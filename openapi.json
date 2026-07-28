@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "version": "1.7.0",
+    "version": "1.8.0",
     "title": "PayZu Pix API",
     "description": "REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.\n\n## SDKs oficiais\n\n- Node.js: `npm install payzu-pix`\n- Python: `pip install payzu-pix`\n- Go: `go get github.com/PayZuPlus/payzu-sdks/go`\n- PHP: `composer require payzu/pix`\n\nRepo: https://github.com/PayZuPlus/payzu-sdks\n",
     "contact": {
@@ -167,7 +167,7 @@
       },
       "get": {
         "summary": "Retrieve Charge",
-        "description": "Get the latest status and details for a Pix **deposit (charge)**. Provide **one** of `id`, `clientReference`, or `endToEndId`. Combining more than one returns an error.",
+        "description": "Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).",
         "operationId": "get_pix",
         "tags": [
           "Pix Operations"
@@ -1408,6 +1408,12 @@
                       "nullable": true,
                       "description": "Public account identifier (6 digits, unique). Used as destination for internal transfers."
                     },
+                    "branch": {
+                      "type": "string",
+                      "pattern": "^[0-9]{4}$",
+                      "description": "Branch number (4 digits).",
+                      "example": "0001"
+                    },
                     "name": {
                       "type": "string"
                     },
@@ -1497,6 +1503,7 @@
                     "summary": "Account information",
                     "value": {
                       "accountNumber": "513579",
+                      "branch": "0001",
                       "name": "PAYZU",
                       "role": "USER",
                       "balanceAvailable": 231.46,
@@ -1724,6 +1731,17 @@
               "example": "DEPOSIT,WITHDRAW"
             },
             "example": "DEPOSIT"
+          },
+          {
+            "in": "query",
+            "name": "method",
+            "required": false,
+            "description": "Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER.",
+            "schema": {
+              "type": "string",
+              "example": "PIX,INTERNAL_TRANSFER"
+            },
+            "example": "PIX"
           },
           {
             "in": "query",
@@ -4296,7 +4314,7 @@
           "payerAccountNumber": {
             "type": "string",
             "nullable": true,
-            "description": "Payer's PayZu account number (6 digits). Present only on internal-transfer transactions."
+            "description": "Payer's PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions."
           },
           "serviceFeeCharged": {
             "type": "number",
@@ -4329,7 +4347,7 @@
           "receiverAccountNumber": {
             "type": "string",
             "nullable": true,
-            "description": "Receiver's PayZu account number (6 digits). Present only on internal-transfer transactions."
+            "description": "Receiver's PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions."
           },
           "endToEndId": {
             "type": "string",

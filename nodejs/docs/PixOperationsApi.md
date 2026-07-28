@@ -17,7 +17,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 
 Retrieve Charge
 
-Get the latest status and details for a Pix **deposit (charge)**. Provide **one** of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. Combining more than one returns an error.
+Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).
 
 ### Example
 

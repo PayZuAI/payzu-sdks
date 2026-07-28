@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
 **account_number** | **str** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] 
+**branch** | **str** | Branch number (4 digits). | [optional] 
 **name** | **str** |  | [optional] 
 **role** | **str** |  | [optional] 
 **balance_available** | **float** |  | [optional] 

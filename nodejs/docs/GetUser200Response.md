@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `id` | string
 `accountNumber` | string
+`branch` | string
 `name` | string
 `role` | string
 `balanceAvailable` | number
@@ -33,6 +34,7 @@ import type { GetUser200Response } from 'payzu-pix'
 const example = {
   "id": null,
   "accountNumber": null,
+  "branch": 0001,
   "name": null,
   "role": null,
   "balanceAvailable": null,

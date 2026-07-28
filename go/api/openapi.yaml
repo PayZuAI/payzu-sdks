@@ -15,7 +15,7 @@ info:
 
     Repo: https://github.com/PayZuPlus/payzu-sdks
   title: PayZu Pix API
-  version: 1.7.0
+  version: 1.8.0
 externalDocs:
   description: Complete documentation
   url: https://docs.payzu.com.br/docs/pix-processamento
@@ -41,8 +41,9 @@ paths:
   /pix:
     get:
       description: "Get the latest status and details for a Pix **deposit (charge)**.\
-        \ Provide **one** of `id`, `clientReference`, or `endToEndId`. Combining more\
-        \ than one returns an error."
+        \ Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount`\
+        \ is also accepted). When more than one parameter is provided, they are combined\
+        \ as filters (AND)."
       operationId: get_pix
       parameters:
       - description: Transaction ID.
@@ -1061,6 +1062,7 @@ paths:
                   summary: Account information
                   value:
                     accountNumber: "513579"
+                    branch: "0001"
                     name: PAYZU
                     role: USER
                     balanceAvailable: 231.46
@@ -1227,6 +1229,16 @@ paths:
         required: false
         schema:
           example: "DEPOSIT,WITHDRAW"
+          type: string
+        style: form
+      - description: "Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER."
+        example: PIX
+        explode: true
+        in: query
+        name: method
+        required: false
+        schema:
+          example: "PIX,INTERNAL_TRANSFER"
           type: string
         style: form
       - description: Amount filter. Minimum 0.01.
@@ -3097,8 +3109,8 @@ components:
           type: string
           nullable: true
         payerAccountNumber:
-          description: Payer's PayZu account number (6 digits). Present only on internal-transfer
-            transactions.
+          description: "Payer's PayZu account number (6 digits). Present on withdraw,\
+            \ internal-transfer and commission transactions."
           type: string
           nullable: true
         serviceFeeCharged:
@@ -3123,8 +3135,8 @@ components:
           type: string
           nullable: true
         receiverAccountNumber:
-          description: Receiver's PayZu account number (6 digits). Present only on
-            internal-transfer transactions.
+          description: "Receiver's PayZu account number (6 digits). Present on deposit,\
+            \ internal-transfer and commission transactions."
           type: string
           nullable: true
         endToEndId:
@@ -4126,6 +4138,7 @@ components:
         cashInTicketMin: 1.4658129805029452
         allowDeposit: true
         accountNumber: accountNumber
+        branch: "0001"
         cashOutTicketMin: 5.637376656633329
         ServiceFee:
           cashOutFixed: 4.145608029883936
@@ -4152,6 +4165,11 @@ components:
             \ for internal transfers."
           type: string
           nullable: true
+        branch:
+          description: Branch number (4 digits).
+          example: "0001"
+          pattern: "^[0-9]{4}$"
+          type: string
         name:
           type: string
         role:

@@ -197,7 +197,7 @@ try {
 ## `getUserTransactions()`
 
 ```php
-getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account): \OpenAPI\Client\Model\GetUserTransactions200Response
+getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account): \OpenAPI\Client\Model\GetUserTransactions200Response
 ```
 
 List Transactions
@@ -228,6 +228,7 @@ $page = 1; // float | Page number (default 1).
 $id = PAYZU2025081418333632CYKN8M; // string | Transaction ID.
 $status = COMPLETED; // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
 $type = DEPOSIT; // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION.
+$method = PIX; // string | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER.
 $amount = 15000; // float | Amount filter. Minimum 0.01.
 $document = 12345678901; // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
 $name = Alice; // string | Name filter.
@@ -238,7 +239,7 @@ $client_reference = 'client_reference_example'; // string | Filter by external r
 $virtual_account = 'virtual_account_example'; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
 
 try {
-    $result = $apiInstance->getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account);
+    $result = $apiInstance->getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ReportsApi->getUserTransactions: ', $e->getMessage(), PHP_EOL;
@@ -256,6 +257,7 @@ try {
 | **id** | **string**| Transaction ID. | [optional] |
 | **status** | **string**| Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [optional] |
 | **type** | **string**| Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | [optional] |
+| **method** | **string**| Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | [optional] |
 | **amount** | **float**| Amount filter. Minimum 0.01. | [optional] |
 | **document** | **string**| CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [optional] |
 | **name** | **string**| Name filter. | [optional] |

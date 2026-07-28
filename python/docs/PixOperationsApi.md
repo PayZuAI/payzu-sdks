@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 Retrieve Charge
 
-Get the latest status and details for a Pix **deposit (charge)**. Provide **one** of `id`, `clientReference`, or `endToEndId`. Combining more than one returns an error.
+Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
 
 ### Example
 

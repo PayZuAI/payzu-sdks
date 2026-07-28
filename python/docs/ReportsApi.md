@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_transactions**
-> GetUserTransactions200Response get_user_transactions(date_from=date_from, date_to=date_to, limit=limit, page=page, id=id, status=status, type=type, amount=amount, document=document, name=name, end_to_end_id=end_to_end_id, sort_by=sort_by, sort_direction=sort_direction, client_reference=client_reference, virtual_account=virtual_account)
+> GetUserTransactions200Response get_user_transactions(date_from=date_from, date_to=date_to, limit=limit, page=page, id=id, status=status, type=type, method=method, amount=amount, document=document, name=name, end_to_end_id=end_to_end_id, sort_by=sort_by, sort_direction=sort_direction, client_reference=client_reference, virtual_account=virtual_account)
 
 List Transactions
 
@@ -295,6 +295,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     id = 'PAYZU2025081418333632CYKN8M' # str | Transaction ID. (optional)
     status = 'COMPLETED' # str | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
     type = 'DEPOSIT' # str | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. (optional)
+    method = 'PIX' # str | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. (optional)
     amount = 15000 # float | Amount filter. Minimum 0.01. (optional)
     document = '12345678901' # str | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
     name = 'Alice' # str | Name filter. (optional)
@@ -306,7 +307,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
     try:
         # List Transactions
-        api_response = api_instance.get_user_transactions(date_from=date_from, date_to=date_to, limit=limit, page=page, id=id, status=status, type=type, amount=amount, document=document, name=name, end_to_end_id=end_to_end_id, sort_by=sort_by, sort_direction=sort_direction, client_reference=client_reference, virtual_account=virtual_account)
+        api_response = api_instance.get_user_transactions(date_from=date_from, date_to=date_to, limit=limit, page=page, id=id, status=status, type=type, method=method, amount=amount, document=document, name=name, end_to_end_id=end_to_end_id, sort_by=sort_by, sort_direction=sort_direction, client_reference=client_reference, virtual_account=virtual_account)
         print("The response of ReportsApi->get_user_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -327,6 +328,7 @@ Name | Type | Description  | Notes
  **id** | **str**| Transaction ID. | [optional] 
  **status** | **str**| Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [optional] 
  **type** | **str**| Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | [optional] 
+ **method** | **str**| Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | [optional] 
  **amount** | **float**| Amount filter. Minimum 0.01. | [optional] 
  **document** | **str**| CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [optional] 
  **name** | **str**| Name filter. | [optional] 

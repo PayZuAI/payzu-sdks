@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
 **AccountNumber** | Pointer to **string** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] 
+**Branch** | Pointer to **string** | Branch number (4 digits). | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Role** | Pointer to **string** |  | [optional] 
 **BalanceAvailable** | Pointer to **float32** |  | [optional] 
@@ -90,6 +91,31 @@ SetAccountNumber sets AccountNumber field to given value.
 `func (o *GetUser200Response) HasAccountNumber() bool`
 
 HasAccountNumber returns a boolean if a field has been set.
+
+### GetBranch
+
+`func (o *GetUser200Response) GetBranch() string`
+
+GetBranch returns the Branch field if non-nil, zero value otherwise.
+
+### GetBranchOk
+
+`func (o *GetUser200Response) GetBranchOk() (*string, bool)`
+
+GetBranchOk returns a tuple with the Branch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBranch
+
+`func (o *GetUser200Response) SetBranch(v string)`
+
+SetBranch sets Branch field to given value.
+
+### HasBranch
+
+`func (o *GetUser200Response) HasBranch() bool`
+
+HasBranch returns a boolean if a field has been set.
 
 ### GetName
 

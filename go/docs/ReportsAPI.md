@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ## GetUserTransactions
 
-> GetUserTransactions200Response GetUserTransactions(ctx).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
+> GetUserTransactions200Response GetUserTransactions(ctx).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
 
 List Transactions
 
@@ -251,6 +251,7 @@ func main() {
 	id := "PAYZU2025081418333632CYKN8M" // string | Transaction ID. (optional)
 	status := "COMPLETED" // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
 	type_ := "DEPOSIT" // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. (optional)
+	method := "PIX" // string | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. (optional)
 	amount := float32(15000) // float32 | Amount filter. Minimum 0.01. (optional)
 	document := "12345678901" // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
 	name := "Alice" // string | Name filter. (optional)
@@ -262,7 +263,7 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReportsAPI.GetUserTransactions(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
+	resp, r, err := apiClient.ReportsAPI.GetUserTransactions(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserTransactions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -290,6 +291,7 @@ Name | Type | Description  | Notes
  **id** | **string** | Transaction ID. | 
  **status** | **string** | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | 
  **type_** | **string** | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | 
+ **method** | **string** | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | 
  **amount** | **float32** | Amount filter. Minimum 0.01. | 
  **document** | **string** | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | 
  **name** | **string** | Name filter. | 

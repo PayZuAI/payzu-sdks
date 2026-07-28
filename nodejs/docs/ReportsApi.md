@@ -233,7 +233,7 @@ example().catch(console.error);
 
 ## getUserTransactions
 
-> GetUserTransactions200Response getUserTransactions(dateFrom, dateTo, limit, page, id, status, type, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount)
+> GetUserTransactions200Response getUserTransactions(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount)
 
 List Transactions
 
@@ -271,6 +271,8 @@ async function example() {
     status: COMPLETED,
     // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. (optional)
     type: DEPOSIT,
+    // string | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. (optional)
+    method: PIX,
     // number | Amount filter. Minimum 0.01. (optional)
     amount: 15000,
     // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
@@ -313,6 +315,7 @@ example().catch(console.error);
 | **id** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
 | **status** | `string` | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [Optional] [Defaults to `undefined`] |
 | **type** | `string` | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | [Optional] [Defaults to `undefined`] |
+| **method** | `string` | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | [Optional] [Defaults to `undefined`] |
 | **amount** | `number` | Amount filter. Minimum 0.01. | [Optional] [Defaults to `undefined`] |
 | **document** | `string` | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [Optional] [Defaults to `undefined`] |
 | **name** | `string` | Name filter. | [Optional] [Defaults to `undefined`] |

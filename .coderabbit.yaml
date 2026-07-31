@@ -1,0 +1,119 @@
+language: pt-BR
+early_access: true
+enable_free_tier: false
+
+reviews:
+  profile: assertive
+  request_changes_workflow: true
+  high_level_summary: true
+  high_level_summary_placeholder: '@coderabbitai resumo'
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: false
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: false
+  auto_apply_labels: false
+  suggested_reviewers: false
+  auto_assign_reviewers: false
+
+  path_instructions:
+    - path: '**/*'
+      instructions: |
+        Revisar em portugues do Brasil. NUNCA usar emojis. NUNCA usar em dash
+        (—) ou en dash (–), use hifen (-) ou ponto. NAO sugerir adicionar
+        comentarios no codigo.
+
+        Organizacao de FINTECH (Pix, cartao, KYC, saldo). Aplique criterios
+        STRICT independente da linguagem:
+
+        - Credencial, token ou secret em codigo, log ou arquivo versionado = HIGH.
+        - Dado de cliente (cpf, cnpj, chave Pix, documento) em log = HIGH.
+        - SQL montado por concatenacao de string = HIGH.
+        - Fonte de aleatoriedade fraca para token, secret ou idempotencia = HIGH.
+        - Rota de autenticacao ou de movimentacao de valor sem rate limit = HIGH.
+        - Chamada externa em fluxo de pagamento sem timeout = MEDIUM.
+        - Entrada externa usada sem validacao de schema = MEDIUM.
+        - Tratamento de erro que engole a falha e segue como se tivesse dado certo = HIGH.
+
+        Para cada achado: file:linha, severidade, problema, cenario de impacto, fix.
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    base_branches:
+      - main
+      - master
+      - develop
+
+  tools:
+    ast-grep:
+      essential_rules: true
+      packages: []
+    shellcheck:
+      enabled: true
+    ruff:
+      enabled: true
+    markdownlint:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 120000
+    languagetool:
+      enabled: false
+    biome:
+      enabled: true
+    hadolint:
+      enabled: true
+    swiftlint:
+      enabled: false
+    phpstan:
+      enabled: false
+    golangci-lint:
+      enabled: true
+    yamllint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    checkov:
+      enabled: true
+    detekt:
+      enabled: false
+    eslint:
+      enabled: true
+    rubocop:
+      enabled: false
+    buf:
+      enabled: false
+    regal:
+      enabled: false
+    actionlint:
+      enabled: true
+    pmd:
+      enabled: false
+    cppcheck:
+      enabled: false
+    semgrep:
+      enabled: true
+    circleci:
+      enabled: false
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  opt_out: false
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  jira:
+    project_keys: []
+  linear:
+    team_keys: []
+  pull_requests:
+    scope: auto

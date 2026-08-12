@@ -7,7 +7,12 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**downloadUserReport()**](ReportsApi.md#downloadUserReport) | **POST** /user/report/{id}/download | Download report |
+| [**getUserBankStatement()**](ReportsApi.md#getUserBankStatement) | **GET** /user/bank-statements/{id} | Get bank statement |
+| [**getUserBankStatements()**](ReportsApi.md#getUserBankStatements) | **GET** /user/bank-statements | List bank statements |
+| [**getUserDepositPending()**](ReportsApi.md#getUserDepositPending) | **GET** /user/deposit-pending | List pending deposits |
+| [**getUserDepositPendingById()**](ReportsApi.md#getUserDepositPendingById) | **GET** /user/deposit-pending/{id} | Get pending deposit |
 | [**getUserReport()**](ReportsApi.md#getUserReport) | **GET** /user/report/{id} | Get report job status |
+| [**getUserSummary()**](ReportsApi.md#getUserSummary) | **GET** /user/summary | Transaction summary |
 | [**getUserTransactionById()**](ReportsApi.md#getUserTransactionById) | **GET** /user/transactions/{id} | List transaction details |
 | [**getUserTransactions()**](ReportsApi.md#getUserTransactions) | **GET** /user/transactions | List Transactions |
 | [**listUserReports()**](ReportsApi.md#listUserReports) | **GET** /user/report | List report jobs |
@@ -74,6 +79,286 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getUserBankStatement()`
+
+```php
+getUserBankStatement($id): \OpenAPI\Client\Model\BankStatement
+```
+
+Get bank statement
+
+Returns a single statement entry.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer authorization: BearerAuth
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Statement entry id.
+
+try {
+    $result = $apiInstance->getUserBankStatement($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ReportsApi->getUserBankStatement: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Statement entry id. | |
+
+### Return type
+
+[**\OpenAPI\Client\Model\BankStatement**](../Model/BankStatement.md)
+
+### Authorization
+
+[BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getUserBankStatements()`
+
+```php
+getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction): \OpenAPI\Client\Model\BankStatementListResponse
+```
+
+List bank statements
+
+Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer authorization: BearerAuth
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$created_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Start date (required).
+$created_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | End date (required).
+$id = 'id_example'; // string
+$operation = 'operation_example'; // string
+$reason = 'reason_example'; // string
+$transaction_id = 'transaction_id_example'; // string
+$amount_from = 3.4; // float
+$amount_to = 3.4; // float
+$page = 1; // int
+$limit = 10; // int
+$sort_by = 'createdAt'; // string
+$sort_direction = 'desc'; // string
+
+try {
+    $result = $apiInstance->getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ReportsApi->getUserBankStatements: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **created_at_from** | **\DateTime**| Start date (required). | |
+| **created_at_to** | **\DateTime**| End date (required). | |
+| **id** | **string**|  | [optional] |
+| **operation** | **string**|  | [optional] |
+| **reason** | **string**|  | [optional] |
+| **transaction_id** | **string**|  | [optional] |
+| **amount_from** | **float**|  | [optional] |
+| **amount_to** | **float**|  | [optional] |
+| **page** | **int**|  | [optional] [default to 1] |
+| **limit** | **int**|  | [optional] [default to 10] |
+| **sort_by** | **string**|  | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**|  | [optional] [default to &#39;desc&#39;] |
+
+### Return type
+
+[**\OpenAPI\Client\Model\BankStatementListResponse**](../Model/BankStatementListResponse.md)
+
+### Authorization
+
+[BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getUserDepositPending()`
+
+```php
+getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit): \OpenAPI\Client\Model\DepositPendingListResponse
+```
+
+List pending deposits
+
+Lists deposits that are pending / not yet reconciled.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer authorization: BearerAuth
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$status = 'status_example'; // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+$document = 'document_example'; // string
+$name = 'name_example'; // string
+$end_to_end_id = 'end_to_end_id_example'; // string
+$amount_min = 3.4; // float
+$amount_max = 3.4; // float
+$created_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
+$created_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
+$page = 1; // int
+$limit = 20; // int
+
+try {
+    $result = $apiInstance->getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ReportsApi->getUserDepositPending: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **status** | **string**| Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [optional] |
+| **document** | **string**|  | [optional] |
+| **name** | **string**|  | [optional] |
+| **end_to_end_id** | **string**|  | [optional] |
+| **amount_min** | **float**|  | [optional] |
+| **amount_max** | **float**|  | [optional] |
+| **created_at_from** | **\DateTime**|  | [optional] |
+| **created_at_to** | **\DateTime**|  | [optional] |
+| **page** | **int**|  | [optional] [default to 1] |
+| **limit** | **int**|  | [optional] [default to 20] |
+
+### Return type
+
+[**\OpenAPI\Client\Model\DepositPendingListResponse**](../Model/DepositPendingListResponse.md)
+
+### Authorization
+
+[BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getUserDepositPendingById()`
+
+```php
+getUserDepositPendingById($id): \OpenAPI\Client\Model\DepositPending
+```
+
+Get pending deposit
+
+Returns a single pending deposit.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer authorization: BearerAuth
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | Pending deposit id.
+
+try {
+    $result = $apiInstance->getUserDepositPendingById($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ReportsApi->getUserDepositPendingById: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| Pending deposit id. | |
+
+### Return type
+
+[**\OpenAPI\Client\Model\DepositPending**](../Model/DepositPending.md)
+
+### Authorization
+
+[BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getUserReport()`
 
 ```php
@@ -120,6 +405,72 @@ try {
 ### Return type
 
 [**\OpenAPI\Client\Model\ReportJob**](../Model/ReportJob.md)
+
+### Authorization
+
+[BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getUserSummary()`
+
+```php
+getUserSummary($date_from, $date_to, $group_by, $grouped): \OpenAPI\Client\Model\Summary
+```
+
+Transaction summary
+
+Aggregated totals for deposits, withdrawals and commission over a period.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer authorization: BearerAuth
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$date_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
+$date_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
+$group_by = 'day'; // string
+$grouped = True; // bool | When true, returns a series grouped by date.
+
+try {
+    $result = $apiInstance->getUserSummary($date_from, $date_to, $group_by, $grouped);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ReportsApi->getUserSummary: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **date_from** | **\DateTime**|  | [optional] |
+| **date_to** | **\DateTime**|  | [optional] |
+| **group_by** | **string**|  | [optional] [default to &#39;day&#39;] |
+| **grouped** | **bool**| When true, returns a series grouped by date. | [optional] |
+
+### Return type
+
+[**\OpenAPI\Client\Model\Summary**](../Model/Summary.md)
 
 ### Authorization
 

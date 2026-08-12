@@ -5,6 +5,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetPixKey**](WithdrawalsAPI.md#GetPixKey) | **Get** /pix/key | Dict Pix Key Lookup
+[**GetUserDict**](WithdrawalsAPI.md#GetUserDict) | **Get** /user/dict | DICT key lookup
 [**GetWithdraw**](WithdrawalsAPI.md#GetWithdraw) | **Get** /withdraw | Retrieve Withdrawal
 [**GetWithdrawProof**](WithdrawalsAPI.md#GetWithdrawProof) | **Get** /withdraw/proof/{id} | Get Withdrawal Receipt
 [**PostPixQrcodeRead**](WithdrawalsAPI.md#PostPixQrcodeRead) | **Post** /pix/qrcode/read | Read QR Code
@@ -64,6 +65,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PixKeyInfo**](PixKeyInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserDict
+
+> DictConsultResponse GetUserDict(ctx).Key(key).Execute()
+
+DICT key lookup
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	key := "key_example" // string | Pix key to look up (CPF, CNPJ, email, phone or EVP).
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WithdrawalsAPI.GetUserDict(context.Background()).Key(key).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WithdrawalsAPI.GetUserDict``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserDict`: DictConsultResponse
+	fmt.Fprintf(os.Stdout, "Response from `WithdrawalsAPI.GetUserDict`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserDictRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key** | **string** | Pix key to look up (CPF, CNPJ, email, phone or EVP). | 
+
+### Return type
+
+[**DictConsultResponse**](DictConsultResponse.md)
 
 ### Authorization
 

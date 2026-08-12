@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**get_user_callbacks**](CallbacksApi.md#get_user_callbacks) | **GET** /user/callbacks | List Callbacks
 [**resend_user_callback_single**](CallbacksApi.md#resend_user_callback_single) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single)
 [**resend_user_callbacks**](CallbacksApi.md#resend_user_callbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk)
+[**resend_user_callbacks_webhook**](CallbacksApi.md#resend_user_callbacks_webhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
 
 
 # **get_user_callback_by_id**
@@ -348,6 +349,84 @@ Name | Type | Description  | Notes
 **200** | Resend dispatched |  -  |
 **404** | No matching transactions |  -  |
 **429** | Rate limit exceeded (5/min) |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resend_user_callbacks_webhook**
+> CallbackResendResponse resend_user_callbacks_webhook(webhook_id)
+
+Resend callbacks by webhook
+
+Queues a bulk resend of the failed callbacks of a given webhook.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.callback_resend_response import CallbackResendResponse
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.CallbacksApi(api_client)
+    webhook_id = 'webhook_id_example' # str | Webhook id.
+
+    try:
+        # Resend callbacks by webhook
+        api_response = api_instance.resend_user_callbacks_webhook(webhook_id)
+        print("The response of CallbacksApi->resend_user_callbacks_webhook:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CallbacksApi->resend_user_callbacks_webhook: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhook_id** | **str**| Webhook id. | 
+
+### Return type
+
+[**CallbackResendResponse**](CallbackResendResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Resend queued. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

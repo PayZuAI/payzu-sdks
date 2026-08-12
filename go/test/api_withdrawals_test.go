@@ -34,6 +34,18 @@ func Test_payzupix_WithdrawalsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test WithdrawalsAPIService GetUserDict", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.WithdrawalsAPI.GetUserDict(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WithdrawalsAPIService GetWithdraw", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

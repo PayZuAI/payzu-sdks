@@ -36,6 +36,58 @@ func Test_payzupix_ReportsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ReportsAPIService GetUserBankStatement", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ReportsAPI.GetUserBankStatement(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ReportsAPIService GetUserBankStatements", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ReportsAPI.GetUserBankStatements(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ReportsAPIService GetUserDepositPending", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ReportsAPI.GetUserDepositPending(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ReportsAPIService GetUserDepositPendingById", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.ReportsAPI.GetUserDepositPendingById(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ReportsAPIService GetUserReport", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -43,6 +95,18 @@ func Test_payzupix_ReportsAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.ReportsAPI.GetUserReport(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ReportsAPIService GetUserSummary", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ReportsAPI.GetUserSummary(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

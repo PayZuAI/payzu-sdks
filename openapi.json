@@ -43,6 +43,14 @@
     {
       "name": "Infractions",
       "description": "Manage Pix infractions (disputes, fraud reports) and submit defenses"
+    },
+    {
+      "name": "Refunds",
+      "description": "Refund received Pix charges, full or partial"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Register and manage webhook endpoints that receive transaction notifications"
     }
   ],
   "paths": {
@@ -509,7 +517,7 @@
     "/pix/qrcode/read": {
       "post": {
         "summary": "Read QR Code",
-        "description": "Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.",
+        "description": "Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.",
         "operationId": "post_pix_qrcode_read",
         "tags": [
           "Withdrawals"
@@ -1103,7 +1111,7 @@
     "/withdraw/qrcode": {
       "post": {
         "summary": "Create Withdrawal using QR Code",
-        "description": "Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.",
+        "description": "Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.",
         "operationId": "post_withdraw_qrcode",
         "tags": [
           "Withdrawals"
@@ -4240,6 +4248,1162 @@
           }
         }
       }
+    },
+    "/refund/{transactionId}": {
+      "post": {
+        "summary": "Refund a Pix",
+        "description": "Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.",
+        "operationId": "post_refund",
+        "tags": [
+          "Refunds"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "description": "ID of the transaction to refund.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Refund accepted and enqueued (asynchronous).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                },
+                "examples": {
+                  "pending": {
+                    "summary": "Partial refund enqueued",
+                    "value": {
+                      "id": "PAYZU20250810120000ABCD12",
+                      "status": "COMPLETED",
+                      "amount": 100,
+                      "type": "DEPOSIT",
+                      "method": "PIX",
+                      "qrCodeText": null,
+                      "qrCodeBase64": null,
+                      "qrCodeUrl": null,
+                      "generatedName": "Fulano de Tal",
+                      "generatedDocument": "12345678901",
+                      "generatedEmail": null,
+                      "payerName": "Fulano de Tal",
+                      "payerDocument": "12345678901",
+                      "payerInstitutionIspb": "12345678",
+                      "payerInstitutionName": "Banco X",
+                      "payerAccountNumber": null,
+                      "serviceFeeCharged": 1.5,
+                      "withdrawPixKey": null,
+                      "withdrawPixType": null,
+                      "receiverName": "Loja Exemplo",
+                      "receiverDocument": "11222333000181",
+                      "receiverInstitutionIspb": "00000000",
+                      "receiverInstitutionName": "PayZu",
+                      "receiverAccountNumber": "513579",
+                      "endToEndId": "E12345678202508101200abcdef01",
+                      "clientReference": "pedido-42",
+                      "refundEndToEndId": null,
+                      "refundAmount": 30.5,
+                      "refundStatus": "PENDING",
+                      "refundReason": "CUSTOMER_REQUEST",
+                      "refundDescription": "Devolução parcial",
+                      "refundedAt": null,
+                      "cancellationReason": null,
+                      "paidAt": "2025-08-10T12:00:00.000Z",
+                      "createdAt": "2025-08-10T11:59:00.000Z",
+                      "updatedAt": "2026-08-11T09:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Refund not allowed for this transaction or amount.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/webhooks": {
+      "post": {
+        "summary": "Create webhook",
+        "description": "Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).",
+        "operationId": "post_user_webhook",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Webhook created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookWithSecret"
+                },
+                "examples": {
+                  "created": {
+                    "value": {
+                      "id": "yl9k2m0c8x1",
+                      "url": "https://sualoja.com.br/webhook",
+                      "active": true,
+                      "events": [
+                        "TRANSACTION_COMPLETED",
+                        "TRANSACTION_REFUNDED"
+                      ],
+                      "hasSecret": true,
+                      "createdAt": "2026-08-10T12:00:00.000Z",
+                      "updatedAt": "2026-08-10T12:00:00.000Z",
+                      "secret": "whsec_9f8a2b7c6d5e4f3a2b1c0d9e8f7a6b5c"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List webhooks",
+        "description": "Lists the webhooks registered for the account.",
+        "operationId": "get_user_webhooks",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "active",
+            "required": false,
+            "description": "Filter by active status.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookListResponse"
+                },
+                "examples": {
+                  "list": {
+                    "value": {
+                      "webhooks": [
+                        {
+                          "id": "yl9k2m0c8x1",
+                          "url": "https://sualoja.com.br/webhook",
+                          "active": true,
+                          "events": [
+                            "TRANSACTION_COMPLETED",
+                            "TRANSACTION_REFUNDED"
+                          ],
+                          "hasSecret": true,
+                          "createdAt": "2026-08-10T12:00:00.000Z",
+                          "updatedAt": "2026-08-10T12:00:00.000Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/webhooks/{id}": {
+      "get": {
+        "summary": "Get webhook",
+        "description": "Returns a single webhook.",
+        "operationId": "get_user_webhook",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Webhook"
+                },
+                "examples": {
+                  "webhook": {
+                    "value": {
+                      "id": "yl9k2m0c8x1",
+                      "url": "https://sualoja.com.br/webhook",
+                      "active": true,
+                      "events": [
+                        "TRANSACTION_COMPLETED",
+                        "TRANSACTION_REFUNDED"
+                      ],
+                      "hasSecret": true,
+                      "createdAt": "2026-08-10T12:00:00.000Z",
+                      "updatedAt": "2026-08-10T12:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update webhook",
+        "description": "Updates the url, active flag or events of a webhook. Provide at least one field.",
+        "operationId": "patch_user_webhook",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Webhook"
+                },
+                "examples": {
+                  "webhook": {
+                    "value": {
+                      "id": "yl9k2m0c8x1",
+                      "url": "https://sualoja.com.br/webhook",
+                      "active": true,
+                      "events": [
+                        "TRANSACTION_COMPLETED",
+                        "TRANSACTION_REFUNDED"
+                      ],
+                      "hasSecret": true,
+                      "createdAt": "2026-08-10T12:00:00.000Z",
+                      "updatedAt": "2026-08-10T12:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete webhook",
+        "description": "Removes a webhook.",
+        "operationId": "delete_user_webhook",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook deleted."
+          }
+        }
+      }
+    },
+    "/user/webhooks/{id}/rotate-secret": {
+      "post": {
+        "summary": "Rotate webhook secret",
+        "description": "Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.",
+        "operationId": "post_user_webhook_rotate_secret",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New secret.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RotateSecretResponse"
+                },
+                "examples": {
+                  "rotated": {
+                    "value": {
+                      "secret": "whsec_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/webhooks/sent/quantity": {
+      "get": {
+        "summary": "Count sent callbacks",
+        "description": "Returns how many callbacks were sent, optionally filtered by webhook.",
+        "operationId": "get_user_webhooks_sent_quantity",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "webhookId",
+            "required": false,
+            "description": "Filter the count by webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SentWebhooksQuantity"
+                },
+                "examples": {
+                  "qty": {
+                    "value": {
+                      "quantity": 128
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/webhooks/{id}/sent/{callbackId}": {
+      "get": {
+        "summary": "Get sent callback detail",
+        "description": "Returns the delivery detail of a single sent callback.",
+        "operationId": "get_user_webhook_sent_detail",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "callbackId",
+            "required": true,
+            "description": "Callback log id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Callback delivery detail.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SentWebhookDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/callbacks/resend/webhook/{webhookId}": {
+      "post": {
+        "summary": "Resend callbacks by webhook",
+        "description": "Queues a bulk resend of the failed callbacks of a given webhook.",
+        "operationId": "resend_user_callbacks_webhook",
+        "tags": [
+          "Callbacks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "webhookId",
+            "required": true,
+            "description": "Webhook id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resend queued.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CallbackResendResponse"
+                },
+                "examples": {
+                  "queued": {
+                    "value": {
+                      "message": "Bulk resend started",
+                      "count": 12
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/bank-statements": {
+      "get": {
+        "summary": "List bank statements",
+        "description": "Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.",
+        "operationId": "get_user_bank_statements",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "createdAtFrom",
+            "required": true,
+            "description": "Start date (required).",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "createdAtTo",
+            "required": true,
+            "description": "End date (required).",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "operation",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "INCREMENT",
+                "DECREMENT"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "reason",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "transactionId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "amountFrom",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "amountTo",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "createdAt",
+                "amount"
+              ],
+              "default": "createdAt"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortDirection",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statement page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankStatementListResponse"
+                },
+                "examples": {
+                  "list": {
+                    "value": {
+                      "pagination": {
+                        "page": 1,
+                        "limit": 10,
+                        "hasNextPage": true
+                      },
+                      "bankStatements": [
+                        {
+                          "id": "bs_1",
+                          "amount": 100,
+                          "operation": "INCREMENT",
+                          "reason": "PIX_DEPOSIT",
+                          "balanceType": "AVAILABLE",
+                          "previousBalanceAvailable": 400,
+                          "previousBalanceBlocked": 0,
+                          "newBalanceAvailable": 500,
+                          "newBalanceBlocked": 0,
+                          "transactionId": "PAYZU2025...",
+                          "infractionId": null,
+                          "createdAt": "2026-08-10T12:00:00.000Z",
+                          "updatedAt": "2026-08-10T12:00:00.000Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/bank-statements/{id}": {
+      "get": {
+        "summary": "Get bank statement",
+        "description": "Returns a single statement entry.",
+        "operationId": "get_user_bank_statement",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Statement entry id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statement entry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankStatement"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/deposit-pending": {
+      "get": {
+        "summary": "List pending deposits",
+        "description": "Lists deposits that are pending / not yet reconciled.",
+        "operationId": "get_user_deposit_pending",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "description": "Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "document",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "endToEndId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "amountMin",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "amountMax",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "createdAtFrom",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "createdAtTo",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pending deposit page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositPendingListResponse"
+                },
+                "examples": {
+                  "list": {
+                    "value": {
+                      "page": 1,
+                      "limit": 20,
+                      "hasNextPage": false,
+                      "data": [
+                        {
+                          "id": "dp_1",
+                          "status": "PENDING",
+                          "amount": 250.5,
+                          "payerDocument": "12345678901",
+                          "payerName": "Fulano",
+                          "payerAccountNumber": null,
+                          "payerInstitutionIspb": "12345678",
+                          "payerInstitutionName": "Banco X",
+                          "receiverDocument": "11222333000181",
+                          "receiverName": "Loja",
+                          "receiverAccountNumber": "513579",
+                          "receiverInstitutionIspb": "00000000",
+                          "receiverInstitutionName": "PayZu",
+                          "endToEndId": "E123...",
+                          "paidAt": "2026-08-10T12:00:00.000Z",
+                          "pixKey": null,
+                          "description": null,
+                          "approvedAt": null,
+                          "rejectedAt": null,
+                          "rejectionReason": null,
+                          "transactionId": null,
+                          "createdAt": "2026-08-10T11:59:00.000Z",
+                          "updatedAt": "2026-08-10T12:00:00.000Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/deposit-pending/{id}": {
+      "get": {
+        "summary": "Get pending deposit",
+        "description": "Returns a single pending deposit.",
+        "operationId": "get_user_deposit_pending_by_id",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Pending deposit id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pending deposit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepositPending"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/summary": {
+      "get": {
+        "summary": "Transaction summary",
+        "description": "Aggregated totals for deposits, withdrawals and commission over a period.",
+        "operationId": "get_user_summary",
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dateFrom",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dateTo",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "groupBy",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "day",
+                "hour"
+              ],
+              "default": "day"
+            }
+          },
+          {
+            "in": "query",
+            "name": "grouped",
+            "required": false,
+            "description": "When true, returns a series grouped by date.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Summary"
+                },
+                "examples": {
+                  "summary": {
+                    "value": {
+                      "totalTransactions": 42,
+                      "deposit": {
+                        "totalAmount": 1500,
+                        "totalTransactions": 20,
+                        "statuses": {
+                          "pending": {
+                            "count": 1,
+                            "amount": 100,
+                            "serviceFeeCharged": 1.5
+                          },
+                          "completed": {
+                            "count": 18,
+                            "amount": 1350,
+                            "serviceFeeCharged": 20
+                          },
+                          "canceled": {
+                            "count": 0,
+                            "amount": 0,
+                            "serviceFeeCharged": 0
+                          },
+                          "expired": {
+                            "count": 1,
+                            "amount": 50,
+                            "serviceFeeCharged": 0
+                          },
+                          "refunded": {
+                            "count": 0,
+                            "amount": 0,
+                            "serviceFeeCharged": 0
+                          }
+                        }
+                      },
+                      "withdraw": {
+                        "totalAmount": 800,
+                        "totalTransactions": 12,
+                        "statuses": {
+                          "pending": {
+                            "count": 0,
+                            "amount": 0
+                          },
+                          "completed": {
+                            "count": 12,
+                            "amount": 800
+                          },
+                          "canceled": {
+                            "count": 0,
+                            "amount": 0
+                          },
+                          "expired": {
+                            "count": 0,
+                            "amount": 0
+                          },
+                          "refunded": {
+                            "count": 0,
+                            "amount": 0
+                          }
+                        }
+                      },
+                      "commission": {
+                        "totalAmount": 30,
+                        "totalTransactions": 10,
+                        "statuses": {
+                          "pending": {
+                            "count": 0,
+                            "amount": 0
+                          },
+                          "completed": {
+                            "count": 10,
+                            "amount": 30
+                          },
+                          "canceled": {
+                            "count": 0,
+                            "amount": 0
+                          },
+                          "expired": {
+                            "count": 0,
+                            "amount": 0
+                          },
+                          "refunded": {
+                            "count": 0,
+                            "amount": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/dict": {
+      "get": {
+        "summary": "DICT key lookup",
+        "description": "Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.",
+        "operationId": "get_user_dict",
+        "tags": [
+          "Withdrawals"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "key",
+            "required": true,
+            "description": "Pix key to look up (CPF, CNPJ, email, phone or EVP).",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 77
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Key holder details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DictConsultResponse"
+                },
+                "examples": {
+                  "key": {
+                    "value": {
+                      "pixKey": "+5511999998888",
+                      "name": "Fulano de Tal",
+                      "document": "***.456.789-**",
+                      "personType": "PF",
+                      "accountType": "CACC",
+                      "institutionIspb": "12345678",
+                      "institutionName": "Banco X"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5231,6 +6395,585 @@
           "base64": {
             "type": "string",
             "description": "Base64-encoded PDF receipt."
+          }
+        }
+      },
+      "RefundRequest": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "minimum": 0.01,
+            "description": "Amount in BRL to refund. Omit to refund the full transaction amount. Partial refunds are allowed up to the original amount.",
+            "example": 30.5
+          },
+          "description": {
+            "type": "string",
+            "description": "Free-text description for the refund."
+          },
+          "clientReference": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Idempotency key. Reusing it with the same amount replays the existing refund; reusing it with a different amount is rejected.",
+            "example": "refund-2026-0001"
+          }
+        }
+      },
+      "WebhookEventType": {
+        "type": "string",
+        "enum": [
+          "TRANSACTION_PENDING",
+          "TRANSACTION_COMPLETED",
+          "TRANSACTION_CANCELED",
+          "TRANSACTION_WAITING_FOR_REFUND",
+          "TRANSACTION_REFUNDED",
+          "TRANSACTION_EXPIRED",
+          "TRANSACTION_ERROR",
+          "TRANSACTION_SUSPECTED_FRAUD",
+          "TRANSACTION_SUSPECTED_FRAUD_REVERSAL",
+          "INFRACTION_CHANGED"
+        ],
+        "description": "Transaction event that triggers the webhook."
+      },
+      "Webhook": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "yl9k2m0c8x1",
+            "description": "Webhook id."
+          },
+          "url": {
+            "type": "string",
+            "example": "https://sualoja.com.br/webhook"
+          },
+          "active": {
+            "type": "boolean",
+            "example": true
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            },
+            "description": "Subscribed events. Empty means all events."
+          },
+          "hasSecret": {
+            "type": "boolean",
+            "description": "Whether the webhook has an HMAC signing secret.",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "WebhookWithSecret": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "yl9k2m0c8x1"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://sualoja.com.br/webhook"
+          },
+          "active": {
+            "type": "boolean",
+            "example": true
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            }
+          },
+          "hasSecret": {
+            "type": "boolean",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "secret": {
+            "type": "string",
+            "nullable": true,
+            "description": "HMAC signing secret. Shown only on creation and on rotate-secret. Store it now.",
+            "example": "whsec_9f8a2b7c6d5e4f3a2b1c0d9e8f7a6b5c"
+          }
+        }
+      },
+      "WebhookCreateRequest": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "HTTPS URL that will receive the notifications.",
+            "example": "https://sualoja.com.br/webhook"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            },
+            "default": [],
+            "description": "Events to subscribe to. Omit or leave empty to receive all events."
+          },
+          "generateSecret": {
+            "type": "boolean",
+            "default": false,
+            "description": "Generate an HMAC signing secret for this webhook."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the webhook starts active."
+          }
+        }
+      },
+      "WebhookUpdateRequest": {
+        "type": "object",
+        "description": "Provide at least one field.",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            }
+          }
+        },
+        "minProperties": 1
+      },
+      "RotateSecretResponse": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "type": "string",
+            "description": "HMAC signing secret. Shown only on creation and on rotate-secret. Store it now.",
+            "example": "whsec_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+          }
+        }
+      },
+      "SentWebhooksQuantity": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "example": 128
+          }
+        }
+      },
+      "WebhookListResponse": {
+        "type": "object",
+        "properties": {
+          "webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Webhook"
+            }
+          }
+        }
+      },
+      "SentWebhookDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "webhookId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "body": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status returned by your endpoint.",
+            "example": 200
+          },
+          "responseHeaders": {
+            "type": "object",
+            "additionalProperties": true,
+            "nullable": true
+          },
+          "responseBody": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseTime": {
+            "type": "integer",
+            "description": "Response time of your endpoint, in milliseconds.",
+            "example": 342
+          },
+          "eventType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CallbackResendResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of callbacks queued for resend.",
+            "example": 12
+          }
+        }
+      },
+      "BankStatement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "INCREMENT",
+              "DECREMENT"
+            ],
+            "description": "INCREMENT credits the balance, DECREMENT debits it."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Internal reason for the credit/debit."
+          },
+          "balanceType": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "BLOCKED"
+            ]
+          },
+          "previousBalanceAvailable": {
+            "type": "number"
+          },
+          "previousBalanceBlocked": {
+            "type": "number"
+          },
+          "newBalanceAvailable": {
+            "type": "number"
+          },
+          "newBalanceBlocked": {
+            "type": "number"
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "infractionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "BankStatementListResponse": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer"
+              },
+              "limit": {
+                "type": "integer"
+              },
+              "hasNextPage": {
+                "type": "boolean"
+              }
+            }
+          },
+          "bankStatements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BankStatement"
+            }
+          }
+        }
+      },
+      "DepositPending": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "APPROVED",
+              "REJECTED",
+              "EXPIRED",
+              "COMPLETED"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "payerDocument": {
+            "type": "string"
+          },
+          "payerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "payerAccountNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "payerInstitutionIspb": {
+            "type": "string",
+            "nullable": true
+          },
+          "payerInstitutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiverDocument": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiverName": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiverAccountNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiverInstitutionIspb": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiverInstitutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "endToEndId": {
+            "type": "string"
+          },
+          "paidAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "pixKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rejectedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rejectionReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DepositPendingListResponse": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DepositPending"
+            }
+          }
+        }
+      },
+      "SummaryStatus": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "serviceFeeCharged": {
+            "type": "number",
+            "description": "Service fee charged (hidden for limited accounts)."
+          }
+        }
+      },
+      "SummaryBlock": {
+        "type": "object",
+        "properties": {
+          "totalAmount": {
+            "type": "number"
+          },
+          "totalTransactions": {
+            "type": "integer"
+          },
+          "statuses": {
+            "type": "object",
+            "properties": {
+              "pending": {
+                "$ref": "#/components/schemas/SummaryStatus"
+              },
+              "completed": {
+                "$ref": "#/components/schemas/SummaryStatus"
+              },
+              "canceled": {
+                "$ref": "#/components/schemas/SummaryStatus"
+              },
+              "expired": {
+                "$ref": "#/components/schemas/SummaryStatus"
+              },
+              "refunded": {
+                "$ref": "#/components/schemas/SummaryStatus"
+              }
+            }
+          },
+          "grouped": {
+            "type": "array",
+            "description": "Present only when grouped=true.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Summary": {
+        "type": "object",
+        "properties": {
+          "totalTransactions": {
+            "type": "integer"
+          },
+          "deposit": {
+            "$ref": "#/components/schemas/SummaryBlock"
+          },
+          "withdraw": {
+            "$ref": "#/components/schemas/SummaryBlock"
+          },
+          "commission": {
+            "$ref": "#/components/schemas/SummaryBlock"
+          }
+        }
+      },
+      "DictConsultResponse": {
+        "type": "object",
+        "properties": {
+          "pixKey": {
+            "type": "string",
+            "description": "Normalized Pix key."
+          },
+          "name": {
+            "type": "string"
+          },
+          "document": {
+            "type": "string",
+            "description": "Masked CPF/CNPJ of the key holder."
+          },
+          "personType": {
+            "type": "string",
+            "enum": [
+              "PF",
+              "PJ"
+            ]
+          },
+          "accountType": {
+            "type": "string"
+          },
+          "institutionIspb": {
+            "type": "string"
+          },
+          "institutionName": {
+            "type": "string"
           }
         }
       }

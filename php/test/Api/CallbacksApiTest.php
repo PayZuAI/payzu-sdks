@@ -118,4 +118,16 @@ class CallbacksApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for resendUserCallbacksWebhook
+     *
+     * Resend callbacks by webhook.
+     *
+     */
+    public function testResendUserCallbacksWebhook()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

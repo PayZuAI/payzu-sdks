@@ -19,6 +19,11 @@ import {
     ApiErrorToJSON,
 } from '../models/ApiError.js';
 import {
+    type DictConsultResponse,
+    DictConsultResponseFromJSON,
+    DictConsultResponseToJSON,
+} from '../models/DictConsultResponse.js';
+import {
     type GetPixKey400Response,
     GetPixKey400ResponseFromJSON,
     GetPixKey400ResponseToJSON,
@@ -78,6 +83,10 @@ export interface GetPixKeyRequest {
     pixKey: string;
 }
 
+export interface GetUserDictRequest {
+    key: string;
+}
+
 export interface GetWithdrawRequest {
     id?: string;
     clientReference?: string;
@@ -132,6 +141,30 @@ export interface WithdrawalsApiInterface {
      * Dict Pix Key Lookup
      */
     getPixKey(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PixKeyInfo>;
+
+    /**
+     * Creates request options for getUserDict without sending the request
+     * @param {string} key Pix key to look up (CPF, CNPJ, email, phone or EVP).
+     * @throws {RequiredError}
+     * @memberof WithdrawalsApiInterface
+     */
+    getUserDictRequestOpts(requestParameters: GetUserDictRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+     * @summary DICT key lookup
+     * @param {string} key Pix key to look up (CPF, CNPJ, email, phone or EVP).
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WithdrawalsApiInterface
+     */
+    getUserDictRaw(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DictConsultResponse>>;
+
+    /**
+     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+     * DICT key lookup
+     */
+    getUserDict(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DictConsultResponse>;
 
     /**
      * Creates request options for getWithdraw without sending the request
@@ -198,7 +231,7 @@ export interface WithdrawalsApiInterface {
     postPixQrcodeReadRequestOpts(requestParameters: PostPixQrcodeReadOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
      * @summary Read QR Code
      * @param {PostPixQrcodeReadRequest} postPixQrcodeReadRequest 
      * @param {*} [options] Override http request option.
@@ -208,7 +241,7 @@ export interface WithdrawalsApiInterface {
     postPixQrcodeReadRaw(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<QRCodeReadResponse>>;
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
      * Read QR Code
      */
     postPixQrcodeRead(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<QRCodeReadResponse>;
@@ -246,7 +279,7 @@ export interface WithdrawalsApiInterface {
     postWithdrawQrcodeRequestOpts(requestParameters: PostWithdrawQrcodeOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
      * @summary Create Withdrawal using QR Code
      * @param {PostWithdrawQrcodeRequest} postWithdrawQrcodeRequest 
      * @param {*} [options] Override http request option.
@@ -256,7 +289,7 @@ export interface WithdrawalsApiInterface {
     postWithdrawQrcodeRaw(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
      * Create Withdrawal using QR Code
      */
     postWithdrawQrcode(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
@@ -323,6 +356,64 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
      */
     async getPixKey(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PixKeyInfo> {
         const response = await this.getPixKeyRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for getUserDict without sending the request
+     */
+    async getUserDictRequestOpts(requestParameters: GetUserDictRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['key'] == null) {
+            throw new runtime.RequiredError(
+                'key',
+                'Required parameter "key" was null or undefined when calling getUserDict().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['key'] != null) {
+            queryParameters['key'] = requestParameters['key'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/dict`;
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+     * DICT key lookup
+     */
+    async getUserDictRaw(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DictConsultResponse>> {
+        const requestOptions = await this.getUserDictRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DictConsultResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+     * DICT key lookup
+     */
+    async getUserDict(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DictConsultResponse> {
+        const response = await this.getUserDictRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -486,7 +577,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
      * Read QR Code
      */
     async postPixQrcodeReadRaw(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<QRCodeReadResponse>> {
@@ -497,7 +588,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
      * Read QR Code
      */
     async postPixQrcodeRead(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<QRCodeReadResponse> {
@@ -600,7 +691,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
      * Create Withdrawal using QR Code
      */
     async postWithdrawQrcodeRaw(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
@@ -611,7 +702,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
      * Create Withdrawal using QR Code
      */
     async postWithdrawQrcode(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {

@@ -29,6 +29,11 @@ import {
     CallbackListResponseToJSON,
 } from '../models/CallbackListResponse.js';
 import {
+    type CallbackResendResponse,
+    CallbackResendResponseFromJSON,
+    CallbackResendResponseToJSON,
+} from '../models/CallbackResendResponse.js';
+import {
     type ResendUserCallbackSingle200Response,
     ResendUserCallbackSingle200ResponseFromJSON,
     ResendUserCallbackSingle200ResponseToJSON,
@@ -68,6 +73,10 @@ export interface ResendUserCallbackSingleRequest {
 
 export interface ResendUserCallbacksOperationRequest {
     resendUserCallbacksRequest: ResendUserCallbacksRequest;
+}
+
+export interface ResendUserCallbacksWebhookRequest {
+    webhookId: string;
 }
 
 /**
@@ -192,6 +201,30 @@ export interface CallbacksApiInterface {
      * Re-send callbacks (bulk)
      */
     resendUserCallbacks(requestParameters: ResendUserCallbacksOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ResendUserCallbacks200Response>;
+
+    /**
+     * Creates request options for resendUserCallbacksWebhook without sending the request
+     * @param {string} webhookId Webhook id.
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    resendUserCallbacksWebhookRequestOpts(requestParameters: ResendUserCallbacksWebhookRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Queues a bulk resend of the failed callbacks of a given webhook.
+     * @summary Resend callbacks by webhook
+     * @param {string} webhookId Webhook id.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    resendUserCallbacksWebhookRaw(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CallbackResendResponse>>;
+
+    /**
+     * Queues a bulk resend of the failed callbacks of a given webhook.
+     * Resend callbacks by webhook
+     */
+    resendUserCallbacksWebhook(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CallbackResendResponse>;
 
 }
 
@@ -455,6 +488,61 @@ export class CallbacksApi extends runtime.BaseAPI implements CallbacksApiInterfa
      */
     async resendUserCallbacks(requestParameters: ResendUserCallbacksOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ResendUserCallbacks200Response> {
         const response = await this.resendUserCallbacksRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for resendUserCallbacksWebhook without sending the request
+     */
+    async resendUserCallbacksWebhookRequestOpts(requestParameters: ResendUserCallbacksWebhookRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['webhookId'] == null) {
+            throw new runtime.RequiredError(
+                'webhookId',
+                'Required parameter "webhookId" was null or undefined when calling resendUserCallbacksWebhook().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/callbacks/resend/webhook/{webhookId}`;
+        urlPath = urlPath.replace('{webhookId}', encodeURIComponent(String(requestParameters['webhookId'])));
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Queues a bulk resend of the failed callbacks of a given webhook.
+     * Resend callbacks by webhook
+     */
+    async resendUserCallbacksWebhookRaw(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CallbackResendResponse>> {
+        const requestOptions = await this.resendUserCallbacksWebhookRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CallbackResendResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Queues a bulk resend of the failed callbacks of a given webhook.
+     * Resend callbacks by webhook
+     */
+    async resendUserCallbacksWebhook(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CallbackResendResponse> {
+        const response = await this.resendUserCallbacksWebhookRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -59,7 +59,11 @@ type APIClient struct {
 
 	PixOperationsAPI *PixOperationsAPIService
 
+	RefundsAPI *RefundsAPIService
+
 	ReportsAPI *ReportsAPIService
+
+	WebhooksAPI *WebhooksAPIService
 
 	WithdrawalsAPI *WithdrawalsAPIService
 }
@@ -85,7 +89,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.InfractionsAPI = (*InfractionsAPIService)(&c.common)
 	c.InternalTransferAPI = (*InternalTransferAPIService)(&c.common)
 	c.PixOperationsAPI = (*PixOperationsAPIService)(&c.common)
+	c.RefundsAPI = (*RefundsAPIService)(&c.common)
 	c.ReportsAPI = (*ReportsAPIService)(&c.common)
+	c.WebhooksAPI = (*WebhooksAPIService)(&c.common)
 	c.WithdrawalsAPI = (*WithdrawalsAPIService)(&c.common)
 
 	return c

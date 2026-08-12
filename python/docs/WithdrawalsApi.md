@@ -5,6 +5,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_pix_key**](WithdrawalsApi.md#get_pix_key) | **GET** /pix/key | Dict Pix Key Lookup
+[**get_user_dict**](WithdrawalsApi.md#get_user_dict) | **GET** /user/dict | DICT key lookup
 [**get_withdraw**](WithdrawalsApi.md#get_withdraw) | **GET** /withdraw | Retrieve Withdrawal
 [**get_withdraw_proof**](WithdrawalsApi.md#get_withdraw_proof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt
 [**post_pix_qrcode_read**](WithdrawalsApi.md#post_pix_qrcode_read) | **POST** /pix/qrcode/read | Read QR Code
@@ -89,6 +90,84 @@ Name | Type | Description  | Notes
 **200** | Pix key information retrieved successfully |  -  |
 **400** | Invalid Pix key format |  -  |
 **404** | Pix key not found in DICT |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_dict**
+> DictConsultResponse get_user_dict(key)
+
+DICT key lookup
+
+Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.dict_consult_response import DictConsultResponse
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.WithdrawalsApi(api_client)
+    key = 'key_example' # str | Pix key to look up (CPF, CNPJ, email, phone or EVP).
+
+    try:
+        # DICT key lookup
+        api_response = api_instance.get_user_dict(key)
+        print("The response of WithdrawalsApi->get_user_dict:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WithdrawalsApi->get_user_dict: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key** | **str**| Pix key to look up (CPF, CNPJ, email, phone or EVP). | 
+
+### Return type
+
+[**DictConsultResponse**](DictConsultResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Key holder details. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -267,7 +346,7 @@ Name | Type | Description  | Notes
 
 Read QR Code
 
-Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
 
 ### Example
 
@@ -428,7 +507,7 @@ Name | Type | Description  | Notes
 
 Create Withdrawal using QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.
 
 ### Example
 

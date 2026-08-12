@@ -5,6 +5,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getPixKey**](WithdrawalsApi.md#getpixkey) | **GET** /pix/key | Dict Pix Key Lookup |
+| [**getUserDict**](WithdrawalsApi.md#getuserdict) | **GET** /user/dict | DICT key lookup |
 | [**getWithdraw**](WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Retrieve Withdrawal |
 | [**getWithdrawProof**](WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
 | [**postPixQrcodeRead**](WithdrawalsApi.md#postpixqrcodereadoperation) | **POST** /pix/qrcode/read | Read QR Code |
@@ -82,6 +83,77 @@ example().catch(console.error);
 | **200** | Pix key information retrieved successfully |  -  |
 | **400** | Invalid Pix key format |  -  |
 | **404** | Pix key not found in DICT |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getUserDict
+
+> DictConsultResponse getUserDict(key)
+
+DICT key lookup
+
+Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  WithdrawalsApi,
+} from 'payzu-pix';
+import type { GetUserDictRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WithdrawalsApi(config);
+
+  const body = {
+    // string | Pix key to look up (CPF, CNPJ, email, phone or EVP).
+    key: key_example,
+  } satisfies GetUserDictRequest;
+
+  try {
+    const data = await api.getUserDict(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **key** | `string` | Pix key to look up (CPF, CNPJ, email, phone or EVP). | [Defaults to `undefined`] |
+
+### Return type
+
+[**DictConsultResponse**](DictConsultResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Key holder details. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -252,7 +324,7 @@ example().catch(console.error);
 
 Read QR Code
 
-Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
 
 ### Example
 
@@ -397,7 +469,7 @@ example().catch(console.error);
 
 Create Withdrawal using QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code\&#39;s embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code\&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.
 
 ### Example
 

@@ -23,7 +23,9 @@ __all__ = [
     "InfractionsApi",
     "InternalTransferApi",
     "PixOperationsApi",
+    "RefundsApi",
     "ReportsApi",
+    "WebhooksApi",
     "WithdrawalsApi",
     "ApiResponse",
     "ApiClient",
@@ -36,11 +38,18 @@ __all__ = [
     "ApiException",
     "ApiError",
     "ApiErrorDetailsInner",
+    "BankStatement",
+    "BankStatementListResponse",
+    "BankStatementListResponsePagination",
     "CallbackDetail",
     "CallbackListResponse",
     "CallbackListResponsePagination",
+    "CallbackResendResponse",
     "Defense",
     "DefenseFilesInner",
+    "DepositPending",
+    "DepositPendingListResponse",
+    "DictConsultResponse",
     "DownloadUserReport200Response",
     "GetPixKey400Response",
     "GetPixKey404Response",
@@ -69,11 +78,26 @@ __all__ = [
     "PostWithdrawRequest",
     "ProofResponse",
     "QRCodeReadResponse",
+    "RefundRequest",
     "ReportJob",
     "ResendUserCallbackSingle200Response",
     "ResendUserCallbacks200Response",
     "ResendUserCallbacksRequest",
+    "RotateSecretResponse",
+    "SentWebhookDetail",
+    "SentWebhooksQuantity",
+    "Summary",
+    "SummaryBlock",
+    "SummaryBlockGroupedInner",
+    "SummaryBlockStatuses",
+    "SummaryStatus",
     "Transaction",
+    "Webhook",
+    "WebhookCreateRequest",
+    "WebhookEventType",
+    "WebhookListResponse",
+    "WebhookUpdateRequest",
+    "WebhookWithSecret",
 ]
 
 # import apis into sdk package
@@ -82,7 +106,9 @@ from payzu_pix.api.callbacks_api import CallbacksApi as CallbacksApi
 from payzu_pix.api.infractions_api import InfractionsApi as InfractionsApi
 from payzu_pix.api.internal_transfer_api import InternalTransferApi as InternalTransferApi
 from payzu_pix.api.pix_operations_api import PixOperationsApi as PixOperationsApi
+from payzu_pix.api.refunds_api import RefundsApi as RefundsApi
 from payzu_pix.api.reports_api import ReportsApi as ReportsApi
+from payzu_pix.api.webhooks_api import WebhooksApi as WebhooksApi
 from payzu_pix.api.withdrawals_api import WithdrawalsApi as WithdrawalsApi
 
 # import ApiClient
@@ -99,11 +125,18 @@ from payzu_pix.exceptions import ApiException as ApiException
 # import models into sdk package
 from payzu_pix.models.api_error import ApiError as ApiError
 from payzu_pix.models.api_error_details_inner import ApiErrorDetailsInner as ApiErrorDetailsInner
+from payzu_pix.models.bank_statement import BankStatement as BankStatement
+from payzu_pix.models.bank_statement_list_response import BankStatementListResponse as BankStatementListResponse
+from payzu_pix.models.bank_statement_list_response_pagination import BankStatementListResponsePagination as BankStatementListResponsePagination
 from payzu_pix.models.callback_detail import CallbackDetail as CallbackDetail
 from payzu_pix.models.callback_list_response import CallbackListResponse as CallbackListResponse
 from payzu_pix.models.callback_list_response_pagination import CallbackListResponsePagination as CallbackListResponsePagination
+from payzu_pix.models.callback_resend_response import CallbackResendResponse as CallbackResendResponse
 from payzu_pix.models.defense import Defense as Defense
 from payzu_pix.models.defense_files_inner import DefenseFilesInner as DefenseFilesInner
+from payzu_pix.models.deposit_pending import DepositPending as DepositPending
+from payzu_pix.models.deposit_pending_list_response import DepositPendingListResponse as DepositPendingListResponse
+from payzu_pix.models.dict_consult_response import DictConsultResponse as DictConsultResponse
 from payzu_pix.models.download_user_report200_response import DownloadUserReport200Response as DownloadUserReport200Response
 from payzu_pix.models.get_pix_key400_response import GetPixKey400Response as GetPixKey400Response
 from payzu_pix.models.get_pix_key404_response import GetPixKey404Response as GetPixKey404Response
@@ -132,9 +165,24 @@ from payzu_pix.models.post_withdraw_qrcode_request import PostWithdrawQrcodeRequ
 from payzu_pix.models.post_withdraw_request import PostWithdrawRequest as PostWithdrawRequest
 from payzu_pix.models.proof_response import ProofResponse as ProofResponse
 from payzu_pix.models.qr_code_read_response import QRCodeReadResponse as QRCodeReadResponse
+from payzu_pix.models.refund_request import RefundRequest as RefundRequest
 from payzu_pix.models.report_job import ReportJob as ReportJob
 from payzu_pix.models.resend_user_callback_single200_response import ResendUserCallbackSingle200Response as ResendUserCallbackSingle200Response
 from payzu_pix.models.resend_user_callbacks200_response import ResendUserCallbacks200Response as ResendUserCallbacks200Response
 from payzu_pix.models.resend_user_callbacks_request import ResendUserCallbacksRequest as ResendUserCallbacksRequest
+from payzu_pix.models.rotate_secret_response import RotateSecretResponse as RotateSecretResponse
+from payzu_pix.models.sent_webhook_detail import SentWebhookDetail as SentWebhookDetail
+from payzu_pix.models.sent_webhooks_quantity import SentWebhooksQuantity as SentWebhooksQuantity
+from payzu_pix.models.summary import Summary as Summary
+from payzu_pix.models.summary_block import SummaryBlock as SummaryBlock
+from payzu_pix.models.summary_block_grouped_inner import SummaryBlockGroupedInner as SummaryBlockGroupedInner
+from payzu_pix.models.summary_block_statuses import SummaryBlockStatuses as SummaryBlockStatuses
+from payzu_pix.models.summary_status import SummaryStatus as SummaryStatus
 from payzu_pix.models.transaction import Transaction as Transaction
+from payzu_pix.models.webhook import Webhook as Webhook
+from payzu_pix.models.webhook_create_request import WebhookCreateRequest as WebhookCreateRequest
+from payzu_pix.models.webhook_event_type import WebhookEventType as WebhookEventType
+from payzu_pix.models.webhook_list_response import WebhookListResponse as WebhookListResponse
+from payzu_pix.models.webhook_update_request import WebhookUpdateRequest as WebhookUpdateRequest
+from payzu_pix.models.webhook_with_secret import WebhookWithSecret as WebhookWithSecret
 

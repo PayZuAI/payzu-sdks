@@ -7,6 +7,7 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**getPixKey()**](WithdrawalsApi.md#getPixKey) | **GET** /pix/key | Dict Pix Key Lookup |
+| [**getUserDict()**](WithdrawalsApi.md#getUserDict) | **GET** /user/dict | DICT key lookup |
 | [**getWithdraw()**](WithdrawalsApi.md#getWithdraw) | **GET** /withdraw | Retrieve Withdrawal |
 | [**getWithdrawProof()**](WithdrawalsApi.md#getWithdrawProof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
 | [**postPixQrcodeRead()**](WithdrawalsApi.md#postPixQrcodeRead) | **POST** /pix/qrcode/read | Read QR Code |
@@ -60,6 +61,66 @@ try {
 ### Return type
 
 [**\OpenAPI\Client\Model\PixKeyInfo**](../Model/PixKeyInfo.md)
+
+### Authorization
+
+[BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getUserDict()`
+
+```php
+getUserDict($key): \OpenAPI\Client\Model\DictConsultResponse
+```
+
+DICT key lookup
+
+Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer authorization: BearerAuth
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$key = 'key_example'; // string | Pix key to look up (CPF, CNPJ, email, phone or EVP).
+
+try {
+    $result = $apiInstance->getUserDict($key);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WithdrawalsApi->getUserDict: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **key** | **string**| Pix key to look up (CPF, CNPJ, email, phone or EVP). | |
+
+### Return type
+
+[**\OpenAPI\Client\Model\DictConsultResponse**](../Model/DictConsultResponse.md)
 
 ### Authorization
 
@@ -210,7 +271,7 @@ postPixQrcodeRead($post_pix_qrcode_read_request): \OpenAPI\Client\Model\QRCodeRe
 
 Read QR Code
 
-Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
 
 ### Example
 
@@ -330,7 +391,7 @@ postWithdrawQrcode($post_withdraw_qrcode_request): \OpenAPI\Client\Model\Transac
 
 Create Withdrawal using QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.
 
 ### Example
 

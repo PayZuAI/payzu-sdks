@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
 *CallbacksApi* | [**get_user_callbacks**](docs/CallbacksApi.md#get_user_callbacks) | **GET** /user/callbacks | List Callbacks
 *CallbacksApi* | [**resend_user_callback_single**](docs/CallbacksApi.md#resend_user_callback_single) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single)
 *CallbacksApi* | [**resend_user_callbacks**](docs/CallbacksApi.md#resend_user_callbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk)
+*CallbacksApi* | [**resend_user_callbacks_webhook**](docs/CallbacksApi.md#resend_user_callbacks_webhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
 *InfractionsApi* | [**get_infractions**](docs/InfractionsApi.md#get_infractions) | **GET** /user/infractions | List Infractions
 *InfractionsApi* | [**get_infractions_by_id**](docs/InfractionsApi.md#get_infractions_by_id) | **GET** /user/infractions/{id} | Get Infraction
 *InfractionsApi* | [**get_infractions_defense_by_id**](docs/InfractionsApi.md#get_infractions_defense_by_id) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Get Defense
@@ -121,13 +122,28 @@ Class | Method | HTTP request | Description
 *PixOperationsApi* | [**get_pix_qrcode**](docs/PixOperationsApi.md#get_pix_qrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG)
 *PixOperationsApi* | [**get_proof**](docs/PixOperationsApi.md#get_proof) | **GET** /proof/{id} | Get Transaction Receipt
 *PixOperationsApi* | [**post_pix**](docs/PixOperationsApi.md#post_pix) | **POST** /pix | Create Charge (Pix deposit)
+*RefundsApi* | [**post_refund**](docs/RefundsApi.md#post_refund) | **POST** /refund/{transactionId} | Refund a Pix
 *ReportsApi* | [**download_user_report**](docs/ReportsApi.md#download_user_report) | **POST** /user/report/{id}/download | Download report
+*ReportsApi* | [**get_user_bank_statement**](docs/ReportsApi.md#get_user_bank_statement) | **GET** /user/bank-statements/{id} | Get bank statement
+*ReportsApi* | [**get_user_bank_statements**](docs/ReportsApi.md#get_user_bank_statements) | **GET** /user/bank-statements | List bank statements
+*ReportsApi* | [**get_user_deposit_pending**](docs/ReportsApi.md#get_user_deposit_pending) | **GET** /user/deposit-pending | List pending deposits
+*ReportsApi* | [**get_user_deposit_pending_by_id**](docs/ReportsApi.md#get_user_deposit_pending_by_id) | **GET** /user/deposit-pending/{id} | Get pending deposit
 *ReportsApi* | [**get_user_report**](docs/ReportsApi.md#get_user_report) | **GET** /user/report/{id} | Get report job status
+*ReportsApi* | [**get_user_summary**](docs/ReportsApi.md#get_user_summary) | **GET** /user/summary | Transaction summary
 *ReportsApi* | [**get_user_transaction_by_id**](docs/ReportsApi.md#get_user_transaction_by_id) | **GET** /user/transactions/{id} | List transaction details
 *ReportsApi* | [**get_user_transactions**](docs/ReportsApi.md#get_user_transactions) | **GET** /user/transactions | List Transactions
 *ReportsApi* | [**list_user_reports**](docs/ReportsApi.md#list_user_reports) | **GET** /user/report | List report jobs
 *ReportsApi* | [**post_user_report**](docs/ReportsApi.md#post_user_report) | **POST** /user/report | Generate transactions report
+*WebhooksApi* | [**delete_user_webhook**](docs/WebhooksApi.md#delete_user_webhook) | **DELETE** /user/webhooks/{id} | Delete webhook
+*WebhooksApi* | [**get_user_webhook**](docs/WebhooksApi.md#get_user_webhook) | **GET** /user/webhooks/{id} | Get webhook
+*WebhooksApi* | [**get_user_webhook_sent_detail**](docs/WebhooksApi.md#get_user_webhook_sent_detail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail
+*WebhooksApi* | [**get_user_webhooks**](docs/WebhooksApi.md#get_user_webhooks) | **GET** /user/webhooks | List webhooks
+*WebhooksApi* | [**get_user_webhooks_sent_quantity**](docs/WebhooksApi.md#get_user_webhooks_sent_quantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks
+*WebhooksApi* | [**patch_user_webhook**](docs/WebhooksApi.md#patch_user_webhook) | **PATCH** /user/webhooks/{id} | Update webhook
+*WebhooksApi* | [**post_user_webhook**](docs/WebhooksApi.md#post_user_webhook) | **POST** /user/webhooks | Create webhook
+*WebhooksApi* | [**post_user_webhook_rotate_secret**](docs/WebhooksApi.md#post_user_webhook_rotate_secret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret
 *WithdrawalsApi* | [**get_pix_key**](docs/WithdrawalsApi.md#get_pix_key) | **GET** /pix/key | Dict Pix Key Lookup
+*WithdrawalsApi* | [**get_user_dict**](docs/WithdrawalsApi.md#get_user_dict) | **GET** /user/dict | DICT key lookup
 *WithdrawalsApi* | [**get_withdraw**](docs/WithdrawalsApi.md#get_withdraw) | **GET** /withdraw | Retrieve Withdrawal
 *WithdrawalsApi* | [**get_withdraw_proof**](docs/WithdrawalsApi.md#get_withdraw_proof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt
 *WithdrawalsApi* | [**post_pix_qrcode_read**](docs/WithdrawalsApi.md#post_pix_qrcode_read) | **POST** /pix/qrcode/read | Read QR Code
@@ -139,11 +155,18 @@ Class | Method | HTTP request | Description
 
  - [ApiError](docs/ApiError.md)
  - [ApiErrorDetailsInner](docs/ApiErrorDetailsInner.md)
+ - [BankStatement](docs/BankStatement.md)
+ - [BankStatementListResponse](docs/BankStatementListResponse.md)
+ - [BankStatementListResponsePagination](docs/BankStatementListResponsePagination.md)
  - [CallbackDetail](docs/CallbackDetail.md)
  - [CallbackListResponse](docs/CallbackListResponse.md)
  - [CallbackListResponsePagination](docs/CallbackListResponsePagination.md)
+ - [CallbackResendResponse](docs/CallbackResendResponse.md)
  - [Defense](docs/Defense.md)
  - [DefenseFilesInner](docs/DefenseFilesInner.md)
+ - [DepositPending](docs/DepositPending.md)
+ - [DepositPendingListResponse](docs/DepositPendingListResponse.md)
+ - [DictConsultResponse](docs/DictConsultResponse.md)
  - [DownloadUserReport200Response](docs/DownloadUserReport200Response.md)
  - [GetPixKey400Response](docs/GetPixKey400Response.md)
  - [GetPixKey404Response](docs/GetPixKey404Response.md)
@@ -172,11 +195,26 @@ Class | Method | HTTP request | Description
  - [PostWithdrawRequest](docs/PostWithdrawRequest.md)
  - [ProofResponse](docs/ProofResponse.md)
  - [QRCodeReadResponse](docs/QRCodeReadResponse.md)
+ - [RefundRequest](docs/RefundRequest.md)
  - [ReportJob](docs/ReportJob.md)
  - [ResendUserCallbackSingle200Response](docs/ResendUserCallbackSingle200Response.md)
  - [ResendUserCallbacks200Response](docs/ResendUserCallbacks200Response.md)
  - [ResendUserCallbacksRequest](docs/ResendUserCallbacksRequest.md)
+ - [RotateSecretResponse](docs/RotateSecretResponse.md)
+ - [SentWebhookDetail](docs/SentWebhookDetail.md)
+ - [SentWebhooksQuantity](docs/SentWebhooksQuantity.md)
+ - [Summary](docs/Summary.md)
+ - [SummaryBlock](docs/SummaryBlock.md)
+ - [SummaryBlockGroupedInner](docs/SummaryBlockGroupedInner.md)
+ - [SummaryBlockStatuses](docs/SummaryBlockStatuses.md)
+ - [SummaryStatus](docs/SummaryStatus.md)
  - [Transaction](docs/Transaction.md)
+ - [Webhook](docs/Webhook.md)
+ - [WebhookCreateRequest](docs/WebhookCreateRequest.md)
+ - [WebhookEventType](docs/WebhookEventType.md)
+ - [WebhookListResponse](docs/WebhookListResponse.md)
+ - [WebhookUpdateRequest](docs/WebhookUpdateRequest.md)
+ - [WebhookWithSecret](docs/WebhookWithSecret.md)
 
 
 <a id="documentation-for-authorization"></a>

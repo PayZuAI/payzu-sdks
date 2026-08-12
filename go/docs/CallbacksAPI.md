@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**GetUserCallbacks**](CallbacksAPI.md#GetUserCallbacks) | **Get** /user/callbacks | List Callbacks
 [**ResendUserCallbackSingle**](CallbacksAPI.md#ResendUserCallbackSingle) | **Post** /user/callbacks/resend/{transactionId} | Re-send callback (single)
 [**ResendUserCallbacks**](CallbacksAPI.md#ResendUserCallbacks) | **Post** /user/callbacks/resend | Re-send callbacks (bulk)
+[**ResendUserCallbacksWebhook**](CallbacksAPI.md#ResendUserCallbacksWebhook) | **Post** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
 
 
 
@@ -298,6 +299,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResendUserCallbacksWebhook
+
+> CallbackResendResponse ResendUserCallbacksWebhook(ctx, webhookId).Execute()
+
+Resend callbacks by webhook
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	webhookId := "webhookId_example" // string | Webhook id.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CallbacksAPI.ResendUserCallbacksWebhook(context.Background(), webhookId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CallbacksAPI.ResendUserCallbacksWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResendUserCallbacksWebhook`: CallbackResendResponse
+	fmt.Fprintf(os.Stdout, "Response from `CallbacksAPI.ResendUserCallbacksWebhook`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**webhookId** | **string** | Webhook id. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResendUserCallbacksWebhookRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CallbackResendResponse**](CallbackResendResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

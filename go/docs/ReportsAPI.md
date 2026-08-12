@@ -5,7 +5,12 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DownloadUserReport**](ReportsAPI.md#DownloadUserReport) | **Post** /user/report/{id}/download | Download report
+[**GetUserBankStatement**](ReportsAPI.md#GetUserBankStatement) | **Get** /user/bank-statements/{id} | Get bank statement
+[**GetUserBankStatements**](ReportsAPI.md#GetUserBankStatements) | **Get** /user/bank-statements | List bank statements
+[**GetUserDepositPending**](ReportsAPI.md#GetUserDepositPending) | **Get** /user/deposit-pending | List pending deposits
+[**GetUserDepositPendingById**](ReportsAPI.md#GetUserDepositPendingById) | **Get** /user/deposit-pending/{id} | Get pending deposit
 [**GetUserReport**](ReportsAPI.md#GetUserReport) | **Get** /user/report/{id} | Get report job status
+[**GetUserSummary**](ReportsAPI.md#GetUserSummary) | **Get** /user/summary | Transaction summary
 [**GetUserTransactionById**](ReportsAPI.md#GetUserTransactionById) | **Get** /user/transactions/{id} | List transaction details
 [**GetUserTransactions**](ReportsAPI.md#GetUserTransactions) | **Get** /user/transactions | List Transactions
 [**ListUserReports**](ReportsAPI.md#ListUserReports) | **Get** /user/report | List report jobs
@@ -83,6 +88,320 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetUserBankStatement
+
+> BankStatement GetUserBankStatement(ctx, id).Execute()
+
+Get bank statement
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	id := "id_example" // string | Statement entry id.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetUserBankStatement(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserBankStatement``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserBankStatement`: BankStatement
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetUserBankStatement`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Statement entry id. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserBankStatementRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BankStatement**](BankStatement.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserBankStatements
+
+> BankStatementListResponse GetUserBankStatements(ctx).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).Id(id).Operation(operation).Reason(reason).TransactionId(transactionId).AmountFrom(amountFrom).AmountTo(amountTo).Page(page).Limit(limit).SortBy(sortBy).SortDirection(sortDirection).Execute()
+
+List bank statements
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	createdAtFrom := time.Now() // time.Time | Start date (required).
+	createdAtTo := time.Now() // time.Time | End date (required).
+	id := "id_example" // string |  (optional)
+	operation := "operation_example" // string |  (optional)
+	reason := "reason_example" // string |  (optional)
+	transactionId := "transactionId_example" // string |  (optional)
+	amountFrom := float32(8.14) // float32 |  (optional)
+	amountTo := float32(8.14) // float32 |  (optional)
+	page := int32(56) // int32 |  (optional) (default to 1)
+	limit := int32(56) // int32 |  (optional) (default to 10)
+	sortBy := "sortBy_example" // string |  (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string |  (optional) (default to "desc")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetUserBankStatements(context.Background()).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).Id(id).Operation(operation).Reason(reason).TransactionId(transactionId).AmountFrom(amountFrom).AmountTo(amountTo).Page(page).Limit(limit).SortBy(sortBy).SortDirection(sortDirection).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserBankStatements``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserBankStatements`: BankStatementListResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetUserBankStatements`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserBankStatementsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createdAtFrom** | **time.Time** | Start date (required). | 
+ **createdAtTo** | **time.Time** | End date (required). | 
+ **id** | **string** |  | 
+ **operation** | **string** |  | 
+ **reason** | **string** |  | 
+ **transactionId** | **string** |  | 
+ **amountFrom** | **float32** |  | 
+ **amountTo** | **float32** |  | 
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
+ **sortBy** | **string** |  | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** |  | [default to &quot;desc&quot;]
+
+### Return type
+
+[**BankStatementListResponse**](BankStatementListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserDepositPending
+
+> DepositPendingListResponse GetUserDepositPending(ctx).Status(status).Document(document).Name(name).EndToEndId(endToEndId).AmountMin(amountMin).AmountMax(amountMax).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).Page(page).Limit(limit).Execute()
+
+List pending deposits
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	status := "status_example" // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+	document := "document_example" // string |  (optional)
+	name := "name_example" // string |  (optional)
+	endToEndId := "endToEndId_example" // string |  (optional)
+	amountMin := float32(8.14) // float32 |  (optional)
+	amountMax := float32(8.14) // float32 |  (optional)
+	createdAtFrom := time.Now() // time.Time |  (optional)
+	createdAtTo := time.Now() // time.Time |  (optional)
+	page := int32(56) // int32 |  (optional) (default to 1)
+	limit := int32(56) // int32 |  (optional) (default to 20)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetUserDepositPending(context.Background()).Status(status).Document(document).Name(name).EndToEndId(endToEndId).AmountMin(amountMin).AmountMax(amountMax).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).Page(page).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserDepositPending``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserDepositPending`: DepositPendingListResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetUserDepositPending`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserDepositPendingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **string** | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | 
+ **document** | **string** |  | 
+ **name** | **string** |  | 
+ **endToEndId** | **string** |  | 
+ **amountMin** | **float32** |  | 
+ **amountMax** | **float32** |  | 
+ **createdAtFrom** | **time.Time** |  | 
+ **createdAtTo** | **time.Time** |  | 
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 20]
+
+### Return type
+
+[**DepositPendingListResponse**](DepositPendingListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserDepositPendingById
+
+> DepositPending GetUserDepositPendingById(ctx, id).Execute()
+
+Get pending deposit
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	id := "id_example" // string | Pending deposit id.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetUserDepositPendingById(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserDepositPendingById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserDepositPendingById`: DepositPending
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetUserDepositPendingById`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Pending deposit id. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserDepositPendingByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DepositPending**](DepositPending.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetUserReport
 
 > ReportJob GetUserReport(ctx, id).Execute()
@@ -138,6 +457,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ReportJob**](ReportJob.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserSummary
+
+> Summary GetUserSummary(ctx).DateFrom(dateFrom).DateTo(dateTo).GroupBy(groupBy).Grouped(grouped).Execute()
+
+Transaction summary
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+)
+
+func main() {
+	dateFrom := time.Now() // time.Time |  (optional)
+	dateTo := time.Now() // time.Time |  (optional)
+	groupBy := "groupBy_example" // string |  (optional) (default to "day")
+	grouped := true // bool | When true, returns a series grouped by date. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetUserSummary(context.Background()).DateFrom(dateFrom).DateTo(dateTo).GroupBy(groupBy).Grouped(grouped).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserSummary``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserSummary`: Summary
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetUserSummary`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserSummaryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dateFrom** | **time.Time** |  | 
+ **dateTo** | **time.Time** |  | 
+ **groupBy** | **string** |  | [default to &quot;day&quot;]
+ **grouped** | **bool** | When true, returns a series grouped by date. | 
+
+### Return type
+
+[**Summary**](Summary.md)
 
 ### Authorization
 

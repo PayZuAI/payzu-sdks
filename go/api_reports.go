@@ -159,6 +159,637 @@ func (a *ReportsAPIService) DownloadUserReportExecute(r ApiDownloadUserReportReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetUserBankStatementRequest struct {
+	ctx context.Context
+	ApiService *ReportsAPIService
+	id string
+}
+
+func (r ApiGetUserBankStatementRequest) Execute() (*BankStatement, *http.Response, error) {
+	return r.ApiService.GetUserBankStatementExecute(r)
+}
+
+/*
+GetUserBankStatement Get bank statement
+
+Returns a single statement entry.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Statement entry id.
+ @return ApiGetUserBankStatementRequest
+*/
+func (a *ReportsAPIService) GetUserBankStatement(ctx context.Context, id string) ApiGetUserBankStatementRequest {
+	return ApiGetUserBankStatementRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return BankStatement
+func (a *ReportsAPIService) GetUserBankStatementExecute(r ApiGetUserBankStatementRequest) (*BankStatement, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BankStatement
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetUserBankStatement")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user/bank-statements/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserBankStatementsRequest struct {
+	ctx context.Context
+	ApiService *ReportsAPIService
+	createdAtFrom *time.Time
+	createdAtTo *time.Time
+	id *string
+	operation *string
+	reason *string
+	transactionId *string
+	amountFrom *float32
+	amountTo *float32
+	page *int32
+	limit *int32
+	sortBy *string
+	sortDirection *string
+}
+
+// Start date (required).
+func (r ApiGetUserBankStatementsRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetUserBankStatementsRequest {
+	r.createdAtFrom = &createdAtFrom
+	return r
+}
+
+// End date (required).
+func (r ApiGetUserBankStatementsRequest) CreatedAtTo(createdAtTo time.Time) ApiGetUserBankStatementsRequest {
+	r.createdAtTo = &createdAtTo
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) Id(id string) ApiGetUserBankStatementsRequest {
+	r.id = &id
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) Operation(operation string) ApiGetUserBankStatementsRequest {
+	r.operation = &operation
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) Reason(reason string) ApiGetUserBankStatementsRequest {
+	r.reason = &reason
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) TransactionId(transactionId string) ApiGetUserBankStatementsRequest {
+	r.transactionId = &transactionId
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) AmountFrom(amountFrom float32) ApiGetUserBankStatementsRequest {
+	r.amountFrom = &amountFrom
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) AmountTo(amountTo float32) ApiGetUserBankStatementsRequest {
+	r.amountTo = &amountTo
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) Page(page int32) ApiGetUserBankStatementsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) Limit(limit int32) ApiGetUserBankStatementsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) SortBy(sortBy string) ApiGetUserBankStatementsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) SortDirection(sortDirection string) ApiGetUserBankStatementsRequest {
+	r.sortDirection = &sortDirection
+	return r
+}
+
+func (r ApiGetUserBankStatementsRequest) Execute() (*BankStatementListResponse, *http.Response, error) {
+	return r.ApiService.GetUserBankStatementsExecute(r)
+}
+
+/*
+GetUserBankStatements List bank statements
+
+Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetUserBankStatementsRequest
+*/
+func (a *ReportsAPIService) GetUserBankStatements(ctx context.Context) ApiGetUserBankStatementsRequest {
+	return ApiGetUserBankStatementsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BankStatementListResponse
+func (a *ReportsAPIService) GetUserBankStatementsExecute(r ApiGetUserBankStatementsRequest) (*BankStatementListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BankStatementListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetUserBankStatements")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user/bank-statements"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createdAtFrom == nil {
+		return localVarReturnValue, nil, reportError("createdAtFrom is required and must be specified")
+	}
+	if r.createdAtTo == nil {
+		return localVarReturnValue, nil, reportError("createdAtTo is required and must be specified")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "createdAtFrom", r.createdAtFrom, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "createdAtTo", r.createdAtTo, "form", "")
+	if r.id != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+	}
+	if r.operation != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "operation", r.operation, "form", "")
+	}
+	if r.reason != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
+	}
+	if r.transactionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "transactionId", r.transactionId, "form", "")
+	}
+	if r.amountFrom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "amountFrom", r.amountFrom, "form", "")
+	}
+	if r.amountTo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "amountTo", r.amountTo, "form", "")
+	}
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	} else {
+		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		r.page = &defaultValue
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 10
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		r.limit = &defaultValue
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortBy", r.sortBy, "form", "")
+	} else {
+		var defaultValue string = "createdAt"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortBy", defaultValue, "form", "")
+		r.sortBy = &defaultValue
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "desc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
+		r.sortDirection = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserDepositPendingRequest struct {
+	ctx context.Context
+	ApiService *ReportsAPIService
+	status *string
+	document *string
+	name *string
+	endToEndId *string
+	amountMin *float32
+	amountMax *float32
+	createdAtFrom *time.Time
+	createdAtTo *time.Time
+	page *int32
+	limit *int32
+}
+
+// Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+func (r ApiGetUserDepositPendingRequest) Status(status string) ApiGetUserDepositPendingRequest {
+	r.status = &status
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) Document(document string) ApiGetUserDepositPendingRequest {
+	r.document = &document
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) Name(name string) ApiGetUserDepositPendingRequest {
+	r.name = &name
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) EndToEndId(endToEndId string) ApiGetUserDepositPendingRequest {
+	r.endToEndId = &endToEndId
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) AmountMin(amountMin float32) ApiGetUserDepositPendingRequest {
+	r.amountMin = &amountMin
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) AmountMax(amountMax float32) ApiGetUserDepositPendingRequest {
+	r.amountMax = &amountMax
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetUserDepositPendingRequest {
+	r.createdAtFrom = &createdAtFrom
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) CreatedAtTo(createdAtTo time.Time) ApiGetUserDepositPendingRequest {
+	r.createdAtTo = &createdAtTo
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) Page(page int32) ApiGetUserDepositPendingRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) Limit(limit int32) ApiGetUserDepositPendingRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetUserDepositPendingRequest) Execute() (*DepositPendingListResponse, *http.Response, error) {
+	return r.ApiService.GetUserDepositPendingExecute(r)
+}
+
+/*
+GetUserDepositPending List pending deposits
+
+Lists deposits that are pending / not yet reconciled.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetUserDepositPendingRequest
+*/
+func (a *ReportsAPIService) GetUserDepositPending(ctx context.Context) ApiGetUserDepositPendingRequest {
+	return ApiGetUserDepositPendingRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DepositPendingListResponse
+func (a *ReportsAPIService) GetUserDepositPendingExecute(r ApiGetUserDepositPendingRequest) (*DepositPendingListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DepositPendingListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetUserDepositPending")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user/deposit-pending"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.status != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+	}
+	if r.document != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "document", r.document, "form", "")
+	}
+	if r.name != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	}
+	if r.endToEndId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endToEndId", r.endToEndId, "form", "")
+	}
+	if r.amountMin != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "amountMin", r.amountMin, "form", "")
+	}
+	if r.amountMax != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "amountMax", r.amountMax, "form", "")
+	}
+	if r.createdAtFrom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createdAtFrom", r.createdAtFrom, "form", "")
+	}
+	if r.createdAtTo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createdAtTo", r.createdAtTo, "form", "")
+	}
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	} else {
+		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		r.page = &defaultValue
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 20
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserDepositPendingByIdRequest struct {
+	ctx context.Context
+	ApiService *ReportsAPIService
+	id string
+}
+
+func (r ApiGetUserDepositPendingByIdRequest) Execute() (*DepositPending, *http.Response, error) {
+	return r.ApiService.GetUserDepositPendingByIdExecute(r)
+}
+
+/*
+GetUserDepositPendingById Get pending deposit
+
+Returns a single pending deposit.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Pending deposit id.
+ @return ApiGetUserDepositPendingByIdRequest
+*/
+func (a *ReportsAPIService) GetUserDepositPendingById(ctx context.Context, id string) ApiGetUserDepositPendingByIdRequest {
+	return ApiGetUserDepositPendingByIdRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return DepositPending
+func (a *ReportsAPIService) GetUserDepositPendingByIdExecute(r ApiGetUserDepositPendingByIdRequest) (*DepositPending, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DepositPending
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetUserDepositPendingById")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user/deposit-pending/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetUserReportRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
@@ -256,6 +887,146 @@ func (a *ReportsAPIService) GetUserReportExecute(r ApiGetUserReportRequest) (*Re
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserSummaryRequest struct {
+	ctx context.Context
+	ApiService *ReportsAPIService
+	dateFrom *time.Time
+	dateTo *time.Time
+	groupBy *string
+	grouped *bool
+}
+
+func (r ApiGetUserSummaryRequest) DateFrom(dateFrom time.Time) ApiGetUserSummaryRequest {
+	r.dateFrom = &dateFrom
+	return r
+}
+
+func (r ApiGetUserSummaryRequest) DateTo(dateTo time.Time) ApiGetUserSummaryRequest {
+	r.dateTo = &dateTo
+	return r
+}
+
+func (r ApiGetUserSummaryRequest) GroupBy(groupBy string) ApiGetUserSummaryRequest {
+	r.groupBy = &groupBy
+	return r
+}
+
+// When true, returns a series grouped by date.
+func (r ApiGetUserSummaryRequest) Grouped(grouped bool) ApiGetUserSummaryRequest {
+	r.grouped = &grouped
+	return r
+}
+
+func (r ApiGetUserSummaryRequest) Execute() (*Summary, *http.Response, error) {
+	return r.ApiService.GetUserSummaryExecute(r)
+}
+
+/*
+GetUserSummary Transaction summary
+
+Aggregated totals for deposits, withdrawals and commission over a period.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetUserSummaryRequest
+*/
+func (a *ReportsAPIService) GetUserSummary(ctx context.Context) ApiGetUserSummaryRequest {
+	return ApiGetUserSummaryRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return Summary
+func (a *ReportsAPIService) GetUserSummaryExecute(r ApiGetUserSummaryRequest) (*Summary, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Summary
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetUserSummary")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user/summary"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.dateFrom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dateFrom", r.dateFrom, "form", "")
+	}
+	if r.dateTo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dateTo", r.dateTo, "form", "")
+	}
+	if r.groupBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", r.groupBy, "form", "")
+	} else {
+		var defaultValue string = "day"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", defaultValue, "form", "")
+		r.groupBy = &defaultValue
+	}
+	if r.grouped != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "grouped", r.grouped, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

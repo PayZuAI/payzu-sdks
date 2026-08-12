@@ -5,7 +5,12 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**download_user_report**](ReportsApi.md#download_user_report) | **POST** /user/report/{id}/download | Download report
+[**get_user_bank_statement**](ReportsApi.md#get_user_bank_statement) | **GET** /user/bank-statements/{id} | Get bank statement
+[**get_user_bank_statements**](ReportsApi.md#get_user_bank_statements) | **GET** /user/bank-statements | List bank statements
+[**get_user_deposit_pending**](ReportsApi.md#get_user_deposit_pending) | **GET** /user/deposit-pending | List pending deposits
+[**get_user_deposit_pending_by_id**](ReportsApi.md#get_user_deposit_pending_by_id) | **GET** /user/deposit-pending/{id} | Get pending deposit
 [**get_user_report**](ReportsApi.md#get_user_report) | **GET** /user/report/{id} | Get report job status
+[**get_user_summary**](ReportsApi.md#get_user_summary) | **GET** /user/summary | Transaction summary
 [**get_user_transaction_by_id**](ReportsApi.md#get_user_transaction_by_id) | **GET** /user/transactions/{id} | List transaction details
 [**get_user_transactions**](ReportsApi.md#get_user_transactions) | **GET** /user/transactions | List Transactions
 [**list_user_reports**](ReportsApi.md#list_user_reports) | **GET** /user/report | List report jobs
@@ -93,6 +98,358 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_user_bank_statement**
+> BankStatement get_user_bank_statement(id)
+
+Get bank statement
+
+Returns a single statement entry.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.bank_statement import BankStatement
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.ReportsApi(api_client)
+    id = 'id_example' # str | Statement entry id.
+
+    try:
+        # Get bank statement
+        api_response = api_instance.get_user_bank_statement(id)
+        print("The response of ReportsApi->get_user_bank_statement:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportsApi->get_user_bank_statement: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| Statement entry id. | 
+
+### Return type
+
+[**BankStatement**](BankStatement.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Statement entry. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_bank_statements**
+> BankStatementListResponse get_user_bank_statements(created_at_from, created_at_to, id=id, operation=operation, reason=reason, transaction_id=transaction_id, amount_from=amount_from, amount_to=amount_to, page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction)
+
+List bank statements
+
+Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.bank_statement_list_response import BankStatementListResponse
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.ReportsApi(api_client)
+    created_at_from = '2013-10-20T19:20:30+01:00' # datetime | Start date (required).
+    created_at_to = '2013-10-20T19:20:30+01:00' # datetime | End date (required).
+    id = 'id_example' # str |  (optional)
+    operation = 'operation_example' # str |  (optional)
+    reason = 'reason_example' # str |  (optional)
+    transaction_id = 'transaction_id_example' # str |  (optional)
+    amount_from = 3.4 # float |  (optional)
+    amount_to = 3.4 # float |  (optional)
+    page = 1 # int |  (optional) (default to 1)
+    limit = 10 # int |  (optional) (default to 10)
+    sort_by = createdAt # str |  (optional) (default to createdAt)
+    sort_direction = desc # str |  (optional) (default to desc)
+
+    try:
+        # List bank statements
+        api_response = api_instance.get_user_bank_statements(created_at_from, created_at_to, id=id, operation=operation, reason=reason, transaction_id=transaction_id, amount_from=amount_from, amount_to=amount_to, page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction)
+        print("The response of ReportsApi->get_user_bank_statements:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportsApi->get_user_bank_statements: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **created_at_from** | **datetime**| Start date (required). | 
+ **created_at_to** | **datetime**| End date (required). | 
+ **id** | **str**|  | [optional] 
+ **operation** | **str**|  | [optional] 
+ **reason** | **str**|  | [optional] 
+ **transaction_id** | **str**|  | [optional] 
+ **amount_from** | **float**|  | [optional] 
+ **amount_to** | **float**|  | [optional] 
+ **page** | **int**|  | [optional] [default to 1]
+ **limit** | **int**|  | [optional] [default to 10]
+ **sort_by** | **str**|  | [optional] [default to createdAt]
+ **sort_direction** | **str**|  | [optional] [default to desc]
+
+### Return type
+
+[**BankStatementListResponse**](BankStatementListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Statement page. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_deposit_pending**
+> DepositPendingListResponse get_user_deposit_pending(status=status, document=document, name=name, end_to_end_id=end_to_end_id, amount_min=amount_min, amount_max=amount_max, created_at_from=created_at_from, created_at_to=created_at_to, page=page, limit=limit)
+
+List pending deposits
+
+Lists deposits that are pending / not yet reconciled.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.deposit_pending_list_response import DepositPendingListResponse
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.ReportsApi(api_client)
+    status = 'status_example' # str | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+    document = 'document_example' # str |  (optional)
+    name = 'name_example' # str |  (optional)
+    end_to_end_id = 'end_to_end_id_example' # str |  (optional)
+    amount_min = 3.4 # float |  (optional)
+    amount_max = 3.4 # float |  (optional)
+    created_at_from = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    created_at_to = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    page = 1 # int |  (optional) (default to 1)
+    limit = 20 # int |  (optional) (default to 20)
+
+    try:
+        # List pending deposits
+        api_response = api_instance.get_user_deposit_pending(status=status, document=document, name=name, end_to_end_id=end_to_end_id, amount_min=amount_min, amount_max=amount_max, created_at_from=created_at_from, created_at_to=created_at_to, page=page, limit=limit)
+        print("The response of ReportsApi->get_user_deposit_pending:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportsApi->get_user_deposit_pending: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **str**| Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [optional] 
+ **document** | **str**|  | [optional] 
+ **name** | **str**|  | [optional] 
+ **end_to_end_id** | **str**|  | [optional] 
+ **amount_min** | **float**|  | [optional] 
+ **amount_max** | **float**|  | [optional] 
+ **created_at_from** | **datetime**|  | [optional] 
+ **created_at_to** | **datetime**|  | [optional] 
+ **page** | **int**|  | [optional] [default to 1]
+ **limit** | **int**|  | [optional] [default to 20]
+
+### Return type
+
+[**DepositPendingListResponse**](DepositPendingListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Pending deposit page. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_deposit_pending_by_id**
+> DepositPending get_user_deposit_pending_by_id(id)
+
+Get pending deposit
+
+Returns a single pending deposit.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.deposit_pending import DepositPending
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.ReportsApi(api_client)
+    id = 'id_example' # str | Pending deposit id.
+
+    try:
+        # Get pending deposit
+        api_response = api_instance.get_user_deposit_pending_by_id(id)
+        print("The response of ReportsApi->get_user_deposit_pending_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportsApi->get_user_deposit_pending_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| Pending deposit id. | 
+
+### Return type
+
+[**DepositPending**](DepositPending.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Pending deposit. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_user_report**
 > ReportJob get_user_report(id)
 
@@ -169,6 +526,90 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Report job |  -  |
 **404** | Report not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_user_summary**
+> Summary get_user_summary(date_from=date_from, date_to=date_to, group_by=group_by, grouped=grouped)
+
+Transaction summary
+
+Aggregated totals for deposits, withdrawals and commission over a period.
+
+### Example
+
+* Bearer Authentication (BearerAuth):
+
+```python
+import payzu_pix
+from payzu_pix.models.summary import Summary
+from payzu_pix.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payzu_pix.Configuration(
+    host = "https://api.payzu.processamento.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: BearerAuth
+configuration = payzu_pix.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payzu_pix.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payzu_pix.ReportsApi(api_client)
+    date_from = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    date_to = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    group_by = day # str |  (optional) (default to day)
+    grouped = True # bool | When true, returns a series grouped by date. (optional)
+
+    try:
+        # Transaction summary
+        api_response = api_instance.get_user_summary(date_from=date_from, date_to=date_to, group_by=group_by, grouped=grouped)
+        print("The response of ReportsApi->get_user_summary:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ReportsApi->get_user_summary: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **date_from** | **datetime**|  | [optional] 
+ **date_to** | **datetime**|  | [optional] 
+ **group_by** | **str**|  | [optional] [default to day]
+ **grouped** | **bool**| When true, returns a series grouped by date. | [optional] 
+
+### Return type
+
+[**Summary**](Summary.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Summary. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

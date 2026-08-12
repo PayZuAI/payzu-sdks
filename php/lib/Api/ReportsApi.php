@@ -77,7 +77,22 @@ class ReportsApi
         'downloadUserReport' => [
             'application/json',
         ],
+        'getUserBankStatement' => [
+            'application/json',
+        ],
+        'getUserBankStatements' => [
+            'application/json',
+        ],
+        'getUserDepositPending' => [
+            'application/json',
+        ],
+        'getUserDepositPendingById' => [
+            'application/json',
+        ],
         'getUserReport' => [
+            'application/json',
+        ],
+        'getUserSummary' => [
             'application/json',
         ],
         'getUserTransactionById' => [
@@ -455,6 +470,1414 @@ class ReportsApi
     }
 
     /**
+     * Operation getUserBankStatement
+     *
+     * Get bank statement
+     *
+     * @param  string $id Statement entry id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatement'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\BankStatement
+     */
+    public function getUserBankStatement($id, string $contentType = self::contentTypes['getUserBankStatement'][0])
+    {
+        list($response) = $this->getUserBankStatementWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserBankStatementWithHttpInfo
+     *
+     * Get bank statement
+     *
+     * @param  string $id Statement entry id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatement'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\BankStatement, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserBankStatementWithHttpInfo($id, string $contentType = self::contentTypes['getUserBankStatement'][0])
+    {
+        $request = $this->getUserBankStatementRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\Model\BankStatement',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\Model\BankStatement',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\BankStatement',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserBankStatementAsync
+     *
+     * Get bank statement
+     *
+     * @param  string $id Statement entry id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatement'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserBankStatementAsync($id, string $contentType = self::contentTypes['getUserBankStatement'][0])
+    {
+        return $this->getUserBankStatementAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserBankStatementAsyncWithHttpInfo
+     *
+     * Get bank statement
+     *
+     * @param  string $id Statement entry id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatement'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserBankStatementAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getUserBankStatement'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\BankStatement';
+        $request = $this->getUserBankStatementRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserBankStatement'
+     *
+     * @param  string $id Statement entry id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatement'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserBankStatementRequest($id, string $contentType = self::contentTypes['getUserBankStatement'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getUserBankStatement'
+            );
+        }
+
+
+        $resourcePath = '/user/bank-statements/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getUserBankStatements
+     *
+     * List bank statements
+     *
+     * @param  \DateTime $created_at_from Start date (required). (required)
+     * @param  \DateTime $created_at_to End date (required). (required)
+     * @param  string|null $id id (optional)
+     * @param  string|null $operation operation (optional)
+     * @param  string|null $reason reason (optional)
+     * @param  string|null $transaction_id transaction_id (optional)
+     * @param  float|null $amount_from amount_from (optional)
+     * @param  float|null $amount_to amount_to (optional)
+     * @param  int|null $page page (optional, default to 1)
+     * @param  int|null $limit limit (optional, default to 10)
+     * @param  string|null $sort_by sort_by (optional, default to 'createdAt')
+     * @param  string|null $sort_direction sort_direction (optional, default to 'desc')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatements'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\BankStatementListResponse
+     */
+    public function getUserBankStatements($created_at_from, $created_at_to, $id = null, $operation = null, $reason = null, $transaction_id = null, $amount_from = null, $amount_to = null, $page = 1, $limit = 10, $sort_by = 'createdAt', $sort_direction = 'desc', string $contentType = self::contentTypes['getUserBankStatements'][0])
+    {
+        list($response) = $this->getUserBankStatementsWithHttpInfo($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserBankStatementsWithHttpInfo
+     *
+     * List bank statements
+     *
+     * @param  \DateTime $created_at_from Start date (required). (required)
+     * @param  \DateTime $created_at_to End date (required). (required)
+     * @param  string|null $id (optional)
+     * @param  string|null $operation (optional)
+     * @param  string|null $reason (optional)
+     * @param  string|null $transaction_id (optional)
+     * @param  float|null $amount_from (optional)
+     * @param  float|null $amount_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 10)
+     * @param  string|null $sort_by (optional, default to 'createdAt')
+     * @param  string|null $sort_direction (optional, default to 'desc')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatements'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\BankStatementListResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserBankStatementsWithHttpInfo($created_at_from, $created_at_to, $id = null, $operation = null, $reason = null, $transaction_id = null, $amount_from = null, $amount_to = null, $page = 1, $limit = 10, $sort_by = 'createdAt', $sort_direction = 'desc', string $contentType = self::contentTypes['getUserBankStatements'][0])
+    {
+        $request = $this->getUserBankStatementsRequest($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\Model\BankStatementListResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\Model\BankStatementListResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\BankStatementListResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserBankStatementsAsync
+     *
+     * List bank statements
+     *
+     * @param  \DateTime $created_at_from Start date (required). (required)
+     * @param  \DateTime $created_at_to End date (required). (required)
+     * @param  string|null $id (optional)
+     * @param  string|null $operation (optional)
+     * @param  string|null $reason (optional)
+     * @param  string|null $transaction_id (optional)
+     * @param  float|null $amount_from (optional)
+     * @param  float|null $amount_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 10)
+     * @param  string|null $sort_by (optional, default to 'createdAt')
+     * @param  string|null $sort_direction (optional, default to 'desc')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatements'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserBankStatementsAsync($created_at_from, $created_at_to, $id = null, $operation = null, $reason = null, $transaction_id = null, $amount_from = null, $amount_to = null, $page = 1, $limit = 10, $sort_by = 'createdAt', $sort_direction = 'desc', string $contentType = self::contentTypes['getUserBankStatements'][0])
+    {
+        return $this->getUserBankStatementsAsyncWithHttpInfo($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserBankStatementsAsyncWithHttpInfo
+     *
+     * List bank statements
+     *
+     * @param  \DateTime $created_at_from Start date (required). (required)
+     * @param  \DateTime $created_at_to End date (required). (required)
+     * @param  string|null $id (optional)
+     * @param  string|null $operation (optional)
+     * @param  string|null $reason (optional)
+     * @param  string|null $transaction_id (optional)
+     * @param  float|null $amount_from (optional)
+     * @param  float|null $amount_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 10)
+     * @param  string|null $sort_by (optional, default to 'createdAt')
+     * @param  string|null $sort_direction (optional, default to 'desc')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatements'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserBankStatementsAsyncWithHttpInfo($created_at_from, $created_at_to, $id = null, $operation = null, $reason = null, $transaction_id = null, $amount_from = null, $amount_to = null, $page = 1, $limit = 10, $sort_by = 'createdAt', $sort_direction = 'desc', string $contentType = self::contentTypes['getUserBankStatements'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\BankStatementListResponse';
+        $request = $this->getUserBankStatementsRequest($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserBankStatements'
+     *
+     * @param  \DateTime $created_at_from Start date (required). (required)
+     * @param  \DateTime $created_at_to End date (required). (required)
+     * @param  string|null $id (optional)
+     * @param  string|null $operation (optional)
+     * @param  string|null $reason (optional)
+     * @param  string|null $transaction_id (optional)
+     * @param  float|null $amount_from (optional)
+     * @param  float|null $amount_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 10)
+     * @param  string|null $sort_by (optional, default to 'createdAt')
+     * @param  string|null $sort_direction (optional, default to 'desc')
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserBankStatements'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserBankStatementsRequest($created_at_from, $created_at_to, $id = null, $operation = null, $reason = null, $transaction_id = null, $amount_from = null, $amount_to = null, $page = 1, $limit = 10, $sort_by = 'createdAt', $sort_direction = 'desc', string $contentType = self::contentTypes['getUserBankStatements'][0])
+    {
+
+        // verify the required parameter 'created_at_from' is set
+        if ($created_at_from === null || (is_array($created_at_from) && count($created_at_from) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $created_at_from when calling getUserBankStatements'
+            );
+        }
+
+        // verify the required parameter 'created_at_to' is set
+        if ($created_at_to === null || (is_array($created_at_to) && count($created_at_to) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $created_at_to when calling getUserBankStatements'
+            );
+        }
+
+
+
+
+
+
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling ReportsApi.getUserBankStatements, must be bigger than or equal to 1.');
+        }
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ReportsApi.getUserBankStatements, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ReportsApi.getUserBankStatements, must be bigger than or equal to 1.');
+        }
+        
+
+
+
+        $resourcePath = '/user/bank-statements';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $created_at_from,
+            'createdAtFrom', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $created_at_to,
+            'createdAtTo', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $operation,
+            'operation', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $reason,
+            'reason', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $transaction_id,
+            'transactionId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount_from,
+            'amountFrom', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount_to,
+            'amountTo', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort_by,
+            'sortBy', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort_direction,
+            'sortDirection', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getUserDepositPending
+     *
+     * List pending deposits
+     *
+     * @param  string|null $status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+     * @param  string|null $document document (optional)
+     * @param  string|null $name name (optional)
+     * @param  string|null $end_to_end_id end_to_end_id (optional)
+     * @param  float|null $amount_min amount_min (optional)
+     * @param  float|null $amount_max amount_max (optional)
+     * @param  \DateTime|null $created_at_from created_at_from (optional)
+     * @param  \DateTime|null $created_at_to created_at_to (optional)
+     * @param  int|null $page page (optional, default to 1)
+     * @param  int|null $limit limit (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPending'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\DepositPendingListResponse
+     */
+    public function getUserDepositPending($status = null, $document = null, $name = null, $end_to_end_id = null, $amount_min = null, $amount_max = null, $created_at_from = null, $created_at_to = null, $page = 1, $limit = 20, string $contentType = self::contentTypes['getUserDepositPending'][0])
+    {
+        list($response) = $this->getUserDepositPendingWithHttpInfo($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserDepositPendingWithHttpInfo
+     *
+     * List pending deposits
+     *
+     * @param  string|null $status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+     * @param  string|null $document (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $end_to_end_id (optional)
+     * @param  float|null $amount_min (optional)
+     * @param  float|null $amount_max (optional)
+     * @param  \DateTime|null $created_at_from (optional)
+     * @param  \DateTime|null $created_at_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPending'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\DepositPendingListResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserDepositPendingWithHttpInfo($status = null, $document = null, $name = null, $end_to_end_id = null, $amount_min = null, $amount_max = null, $created_at_from = null, $created_at_to = null, $page = 1, $limit = 20, string $contentType = self::contentTypes['getUserDepositPending'][0])
+    {
+        $request = $this->getUserDepositPendingRequest($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\Model\DepositPendingListResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\Model\DepositPendingListResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\DepositPendingListResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserDepositPendingAsync
+     *
+     * List pending deposits
+     *
+     * @param  string|null $status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+     * @param  string|null $document (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $end_to_end_id (optional)
+     * @param  float|null $amount_min (optional)
+     * @param  float|null $amount_max (optional)
+     * @param  \DateTime|null $created_at_from (optional)
+     * @param  \DateTime|null $created_at_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPending'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserDepositPendingAsync($status = null, $document = null, $name = null, $end_to_end_id = null, $amount_min = null, $amount_max = null, $created_at_from = null, $created_at_to = null, $page = 1, $limit = 20, string $contentType = self::contentTypes['getUserDepositPending'][0])
+    {
+        return $this->getUserDepositPendingAsyncWithHttpInfo($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserDepositPendingAsyncWithHttpInfo
+     *
+     * List pending deposits
+     *
+     * @param  string|null $status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+     * @param  string|null $document (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $end_to_end_id (optional)
+     * @param  float|null $amount_min (optional)
+     * @param  float|null $amount_max (optional)
+     * @param  \DateTime|null $created_at_from (optional)
+     * @param  \DateTime|null $created_at_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPending'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserDepositPendingAsyncWithHttpInfo($status = null, $document = null, $name = null, $end_to_end_id = null, $amount_min = null, $amount_max = null, $created_at_from = null, $created_at_to = null, $page = 1, $limit = 20, string $contentType = self::contentTypes['getUserDepositPending'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\DepositPendingListResponse';
+        $request = $this->getUserDepositPendingRequest($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserDepositPending'
+     *
+     * @param  string|null $status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+     * @param  string|null $document (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $end_to_end_id (optional)
+     * @param  float|null $amount_min (optional)
+     * @param  float|null $amount_max (optional)
+     * @param  \DateTime|null $created_at_from (optional)
+     * @param  \DateTime|null $created_at_to (optional)
+     * @param  int|null $page (optional, default to 1)
+     * @param  int|null $limit (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPending'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserDepositPendingRequest($status = null, $document = null, $name = null, $end_to_end_id = null, $amount_min = null, $amount_max = null, $created_at_from = null, $created_at_to = null, $page = 1, $limit = 20, string $contentType = self::contentTypes['getUserDepositPending'][0])
+    {
+
+
+
+
+
+
+
+
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling ReportsApi.getUserDepositPending, must be bigger than or equal to 1.');
+        }
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ReportsApi.getUserDepositPending, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ReportsApi.getUserDepositPending, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/user/deposit-pending';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $document,
+            'document', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $name,
+            'name', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $end_to_end_id,
+            'endToEndId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount_min,
+            'amountMin', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount_max,
+            'amountMax', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $created_at_from,
+            'createdAtFrom', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $created_at_to,
+            'createdAtTo', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getUserDepositPendingById
+     *
+     * Get pending deposit
+     *
+     * @param  string $id Pending deposit id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPendingById'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\DepositPending
+     */
+    public function getUserDepositPendingById($id, string $contentType = self::contentTypes['getUserDepositPendingById'][0])
+    {
+        list($response) = $this->getUserDepositPendingByIdWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserDepositPendingByIdWithHttpInfo
+     *
+     * Get pending deposit
+     *
+     * @param  string $id Pending deposit id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPendingById'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\DepositPending, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserDepositPendingByIdWithHttpInfo($id, string $contentType = self::contentTypes['getUserDepositPendingById'][0])
+    {
+        $request = $this->getUserDepositPendingByIdRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\Model\DepositPending',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\Model\DepositPending',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\DepositPending',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserDepositPendingByIdAsync
+     *
+     * Get pending deposit
+     *
+     * @param  string $id Pending deposit id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPendingById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserDepositPendingByIdAsync($id, string $contentType = self::contentTypes['getUserDepositPendingById'][0])
+    {
+        return $this->getUserDepositPendingByIdAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserDepositPendingByIdAsyncWithHttpInfo
+     *
+     * Get pending deposit
+     *
+     * @param  string $id Pending deposit id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPendingById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserDepositPendingByIdAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getUserDepositPendingById'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\DepositPending';
+        $request = $this->getUserDepositPendingByIdRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserDepositPendingById'
+     *
+     * @param  string $id Pending deposit id. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserDepositPendingById'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserDepositPendingByIdRequest($id, string $contentType = self::contentTypes['getUserDepositPendingById'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getUserDepositPendingById'
+            );
+        }
+
+
+        $resourcePath = '/user/deposit-pending/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getUserReport
      *
      * Get report job status
@@ -681,6 +2104,318 @@ class ReportsApi
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getUserSummary
+     *
+     * Transaction summary
+     *
+     * @param  \DateTime|null $date_from date_from (optional)
+     * @param  \DateTime|null $date_to date_to (optional)
+     * @param  string|null $group_by group_by (optional, default to 'day')
+     * @param  bool|null $grouped When true, returns a series grouped by date. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserSummary'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\Summary
+     */
+    public function getUserSummary($date_from = null, $date_to = null, $group_by = 'day', $grouped = null, string $contentType = self::contentTypes['getUserSummary'][0])
+    {
+        list($response) = $this->getUserSummaryWithHttpInfo($date_from, $date_to, $group_by, $grouped, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getUserSummaryWithHttpInfo
+     *
+     * Transaction summary
+     *
+     * @param  \DateTime|null $date_from (optional)
+     * @param  \DateTime|null $date_to (optional)
+     * @param  string|null $group_by (optional, default to 'day')
+     * @param  bool|null $grouped When true, returns a series grouped by date. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserSummary'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\Summary, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserSummaryWithHttpInfo($date_from = null, $date_to = null, $group_by = 'day', $grouped = null, string $contentType = self::contentTypes['getUserSummary'][0])
+    {
+        $request = $this->getUserSummaryRequest($date_from, $date_to, $group_by, $grouped, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\OpenAPI\Client\Model\Summary',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\OpenAPI\Client\Model\Summary',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\Summary',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserSummaryAsync
+     *
+     * Transaction summary
+     *
+     * @param  \DateTime|null $date_from (optional)
+     * @param  \DateTime|null $date_to (optional)
+     * @param  string|null $group_by (optional, default to 'day')
+     * @param  bool|null $grouped When true, returns a series grouped by date. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserSummary'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserSummaryAsync($date_from = null, $date_to = null, $group_by = 'day', $grouped = null, string $contentType = self::contentTypes['getUserSummary'][0])
+    {
+        return $this->getUserSummaryAsyncWithHttpInfo($date_from, $date_to, $group_by, $grouped, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserSummaryAsyncWithHttpInfo
+     *
+     * Transaction summary
+     *
+     * @param  \DateTime|null $date_from (optional)
+     * @param  \DateTime|null $date_to (optional)
+     * @param  string|null $group_by (optional, default to 'day')
+     * @param  bool|null $grouped When true, returns a series grouped by date. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserSummary'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserSummaryAsyncWithHttpInfo($date_from = null, $date_to = null, $group_by = 'day', $grouped = null, string $contentType = self::contentTypes['getUserSummary'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\Summary';
+        $request = $this->getUserSummaryRequest($date_from, $date_to, $group_by, $grouped, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserSummary'
+     *
+     * @param  \DateTime|null $date_from (optional)
+     * @param  \DateTime|null $date_to (optional)
+     * @param  string|null $group_by (optional, default to 'day')
+     * @param  bool|null $grouped When true, returns a series grouped by date. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserSummary'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserSummaryRequest($date_from = null, $date_to = null, $group_by = 'day', $grouped = null, string $contentType = self::contentTypes['getUserSummary'][0])
+    {
+
+
+
+
+
+
+        $resourcePath = '/user/summary';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $date_from,
+            'dateFrom', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $date_to,
+            'dateTo', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $group_by,
+            'groupBy', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $grouped,
+            'grouped', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(

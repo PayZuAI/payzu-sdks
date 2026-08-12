@@ -160,6 +160,122 @@ func (a *WithdrawalsAPIService) GetPixKeyExecute(r ApiGetPixKeyRequest) (*PixKey
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetUserDictRequest struct {
+	ctx context.Context
+	ApiService *WithdrawalsAPIService
+	key *string
+}
+
+// Pix key to look up (CPF, CNPJ, email, phone or EVP).
+func (r ApiGetUserDictRequest) Key(key string) ApiGetUserDictRequest {
+	r.key = &key
+	return r
+}
+
+func (r ApiGetUserDictRequest) Execute() (*DictConsultResponse, *http.Response, error) {
+	return r.ApiService.GetUserDictExecute(r)
+}
+
+/*
+GetUserDict DICT key lookup
+
+Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetUserDictRequest
+*/
+func (a *WithdrawalsAPIService) GetUserDict(ctx context.Context) ApiGetUserDictRequest {
+	return ApiGetUserDictRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DictConsultResponse
+func (a *WithdrawalsAPIService) GetUserDictExecute(r ApiGetUserDictRequest) (*DictConsultResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DictConsultResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WithdrawalsAPIService.GetUserDict")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user/dict"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.key == nil {
+		return localVarReturnValue, nil, reportError("key is required and must be specified")
+	}
+	if strlen(*r.key) < 1 {
+		return localVarReturnValue, nil, reportError("key must have at least 1 elements")
+	}
+	if strlen(*r.key) > 77 {
+		return localVarReturnValue, nil, reportError("key must have less than 77 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "key", r.key, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetWithdrawRequest struct {
 	ctx context.Context
 	ApiService *WithdrawalsAPIService
@@ -498,7 +614,7 @@ func (r ApiPostPixQrcodeReadRequest) Execute() (*QRCodeReadResponse, *http.Respo
 /*
 PostPixQrcodeRead Read QR Code
 
-Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostPixQrcodeReadRequest
@@ -749,7 +865,7 @@ func (r ApiPostWithdrawQrcodeRequest) Execute() (*Transaction, *http.Response, e
 /*
 PostWithdrawQrcode Create Withdrawal using QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. Currently PayZu only supports dynamic QR Codes. Static QR Codes are not processed yet.
+Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostWithdrawQrcodeRequest

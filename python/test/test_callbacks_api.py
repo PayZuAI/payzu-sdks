@@ -54,6 +54,13 @@ class TestCallbacksApi(unittest.TestCase):
         """
         pass
 
+    def test_resend_user_callbacks_webhook(self) -> None:
+        """Test case for resend_user_callbacks_webhook
+
+        Resend callbacks by webhook
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -16,16 +16,21 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Optional, Union
 from typing_extensions import Annotated
 from uuid import UUID
+from payzu_pix.models.bank_statement import BankStatement
+from payzu_pix.models.bank_statement_list_response import BankStatementListResponse
+from payzu_pix.models.deposit_pending import DepositPending
+from payzu_pix.models.deposit_pending_list_response import DepositPendingListResponse
 from payzu_pix.models.download_user_report200_response import DownloadUserReport200Response
 from payzu_pix.models.get_user_transaction_by_id200_response import GetUserTransactionById200Response
 from payzu_pix.models.get_user_transactions200_response import GetUserTransactions200Response
 from payzu_pix.models.list_user_reports200_response import ListUserReports200Response
 from payzu_pix.models.post_user_report_request import PostUserReportRequest
 from payzu_pix.models.report_job import ReportJob
+from payzu_pix.models.summary import Summary
 
 from payzu_pix.api_client import ApiClient, RequestSerialized
 from payzu_pix.api_response import ApiResponse
@@ -316,6 +321,1430 @@ class ReportsApi:
 
 
     @validate_call
+    def get_user_bank_statement(
+        self,
+        id: Annotated[StrictStr, Field(description="Statement entry id.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BankStatement:
+        """Get bank statement
+
+        Returns a single statement entry.
+
+        :param id: Statement entry id. (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_bank_statement_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BankStatement",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_user_bank_statement_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="Statement entry id.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BankStatement]:
+        """Get bank statement
+
+        Returns a single statement entry.
+
+        :param id: Statement entry id. (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_bank_statement_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BankStatement",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_user_bank_statement_without_preload_content(
+        self,
+        id: Annotated[StrictStr, Field(description="Statement entry id.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get bank statement
+
+        Returns a single statement entry.
+
+        :param id: Statement entry id. (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_bank_statement_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BankStatement",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_user_bank_statement_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/user/bank-statements/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_user_bank_statements(
+        self,
+        created_at_from: Annotated[datetime, Field(description="Start date (required).")],
+        created_at_to: Annotated[datetime, Field(description="End date (required).")],
+        id: Optional[StrictStr] = None,
+        operation: Optional[StrictStr] = None,
+        reason: Optional[StrictStr] = None,
+        transaction_id: Optional[StrictStr] = None,
+        amount_from: Optional[Union[StrictFloat, StrictInt]] = None,
+        amount_to: Optional[Union[StrictFloat, StrictInt]] = None,
+        page: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        sort_by: Optional[StrictStr] = None,
+        sort_direction: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BankStatementListResponse:
+        """List bank statements
+
+        Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+
+        :param created_at_from: Start date (required). (required)
+        :type created_at_from: datetime
+        :param created_at_to: End date (required). (required)
+        :type created_at_to: datetime
+        :param id:
+        :type id: str
+        :param operation:
+        :type operation: str
+        :param reason:
+        :type reason: str
+        :param transaction_id:
+        :type transaction_id: str
+        :param amount_from:
+        :type amount_from: float
+        :param amount_to:
+        :type amount_to: float
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param sort_by:
+        :type sort_by: str
+        :param sort_direction:
+        :type sort_direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_bank_statements_serialize(
+            created_at_from=created_at_from,
+            created_at_to=created_at_to,
+            id=id,
+            operation=operation,
+            reason=reason,
+            transaction_id=transaction_id,
+            amount_from=amount_from,
+            amount_to=amount_to,
+            page=page,
+            limit=limit,
+            sort_by=sort_by,
+            sort_direction=sort_direction,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BankStatementListResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_user_bank_statements_with_http_info(
+        self,
+        created_at_from: Annotated[datetime, Field(description="Start date (required).")],
+        created_at_to: Annotated[datetime, Field(description="End date (required).")],
+        id: Optional[StrictStr] = None,
+        operation: Optional[StrictStr] = None,
+        reason: Optional[StrictStr] = None,
+        transaction_id: Optional[StrictStr] = None,
+        amount_from: Optional[Union[StrictFloat, StrictInt]] = None,
+        amount_to: Optional[Union[StrictFloat, StrictInt]] = None,
+        page: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        sort_by: Optional[StrictStr] = None,
+        sort_direction: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BankStatementListResponse]:
+        """List bank statements
+
+        Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+
+        :param created_at_from: Start date (required). (required)
+        :type created_at_from: datetime
+        :param created_at_to: End date (required). (required)
+        :type created_at_to: datetime
+        :param id:
+        :type id: str
+        :param operation:
+        :type operation: str
+        :param reason:
+        :type reason: str
+        :param transaction_id:
+        :type transaction_id: str
+        :param amount_from:
+        :type amount_from: float
+        :param amount_to:
+        :type amount_to: float
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param sort_by:
+        :type sort_by: str
+        :param sort_direction:
+        :type sort_direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_bank_statements_serialize(
+            created_at_from=created_at_from,
+            created_at_to=created_at_to,
+            id=id,
+            operation=operation,
+            reason=reason,
+            transaction_id=transaction_id,
+            amount_from=amount_from,
+            amount_to=amount_to,
+            page=page,
+            limit=limit,
+            sort_by=sort_by,
+            sort_direction=sort_direction,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BankStatementListResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_user_bank_statements_without_preload_content(
+        self,
+        created_at_from: Annotated[datetime, Field(description="Start date (required).")],
+        created_at_to: Annotated[datetime, Field(description="End date (required).")],
+        id: Optional[StrictStr] = None,
+        operation: Optional[StrictStr] = None,
+        reason: Optional[StrictStr] = None,
+        transaction_id: Optional[StrictStr] = None,
+        amount_from: Optional[Union[StrictFloat, StrictInt]] = None,
+        amount_to: Optional[Union[StrictFloat, StrictInt]] = None,
+        page: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        sort_by: Optional[StrictStr] = None,
+        sort_direction: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List bank statements
+
+        Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+
+        :param created_at_from: Start date (required). (required)
+        :type created_at_from: datetime
+        :param created_at_to: End date (required). (required)
+        :type created_at_to: datetime
+        :param id:
+        :type id: str
+        :param operation:
+        :type operation: str
+        :param reason:
+        :type reason: str
+        :param transaction_id:
+        :type transaction_id: str
+        :param amount_from:
+        :type amount_from: float
+        :param amount_to:
+        :type amount_to: float
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param sort_by:
+        :type sort_by: str
+        :param sort_direction:
+        :type sort_direction: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_bank_statements_serialize(
+            created_at_from=created_at_from,
+            created_at_to=created_at_to,
+            id=id,
+            operation=operation,
+            reason=reason,
+            transaction_id=transaction_id,
+            amount_from=amount_from,
+            amount_to=amount_to,
+            page=page,
+            limit=limit,
+            sort_by=sort_by,
+            sort_direction=sort_direction,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BankStatementListResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_user_bank_statements_serialize(
+        self,
+        created_at_from,
+        created_at_to,
+        id,
+        operation,
+        reason,
+        transaction_id,
+        amount_from,
+        amount_to,
+        page,
+        limit,
+        sort_by,
+        sort_direction,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if created_at_from is not None:
+            if isinstance(created_at_from, datetime):
+                _query_params.append(
+                    (
+                        'createdAtFrom',
+                        created_at_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('createdAtFrom', created_at_from))
+            
+        if created_at_to is not None:
+            if isinstance(created_at_to, datetime):
+                _query_params.append(
+                    (
+                        'createdAtTo',
+                        created_at_to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('createdAtTo', created_at_to))
+            
+        if id is not None:
+            
+            _query_params.append(('id', id))
+            
+        if operation is not None:
+            
+            _query_params.append(('operation', operation))
+            
+        if reason is not None:
+            
+            _query_params.append(('reason', reason))
+            
+        if transaction_id is not None:
+            
+            _query_params.append(('transactionId', transaction_id))
+            
+        if amount_from is not None:
+            
+            _query_params.append(('amountFrom', amount_from))
+            
+        if amount_to is not None:
+            
+            _query_params.append(('amountTo', amount_to))
+            
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_direction is not None:
+            
+            _query_params.append(('sortDirection', sort_direction))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/user/bank-statements',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_user_deposit_pending(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.")] = None,
+        document: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        end_to_end_id: Optional[StrictStr] = None,
+        amount_min: Optional[Union[StrictFloat, StrictInt]] = None,
+        amount_max: Optional[Union[StrictFloat, StrictInt]] = None,
+        created_at_from: Optional[datetime] = None,
+        created_at_to: Optional[datetime] = None,
+        page: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DepositPendingListResponse:
+        """List pending deposits
+
+        Lists deposits that are pending / not yet reconciled.
+
+        :param status: Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+        :type status: str
+        :param document:
+        :type document: str
+        :param name:
+        :type name: str
+        :param end_to_end_id:
+        :type end_to_end_id: str
+        :param amount_min:
+        :type amount_min: float
+        :param amount_max:
+        :type amount_max: float
+        :param created_at_from:
+        :type created_at_from: datetime
+        :param created_at_to:
+        :type created_at_to: datetime
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_deposit_pending_serialize(
+            status=status,
+            document=document,
+            name=name,
+            end_to_end_id=end_to_end_id,
+            amount_min=amount_min,
+            amount_max=amount_max,
+            created_at_from=created_at_from,
+            created_at_to=created_at_to,
+            page=page,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DepositPendingListResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_user_deposit_pending_with_http_info(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.")] = None,
+        document: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        end_to_end_id: Optional[StrictStr] = None,
+        amount_min: Optional[Union[StrictFloat, StrictInt]] = None,
+        amount_max: Optional[Union[StrictFloat, StrictInt]] = None,
+        created_at_from: Optional[datetime] = None,
+        created_at_to: Optional[datetime] = None,
+        page: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DepositPendingListResponse]:
+        """List pending deposits
+
+        Lists deposits that are pending / not yet reconciled.
+
+        :param status: Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+        :type status: str
+        :param document:
+        :type document: str
+        :param name:
+        :type name: str
+        :param end_to_end_id:
+        :type end_to_end_id: str
+        :param amount_min:
+        :type amount_min: float
+        :param amount_max:
+        :type amount_max: float
+        :param created_at_from:
+        :type created_at_from: datetime
+        :param created_at_to:
+        :type created_at_to: datetime
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_deposit_pending_serialize(
+            status=status,
+            document=document,
+            name=name,
+            end_to_end_id=end_to_end_id,
+            amount_min=amount_min,
+            amount_max=amount_max,
+            created_at_from=created_at_from,
+            created_at_to=created_at_to,
+            page=page,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DepositPendingListResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_user_deposit_pending_without_preload_content(
+        self,
+        status: Annotated[Optional[StrictStr], Field(description="Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.")] = None,
+        document: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        end_to_end_id: Optional[StrictStr] = None,
+        amount_min: Optional[Union[StrictFloat, StrictInt]] = None,
+        amount_max: Optional[Union[StrictFloat, StrictInt]] = None,
+        created_at_from: Optional[datetime] = None,
+        created_at_to: Optional[datetime] = None,
+        page: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List pending deposits
+
+        Lists deposits that are pending / not yet reconciled.
+
+        :param status: Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+        :type status: str
+        :param document:
+        :type document: str
+        :param name:
+        :type name: str
+        :param end_to_end_id:
+        :type end_to_end_id: str
+        :param amount_min:
+        :type amount_min: float
+        :param amount_max:
+        :type amount_max: float
+        :param created_at_from:
+        :type created_at_from: datetime
+        :param created_at_to:
+        :type created_at_to: datetime
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_deposit_pending_serialize(
+            status=status,
+            document=document,
+            name=name,
+            end_to_end_id=end_to_end_id,
+            amount_min=amount_min,
+            amount_max=amount_max,
+            created_at_from=created_at_from,
+            created_at_to=created_at_to,
+            page=page,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DepositPendingListResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_user_deposit_pending_serialize(
+        self,
+        status,
+        document,
+        name,
+        end_to_end_id,
+        amount_min,
+        amount_max,
+        created_at_from,
+        created_at_to,
+        page,
+        limit,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if document is not None:
+            
+            _query_params.append(('document', document))
+            
+        if name is not None:
+            
+            _query_params.append(('name', name))
+            
+        if end_to_end_id is not None:
+            
+            _query_params.append(('endToEndId', end_to_end_id))
+            
+        if amount_min is not None:
+            
+            _query_params.append(('amountMin', amount_min))
+            
+        if amount_max is not None:
+            
+            _query_params.append(('amountMax', amount_max))
+            
+        if created_at_from is not None:
+            if isinstance(created_at_from, datetime):
+                _query_params.append(
+                    (
+                        'createdAtFrom',
+                        created_at_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('createdAtFrom', created_at_from))
+            
+        if created_at_to is not None:
+            if isinstance(created_at_to, datetime):
+                _query_params.append(
+                    (
+                        'createdAtTo',
+                        created_at_to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('createdAtTo', created_at_to))
+            
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/user/deposit-pending',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_user_deposit_pending_by_id(
+        self,
+        id: Annotated[StrictStr, Field(description="Pending deposit id.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DepositPending:
+        """Get pending deposit
+
+        Returns a single pending deposit.
+
+        :param id: Pending deposit id. (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_deposit_pending_by_id_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DepositPending",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_user_deposit_pending_by_id_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="Pending deposit id.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DepositPending]:
+        """Get pending deposit
+
+        Returns a single pending deposit.
+
+        :param id: Pending deposit id. (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_deposit_pending_by_id_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DepositPending",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_user_deposit_pending_by_id_without_preload_content(
+        self,
+        id: Annotated[StrictStr, Field(description="Pending deposit id.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get pending deposit
+
+        Returns a single pending deposit.
+
+        :param id: Pending deposit id. (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_deposit_pending_by_id_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DepositPending",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_user_deposit_pending_by_id_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/user/deposit-pending/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_user_report(
         self,
         id: UUID,
@@ -564,6 +1993,338 @@ class ReportsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/user/report/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_user_summary(
+        self,
+        date_from: Optional[datetime] = None,
+        date_to: Optional[datetime] = None,
+        group_by: Optional[StrictStr] = None,
+        grouped: Annotated[Optional[StrictBool], Field(description="When true, returns a series grouped by date.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Summary:
+        """Transaction summary
+
+        Aggregated totals for deposits, withdrawals and commission over a period.
+
+        :param date_from:
+        :type date_from: datetime
+        :param date_to:
+        :type date_to: datetime
+        :param group_by:
+        :type group_by: str
+        :param grouped: When true, returns a series grouped by date.
+        :type grouped: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_summary_serialize(
+            date_from=date_from,
+            date_to=date_to,
+            group_by=group_by,
+            grouped=grouped,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Summary",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_user_summary_with_http_info(
+        self,
+        date_from: Optional[datetime] = None,
+        date_to: Optional[datetime] = None,
+        group_by: Optional[StrictStr] = None,
+        grouped: Annotated[Optional[StrictBool], Field(description="When true, returns a series grouped by date.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Summary]:
+        """Transaction summary
+
+        Aggregated totals for deposits, withdrawals and commission over a period.
+
+        :param date_from:
+        :type date_from: datetime
+        :param date_to:
+        :type date_to: datetime
+        :param group_by:
+        :type group_by: str
+        :param grouped: When true, returns a series grouped by date.
+        :type grouped: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_summary_serialize(
+            date_from=date_from,
+            date_to=date_to,
+            group_by=group_by,
+            grouped=grouped,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Summary",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_user_summary_without_preload_content(
+        self,
+        date_from: Optional[datetime] = None,
+        date_to: Optional[datetime] = None,
+        group_by: Optional[StrictStr] = None,
+        grouped: Annotated[Optional[StrictBool], Field(description="When true, returns a series grouped by date.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Transaction summary
+
+        Aggregated totals for deposits, withdrawals and commission over a period.
+
+        :param date_from:
+        :type date_from: datetime
+        :param date_to:
+        :type date_to: datetime
+        :param group_by:
+        :type group_by: str
+        :param grouped: When true, returns a series grouped by date.
+        :type grouped: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_summary_serialize(
+            date_from=date_from,
+            date_to=date_to,
+            group_by=group_by,
+            grouped=grouped,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Summary",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_user_summary_serialize(
+        self,
+        date_from,
+        date_to,
+        group_by,
+        grouped,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if date_from is not None:
+            if isinstance(date_from, datetime):
+                _query_params.append(
+                    (
+                        'dateFrom',
+                        date_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('dateFrom', date_from))
+            
+        if date_to is not None:
+            if isinstance(date_to, datetime):
+                _query_params.append(
+                    (
+                        'dateTo',
+                        date_to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('dateTo', date_to))
+            
+        if group_by is not None:
+            
+            _query_params.append(('groupBy', group_by))
+            
+        if grouped is not None:
+            
+            _query_params.append(('grouped', grouped))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/user/summary',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

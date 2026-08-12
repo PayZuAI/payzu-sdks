@@ -8,6 +8,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 | [**getUserCallbacks**](CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | List Callbacks |
 | [**resendUserCallbackSingle**](CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single) |
 | [**resendUserCallbacks**](CallbacksApi.md#resendusercallbacksoperation) | **POST** /user/callbacks/resend | Re-send callbacks (bulk) |
+| [**resendUserCallbacksWebhook**](CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook |
 
 
 
@@ -329,6 +330,77 @@ example().catch(console.error);
 | **200** | Resend dispatched |  -  |
 | **404** | No matching transactions |  -  |
 | **429** | Rate limit exceeded (5/min) |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## resendUserCallbacksWebhook
+
+> CallbackResendResponse resendUserCallbacksWebhook(webhookId)
+
+Resend callbacks by webhook
+
+Queues a bulk resend of the failed callbacks of a given webhook.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CallbacksApi,
+} from 'payzu-pix';
+import type { ResendUserCallbacksWebhookRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new CallbacksApi(config);
+
+  const body = {
+    // string | Webhook id.
+    webhookId: webhookId_example,
+  } satisfies ResendUserCallbacksWebhookRequest;
+
+  try {
+    const data = await api.resendUserCallbacksWebhook(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **webhookId** | `string` | Webhook id. | [Defaults to `undefined`] |
+
+### Return type
+
+[**CallbackResendResponse**](CallbackResendResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Resend queued. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

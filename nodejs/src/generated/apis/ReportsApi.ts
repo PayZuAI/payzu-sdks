@@ -19,6 +19,26 @@ import {
     ApiErrorToJSON,
 } from '../models/ApiError.js';
 import {
+    type BankStatement,
+    BankStatementFromJSON,
+    BankStatementToJSON,
+} from '../models/BankStatement.js';
+import {
+    type BankStatementListResponse,
+    BankStatementListResponseFromJSON,
+    BankStatementListResponseToJSON,
+} from '../models/BankStatementListResponse.js';
+import {
+    type DepositPending,
+    DepositPendingFromJSON,
+    DepositPendingToJSON,
+} from '../models/DepositPending.js';
+import {
+    type DepositPendingListResponse,
+    DepositPendingListResponseFromJSON,
+    DepositPendingListResponseToJSON,
+} from '../models/DepositPendingListResponse.js';
+import {
     type DownloadUserReport200Response,
     DownloadUserReport200ResponseFromJSON,
     DownloadUserReport200ResponseToJSON,
@@ -48,13 +68,61 @@ import {
     ReportJobFromJSON,
     ReportJobToJSON,
 } from '../models/ReportJob.js';
+import {
+    type Summary,
+    SummaryFromJSON,
+    SummaryToJSON,
+} from '../models/Summary.js';
 
 export interface DownloadUserReportRequest {
     id: string;
 }
 
+export interface GetUserBankStatementRequest {
+    id: string;
+}
+
+export interface GetUserBankStatementsRequest {
+    createdAtFrom: Date;
+    createdAtTo: Date;
+    id?: string;
+    operation?: GetUserBankStatementsOperationEnum;
+    reason?: string;
+    transactionId?: string;
+    amountFrom?: number;
+    amountTo?: number;
+    page?: number;
+    limit?: number;
+    sortBy?: GetUserBankStatementsSortByEnum;
+    sortDirection?: GetUserBankStatementsSortDirectionEnum;
+}
+
+export interface GetUserDepositPendingRequest {
+    status?: string;
+    document?: string;
+    name?: string;
+    endToEndId?: string;
+    amountMin?: number;
+    amountMax?: number;
+    createdAtFrom?: Date;
+    createdAtTo?: Date;
+    page?: number;
+    limit?: number;
+}
+
+export interface GetUserDepositPendingByIdRequest {
+    id: string;
+}
+
 export interface GetUserReportRequest {
     id: string;
+}
+
+export interface GetUserSummaryRequest {
+    dateFrom?: Date;
+    dateTo?: Date;
+    groupBy?: GetUserSummaryGroupByEnum;
+    grouped?: boolean;
 }
 
 export interface GetUserTransactionByIdRequest {
@@ -128,6 +196,142 @@ export interface ReportsApiInterface {
     downloadUserReport(requestParameters: DownloadUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DownloadUserReport200Response>;
 
     /**
+     * Creates request options for getUserBankStatement without sending the request
+     * @param {string} id Statement entry id.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserBankStatementRequestOpts(requestParameters: GetUserBankStatementRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Returns a single statement entry.
+     * @summary Get bank statement
+     * @param {string} id Statement entry id.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserBankStatementRaw(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatement>>;
+
+    /**
+     * Returns a single statement entry.
+     * Get bank statement
+     */
+    getUserBankStatement(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatement>;
+
+    /**
+     * Creates request options for getUserBankStatements without sending the request
+     * @param {Date} createdAtFrom Start date (required).
+     * @param {Date} createdAtTo End date (required).
+     * @param {string} [id] 
+     * @param {'INCREMENT' | 'DECREMENT'} [operation] 
+     * @param {string} [reason] 
+     * @param {string} [transactionId] 
+     * @param {number} [amountFrom] 
+     * @param {number} [amountTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {'createdAt' | 'amount'} [sortBy] 
+     * @param {'asc' | 'desc'} [sortDirection] 
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserBankStatementsRequestOpts(requestParameters: GetUserBankStatementsRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+     * @summary List bank statements
+     * @param {Date} createdAtFrom Start date (required).
+     * @param {Date} createdAtTo End date (required).
+     * @param {string} [id] 
+     * @param {'INCREMENT' | 'DECREMENT'} [operation] 
+     * @param {string} [reason] 
+     * @param {string} [transactionId] 
+     * @param {number} [amountFrom] 
+     * @param {number} [amountTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {'createdAt' | 'amount'} [sortBy] 
+     * @param {'asc' | 'desc'} [sortDirection] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserBankStatementsRaw(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatementListResponse>>;
+
+    /**
+     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+     * List bank statements
+     */
+    getUserBankStatements(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatementListResponse>;
+
+    /**
+     * Creates request options for getUserDepositPending without sending the request
+     * @param {string} [status] Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+     * @param {string} [document] 
+     * @param {string} [name] 
+     * @param {string} [endToEndId] 
+     * @param {number} [amountMin] 
+     * @param {number} [amountMax] 
+     * @param {Date} [createdAtFrom] 
+     * @param {Date} [createdAtTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserDepositPendingRequestOpts(requestParameters: GetUserDepositPendingRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Lists deposits that are pending / not yet reconciled.
+     * @summary List pending deposits
+     * @param {string} [status] Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+     * @param {string} [document] 
+     * @param {string} [name] 
+     * @param {string} [endToEndId] 
+     * @param {number} [amountMin] 
+     * @param {number} [amountMax] 
+     * @param {Date} [createdAtFrom] 
+     * @param {Date} [createdAtTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserDepositPendingRaw(requestParameters: GetUserDepositPendingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPendingListResponse>>;
+
+    /**
+     * Lists deposits that are pending / not yet reconciled.
+     * List pending deposits
+     */
+    getUserDepositPending(requestParameters: GetUserDepositPendingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPendingListResponse>;
+
+    /**
+     * Creates request options for getUserDepositPendingById without sending the request
+     * @param {string} id Pending deposit id.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserDepositPendingByIdRequestOpts(requestParameters: GetUserDepositPendingByIdRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Returns a single pending deposit.
+     * @summary Get pending deposit
+     * @param {string} id Pending deposit id.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserDepositPendingByIdRaw(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPending>>;
+
+    /**
+     * Returns a single pending deposit.
+     * Get pending deposit
+     */
+    getUserDepositPendingById(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPending>;
+
+    /**
      * Creates request options for getUserReport without sending the request
      * @param {string} id 
      * @throws {RequiredError}
@@ -150,6 +354,36 @@ export interface ReportsApiInterface {
      * Get report job status
      */
     getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJob>;
+
+    /**
+     * Creates request options for getUserSummary without sending the request
+     * @param {Date} [dateFrom] 
+     * @param {Date} [dateTo] 
+     * @param {'day' | 'hour'} [groupBy] 
+     * @param {boolean} [grouped] When true, returns a series grouped by date.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserSummaryRequestOpts(requestParameters: GetUserSummaryRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Aggregated totals for deposits, withdrawals and commission over a period.
+     * @summary Transaction summary
+     * @param {Date} [dateFrom] 
+     * @param {Date} [dateTo] 
+     * @param {'day' | 'hour'} [groupBy] 
+     * @param {boolean} [grouped] When true, returns a series grouped by date.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    getUserSummaryRaw(requestParameters: GetUserSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Summary>>;
+
+    /**
+     * Aggregated totals for deposits, withdrawals and commission over a period.
+     * Transaction summary
+     */
+    getUserSummary(requestParameters: GetUserSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Summary>;
 
     /**
      * Creates request options for getUserTransactionById without sending the request
@@ -356,6 +590,312 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
+     * Creates request options for getUserBankStatement without sending the request
+     */
+    async getUserBankStatementRequestOpts(requestParameters: GetUserBankStatementRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling getUserBankStatement().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/bank-statements/{id}`;
+        urlPath = urlPath.replace('{id}', encodeURIComponent(String(requestParameters['id'])));
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Returns a single statement entry.
+     * Get bank statement
+     */
+    async getUserBankStatementRaw(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatement>> {
+        const requestOptions = await this.getUserBankStatementRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BankStatementFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns a single statement entry.
+     * Get bank statement
+     */
+    async getUserBankStatement(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatement> {
+        const response = await this.getUserBankStatementRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for getUserBankStatements without sending the request
+     */
+    async getUserBankStatementsRequestOpts(requestParameters: GetUserBankStatementsRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['createdAtFrom'] == null) {
+            throw new runtime.RequiredError(
+                'createdAtFrom',
+                'Required parameter "createdAtFrom" was null or undefined when calling getUserBankStatements().'
+            );
+        }
+
+        if (requestParameters['createdAtTo'] == null) {
+            throw new runtime.RequiredError(
+                'createdAtTo',
+                'Required parameter "createdAtTo" was null or undefined when calling getUserBankStatements().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['createdAtFrom'] != null) {
+            queryParameters['createdAtFrom'] = (requestParameters['createdAtFrom'] as any).toISOString();
+        }
+
+        if (requestParameters['createdAtTo'] != null) {
+            queryParameters['createdAtTo'] = (requestParameters['createdAtTo'] as any).toISOString();
+        }
+
+        if (requestParameters['id'] != null) {
+            queryParameters['id'] = requestParameters['id'];
+        }
+
+        if (requestParameters['operation'] != null) {
+            queryParameters['operation'] = requestParameters['operation'];
+        }
+
+        if (requestParameters['reason'] != null) {
+            queryParameters['reason'] = requestParameters['reason'];
+        }
+
+        if (requestParameters['transactionId'] != null) {
+            queryParameters['transactionId'] = requestParameters['transactionId'];
+        }
+
+        if (requestParameters['amountFrom'] != null) {
+            queryParameters['amountFrom'] = requestParameters['amountFrom'];
+        }
+
+        if (requestParameters['amountTo'] != null) {
+            queryParameters['amountTo'] = requestParameters['amountTo'];
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['sortBy'] != null) {
+            queryParameters['sortBy'] = requestParameters['sortBy'];
+        }
+
+        if (requestParameters['sortDirection'] != null) {
+            queryParameters['sortDirection'] = requestParameters['sortDirection'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/bank-statements`;
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+     * List bank statements
+     */
+    async getUserBankStatementsRaw(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatementListResponse>> {
+        const requestOptions = await this.getUserBankStatementsRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BankStatementListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+     * List bank statements
+     */
+    async getUserBankStatements(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatementListResponse> {
+        const response = await this.getUserBankStatementsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for getUserDepositPending without sending the request
+     */
+    async getUserDepositPendingRequestOpts(requestParameters: GetUserDepositPendingRequest): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        if (requestParameters['status'] != null) {
+            queryParameters['status'] = requestParameters['status'];
+        }
+
+        if (requestParameters['document'] != null) {
+            queryParameters['document'] = requestParameters['document'];
+        }
+
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
+        }
+
+        if (requestParameters['endToEndId'] != null) {
+            queryParameters['endToEndId'] = requestParameters['endToEndId'];
+        }
+
+        if (requestParameters['amountMin'] != null) {
+            queryParameters['amountMin'] = requestParameters['amountMin'];
+        }
+
+        if (requestParameters['amountMax'] != null) {
+            queryParameters['amountMax'] = requestParameters['amountMax'];
+        }
+
+        if (requestParameters['createdAtFrom'] != null) {
+            queryParameters['createdAtFrom'] = (requestParameters['createdAtFrom'] as any).toISOString();
+        }
+
+        if (requestParameters['createdAtTo'] != null) {
+            queryParameters['createdAtTo'] = (requestParameters['createdAtTo'] as any).toISOString();
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/deposit-pending`;
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Lists deposits that are pending / not yet reconciled.
+     * List pending deposits
+     */
+    async getUserDepositPendingRaw(requestParameters: GetUserDepositPendingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPendingListResponse>> {
+        const requestOptions = await this.getUserDepositPendingRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DepositPendingListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Lists deposits that are pending / not yet reconciled.
+     * List pending deposits
+     */
+    async getUserDepositPending(requestParameters: GetUserDepositPendingRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPendingListResponse> {
+        const response = await this.getUserDepositPendingRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for getUserDepositPendingById without sending the request
+     */
+    async getUserDepositPendingByIdRequestOpts(requestParameters: GetUserDepositPendingByIdRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling getUserDepositPendingById().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/deposit-pending/{id}`;
+        urlPath = urlPath.replace('{id}', encodeURIComponent(String(requestParameters['id'])));
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Returns a single pending deposit.
+     * Get pending deposit
+     */
+    async getUserDepositPendingByIdRaw(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPending>> {
+        const requestOptions = await this.getUserDepositPendingByIdRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DepositPendingFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns a single pending deposit.
+     * Get pending deposit
+     */
+    async getUserDepositPendingById(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPending> {
+        const response = await this.getUserDepositPendingByIdRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Creates request options for getUserReport without sending the request
      */
     async getUserReportRequestOpts(requestParameters: GetUserReportRequest): Promise<runtime.RequestOpts> {
@@ -407,6 +947,69 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
      */
     async getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJob> {
         const response = await this.getUserReportRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for getUserSummary without sending the request
+     */
+    async getUserSummaryRequestOpts(requestParameters: GetUserSummaryRequest): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        if (requestParameters['dateFrom'] != null) {
+            queryParameters['dateFrom'] = (requestParameters['dateFrom'] as any).toISOString();
+        }
+
+        if (requestParameters['dateTo'] != null) {
+            queryParameters['dateTo'] = (requestParameters['dateTo'] as any).toISOString();
+        }
+
+        if (requestParameters['groupBy'] != null) {
+            queryParameters['groupBy'] = requestParameters['groupBy'];
+        }
+
+        if (requestParameters['grouped'] != null) {
+            queryParameters['grouped'] = requestParameters['grouped'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/summary`;
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Aggregated totals for deposits, withdrawals and commission over a period.
+     * Transaction summary
+     */
+    async getUserSummaryRaw(requestParameters: GetUserSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Summary>> {
+        const requestOptions = await this.getUserSummaryRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SummaryFromJSON(jsonValue));
+    }
+
+    /**
+     * Aggregated totals for deposits, withdrawals and commission over a period.
+     * Transaction summary
+     */
+    async getUserSummary(requestParameters: GetUserSummaryRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Summary> {
+        const response = await this.getUserSummaryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -718,6 +1321,38 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
 
 }
 
+/**
+ * @export
+ */
+export const GetUserBankStatementsOperationEnum = {
+    Increment: 'INCREMENT',
+    Decrement: 'DECREMENT'
+} as const;
+export type GetUserBankStatementsOperationEnum = typeof GetUserBankStatementsOperationEnum[keyof typeof GetUserBankStatementsOperationEnum];
+/**
+ * @export
+ */
+export const GetUserBankStatementsSortByEnum = {
+    CreatedAt: 'createdAt',
+    Amount: 'amount'
+} as const;
+export type GetUserBankStatementsSortByEnum = typeof GetUserBankStatementsSortByEnum[keyof typeof GetUserBankStatementsSortByEnum];
+/**
+ * @export
+ */
+export const GetUserBankStatementsSortDirectionEnum = {
+    Asc: 'asc',
+    Desc: 'desc'
+} as const;
+export type GetUserBankStatementsSortDirectionEnum = typeof GetUserBankStatementsSortDirectionEnum[keyof typeof GetUserBankStatementsSortDirectionEnum];
+/**
+ * @export
+ */
+export const GetUserSummaryGroupByEnum = {
+    Day: 'day',
+    Hour: 'hour'
+} as const;
+export type GetUserSummaryGroupByEnum = typeof GetUserSummaryGroupByEnum[keyof typeof GetUserSummaryGroupByEnum];
 /**
  * @export
  */

@@ -84,12 +84,72 @@ class ReportsApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserBankStatement
+     *
+     * Get bank statement.
+     *
+     */
+    public function testGetUserBankStatement()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserBankStatements
+     *
+     * List bank statements.
+     *
+     */
+    public function testGetUserBankStatements()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserDepositPending
+     *
+     * List pending deposits.
+     *
+     */
+    public function testGetUserDepositPending()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserDepositPendingById
+     *
+     * Get pending deposit.
+     *
+     */
+    public function testGetUserDepositPendingById()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getUserReport
      *
      * Get report job status.
      *
      */
     public function testGetUserReport()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserSummary
+     *
+     * Transaction summary.
+     *
+     */
+    public function testGetUserSummary()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

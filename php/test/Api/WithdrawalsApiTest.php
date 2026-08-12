@@ -84,6 +84,18 @@ class WithdrawalsApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserDict
+     *
+     * DICT key lookup.
+     *
+     */
+    public function testGetUserDict()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getWithdraw
      *
      * Retrieve Withdrawal.

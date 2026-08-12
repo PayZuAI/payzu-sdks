@@ -33,10 +33,45 @@ class TestReportsApi(unittest.TestCase):
         """
         pass
 
+    def test_get_user_bank_statement(self) -> None:
+        """Test case for get_user_bank_statement
+
+        Get bank statement
+        """
+        pass
+
+    def test_get_user_bank_statements(self) -> None:
+        """Test case for get_user_bank_statements
+
+        List bank statements
+        """
+        pass
+
+    def test_get_user_deposit_pending(self) -> None:
+        """Test case for get_user_deposit_pending
+
+        List pending deposits
+        """
+        pass
+
+    def test_get_user_deposit_pending_by_id(self) -> None:
+        """Test case for get_user_deposit_pending_by_id
+
+        Get pending deposit
+        """
+        pass
+
     def test_get_user_report(self) -> None:
         """Test case for get_user_report
 
         Get report job status
+        """
+        pass
+
+    def test_get_user_summary(self) -> None:
+        """Test case for get_user_summary
+
+        Transaction summary
         """
         pass
 

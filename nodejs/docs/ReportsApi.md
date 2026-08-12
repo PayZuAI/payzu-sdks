@@ -5,7 +5,12 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**downloadUserReport**](ReportsApi.md#downloaduserreport) | **POST** /user/report/{id}/download | Download report |
+| [**getUserBankStatement**](ReportsApi.md#getuserbankstatement) | **GET** /user/bank-statements/{id} | Get bank statement |
+| [**getUserBankStatements**](ReportsApi.md#getuserbankstatements) | **GET** /user/bank-statements | List bank statements |
+| [**getUserDepositPending**](ReportsApi.md#getuserdepositpending) | **GET** /user/deposit-pending | List pending deposits |
+| [**getUserDepositPendingById**](ReportsApi.md#getuserdepositpendingbyid) | **GET** /user/deposit-pending/{id} | Get pending deposit |
 | [**getUserReport**](ReportsApi.md#getuserreport) | **GET** /user/report/{id} | Get report job status |
+| [**getUserSummary**](ReportsApi.md#getusersummary) | **GET** /user/summary | Transaction summary |
 | [**getUserTransactionById**](ReportsApi.md#getusertransactionbyid) | **GET** /user/transactions/{id} | List transaction details |
 | [**getUserTransactions**](ReportsApi.md#getusertransactions) | **GET** /user/transactions | List Transactions |
 | [**listUserReports**](ReportsApi.md#listuserreports) | **GET** /user/report | List report jobs |
@@ -87,6 +92,350 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## getUserBankStatement
+
+> BankStatement getUserBankStatement(id)
+
+Get bank statement
+
+Returns a single statement entry.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  ReportsApi,
+} from 'payzu-pix';
+import type { GetUserBankStatementRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ReportsApi(config);
+
+  const body = {
+    // string | Statement entry id.
+    id: id_example,
+  } satisfies GetUserBankStatementRequest;
+
+  try {
+    const data = await api.getUserBankStatement(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Statement entry id. | [Defaults to `undefined`] |
+
+### Return type
+
+[**BankStatement**](BankStatement.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Statement entry. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getUserBankStatements
+
+> BankStatementListResponse getUserBankStatements(createdAtFrom, createdAtTo, id, operation, reason, transactionId, amountFrom, amountTo, page, limit, sortBy, sortDirection)
+
+List bank statements
+
+Lists the account statement entries. &#x60;createdAtFrom&#x60; and &#x60;createdAtTo&#x60; are required.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  ReportsApi,
+} from 'payzu-pix';
+import type { GetUserBankStatementsRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ReportsApi(config);
+
+  const body = {
+    // Date | Start date (required).
+    createdAtFrom: 2013-10-20T19:20:30+01:00,
+    // Date | End date (required).
+    createdAtTo: 2013-10-20T19:20:30+01:00,
+    // string (optional)
+    id: id_example,
+    // 'INCREMENT' | 'DECREMENT' (optional)
+    operation: operation_example,
+    // string (optional)
+    reason: reason_example,
+    // string (optional)
+    transactionId: transactionId_example,
+    // number (optional)
+    amountFrom: 8.14,
+    // number (optional)
+    amountTo: 8.14,
+    // number (optional)
+    page: 56,
+    // number (optional)
+    limit: 56,
+    // 'createdAt' | 'amount' (optional)
+    sortBy: sortBy_example,
+    // 'asc' | 'desc' (optional)
+    sortDirection: sortDirection_example,
+  } satisfies GetUserBankStatementsRequest;
+
+  try {
+    const data = await api.getUserBankStatements(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createdAtFrom** | `Date` | Start date (required). | [Defaults to `undefined`] |
+| **createdAtTo** | `Date` | End date (required). | [Defaults to `undefined`] |
+| **id** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **operation** | `INCREMENT`, `DECREMENT` |  | [Optional] [Defaults to `undefined`] [Enum: INCREMENT, DECREMENT] |
+| **reason** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **transactionId** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **amountFrom** | `number` |  | [Optional] [Defaults to `undefined`] |
+| **amountTo** | `number` |  | [Optional] [Defaults to `undefined`] |
+| **page** | `number` |  | [Optional] [Defaults to `1`] |
+| **limit** | `number` |  | [Optional] [Defaults to `10`] |
+| **sortBy** | `createdAt`, `amount` |  | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, amount] |
+| **sortDirection** | `asc`, `desc` |  | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
+
+### Return type
+
+[**BankStatementListResponse**](BankStatementListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Statement page. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getUserDepositPending
+
+> DepositPendingListResponse getUserDepositPending(status, document, name, endToEndId, amountMin, amountMax, createdAtFrom, createdAtTo, page, limit)
+
+List pending deposits
+
+Lists deposits that are pending / not yet reconciled.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  ReportsApi,
+} from 'payzu-pix';
+import type { GetUserDepositPendingRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ReportsApi(config);
+
+  const body = {
+    // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+    status: status_example,
+    // string (optional)
+    document: document_example,
+    // string (optional)
+    name: name_example,
+    // string (optional)
+    endToEndId: endToEndId_example,
+    // number (optional)
+    amountMin: 8.14,
+    // number (optional)
+    amountMax: 8.14,
+    // Date (optional)
+    createdAtFrom: 2013-10-20T19:20:30+01:00,
+    // Date (optional)
+    createdAtTo: 2013-10-20T19:20:30+01:00,
+    // number (optional)
+    page: 56,
+    // number (optional)
+    limit: 56,
+  } satisfies GetUserDepositPendingRequest;
+
+  try {
+    const data = await api.getUserDepositPending(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **status** | `string` | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [Optional] [Defaults to `undefined`] |
+| **document** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **name** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **endToEndId** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **amountMin** | `number` |  | [Optional] [Defaults to `undefined`] |
+| **amountMax** | `number` |  | [Optional] [Defaults to `undefined`] |
+| **createdAtFrom** | `Date` |  | [Optional] [Defaults to `undefined`] |
+| **createdAtTo** | `Date` |  | [Optional] [Defaults to `undefined`] |
+| **page** | `number` |  | [Optional] [Defaults to `1`] |
+| **limit** | `number` |  | [Optional] [Defaults to `20`] |
+
+### Return type
+
+[**DepositPendingListResponse**](DepositPendingListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Pending deposit page. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getUserDepositPendingById
+
+> DepositPending getUserDepositPendingById(id)
+
+Get pending deposit
+
+Returns a single pending deposit.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  ReportsApi,
+} from 'payzu-pix';
+import type { GetUserDepositPendingByIdRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ReportsApi(config);
+
+  const body = {
+    // string | Pending deposit id.
+    id: id_example,
+  } satisfies GetUserDepositPendingByIdRequest;
+
+  try {
+    const data = await api.getUserDepositPendingById(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | `string` | Pending deposit id. | [Defaults to `undefined`] |
+
+### Return type
+
+[**DepositPending**](DepositPending.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Pending deposit. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## getUserReport
 
 > ReportJob getUserReport(id)
@@ -155,6 +504,86 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Report job |  -  |
 | **404** | Report not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getUserSummary
+
+> Summary getUserSummary(dateFrom, dateTo, groupBy, grouped)
+
+Transaction summary
+
+Aggregated totals for deposits, withdrawals and commission over a period.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  ReportsApi,
+} from 'payzu-pix';
+import type { GetUserSummaryRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ReportsApi(config);
+
+  const body = {
+    // Date (optional)
+    dateFrom: 2013-10-20T19:20:30+01:00,
+    // Date (optional)
+    dateTo: 2013-10-20T19:20:30+01:00,
+    // 'day' | 'hour' (optional)
+    groupBy: groupBy_example,
+    // boolean | When true, returns a series grouped by date. (optional)
+    grouped: true,
+  } satisfies GetUserSummaryRequest;
+
+  try {
+    const data = await api.getUserSummary(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dateFrom** | `Date` |  | [Optional] [Defaults to `undefined`] |
+| **dateTo** | `Date` |  | [Optional] [Defaults to `undefined`] |
+| **groupBy** | `day`, `hour` |  | [Optional] [Defaults to `&#39;day&#39;`] [Enum: day, hour] |
+| **grouped** | `boolean` | When true, returns a series grouped by date. | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+[**Summary**](Summary.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Summary. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

@@ -37,6 +37,10 @@ tags:
   name: Callbacks
 - description: "Manage Pix infractions (disputes, fraud reports) and submit defenses"
   name: Infractions
+- description: "Refund received Pix charges, full or partial"
+  name: Refunds
+- description: Register and manage webhook endpoints that receive transaction notifications
+  name: Webhooks
 paths:
   /pix:
     get:
@@ -391,8 +395,8 @@ paths:
     post:
       description: "Decode and extract information from a Pix QR Code (EMV format)\
         \ before making a payment. Returns the parsed data including receiver details,\
-        \ amount (if present), and other QR Code metadata. Currently PayZu only supports\
-        \ dynamic QR Codes. Static QR Codes are not processed yet."
+        \ amount (if present), and other QR Code metadata. PayZu processes both dynamic\
+        \ and static QR Codes."
       operationId: post_pix_qrcode_read
       parameters: []
       requestBody:
@@ -845,8 +849,8 @@ paths:
   /withdraw/qrcode:
     post:
       description: "Cash out using a **Pix QR Code** (static/dynamic). If `amount`\
-        \ is not provided, the QR Code's embedded value will be used. Currently PayZu\
-        \ only supports dynamic QR Codes. Static QR Codes are not processed yet."
+        \ is not provided, the QR Code's embedded value will be used. PayZu processes\
+        \ both dynamic and static QR Codes."
       operationId: post_withdraw_qrcode
       parameters: []
       requestBody:
@@ -3020,6 +3024,857 @@ paths:
       summary: Render Pix QR code (PNG)
       tags:
       - Pix Operations
+  /refund/{transactionId}:
+    post:
+      description: "Refund a received Pix charge. Provide `amount` for a partial refund,\
+        \ or omit it to refund the full amount. Processing is **asynchronous**: the\
+        \ response returns the transaction with `refundStatus: PENDING`; completion\
+        \ is confirmed later by webhook."
+      operationId: post_refund
+      parameters:
+      - description: ID of the transaction to refund.
+        explode: false
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundRequest"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                pending:
+                  summary: Partial refund enqueued
+                  value:
+                    id: PAYZU20250810120000ABCD12
+                    status: COMPLETED
+                    amount: 100
+                    type: DEPOSIT
+                    method: PIX
+                    qrCodeText: null
+                    qrCodeBase64: null
+                    qrCodeUrl: null
+                    generatedName: Fulano de Tal
+                    generatedDocument: "12345678901"
+                    generatedEmail: null
+                    payerName: Fulano de Tal
+                    payerDocument: "12345678901"
+                    payerInstitutionIspb: "12345678"
+                    payerInstitutionName: Banco X
+                    payerAccountNumber: null
+                    serviceFeeCharged: 1.5
+                    withdrawPixKey: null
+                    withdrawPixType: null
+                    receiverName: Loja Exemplo
+                    receiverDocument: "11222333000181"
+                    receiverInstitutionIspb: "00000000"
+                    receiverInstitutionName: PayZu
+                    receiverAccountNumber: "513579"
+                    endToEndId: E12345678202508101200abcdef01
+                    clientReference: pedido-42
+                    refundEndToEndId: null
+                    refundAmount: 30.5
+                    refundStatus: PENDING
+                    refundReason: CUSTOMER_REQUEST
+                    refundDescription: Devolução parcial
+                    refundedAt: null
+                    cancellationReason: null
+                    paidAt: 2025-08-10T12:00:00.000Z
+                    createdAt: 2025-08-10T11:59:00.000Z
+                    updatedAt: 2026-08-11T09:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/Transaction"
+          description: Refund accepted and enqueued (asynchronous).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Refund not allowed for this transaction or amount.
+      security:
+      - BearerAuth: []
+      summary: Refund a Pix
+      tags:
+      - Refunds
+  /user/webhooks:
+    get:
+      description: Lists the webhooks registered for the account.
+      operationId: get_user_webhooks
+      parameters:
+      - description: Filter by active status.
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                list:
+                  value:
+                    webhooks:
+                    - id: yl9k2m0c8x1
+                      url: https://sualoja.com.br/webhook
+                      active: true
+                      events:
+                      - TRANSACTION_COMPLETED
+                      - TRANSACTION_REFUNDED
+                      hasSecret: true
+                      createdAt: 2026-08-10T12:00:00.000Z
+                      updatedAt: 2026-08-10T12:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/WebhookListResponse"
+          description: Webhook list.
+      security:
+      - BearerAuth: []
+      summary: List webhooks
+      tags:
+      - Webhooks
+    post:
+      description: "Registers a webhook endpoint. If `generateSecret` is true, the\
+        \ response includes the HMAC `secret` (shown only here)."
+      operationId: post_user_webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                created:
+                  value:
+                    id: yl9k2m0c8x1
+                    url: https://sualoja.com.br/webhook
+                    active: true
+                    events:
+                    - TRANSACTION_COMPLETED
+                    - TRANSACTION_REFUNDED
+                    hasSecret: true
+                    createdAt: 2026-08-10T12:00:00.000Z
+                    updatedAt: 2026-08-10T12:00:00.000Z
+                    secret: whsec_9f8a2b7c6d5e4f3a2b1c0d9e8f7a6b5c
+              schema:
+                $ref: "#/components/schemas/WebhookWithSecret"
+          description: Webhook created.
+      security:
+      - BearerAuth: []
+      summary: Create webhook
+      tags:
+      - Webhooks
+  /user/webhooks/{id}:
+    delete:
+      description: Removes a webhook.
+      operationId: delete_user_webhook
+      parameters:
+      - description: Webhook id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Webhook deleted.
+      security:
+      - BearerAuth: []
+      summary: Delete webhook
+      tags:
+      - Webhooks
+    get:
+      description: Returns a single webhook.
+      operationId: get_user_webhook
+      parameters:
+      - description: Webhook id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                webhook:
+                  value:
+                    id: yl9k2m0c8x1
+                    url: https://sualoja.com.br/webhook
+                    active: true
+                    events:
+                    - TRANSACTION_COMPLETED
+                    - TRANSACTION_REFUNDED
+                    hasSecret: true
+                    createdAt: 2026-08-10T12:00:00.000Z
+                    updatedAt: 2026-08-10T12:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/Webhook"
+          description: Webhook.
+      security:
+      - BearerAuth: []
+      summary: Get webhook
+      tags:
+      - Webhooks
+    patch:
+      description: "Updates the url, active flag or events of a webhook. Provide at\
+        \ least one field."
+      operationId: patch_user_webhook
+      parameters:
+      - description: Webhook id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                webhook:
+                  value:
+                    id: yl9k2m0c8x1
+                    url: https://sualoja.com.br/webhook
+                    active: true
+                    events:
+                    - TRANSACTION_COMPLETED
+                    - TRANSACTION_REFUNDED
+                    hasSecret: true
+                    createdAt: 2026-08-10T12:00:00.000Z
+                    updatedAt: 2026-08-10T12:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/Webhook"
+          description: Webhook updated.
+      security:
+      - BearerAuth: []
+      summary: Update webhook
+      tags:
+      - Webhooks
+  /user/webhooks/{id}/rotate-secret:
+    post:
+      description: Generates a new HMAC signing secret and invalidates the previous
+        one. The new `secret` is shown only in this response.
+      operationId: post_user_webhook_rotate_secret
+      parameters:
+      - description: Webhook id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                rotated:
+                  value:
+                    secret: whsec_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d
+              schema:
+                $ref: "#/components/schemas/RotateSecretResponse"
+          description: New secret.
+      security:
+      - BearerAuth: []
+      summary: Rotate webhook secret
+      tags:
+      - Webhooks
+  /user/webhooks/sent/quantity:
+    get:
+      description: "Returns how many callbacks were sent, optionally filtered by webhook."
+      operationId: get_user_webhooks_sent_quantity
+      parameters:
+      - description: Filter the count by webhook id.
+        explode: true
+        in: query
+        name: webhookId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                qty:
+                  value:
+                    quantity: 128
+              schema:
+                $ref: "#/components/schemas/SentWebhooksQuantity"
+          description: Quantity.
+      security:
+      - BearerAuth: []
+      summary: Count sent callbacks
+      tags:
+      - Webhooks
+  /user/webhooks/{id}/sent/{callbackId}:
+    get:
+      description: Returns the delivery detail of a single sent callback.
+      operationId: get_user_webhook_sent_detail
+      parameters:
+      - description: Webhook id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Callback log id.
+        explode: false
+        in: path
+        name: callbackId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SentWebhookDetail"
+          description: Callback delivery detail.
+      security:
+      - BearerAuth: []
+      summary: Get sent callback detail
+      tags:
+      - Webhooks
+  /user/callbacks/resend/webhook/{webhookId}:
+    post:
+      description: Queues a bulk resend of the failed callbacks of a given webhook.
+      operationId: resend_user_callbacks_webhook
+      parameters:
+      - description: Webhook id.
+        explode: false
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                queued:
+                  value:
+                    message: Bulk resend started
+                    count: 12
+              schema:
+                $ref: "#/components/schemas/CallbackResendResponse"
+          description: Resend queued.
+      security:
+      - BearerAuth: []
+      summary: Resend callbacks by webhook
+      tags:
+      - Callbacks
+  /user/bank-statements:
+    get:
+      description: Lists the account statement entries. `createdAtFrom` and `createdAtTo`
+        are required.
+      operationId: get_user_bank_statements
+      parameters:
+      - description: Start date (required).
+        explode: true
+        in: query
+        name: createdAtFrom
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: End date (required).
+        explode: true
+        in: query
+        name: createdAtTo
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: operation
+        required: false
+        schema:
+          enum:
+          - INCREMENT
+          - DECREMENT
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: reason
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: transactionId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: amountFrom
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: amountTo
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          default: createdAt
+          enum:
+          - createdAt
+          - amount
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortDirection
+        required: false
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                list:
+                  value:
+                    pagination:
+                      page: 1
+                      limit: 10
+                      hasNextPage: true
+                    bankStatements:
+                    - id: bs_1
+                      amount: 100
+                      operation: INCREMENT
+                      reason: PIX_DEPOSIT
+                      balanceType: AVAILABLE
+                      previousBalanceAvailable: 400
+                      previousBalanceBlocked: 0
+                      newBalanceAvailable: 500
+                      newBalanceBlocked: 0
+                      transactionId: PAYZU2025...
+                      infractionId: null
+                      createdAt: 2026-08-10T12:00:00.000Z
+                      updatedAt: 2026-08-10T12:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/BankStatementListResponse"
+          description: Statement page.
+      security:
+      - BearerAuth: []
+      summary: List bank statements
+      tags:
+      - Reports
+  /user/bank-statements/{id}:
+    get:
+      description: Returns a single statement entry.
+      operationId: get_user_bank_statement
+      parameters:
+      - description: Statement entry id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankStatement"
+          description: Statement entry.
+      security:
+      - BearerAuth: []
+      summary: Get bank statement
+      tags:
+      - Reports
+  /user/deposit-pending:
+    get:
+      description: Lists deposits that are pending / not yet reconciled.
+      operationId: get_user_deposit_pending
+      parameters:
+      - description: "Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED,\
+          \ COMPLETED."
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: document
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: endToEndId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: amountMin
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: amountMax
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: createdAtFrom
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: createdAtTo
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                list:
+                  value:
+                    page: 1
+                    limit: 20
+                    hasNextPage: false
+                    data:
+                    - id: dp_1
+                      status: PENDING
+                      amount: 250.5
+                      payerDocument: "12345678901"
+                      payerName: Fulano
+                      payerAccountNumber: null
+                      payerInstitutionIspb: "12345678"
+                      payerInstitutionName: Banco X
+                      receiverDocument: "11222333000181"
+                      receiverName: Loja
+                      receiverAccountNumber: "513579"
+                      receiverInstitutionIspb: "00000000"
+                      receiverInstitutionName: PayZu
+                      endToEndId: E123...
+                      paidAt: 2026-08-10T12:00:00.000Z
+                      pixKey: null
+                      description: null
+                      approvedAt: null
+                      rejectedAt: null
+                      rejectionReason: null
+                      transactionId: null
+                      createdAt: 2026-08-10T11:59:00.000Z
+                      updatedAt: 2026-08-10T12:00:00.000Z
+              schema:
+                $ref: "#/components/schemas/DepositPendingListResponse"
+          description: Pending deposit page.
+      security:
+      - BearerAuth: []
+      summary: List pending deposits
+      tags:
+      - Reports
+  /user/deposit-pending/{id}:
+    get:
+      description: Returns a single pending deposit.
+      operationId: get_user_deposit_pending_by_id
+      parameters:
+      - description: Pending deposit id.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DepositPending"
+          description: Pending deposit.
+      security:
+      - BearerAuth: []
+      summary: Get pending deposit
+      tags:
+      - Reports
+  /user/summary:
+    get:
+      description: "Aggregated totals for deposits, withdrawals and commission over\
+        \ a period."
+      operationId: get_user_summary
+      parameters:
+      - explode: true
+        in: query
+        name: dateFrom
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: dateTo
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: groupBy
+        required: false
+        schema:
+          default: day
+          enum:
+          - day
+          - hour
+          type: string
+        style: form
+      - description: "When true, returns a series grouped by date."
+        explode: true
+        in: query
+        name: grouped
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                summary:
+                  value:
+                    totalTransactions: 42
+                    deposit:
+                      totalAmount: 1500
+                      totalTransactions: 20
+                      statuses:
+                        pending:
+                          count: 1
+                          amount: 100
+                          serviceFeeCharged: 1.5
+                        completed:
+                          count: 18
+                          amount: 1350
+                          serviceFeeCharged: 20
+                        canceled:
+                          count: 0
+                          amount: 0
+                          serviceFeeCharged: 0
+                        expired:
+                          count: 1
+                          amount: 50
+                          serviceFeeCharged: 0
+                        refunded:
+                          count: 0
+                          amount: 0
+                          serviceFeeCharged: 0
+                    withdraw:
+                      totalAmount: 800
+                      totalTransactions: 12
+                      statuses:
+                        pending:
+                          count: 0
+                          amount: 0
+                        completed:
+                          count: 12
+                          amount: 800
+                        canceled:
+                          count: 0
+                          amount: 0
+                        expired:
+                          count: 0
+                          amount: 0
+                        refunded:
+                          count: 0
+                          amount: 0
+                    commission:
+                      totalAmount: 30
+                      totalTransactions: 10
+                      statuses:
+                        pending:
+                          count: 0
+                          amount: 0
+                        completed:
+                          count: 10
+                          amount: 30
+                        canceled:
+                          count: 0
+                          amount: 0
+                        expired:
+                          count: 0
+                          amount: 0
+                        refunded:
+                          count: 0
+                          amount: 0
+              schema:
+                $ref: "#/components/schemas/Summary"
+          description: Summary.
+      security:
+      - BearerAuth: []
+      summary: Transaction summary
+      tags:
+      - Reports
+  /user/dict:
+    get:
+      description: Resolves a Pix key (DICT) to the holder details before paying.
+        Requires WITHDRAW scope.
+      operationId: get_user_dict
+      parameters:
+      - description: "Pix key to look up (CPF, CNPJ, email, phone or EVP)."
+        explode: true
+        in: query
+        name: key
+        required: true
+        schema:
+          maxLength: 77
+          minLength: 1
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                key:
+                  value:
+                    pixKey: "+5511999998888"
+                    name: Fulano de Tal
+                    document: '***.456.789-**'
+                    personType: PF
+                    accountType: CACC
+                    institutionIspb: "12345678"
+                    institutionName: Banco X
+              schema:
+                $ref: "#/components/schemas/DictConsultResponse"
+          description: Key holder details.
+      security:
+      - BearerAuth: []
+      summary: DICT key lookup
+      tags:
+      - Withdrawals
 components:
   schemas:
     Transaction:
@@ -4045,6 +4900,714 @@ components:
         base64:
           description: Base64-encoded PDF receipt.
           type: string
+    RefundRequest:
+      example:
+        amount: 30.5
+        clientReference: refund-2026-0001
+        description: description
+      properties:
+        amount:
+          description: Amount in BRL to refund. Omit to refund the full transaction
+            amount. Partial refunds are allowed up to the original amount.
+          example: 30.5
+          minimum: 0.01
+          type: number
+        description:
+          description: Free-text description for the refund.
+          type: string
+        clientReference:
+          description: Idempotency key. Reusing it with the same amount replays the
+            existing refund; reusing it with a different amount is rejected.
+          example: refund-2026-0001
+          maxLength: 64
+          type: string
+    WebhookEventType:
+      description: Transaction event that triggers the webhook.
+      enum:
+      - TRANSACTION_PENDING
+      - TRANSACTION_COMPLETED
+      - TRANSACTION_CANCELED
+      - TRANSACTION_WAITING_FOR_REFUND
+      - TRANSACTION_REFUNDED
+      - TRANSACTION_EXPIRED
+      - TRANSACTION_ERROR
+      - TRANSACTION_SUSPECTED_FRAUD
+      - TRANSACTION_SUSPECTED_FRAUD_REVERSAL
+      - INFRACTION_CHANGED
+      type: string
+    Webhook:
+      example:
+        hasSecret: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        active: true
+        id: yl9k2m0c8x1
+        url: https://sualoja.com.br/webhook
+        events:
+        - TRANSACTION_PENDING
+        - TRANSACTION_PENDING
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          description: Webhook id.
+          example: yl9k2m0c8x1
+          type: string
+        url:
+          example: https://sualoja.com.br/webhook
+          type: string
+        active:
+          example: true
+          type: boolean
+        events:
+          description: Subscribed events. Empty means all events.
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          type: array
+        hasSecret:
+          description: Whether the webhook has an HMAC signing secret.
+          example: true
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    WebhookWithSecret:
+      example:
+        hasSecret: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        active: true
+        id: yl9k2m0c8x1
+        secret: whsec_9f8a2b7c6d5e4f3a2b1c0d9e8f7a6b5c
+        url: https://sualoja.com.br/webhook
+        events:
+        - TRANSACTION_PENDING
+        - TRANSACTION_PENDING
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          example: yl9k2m0c8x1
+          type: string
+        url:
+          example: https://sualoja.com.br/webhook
+          type: string
+        active:
+          example: true
+          type: boolean
+        events:
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          type: array
+        hasSecret:
+          example: true
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        secret:
+          description: HMAC signing secret. Shown only on creation and on rotate-secret.
+            Store it now.
+          example: whsec_9f8a2b7c6d5e4f3a2b1c0d9e8f7a6b5c
+          type: string
+          nullable: true
+    WebhookCreateRequest:
+      example:
+        generateSecret: false
+        active: true
+        url: https://sualoja.com.br/webhook
+        events:
+        - TRANSACTION_PENDING
+        - TRANSACTION_PENDING
+      properties:
+        url:
+          description: HTTPS URL that will receive the notifications.
+          example: https://sualoja.com.br/webhook
+          type: string
+        events:
+          default: []
+          description: Events to subscribe to. Omit or leave empty to receive all
+            events.
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          type: array
+        generateSecret:
+          default: false
+          description: Generate an HMAC signing secret for this webhook.
+          type: boolean
+        active:
+          description: Whether the webhook starts active.
+          type: boolean
+      required:
+      - url
+    WebhookUpdateRequest:
+      description: Provide at least one field.
+      example:
+        active: true
+        url: url
+        events:
+        - TRANSACTION_PENDING
+        - TRANSACTION_PENDING
+      minProperties: 1
+      properties:
+        url:
+          type: string
+        active:
+          type: boolean
+        events:
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          type: array
+    RotateSecretResponse:
+      example:
+        secret: whsec_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d
+      properties:
+        secret:
+          description: HMAC signing secret. Shown only on creation and on rotate-secret.
+            Store it now.
+          example: whsec_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d
+          type: string
+    SentWebhooksQuantity:
+      example:
+        quantity: 128
+      properties:
+        quantity:
+          example: 128
+          type: integer
+    WebhookListResponse:
+      example:
+        webhooks:
+        - hasSecret: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          active: true
+          id: yl9k2m0c8x1
+          url: https://sualoja.com.br/webhook
+          events:
+          - TRANSACTION_PENDING
+          - TRANSACTION_PENDING
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - hasSecret: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          active: true
+          id: yl9k2m0c8x1
+          url: https://sualoja.com.br/webhook
+          events:
+          - TRANSACTION_PENDING
+          - TRANSACTION_PENDING
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        webhooks:
+          items:
+            $ref: "#/components/schemas/Webhook"
+          type: array
+    SentWebhookDetail:
+      example:
+        webhookId: webhookId
+        responseBody: responseBody
+        responseTime: 342
+        eventType: eventType
+        body:
+          key: ""
+        error: error
+        userId: userId
+        transactionId: transactionId
+        url: url
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        responseHeaders:
+          key: ""
+        id: id
+        status: 200
+      properties:
+        id:
+          type: string
+        webhookId:
+          type: string
+          nullable: true
+        userId:
+          type: string
+        transactionId:
+          type: string
+        url:
+          type: string
+        body:
+          additionalProperties: true
+          type: object
+        status:
+          description: HTTP status returned by your endpoint.
+          example: 200
+          type: integer
+        responseHeaders:
+          additionalProperties: true
+          type: object
+          nullable: true
+        responseBody:
+          type: string
+          nullable: true
+        error:
+          type: string
+          nullable: true
+        responseTime:
+          description: "Response time of your endpoint, in milliseconds."
+          example: 342
+          type: integer
+        eventType:
+          type: string
+          nullable: true
+        createdAt:
+          format: date-time
+          type: string
+    CallbackResendResponse:
+      example:
+        count: 12
+        message: message
+      properties:
+        message:
+          type: string
+        count:
+          description: Number of callbacks queued for resend.
+          example: 12
+          type: integer
+    BankStatement:
+      example:
+        reason: reason
+        amount: 1.4658129805029452
+        infractionId: infractionId
+        previousBalanceAvailable: 5.962133916683182
+        transactionId: transactionId
+        newBalanceAvailable: 2.3021358869347655
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        newBalanceBlocked: 7.061401241503109
+        balanceType: AVAILABLE
+        previousBalanceBlocked: 5.637376656633329
+        id: id
+        operation: INCREMENT
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+        operation:
+          description: "INCREMENT credits the balance, DECREMENT debits it."
+          enum:
+          - INCREMENT
+          - DECREMENT
+          type: string
+        reason:
+          description: Internal reason for the credit/debit.
+          type: string
+        balanceType:
+          enum:
+          - AVAILABLE
+          - BLOCKED
+          type: string
+        previousBalanceAvailable:
+          type: number
+        previousBalanceBlocked:
+          type: number
+        newBalanceAvailable:
+          type: number
+        newBalanceBlocked:
+          type: number
+        transactionId:
+          type: string
+          nullable: true
+        infractionId:
+          type: string
+          nullable: true
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    BankStatementListResponse:
+      example:
+        pagination:
+          hasNextPage: true
+          limit: 6
+          page: 0
+        bankStatements:
+        - reason: reason
+          amount: 1.4658129805029452
+          infractionId: infractionId
+          previousBalanceAvailable: 5.962133916683182
+          transactionId: transactionId
+          newBalanceAvailable: 2.3021358869347655
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          newBalanceBlocked: 7.061401241503109
+          balanceType: AVAILABLE
+          previousBalanceBlocked: 5.637376656633329
+          id: id
+          operation: INCREMENT
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - reason: reason
+          amount: 1.4658129805029452
+          infractionId: infractionId
+          previousBalanceAvailable: 5.962133916683182
+          transactionId: transactionId
+          newBalanceAvailable: 2.3021358869347655
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          newBalanceBlocked: 7.061401241503109
+          balanceType: AVAILABLE
+          previousBalanceBlocked: 5.637376656633329
+          id: id
+          operation: INCREMENT
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        pagination:
+          $ref: "#/components/schemas/BankStatementListResponse_pagination"
+        bankStatements:
+          items:
+            $ref: "#/components/schemas/BankStatement"
+          type: array
+    DepositPending:
+      example:
+        amount: 1.4658129805029452
+        receiverName: receiverName
+        receiverDocument: receiverDocument
+        description: description
+        endToEndId: endToEndId
+        approvedAt: 2000-01-23T04:56:07.000+00:00
+        receiverInstitutionName: receiverInstitutionName
+        transactionId: transactionId
+        payerInstitutionIspb: payerInstitutionIspb
+        payerAccountNumber: payerAccountNumber
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        payerDocument: payerDocument
+        rejectedAt: 2000-01-23T04:56:07.000+00:00
+        receiverAccountNumber: receiverAccountNumber
+        payerName: payerName
+        paidAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        rejectionReason: rejectionReason
+        receiverInstitutionIspb: receiverInstitutionIspb
+        pixKey: pixKey
+        status: PENDING
+        payerInstitutionName: payerInstitutionName
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        status:
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          - EXPIRED
+          - COMPLETED
+          type: string
+        amount:
+          type: number
+        payerDocument:
+          type: string
+        payerName:
+          type: string
+          nullable: true
+        payerAccountNumber:
+          type: string
+          nullable: true
+        payerInstitutionIspb:
+          type: string
+          nullable: true
+        payerInstitutionName:
+          type: string
+          nullable: true
+        receiverDocument:
+          type: string
+          nullable: true
+        receiverName:
+          type: string
+          nullable: true
+        receiverAccountNumber:
+          type: string
+          nullable: true
+        receiverInstitutionIspb:
+          type: string
+          nullable: true
+        receiverInstitutionName:
+          type: string
+          nullable: true
+        endToEndId:
+          type: string
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+        pixKey:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        approvedAt:
+          format: date-time
+          type: string
+          nullable: true
+        rejectedAt:
+          format: date-time
+          type: string
+          nullable: true
+        rejectionReason:
+          type: string
+          nullable: true
+        transactionId:
+          type: string
+          nullable: true
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    DepositPendingListResponse:
+      example:
+        data:
+        - amount: 1.4658129805029452
+          receiverName: receiverName
+          receiverDocument: receiverDocument
+          description: description
+          endToEndId: endToEndId
+          approvedAt: 2000-01-23T04:56:07.000+00:00
+          receiverInstitutionName: receiverInstitutionName
+          transactionId: transactionId
+          payerInstitutionIspb: payerInstitutionIspb
+          payerAccountNumber: payerAccountNumber
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          payerDocument: payerDocument
+          rejectedAt: 2000-01-23T04:56:07.000+00:00
+          receiverAccountNumber: receiverAccountNumber
+          payerName: payerName
+          paidAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          rejectionReason: rejectionReason
+          receiverInstitutionIspb: receiverInstitutionIspb
+          pixKey: pixKey
+          status: PENDING
+          payerInstitutionName: payerInstitutionName
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - amount: 1.4658129805029452
+          receiverName: receiverName
+          receiverDocument: receiverDocument
+          description: description
+          endToEndId: endToEndId
+          approvedAt: 2000-01-23T04:56:07.000+00:00
+          receiverInstitutionName: receiverInstitutionName
+          transactionId: transactionId
+          payerInstitutionIspb: payerInstitutionIspb
+          payerAccountNumber: payerAccountNumber
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          payerDocument: payerDocument
+          rejectedAt: 2000-01-23T04:56:07.000+00:00
+          receiverAccountNumber: receiverAccountNumber
+          payerName: payerName
+          paidAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          rejectionReason: rejectionReason
+          receiverInstitutionIspb: receiverInstitutionIspb
+          pixKey: pixKey
+          status: PENDING
+          payerInstitutionName: payerInstitutionName
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        hasNextPage: true
+        limit: 6
+        page: 0
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        hasNextPage:
+          type: boolean
+        data:
+          items:
+            $ref: "#/components/schemas/DepositPending"
+          type: array
+    SummaryStatus:
+      example:
+        amount: 5.637376656633329
+        count: 5
+        serviceFeeCharged: 2.3021358869347655
+      properties:
+        count:
+          type: integer
+        amount:
+          type: number
+        serviceFeeCharged:
+          description: Service fee charged (hidden for limited accounts).
+          type: number
+    SummaryBlock:
+      example:
+        totalAmount: 6.027456183070403
+        totalTransactions: 1
+        grouped:
+        - date: date
+          amount: 7.061401241503109
+        - date: date
+          amount: 7.061401241503109
+        statuses:
+          canceled:
+            amount: 5.637376656633329
+            count: 5
+            serviceFeeCharged: 2.3021358869347655
+          expired:
+            amount: 5.637376656633329
+            count: 5
+            serviceFeeCharged: 2.3021358869347655
+          pending:
+            amount: 5.637376656633329
+            count: 5
+            serviceFeeCharged: 2.3021358869347655
+          refunded:
+            amount: 5.637376656633329
+            count: 5
+            serviceFeeCharged: 2.3021358869347655
+          completed:
+            amount: 5.637376656633329
+            count: 5
+            serviceFeeCharged: 2.3021358869347655
+      properties:
+        totalAmount:
+          type: number
+        totalTransactions:
+          type: integer
+        statuses:
+          $ref: "#/components/schemas/SummaryBlock_statuses"
+        grouped:
+          description: Present only when grouped=true.
+          items:
+            $ref: "#/components/schemas/SummaryBlock_grouped_inner"
+          type: array
+    Summary:
+      example:
+        totalTransactions: 0
+        deposit:
+          totalAmount: 6.027456183070403
+          totalTransactions: 1
+          grouped:
+          - date: date
+            amount: 7.061401241503109
+          - date: date
+            amount: 7.061401241503109
+          statuses:
+            canceled:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            expired:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            pending:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            refunded:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            completed:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+        commission:
+          totalAmount: 6.027456183070403
+          totalTransactions: 1
+          grouped:
+          - date: date
+            amount: 7.061401241503109
+          - date: date
+            amount: 7.061401241503109
+          statuses:
+            canceled:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            expired:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            pending:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            refunded:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            completed:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+        withdraw:
+          totalAmount: 6.027456183070403
+          totalTransactions: 1
+          grouped:
+          - date: date
+            amount: 7.061401241503109
+          - date: date
+            amount: 7.061401241503109
+          statuses:
+            canceled:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            expired:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            pending:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            refunded:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+            completed:
+              amount: 5.637376656633329
+              count: 5
+              serviceFeeCharged: 2.3021358869347655
+      properties:
+        totalTransactions:
+          type: integer
+        deposit:
+          $ref: "#/components/schemas/SummaryBlock"
+        withdraw:
+          $ref: "#/components/schemas/SummaryBlock"
+        commission:
+          $ref: "#/components/schemas/SummaryBlock"
+    DictConsultResponse:
+      example:
+        institutionIspb: institutionIspb
+        document: document
+        accountType: accountType
+        institutionName: institutionName
+        name: name
+        personType: PF
+        pixKey: pixKey
+      properties:
+        pixKey:
+          description: Normalized Pix key.
+          type: string
+        name:
+          type: string
+        document:
+          description: Masked CPF/CNPJ of the key holder.
+          type: string
+        personType:
+          enum:
+          - PF
+          - PJ
+          type: string
+        accountType:
+          type: string
+        institutionIspb:
+          type: string
+        institutionName:
+          type: string
     get_pix_key_400_response:
       example:
         error: INVALID_PIX_KEY
@@ -4575,6 +6138,60 @@ components:
       required:
       - field
       - message
+    BankStatementListResponse_pagination:
+      example:
+        hasNextPage: true
+        limit: 6
+        page: 0
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        hasNextPage:
+          type: boolean
+    SummaryBlock_statuses:
+      example:
+        canceled:
+          amount: 5.637376656633329
+          count: 5
+          serviceFeeCharged: 2.3021358869347655
+        expired:
+          amount: 5.637376656633329
+          count: 5
+          serviceFeeCharged: 2.3021358869347655
+        pending:
+          amount: 5.637376656633329
+          count: 5
+          serviceFeeCharged: 2.3021358869347655
+        refunded:
+          amount: 5.637376656633329
+          count: 5
+          serviceFeeCharged: 2.3021358869347655
+        completed:
+          amount: 5.637376656633329
+          count: 5
+          serviceFeeCharged: 2.3021358869347655
+      properties:
+        pending:
+          $ref: "#/components/schemas/SummaryStatus"
+        completed:
+          $ref: "#/components/schemas/SummaryStatus"
+        canceled:
+          $ref: "#/components/schemas/SummaryStatus"
+        expired:
+          $ref: "#/components/schemas/SummaryStatus"
+        refunded:
+          $ref: "#/components/schemas/SummaryStatus"
+    SummaryBlock_grouped_inner:
+      example:
+        date: date
+        amount: 7.061401241503109
+      properties:
+        date:
+          type: string
+        amount:
+          type: number
   securitySchemes:
     BearerAuth:
       scheme: bearer

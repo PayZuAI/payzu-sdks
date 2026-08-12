@@ -33,6 +33,13 @@ class TestWithdrawalsApi(unittest.TestCase):
         """
         pass
 
+    def test_get_user_dict(self) -> None:
+        """Test case for get_user_dict
+
+        DICT key lookup
+        """
+        pass
+
     def test_get_withdraw(self) -> None:
         """Test case for get_withdraw
 

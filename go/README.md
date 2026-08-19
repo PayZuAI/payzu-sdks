@@ -6,10 +6,10 @@ REST API for Pix operations on the PayZu platform, deposits, withdrawals, intern
 
 - Node.js: `npm install payzu-pix`
 - Python: `pip install payzu-pix`
-- Go: `go get github.com/PayZuPlus/payzu-sdks/go`
+- Go: `go get github.com/PayZuAI/payzu-sdks/go`
 - PHP: `composer require payzu/pix`
 
-Repo: https://github.com/PayZuPlus/payzu-sdks
+Repo: https://github.com/PayZuAI/payzu-sdks
 
 
 ## Overview
@@ -26,7 +26,7 @@ For more information, please visit [https://suporte.payzu.com.br](https://suport
 Import the package in a go file in your project and run `go mod tidy`:
 
 ```go
-import payzupix "github.com/PayZuPlus/payzu-sdks/go"
+import payzupix "github.com/PayZuAI/payzu-sdks/go"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:

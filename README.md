@@ -6,7 +6,7 @@ SDKs oficiais da API PayZu Pix, mantidos em paridade com o [OpenAPI](./openapi.j
 | --------- | ------ | ---------- |
 | Node.js   | [`payzu-pix`](./nodejs) | `npm install payzu-pix` |
 | Python    | `payzu-pix` | `pip install payzu-pix` |
-| Go        | `github.com/PayZuPlus/payzu-sdks/go` | `go get github.com/PayZuPlus/payzu-sdks/go` |
+| Go        | `github.com/PayZuAI/payzu-sdks/go` | `go get github.com/PayZuAI/payzu-sdks/go` |
 | PHP       | indisponível no momento | |
 
 ## Uso rápido (Node.js)

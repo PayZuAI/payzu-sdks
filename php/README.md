@@ -6,10 +6,10 @@ REST API for Pix operations on the PayZu platform, deposits, withdrawals, intern
 
 - Node.js: `npm install payzu-pix`
 - Python: `pip install payzu-pix`
-- Go: `go get github.com/PayZuPlus/payzu-sdks/go`
+- Go: `go get github.com/PayZuAI/payzu-sdks/go`
 - PHP: `composer require payzu/pix`
 
-Repo: https://github.com/PayZuPlus/payzu-sdks
+Repo: https://github.com/PayZuAI/payzu-sdks
 
 
 For more information, please visit [https://suporte.payzu.com.br](https://suporte.payzu.com.br).
@@ -29,11 +29,11 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/PayZuPlus/payzu-sdks.git"
+      "url": "https://github.com/PayZuAI/payzu-sdks.git"
     }
   ],
   "require": {
-    "PayZuPlus/payzu-sdks": "*@dev"
+    "PayZuAI/payzu-sdks": "*@dev"
   }
 }
 ```

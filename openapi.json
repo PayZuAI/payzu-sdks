@@ -3,7 +3,7 @@
   "info": {
     "version": "1.8.0",
     "title": "PayZu Pix API",
-    "description": "REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.\n\n## SDKs oficiais\n\n- Node.js: `npm install payzu-pix`\n- Python: `pip install payzu-pix`\n- Go: `go get github.com/PayZuPlus/payzu-sdks/go`\n- PHP: `composer require payzu/pix`\n\nRepo: https://github.com/PayZuPlus/payzu-sdks\n",
+    "description": "REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.\n\n## SDKs oficiais\n\n- Node.js: `npm install payzu-pix`\n- Python: `pip install payzu-pix`\n- Go: `go get github.com/PayZuAI/payzu-sdks/go`\n- PHP: `composer require payzu/pix`\n\nRepo: https://github.com/PayZuAI/payzu-sdks\n",
     "contact": {
       "name": "Suporte PayZu",
       "url": "https://suporte.payzu.com.br"

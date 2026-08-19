@@ -7,11 +7,11 @@
   "homepage": "https://docs.payzu.com.br",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PayZuPlus/payzu-sdks.git",
+    "url": "https://github.com/PayZuAI/payzu-sdks.git",
     "directory": "nodejs"
   },
   "bugs": {
-    "url": "https://github.com/PayZuPlus/payzu-sdks/issues"
+    "url": "https://github.com/PayZuAI/payzu-sdks/issues"
   },
   "keywords": [
     "payzu",

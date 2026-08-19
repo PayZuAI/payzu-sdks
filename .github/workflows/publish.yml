@@ -79,4 +79,4 @@ jobs:
         run: |
           curl -sf -XPOST -H "content-type:application/json" \
             "https://packagist.org/api/update-package?username=payzu&apiToken=${PACKAGIST_TOKEN}" \
-            -d '{"repository":{"url":"https://github.com/PayZuPlus/payzu-sdks"}}'
+            -d '{"repository":{"url":"https://github.com/PayZuAI/payzu-sdks"}}'

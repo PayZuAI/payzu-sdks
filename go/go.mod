@@ -1,4 +1,4 @@
-module github.com/PayZuPlus/payzu-sdks/go
+module github.com/PayZuAI/payzu-sdks/go
 
 go 1.23
 

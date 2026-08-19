@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/PayZuPlus/payzu-sdks/go"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go"
 )
 
 func Test_payzupix_WithdrawalsAPIService(t *testing.T) {

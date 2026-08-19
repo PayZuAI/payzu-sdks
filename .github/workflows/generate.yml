@@ -53,7 +53,7 @@ jobs:
           rm -rf nodejs-gen
           npx openapi-generator-cli generate \
             -i openapi.json -g typescript-fetch -o nodejs-gen \
-            --git-user-id=PayZuPlus --git-repo-id=payzu-sdks \
+            --git-user-id=PayZuAI --git-repo-id=payzu-sdks \
             --additional-properties=npmName=payzu-pix,supportsES6=true,withInterfaces=true,typescriptThreePlus=true,importFileExtension=.js
           rm -rf nodejs/src/generated nodejs/docs
           mkdir -p nodejs/src/generated nodejs/docs
@@ -80,7 +80,7 @@ jobs:
           rm -rf go
           npx openapi-generator-cli generate \
             -i openapi.json -g go -o go \
-            --git-user-id=PayZuPlus --git-repo-id=payzu-sdks/go \
+            --git-user-id=PayZuAI --git-repo-id=payzu-sdks/go \
             --additional-properties=packageName=payzupix,packageVersion=0.1.0
 
       - name: Generate PHP SDK
@@ -88,7 +88,7 @@ jobs:
           rm -rf php
           npx openapi-generator-cli generate \
             -i openapi.json -g php -o php \
-            --git-user-id=PayZuPlus --git-repo-id=payzu-sdks \
+            --git-user-id=PayZuAI --git-repo-id=payzu-sdks \
             --additional-properties=composerVendorName=payzu,composerProjectName=pix,packageName=PayZuPix,artifactVersion=0.1.0
 
       - name: Create PR

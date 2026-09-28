@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -21,7 +21,7 @@ var _ MappedNullable = &WebhookCreateRequest{}
 
 // WebhookCreateRequest struct for WebhookCreateRequest
 type WebhookCreateRequest struct {
-	// HTTPS URL that will receive the notifications.
+	// URL (http or https) that will receive the notifications.
 	Url string `json:"url"`
 	// Events to subscribe to. Omit or leave empty to receive all events.
 	Events []WebhookEventType `json:"events,omitempty"`
@@ -42,6 +42,8 @@ func NewWebhookCreateRequest(url string) *WebhookCreateRequest {
 	this.Url = url
 	var generateSecret bool = false
 	this.GenerateSecret = &generateSecret
+	var active bool = true
+	this.Active = &active
 	return &this
 }
 
@@ -52,6 +54,8 @@ func NewWebhookCreateRequestWithDefaults() *WebhookCreateRequest {
 	this := WebhookCreateRequest{}
 	var generateSecret bool = false
 	this.GenerateSecret = &generateSecret
+	var active bool = true
+	this.Active = &active
 	return &this
 }
 

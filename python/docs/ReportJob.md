@@ -5,11 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**status** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Report identifier (UUID), generated when the report is requested. | [optional] 
+**status** | **str** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional] 
+**created_at** | **datetime** | Date and time the report generation was requested. | [optional] 
+**updated_at** | **datetime** | Date and time of the last change to the report record. | [optional] 
 **expires_at** | **datetime** | When the file expires from storage (typically 7 days after creation) | [optional] 
+**params** | **object** | Filters used to generate the report. | [optional] 
+**written_rows** | **int** | Rows written to the file. Null until the report is COMPLETED. | [optional] 
 
 ## Example
 

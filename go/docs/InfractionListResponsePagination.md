@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to **int32** |  | [optional] 
-**Limit** | Pointer to **int32** |  | [optional] 
-**TotalItems** | Pointer to **int32** |  | [optional] 
-**TotalPages** | Pointer to **int32** |  | [optional] 
+**Page** | Pointer to **int32** | Page returned, the same as the page parameter sent in the query; when omitted, it is 1. | [optional] 
+**Limit** | Pointer to **int32** | Page size applied in the query; when omitted it is 10 and the maximum accepted is 100. | [optional] 
+**TotalItems** | Pointer to **int32** | Number of infractions that match the filters, counted up to 100,000. | [optional] 
+**TotalPages** | Pointer to **int32** | Number of pages for the limit provided, taken from totalItems rounded up. | [optional] 
 
 ## Methods
 

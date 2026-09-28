@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,31 +28,31 @@ import {
  */
 export interface WebhookWithSecret {
     /**
-     * 
+     * Webhook identifier.
      * @type {string}
      * @memberof WebhookWithSecret
      */
     id?: string;
     /**
-     * 
+     * Address that receives the notifications.
      * @type {string}
      * @memberof WebhookWithSecret
      */
     url?: string;
     /**
-     * 
+     * Indicates whether the webhook starts out receiving events.
      * @type {boolean}
      * @memberof WebhookWithSecret
      */
     active?: boolean;
     /**
-     * 
+     * Events subscribed by this webhook.
      * @type {Array<WebhookEventType>}
      * @memberof WebhookWithSecret
      */
     events?: Array<WebhookEventType>;
     /**
-     * 
+     * Indicates whether the webhook has a signing secret.
      * @type {boolean}
      * @memberof WebhookWithSecret
      */
@@ -64,7 +64,7 @@ export interface WebhookWithSecret {
      */
     createdAt?: Date;
     /**
-     * 
+     * Date and time of the last change to the webhook.
      * @type {Date}
      * @memberof WebhookWithSecret
      */
@@ -74,7 +74,7 @@ export interface WebhookWithSecret {
      * @type {string}
      * @memberof WebhookWithSecret
      */
-    secret?: string;
+    secret?: string | null;
 }
 
 /**

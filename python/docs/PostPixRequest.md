@@ -6,12 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **float** | Amount in BRL. Must be &gt;&#x3D; 1. | 
-**callback_url** | **str** | URL to receive &#x60;transaction updated&#x60; webhooks. | [optional] 
+**callback_url** | **str** | URL for transaction notifications (http or https). | [optional] 
 **generated_name** | **str** | Payer full name. Letters and spaces only. | [optional] 
 **generated_email** | **str** | Payer email (optional). | [optional] 
-**generated_document** | **str** | Payer CPF (11 digits) or CNPJ (14 digits), no punctuation. | [optional] 
-**expires_in** | **float** | Seconds until the QR Code expires. Default: 600. | [optional] 
-**client_reference** | **str** | External reference (order, invoice, etc.). | [optional] 
+**generated_document** | **str** | Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits. | [optional] 
+**expires_in** | **float** | Seconds until the QR Code expires. | [optional] 
+**client_reference** | **str** | External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it. | [optional] 
 **virtual_account** | **str** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
 
 ## Example

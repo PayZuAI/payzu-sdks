@@ -36,7 +36,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetUserWebhookSentDetail
 
-> SentWebhookDetail GetUserWebhookSentDetail(ctx, id, callbackId).Execute()
+> SentWebhookDetailResponse GetUserWebhookSentDetail(ctx, id, callbackId).Execute()
 
 Get sent callback detail
 
@@ -174,8 +174,8 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Webhook id.
-	callbackId := "callbackId_example" // string | Callback log id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
+	callbackId := "cm3w7l9v20001q8f2u6c1y4be" // string | Callback log id.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -184,7 +184,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.GetUserWebhookSentDetail``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserWebhookSentDetail`: SentWebhookDetail
+	// response from `GetUserWebhookSentDetail`: SentWebhookDetailResponse
 	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.GetUserWebhookSentDetail`: %v\n", resp)
 }
 ```
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SentWebhookDetail**](SentWebhookDetail.md)
+[**SentWebhookDetailResponse**](SentWebhookDetailResponse.md)
 
 ### Authorization
 
@@ -313,7 +313,7 @@ import (
 )
 
 func main() {
-	webhookId := "webhookId_example" // string | Filter the count by webhook id. (optional)
+	webhookId := "cm3w7k1t40000q8f2r5b9x3ad" // string | Filter the count by webhook id. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -379,7 +379,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
 	webhookUpdateRequest := *openapiclient.NewWebhookUpdateRequest() // WebhookUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -517,7 +517,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

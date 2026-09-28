@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -18,11 +18,6 @@ import {
     ApiErrorFromJSON,
     ApiErrorToJSON,
 } from '../models/ApiError.js';
-import {
-    type GetPixQrcode404Response,
-    GetPixQrcode404ResponseFromJSON,
-    GetPixQrcode404ResponseToJSON,
-} from '../models/GetPixQrcode404Response.js';
 import {
     type PostPixRequest,
     PostPixRequestFromJSON,
@@ -78,7 +73,7 @@ export interface PixOperationsApiInterface {
     getPixRequestOpts(requestParameters: GetPixRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
      * @summary Retrieve Charge
      * @param {string} [id] Transaction ID.
      * @param {string} [clientReference] External reference provided when creating the charge.
@@ -91,23 +86,23 @@ export interface PixOperationsApiInterface {
     getPixRaw(requestParameters: GetPixRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
      * Retrieve Charge
      */
     getPix(requestParameters: GetPixRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
 
     /**
      * Creates request options for getPixQrcode without sending the request
-     * @param {string} transactionId 
+     * @param {string} transactionId Transaction ID.
      * @throws {RequiredError}
      * @memberof PixOperationsApiInterface
      */
     getPixQrcodeRequestOpts(requestParameters: GetPixQrcodeRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Render the Pix QR Code of a deposit as a binary PNG image
+     * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
      * @summary Render Pix QR code (PNG)
-     * @param {string} transactionId 
+     * @param {string} transactionId Transaction ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PixOperationsApiInterface
@@ -115,7 +110,7 @@ export interface PixOperationsApiInterface {
     getPixQrcodeRaw(requestParameters: GetPixQrcodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
 
     /**
-     * Render the Pix QR Code of a deposit as a binary PNG image
+     * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
      * Render Pix QR code (PNG)
      */
     getPixQrcode(requestParameters: GetPixQrcodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
@@ -130,7 +125,7 @@ export interface PixOperationsApiInterface {
     getProofRequestOpts(requestParameters: GetProofRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * @summary Get Transaction Receipt
      * @param {string} id Transaction ID.
      * @param {'pdf' | 'base64'} [type] Return format.
@@ -141,7 +136,7 @@ export interface PixOperationsApiInterface {
     getProofRaw(requestParameters: GetProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProofResponse>>;
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * Get Transaction Receipt
      */
     getProof(requestParameters: GetProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProofResponse>;
@@ -155,7 +150,7 @@ export interface PixOperationsApiInterface {
     postPixRequestOpts(requestParameters: PostPixOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
+     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
      * @summary Create Charge (Pix deposit)
      * @param {PostPixRequest} postPixRequest 
      * @param {*} [options] Override http request option.
@@ -165,7 +160,7 @@ export interface PixOperationsApiInterface {
     postPixRaw(requestParameters: PostPixOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
+     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
      * Create Charge (Pix deposit)
      */
     postPix(requestParameters: PostPixOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
@@ -221,7 +216,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
      * Retrieve Charge
      */
     async getPixRaw(requestParameters: GetPixRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
@@ -232,7 +227,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
      * Retrieve Charge
      */
     async getPix(requestParameters: GetPixRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
@@ -276,7 +271,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Render the Pix QR Code of a deposit as a binary PNG image
+     * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
      * Render Pix QR code (PNG)
      */
     async getPixQrcodeRaw(requestParameters: GetPixQrcodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
@@ -287,7 +282,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Render the Pix QR Code of a deposit as a binary PNG image
+     * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
      * Render Pix QR code (PNG)
      */
     async getPixQrcode(requestParameters: GetPixQrcodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
@@ -335,7 +330,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * Get Transaction Receipt
      */
     async getProofRaw(requestParameters: GetProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProofResponse>> {
@@ -346,7 +341,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * Get Transaction Receipt
      */
     async getProof(requestParameters: GetProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProofResponse> {
@@ -392,7 +387,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
+     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
      * Create Charge (Pix deposit)
      */
     async postPixRaw(requestParameters: PostPixOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
@@ -403,7 +398,7 @@ export class PixOperationsApi extends runtime.BaseAPI implements PixOperationsAp
     }
 
     /**
-     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
+     * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
      * Create Charge (Pix deposit)
      */
     async postPix(requestParameters: PostPixOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {

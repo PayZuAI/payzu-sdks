@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,9 +20,13 @@ var _ MappedNullable = &GetUserTransactionById200ResponseAllOfInfractionInner{}
 
 // GetUserTransactionById200ResponseAllOfInfractionInner struct for GetUserTransactionById200ResponseAllOfInfractionInner
 type GetUserTransactionById200ResponseAllOfInfractionInner struct {
+	// Identifier of the infraction linked to this transaction.
 	Id *string `json:"id,omitempty"`
+	// Current state of the infraction.
 	Status *string `json:"status,omitempty"`
+	// Date and time the infraction was recorded at PayZu.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Date and time of the last change to the infraction record.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 

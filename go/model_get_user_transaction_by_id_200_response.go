@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,46 +19,70 @@ var _ MappedNullable = &GetUserTransactionById200Response{}
 
 // GetUserTransactionById200Response struct for GetUserTransactionById200Response
 type GetUserTransactionById200Response struct {
+	// Identifier of the transaction at PayZu.
 	Id *string `json:"id,omitempty"`
 	// PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
 	Status *string `json:"status,omitempty"`
+	// Amount of the transaction, before the fee.
 	Amount *float32 `json:"amount,omitempty"`
-	// DEPOSIT or WITHDRAW
+	// Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
 	Type *string `json:"type,omitempty"`
+	// Copy-and-paste Pix code.
 	QrCodeText *string `json:"qrCodeText,omitempty"`
+	// PNG image of the QR Code in base64, without the data: prefix.
 	QrCodeBase64 *string `json:"qrCodeBase64,omitempty"`
+	// Authenticated route that returns the PNG of the QR Code.
 	QrCodeUrl *string `json:"qrCodeUrl,omitempty"`
+	// Name used to build the charge.
 	GeneratedName *string `json:"generatedName,omitempty"`
+	// CPF or CNPJ used as the debtor of the charge.
 	GeneratedDocument *string `json:"generatedDocument,omitempty"`
+	// Email used to build the charge.
 	GeneratedEmail *string `json:"generatedEmail,omitempty"`
+	// Name of the holder of the account that sent the Pix, as reported by the originating institution.
 	PayerName *string `json:"payerName,omitempty"`
+	// CPF or CNPJ of the payer of the Pix, reported by the originating institution.
 	PayerDocument *string `json:"payerDocument,omitempty"`
+	// ISPB code of the institution the Pix was sent from.
 	PayerInstitutionIspb *string `json:"payerInstitutionIspb,omitempty"`
+	// Name of the institution the Pix was sent from.
 	PayerInstitutionName *string `json:"payerInstitutionName,omitempty"`
 	// Payer's PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions.
 	PayerAccountNumber *string `json:"payerAccountNumber,omitempty"`
+	// PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
 	ServiceFeeCharged *float32 `json:"serviceFeeCharged,omitempty"`
+	// Destination Pix key of the withdrawal, already normalized.
 	WithdrawPixKey *string `json:"withdrawPixKey,omitempty"`
-	WithdrawPixType *string `json:"withdrawPixType,omitempty"`
+	// Type of the destination key of the withdrawal, with evp being the random key.
+	WithdrawPixType NullableString `json:"withdrawPixType,omitempty"`
+	// Name of the holder of the receiving account.
 	ReceiverName *string `json:"receiverName,omitempty"`
+	// CPF or CNPJ of the receiver.
 	ReceiverDocument *string `json:"receiverDocument,omitempty"`
+	// ISPB code of the institution that receives the Pix.
 	ReceiverInstitutionIspb *string `json:"receiverInstitutionIspb,omitempty"`
+	// Name of the institution that receives the Pix.
 	ReceiverInstitutionName *string `json:"receiverInstitutionName,omitempty"`
 	// Receiver's PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions.
 	ReceiverAccountNumber *string `json:"receiverAccountNumber,omitempty"`
+	// Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
 	EndToEndId *string `json:"endToEndId,omitempty"`
+	// Date and time the transaction was recorded.
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// Date and time of the last change.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	// Date and time the Pix was settled, reported by the institution.
 	PaidAt *string `json:"paidAt,omitempty"`
+	// Your identifier of the transaction, returned in queries and callbacks.
 	ClientReference *string `json:"clientReference,omitempty"`
 	// End-to-end ID of the refund transaction
 	RefundEndToEndId *string `json:"refundEndToEndId,omitempty"`
 	// Amount refunded
 	RefundAmount *float32 `json:"refundAmount,omitempty"`
-	// Status of the refund (PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR)
-	RefundStatus *string `json:"refundStatus,omitempty"`
+	// Refund status: PENDING, COMPLETED or CANCELED.
+	RefundStatus NullableString `json:"refundStatus,omitempty"`
 	// Reason for the refund
-	RefundReason *string `json:"refundReason,omitempty"`
+	RefundReason NullableString `json:"refundReason,omitempty"`
 	// Description of the refund
 	RefundDescription *string `json:"refundDescription,omitempty"`
 	// Date and time when the refund was processed
@@ -636,36 +660,46 @@ func (o *GetUserTransactionById200Response) SetWithdrawPixKey(v string) {
 	o.WithdrawPixKey = &v
 }
 
-// GetWithdrawPixType returns the WithdrawPixType field value if set, zero value otherwise.
+// GetWithdrawPixType returns the WithdrawPixType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetUserTransactionById200Response) GetWithdrawPixType() string {
-	if o == nil || IsNil(o.WithdrawPixType) {
+	if o == nil || IsNil(o.WithdrawPixType.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.WithdrawPixType
+	return *o.WithdrawPixType.Get()
 }
 
 // GetWithdrawPixTypeOk returns a tuple with the WithdrawPixType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetUserTransactionById200Response) GetWithdrawPixTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.WithdrawPixType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WithdrawPixType, true
+	return o.WithdrawPixType.Get(), o.WithdrawPixType.IsSet()
 }
 
 // HasWithdrawPixType returns a boolean if a field has been set.
 func (o *GetUserTransactionById200Response) HasWithdrawPixType() bool {
-	if o != nil && !IsNil(o.WithdrawPixType) {
+	if o != nil && o.WithdrawPixType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWithdrawPixType gets a reference to the given string and assigns it to the WithdrawPixType field.
+// SetWithdrawPixType gets a reference to the given NullableString and assigns it to the WithdrawPixType field.
 func (o *GetUserTransactionById200Response) SetWithdrawPixType(v string) {
-	o.WithdrawPixType = &v
+	o.WithdrawPixType.Set(&v)
+}
+// SetWithdrawPixTypeNil sets the value for WithdrawPixType to be an explicit nil
+func (o *GetUserTransactionById200Response) SetWithdrawPixTypeNil() {
+	o.WithdrawPixType.Set(nil)
+}
+
+// UnsetWithdrawPixType ensures that no value is present for WithdrawPixType, not even an explicit nil
+func (o *GetUserTransactionById200Response) UnsetWithdrawPixType() {
+	o.WithdrawPixType.Unset()
 }
 
 // GetReceiverName returns the ReceiverName field value if set, zero value otherwise.
@@ -1052,68 +1086,88 @@ func (o *GetUserTransactionById200Response) SetRefundAmount(v float32) {
 	o.RefundAmount = &v
 }
 
-// GetRefundStatus returns the RefundStatus field value if set, zero value otherwise.
+// GetRefundStatus returns the RefundStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetUserTransactionById200Response) GetRefundStatus() string {
-	if o == nil || IsNil(o.RefundStatus) {
+	if o == nil || IsNil(o.RefundStatus.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundStatus
+	return *o.RefundStatus.Get()
 }
 
 // GetRefundStatusOk returns a tuple with the RefundStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetUserTransactionById200Response) GetRefundStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundStatus) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundStatus, true
+	return o.RefundStatus.Get(), o.RefundStatus.IsSet()
 }
 
 // HasRefundStatus returns a boolean if a field has been set.
 func (o *GetUserTransactionById200Response) HasRefundStatus() bool {
-	if o != nil && !IsNil(o.RefundStatus) {
+	if o != nil && o.RefundStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundStatus gets a reference to the given string and assigns it to the RefundStatus field.
+// SetRefundStatus gets a reference to the given NullableString and assigns it to the RefundStatus field.
 func (o *GetUserTransactionById200Response) SetRefundStatus(v string) {
-	o.RefundStatus = &v
+	o.RefundStatus.Set(&v)
+}
+// SetRefundStatusNil sets the value for RefundStatus to be an explicit nil
+func (o *GetUserTransactionById200Response) SetRefundStatusNil() {
+	o.RefundStatus.Set(nil)
 }
 
-// GetRefundReason returns the RefundReason field value if set, zero value otherwise.
+// UnsetRefundStatus ensures that no value is present for RefundStatus, not even an explicit nil
+func (o *GetUserTransactionById200Response) UnsetRefundStatus() {
+	o.RefundStatus.Unset()
+}
+
+// GetRefundReason returns the RefundReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetUserTransactionById200Response) GetRefundReason() string {
-	if o == nil || IsNil(o.RefundReason) {
+	if o == nil || IsNil(o.RefundReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundReason
+	return *o.RefundReason.Get()
 }
 
 // GetRefundReasonOk returns a tuple with the RefundReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetUserTransactionById200Response) GetRefundReasonOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundReason, true
+	return o.RefundReason.Get(), o.RefundReason.IsSet()
 }
 
 // HasRefundReason returns a boolean if a field has been set.
 func (o *GetUserTransactionById200Response) HasRefundReason() bool {
-	if o != nil && !IsNil(o.RefundReason) {
+	if o != nil && o.RefundReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundReason gets a reference to the given string and assigns it to the RefundReason field.
+// SetRefundReason gets a reference to the given NullableString and assigns it to the RefundReason field.
 func (o *GetUserTransactionById200Response) SetRefundReason(v string) {
-	o.RefundReason = &v
+	o.RefundReason.Set(&v)
+}
+// SetRefundReasonNil sets the value for RefundReason to be an explicit nil
+func (o *GetUserTransactionById200Response) SetRefundReasonNil() {
+	o.RefundReason.Set(nil)
+}
+
+// UnsetRefundReason ensures that no value is present for RefundReason, not even an explicit nil
+func (o *GetUserTransactionById200Response) UnsetRefundReason() {
+	o.RefundReason.Unset()
 }
 
 // GetRefundDescription returns the RefundDescription field value if set, zero value otherwise.
@@ -1401,8 +1455,8 @@ func (o GetUserTransactionById200Response) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.WithdrawPixKey) {
 		toSerialize["withdrawPixKey"] = o.WithdrawPixKey
 	}
-	if !IsNil(o.WithdrawPixType) {
-		toSerialize["withdrawPixType"] = o.WithdrawPixType
+	if o.WithdrawPixType.IsSet() {
+		toSerialize["withdrawPixType"] = o.WithdrawPixType.Get()
 	}
 	if !IsNil(o.ReceiverName) {
 		toSerialize["receiverName"] = o.ReceiverName
@@ -1440,11 +1494,11 @@ func (o GetUserTransactionById200Response) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.RefundAmount) {
 		toSerialize["refundAmount"] = o.RefundAmount
 	}
-	if !IsNil(o.RefundStatus) {
-		toSerialize["refundStatus"] = o.RefundStatus
+	if o.RefundStatus.IsSet() {
+		toSerialize["refundStatus"] = o.RefundStatus.Get()
 	}
-	if !IsNil(o.RefundReason) {
-		toSerialize["refundReason"] = o.RefundReason
+	if o.RefundReason.IsSet() {
+		toSerialize["refundReason"] = o.RefundReason.Get()
 	}
 	if !IsNil(o.RefundDescription) {
 		toSerialize["refundDescription"] = o.RefundDescription

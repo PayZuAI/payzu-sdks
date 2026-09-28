@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,12 +20,20 @@ var _ MappedNullable = &ReportJob{}
 
 // ReportJob struct for ReportJob
 type ReportJob struct {
+	// Report identifier (UUID), generated when the report is requested.
 	Id *string `json:"id,omitempty"`
+	// Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
 	Status *string `json:"status,omitempty"`
+	// Date and time the report generation was requested.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Date and time of the last change to the report record.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// When the file expires from storage (typically 7 days after creation)
-	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+	ExpiresAt NullableTime `json:"expiresAt,omitempty"`
+	// Filters used to generate the report.
+	Params map[string]interface{} `json:"params,omitempty"`
+	// Rows written to the file. Null until the report is COMPLETED.
+	WrittenRows NullableInt32 `json:"writtenRows,omitempty"`
 }
 
 // NewReportJob instantiates a new ReportJob object
@@ -173,36 +181,120 @@ func (o *ReportJob) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ReportJob) GetExpiresAt() time.Time {
-	if o == nil || IsNil(o.ExpiresAt) {
+	if o == nil || IsNil(o.ExpiresAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.ExpiresAt
+	return *o.ExpiresAt.Get()
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReportJob) GetExpiresAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ExpiresAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpiresAt, true
+	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
 func (o *ReportJob) HasExpiresAt() bool {
-	if o != nil && !IsNil(o.ExpiresAt) {
+	if o != nil && o.ExpiresAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
+// SetExpiresAt gets a reference to the given NullableTime and assigns it to the ExpiresAt field.
 func (o *ReportJob) SetExpiresAt(v time.Time) {
-	o.ExpiresAt = &v
+	o.ExpiresAt.Set(&v)
+}
+// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+func (o *ReportJob) SetExpiresAtNil() {
+	o.ExpiresAt.Set(nil)
+}
+
+// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+func (o *ReportJob) UnsetExpiresAt() {
+	o.ExpiresAt.Unset()
+}
+
+// GetParams returns the Params field value if set, zero value otherwise.
+func (o *ReportJob) GetParams() map[string]interface{} {
+	if o == nil || IsNil(o.Params) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Params
+}
+
+// GetParamsOk returns a tuple with the Params field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReportJob) GetParamsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Params) {
+		return map[string]interface{}{}, false
+	}
+	return o.Params, true
+}
+
+// HasParams returns a boolean if a field has been set.
+func (o *ReportJob) HasParams() bool {
+	if o != nil && !IsNil(o.Params) {
+		return true
+	}
+
+	return false
+}
+
+// SetParams gets a reference to the given map[string]interface{} and assigns it to the Params field.
+func (o *ReportJob) SetParams(v map[string]interface{}) {
+	o.Params = v
+}
+
+// GetWrittenRows returns the WrittenRows field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReportJob) GetWrittenRows() int32 {
+	if o == nil || IsNil(o.WrittenRows.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.WrittenRows.Get()
+}
+
+// GetWrittenRowsOk returns a tuple with the WrittenRows field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReportJob) GetWrittenRowsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.WrittenRows.Get(), o.WrittenRows.IsSet()
+}
+
+// HasWrittenRows returns a boolean if a field has been set.
+func (o *ReportJob) HasWrittenRows() bool {
+	if o != nil && o.WrittenRows.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetWrittenRows gets a reference to the given NullableInt32 and assigns it to the WrittenRows field.
+func (o *ReportJob) SetWrittenRows(v int32) {
+	o.WrittenRows.Set(&v)
+}
+// SetWrittenRowsNil sets the value for WrittenRows to be an explicit nil
+func (o *ReportJob) SetWrittenRowsNil() {
+	o.WrittenRows.Set(nil)
+}
+
+// UnsetWrittenRows ensures that no value is present for WrittenRows, not even an explicit nil
+func (o *ReportJob) UnsetWrittenRows() {
+	o.WrittenRows.Unset()
 }
 
 func (o ReportJob) MarshalJSON() ([]byte, error) {
@@ -227,8 +319,14 @@ func (o ReportJob) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !IsNil(o.ExpiresAt) {
-		toSerialize["expiresAt"] = o.ExpiresAt
+	if o.ExpiresAt.IsSet() {
+		toSerialize["expiresAt"] = o.ExpiresAt.Get()
+	}
+	if !IsNil(o.Params) {
+		toSerialize["params"] = o.Params
+	}
+	if o.WrittenRows.IsSet() {
+		toSerialize["writtenRows"] = o.WrittenRows.Get()
 	}
 	return toSerialize, nil
 }

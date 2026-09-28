@@ -1,149 +1,26 @@
-# OpenAPI\Client\WithdrawalsApi
+# PayZu\Pix\WithdrawalsApi
 
-Send money via Pix (cash out) and DICT key/QR-code consultation
+Send money via Pix (cash out) by Pix key or QR Code
 
 All URIs are relative to https://api.payzu.processamento.com/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getPixKey()**](WithdrawalsApi.md#getPixKey) | **GET** /pix/key | Dict Pix Key Lookup |
-| [**getUserDict()**](WithdrawalsApi.md#getUserDict) | **GET** /user/dict | DICT key lookup |
 | [**getWithdraw()**](WithdrawalsApi.md#getWithdraw) | **GET** /withdraw | Retrieve Withdrawal |
 | [**getWithdrawProof()**](WithdrawalsApi.md#getWithdrawProof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
-| [**postPixQrcodeRead()**](WithdrawalsApi.md#postPixQrcodeRead) | **POST** /pix/qrcode/read | Read QR Code |
 | [**postWithdraw()**](WithdrawalsApi.md#postWithdraw) | **POST** /withdraw | Create Withdrawal (Pix key) |
 | [**postWithdrawQrcode()**](WithdrawalsApi.md#postWithdrawQrcode) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code |
 
 
-## `getPixKey()`
-
-```php
-getPixKey($pix_key): \OpenAPI\Client\Model\PixKeyInfo
-```
-
-Dict Pix Key Lookup
-
-Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner's details and associated financial institution.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
-
-
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$pix_key = example@payzu.com.br; // string | The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
-
-try {
-    $result = $apiInstance->getPixKey($pix_key);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling WithdrawalsApi->getPixKey: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **pix_key** | **string**| The Pix key to lookup (CPF, CNPJ, email, phone, or EVP). | |
-
-### Return type
-
-[**\OpenAPI\Client\Model\PixKeyInfo**](../Model/PixKeyInfo.md)
-
-### Authorization
-
-[BearerAuth](../../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getUserDict()`
-
-```php
-getUserDict($key): \OpenAPI\Client\Model\DictConsultResponse
-```
-
-DICT key lookup
-
-Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
-
-
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$key = 'key_example'; // string | Pix key to look up (CPF, CNPJ, email, phone or EVP).
-
-try {
-    $result = $apiInstance->getUserDict($key);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling WithdrawalsApi->getUserDict: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **key** | **string**| Pix key to look up (CPF, CNPJ, email, phone or EVP). | |
-
-### Return type
-
-[**\OpenAPI\Client\Model\DictConsultResponse**](../Model/DictConsultResponse.md)
-
-### Authorization
-
-[BearerAuth](../../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
 ## `getWithdraw()`
 
 ```php
-getWithdraw($id, $client_reference, $end_to_end_id, $virtual_account): \OpenAPI\Client\Model\Transaction
+getWithdraw($id, $client_reference, $end_to_end_id, $virtual_account): \PayZu\Pix\Model\Transaction
 ```
 
 Retrieve Withdrawal
 
-Get the latest status and details for a withdrawal. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
+Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -153,19 +30,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
+$apiInstance = new PayZu\Pix\Api\WithdrawalsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU2025081721512946OOLK75; // string | Transaction ID.
-$client_reference = 'client_reference_example'; // string | External reference provided when creating the withdrawal.
-$end_to_end_id = 'end_to_end_id_example'; // string | Pix end-to-end ID.
-$virtual_account = 'virtual_account_example'; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$id = PAYZU20260817B3PL8SG5WQ000000; // string | Transaction ID.
+$client_reference = order_12345; // string | External reference provided when creating the withdrawal.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | Pix end-to-end ID.
+$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
 
 try {
     $result = $apiInstance->getWithdraw($id, $client_reference, $end_to_end_id, $virtual_account);
@@ -186,7 +63,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 
@@ -204,12 +81,12 @@ try {
 ## `getWithdrawProof()`
 
 ```php
-getWithdrawProof($id, $type): \OpenAPI\Client\Model\ProofResponse
+getWithdrawProof($id, $type): \PayZu\Pix\Model\ProofResponse
 ```
 
 Get Withdrawal Receipt
 
-Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
 
 ### Example
 
@@ -219,16 +96,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
+$apiInstance = new PayZu\Pix\Api\WithdrawalsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU2025081721512946OOLK75; // string | Transaction ID.
+$id = PAYZU20260817B3PL8SG5WQ000000; // string | Transaction ID.
 $type = pdf; // string | Return format.
 
 try {
@@ -248,7 +125,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\ProofResponse**](../Model/ProofResponse.md)
+[**\PayZu\Pix\Model\ProofResponse**](../Model/ProofResponse.md)
 
 ### Authorization
 
@@ -263,75 +140,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `postPixQrcodeRead()`
-
-```php
-postPixQrcodeRead($post_pix_qrcode_read_request): \OpenAPI\Client\Model\QRCodeReadResponse
-```
-
-Read QR Code
-
-Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
-
-
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$post_pix_qrcode_read_request = new \OpenAPI\Client\Model\PostPixQrcodeReadRequest(); // \OpenAPI\Client\Model\PostPixQrcodeReadRequest
-
-try {
-    $result = $apiInstance->postPixQrcodeRead($post_pix_qrcode_read_request);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling WithdrawalsApi->postPixQrcodeRead: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **post_pix_qrcode_read_request** | [**\OpenAPI\Client\Model\PostPixQrcodeReadRequest**](../Model/PostPixQrcodeReadRequest.md)|  | |
-
-### Return type
-
-[**\OpenAPI\Client\Model\QRCodeReadResponse**](../Model/QRCodeReadResponse.md)
-
-### Authorization
-
-[BearerAuth](../../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
 ## `postWithdraw()`
 
 ```php
-postWithdraw($post_withdraw_request): \OpenAPI\Client\Model\Transaction
+postWithdraw($post_withdraw_request): \PayZu\Pix\Model\Transaction
 ```
 
 Create Withdrawal (Pix key)
 
-Send a Pix **cash out** to the specified Pix key.
+Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -341,16 +158,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
+$apiInstance = new PayZu\Pix\Api\WithdrawalsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$post_withdraw_request = new \OpenAPI\Client\Model\PostWithdrawRequest(); // \OpenAPI\Client\Model\PostWithdrawRequest
+$post_withdraw_request = new \PayZu\Pix\Model\PostWithdrawRequest(); // \PayZu\Pix\Model\PostWithdrawRequest
 
 try {
     $result = $apiInstance->postWithdraw($post_withdraw_request);
@@ -364,11 +181,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_withdraw_request** | [**\OpenAPI\Client\Model\PostWithdrawRequest**](../Model/PostWithdrawRequest.md)|  | |
+| **post_withdraw_request** | [**\PayZu\Pix\Model\PostWithdrawRequest**](../Model/PostWithdrawRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 
@@ -386,12 +203,12 @@ try {
 ## `postWithdrawQrcode()`
 
 ```php
-postWithdrawQrcode($post_withdraw_qrcode_request): \OpenAPI\Client\Model\Transaction
+postWithdrawQrcode($post_withdraw_qrcode_request): \PayZu\Pix\Model\Transaction
 ```
 
 Create Withdrawal using QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.
+Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -401,16 +218,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WithdrawalsApi(
+$apiInstance = new PayZu\Pix\Api\WithdrawalsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$post_withdraw_qrcode_request = new \OpenAPI\Client\Model\PostWithdrawQrcodeRequest(); // \OpenAPI\Client\Model\PostWithdrawQrcodeRequest
+$post_withdraw_qrcode_request = new \PayZu\Pix\Model\PostWithdrawQrcodeRequest(); // \PayZu\Pix\Model\PostWithdrawQrcodeRequest
 
 try {
     $result = $apiInstance->postWithdrawQrcode($post_withdraw_qrcode_request);
@@ -424,11 +241,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_withdraw_qrcode_request** | [**\OpenAPI\Client\Model\PostWithdrawQrcodeRequest**](../Model/PostWithdrawQrcodeRequest.md)|  | |
+| **post_withdraw_qrcode_request** | [**\PayZu\Pix\Model\PostWithdrawQrcodeRequest**](../Model/PostWithdrawQrcodeRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 

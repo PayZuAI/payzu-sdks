@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**ExpiresAt** | Pointer to **time.Time** | When the file expires from storage (typically 7 days after creation) | [optional] 
+**Id** | Pointer to **string** | Report identifier (UUID), generated when the report is requested. | [optional] 
+**Status** | Pointer to **string** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Date and time the report generation was requested. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the report record. | [optional] 
+**ExpiresAt** | Pointer to **NullableTime** | When the file expires from storage (typically 7 days after creation) | [optional] 
+**Params** | Pointer to **map[string]interface{}** | Filters used to generate the report. | [optional] 
+**WrittenRows** | Pointer to **NullableInt32** | Rows written to the file. Null until the report is COMPLETED. | [optional] 
 
 ## Methods
 
@@ -154,6 +156,76 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
+### SetExpiresAtNil
+
+`func (o *ReportJob) SetExpiresAtNil(b bool)`
+
+ SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+
+### UnsetExpiresAt
+`func (o *ReportJob) UnsetExpiresAt()`
+
+UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+### GetParams
+
+`func (o *ReportJob) GetParams() map[string]interface{}`
+
+GetParams returns the Params field if non-nil, zero value otherwise.
+
+### GetParamsOk
+
+`func (o *ReportJob) GetParamsOk() (*map[string]interface{}, bool)`
+
+GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParams
+
+`func (o *ReportJob) SetParams(v map[string]interface{})`
+
+SetParams sets Params field to given value.
+
+### HasParams
+
+`func (o *ReportJob) HasParams() bool`
+
+HasParams returns a boolean if a field has been set.
+
+### GetWrittenRows
+
+`func (o *ReportJob) GetWrittenRows() int32`
+
+GetWrittenRows returns the WrittenRows field if non-nil, zero value otherwise.
+
+### GetWrittenRowsOk
+
+`func (o *ReportJob) GetWrittenRowsOk() (*int32, bool)`
+
+GetWrittenRowsOk returns a tuple with the WrittenRows field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWrittenRows
+
+`func (o *ReportJob) SetWrittenRows(v int32)`
+
+SetWrittenRows sets WrittenRows field to given value.
+
+### HasWrittenRows
+
+`func (o *ReportJob) HasWrittenRows() bool`
+
+HasWrittenRows returns a boolean if a field has been set.
+
+### SetWrittenRowsNil
+
+`func (o *ReportJob) SetWrittenRowsNil(b bool)`
+
+ SetWrittenRowsNil sets the value for WrittenRows to be an explicit nil
+
+### UnsetWrittenRows
+`func (o *ReportJob) UnsetWrittenRows()`
+
+UnsetWrittenRows ensures that no value is present for WrittenRows, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

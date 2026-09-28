@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**mime_type** | **str** |  | [optional] 
-**size** | **int** |  | [optional] 
-**url** | **str** | Signed download URL (expires in 9 minutes). Present only when fetching an individual defense; absent in the listing. | [optional] 
+**name** | **str** | Name of the file sent with the defense. | [optional] 
+**mime_type** | **str** | MIME type of the file, provided on upload, for example application/pdf or image/png. | [optional] 
+**size** | **int** | Size of the file in bytes. | [optional] 
+**url** | **str** | Signed download URL, valid for 9 minutes; null when unavailable. Returned when creating the defense and when fetching a single defense. | [optional] 
 
 ## Example
 

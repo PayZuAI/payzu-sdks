@@ -6,29 +6,29 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Versão (ex: 0.1.0)'
+        description: 'Versão (ex: 2.0.0)'
         required: true
         type: string
 
 permissions:
   contents: read
 
+env:
+  RELEASE_TAG: ${{ inputs.version || github.event.release.tag_name }}
+
 jobs:
   npm:
     runs-on: ubuntu-latest
-    if: ${{ vars.NPM_PUBLISH == 'true' || github.event_name == 'release' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
       - name: Build
         working-directory: nodejs
-        env:
-          RELEASE_VERSION: ${{ inputs.version || github.event.release.tag_name }}
         run: |
-          npm version "$RELEASE_VERSION" --no-git-tag-version --allow-same-version
+          npm version "${RELEASE_TAG#v}" --no-git-tag-version --allow-same-version
           npm ci
           npm run build
           npm test
@@ -37,17 +37,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          LOCAL=$(node -p "require('./package.json').version")
-          PUBLISHED=$(npm view "payzu-pix@$LOCAL" version 2>/dev/null || true)
-          if [ -n "$PUBLISHED" ]; then
-            echo "payzu-pix@$LOCAL ja publicado, pulando"
+          VERSION=$(node -p "require('./package.json').version")
+          if [ -n "$(npm view "payzu-pix@$VERSION" version 2>/dev/null || true)" ]; then
+            echo "payzu-pix@$VERSION já publicado"
           else
             npm publish
           fi
 
   pypi:
     runs-on: ubuntu-latest
-    if: ${{ vars.PYPI_PUBLISH == 'true' || github.event_name == 'release' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -55,12 +53,11 @@ jobs:
           python-version: '3.12'
       - name: Build
         working-directory: python
-        env:
-          RELEASE_VERSION: ${{ inputs.version || github.event.release.tag_name }}
         run: |
+          VERSION="${RELEASE_TAG#v}"
+          sed -i "s/^VERSION = .*/VERSION = \"$VERSION\"/" setup.py
+          sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
           python -m pip install --upgrade build twine
-          sed -i "s/^VERSION = .*/VERSION = \"$RELEASE_VERSION\"/" setup.py
-          sed -i "s/^version = .*/version = \"$RELEASE_VERSION\"/" pyproject.toml
           python -m build
       - name: Publish
         working-directory: python
@@ -69,14 +66,75 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: twine upload --skip-existing dist/*
 
-  packagist:
+  rubygems:
     runs-on: ubuntu-latest
-    if: ${{ vars.PACKAGIST_PUBLISH == 'true' }}
     steps:
-      - name: Trigger Packagist update
-        env:
-          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - name: Build
+        working-directory: ruby
         run: |
-          curl -sf -XPOST -H "content-type:application/json" \
-            "https://packagist.org/api/update-package?username=payzu&apiToken=${PACKAGIST_TOKEN}" \
-            -d '{"repository":{"url":"https://github.com/PayZuAI/payzu-sdks"}}'
+          sed -i "s/VERSION = '.*'/VERSION = '${RELEASE_TAG#v}'/" lib/payzu-pix/version.rb
+          gem build payzu-pix.gemspec
+      - name: Publish
+        working-directory: ruby
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+        run: |
+          VERSION="${RELEASE_TAG#v}"
+          if gem list --remote --exact payzu-pix --all | grep -q "[( ]$VERSION[,)]"; then
+            echo "payzu-pix $VERSION já publicado"
+          else
+            gem push "payzu-pix-$VERSION.gem"
+          fi
+
+  maven-central:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Import signing key
+        env:
+          MAVEN_GPG_PRIVATE_KEY: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+        run: |
+          mkdir -m 700 -p ~/.gnupg
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          echo "$MAVEN_GPG_PRIVATE_KEY" | gpg --batch --import
+      - name: Build signed bundle
+        working-directory: java
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: |
+          mvn -B -q versions:set -DnewVersion="${RELEASE_TAG#v}" -DgenerateBackupPoms=false
+          mvn -B -Psign-artifacts -DskipTests -Dgpg.passphrase="$MAVEN_GPG_PASSPHRASE" \
+            deploy -DaltDeploymentRepository="staging::file://$PWD/target/staging"
+          cd target/staging
+          find . -name 'maven-metadata.xml*' -delete
+          zip -qr ../bundle.zip .
+      - name: Upload to Maven Central
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+        run: |
+          AUTH=$(printf '%s:%s' "$MAVEN_CENTRAL_USERNAME" "$MAVEN_CENTRAL_PASSWORD" | base64 -w0)
+          API=https://central.sonatype.com/api/v1/publisher
+          ID=$(curl -sf -H "Authorization: Bearer $AUTH" -F bundle=@java/target/bundle.zip \
+            "$API/upload?name=payzu-pix-${RELEASE_TAG#v}&publishingType=AUTOMATIC")
+          echo "deployment $ID"
+          for _ in $(seq 1 90); do
+            STATUS=$(curl -sf -X POST -H "Authorization: Bearer $AUTH" "$API/status?id=$ID")
+            STATE=$(echo "$STATUS" | jq -r .deploymentState)
+            echo "$STATE"
+            case "$STATE" in
+              PUBLISHING|PUBLISHED) exit 0 ;;
+              FAILED) echo "$STATUS" | jq .errors; exit 1 ;;
+            esac
+            sleep 20
+          done
+          exit 1

@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
-**PayerName** | Pointer to **string** |  | [optional] 
-**PayerDocument** | Pointer to **string** |  | [optional] 
-**ReceiverName** | Pointer to **string** |  | [optional] 
-**ReceiverDocument** | Pointer to **string** |  | [optional] 
-**EndToEndId** | Pointer to **string** |  | [optional] 
+**Amount** | Pointer to **float32** | Amount of the disputed transaction, in reais with decimal places. | [optional] 
+**PayerName** | Pointer to **NullableString** | Name of the Pix payer, as reported by the provider. | [optional] 
+**PayerDocument** | Pointer to **NullableString** | CPF or CNPJ of the Pix payer, as reported by the provider. | [optional] 
+**ReceiverName** | Pointer to **NullableString** | Name of the Pix receiver, as reported by the provider. | [optional] 
+**ReceiverDocument** | Pointer to **NullableString** | CPF or CNPJ of the Pix receiver, as reported by the provider. | [optional] 
+**EndToEndId** | Pointer to **NullableString** | End-to-end identifier of the Pix, reported by the provider at settlement. | [optional] 
 
 ## Methods
 
@@ -106,6 +106,16 @@ SetPayerName sets PayerName field to given value.
 
 HasPayerName returns a boolean if a field has been set.
 
+### SetPayerNameNil
+
+`func (o *InfractionDetailTransaction) SetPayerNameNil(b bool)`
+
+ SetPayerNameNil sets the value for PayerName to be an explicit nil
+
+### UnsetPayerName
+`func (o *InfractionDetailTransaction) UnsetPayerName()`
+
+UnsetPayerName ensures that no value is present for PayerName, not even an explicit nil
 ### GetPayerDocument
 
 `func (o *InfractionDetailTransaction) GetPayerDocument() string`
@@ -131,6 +141,16 @@ SetPayerDocument sets PayerDocument field to given value.
 
 HasPayerDocument returns a boolean if a field has been set.
 
+### SetPayerDocumentNil
+
+`func (o *InfractionDetailTransaction) SetPayerDocumentNil(b bool)`
+
+ SetPayerDocumentNil sets the value for PayerDocument to be an explicit nil
+
+### UnsetPayerDocument
+`func (o *InfractionDetailTransaction) UnsetPayerDocument()`
+
+UnsetPayerDocument ensures that no value is present for PayerDocument, not even an explicit nil
 ### GetReceiverName
 
 `func (o *InfractionDetailTransaction) GetReceiverName() string`
@@ -156,6 +176,16 @@ SetReceiverName sets ReceiverName field to given value.
 
 HasReceiverName returns a boolean if a field has been set.
 
+### SetReceiverNameNil
+
+`func (o *InfractionDetailTransaction) SetReceiverNameNil(b bool)`
+
+ SetReceiverNameNil sets the value for ReceiverName to be an explicit nil
+
+### UnsetReceiverName
+`func (o *InfractionDetailTransaction) UnsetReceiverName()`
+
+UnsetReceiverName ensures that no value is present for ReceiverName, not even an explicit nil
 ### GetReceiverDocument
 
 `func (o *InfractionDetailTransaction) GetReceiverDocument() string`
@@ -181,6 +211,16 @@ SetReceiverDocument sets ReceiverDocument field to given value.
 
 HasReceiverDocument returns a boolean if a field has been set.
 
+### SetReceiverDocumentNil
+
+`func (o *InfractionDetailTransaction) SetReceiverDocumentNil(b bool)`
+
+ SetReceiverDocumentNil sets the value for ReceiverDocument to be an explicit nil
+
+### UnsetReceiverDocument
+`func (o *InfractionDetailTransaction) UnsetReceiverDocument()`
+
+UnsetReceiverDocument ensures that no value is present for ReceiverDocument, not even an explicit nil
 ### GetEndToEndId
 
 `func (o *InfractionDetailTransaction) GetEndToEndId() string`
@@ -206,6 +246,16 @@ SetEndToEndId sets EndToEndId field to given value.
 
 HasEndToEndId returns a boolean if a field has been set.
 
+### SetEndToEndIdNil
+
+`func (o *InfractionDetailTransaction) SetEndToEndIdNil(b bool)`
+
+ SetEndToEndIdNil sets the value for EndToEndId to be an explicit nil
+
+### UnsetEndToEndId
+`func (o *InfractionDetailTransaction) UnsetEndToEndId()`
+
+UnsetEndToEndId ensures that no value is present for EndToEndId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

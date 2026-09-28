@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -23,17 +23,17 @@ var _ MappedNullable = &PostPixRequest{}
 type PostPixRequest struct {
 	// Amount in BRL. Must be >= 1.
 	Amount float32 `json:"amount"`
-	// URL to receive `transaction updated` webhooks.
-	CallbackUrl *string `json:"callbackUrl,omitempty"`
+	// URL for transaction notifications (http or https).
+	CallbackUrl *string `json:"callbackUrl,omitempty" validate:"regexp=^https?:\\/\\/"`
 	// Payer full name. Letters and spaces only.
-	GeneratedName *string `json:"generatedName,omitempty"`
+	GeneratedName *string `json:"generatedName,omitempty" validate:"regexp=^[a-zA-Z À-ÿ]+$"`
 	// Payer email (optional).
 	GeneratedEmail *string `json:"generatedEmail,omitempty"`
-	// Payer CPF (11 digits) or CNPJ (14 digits), no punctuation.
-	GeneratedDocument *string `json:"generatedDocument,omitempty"`
-	// Seconds until the QR Code expires. Default: 600.
+	// Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits.
+	GeneratedDocument *string `json:"generatedDocument,omitempty" validate:"regexp=^(\\\\d{11}|\\\\d{14})$"`
+	// Seconds until the QR Code expires.
 	ExpiresIn *float32 `json:"expiresIn,omitempty"`
-	// External reference (order, invoice, etc.).
+	// External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it.
 	ClientReference *string `json:"clientReference,omitempty"`
 	// Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
 	VirtualAccount *string `json:"virtualAccount,omitempty"`

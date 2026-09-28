@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -26,7 +26,7 @@ export interface DictConsultResponse {
      */
     pixKey?: string;
     /**
-     * 
+     * Name of the key holder as returned by the institution queried.
      * @type {string}
      * @memberof DictConsultResponse
      */
@@ -38,7 +38,7 @@ export interface DictConsultResponse {
      */
     document?: string;
     /**
-     * 
+     * Type of person: PF, PJ, or empty when not informed.
      * @type {DictConsultResponsePersonTypeEnum}
      * @memberof DictConsultResponse
      */
@@ -50,13 +50,13 @@ export interface DictConsultResponse {
      */
     accountType?: string;
     /**
-     * 
+     * ISPB code of the account institution.
      * @type {string}
      * @memberof DictConsultResponse
      */
     institutionIspb?: string;
     /**
-     * 
+     * Name of the institution where the holder account is registered, as the lookup returns it.
      * @type {string}
      * @memberof DictConsultResponse
      */
@@ -69,7 +69,8 @@ export interface DictConsultResponse {
  */
 export const DictConsultResponsePersonTypeEnum = {
     Pf: 'PF',
-    Pj: 'PJ'
+    Pj: 'PJ',
+    Empty: ''
 } as const;
 export type DictConsultResponsePersonTypeEnum = typeof DictConsultResponsePersonTypeEnum[keyof typeof DictConsultResponsePersonTypeEnum];
 

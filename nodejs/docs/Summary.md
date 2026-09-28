@@ -10,6 +10,7 @@ Name | Type
 `deposit` | [SummaryBlock](SummaryBlock.md)
 `withdraw` | [SummaryBlock](SummaryBlock.md)
 `commission` | [SummaryBlock](SummaryBlock.md)
+`adjustment` | [SummaryBlock](SummaryBlock.md)
 
 ## Example
 
@@ -22,6 +23,7 @@ const example = {
   "deposit": null,
   "withdraw": null,
   "commission": null,
+  "adjustment": null,
 } satisfies Summary
 
 console.log(example)

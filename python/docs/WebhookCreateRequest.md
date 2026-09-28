@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | HTTPS URL that will receive the notifications. | 
+**url** | **str** | URL (http or https) that will receive the notifications. | 
 **events** | [**List[WebhookEventType]**](WebhookEventType.md) | Events to subscribe to. Omit or leave empty to receive all events. | [optional] [default to []]
 **generate_secret** | **bool** | Generate an HMAC signing secret for this webhook. | [optional] [default to False]
-**active** | **bool** | Whether the webhook starts active. | [optional] 
+**active** | **bool** | Whether the webhook starts active. | [optional] [default to True]
 
 ## Example
 

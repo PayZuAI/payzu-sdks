@@ -15,7 +15,7 @@ import type { RotateSecretResponse } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "secret": whsec_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d,
+  "secret": q7Kx2mV9pL4sR8tW1nB6cY3hJ5dF0gZ-aE_uT7iO2kM,
 } satisfies RotateSecretResponse
 
 console.log(example)

@@ -5,13 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status_code** | **int** | HTTP status code. | 
-**error** | **str** | HTTP status text. | 
+**status** | **str** | Fixed marker of an error response. | 
+**error** | **str** | Name of the corresponding HTTP status. | 
+**error_code** | **str** | Stable machine-readable error code, when available. | 
 **message** | **str** | Human-readable error message. | 
+**status_code** | **int** | HTTP status code. | 
 **request_id** | **str** | Unique request correlation ID (cuid). Include it when contacting support. | 
-**error_code** | **str** | Stable machine-readable error code, when available. | [optional] 
-**retry_after_seconds** | **int** | Seconds to wait before retrying. Present only on 429 responses. | [optional] 
 **details** | [**List[ApiErrorDetailsInner]**](ApiErrorDetailsInner.md) | Field-level validation errors, when applicable. | [optional] 
+**retry_after_seconds** | **int** | Seconds to wait before retrying. Present only on 429 responses. | [optional] 
 
 ## Example
 

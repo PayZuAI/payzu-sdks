@@ -6,13 +6,14 @@
 
 Name | Type
 ------------ | -------------
-`statusCode` | number
+`status` | string
 `error` | string
-`message` | string
-`requestId` | string
 `errorCode` | string
-`retryAfterSeconds` | number
+`message` | string
+`statusCode` | number
+`requestId` | string
 `details` | [Array&lt;ApiErrorDetailsInner&gt;](ApiErrorDetailsInner.md)
+`retryAfterSeconds` | number
 
 ## Example
 
@@ -21,13 +22,14 @@ import type { ApiError } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "statusCode": 400,
+  "status": ERROR,
   "error": Bad Request,
-  "message": Validation failed,
+  "errorCode": PZV001,
+  "message": Invalid data. Check the fields provided.,
+  "statusCode": 400,
   "requestId": cmbz0f8qk0001js04hp3e2n0f,
-  "errorCode": PZA100,
-  "retryAfterSeconds": 30,
   "details": null,
+  "retryAfterSeconds": 30,
 } satisfies ApiError
 
 console.log(example)

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalAmount** | Pointer to **float32** |  | [optional] 
-**TotalTransactions** | Pointer to **int32** |  | [optional] 
+**TotalAmount** | Pointer to **float32** | Sum of the amounts in the period. | [optional] 
+**TotalTransactions** | Pointer to **int32** | Number of transactions of that type in the period, also summing all statuses. | [optional] 
 **Statuses** | Pointer to [**SummaryBlockStatuses**](SummaryBlockStatuses.md) |  | [optional] 
 **Grouped** | Pointer to [**[]SummaryBlockGroupedInner**](SummaryBlockGroupedInner.md) | Present only when grouped&#x3D;true. | [optional] 
 

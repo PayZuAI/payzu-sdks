@@ -44,8 +44,8 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Report ID.
+    id: 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78,
   } satisfies DownloadUserReportRequest;
 
   try {
@@ -65,7 +65,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Report ID. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -85,6 +85,9 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Signed download URL |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
 | **404** | Report not found |  -  |
 | **410** | Report file expired |  -  |
 | **422** | Report not ready (still processing) |  -  |
@@ -119,7 +122,7 @@ async function example() {
 
   const body = {
     // string | Statement entry id.
-    id: id_example,
+    id: cm3w7q8s10004q8f2k9f5b7eh,
   } satisfies GetUserBankStatementRequest;
 
   try {
@@ -159,6 +162,8 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Statement entry. |  -  |
+| **401** | Authentication failure |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -190,28 +195,28 @@ async function example() {
 
   const body = {
     // Date | Start date (required).
-    createdAtFrom: 2013-10-20T19:20:30+01:00,
+    createdAtFrom: 2026-08-01,
     // Date | End date (required).
-    createdAtTo: 2013-10-20T19:20:30+01:00,
-    // string (optional)
-    id: id_example,
-    // 'INCREMENT' | 'DECREMENT' (optional)
+    createdAtTo: 2026-08-31,
+    // string | Entry ID. (optional)
+    id: cm3w7q8s10004q8f2k9f5b7eh,
+    // 'INCREMENT' | 'DECREMENT' | Operation type.  `INCREMENT` `DECREMENT` (optional)
     operation: operation_example,
-    // string (optional)
-    reason: reason_example,
-    // string (optional)
-    transactionId: transactionId_example,
-    // number (optional)
-    amountFrom: 8.14,
-    // number (optional)
-    amountTo: 8.14,
-    // number (optional)
+    // string | Reason for the entry. (optional)
+    reason: Estorno,
+    // string | Transaction ID. (optional)
+    transactionId: PAYZU20260814T6NX1CV9MK000000,
+    // number | Minimum amount. (optional)
+    amountFrom: 10.9,
+    // number | Maximum amount. (optional)
+    amountTo: 500,
+    // number | Page number. (optional)
     page: 56,
-    // number (optional)
+    // number | Items per page. (optional)
     limit: 56,
-    // 'createdAt' | 'amount' (optional)
+    // 'createdAt' | 'amount' | Sort field. (optional)
     sortBy: sortBy_example,
-    // 'asc' | 'desc' (optional)
+    // 'asc' | 'desc' | Sort direction. (optional)
     sortDirection: sortDirection_example,
   } satisfies GetUserBankStatementsRequest;
 
@@ -234,16 +239,16 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **createdAtFrom** | `Date` | Start date (required). | [Defaults to `undefined`] |
 | **createdAtTo** | `Date` | End date (required). | [Defaults to `undefined`] |
-| **id** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **operation** | `INCREMENT`, `DECREMENT` |  | [Optional] [Defaults to `undefined`] [Enum: INCREMENT, DECREMENT] |
-| **reason** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **transactionId** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **amountFrom** | `number` |  | [Optional] [Defaults to `undefined`] |
-| **amountTo** | `number` |  | [Optional] [Defaults to `undefined`] |
-| **page** | `number` |  | [Optional] [Defaults to `1`] |
-| **limit** | `number` |  | [Optional] [Defaults to `10`] |
-| **sortBy** | `createdAt`, `amount` |  | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, amount] |
-| **sortDirection** | `asc`, `desc` |  | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
+| **id** | `string` | Entry ID. | [Optional] [Defaults to `undefined`] |
+| **operation** | `INCREMENT`, `DECREMENT` | Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [Optional] [Defaults to `undefined`] [Enum: INCREMENT, DECREMENT] |
+| **reason** | `string` | Reason for the entry. | [Optional] [Defaults to `undefined`] |
+| **transactionId** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
+| **amountFrom** | `number` | Minimum amount. | [Optional] [Defaults to `undefined`] |
+| **amountTo** | `number` | Maximum amount. | [Optional] [Defaults to `undefined`] |
+| **page** | `number` | Page number. | [Optional] [Defaults to `1`] |
+| **limit** | `number` | Items per page. | [Optional] [Defaults to `10`] |
+| **sortBy** | `createdAt`, `amount` | Sort field. | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, amount] |
+| **sortDirection** | `asc`, `desc` | Sort direction. | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
 
 ### Return type
 
@@ -263,6 +268,8 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Statement page. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -294,24 +301,24 @@ async function example() {
 
   const body = {
     // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-    status: status_example,
-    // string (optional)
-    document: document_example,
-    // string (optional)
-    name: name_example,
-    // string (optional)
-    endToEndId: endToEndId_example,
-    // number (optional)
-    amountMin: 8.14,
-    // number (optional)
-    amountMax: 8.14,
-    // Date (optional)
-    createdAtFrom: 2013-10-20T19:20:30+01:00,
-    // Date (optional)
-    createdAtTo: 2013-10-20T19:20:30+01:00,
-    // number (optional)
+    status: PENDING,
+    // string | CPF or CNPJ, digits only. (optional)
+    document: 12345678901,
+    // string | Name of the payer or receiver. (optional)
+    name: John Doe,
+    // string | End-to-end ID of the Pix. (optional)
+    endToEndId: E00000000202508172159kZ8dQ2mNb1x,
+    // number | Minimum amount. (optional)
+    amountMin: 10.9,
+    // number | Maximum amount. (optional)
+    amountMax: 500,
+    // Date | Start of the creation date range. (optional)
+    createdAtFrom: 2026-08-01,
+    // Date | End of the creation date range. (optional)
+    createdAtTo: 2026-08-31,
+    // number | Page number. (optional)
     page: 56,
-    // number (optional)
+    // number | Items per page. (optional)
     limit: 56,
   } satisfies GetUserDepositPendingRequest;
 
@@ -333,15 +340,15 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **status** | `string` | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [Optional] [Defaults to `undefined`] |
-| **document** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **name** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **endToEndId** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **amountMin** | `number` |  | [Optional] [Defaults to `undefined`] |
-| **amountMax** | `number` |  | [Optional] [Defaults to `undefined`] |
-| **createdAtFrom** | `Date` |  | [Optional] [Defaults to `undefined`] |
-| **createdAtTo** | `Date` |  | [Optional] [Defaults to `undefined`] |
-| **page** | `number` |  | [Optional] [Defaults to `1`] |
-| **limit** | `number` |  | [Optional] [Defaults to `20`] |
+| **document** | `string` | CPF or CNPJ, digits only. | [Optional] [Defaults to `undefined`] |
+| **name** | `string` | Name of the payer or receiver. | [Optional] [Defaults to `undefined`] |
+| **endToEndId** | `string` | End-to-end ID of the Pix. | [Optional] [Defaults to `undefined`] |
+| **amountMin** | `number` | Minimum amount. | [Optional] [Defaults to `undefined`] |
+| **amountMax** | `number` | Maximum amount. | [Optional] [Defaults to `undefined`] |
+| **createdAtFrom** | `Date` | Start of the creation date range. | [Optional] [Defaults to `undefined`] |
+| **createdAtTo** | `Date` | End of the creation date range. | [Optional] [Defaults to `undefined`] |
+| **page** | `number` | Page number. | [Optional] [Defaults to `1`] |
+| **limit** | `number` | Items per page. | [Optional] [Defaults to `20`] |
 
 ### Return type
 
@@ -361,6 +368,8 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Pending deposit page. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -392,7 +401,7 @@ async function example() {
 
   const body = {
     // string | Pending deposit id.
-    id: id_example,
+    id: cm3w7r1u50005q8f2m1g6c8fj,
   } satisfies GetUserDepositPendingByIdRequest;
 
   try {
@@ -432,13 +441,15 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Pending deposit. |  -  |
+| **401** | Authentication failure |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getUserReport
 
-> ReportJob getUserReport(id)
+> ReportJobDetail getUserReport(id)
 
 Get report job status
 
@@ -462,8 +473,8 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // string
-    id: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Report ID.
+    id: 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78,
   } satisfies GetUserReportRequest;
 
   try {
@@ -483,11 +494,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Report ID. | [Defaults to `undefined`] |
 
 ### Return type
 
-[**ReportJob**](ReportJob.md)
+[**ReportJobDetail**](ReportJobDetail.md)
 
 ### Authorization
 
@@ -503,6 +514,8 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Report job |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
 | **404** | Report not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -534,11 +547,11 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // Date (optional)
-    dateFrom: 2013-10-20T19:20:30+01:00,
-    // Date (optional)
-    dateTo: 2013-10-20T19:20:30+01:00,
-    // 'day' | 'hour' (optional)
+    // Date | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
+    dateFrom: 2026-08-01,
+    // Date | End date. Default: now. (optional)
+    dateTo: 2026-08-31,
+    // 'day' | Grouping applied to the transactions. (optional)
     groupBy: groupBy_example,
     // boolean | When true, returns a series grouped by date. (optional)
     grouped: true,
@@ -561,9 +574,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dateFrom** | `Date` |  | [Optional] [Defaults to `undefined`] |
-| **dateTo** | `Date` |  | [Optional] [Defaults to `undefined`] |
-| **groupBy** | `day`, `hour` |  | [Optional] [Defaults to `&#39;day&#39;`] [Enum: day, hour] |
+| **dateFrom** | `Date` | Start date. Default: start of the previous day (America/Sao_Paulo). | [Optional] [Defaults to `undefined`] |
+| **dateTo** | `Date` | End date. Default: now. | [Optional] [Defaults to `undefined`] |
+| **groupBy** | `day` | Grouping applied to the transactions. | [Optional] [Defaults to `&#39;day&#39;`] [Enum: day] |
 | **grouped** | `boolean` | When true, returns a series grouped by date. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
@@ -584,6 +597,8 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Summary. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -614,8 +629,8 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // string
-    id: id_example,
+    // string | Transaction ID.
+    id: PAYZU20260814T6NX1CV9MK000000,
   } satisfies GetUserTransactionByIdRequest;
 
   try {
@@ -635,7 +650,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` |  | [Defaults to `undefined`] |
+| **id** | `string` | Transaction ID. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -655,6 +670,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Transaction details |  -  |
+| **401** | Authentication failure |  -  |
 | **404** | Transaction not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -662,7 +678,7 @@ example().catch(console.error);
 
 ## getUserTransactions
 
-> GetUserTransactions200Response getUserTransactions(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount)
+> GetUserTransactions200Response getUserTransactions(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount, hasQrCode)
 
 List Transactions
 
@@ -686,21 +702,21 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // string | Start date (YYYY-MM-DD). (optional)
-    dateFrom: 2025-08-01,
-    // string | End date (YYYY-MM-DD). (optional)
-    dateTo: 2025-08-17,
+    // Date | Start date or date-time (ISO 8601). (optional)
+    dateFrom: 2026-08-01,
+    // Date | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+    dateTo: 2026-08-31,
     // number | Items per page (max 1000). (optional)
     limit: 10,
     // number | Page number (default 1). (optional)
     page: 1,
     // string | Transaction ID. (optional)
-    id: PAYZU2025081418333632CYKN8M,
+    id: PAYZU20260814T6NX1CV9MK000000,
     // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
     status: COMPLETED,
-    // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. (optional)
+    // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
     type: DEPOSIT,
-    // string | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. (optional)
+    // string | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
     method: PIX,
     // number | Amount filter. Minimum 0.01. (optional)
     amount: 15000,
@@ -709,15 +725,17 @@ async function example() {
     // string | Name filter. (optional)
     name: Alice,
     // string | Pix end-to-end ID. (optional)
-    endToEndId: E00360305202508141833bcf1f37b487,
+    endToEndId: E00000000202508172159kZ8dQ2mNb1x,
     // 'createdAt' | 'updatedAt' | Field to sort by (optional)
     sortBy: sortBy_example,
     // 'asc' | 'desc' | Sort direction (optional)
     sortDirection: sortDirection_example,
     // string | Filter by external reference (optional)
-    clientReference: clientReference_example,
+    clientReference: order_12345,
     // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-    virtualAccount: virtualAccount_example,
+    virtualAccount: loja-centro-01,
+    // boolean | Only transactions with (true) or without (false) QR Code. (optional)
+    hasQrCode: true,
   } satisfies GetUserTransactionsRequest;
 
   try {
@@ -737,14 +755,14 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dateFrom** | `string` | Start date (YYYY-MM-DD). | [Optional] [Defaults to `undefined`] |
-| **dateTo** | `string` | End date (YYYY-MM-DD). | [Optional] [Defaults to `undefined`] |
+| **dateFrom** | `Date` | Start date or date-time (ISO 8601). | [Optional] [Defaults to `undefined`] |
+| **dateTo** | `Date` | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Items per page (max 1000). | [Optional] [Defaults to `10`] |
 | **page** | `number` | Page number (default 1). | [Optional] [Defaults to `1`] |
 | **id** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
 | **status** | `string` | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [Optional] [Defaults to `undefined`] |
-| **type** | `string` | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | [Optional] [Defaults to `undefined`] |
-| **method** | `string` | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | [Optional] [Defaults to `undefined`] |
+| **type** | `string` | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [Optional] [Defaults to `undefined`] |
+| **method** | `string` | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | [Optional] [Defaults to `undefined`] |
 | **amount** | `number` | Amount filter. Minimum 0.01. | [Optional] [Defaults to `undefined`] |
 | **document** | `string` | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [Optional] [Defaults to `undefined`] |
 | **name** | `string` | Name filter. | [Optional] [Defaults to `undefined`] |
@@ -753,6 +771,7 @@ example().catch(console.error);
 | **sortDirection** | `asc`, `desc` | Sort direction | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
 | **clientReference** | `string` | Filter by external reference | [Optional] [Defaults to `undefined`] |
 | **virtualAccount** | `string` | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [Optional] [Defaults to `undefined`] |
+| **hasQrCode** | `boolean` | Only transactions with (true) or without (false) QR Code. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -774,7 +793,6 @@ example().catch(console.error);
 | **200** | Transaction page |  -  |
 | **400** | Bad Request, payload or query string failed validation |  -  |
 | **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
-| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -805,20 +823,20 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // number (optional)
+    // number | Page number. (optional)
     page: 56,
-    // number (optional)
+    // number | Items per page. (optional)
     limit: 56,
-    // 'PENDING' | 'RUNNING' | 'COMPLETED' | 'FAILED' (optional)
-    status: status_example,
+    // string | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+    status: COMPLETED,FAILED,
     // Date | Filter: created from. (optional)
-    createdAtFrom: 2013-10-20T19:20:30+01:00,
+    createdAtFrom: 2026-08-01,
     // Date | Filter: created up to. (optional)
-    createdAtTo: 2013-10-20T19:20:30+01:00,
+    createdAtTo: 2026-08-31,
     // Date | Filter: updated from. (optional)
-    updatedAtFrom: 2013-10-20T19:20:30+01:00,
+    updatedAtFrom: 2026-08-01,
     // Date | Filter: updated up to. (optional)
-    updatedAtTo: 2013-10-20T19:20:30+01:00,
+    updatedAtTo: 2026-08-31,
     // 'createdAt' | 'updatedAt' | Sort field. (optional)
     sortBy: sortBy_example,
     // 'asc' | 'desc' | Sort direction. (optional)
@@ -842,9 +860,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | `number` |  | [Optional] [Defaults to `1`] |
-| **limit** | `number` |  | [Optional] [Defaults to `10`] |
-| **status** | `PENDING`, `RUNNING`, `COMPLETED`, `FAILED` |  | [Optional] [Defaults to `undefined`] [Enum: PENDING, RUNNING, COMPLETED, FAILED] |
+| **page** | `number` | Page number. | [Optional] [Defaults to `1`] |
+| **limit** | `number` | Items per page. | [Optional] [Defaults to `10`] |
+| **status** | `string` | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | [Optional] [Defaults to `undefined`] |
 | **createdAtFrom** | `Date` | Filter: created from. | [Optional] [Defaults to `undefined`] |
 | **createdAtTo** | `Date` | Filter: created up to. | [Optional] [Defaults to `undefined`] |
 | **updatedAtFrom** | `Date` | Filter: updated from. | [Optional] [Defaults to `undefined`] |
@@ -872,14 +890,13 @@ example().catch(console.error);
 | **200** | Page of report jobs |  -  |
 | **400** | Bad Request, payload or query string failed validation |  -  |
 | **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
-| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## postUserReport
 
-> ReportJob postUserReport(postUserReportRequest)
+> ReportJobAccepted postUserReport(postUserReportRequest)
 
 Generate transactions report
 
@@ -928,7 +945,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**ReportJob**](ReportJob.md)
+[**ReportJobAccepted**](ReportJobAccepted.md)
 
 ### Authorization
 
@@ -944,6 +961,9 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **202** | Report job aceito (job enfileirado) |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
 | **422** | No transactions match the filter / concurrency limit reached |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

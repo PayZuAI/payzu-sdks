@@ -27,7 +27,7 @@ const example = {
   "callbackUrl": https://webhook.cool/,
   "clientReference": withdraw_98765,
   "description": Weekly payout,
-  "virtualAccount": null,
+  "virtualAccount": loja-centro-01,
 } satisfies PostWithdrawRequest
 
 console.log(example)

@@ -4,42 +4,42 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of the transaction at PayZu. | [optional] 
 **Status** | Pointer to **string** | PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
-**Type** | Pointer to **string** | DEPOSIT or WITHDRAW | [optional] 
-**QrCodeText** | Pointer to **string** |  | [optional] 
-**QrCodeBase64** | Pointer to **string** |  | [optional] 
-**QrCodeUrl** | Pointer to **string** |  | [optional] 
-**GeneratedName** | Pointer to **string** |  | [optional] 
-**GeneratedDocument** | Pointer to **string** |  | [optional] 
-**GeneratedEmail** | Pointer to **string** |  | [optional] 
-**PayerName** | Pointer to **string** |  | [optional] 
-**PayerDocument** | Pointer to **string** |  | [optional] 
-**PayerInstitutionIspb** | Pointer to **string** |  | [optional] 
-**PayerInstitutionName** | Pointer to **string** |  | [optional] 
-**PayerAccountNumber** | Pointer to **string** | Payer&#39;s PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions. | [optional] 
-**ServiceFeeCharged** | Pointer to **float32** |  | [optional] 
-**WithdrawPixKey** | Pointer to **string** |  | [optional] 
-**WithdrawPixType** | Pointer to **string** |  | [optional] 
-**ReceiverName** | Pointer to **string** |  | [optional] 
-**ReceiverDocument** | Pointer to **string** |  | [optional] 
-**ReceiverInstitutionIspb** | Pointer to **string** |  | [optional] 
-**ReceiverInstitutionName** | Pointer to **string** |  | [optional] 
-**ReceiverAccountNumber** | Pointer to **string** | Receiver&#39;s PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions. | [optional] 
-**EndToEndId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **string** |  | [optional] 
-**PaidAt** | Pointer to **string** |  | [optional] 
-**ClientReference** | Pointer to **string** |  | [optional] 
-**RefundEndToEndId** | Pointer to **string** | End-to-end ID of the refund transaction | [optional] 
-**RefundAmount** | Pointer to **float32** | Amount refunded | [optional] 
-**RefundStatus** | Pointer to **string** | Status of the refund (PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR) | [optional] 
-**RefundReason** | Pointer to **string** | Reason for the refund | [optional] 
-**RefundDescription** | Pointer to **string** | Description of the refund | [optional] 
-**RefundedAt** | Pointer to **string** | Date and time when the refund was processed | [optional] 
-**CancellationReason** | Pointer to **string** | Reason for cancellation (if cancelled) | [optional] 
-**VirtualAccount** | Pointer to **string** | Virtual sub-account provided at creation. | [optional] 
+**Amount** | Pointer to **float32** | Amount of the transaction, before the fee. | [optional] 
+**Type** | Pointer to **string** | Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT. | [optional] 
+**QrCodeText** | Pointer to **NullableString** | Copy-and-paste Pix code. | [optional] 
+**QrCodeBase64** | Pointer to **NullableString** | PNG image of the QR Code in base64, without the data: prefix. | [optional] 
+**QrCodeUrl** | Pointer to **NullableString** | Authenticated route that returns the PNG of the QR Code. | [optional] 
+**GeneratedName** | Pointer to **NullableString** | Name used to build the charge. | [optional] 
+**GeneratedDocument** | Pointer to **NullableString** | CPF or CNPJ used as the debtor of the charge. | [optional] 
+**GeneratedEmail** | Pointer to **NullableString** | Email used to build the charge. | [optional] 
+**PayerName** | Pointer to **NullableString** | Name of the holder of the account that sent the Pix, as reported by the originating institution. | [optional] 
+**PayerDocument** | Pointer to **NullableString** | CPF or CNPJ of the payer of the Pix, reported by the originating institution. | [optional] 
+**PayerInstitutionIspb** | Pointer to **NullableString** | ISPB code of the institution the Pix was sent from. | [optional] 
+**PayerInstitutionName** | Pointer to **NullableString** | Name of the institution the Pix was sent from. | [optional] 
+**PayerAccountNumber** | Pointer to **NullableString** | Payer&#39;s PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions. | [optional] 
+**ServiceFeeCharged** | Pointer to **NullableFloat32** | PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling. | [optional] 
+**WithdrawPixKey** | Pointer to **NullableString** | Destination Pix key of the withdrawal, already normalized. | [optional] 
+**WithdrawPixType** | Pointer to **NullableString** | Type of the destination key of the withdrawal, with evp being the random key. | [optional] 
+**ReceiverName** | Pointer to **NullableString** | Name of the holder of the receiving account. | [optional] 
+**ReceiverDocument** | Pointer to **NullableString** | CPF or CNPJ of the receiver. | [optional] 
+**ReceiverInstitutionIspb** | Pointer to **NullableString** | ISPB code of the institution that receives the Pix. | [optional] 
+**ReceiverInstitutionName** | Pointer to **NullableString** | Name of the institution that receives the Pix. | [optional] 
+**ReceiverAccountNumber** | Pointer to **NullableString** | Receiver&#39;s PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions. | [optional] 
+**EndToEndId** | Pointer to **NullableString** | Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return. | [optional] 
+**CreatedAt** | Pointer to **string** | Date and time the transaction was recorded. | [optional] 
+**UpdatedAt** | Pointer to **string** | Date and time of the last change. | [optional] 
+**PaidAt** | Pointer to **NullableString** | Date and time the Pix was settled, reported by the institution. | [optional] 
+**ClientReference** | Pointer to **NullableString** | Your identifier of the transaction, returned in queries and callbacks. | [optional] 
+**RefundEndToEndId** | Pointer to **NullableString** | End-to-end ID of the refund transaction | [optional] 
+**RefundAmount** | Pointer to **NullableFloat32** | Amount refunded | [optional] 
+**RefundStatus** | Pointer to **NullableString** | Refund status: PENDING, COMPLETED or CANCELED. | [optional] 
+**RefundReason** | Pointer to **NullableString** | Reason for the refund | [optional] 
+**RefundDescription** | Pointer to **NullableString** | Description of the refund | [optional] 
+**RefundedAt** | Pointer to **NullableString** | Date and time when the refund was processed | [optional] 
+**CancellationReason** | Pointer to **NullableString** | Reason for cancellation (if cancelled) | [optional] 
+**VirtualAccount** | Pointer to **NullableString** | Virtual sub-account provided at creation. | [optional] 
 **Method** | Pointer to **string** | Transaction method/rail. | [optional] 
 
 ## Methods
@@ -186,6 +186,16 @@ SetQrCodeText sets QrCodeText field to given value.
 
 HasQrCodeText returns a boolean if a field has been set.
 
+### SetQrCodeTextNil
+
+`func (o *Transaction) SetQrCodeTextNil(b bool)`
+
+ SetQrCodeTextNil sets the value for QrCodeText to be an explicit nil
+
+### UnsetQrCodeText
+`func (o *Transaction) UnsetQrCodeText()`
+
+UnsetQrCodeText ensures that no value is present for QrCodeText, not even an explicit nil
 ### GetQrCodeBase64
 
 `func (o *Transaction) GetQrCodeBase64() string`
@@ -211,6 +221,16 @@ SetQrCodeBase64 sets QrCodeBase64 field to given value.
 
 HasQrCodeBase64 returns a boolean if a field has been set.
 
+### SetQrCodeBase64Nil
+
+`func (o *Transaction) SetQrCodeBase64Nil(b bool)`
+
+ SetQrCodeBase64Nil sets the value for QrCodeBase64 to be an explicit nil
+
+### UnsetQrCodeBase64
+`func (o *Transaction) UnsetQrCodeBase64()`
+
+UnsetQrCodeBase64 ensures that no value is present for QrCodeBase64, not even an explicit nil
 ### GetQrCodeUrl
 
 `func (o *Transaction) GetQrCodeUrl() string`
@@ -236,6 +256,16 @@ SetQrCodeUrl sets QrCodeUrl field to given value.
 
 HasQrCodeUrl returns a boolean if a field has been set.
 
+### SetQrCodeUrlNil
+
+`func (o *Transaction) SetQrCodeUrlNil(b bool)`
+
+ SetQrCodeUrlNil sets the value for QrCodeUrl to be an explicit nil
+
+### UnsetQrCodeUrl
+`func (o *Transaction) UnsetQrCodeUrl()`
+
+UnsetQrCodeUrl ensures that no value is present for QrCodeUrl, not even an explicit nil
 ### GetGeneratedName
 
 `func (o *Transaction) GetGeneratedName() string`
@@ -261,6 +291,16 @@ SetGeneratedName sets GeneratedName field to given value.
 
 HasGeneratedName returns a boolean if a field has been set.
 
+### SetGeneratedNameNil
+
+`func (o *Transaction) SetGeneratedNameNil(b bool)`
+
+ SetGeneratedNameNil sets the value for GeneratedName to be an explicit nil
+
+### UnsetGeneratedName
+`func (o *Transaction) UnsetGeneratedName()`
+
+UnsetGeneratedName ensures that no value is present for GeneratedName, not even an explicit nil
 ### GetGeneratedDocument
 
 `func (o *Transaction) GetGeneratedDocument() string`
@@ -286,6 +326,16 @@ SetGeneratedDocument sets GeneratedDocument field to given value.
 
 HasGeneratedDocument returns a boolean if a field has been set.
 
+### SetGeneratedDocumentNil
+
+`func (o *Transaction) SetGeneratedDocumentNil(b bool)`
+
+ SetGeneratedDocumentNil sets the value for GeneratedDocument to be an explicit nil
+
+### UnsetGeneratedDocument
+`func (o *Transaction) UnsetGeneratedDocument()`
+
+UnsetGeneratedDocument ensures that no value is present for GeneratedDocument, not even an explicit nil
 ### GetGeneratedEmail
 
 `func (o *Transaction) GetGeneratedEmail() string`
@@ -311,6 +361,16 @@ SetGeneratedEmail sets GeneratedEmail field to given value.
 
 HasGeneratedEmail returns a boolean if a field has been set.
 
+### SetGeneratedEmailNil
+
+`func (o *Transaction) SetGeneratedEmailNil(b bool)`
+
+ SetGeneratedEmailNil sets the value for GeneratedEmail to be an explicit nil
+
+### UnsetGeneratedEmail
+`func (o *Transaction) UnsetGeneratedEmail()`
+
+UnsetGeneratedEmail ensures that no value is present for GeneratedEmail, not even an explicit nil
 ### GetPayerName
 
 `func (o *Transaction) GetPayerName() string`
@@ -336,6 +396,16 @@ SetPayerName sets PayerName field to given value.
 
 HasPayerName returns a boolean if a field has been set.
 
+### SetPayerNameNil
+
+`func (o *Transaction) SetPayerNameNil(b bool)`
+
+ SetPayerNameNil sets the value for PayerName to be an explicit nil
+
+### UnsetPayerName
+`func (o *Transaction) UnsetPayerName()`
+
+UnsetPayerName ensures that no value is present for PayerName, not even an explicit nil
 ### GetPayerDocument
 
 `func (o *Transaction) GetPayerDocument() string`
@@ -361,6 +431,16 @@ SetPayerDocument sets PayerDocument field to given value.
 
 HasPayerDocument returns a boolean if a field has been set.
 
+### SetPayerDocumentNil
+
+`func (o *Transaction) SetPayerDocumentNil(b bool)`
+
+ SetPayerDocumentNil sets the value for PayerDocument to be an explicit nil
+
+### UnsetPayerDocument
+`func (o *Transaction) UnsetPayerDocument()`
+
+UnsetPayerDocument ensures that no value is present for PayerDocument, not even an explicit nil
 ### GetPayerInstitutionIspb
 
 `func (o *Transaction) GetPayerInstitutionIspb() string`
@@ -386,6 +466,16 @@ SetPayerInstitutionIspb sets PayerInstitutionIspb field to given value.
 
 HasPayerInstitutionIspb returns a boolean if a field has been set.
 
+### SetPayerInstitutionIspbNil
+
+`func (o *Transaction) SetPayerInstitutionIspbNil(b bool)`
+
+ SetPayerInstitutionIspbNil sets the value for PayerInstitutionIspb to be an explicit nil
+
+### UnsetPayerInstitutionIspb
+`func (o *Transaction) UnsetPayerInstitutionIspb()`
+
+UnsetPayerInstitutionIspb ensures that no value is present for PayerInstitutionIspb, not even an explicit nil
 ### GetPayerInstitutionName
 
 `func (o *Transaction) GetPayerInstitutionName() string`
@@ -411,6 +501,16 @@ SetPayerInstitutionName sets PayerInstitutionName field to given value.
 
 HasPayerInstitutionName returns a boolean if a field has been set.
 
+### SetPayerInstitutionNameNil
+
+`func (o *Transaction) SetPayerInstitutionNameNil(b bool)`
+
+ SetPayerInstitutionNameNil sets the value for PayerInstitutionName to be an explicit nil
+
+### UnsetPayerInstitutionName
+`func (o *Transaction) UnsetPayerInstitutionName()`
+
+UnsetPayerInstitutionName ensures that no value is present for PayerInstitutionName, not even an explicit nil
 ### GetPayerAccountNumber
 
 `func (o *Transaction) GetPayerAccountNumber() string`
@@ -436,6 +536,16 @@ SetPayerAccountNumber sets PayerAccountNumber field to given value.
 
 HasPayerAccountNumber returns a boolean if a field has been set.
 
+### SetPayerAccountNumberNil
+
+`func (o *Transaction) SetPayerAccountNumberNil(b bool)`
+
+ SetPayerAccountNumberNil sets the value for PayerAccountNumber to be an explicit nil
+
+### UnsetPayerAccountNumber
+`func (o *Transaction) UnsetPayerAccountNumber()`
+
+UnsetPayerAccountNumber ensures that no value is present for PayerAccountNumber, not even an explicit nil
 ### GetServiceFeeCharged
 
 `func (o *Transaction) GetServiceFeeCharged() float32`
@@ -461,6 +571,16 @@ SetServiceFeeCharged sets ServiceFeeCharged field to given value.
 
 HasServiceFeeCharged returns a boolean if a field has been set.
 
+### SetServiceFeeChargedNil
+
+`func (o *Transaction) SetServiceFeeChargedNil(b bool)`
+
+ SetServiceFeeChargedNil sets the value for ServiceFeeCharged to be an explicit nil
+
+### UnsetServiceFeeCharged
+`func (o *Transaction) UnsetServiceFeeCharged()`
+
+UnsetServiceFeeCharged ensures that no value is present for ServiceFeeCharged, not even an explicit nil
 ### GetWithdrawPixKey
 
 `func (o *Transaction) GetWithdrawPixKey() string`
@@ -486,6 +606,16 @@ SetWithdrawPixKey sets WithdrawPixKey field to given value.
 
 HasWithdrawPixKey returns a boolean if a field has been set.
 
+### SetWithdrawPixKeyNil
+
+`func (o *Transaction) SetWithdrawPixKeyNil(b bool)`
+
+ SetWithdrawPixKeyNil sets the value for WithdrawPixKey to be an explicit nil
+
+### UnsetWithdrawPixKey
+`func (o *Transaction) UnsetWithdrawPixKey()`
+
+UnsetWithdrawPixKey ensures that no value is present for WithdrawPixKey, not even an explicit nil
 ### GetWithdrawPixType
 
 `func (o *Transaction) GetWithdrawPixType() string`
@@ -511,6 +641,16 @@ SetWithdrawPixType sets WithdrawPixType field to given value.
 
 HasWithdrawPixType returns a boolean if a field has been set.
 
+### SetWithdrawPixTypeNil
+
+`func (o *Transaction) SetWithdrawPixTypeNil(b bool)`
+
+ SetWithdrawPixTypeNil sets the value for WithdrawPixType to be an explicit nil
+
+### UnsetWithdrawPixType
+`func (o *Transaction) UnsetWithdrawPixType()`
+
+UnsetWithdrawPixType ensures that no value is present for WithdrawPixType, not even an explicit nil
 ### GetReceiverName
 
 `func (o *Transaction) GetReceiverName() string`
@@ -536,6 +676,16 @@ SetReceiverName sets ReceiverName field to given value.
 
 HasReceiverName returns a boolean if a field has been set.
 
+### SetReceiverNameNil
+
+`func (o *Transaction) SetReceiverNameNil(b bool)`
+
+ SetReceiverNameNil sets the value for ReceiverName to be an explicit nil
+
+### UnsetReceiverName
+`func (o *Transaction) UnsetReceiverName()`
+
+UnsetReceiverName ensures that no value is present for ReceiverName, not even an explicit nil
 ### GetReceiverDocument
 
 `func (o *Transaction) GetReceiverDocument() string`
@@ -561,6 +711,16 @@ SetReceiverDocument sets ReceiverDocument field to given value.
 
 HasReceiverDocument returns a boolean if a field has been set.
 
+### SetReceiverDocumentNil
+
+`func (o *Transaction) SetReceiverDocumentNil(b bool)`
+
+ SetReceiverDocumentNil sets the value for ReceiverDocument to be an explicit nil
+
+### UnsetReceiverDocument
+`func (o *Transaction) UnsetReceiverDocument()`
+
+UnsetReceiverDocument ensures that no value is present for ReceiverDocument, not even an explicit nil
 ### GetReceiverInstitutionIspb
 
 `func (o *Transaction) GetReceiverInstitutionIspb() string`
@@ -586,6 +746,16 @@ SetReceiverInstitutionIspb sets ReceiverInstitutionIspb field to given value.
 
 HasReceiverInstitutionIspb returns a boolean if a field has been set.
 
+### SetReceiverInstitutionIspbNil
+
+`func (o *Transaction) SetReceiverInstitutionIspbNil(b bool)`
+
+ SetReceiverInstitutionIspbNil sets the value for ReceiverInstitutionIspb to be an explicit nil
+
+### UnsetReceiverInstitutionIspb
+`func (o *Transaction) UnsetReceiverInstitutionIspb()`
+
+UnsetReceiverInstitutionIspb ensures that no value is present for ReceiverInstitutionIspb, not even an explicit nil
 ### GetReceiverInstitutionName
 
 `func (o *Transaction) GetReceiverInstitutionName() string`
@@ -611,6 +781,16 @@ SetReceiverInstitutionName sets ReceiverInstitutionName field to given value.
 
 HasReceiverInstitutionName returns a boolean if a field has been set.
 
+### SetReceiverInstitutionNameNil
+
+`func (o *Transaction) SetReceiverInstitutionNameNil(b bool)`
+
+ SetReceiverInstitutionNameNil sets the value for ReceiverInstitutionName to be an explicit nil
+
+### UnsetReceiverInstitutionName
+`func (o *Transaction) UnsetReceiverInstitutionName()`
+
+UnsetReceiverInstitutionName ensures that no value is present for ReceiverInstitutionName, not even an explicit nil
 ### GetReceiverAccountNumber
 
 `func (o *Transaction) GetReceiverAccountNumber() string`
@@ -636,6 +816,16 @@ SetReceiverAccountNumber sets ReceiverAccountNumber field to given value.
 
 HasReceiverAccountNumber returns a boolean if a field has been set.
 
+### SetReceiverAccountNumberNil
+
+`func (o *Transaction) SetReceiverAccountNumberNil(b bool)`
+
+ SetReceiverAccountNumberNil sets the value for ReceiverAccountNumber to be an explicit nil
+
+### UnsetReceiverAccountNumber
+`func (o *Transaction) UnsetReceiverAccountNumber()`
+
+UnsetReceiverAccountNumber ensures that no value is present for ReceiverAccountNumber, not even an explicit nil
 ### GetEndToEndId
 
 `func (o *Transaction) GetEndToEndId() string`
@@ -661,6 +851,16 @@ SetEndToEndId sets EndToEndId field to given value.
 
 HasEndToEndId returns a boolean if a field has been set.
 
+### SetEndToEndIdNil
+
+`func (o *Transaction) SetEndToEndIdNil(b bool)`
+
+ SetEndToEndIdNil sets the value for EndToEndId to be an explicit nil
+
+### UnsetEndToEndId
+`func (o *Transaction) UnsetEndToEndId()`
+
+UnsetEndToEndId ensures that no value is present for EndToEndId, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Transaction) GetCreatedAt() string`
@@ -736,6 +936,16 @@ SetPaidAt sets PaidAt field to given value.
 
 HasPaidAt returns a boolean if a field has been set.
 
+### SetPaidAtNil
+
+`func (o *Transaction) SetPaidAtNil(b bool)`
+
+ SetPaidAtNil sets the value for PaidAt to be an explicit nil
+
+### UnsetPaidAt
+`func (o *Transaction) UnsetPaidAt()`
+
+UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
 ### GetClientReference
 
 `func (o *Transaction) GetClientReference() string`
@@ -761,6 +971,16 @@ SetClientReference sets ClientReference field to given value.
 
 HasClientReference returns a boolean if a field has been set.
 
+### SetClientReferenceNil
+
+`func (o *Transaction) SetClientReferenceNil(b bool)`
+
+ SetClientReferenceNil sets the value for ClientReference to be an explicit nil
+
+### UnsetClientReference
+`func (o *Transaction) UnsetClientReference()`
+
+UnsetClientReference ensures that no value is present for ClientReference, not even an explicit nil
 ### GetRefundEndToEndId
 
 `func (o *Transaction) GetRefundEndToEndId() string`
@@ -786,6 +1006,16 @@ SetRefundEndToEndId sets RefundEndToEndId field to given value.
 
 HasRefundEndToEndId returns a boolean if a field has been set.
 
+### SetRefundEndToEndIdNil
+
+`func (o *Transaction) SetRefundEndToEndIdNil(b bool)`
+
+ SetRefundEndToEndIdNil sets the value for RefundEndToEndId to be an explicit nil
+
+### UnsetRefundEndToEndId
+`func (o *Transaction) UnsetRefundEndToEndId()`
+
+UnsetRefundEndToEndId ensures that no value is present for RefundEndToEndId, not even an explicit nil
 ### GetRefundAmount
 
 `func (o *Transaction) GetRefundAmount() float32`
@@ -811,6 +1041,16 @@ SetRefundAmount sets RefundAmount field to given value.
 
 HasRefundAmount returns a boolean if a field has been set.
 
+### SetRefundAmountNil
+
+`func (o *Transaction) SetRefundAmountNil(b bool)`
+
+ SetRefundAmountNil sets the value for RefundAmount to be an explicit nil
+
+### UnsetRefundAmount
+`func (o *Transaction) UnsetRefundAmount()`
+
+UnsetRefundAmount ensures that no value is present for RefundAmount, not even an explicit nil
 ### GetRefundStatus
 
 `func (o *Transaction) GetRefundStatus() string`
@@ -836,6 +1076,16 @@ SetRefundStatus sets RefundStatus field to given value.
 
 HasRefundStatus returns a boolean if a field has been set.
 
+### SetRefundStatusNil
+
+`func (o *Transaction) SetRefundStatusNil(b bool)`
+
+ SetRefundStatusNil sets the value for RefundStatus to be an explicit nil
+
+### UnsetRefundStatus
+`func (o *Transaction) UnsetRefundStatus()`
+
+UnsetRefundStatus ensures that no value is present for RefundStatus, not even an explicit nil
 ### GetRefundReason
 
 `func (o *Transaction) GetRefundReason() string`
@@ -861,6 +1111,16 @@ SetRefundReason sets RefundReason field to given value.
 
 HasRefundReason returns a boolean if a field has been set.
 
+### SetRefundReasonNil
+
+`func (o *Transaction) SetRefundReasonNil(b bool)`
+
+ SetRefundReasonNil sets the value for RefundReason to be an explicit nil
+
+### UnsetRefundReason
+`func (o *Transaction) UnsetRefundReason()`
+
+UnsetRefundReason ensures that no value is present for RefundReason, not even an explicit nil
 ### GetRefundDescription
 
 `func (o *Transaction) GetRefundDescription() string`
@@ -886,6 +1146,16 @@ SetRefundDescription sets RefundDescription field to given value.
 
 HasRefundDescription returns a boolean if a field has been set.
 
+### SetRefundDescriptionNil
+
+`func (o *Transaction) SetRefundDescriptionNil(b bool)`
+
+ SetRefundDescriptionNil sets the value for RefundDescription to be an explicit nil
+
+### UnsetRefundDescription
+`func (o *Transaction) UnsetRefundDescription()`
+
+UnsetRefundDescription ensures that no value is present for RefundDescription, not even an explicit nil
 ### GetRefundedAt
 
 `func (o *Transaction) GetRefundedAt() string`
@@ -911,6 +1181,16 @@ SetRefundedAt sets RefundedAt field to given value.
 
 HasRefundedAt returns a boolean if a field has been set.
 
+### SetRefundedAtNil
+
+`func (o *Transaction) SetRefundedAtNil(b bool)`
+
+ SetRefundedAtNil sets the value for RefundedAt to be an explicit nil
+
+### UnsetRefundedAt
+`func (o *Transaction) UnsetRefundedAt()`
+
+UnsetRefundedAt ensures that no value is present for RefundedAt, not even an explicit nil
 ### GetCancellationReason
 
 `func (o *Transaction) GetCancellationReason() string`
@@ -936,6 +1216,16 @@ SetCancellationReason sets CancellationReason field to given value.
 
 HasCancellationReason returns a boolean if a field has been set.
 
+### SetCancellationReasonNil
+
+`func (o *Transaction) SetCancellationReasonNil(b bool)`
+
+ SetCancellationReasonNil sets the value for CancellationReason to be an explicit nil
+
+### UnsetCancellationReason
+`func (o *Transaction) UnsetCancellationReason()`
+
+UnsetCancellationReason ensures that no value is present for CancellationReason, not even an explicit nil
 ### GetVirtualAccount
 
 `func (o *Transaction) GetVirtualAccount() string`
@@ -961,6 +1251,16 @@ SetVirtualAccount sets VirtualAccount field to given value.
 
 HasVirtualAccount returns a boolean if a field has been set.
 
+### SetVirtualAccountNil
+
+`func (o *Transaction) SetVirtualAccountNil(b bool)`
+
+ SetVirtualAccountNil sets the value for VirtualAccount to be an explicit nil
+
+### UnsetVirtualAccount
+`func (o *Transaction) UnsetVirtualAccount()`
+
+UnsetVirtualAccount ensures that no value is present for VirtualAccount, not even an explicit nil
 ### GetMethod
 
 `func (o *Transaction) GetMethod() string`

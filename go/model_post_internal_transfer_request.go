@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -25,12 +25,12 @@ type PostInternalTransferRequest struct {
 	PayerAccountNumber string `json:"payerAccountNumber" validate:"regexp=^\\\\d{6}$"`
 	// Destination account number (6 digits).
 	ReceiverAccountNumber string `json:"receiverAccountNumber" validate:"regexp=^\\\\d{6}$"`
-	// Transfer amount in BRL.
+	// Transfer amount in BRL, with at most 2 decimal places.
 	Amount float32 `json:"amount"`
 	// Optional transfer description.
 	Description *string `json:"description,omitempty"`
-	// URL to receive transaction-update webhooks.
-	CallbackUrl *string `json:"callbackUrl,omitempty"`
+	// URL for transaction notifications (http or https).
+	CallbackUrl *string `json:"callbackUrl,omitempty" validate:"regexp=^https?:\\/\\/"`
 	// External reference for idempotency / reconciliation.
 	ClientReference *string `json:"clientReference,omitempty"`
 	// Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.

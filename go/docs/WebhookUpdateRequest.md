@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | Pointer to **string** |  | [optional] 
-**Active** | Pointer to **bool** |  | [optional] 
-**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) |  | [optional] 
+**Url** | Pointer to **string** | New delivery address, which applies to the following dispatches. | [optional] 
+**Active** | Pointer to **bool** | Turns the webhook deliveries on or pauses them. | [optional] 
+**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | New list of subscribed events, which replaces the previous one entirely. | [optional] 
 
 ## Methods
 

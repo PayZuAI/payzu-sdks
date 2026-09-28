@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | Pointer to **int32** |  | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
-**ServiceFeeCharged** | Pointer to **float32** | Service fee charged (hidden for limited accounts). | [optional] 
+**Count** | Pointer to **int32** | Number of transactions in that state within the period. | [optional] 
+**Amount** | Pointer to **float32** | Sum of the amounts of those transactions. | [optional] 
+**ServiceFeeCharged** | Pointer to **float32** | Sum of the fees charged on those transactions, in BRL. | [optional] 
 
 ## Methods
 

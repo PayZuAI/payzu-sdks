@@ -50,7 +50,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'id_example' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
 
     try:
         # Delete webhook
@@ -79,13 +79,17 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Webhook deleted. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**403** | Operation not allowed |  -  |
+**404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -126,7 +130,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'id_example' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
 
     try:
         # Get webhook
@@ -164,11 +168,14 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Webhook. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_webhook_sent_detail**
-> SentWebhookDetail get_user_webhook_sent_detail(id, callback_id)
+> SentWebhookDetailResponse get_user_webhook_sent_detail(id, callback_id)
 
 Get sent callback detail
 
@@ -180,7 +187,7 @@ Returns the delivery detail of a single sent callback.
 
 ```python
 import payzu_pix
-from payzu_pix.models.sent_webhook_detail import SentWebhookDetail
+from payzu_pix.models.sent_webhook_detail_response import SentWebhookDetailResponse
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
@@ -204,8 +211,8 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'id_example' # str | Webhook id.
-    callback_id = 'callback_id_example' # str | Callback log id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
+    callback_id = 'cm3w7l9v20001q8f2u6c1y4be' # str | Callback log id.
 
     try:
         # Get sent callback detail
@@ -228,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SentWebhookDetail**](SentWebhookDetail.md)
+[**SentWebhookDetailResponse**](SentWebhookDetailResponse.md)
 
 ### Authorization
 
@@ -244,6 +251,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Callback delivery detail. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -284,7 +294,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    active = True # bool | Filter by active status. (optional)
+    active = true # bool | Filter by active status. (optional)
 
     try:
         # List webhooks
@@ -322,6 +332,8 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Webhook list. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -330,7 +342,7 @@ Name | Type | Description  | Notes
 
 Count sent callbacks
 
-Returns how many callbacks were sent, optionally filtered by webhook.
+Returns how many webhook deliveries were made, optionally filtered by webhook.
 
 ### Example
 
@@ -362,7 +374,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    webhook_id = 'webhook_id_example' # str | Filter the count by webhook id. (optional)
+    webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Filter the count by webhook id. (optional)
 
     try:
         # Count sent callbacks
@@ -400,6 +412,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Quantity. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -441,7 +456,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'id_example' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
     webhook_update_request = payzu_pix.WebhookUpdateRequest() # WebhookUpdateRequest | 
 
     try:
@@ -481,6 +496,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Webhook updated. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**403** | Operation not allowed |  -  |
+**404** | Resource not found |  -  |
+**409** | Conflict with the current state of the resource |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -560,6 +580,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Webhook created. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**403** | Operation not allowed |  -  |
+**409** | Conflict with the current state of the resource |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -600,7 +624,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'id_example' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
 
     try:
         # Rotate webhook secret
@@ -638,6 +662,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | New secret. |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**403** | Operation not allowed |  -  |
+**404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

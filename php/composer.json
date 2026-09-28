@@ -1,21 +1,21 @@
 {
-    "version": "0.1.0",
-    "description": "REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks",
+    "name": "payzu/pix",
+    "description": "SDK oficial PHP da API PayZu Pix: depósitos, saques, transferências internas, infrações, relatórios e callbacks.",
     "keywords": [
-        "openapitools",
-        "openapi-generator",
-        "openapi",
-        "php",
+        "payzu",
+        "pix",
+        "pagamentos",
+        "payments",
+        "brasil",
         "sdk",
-        "rest",
         "api"
     ],
-    "homepage": "https://openapi-generator.tech",
-    "license": "unlicense",
+    "homepage": "https://docs.payzu.com.br",
+    "license": "MIT",
     "authors": [
         {
-            "name": "OpenAPI",
-            "homepage": "https://openapi-generator.tech"
+            "name": "PayZu",
+            "homepage": "https://payzu.com.br"
         }
     ],
     "require": {
@@ -31,9 +31,13 @@
         "friendsofphp/php-cs-fixer": "^3.5"
     },
     "autoload": {
-        "psr-4": { "OpenAPI\\Client\\" : "lib/" }
+        "psr-4": {
+            "PayZu\\Pix\\": "lib/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "OpenAPI\\Client\\Test\\" : "test/" }
+        "psr-4": {
+            "PayZu\\Pix\\Test\\": "test/"
+        }
     }
 }

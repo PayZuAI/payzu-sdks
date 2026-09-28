@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | **str** |  | [optional] 
-**amount** | **float** |  | [optional] 
+**var_date** | **str** | Day (YYYY-MM-DD, America/Sao_Paulo time zone). | [optional] 
+**amount** | **float** | Sum of the amounts, in reais, of the completed transactions of the day. | [optional] 
 
 ## Example
 

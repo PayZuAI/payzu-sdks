@@ -8,11 +8,15 @@ Method | HTTP request | Description
 
 
 # **post_refund**
-> Transaction post_refund(transaction_id, refund_request=refund_request)
+> TransactionWithRefunds post_refund(transaction_id, refund_request)
 
 Refund a Pix
 
 Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+
+Send `{}` to refund the full amount.
+
+Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -21,7 +25,7 @@ Refund a received Pix charge. Provide `amount` for a partial refund, or omit it 
 ```python
 import payzu_pix
 from payzu_pix.models.refund_request import RefundRequest
-from payzu_pix.models.transaction import Transaction
+from payzu_pix.models.transaction_with_refunds import TransactionWithRefunds
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
@@ -45,12 +49,12 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.RefundsApi(api_client)
-    transaction_id = 'transaction_id_example' # str | ID of the transaction to refund.
-    refund_request = payzu_pix.RefundRequest() # RefundRequest |  (optional)
+    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID of the transaction to refund.
+    refund_request = payzu_pix.RefundRequest() # RefundRequest | 
 
     try:
         # Refund a Pix
-        api_response = api_instance.post_refund(transaction_id, refund_request=refund_request)
+        api_response = api_instance.post_refund(transaction_id, refund_request)
         print("The response of RefundsApi->post_refund:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,11 +69,11 @@ with payzu_pix.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **transaction_id** | **str**| ID of the transaction to refund. | 
- **refund_request** | [**RefundRequest**](RefundRequest.md)|  | [optional] 
+ **refund_request** | [**RefundRequest**](RefundRequest.md)|  | 
 
 ### Return type
 
-[**Transaction**](Transaction.md)
+[**TransactionWithRefunds**](TransactionWithRefunds.md)
 
 ### Authorization
 
@@ -85,7 +89,14 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Refund accepted and enqueued (asynchronous). |  -  |
+**400** | Invalid request |  -  |
+**401** | Authentication failure |  -  |
+**403** | Operation not allowed |  -  |
+**404** | Resource not found |  -  |
+**409** | Conflict with the current state of the resource |  -  |
 **422** | Refund not allowed for this transaction or amount. |  -  |
+**429** | Rate limit exceeded |  -  |
+**500** | Internal error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

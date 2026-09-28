@@ -39,7 +39,7 @@ import (
 )
 
 func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	id := "01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78" // string | Report ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -59,7 +59,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Report ID. | 
 
 ### Other Parameters
 
@@ -109,7 +109,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Statement entry id.
+	id := "cm3w7q8s10004q8f2k9f5b7eh" // string | Statement entry id.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -182,16 +182,16 @@ import (
 func main() {
 	createdAtFrom := time.Now() // time.Time | Start date (required).
 	createdAtTo := time.Now() // time.Time | End date (required).
-	id := "id_example" // string |  (optional)
-	operation := "operation_example" // string |  (optional)
-	reason := "reason_example" // string |  (optional)
-	transactionId := "transactionId_example" // string |  (optional)
-	amountFrom := float32(8.14) // float32 |  (optional)
-	amountTo := float32(8.14) // float32 |  (optional)
-	page := int32(56) // int32 |  (optional) (default to 1)
-	limit := int32(56) // int32 |  (optional) (default to 10)
-	sortBy := "sortBy_example" // string |  (optional) (default to "createdAt")
-	sortDirection := "sortDirection_example" // string |  (optional) (default to "desc")
+	id := "cm3w7q8s10004q8f2k9f5b7eh" // string | Entry ID. (optional)
+	operation := "operation_example" // string | Operation type.  `INCREMENT` `DECREMENT` (optional)
+	reason := "Estorno" // string | Reason for the entry. (optional)
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
+	amountFrom := float32(10.9) // float32 | Minimum amount. (optional)
+	amountTo := float32(500) // float32 | Maximum amount. (optional)
+	page := int32(56) // int32 | Page number. (optional) (default to 1)
+	limit := int32(56) // int32 | Items per page. (optional) (default to 10)
+	sortBy := "sortBy_example" // string | Sort field. (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string | Sort direction. (optional) (default to "desc")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -218,16 +218,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createdAtFrom** | **time.Time** | Start date (required). | 
  **createdAtTo** | **time.Time** | End date (required). | 
- **id** | **string** |  | 
- **operation** | **string** |  | 
- **reason** | **string** |  | 
- **transactionId** | **string** |  | 
- **amountFrom** | **float32** |  | 
- **amountTo** | **float32** |  | 
- **page** | **int32** |  | [default to 1]
- **limit** | **int32** |  | [default to 10]
- **sortBy** | **string** |  | [default to &quot;createdAt&quot;]
- **sortDirection** | **string** |  | [default to &quot;desc&quot;]
+ **id** | **string** | Entry ID. | 
+ **operation** | **string** | Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | 
+ **reason** | **string** | Reason for the entry. | 
+ **transactionId** | **string** | Transaction ID. | 
+ **amountFrom** | **float32** | Minimum amount. | 
+ **amountTo** | **float32** | Maximum amount. | 
+ **page** | **int32** | Page number. | [default to 1]
+ **limit** | **int32** | Items per page. | [default to 10]
+ **sortBy** | **string** | Sort field. | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** | Sort direction. | [default to &quot;desc&quot;]
 
 ### Return type
 
@@ -269,16 +269,16 @@ import (
 )
 
 func main() {
-	status := "status_example" // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-	document := "document_example" // string |  (optional)
-	name := "name_example" // string |  (optional)
-	endToEndId := "endToEndId_example" // string |  (optional)
-	amountMin := float32(8.14) // float32 |  (optional)
-	amountMax := float32(8.14) // float32 |  (optional)
-	createdAtFrom := time.Now() // time.Time |  (optional)
-	createdAtTo := time.Now() // time.Time |  (optional)
-	page := int32(56) // int32 |  (optional) (default to 1)
-	limit := int32(56) // int32 |  (optional) (default to 20)
+	status := "PENDING" // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
+	document := "12345678901" // string | CPF or CNPJ, digits only. (optional)
+	name := "John Doe" // string | Name of the payer or receiver. (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | End-to-end ID of the Pix. (optional)
+	amountMin := float32(10.9) // float32 | Minimum amount. (optional)
+	amountMax := float32(500) // float32 | Maximum amount. (optional)
+	createdAtFrom := time.Now() // time.Time | Start of the creation date range. (optional)
+	createdAtTo := time.Now() // time.Time | End of the creation date range. (optional)
+	page := int32(56) // int32 | Page number. (optional) (default to 1)
+	limit := int32(56) // int32 | Items per page. (optional) (default to 20)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -304,15 +304,15 @@ Other parameters are passed through a pointer to a apiGetUserDepositPendingReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **status** | **string** | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | 
- **document** | **string** |  | 
- **name** | **string** |  | 
- **endToEndId** | **string** |  | 
- **amountMin** | **float32** |  | 
- **amountMax** | **float32** |  | 
- **createdAtFrom** | **time.Time** |  | 
- **createdAtTo** | **time.Time** |  | 
- **page** | **int32** |  | [default to 1]
- **limit** | **int32** |  | [default to 20]
+ **document** | **string** | CPF or CNPJ, digits only. | 
+ **name** | **string** | Name of the payer or receiver. | 
+ **endToEndId** | **string** | End-to-end ID of the Pix. | 
+ **amountMin** | **float32** | Minimum amount. | 
+ **amountMax** | **float32** | Maximum amount. | 
+ **createdAtFrom** | **time.Time** | Start of the creation date range. | 
+ **createdAtTo** | **time.Time** | End of the creation date range. | 
+ **page** | **int32** | Page number. | [default to 1]
+ **limit** | **int32** | Items per page. | [default to 20]
 
 ### Return type
 
@@ -353,7 +353,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Pending deposit id.
+	id := "cm3w7r1u50005q8f2m1g6c8fj" // string | Pending deposit id.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -404,7 +404,7 @@ Name | Type | Description  | Notes
 
 ## GetUserReport
 
-> ReportJob GetUserReport(ctx, id).Execute()
+> ReportJobDetail GetUserReport(ctx, id).Execute()
 
 Get report job status
 
@@ -423,7 +423,7 @@ import (
 )
 
 func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	id := "01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78" // string | Report ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -432,7 +432,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUserReport`: ReportJob
+	// response from `GetUserReport`: ReportJobDetail
 	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetUserReport`: %v\n", resp)
 }
 ```
@@ -443,7 +443,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Report ID. | 
 
 ### Other Parameters
 
@@ -456,7 +456,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ReportJob**](ReportJob.md)
+[**ReportJobDetail**](ReportJobDetail.md)
 
 ### Authorization
 
@@ -494,9 +494,9 @@ import (
 )
 
 func main() {
-	dateFrom := time.Now() // time.Time |  (optional)
-	dateTo := time.Now() // time.Time |  (optional)
-	groupBy := "groupBy_example" // string |  (optional) (default to "day")
+	dateFrom := time.Now() // time.Time | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
+	dateTo := time.Now() // time.Time | End date. Default: now. (optional)
+	groupBy := "groupBy_example" // string | Grouping applied to the transactions. (optional) (default to "day")
 	grouped := true // bool | When true, returns a series grouped by date. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -522,9 +522,9 @@ Other parameters are passed through a pointer to a apiGetUserSummaryRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dateFrom** | **time.Time** |  | 
- **dateTo** | **time.Time** |  | 
- **groupBy** | **string** |  | [default to &quot;day&quot;]
+ **dateFrom** | **time.Time** | Start date. Default: start of the previous day (America/Sao_Paulo). | 
+ **dateTo** | **time.Time** | End date. Default: now. | 
+ **groupBy** | **string** | Grouping applied to the transactions. | [default to &quot;day&quot;]
  **grouped** | **bool** | When true, returns a series grouped by date. | 
 
 ### Return type
@@ -566,7 +566,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | 
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -586,7 +586,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Transaction ID. | 
 
 ### Other Parameters
 
@@ -617,7 +617,7 @@ Name | Type | Description  | Notes
 
 ## GetUserTransactions
 
-> GetUserTransactions200Response GetUserTransactions(ctx).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
+> GetUserTransactions200Response GetUserTransactions(ctx).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).HasQrCode(hasQrCode).Execute()
 
 List Transactions
 
@@ -632,30 +632,32 @@ import (
 	"context"
 	"fmt"
 	"os"
+    "time"
 	openapiclient "github.com/PayZuAI/payzu-sdks/go"
 )
 
 func main() {
-	dateFrom := "2025-08-01" // string | Start date (YYYY-MM-DD). (optional)
-	dateTo := "2025-08-17" // string | End date (YYYY-MM-DD). (optional)
-	limit := float32(10) // float32 | Items per page (max 1000). (optional) (default to 10)
-	page := float32(1) // float32 | Page number (default 1). (optional) (default to 1)
-	id := "PAYZU2025081418333632CYKN8M" // string | Transaction ID. (optional)
+	dateFrom := time.Now() // time.Time | Start date or date-time (ISO 8601). (optional)
+	dateTo := time.Now() // time.Time | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+	limit := int32(10) // int32 | Items per page (max 1000). (optional) (default to 10)
+	page := int32(1) // int32 | Page number (default 1). (optional) (default to 1)
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
 	status := "COMPLETED" // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-	type_ := "DEPOSIT" // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. (optional)
-	method := "PIX" // string | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. (optional)
+	type_ := "DEPOSIT" // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+	method := "PIX" // string | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
 	amount := float32(15000) // float32 | Amount filter. Minimum 0.01. (optional)
 	document := "12345678901" // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
 	name := "Alice" // string | Name filter. (optional)
-	endToEndId := "E00360305202508141833bcf1f37b487" // string | Pix end-to-end ID. (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | Pix end-to-end ID. (optional)
 	sortBy := "sortBy_example" // string | Field to sort by (optional) (default to "createdAt")
 	sortDirection := "sortDirection_example" // string | Sort direction (optional) (default to "desc")
-	clientReference := "clientReference_example" // string | Filter by external reference (optional)
-	virtualAccount := "virtualAccount_example" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+	clientReference := "order_12345" // string | Filter by external reference (optional)
+	virtualAccount := "loja-centro-01" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+	hasQrCode := true // bool | Only transactions with (true) or without (false) QR Code. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReportsAPI.GetUserTransactions(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
+	resp, r, err := apiClient.ReportsAPI.GetUserTransactions(context.Background()).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).HasQrCode(hasQrCode).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetUserTransactions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -676,14 +678,14 @@ Other parameters are passed through a pointer to a apiGetUserTransactionsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dateFrom** | **string** | Start date (YYYY-MM-DD). | 
- **dateTo** | **string** | End date (YYYY-MM-DD). | 
- **limit** | **float32** | Items per page (max 1000). | [default to 10]
- **page** | **float32** | Page number (default 1). | [default to 1]
+ **dateFrom** | **time.Time** | Start date or date-time (ISO 8601). | 
+ **dateTo** | **time.Time** | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | 
+ **limit** | **int32** | Items per page (max 1000). | [default to 10]
+ **page** | **int32** | Page number (default 1). | [default to 1]
  **id** | **string** | Transaction ID. | 
  **status** | **string** | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | 
- **type_** | **string** | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | 
- **method** | **string** | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | 
+ **type_** | **string** | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | 
+ **method** | **string** | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | 
  **amount** | **float32** | Amount filter. Minimum 0.01. | 
  **document** | **string** | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | 
  **name** | **string** | Name filter. | 
@@ -692,6 +694,7 @@ Name | Type | Description  | Notes
  **sortDirection** | **string** | Sort direction | [default to &quot;desc&quot;]
  **clientReference** | **string** | Filter by external reference | 
  **virtualAccount** | **string** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | 
+ **hasQrCode** | **bool** | Only transactions with (true) or without (false) QR Code. | 
 
 ### Return type
 
@@ -733,9 +736,9 @@ import (
 )
 
 func main() {
-	page := int32(56) // int32 |  (optional) (default to 1)
-	limit := int32(56) // int32 |  (optional) (default to 10)
-	status := "status_example" // string |  (optional)
+	page := int32(56) // int32 | Page number. (optional) (default to 1)
+	limit := int32(56) // int32 | Items per page. (optional) (default to 10)
+	status := "COMPLETED,FAILED" // string | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
 	createdAtFrom := time.Now() // time.Time | Filter: created from. (optional)
 	createdAtTo := time.Now() // time.Time | Filter: created up to. (optional)
 	updatedAtFrom := time.Now() // time.Time | Filter: updated from. (optional)
@@ -766,9 +769,9 @@ Other parameters are passed through a pointer to a apiListUserReportsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int32** |  | [default to 1]
- **limit** | **int32** |  | [default to 10]
- **status** | **string** |  | 
+ **page** | **int32** | Page number. | [default to 1]
+ **limit** | **int32** | Items per page. | [default to 10]
+ **status** | **string** | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | 
  **createdAtFrom** | **time.Time** | Filter: created from. | 
  **createdAtTo** | **time.Time** | Filter: created up to. | 
  **updatedAtFrom** | **time.Time** | Filter: updated from. | 
@@ -796,7 +799,7 @@ Name | Type | Description  | Notes
 
 ## PostUserReport
 
-> ReportJob PostUserReport(ctx).PostUserReportRequest(postUserReportRequest).Execute()
+> ReportJobAccepted PostUserReport(ctx).PostUserReportRequest(postUserReportRequest).Execute()
 
 Generate transactions report
 
@@ -825,7 +828,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.PostUserReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PostUserReport`: ReportJob
+	// response from `PostUserReport`: ReportJobAccepted
 	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.PostUserReport`: %v\n", resp)
 }
 ```
@@ -845,7 +848,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ReportJob**](ReportJob.md)
+[**ReportJobAccepted**](ReportJobAccepted.md)
 
 ### Authorization
 

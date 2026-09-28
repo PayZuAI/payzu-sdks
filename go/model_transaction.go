@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,54 +19,78 @@ var _ MappedNullable = &Transaction{}
 
 // Transaction Unified transaction representation used by all endpoints.
 type Transaction struct {
+	// Identifier of the transaction at PayZu.
 	Id *string `json:"id,omitempty"`
 	// PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
 	Status *string `json:"status,omitempty"`
+	// Amount of the transaction, before the fee.
 	Amount *float32 `json:"amount,omitempty"`
-	// DEPOSIT or WITHDRAW
+	// Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
 	Type *string `json:"type,omitempty"`
-	QrCodeText *string `json:"qrCodeText,omitempty"`
-	QrCodeBase64 *string `json:"qrCodeBase64,omitempty"`
-	QrCodeUrl *string `json:"qrCodeUrl,omitempty"`
-	GeneratedName *string `json:"generatedName,omitempty"`
-	GeneratedDocument *string `json:"generatedDocument,omitempty"`
-	GeneratedEmail *string `json:"generatedEmail,omitempty"`
-	PayerName *string `json:"payerName,omitempty"`
-	PayerDocument *string `json:"payerDocument,omitempty"`
-	PayerInstitutionIspb *string `json:"payerInstitutionIspb,omitempty"`
-	PayerInstitutionName *string `json:"payerInstitutionName,omitempty"`
+	// Copy-and-paste Pix code.
+	QrCodeText NullableString `json:"qrCodeText,omitempty"`
+	// PNG image of the QR Code in base64, without the data: prefix.
+	QrCodeBase64 NullableString `json:"qrCodeBase64,omitempty"`
+	// Authenticated route that returns the PNG of the QR Code.
+	QrCodeUrl NullableString `json:"qrCodeUrl,omitempty"`
+	// Name used to build the charge.
+	GeneratedName NullableString `json:"generatedName,omitempty"`
+	// CPF or CNPJ used as the debtor of the charge.
+	GeneratedDocument NullableString `json:"generatedDocument,omitempty"`
+	// Email used to build the charge.
+	GeneratedEmail NullableString `json:"generatedEmail,omitempty"`
+	// Name of the holder of the account that sent the Pix, as reported by the originating institution.
+	PayerName NullableString `json:"payerName,omitempty"`
+	// CPF or CNPJ of the payer of the Pix, reported by the originating institution.
+	PayerDocument NullableString `json:"payerDocument,omitempty"`
+	// ISPB code of the institution the Pix was sent from.
+	PayerInstitutionIspb NullableString `json:"payerInstitutionIspb,omitempty"`
+	// Name of the institution the Pix was sent from.
+	PayerInstitutionName NullableString `json:"payerInstitutionName,omitempty"`
 	// Payer's PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions.
-	PayerAccountNumber *string `json:"payerAccountNumber,omitempty"`
-	ServiceFeeCharged *float32 `json:"serviceFeeCharged,omitempty"`
-	WithdrawPixKey *string `json:"withdrawPixKey,omitempty"`
-	WithdrawPixType *string `json:"withdrawPixType,omitempty"`
-	ReceiverName *string `json:"receiverName,omitempty"`
-	ReceiverDocument *string `json:"receiverDocument,omitempty"`
-	ReceiverInstitutionIspb *string `json:"receiverInstitutionIspb,omitempty"`
-	ReceiverInstitutionName *string `json:"receiverInstitutionName,omitempty"`
+	PayerAccountNumber NullableString `json:"payerAccountNumber,omitempty"`
+	// PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
+	ServiceFeeCharged NullableFloat32 `json:"serviceFeeCharged,omitempty"`
+	// Destination Pix key of the withdrawal, already normalized.
+	WithdrawPixKey NullableString `json:"withdrawPixKey,omitempty"`
+	// Type of the destination key of the withdrawal, with evp being the random key.
+	WithdrawPixType NullableString `json:"withdrawPixType,omitempty"`
+	// Name of the holder of the receiving account.
+	ReceiverName NullableString `json:"receiverName,omitempty"`
+	// CPF or CNPJ of the receiver.
+	ReceiverDocument NullableString `json:"receiverDocument,omitempty"`
+	// ISPB code of the institution that receives the Pix.
+	ReceiverInstitutionIspb NullableString `json:"receiverInstitutionIspb,omitempty"`
+	// Name of the institution that receives the Pix.
+	ReceiverInstitutionName NullableString `json:"receiverInstitutionName,omitempty"`
 	// Receiver's PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions.
-	ReceiverAccountNumber *string `json:"receiverAccountNumber,omitempty"`
-	EndToEndId *string `json:"endToEndId,omitempty"`
+	ReceiverAccountNumber NullableString `json:"receiverAccountNumber,omitempty"`
+	// Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
+	EndToEndId NullableString `json:"endToEndId,omitempty"`
+	// Date and time the transaction was recorded.
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// Date and time of the last change.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
-	PaidAt *string `json:"paidAt,omitempty"`
-	ClientReference *string `json:"clientReference,omitempty"`
+	// Date and time the Pix was settled, reported by the institution.
+	PaidAt NullableString `json:"paidAt,omitempty"`
+	// Your identifier of the transaction, returned in queries and callbacks.
+	ClientReference NullableString `json:"clientReference,omitempty"`
 	// End-to-end ID of the refund transaction
-	RefundEndToEndId *string `json:"refundEndToEndId,omitempty"`
+	RefundEndToEndId NullableString `json:"refundEndToEndId,omitempty"`
 	// Amount refunded
-	RefundAmount *float32 `json:"refundAmount,omitempty"`
-	// Status of the refund (PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR)
-	RefundStatus *string `json:"refundStatus,omitempty"`
+	RefundAmount NullableFloat32 `json:"refundAmount,omitempty"`
+	// Refund status: PENDING, COMPLETED or CANCELED.
+	RefundStatus NullableString `json:"refundStatus,omitempty"`
 	// Reason for the refund
-	RefundReason *string `json:"refundReason,omitempty"`
+	RefundReason NullableString `json:"refundReason,omitempty"`
 	// Description of the refund
-	RefundDescription *string `json:"refundDescription,omitempty"`
+	RefundDescription NullableString `json:"refundDescription,omitempty"`
 	// Date and time when the refund was processed
-	RefundedAt *string `json:"refundedAt,omitempty"`
+	RefundedAt NullableString `json:"refundedAt,omitempty"`
 	// Reason for cancellation (if cancelled)
-	CancellationReason *string `json:"cancellationReason,omitempty"`
+	CancellationReason NullableString `json:"cancellationReason,omitempty"`
 	// Virtual sub-account provided at creation.
-	VirtualAccount *string `json:"virtualAccount,omitempty"`
+	VirtualAccount NullableString `json:"virtualAccount,omitempty"`
 	// Transaction method/rail.
 	Method *string `json:"method,omitempty"`
 }
@@ -216,644 +240,844 @@ func (o *Transaction) SetType(v string) {
 	o.Type = &v
 }
 
-// GetQrCodeText returns the QrCodeText field value if set, zero value otherwise.
+// GetQrCodeText returns the QrCodeText field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetQrCodeText() string {
-	if o == nil || IsNil(o.QrCodeText) {
+	if o == nil || IsNil(o.QrCodeText.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.QrCodeText
+	return *o.QrCodeText.Get()
 }
 
 // GetQrCodeTextOk returns a tuple with the QrCodeText field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetQrCodeTextOk() (*string, bool) {
-	if o == nil || IsNil(o.QrCodeText) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QrCodeText, true
+	return o.QrCodeText.Get(), o.QrCodeText.IsSet()
 }
 
 // HasQrCodeText returns a boolean if a field has been set.
 func (o *Transaction) HasQrCodeText() bool {
-	if o != nil && !IsNil(o.QrCodeText) {
+	if o != nil && o.QrCodeText.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQrCodeText gets a reference to the given string and assigns it to the QrCodeText field.
+// SetQrCodeText gets a reference to the given NullableString and assigns it to the QrCodeText field.
 func (o *Transaction) SetQrCodeText(v string) {
-	o.QrCodeText = &v
+	o.QrCodeText.Set(&v)
+}
+// SetQrCodeTextNil sets the value for QrCodeText to be an explicit nil
+func (o *Transaction) SetQrCodeTextNil() {
+	o.QrCodeText.Set(nil)
 }
 
-// GetQrCodeBase64 returns the QrCodeBase64 field value if set, zero value otherwise.
+// UnsetQrCodeText ensures that no value is present for QrCodeText, not even an explicit nil
+func (o *Transaction) UnsetQrCodeText() {
+	o.QrCodeText.Unset()
+}
+
+// GetQrCodeBase64 returns the QrCodeBase64 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetQrCodeBase64() string {
-	if o == nil || IsNil(o.QrCodeBase64) {
+	if o == nil || IsNil(o.QrCodeBase64.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.QrCodeBase64
+	return *o.QrCodeBase64.Get()
 }
 
 // GetQrCodeBase64Ok returns a tuple with the QrCodeBase64 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetQrCodeBase64Ok() (*string, bool) {
-	if o == nil || IsNil(o.QrCodeBase64) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QrCodeBase64, true
+	return o.QrCodeBase64.Get(), o.QrCodeBase64.IsSet()
 }
 
 // HasQrCodeBase64 returns a boolean if a field has been set.
 func (o *Transaction) HasQrCodeBase64() bool {
-	if o != nil && !IsNil(o.QrCodeBase64) {
+	if o != nil && o.QrCodeBase64.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQrCodeBase64 gets a reference to the given string and assigns it to the QrCodeBase64 field.
+// SetQrCodeBase64 gets a reference to the given NullableString and assigns it to the QrCodeBase64 field.
 func (o *Transaction) SetQrCodeBase64(v string) {
-	o.QrCodeBase64 = &v
+	o.QrCodeBase64.Set(&v)
+}
+// SetQrCodeBase64Nil sets the value for QrCodeBase64 to be an explicit nil
+func (o *Transaction) SetQrCodeBase64Nil() {
+	o.QrCodeBase64.Set(nil)
 }
 
-// GetQrCodeUrl returns the QrCodeUrl field value if set, zero value otherwise.
+// UnsetQrCodeBase64 ensures that no value is present for QrCodeBase64, not even an explicit nil
+func (o *Transaction) UnsetQrCodeBase64() {
+	o.QrCodeBase64.Unset()
+}
+
+// GetQrCodeUrl returns the QrCodeUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetQrCodeUrl() string {
-	if o == nil || IsNil(o.QrCodeUrl) {
+	if o == nil || IsNil(o.QrCodeUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.QrCodeUrl
+	return *o.QrCodeUrl.Get()
 }
 
 // GetQrCodeUrlOk returns a tuple with the QrCodeUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetQrCodeUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.QrCodeUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QrCodeUrl, true
+	return o.QrCodeUrl.Get(), o.QrCodeUrl.IsSet()
 }
 
 // HasQrCodeUrl returns a boolean if a field has been set.
 func (o *Transaction) HasQrCodeUrl() bool {
-	if o != nil && !IsNil(o.QrCodeUrl) {
+	if o != nil && o.QrCodeUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQrCodeUrl gets a reference to the given string and assigns it to the QrCodeUrl field.
+// SetQrCodeUrl gets a reference to the given NullableString and assigns it to the QrCodeUrl field.
 func (o *Transaction) SetQrCodeUrl(v string) {
-	o.QrCodeUrl = &v
+	o.QrCodeUrl.Set(&v)
+}
+// SetQrCodeUrlNil sets the value for QrCodeUrl to be an explicit nil
+func (o *Transaction) SetQrCodeUrlNil() {
+	o.QrCodeUrl.Set(nil)
 }
 
-// GetGeneratedName returns the GeneratedName field value if set, zero value otherwise.
+// UnsetQrCodeUrl ensures that no value is present for QrCodeUrl, not even an explicit nil
+func (o *Transaction) UnsetQrCodeUrl() {
+	o.QrCodeUrl.Unset()
+}
+
+// GetGeneratedName returns the GeneratedName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetGeneratedName() string {
-	if o == nil || IsNil(o.GeneratedName) {
+	if o == nil || IsNil(o.GeneratedName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.GeneratedName
+	return *o.GeneratedName.Get()
 }
 
 // GetGeneratedNameOk returns a tuple with the GeneratedName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetGeneratedNameOk() (*string, bool) {
-	if o == nil || IsNil(o.GeneratedName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GeneratedName, true
+	return o.GeneratedName.Get(), o.GeneratedName.IsSet()
 }
 
 // HasGeneratedName returns a boolean if a field has been set.
 func (o *Transaction) HasGeneratedName() bool {
-	if o != nil && !IsNil(o.GeneratedName) {
+	if o != nil && o.GeneratedName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGeneratedName gets a reference to the given string and assigns it to the GeneratedName field.
+// SetGeneratedName gets a reference to the given NullableString and assigns it to the GeneratedName field.
 func (o *Transaction) SetGeneratedName(v string) {
-	o.GeneratedName = &v
+	o.GeneratedName.Set(&v)
+}
+// SetGeneratedNameNil sets the value for GeneratedName to be an explicit nil
+func (o *Transaction) SetGeneratedNameNil() {
+	o.GeneratedName.Set(nil)
 }
 
-// GetGeneratedDocument returns the GeneratedDocument field value if set, zero value otherwise.
+// UnsetGeneratedName ensures that no value is present for GeneratedName, not even an explicit nil
+func (o *Transaction) UnsetGeneratedName() {
+	o.GeneratedName.Unset()
+}
+
+// GetGeneratedDocument returns the GeneratedDocument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetGeneratedDocument() string {
-	if o == nil || IsNil(o.GeneratedDocument) {
+	if o == nil || IsNil(o.GeneratedDocument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.GeneratedDocument
+	return *o.GeneratedDocument.Get()
 }
 
 // GetGeneratedDocumentOk returns a tuple with the GeneratedDocument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetGeneratedDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.GeneratedDocument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GeneratedDocument, true
+	return o.GeneratedDocument.Get(), o.GeneratedDocument.IsSet()
 }
 
 // HasGeneratedDocument returns a boolean if a field has been set.
 func (o *Transaction) HasGeneratedDocument() bool {
-	if o != nil && !IsNil(o.GeneratedDocument) {
+	if o != nil && o.GeneratedDocument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGeneratedDocument gets a reference to the given string and assigns it to the GeneratedDocument field.
+// SetGeneratedDocument gets a reference to the given NullableString and assigns it to the GeneratedDocument field.
 func (o *Transaction) SetGeneratedDocument(v string) {
-	o.GeneratedDocument = &v
+	o.GeneratedDocument.Set(&v)
+}
+// SetGeneratedDocumentNil sets the value for GeneratedDocument to be an explicit nil
+func (o *Transaction) SetGeneratedDocumentNil() {
+	o.GeneratedDocument.Set(nil)
 }
 
-// GetGeneratedEmail returns the GeneratedEmail field value if set, zero value otherwise.
+// UnsetGeneratedDocument ensures that no value is present for GeneratedDocument, not even an explicit nil
+func (o *Transaction) UnsetGeneratedDocument() {
+	o.GeneratedDocument.Unset()
+}
+
+// GetGeneratedEmail returns the GeneratedEmail field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetGeneratedEmail() string {
-	if o == nil || IsNil(o.GeneratedEmail) {
+	if o == nil || IsNil(o.GeneratedEmail.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.GeneratedEmail
+	return *o.GeneratedEmail.Get()
 }
 
 // GetGeneratedEmailOk returns a tuple with the GeneratedEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetGeneratedEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.GeneratedEmail) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GeneratedEmail, true
+	return o.GeneratedEmail.Get(), o.GeneratedEmail.IsSet()
 }
 
 // HasGeneratedEmail returns a boolean if a field has been set.
 func (o *Transaction) HasGeneratedEmail() bool {
-	if o != nil && !IsNil(o.GeneratedEmail) {
+	if o != nil && o.GeneratedEmail.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGeneratedEmail gets a reference to the given string and assigns it to the GeneratedEmail field.
+// SetGeneratedEmail gets a reference to the given NullableString and assigns it to the GeneratedEmail field.
 func (o *Transaction) SetGeneratedEmail(v string) {
-	o.GeneratedEmail = &v
+	o.GeneratedEmail.Set(&v)
+}
+// SetGeneratedEmailNil sets the value for GeneratedEmail to be an explicit nil
+func (o *Transaction) SetGeneratedEmailNil() {
+	o.GeneratedEmail.Set(nil)
 }
 
-// GetPayerName returns the PayerName field value if set, zero value otherwise.
+// UnsetGeneratedEmail ensures that no value is present for GeneratedEmail, not even an explicit nil
+func (o *Transaction) UnsetGeneratedEmail() {
+	o.GeneratedEmail.Unset()
+}
+
+// GetPayerName returns the PayerName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetPayerName() string {
-	if o == nil || IsNil(o.PayerName) {
+	if o == nil || IsNil(o.PayerName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerName
+	return *o.PayerName.Get()
 }
 
 // GetPayerNameOk returns a tuple with the PayerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetPayerNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerName, true
+	return o.PayerName.Get(), o.PayerName.IsSet()
 }
 
 // HasPayerName returns a boolean if a field has been set.
 func (o *Transaction) HasPayerName() bool {
-	if o != nil && !IsNil(o.PayerName) {
+	if o != nil && o.PayerName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerName gets a reference to the given string and assigns it to the PayerName field.
+// SetPayerName gets a reference to the given NullableString and assigns it to the PayerName field.
 func (o *Transaction) SetPayerName(v string) {
-	o.PayerName = &v
+	o.PayerName.Set(&v)
+}
+// SetPayerNameNil sets the value for PayerName to be an explicit nil
+func (o *Transaction) SetPayerNameNil() {
+	o.PayerName.Set(nil)
 }
 
-// GetPayerDocument returns the PayerDocument field value if set, zero value otherwise.
+// UnsetPayerName ensures that no value is present for PayerName, not even an explicit nil
+func (o *Transaction) UnsetPayerName() {
+	o.PayerName.Unset()
+}
+
+// GetPayerDocument returns the PayerDocument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetPayerDocument() string {
-	if o == nil || IsNil(o.PayerDocument) {
+	if o == nil || IsNil(o.PayerDocument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerDocument
+	return *o.PayerDocument.Get()
 }
 
 // GetPayerDocumentOk returns a tuple with the PayerDocument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetPayerDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerDocument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerDocument, true
+	return o.PayerDocument.Get(), o.PayerDocument.IsSet()
 }
 
 // HasPayerDocument returns a boolean if a field has been set.
 func (o *Transaction) HasPayerDocument() bool {
-	if o != nil && !IsNil(o.PayerDocument) {
+	if o != nil && o.PayerDocument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerDocument gets a reference to the given string and assigns it to the PayerDocument field.
+// SetPayerDocument gets a reference to the given NullableString and assigns it to the PayerDocument field.
 func (o *Transaction) SetPayerDocument(v string) {
-	o.PayerDocument = &v
+	o.PayerDocument.Set(&v)
+}
+// SetPayerDocumentNil sets the value for PayerDocument to be an explicit nil
+func (o *Transaction) SetPayerDocumentNil() {
+	o.PayerDocument.Set(nil)
 }
 
-// GetPayerInstitutionIspb returns the PayerInstitutionIspb field value if set, zero value otherwise.
+// UnsetPayerDocument ensures that no value is present for PayerDocument, not even an explicit nil
+func (o *Transaction) UnsetPayerDocument() {
+	o.PayerDocument.Unset()
+}
+
+// GetPayerInstitutionIspb returns the PayerInstitutionIspb field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetPayerInstitutionIspb() string {
-	if o == nil || IsNil(o.PayerInstitutionIspb) {
+	if o == nil || IsNil(o.PayerInstitutionIspb.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerInstitutionIspb
+	return *o.PayerInstitutionIspb.Get()
 }
 
 // GetPayerInstitutionIspbOk returns a tuple with the PayerInstitutionIspb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetPayerInstitutionIspbOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerInstitutionIspb) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerInstitutionIspb, true
+	return o.PayerInstitutionIspb.Get(), o.PayerInstitutionIspb.IsSet()
 }
 
 // HasPayerInstitutionIspb returns a boolean if a field has been set.
 func (o *Transaction) HasPayerInstitutionIspb() bool {
-	if o != nil && !IsNil(o.PayerInstitutionIspb) {
+	if o != nil && o.PayerInstitutionIspb.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerInstitutionIspb gets a reference to the given string and assigns it to the PayerInstitutionIspb field.
+// SetPayerInstitutionIspb gets a reference to the given NullableString and assigns it to the PayerInstitutionIspb field.
 func (o *Transaction) SetPayerInstitutionIspb(v string) {
-	o.PayerInstitutionIspb = &v
+	o.PayerInstitutionIspb.Set(&v)
+}
+// SetPayerInstitutionIspbNil sets the value for PayerInstitutionIspb to be an explicit nil
+func (o *Transaction) SetPayerInstitutionIspbNil() {
+	o.PayerInstitutionIspb.Set(nil)
 }
 
-// GetPayerInstitutionName returns the PayerInstitutionName field value if set, zero value otherwise.
+// UnsetPayerInstitutionIspb ensures that no value is present for PayerInstitutionIspb, not even an explicit nil
+func (o *Transaction) UnsetPayerInstitutionIspb() {
+	o.PayerInstitutionIspb.Unset()
+}
+
+// GetPayerInstitutionName returns the PayerInstitutionName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetPayerInstitutionName() string {
-	if o == nil || IsNil(o.PayerInstitutionName) {
+	if o == nil || IsNil(o.PayerInstitutionName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerInstitutionName
+	return *o.PayerInstitutionName.Get()
 }
 
 // GetPayerInstitutionNameOk returns a tuple with the PayerInstitutionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetPayerInstitutionNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerInstitutionName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerInstitutionName, true
+	return o.PayerInstitutionName.Get(), o.PayerInstitutionName.IsSet()
 }
 
 // HasPayerInstitutionName returns a boolean if a field has been set.
 func (o *Transaction) HasPayerInstitutionName() bool {
-	if o != nil && !IsNil(o.PayerInstitutionName) {
+	if o != nil && o.PayerInstitutionName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerInstitutionName gets a reference to the given string and assigns it to the PayerInstitutionName field.
+// SetPayerInstitutionName gets a reference to the given NullableString and assigns it to the PayerInstitutionName field.
 func (o *Transaction) SetPayerInstitutionName(v string) {
-	o.PayerInstitutionName = &v
+	o.PayerInstitutionName.Set(&v)
+}
+// SetPayerInstitutionNameNil sets the value for PayerInstitutionName to be an explicit nil
+func (o *Transaction) SetPayerInstitutionNameNil() {
+	o.PayerInstitutionName.Set(nil)
 }
 
-// GetPayerAccountNumber returns the PayerAccountNumber field value if set, zero value otherwise.
+// UnsetPayerInstitutionName ensures that no value is present for PayerInstitutionName, not even an explicit nil
+func (o *Transaction) UnsetPayerInstitutionName() {
+	o.PayerInstitutionName.Unset()
+}
+
+// GetPayerAccountNumber returns the PayerAccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetPayerAccountNumber() string {
-	if o == nil || IsNil(o.PayerAccountNumber) {
+	if o == nil || IsNil(o.PayerAccountNumber.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerAccountNumber
+	return *o.PayerAccountNumber.Get()
 }
 
 // GetPayerAccountNumberOk returns a tuple with the PayerAccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetPayerAccountNumberOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerAccountNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerAccountNumber, true
+	return o.PayerAccountNumber.Get(), o.PayerAccountNumber.IsSet()
 }
 
 // HasPayerAccountNumber returns a boolean if a field has been set.
 func (o *Transaction) HasPayerAccountNumber() bool {
-	if o != nil && !IsNil(o.PayerAccountNumber) {
+	if o != nil && o.PayerAccountNumber.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerAccountNumber gets a reference to the given string and assigns it to the PayerAccountNumber field.
+// SetPayerAccountNumber gets a reference to the given NullableString and assigns it to the PayerAccountNumber field.
 func (o *Transaction) SetPayerAccountNumber(v string) {
-	o.PayerAccountNumber = &v
+	o.PayerAccountNumber.Set(&v)
+}
+// SetPayerAccountNumberNil sets the value for PayerAccountNumber to be an explicit nil
+func (o *Transaction) SetPayerAccountNumberNil() {
+	o.PayerAccountNumber.Set(nil)
 }
 
-// GetServiceFeeCharged returns the ServiceFeeCharged field value if set, zero value otherwise.
+// UnsetPayerAccountNumber ensures that no value is present for PayerAccountNumber, not even an explicit nil
+func (o *Transaction) UnsetPayerAccountNumber() {
+	o.PayerAccountNumber.Unset()
+}
+
+// GetServiceFeeCharged returns the ServiceFeeCharged field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetServiceFeeCharged() float32 {
-	if o == nil || IsNil(o.ServiceFeeCharged) {
+	if o == nil || IsNil(o.ServiceFeeCharged.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.ServiceFeeCharged
+	return *o.ServiceFeeCharged.Get()
 }
 
 // GetServiceFeeChargedOk returns a tuple with the ServiceFeeCharged field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetServiceFeeChargedOk() (*float32, bool) {
-	if o == nil || IsNil(o.ServiceFeeCharged) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceFeeCharged, true
+	return o.ServiceFeeCharged.Get(), o.ServiceFeeCharged.IsSet()
 }
 
 // HasServiceFeeCharged returns a boolean if a field has been set.
 func (o *Transaction) HasServiceFeeCharged() bool {
-	if o != nil && !IsNil(o.ServiceFeeCharged) {
+	if o != nil && o.ServiceFeeCharged.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceFeeCharged gets a reference to the given float32 and assigns it to the ServiceFeeCharged field.
+// SetServiceFeeCharged gets a reference to the given NullableFloat32 and assigns it to the ServiceFeeCharged field.
 func (o *Transaction) SetServiceFeeCharged(v float32) {
-	o.ServiceFeeCharged = &v
+	o.ServiceFeeCharged.Set(&v)
+}
+// SetServiceFeeChargedNil sets the value for ServiceFeeCharged to be an explicit nil
+func (o *Transaction) SetServiceFeeChargedNil() {
+	o.ServiceFeeCharged.Set(nil)
 }
 
-// GetWithdrawPixKey returns the WithdrawPixKey field value if set, zero value otherwise.
+// UnsetServiceFeeCharged ensures that no value is present for ServiceFeeCharged, not even an explicit nil
+func (o *Transaction) UnsetServiceFeeCharged() {
+	o.ServiceFeeCharged.Unset()
+}
+
+// GetWithdrawPixKey returns the WithdrawPixKey field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetWithdrawPixKey() string {
-	if o == nil || IsNil(o.WithdrawPixKey) {
+	if o == nil || IsNil(o.WithdrawPixKey.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.WithdrawPixKey
+	return *o.WithdrawPixKey.Get()
 }
 
 // GetWithdrawPixKeyOk returns a tuple with the WithdrawPixKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetWithdrawPixKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.WithdrawPixKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WithdrawPixKey, true
+	return o.WithdrawPixKey.Get(), o.WithdrawPixKey.IsSet()
 }
 
 // HasWithdrawPixKey returns a boolean if a field has been set.
 func (o *Transaction) HasWithdrawPixKey() bool {
-	if o != nil && !IsNil(o.WithdrawPixKey) {
+	if o != nil && o.WithdrawPixKey.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWithdrawPixKey gets a reference to the given string and assigns it to the WithdrawPixKey field.
+// SetWithdrawPixKey gets a reference to the given NullableString and assigns it to the WithdrawPixKey field.
 func (o *Transaction) SetWithdrawPixKey(v string) {
-	o.WithdrawPixKey = &v
+	o.WithdrawPixKey.Set(&v)
+}
+// SetWithdrawPixKeyNil sets the value for WithdrawPixKey to be an explicit nil
+func (o *Transaction) SetWithdrawPixKeyNil() {
+	o.WithdrawPixKey.Set(nil)
 }
 
-// GetWithdrawPixType returns the WithdrawPixType field value if set, zero value otherwise.
+// UnsetWithdrawPixKey ensures that no value is present for WithdrawPixKey, not even an explicit nil
+func (o *Transaction) UnsetWithdrawPixKey() {
+	o.WithdrawPixKey.Unset()
+}
+
+// GetWithdrawPixType returns the WithdrawPixType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetWithdrawPixType() string {
-	if o == nil || IsNil(o.WithdrawPixType) {
+	if o == nil || IsNil(o.WithdrawPixType.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.WithdrawPixType
+	return *o.WithdrawPixType.Get()
 }
 
 // GetWithdrawPixTypeOk returns a tuple with the WithdrawPixType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetWithdrawPixTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.WithdrawPixType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WithdrawPixType, true
+	return o.WithdrawPixType.Get(), o.WithdrawPixType.IsSet()
 }
 
 // HasWithdrawPixType returns a boolean if a field has been set.
 func (o *Transaction) HasWithdrawPixType() bool {
-	if o != nil && !IsNil(o.WithdrawPixType) {
+	if o != nil && o.WithdrawPixType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWithdrawPixType gets a reference to the given string and assigns it to the WithdrawPixType field.
+// SetWithdrawPixType gets a reference to the given NullableString and assigns it to the WithdrawPixType field.
 func (o *Transaction) SetWithdrawPixType(v string) {
-	o.WithdrawPixType = &v
+	o.WithdrawPixType.Set(&v)
+}
+// SetWithdrawPixTypeNil sets the value for WithdrawPixType to be an explicit nil
+func (o *Transaction) SetWithdrawPixTypeNil() {
+	o.WithdrawPixType.Set(nil)
 }
 
-// GetReceiverName returns the ReceiverName field value if set, zero value otherwise.
+// UnsetWithdrawPixType ensures that no value is present for WithdrawPixType, not even an explicit nil
+func (o *Transaction) UnsetWithdrawPixType() {
+	o.WithdrawPixType.Unset()
+}
+
+// GetReceiverName returns the ReceiverName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetReceiverName() string {
-	if o == nil || IsNil(o.ReceiverName) {
+	if o == nil || IsNil(o.ReceiverName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverName
+	return *o.ReceiverName.Get()
 }
 
 // GetReceiverNameOk returns a tuple with the ReceiverName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetReceiverNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverName, true
+	return o.ReceiverName.Get(), o.ReceiverName.IsSet()
 }
 
 // HasReceiverName returns a boolean if a field has been set.
 func (o *Transaction) HasReceiverName() bool {
-	if o != nil && !IsNil(o.ReceiverName) {
+	if o != nil && o.ReceiverName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverName gets a reference to the given string and assigns it to the ReceiverName field.
+// SetReceiverName gets a reference to the given NullableString and assigns it to the ReceiverName field.
 func (o *Transaction) SetReceiverName(v string) {
-	o.ReceiverName = &v
+	o.ReceiverName.Set(&v)
+}
+// SetReceiverNameNil sets the value for ReceiverName to be an explicit nil
+func (o *Transaction) SetReceiverNameNil() {
+	o.ReceiverName.Set(nil)
 }
 
-// GetReceiverDocument returns the ReceiverDocument field value if set, zero value otherwise.
+// UnsetReceiverName ensures that no value is present for ReceiverName, not even an explicit nil
+func (o *Transaction) UnsetReceiverName() {
+	o.ReceiverName.Unset()
+}
+
+// GetReceiverDocument returns the ReceiverDocument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetReceiverDocument() string {
-	if o == nil || IsNil(o.ReceiverDocument) {
+	if o == nil || IsNil(o.ReceiverDocument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverDocument
+	return *o.ReceiverDocument.Get()
 }
 
 // GetReceiverDocumentOk returns a tuple with the ReceiverDocument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetReceiverDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverDocument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverDocument, true
+	return o.ReceiverDocument.Get(), o.ReceiverDocument.IsSet()
 }
 
 // HasReceiverDocument returns a boolean if a field has been set.
 func (o *Transaction) HasReceiverDocument() bool {
-	if o != nil && !IsNil(o.ReceiverDocument) {
+	if o != nil && o.ReceiverDocument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverDocument gets a reference to the given string and assigns it to the ReceiverDocument field.
+// SetReceiverDocument gets a reference to the given NullableString and assigns it to the ReceiverDocument field.
 func (o *Transaction) SetReceiverDocument(v string) {
-	o.ReceiverDocument = &v
+	o.ReceiverDocument.Set(&v)
+}
+// SetReceiverDocumentNil sets the value for ReceiverDocument to be an explicit nil
+func (o *Transaction) SetReceiverDocumentNil() {
+	o.ReceiverDocument.Set(nil)
 }
 
-// GetReceiverInstitutionIspb returns the ReceiverInstitutionIspb field value if set, zero value otherwise.
+// UnsetReceiverDocument ensures that no value is present for ReceiverDocument, not even an explicit nil
+func (o *Transaction) UnsetReceiverDocument() {
+	o.ReceiverDocument.Unset()
+}
+
+// GetReceiverInstitutionIspb returns the ReceiverInstitutionIspb field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetReceiverInstitutionIspb() string {
-	if o == nil || IsNil(o.ReceiverInstitutionIspb) {
+	if o == nil || IsNil(o.ReceiverInstitutionIspb.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverInstitutionIspb
+	return *o.ReceiverInstitutionIspb.Get()
 }
 
 // GetReceiverInstitutionIspbOk returns a tuple with the ReceiverInstitutionIspb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetReceiverInstitutionIspbOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverInstitutionIspb) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverInstitutionIspb, true
+	return o.ReceiverInstitutionIspb.Get(), o.ReceiverInstitutionIspb.IsSet()
 }
 
 // HasReceiverInstitutionIspb returns a boolean if a field has been set.
 func (o *Transaction) HasReceiverInstitutionIspb() bool {
-	if o != nil && !IsNil(o.ReceiverInstitutionIspb) {
+	if o != nil && o.ReceiverInstitutionIspb.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverInstitutionIspb gets a reference to the given string and assigns it to the ReceiverInstitutionIspb field.
+// SetReceiverInstitutionIspb gets a reference to the given NullableString and assigns it to the ReceiverInstitutionIspb field.
 func (o *Transaction) SetReceiverInstitutionIspb(v string) {
-	o.ReceiverInstitutionIspb = &v
+	o.ReceiverInstitutionIspb.Set(&v)
+}
+// SetReceiverInstitutionIspbNil sets the value for ReceiverInstitutionIspb to be an explicit nil
+func (o *Transaction) SetReceiverInstitutionIspbNil() {
+	o.ReceiverInstitutionIspb.Set(nil)
 }
 
-// GetReceiverInstitutionName returns the ReceiverInstitutionName field value if set, zero value otherwise.
+// UnsetReceiverInstitutionIspb ensures that no value is present for ReceiverInstitutionIspb, not even an explicit nil
+func (o *Transaction) UnsetReceiverInstitutionIspb() {
+	o.ReceiverInstitutionIspb.Unset()
+}
+
+// GetReceiverInstitutionName returns the ReceiverInstitutionName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetReceiverInstitutionName() string {
-	if o == nil || IsNil(o.ReceiverInstitutionName) {
+	if o == nil || IsNil(o.ReceiverInstitutionName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverInstitutionName
+	return *o.ReceiverInstitutionName.Get()
 }
 
 // GetReceiverInstitutionNameOk returns a tuple with the ReceiverInstitutionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetReceiverInstitutionNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverInstitutionName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverInstitutionName, true
+	return o.ReceiverInstitutionName.Get(), o.ReceiverInstitutionName.IsSet()
 }
 
 // HasReceiverInstitutionName returns a boolean if a field has been set.
 func (o *Transaction) HasReceiverInstitutionName() bool {
-	if o != nil && !IsNil(o.ReceiverInstitutionName) {
+	if o != nil && o.ReceiverInstitutionName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverInstitutionName gets a reference to the given string and assigns it to the ReceiverInstitutionName field.
+// SetReceiverInstitutionName gets a reference to the given NullableString and assigns it to the ReceiverInstitutionName field.
 func (o *Transaction) SetReceiverInstitutionName(v string) {
-	o.ReceiverInstitutionName = &v
+	o.ReceiverInstitutionName.Set(&v)
+}
+// SetReceiverInstitutionNameNil sets the value for ReceiverInstitutionName to be an explicit nil
+func (o *Transaction) SetReceiverInstitutionNameNil() {
+	o.ReceiverInstitutionName.Set(nil)
 }
 
-// GetReceiverAccountNumber returns the ReceiverAccountNumber field value if set, zero value otherwise.
+// UnsetReceiverInstitutionName ensures that no value is present for ReceiverInstitutionName, not even an explicit nil
+func (o *Transaction) UnsetReceiverInstitutionName() {
+	o.ReceiverInstitutionName.Unset()
+}
+
+// GetReceiverAccountNumber returns the ReceiverAccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetReceiverAccountNumber() string {
-	if o == nil || IsNil(o.ReceiverAccountNumber) {
+	if o == nil || IsNil(o.ReceiverAccountNumber.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverAccountNumber
+	return *o.ReceiverAccountNumber.Get()
 }
 
 // GetReceiverAccountNumberOk returns a tuple with the ReceiverAccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetReceiverAccountNumberOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverAccountNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverAccountNumber, true
+	return o.ReceiverAccountNumber.Get(), o.ReceiverAccountNumber.IsSet()
 }
 
 // HasReceiverAccountNumber returns a boolean if a field has been set.
 func (o *Transaction) HasReceiverAccountNumber() bool {
-	if o != nil && !IsNil(o.ReceiverAccountNumber) {
+	if o != nil && o.ReceiverAccountNumber.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverAccountNumber gets a reference to the given string and assigns it to the ReceiverAccountNumber field.
+// SetReceiverAccountNumber gets a reference to the given NullableString and assigns it to the ReceiverAccountNumber field.
 func (o *Transaction) SetReceiverAccountNumber(v string) {
-	o.ReceiverAccountNumber = &v
+	o.ReceiverAccountNumber.Set(&v)
+}
+// SetReceiverAccountNumberNil sets the value for ReceiverAccountNumber to be an explicit nil
+func (o *Transaction) SetReceiverAccountNumberNil() {
+	o.ReceiverAccountNumber.Set(nil)
 }
 
-// GetEndToEndId returns the EndToEndId field value if set, zero value otherwise.
+// UnsetReceiverAccountNumber ensures that no value is present for ReceiverAccountNumber, not even an explicit nil
+func (o *Transaction) UnsetReceiverAccountNumber() {
+	o.ReceiverAccountNumber.Unset()
+}
+
+// GetEndToEndId returns the EndToEndId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetEndToEndId() string {
-	if o == nil || IsNil(o.EndToEndId) {
+	if o == nil || IsNil(o.EndToEndId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.EndToEndId
+	return *o.EndToEndId.Get()
 }
 
 // GetEndToEndIdOk returns a tuple with the EndToEndId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetEndToEndIdOk() (*string, bool) {
-	if o == nil || IsNil(o.EndToEndId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EndToEndId, true
+	return o.EndToEndId.Get(), o.EndToEndId.IsSet()
 }
 
 // HasEndToEndId returns a boolean if a field has been set.
 func (o *Transaction) HasEndToEndId() bool {
-	if o != nil && !IsNil(o.EndToEndId) {
+	if o != nil && o.EndToEndId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEndToEndId gets a reference to the given string and assigns it to the EndToEndId field.
+// SetEndToEndId gets a reference to the given NullableString and assigns it to the EndToEndId field.
 func (o *Transaction) SetEndToEndId(v string) {
-	o.EndToEndId = &v
+	o.EndToEndId.Set(&v)
+}
+// SetEndToEndIdNil sets the value for EndToEndId to be an explicit nil
+func (o *Transaction) SetEndToEndIdNil() {
+	o.EndToEndId.Set(nil)
+}
+
+// UnsetEndToEndId ensures that no value is present for EndToEndId, not even an explicit nil
+func (o *Transaction) UnsetEndToEndId() {
+	o.EndToEndId.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -920,324 +1144,424 @@ func (o *Transaction) SetUpdatedAt(v string) {
 	o.UpdatedAt = &v
 }
 
-// GetPaidAt returns the PaidAt field value if set, zero value otherwise.
+// GetPaidAt returns the PaidAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetPaidAt() string {
-	if o == nil || IsNil(o.PaidAt) {
+	if o == nil || IsNil(o.PaidAt.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PaidAt
+	return *o.PaidAt.Get()
 }
 
 // GetPaidAtOk returns a tuple with the PaidAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetPaidAtOk() (*string, bool) {
-	if o == nil || IsNil(o.PaidAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PaidAt, true
+	return o.PaidAt.Get(), o.PaidAt.IsSet()
 }
 
 // HasPaidAt returns a boolean if a field has been set.
 func (o *Transaction) HasPaidAt() bool {
-	if o != nil && !IsNil(o.PaidAt) {
+	if o != nil && o.PaidAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaidAt gets a reference to the given string and assigns it to the PaidAt field.
+// SetPaidAt gets a reference to the given NullableString and assigns it to the PaidAt field.
 func (o *Transaction) SetPaidAt(v string) {
-	o.PaidAt = &v
+	o.PaidAt.Set(&v)
+}
+// SetPaidAtNil sets the value for PaidAt to be an explicit nil
+func (o *Transaction) SetPaidAtNil() {
+	o.PaidAt.Set(nil)
 }
 
-// GetClientReference returns the ClientReference field value if set, zero value otherwise.
+// UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
+func (o *Transaction) UnsetPaidAt() {
+	o.PaidAt.Unset()
+}
+
+// GetClientReference returns the ClientReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetClientReference() string {
-	if o == nil || IsNil(o.ClientReference) {
+	if o == nil || IsNil(o.ClientReference.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ClientReference
+	return *o.ClientReference.Get()
 }
 
 // GetClientReferenceOk returns a tuple with the ClientReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetClientReferenceOk() (*string, bool) {
-	if o == nil || IsNil(o.ClientReference) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClientReference, true
+	return o.ClientReference.Get(), o.ClientReference.IsSet()
 }
 
 // HasClientReference returns a boolean if a field has been set.
 func (o *Transaction) HasClientReference() bool {
-	if o != nil && !IsNil(o.ClientReference) {
+	if o != nil && o.ClientReference.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClientReference gets a reference to the given string and assigns it to the ClientReference field.
+// SetClientReference gets a reference to the given NullableString and assigns it to the ClientReference field.
 func (o *Transaction) SetClientReference(v string) {
-	o.ClientReference = &v
+	o.ClientReference.Set(&v)
+}
+// SetClientReferenceNil sets the value for ClientReference to be an explicit nil
+func (o *Transaction) SetClientReferenceNil() {
+	o.ClientReference.Set(nil)
 }
 
-// GetRefundEndToEndId returns the RefundEndToEndId field value if set, zero value otherwise.
+// UnsetClientReference ensures that no value is present for ClientReference, not even an explicit nil
+func (o *Transaction) UnsetClientReference() {
+	o.ClientReference.Unset()
+}
+
+// GetRefundEndToEndId returns the RefundEndToEndId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetRefundEndToEndId() string {
-	if o == nil || IsNil(o.RefundEndToEndId) {
+	if o == nil || IsNil(o.RefundEndToEndId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundEndToEndId
+	return *o.RefundEndToEndId.Get()
 }
 
 // GetRefundEndToEndIdOk returns a tuple with the RefundEndToEndId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetRefundEndToEndIdOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundEndToEndId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundEndToEndId, true
+	return o.RefundEndToEndId.Get(), o.RefundEndToEndId.IsSet()
 }
 
 // HasRefundEndToEndId returns a boolean if a field has been set.
 func (o *Transaction) HasRefundEndToEndId() bool {
-	if o != nil && !IsNil(o.RefundEndToEndId) {
+	if o != nil && o.RefundEndToEndId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundEndToEndId gets a reference to the given string and assigns it to the RefundEndToEndId field.
+// SetRefundEndToEndId gets a reference to the given NullableString and assigns it to the RefundEndToEndId field.
 func (o *Transaction) SetRefundEndToEndId(v string) {
-	o.RefundEndToEndId = &v
+	o.RefundEndToEndId.Set(&v)
+}
+// SetRefundEndToEndIdNil sets the value for RefundEndToEndId to be an explicit nil
+func (o *Transaction) SetRefundEndToEndIdNil() {
+	o.RefundEndToEndId.Set(nil)
 }
 
-// GetRefundAmount returns the RefundAmount field value if set, zero value otherwise.
+// UnsetRefundEndToEndId ensures that no value is present for RefundEndToEndId, not even an explicit nil
+func (o *Transaction) UnsetRefundEndToEndId() {
+	o.RefundEndToEndId.Unset()
+}
+
+// GetRefundAmount returns the RefundAmount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetRefundAmount() float32 {
-	if o == nil || IsNil(o.RefundAmount) {
+	if o == nil || IsNil(o.RefundAmount.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.RefundAmount
+	return *o.RefundAmount.Get()
 }
 
 // GetRefundAmountOk returns a tuple with the RefundAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetRefundAmountOk() (*float32, bool) {
-	if o == nil || IsNil(o.RefundAmount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundAmount, true
+	return o.RefundAmount.Get(), o.RefundAmount.IsSet()
 }
 
 // HasRefundAmount returns a boolean if a field has been set.
 func (o *Transaction) HasRefundAmount() bool {
-	if o != nil && !IsNil(o.RefundAmount) {
+	if o != nil && o.RefundAmount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundAmount gets a reference to the given float32 and assigns it to the RefundAmount field.
+// SetRefundAmount gets a reference to the given NullableFloat32 and assigns it to the RefundAmount field.
 func (o *Transaction) SetRefundAmount(v float32) {
-	o.RefundAmount = &v
+	o.RefundAmount.Set(&v)
+}
+// SetRefundAmountNil sets the value for RefundAmount to be an explicit nil
+func (o *Transaction) SetRefundAmountNil() {
+	o.RefundAmount.Set(nil)
 }
 
-// GetRefundStatus returns the RefundStatus field value if set, zero value otherwise.
+// UnsetRefundAmount ensures that no value is present for RefundAmount, not even an explicit nil
+func (o *Transaction) UnsetRefundAmount() {
+	o.RefundAmount.Unset()
+}
+
+// GetRefundStatus returns the RefundStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetRefundStatus() string {
-	if o == nil || IsNil(o.RefundStatus) {
+	if o == nil || IsNil(o.RefundStatus.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundStatus
+	return *o.RefundStatus.Get()
 }
 
 // GetRefundStatusOk returns a tuple with the RefundStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetRefundStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundStatus) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundStatus, true
+	return o.RefundStatus.Get(), o.RefundStatus.IsSet()
 }
 
 // HasRefundStatus returns a boolean if a field has been set.
 func (o *Transaction) HasRefundStatus() bool {
-	if o != nil && !IsNil(o.RefundStatus) {
+	if o != nil && o.RefundStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundStatus gets a reference to the given string and assigns it to the RefundStatus field.
+// SetRefundStatus gets a reference to the given NullableString and assigns it to the RefundStatus field.
 func (o *Transaction) SetRefundStatus(v string) {
-	o.RefundStatus = &v
+	o.RefundStatus.Set(&v)
+}
+// SetRefundStatusNil sets the value for RefundStatus to be an explicit nil
+func (o *Transaction) SetRefundStatusNil() {
+	o.RefundStatus.Set(nil)
 }
 
-// GetRefundReason returns the RefundReason field value if set, zero value otherwise.
+// UnsetRefundStatus ensures that no value is present for RefundStatus, not even an explicit nil
+func (o *Transaction) UnsetRefundStatus() {
+	o.RefundStatus.Unset()
+}
+
+// GetRefundReason returns the RefundReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetRefundReason() string {
-	if o == nil || IsNil(o.RefundReason) {
+	if o == nil || IsNil(o.RefundReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundReason
+	return *o.RefundReason.Get()
 }
 
 // GetRefundReasonOk returns a tuple with the RefundReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetRefundReasonOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundReason, true
+	return o.RefundReason.Get(), o.RefundReason.IsSet()
 }
 
 // HasRefundReason returns a boolean if a field has been set.
 func (o *Transaction) HasRefundReason() bool {
-	if o != nil && !IsNil(o.RefundReason) {
+	if o != nil && o.RefundReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundReason gets a reference to the given string and assigns it to the RefundReason field.
+// SetRefundReason gets a reference to the given NullableString and assigns it to the RefundReason field.
 func (o *Transaction) SetRefundReason(v string) {
-	o.RefundReason = &v
+	o.RefundReason.Set(&v)
+}
+// SetRefundReasonNil sets the value for RefundReason to be an explicit nil
+func (o *Transaction) SetRefundReasonNil() {
+	o.RefundReason.Set(nil)
 }
 
-// GetRefundDescription returns the RefundDescription field value if set, zero value otherwise.
+// UnsetRefundReason ensures that no value is present for RefundReason, not even an explicit nil
+func (o *Transaction) UnsetRefundReason() {
+	o.RefundReason.Unset()
+}
+
+// GetRefundDescription returns the RefundDescription field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetRefundDescription() string {
-	if o == nil || IsNil(o.RefundDescription) {
+	if o == nil || IsNil(o.RefundDescription.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundDescription
+	return *o.RefundDescription.Get()
 }
 
 // GetRefundDescriptionOk returns a tuple with the RefundDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetRefundDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundDescription) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundDescription, true
+	return o.RefundDescription.Get(), o.RefundDescription.IsSet()
 }
 
 // HasRefundDescription returns a boolean if a field has been set.
 func (o *Transaction) HasRefundDescription() bool {
-	if o != nil && !IsNil(o.RefundDescription) {
+	if o != nil && o.RefundDescription.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundDescription gets a reference to the given string and assigns it to the RefundDescription field.
+// SetRefundDescription gets a reference to the given NullableString and assigns it to the RefundDescription field.
 func (o *Transaction) SetRefundDescription(v string) {
-	o.RefundDescription = &v
+	o.RefundDescription.Set(&v)
+}
+// SetRefundDescriptionNil sets the value for RefundDescription to be an explicit nil
+func (o *Transaction) SetRefundDescriptionNil() {
+	o.RefundDescription.Set(nil)
 }
 
-// GetRefundedAt returns the RefundedAt field value if set, zero value otherwise.
+// UnsetRefundDescription ensures that no value is present for RefundDescription, not even an explicit nil
+func (o *Transaction) UnsetRefundDescription() {
+	o.RefundDescription.Unset()
+}
+
+// GetRefundedAt returns the RefundedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetRefundedAt() string {
-	if o == nil || IsNil(o.RefundedAt) {
+	if o == nil || IsNil(o.RefundedAt.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RefundedAt
+	return *o.RefundedAt.Get()
 }
 
 // GetRefundedAtOk returns a tuple with the RefundedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetRefundedAtOk() (*string, bool) {
-	if o == nil || IsNil(o.RefundedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RefundedAt, true
+	return o.RefundedAt.Get(), o.RefundedAt.IsSet()
 }
 
 // HasRefundedAt returns a boolean if a field has been set.
 func (o *Transaction) HasRefundedAt() bool {
-	if o != nil && !IsNil(o.RefundedAt) {
+	if o != nil && o.RefundedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRefundedAt gets a reference to the given string and assigns it to the RefundedAt field.
+// SetRefundedAt gets a reference to the given NullableString and assigns it to the RefundedAt field.
 func (o *Transaction) SetRefundedAt(v string) {
-	o.RefundedAt = &v
+	o.RefundedAt.Set(&v)
+}
+// SetRefundedAtNil sets the value for RefundedAt to be an explicit nil
+func (o *Transaction) SetRefundedAtNil() {
+	o.RefundedAt.Set(nil)
 }
 
-// GetCancellationReason returns the CancellationReason field value if set, zero value otherwise.
+// UnsetRefundedAt ensures that no value is present for RefundedAt, not even an explicit nil
+func (o *Transaction) UnsetRefundedAt() {
+	o.RefundedAt.Unset()
+}
+
+// GetCancellationReason returns the CancellationReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetCancellationReason() string {
-	if o == nil || IsNil(o.CancellationReason) {
+	if o == nil || IsNil(o.CancellationReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.CancellationReason
+	return *o.CancellationReason.Get()
 }
 
 // GetCancellationReasonOk returns a tuple with the CancellationReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetCancellationReasonOk() (*string, bool) {
-	if o == nil || IsNil(o.CancellationReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CancellationReason, true
+	return o.CancellationReason.Get(), o.CancellationReason.IsSet()
 }
 
 // HasCancellationReason returns a boolean if a field has been set.
 func (o *Transaction) HasCancellationReason() bool {
-	if o != nil && !IsNil(o.CancellationReason) {
+	if o != nil && o.CancellationReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCancellationReason gets a reference to the given string and assigns it to the CancellationReason field.
+// SetCancellationReason gets a reference to the given NullableString and assigns it to the CancellationReason field.
 func (o *Transaction) SetCancellationReason(v string) {
-	o.CancellationReason = &v
+	o.CancellationReason.Set(&v)
+}
+// SetCancellationReasonNil sets the value for CancellationReason to be an explicit nil
+func (o *Transaction) SetCancellationReasonNil() {
+	o.CancellationReason.Set(nil)
 }
 
-// GetVirtualAccount returns the VirtualAccount field value if set, zero value otherwise.
+// UnsetCancellationReason ensures that no value is present for CancellationReason, not even an explicit nil
+func (o *Transaction) UnsetCancellationReason() {
+	o.CancellationReason.Unset()
+}
+
+// GetVirtualAccount returns the VirtualAccount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetVirtualAccount() string {
-	if o == nil || IsNil(o.VirtualAccount) {
+	if o == nil || IsNil(o.VirtualAccount.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.VirtualAccount
+	return *o.VirtualAccount.Get()
 }
 
 // GetVirtualAccountOk returns a tuple with the VirtualAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetVirtualAccountOk() (*string, bool) {
-	if o == nil || IsNil(o.VirtualAccount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.VirtualAccount, true
+	return o.VirtualAccount.Get(), o.VirtualAccount.IsSet()
 }
 
 // HasVirtualAccount returns a boolean if a field has been set.
 func (o *Transaction) HasVirtualAccount() bool {
-	if o != nil && !IsNil(o.VirtualAccount) {
+	if o != nil && o.VirtualAccount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualAccount gets a reference to the given string and assigns it to the VirtualAccount field.
+// SetVirtualAccount gets a reference to the given NullableString and assigns it to the VirtualAccount field.
 func (o *Transaction) SetVirtualAccount(v string) {
-	o.VirtualAccount = &v
+	o.VirtualAccount.Set(&v)
+}
+// SetVirtualAccountNil sets the value for VirtualAccount to be an explicit nil
+func (o *Transaction) SetVirtualAccountNil() {
+	o.VirtualAccount.Set(nil)
+}
+
+// UnsetVirtualAccount ensures that no value is present for VirtualAccount, not even an explicit nil
+func (o *Transaction) UnsetVirtualAccount() {
+	o.VirtualAccount.Unset()
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
@@ -1294,65 +1618,65 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !IsNil(o.QrCodeText) {
-		toSerialize["qrCodeText"] = o.QrCodeText
+	if o.QrCodeText.IsSet() {
+		toSerialize["qrCodeText"] = o.QrCodeText.Get()
 	}
-	if !IsNil(o.QrCodeBase64) {
-		toSerialize["qrCodeBase64"] = o.QrCodeBase64
+	if o.QrCodeBase64.IsSet() {
+		toSerialize["qrCodeBase64"] = o.QrCodeBase64.Get()
 	}
-	if !IsNil(o.QrCodeUrl) {
-		toSerialize["qrCodeUrl"] = o.QrCodeUrl
+	if o.QrCodeUrl.IsSet() {
+		toSerialize["qrCodeUrl"] = o.QrCodeUrl.Get()
 	}
-	if !IsNil(o.GeneratedName) {
-		toSerialize["generatedName"] = o.GeneratedName
+	if o.GeneratedName.IsSet() {
+		toSerialize["generatedName"] = o.GeneratedName.Get()
 	}
-	if !IsNil(o.GeneratedDocument) {
-		toSerialize["generatedDocument"] = o.GeneratedDocument
+	if o.GeneratedDocument.IsSet() {
+		toSerialize["generatedDocument"] = o.GeneratedDocument.Get()
 	}
-	if !IsNil(o.GeneratedEmail) {
-		toSerialize["generatedEmail"] = o.GeneratedEmail
+	if o.GeneratedEmail.IsSet() {
+		toSerialize["generatedEmail"] = o.GeneratedEmail.Get()
 	}
-	if !IsNil(o.PayerName) {
-		toSerialize["payerName"] = o.PayerName
+	if o.PayerName.IsSet() {
+		toSerialize["payerName"] = o.PayerName.Get()
 	}
-	if !IsNil(o.PayerDocument) {
-		toSerialize["payerDocument"] = o.PayerDocument
+	if o.PayerDocument.IsSet() {
+		toSerialize["payerDocument"] = o.PayerDocument.Get()
 	}
-	if !IsNil(o.PayerInstitutionIspb) {
-		toSerialize["payerInstitutionIspb"] = o.PayerInstitutionIspb
+	if o.PayerInstitutionIspb.IsSet() {
+		toSerialize["payerInstitutionIspb"] = o.PayerInstitutionIspb.Get()
 	}
-	if !IsNil(o.PayerInstitutionName) {
-		toSerialize["payerInstitutionName"] = o.PayerInstitutionName
+	if o.PayerInstitutionName.IsSet() {
+		toSerialize["payerInstitutionName"] = o.PayerInstitutionName.Get()
 	}
-	if !IsNil(o.PayerAccountNumber) {
-		toSerialize["payerAccountNumber"] = o.PayerAccountNumber
+	if o.PayerAccountNumber.IsSet() {
+		toSerialize["payerAccountNumber"] = o.PayerAccountNumber.Get()
 	}
-	if !IsNil(o.ServiceFeeCharged) {
-		toSerialize["serviceFeeCharged"] = o.ServiceFeeCharged
+	if o.ServiceFeeCharged.IsSet() {
+		toSerialize["serviceFeeCharged"] = o.ServiceFeeCharged.Get()
 	}
-	if !IsNil(o.WithdrawPixKey) {
-		toSerialize["withdrawPixKey"] = o.WithdrawPixKey
+	if o.WithdrawPixKey.IsSet() {
+		toSerialize["withdrawPixKey"] = o.WithdrawPixKey.Get()
 	}
-	if !IsNil(o.WithdrawPixType) {
-		toSerialize["withdrawPixType"] = o.WithdrawPixType
+	if o.WithdrawPixType.IsSet() {
+		toSerialize["withdrawPixType"] = o.WithdrawPixType.Get()
 	}
-	if !IsNil(o.ReceiverName) {
-		toSerialize["receiverName"] = o.ReceiverName
+	if o.ReceiverName.IsSet() {
+		toSerialize["receiverName"] = o.ReceiverName.Get()
 	}
-	if !IsNil(o.ReceiverDocument) {
-		toSerialize["receiverDocument"] = o.ReceiverDocument
+	if o.ReceiverDocument.IsSet() {
+		toSerialize["receiverDocument"] = o.ReceiverDocument.Get()
 	}
-	if !IsNil(o.ReceiverInstitutionIspb) {
-		toSerialize["receiverInstitutionIspb"] = o.ReceiverInstitutionIspb
+	if o.ReceiverInstitutionIspb.IsSet() {
+		toSerialize["receiverInstitutionIspb"] = o.ReceiverInstitutionIspb.Get()
 	}
-	if !IsNil(o.ReceiverInstitutionName) {
-		toSerialize["receiverInstitutionName"] = o.ReceiverInstitutionName
+	if o.ReceiverInstitutionName.IsSet() {
+		toSerialize["receiverInstitutionName"] = o.ReceiverInstitutionName.Get()
 	}
-	if !IsNil(o.ReceiverAccountNumber) {
-		toSerialize["receiverAccountNumber"] = o.ReceiverAccountNumber
+	if o.ReceiverAccountNumber.IsSet() {
+		toSerialize["receiverAccountNumber"] = o.ReceiverAccountNumber.Get()
 	}
-	if !IsNil(o.EndToEndId) {
-		toSerialize["endToEndId"] = o.EndToEndId
+	if o.EndToEndId.IsSet() {
+		toSerialize["endToEndId"] = o.EndToEndId.Get()
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
@@ -1360,35 +1684,35 @@ func (o Transaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !IsNil(o.PaidAt) {
-		toSerialize["paidAt"] = o.PaidAt
+	if o.PaidAt.IsSet() {
+		toSerialize["paidAt"] = o.PaidAt.Get()
 	}
-	if !IsNil(o.ClientReference) {
-		toSerialize["clientReference"] = o.ClientReference
+	if o.ClientReference.IsSet() {
+		toSerialize["clientReference"] = o.ClientReference.Get()
 	}
-	if !IsNil(o.RefundEndToEndId) {
-		toSerialize["refundEndToEndId"] = o.RefundEndToEndId
+	if o.RefundEndToEndId.IsSet() {
+		toSerialize["refundEndToEndId"] = o.RefundEndToEndId.Get()
 	}
-	if !IsNil(o.RefundAmount) {
-		toSerialize["refundAmount"] = o.RefundAmount
+	if o.RefundAmount.IsSet() {
+		toSerialize["refundAmount"] = o.RefundAmount.Get()
 	}
-	if !IsNil(o.RefundStatus) {
-		toSerialize["refundStatus"] = o.RefundStatus
+	if o.RefundStatus.IsSet() {
+		toSerialize["refundStatus"] = o.RefundStatus.Get()
 	}
-	if !IsNil(o.RefundReason) {
-		toSerialize["refundReason"] = o.RefundReason
+	if o.RefundReason.IsSet() {
+		toSerialize["refundReason"] = o.RefundReason.Get()
 	}
-	if !IsNil(o.RefundDescription) {
-		toSerialize["refundDescription"] = o.RefundDescription
+	if o.RefundDescription.IsSet() {
+		toSerialize["refundDescription"] = o.RefundDescription.Get()
 	}
-	if !IsNil(o.RefundedAt) {
-		toSerialize["refundedAt"] = o.RefundedAt
+	if o.RefundedAt.IsSet() {
+		toSerialize["refundedAt"] = o.RefundedAt.Get()
 	}
-	if !IsNil(o.CancellationReason) {
-		toSerialize["cancellationReason"] = o.CancellationReason
+	if o.CancellationReason.IsSet() {
+		toSerialize["cancellationReason"] = o.CancellationReason.Get()
 	}
-	if !IsNil(o.VirtualAccount) {
-		toSerialize["virtualAccount"] = o.VirtualAccount
+	if o.VirtualAccount.IsSet() {
+		toSerialize["virtualAccount"] = o.VirtualAccount.Get()
 	}
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method

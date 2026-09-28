@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Status** | Pointer to **float32** | HTTP response status code | [optional] 
 **TransactionId** | Pointer to **string** | Related transaction ID | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Date and time when the callback log was created | [optional] 
-**Body** | Pointer to **map[string]interface{}** | Request body sent (parsed JSON) | [optional] 
+**Body** | Pointer to **map[string]interface{}** | Request body sent (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] 
 **ResponseBody** | Pointer to **string** | Response body received (string) | [optional] 
-**ResponseHeaders** | Pointer to **map[string]interface{}** | Response headers (parsed JSON) | [optional] 
+**ResponseHeaders** | Pointer to **map[string]interface{}** | Response headers (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] 
 **ResponseTime** | Pointer to **float32** | Webhook round-trip time in milliseconds | [optional] 
 
 ## Methods

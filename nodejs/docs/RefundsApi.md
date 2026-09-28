@@ -10,11 +10,11 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 
 ## postRefund
 
-> Transaction postRefund(transactionId, refundRequest)
+> TransactionWithRefunds postRefund(transactionId, refundRequest)
 
 Refund a Pix
 
-Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.
+Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
 
 ### Example
 
@@ -35,8 +35,8 @@ async function example() {
 
   const body = {
     // string | ID of the transaction to refund.
-    transactionId: transactionId_example,
-    // RefundRequest (optional)
+    transactionId: PAYZU20260814T6NX1CV9MK000000,
+    // RefundRequest
     refundRequest: ...,
   } satisfies PostRefundRequest;
 
@@ -58,11 +58,11 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **transactionId** | `string` | ID of the transaction to refund. | [Defaults to `undefined`] |
-| **refundRequest** | [RefundRequest](RefundRequest.md) |  | [Optional] |
+| **refundRequest** | [RefundRequest](RefundRequest.md) |  | |
 
 ### Return type
 
-[**Transaction**](Transaction.md)
+[**TransactionWithRefunds**](TransactionWithRefunds.md)
 
 ### Authorization
 
@@ -78,7 +78,14 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Refund accepted and enqueued (asynchronous). |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | Resource not found |  -  |
+| **409** | Conflict with the current state of the resource |  -  |
 | **422** | Refund not allowed for this transaction or amount. |  -  |
+| **429** | Rate limit exceeded |  -  |
+| **500** | Internal error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

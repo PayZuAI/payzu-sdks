@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -23,21 +23,25 @@ type QRCodeReadResponse struct {
 	// Type of QR Code.
 	QrCodeType *string `json:"qrCodeType,omitempty"`
 	// Name of the payment receiver.
-	Name *string `json:"name,omitempty"`
+	Name NullableString `json:"name,omitempty"`
 	// CPF or CNPJ of the receiver.
-	Document *string `json:"document,omitempty"`
+	Document NullableString `json:"document,omitempty"`
 	// Amount to be paid (may differ from originalAmount for dynamic QR Codes).
-	Amount *float32 `json:"amount,omitempty"`
+	Amount NullableFloat32 `json:"amount,omitempty"`
 	// Original amount embedded in the QR Code.
-	OriginalAmount *float32 `json:"originalAmount,omitempty"`
+	OriginalAmount NullableFloat32 `json:"originalAmount,omitempty"`
 	// Transaction identifier.
-	Txid *string `json:"txid,omitempty"`
+	Txid NullableString `json:"txid,omitempty"`
 	// Additional information or description.
-	AdditionalInfo *string `json:"additionalInfo,omitempty"`
+	AdditionalInfo NullableString `json:"additionalInfo,omitempty"`
 	// Seconds until QR Code expires (0 for static QR Codes).
-	ExpiresIn *float32 `json:"expiresIn,omitempty"`
+	ExpiresIn NullableFloat32 `json:"expiresIn,omitempty"`
 	// Creation date of the QR Code (for dynamic QR Codes).
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt NullableTime `json:"createdAt,omitempty"`
+	// Whether the payer can change the amount.
+	AmountEditable NullableBool `json:"amountEditable,omitempty"`
+	// Due date of the charge, when the QR Code has one.
+	DueDate NullableString `json:"dueDate,omitempty"`
 }
 
 // NewQRCodeReadResponse instantiates a new QRCodeReadResponse object
@@ -89,260 +93,424 @@ func (o *QRCodeReadResponse) SetQrCodeType(v string) {
 	o.QrCodeType = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *QRCodeReadResponse) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *QRCodeReadResponse) SetNameNil() {
+	o.Name.Set(nil)
 }
 
-// GetDocument returns the Document field value if set, zero value otherwise.
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetName() {
+	o.Name.Unset()
+}
+
+// GetDocument returns the Document field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetDocument() string {
-	if o == nil || IsNil(o.Document) {
+	if o == nil || IsNil(o.Document.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Document
+	return *o.Document.Get()
 }
 
 // GetDocumentOk returns a tuple with the Document field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.Document) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Document, true
+	return o.Document.Get(), o.Document.IsSet()
 }
 
 // HasDocument returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasDocument() bool {
-	if o != nil && !IsNil(o.Document) {
+	if o != nil && o.Document.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDocument gets a reference to the given string and assigns it to the Document field.
+// SetDocument gets a reference to the given NullableString and assigns it to the Document field.
 func (o *QRCodeReadResponse) SetDocument(v string) {
-	o.Document = &v
+	o.Document.Set(&v)
+}
+// SetDocumentNil sets the value for Document to be an explicit nil
+func (o *QRCodeReadResponse) SetDocumentNil() {
+	o.Document.Set(nil)
 }
 
-// GetAmount returns the Amount field value if set, zero value otherwise.
+// UnsetDocument ensures that no value is present for Document, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetDocument() {
+	o.Document.Unset()
+}
+
+// GetAmount returns the Amount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetAmount() float32 {
-	if o == nil || IsNil(o.Amount) {
+	if o == nil || IsNil(o.Amount.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Amount
+	return *o.Amount.Get()
 }
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetAmountOk() (*float32, bool) {
-	if o == nil || IsNil(o.Amount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Amount, true
+	return o.Amount.Get(), o.Amount.IsSet()
 }
 
 // HasAmount returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasAmount() bool {
-	if o != nil && !IsNil(o.Amount) {
+	if o != nil && o.Amount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
+// SetAmount gets a reference to the given NullableFloat32 and assigns it to the Amount field.
 func (o *QRCodeReadResponse) SetAmount(v float32) {
-	o.Amount = &v
+	o.Amount.Set(&v)
+}
+// SetAmountNil sets the value for Amount to be an explicit nil
+func (o *QRCodeReadResponse) SetAmountNil() {
+	o.Amount.Set(nil)
 }
 
-// GetOriginalAmount returns the OriginalAmount field value if set, zero value otherwise.
+// UnsetAmount ensures that no value is present for Amount, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetAmount() {
+	o.Amount.Unset()
+}
+
+// GetOriginalAmount returns the OriginalAmount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetOriginalAmount() float32 {
-	if o == nil || IsNil(o.OriginalAmount) {
+	if o == nil || IsNil(o.OriginalAmount.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.OriginalAmount
+	return *o.OriginalAmount.Get()
 }
 
 // GetOriginalAmountOk returns a tuple with the OriginalAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetOriginalAmountOk() (*float32, bool) {
-	if o == nil || IsNil(o.OriginalAmount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OriginalAmount, true
+	return o.OriginalAmount.Get(), o.OriginalAmount.IsSet()
 }
 
 // HasOriginalAmount returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasOriginalAmount() bool {
-	if o != nil && !IsNil(o.OriginalAmount) {
+	if o != nil && o.OriginalAmount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOriginalAmount gets a reference to the given float32 and assigns it to the OriginalAmount field.
+// SetOriginalAmount gets a reference to the given NullableFloat32 and assigns it to the OriginalAmount field.
 func (o *QRCodeReadResponse) SetOriginalAmount(v float32) {
-	o.OriginalAmount = &v
+	o.OriginalAmount.Set(&v)
+}
+// SetOriginalAmountNil sets the value for OriginalAmount to be an explicit nil
+func (o *QRCodeReadResponse) SetOriginalAmountNil() {
+	o.OriginalAmount.Set(nil)
 }
 
-// GetTxid returns the Txid field value if set, zero value otherwise.
+// UnsetOriginalAmount ensures that no value is present for OriginalAmount, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetOriginalAmount() {
+	o.OriginalAmount.Unset()
+}
+
+// GetTxid returns the Txid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetTxid() string {
-	if o == nil || IsNil(o.Txid) {
+	if o == nil || IsNil(o.Txid.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Txid
+	return *o.Txid.Get()
 }
 
 // GetTxidOk returns a tuple with the Txid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetTxidOk() (*string, bool) {
-	if o == nil || IsNil(o.Txid) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Txid, true
+	return o.Txid.Get(), o.Txid.IsSet()
 }
 
 // HasTxid returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasTxid() bool {
-	if o != nil && !IsNil(o.Txid) {
+	if o != nil && o.Txid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTxid gets a reference to the given string and assigns it to the Txid field.
+// SetTxid gets a reference to the given NullableString and assigns it to the Txid field.
 func (o *QRCodeReadResponse) SetTxid(v string) {
-	o.Txid = &v
+	o.Txid.Set(&v)
+}
+// SetTxidNil sets the value for Txid to be an explicit nil
+func (o *QRCodeReadResponse) SetTxidNil() {
+	o.Txid.Set(nil)
 }
 
-// GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise.
+// UnsetTxid ensures that no value is present for Txid, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetTxid() {
+	o.Txid.Unset()
+}
+
+// GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetAdditionalInfo() string {
-	if o == nil || IsNil(o.AdditionalInfo) {
+	if o == nil || IsNil(o.AdditionalInfo.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AdditionalInfo
+	return *o.AdditionalInfo.Get()
 }
 
 // GetAdditionalInfoOk returns a tuple with the AdditionalInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetAdditionalInfoOk() (*string, bool) {
-	if o == nil || IsNil(o.AdditionalInfo) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdditionalInfo, true
+	return o.AdditionalInfo.Get(), o.AdditionalInfo.IsSet()
 }
 
 // HasAdditionalInfo returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasAdditionalInfo() bool {
-	if o != nil && !IsNil(o.AdditionalInfo) {
+	if o != nil && o.AdditionalInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdditionalInfo gets a reference to the given string and assigns it to the AdditionalInfo field.
+// SetAdditionalInfo gets a reference to the given NullableString and assigns it to the AdditionalInfo field.
 func (o *QRCodeReadResponse) SetAdditionalInfo(v string) {
-	o.AdditionalInfo = &v
+	o.AdditionalInfo.Set(&v)
+}
+// SetAdditionalInfoNil sets the value for AdditionalInfo to be an explicit nil
+func (o *QRCodeReadResponse) SetAdditionalInfoNil() {
+	o.AdditionalInfo.Set(nil)
 }
 
-// GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise.
+// UnsetAdditionalInfo ensures that no value is present for AdditionalInfo, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetAdditionalInfo() {
+	o.AdditionalInfo.Unset()
+}
+
+// GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetExpiresIn() float32 {
-	if o == nil || IsNil(o.ExpiresIn) {
+	if o == nil || IsNil(o.ExpiresIn.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.ExpiresIn
+	return *o.ExpiresIn.Get()
 }
 
 // GetExpiresInOk returns a tuple with the ExpiresIn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetExpiresInOk() (*float32, bool) {
-	if o == nil || IsNil(o.ExpiresIn) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpiresIn, true
+	return o.ExpiresIn.Get(), o.ExpiresIn.IsSet()
 }
 
 // HasExpiresIn returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasExpiresIn() bool {
-	if o != nil && !IsNil(o.ExpiresIn) {
+	if o != nil && o.ExpiresIn.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresIn gets a reference to the given float32 and assigns it to the ExpiresIn field.
+// SetExpiresIn gets a reference to the given NullableFloat32 and assigns it to the ExpiresIn field.
 func (o *QRCodeReadResponse) SetExpiresIn(v float32) {
-	o.ExpiresIn = &v
+	o.ExpiresIn.Set(&v)
+}
+// SetExpiresInNil sets the value for ExpiresIn to be an explicit nil
+func (o *QRCodeReadResponse) SetExpiresInNil() {
+	o.ExpiresIn.Set(nil)
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// UnsetExpiresIn ensures that no value is present for ExpiresIn, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetExpiresIn() {
+	o.ExpiresIn.Unset()
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QRCodeReadResponse) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+	return *o.CreatedAt.Get()
 }
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QRCodeReadResponse) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *QRCodeReadResponse) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
+	if o != nil && o.CreatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
 func (o *QRCodeReadResponse) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt.Set(&v)
+}
+// SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
+func (o *QRCodeReadResponse) SetCreatedAtNil() {
+	o.CreatedAt.Set(nil)
+}
+
+// UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetCreatedAt() {
+	o.CreatedAt.Unset()
+}
+
+// GetAmountEditable returns the AmountEditable field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *QRCodeReadResponse) GetAmountEditable() bool {
+	if o == nil || IsNil(o.AmountEditable.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.AmountEditable.Get()
+}
+
+// GetAmountEditableOk returns a tuple with the AmountEditable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *QRCodeReadResponse) GetAmountEditableOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AmountEditable.Get(), o.AmountEditable.IsSet()
+}
+
+// HasAmountEditable returns a boolean if a field has been set.
+func (o *QRCodeReadResponse) HasAmountEditable() bool {
+	if o != nil && o.AmountEditable.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAmountEditable gets a reference to the given NullableBool and assigns it to the AmountEditable field.
+func (o *QRCodeReadResponse) SetAmountEditable(v bool) {
+	o.AmountEditable.Set(&v)
+}
+// SetAmountEditableNil sets the value for AmountEditable to be an explicit nil
+func (o *QRCodeReadResponse) SetAmountEditableNil() {
+	o.AmountEditable.Set(nil)
+}
+
+// UnsetAmountEditable ensures that no value is present for AmountEditable, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetAmountEditable() {
+	o.AmountEditable.Unset()
+}
+
+// GetDueDate returns the DueDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *QRCodeReadResponse) GetDueDate() string {
+	if o == nil || IsNil(o.DueDate.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DueDate.Get()
+}
+
+// GetDueDateOk returns a tuple with the DueDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *QRCodeReadResponse) GetDueDateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DueDate.Get(), o.DueDate.IsSet()
+}
+
+// HasDueDate returns a boolean if a field has been set.
+func (o *QRCodeReadResponse) HasDueDate() bool {
+	if o != nil && o.DueDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDueDate gets a reference to the given NullableString and assigns it to the DueDate field.
+func (o *QRCodeReadResponse) SetDueDate(v string) {
+	o.DueDate.Set(&v)
+}
+// SetDueDateNil sets the value for DueDate to be an explicit nil
+func (o *QRCodeReadResponse) SetDueDateNil() {
+	o.DueDate.Set(nil)
+}
+
+// UnsetDueDate ensures that no value is present for DueDate, not even an explicit nil
+func (o *QRCodeReadResponse) UnsetDueDate() {
+	o.DueDate.Unset()
 }
 
 func (o QRCodeReadResponse) MarshalJSON() ([]byte, error) {
@@ -358,29 +526,35 @@ func (o QRCodeReadResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.QrCodeType) {
 		toSerialize["qrCodeType"] = o.QrCodeType
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
-	if !IsNil(o.Document) {
-		toSerialize["document"] = o.Document
+	if o.Document.IsSet() {
+		toSerialize["document"] = o.Document.Get()
 	}
-	if !IsNil(o.Amount) {
-		toSerialize["amount"] = o.Amount
+	if o.Amount.IsSet() {
+		toSerialize["amount"] = o.Amount.Get()
 	}
-	if !IsNil(o.OriginalAmount) {
-		toSerialize["originalAmount"] = o.OriginalAmount
+	if o.OriginalAmount.IsSet() {
+		toSerialize["originalAmount"] = o.OriginalAmount.Get()
 	}
-	if !IsNil(o.Txid) {
-		toSerialize["txid"] = o.Txid
+	if o.Txid.IsSet() {
+		toSerialize["txid"] = o.Txid.Get()
 	}
-	if !IsNil(o.AdditionalInfo) {
-		toSerialize["additionalInfo"] = o.AdditionalInfo
+	if o.AdditionalInfo.IsSet() {
+		toSerialize["additionalInfo"] = o.AdditionalInfo.Get()
 	}
-	if !IsNil(o.ExpiresIn) {
-		toSerialize["expiresIn"] = o.ExpiresIn
+	if o.ExpiresIn.IsSet() {
+		toSerialize["expiresIn"] = o.ExpiresIn.Get()
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
+	if o.CreatedAt.IsSet() {
+		toSerialize["createdAt"] = o.CreatedAt.Get()
+	}
+	if o.AmountEditable.IsSet() {
+		toSerialize["amountEditable"] = o.AmountEditable.Get()
+	}
+	if o.DueDate.IsSet() {
+		toSerialize["dueDate"] = o.DueDate.Get()
 	}
 	return toSerialize, nil
 }

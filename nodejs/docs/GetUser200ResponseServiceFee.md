@@ -1,6 +1,7 @@
 
 # GetUser200ResponseServiceFee
 
+Cash-in and cash-out fees of the account, in reais.
 
 ## Properties
 

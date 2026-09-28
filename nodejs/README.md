@@ -66,6 +66,9 @@ const payzu = new PayZu({
 | `payzu.withdraw.fromQrCode(params)` | `POST /withdraw/qrcode` | `Transaction` |
 | `payzu.withdraw.readQrCode(emv)` | `POST /pix/qrcode/read` | `QrCodeRead` |
 | `payzu.withdraw.pixKey(pixKey)` | `GET /pix/key` | `PixKeyInfo` |
+| `payzu.keys.lookup(pixKey)` | `GET /pix/key` | `PixKeyInfo` |
+| `payzu.keys.dict(key)` | `GET /user/dict` | `DictConsultResponse` |
+| `payzu.keys.readQrCode(emv)` | `POST /pix/qrcode/read` | `QrCodeRead` |
 | `payzu.account.get()` | `GET /user` | `Account` |
 | `payzu.account.balance()` | `GET /user/balance` | `Balance` |
 | `payzu.reports.create(params)` | `POST /user/report` | `ReportJob` |
@@ -74,10 +77,27 @@ const payzu = new PayZu({
 | `payzu.reports.download(id)` | `POST /user/report/{id}/download` | `ReportDownload` |
 | `payzu.reports.transactions(filters?)` | `GET /user/transactions` | `TransactionList` |
 | `payzu.reports.transaction(id)` | `GET /user/transactions/{id}` | `TransactionDetail` |
+| `payzu.reports.bankStatements(filters)` | `GET /user/bank-statements` | `BankStatementListResponse` |
+| `payzu.reports.bankStatement(id)` | `GET /user/bank-statements/{id}` | `BankStatement` |
+| `payzu.reports.pendingDeposits(filters?)` | `GET /user/deposit-pending` | `DepositPendingListResponse` |
+| `payzu.reports.pendingDeposit(id)` | `GET /user/deposit-pending/{id}` | `DepositPending` |
+| `payzu.reports.summary(filters?)` | `GET /user/summary` | `Summary` |
 | `payzu.callbacks.list(filters?)` | `GET /user/callbacks` | `CallbackList` |
 | `payzu.callbacks.get(id)` | `GET /user/callbacks/{id}` | `CallbackDetail` |
 | `payzu.callbacks.resend(transactionId)` | `POST /user/callbacks/resend/{transactionId}` | `ResendCallbackResult` |
 | `payzu.callbacks.resendBatch(params)` | `POST /user/callbacks/resend` | `ResendCallbacksResult` |
+| `payzu.callbacks.resendWebhooks(params)` | `POST /user/callbacks/resend/webhook` | `EnqueuedCallback` |
+| `payzu.callbacks.resendByWebhook(webhookId)` | `POST /user/callbacks/resend/webhook/{webhookId}` | `EnqueuedCallback` |
+| `payzu.callbacks.createSecret()` | `POST /user/callbacks/secret` | `CallbackSecretResponse` |
+| `payzu.callbacks.rotateSecret()` | `PATCH /user/callbacks/secret/rotate` | `RotateCallbackSecretResponse` |
+| `payzu.webhooks.create(params)` | `POST /user/webhooks` | `WebhookWithSecret` |
+| `payzu.webhooks.list(filters?)` | `GET /user/webhooks` | `WebhookListResponse` |
+| `payzu.webhooks.get(id)` | `GET /user/webhooks/{id}` | `Webhook` |
+| `payzu.webhooks.update(id, params)` | `PATCH /user/webhooks/{id}` | `Webhook` |
+| `payzu.webhooks.delete(id)` | `DELETE /user/webhooks/{id}` | `void` |
+| `payzu.webhooks.rotateSecret(id)` | `POST /user/webhooks/{id}/rotate-secret` | `RotateSecretResponse` |
+| `payzu.webhooks.sentQuantity(webhookId?)` | `GET /user/webhooks/sent/quantity` | `SentWebhooksQuantity` |
+| `payzu.webhooks.sent(id, callbackId)` | `GET /user/webhooks/{id}/sent/{callbackId}` | `SentWebhook` |
 | `payzu.infractions.list(filters?)` | `GET /user/infractions` | `InfractionList` |
 | `payzu.infractions.get(id)` | `GET /user/infractions/{id}` | `InfractionDetail` |
 | `payzu.infractions.defenses(infractionId)` | `GET /user/infractions/{id}/defenses` | `Defense[]` |
@@ -85,6 +105,7 @@ const payzu = new PayZu({
 | `payzu.infractions.createDefense(infractionId, defense, files?)` | `POST /user/infractions/{id}/defenses` | `Defense` |
 | `payzu.internalTransfer.create(params)` | `POST /internal-transfer` | `Transaction` |
 | `payzu.internalTransfer.get(params)` | `GET /internal-transfer` | `Transaction` |
+| `payzu.refunds.create(transactionId, params?)` | `POST /refund/{transactionId}` | `TransactionWithRefunds` |
 
 ## Tratamento de erros
 

@@ -25,7 +25,7 @@ const example = {
   "callbackUrl": https://webhook.cool/,
   "description": Pagamento via QR Code,
   "clientReference": order-123,
-  "virtualAccount": null,
+  "virtualAccount": loja-centro-01,
 } satisfies PostWithdrawQrcodeRequest
 
 console.log(example)

@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,35 +14,35 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * 
+ * Control of the daily outbound cap.
  * @export
  * @interface GetUser200ResponseDailyWithdrawLimit
  */
 export interface GetUser200ResponseDailyWithdrawLimit {
     /**
-     * 
+     * Daily outbound cap, in reais, summing withdrawals and internal transfers.
      * @type {number}
      * @memberof GetUser200ResponseDailyWithdrawLimit
      */
     limit?: number;
     /**
-     * 
+     * Total of the cap consumed in the day, in reais, by withdrawals and internal transfers.
      * @type {number}
      * @memberof GetUser200ResponseDailyWithdrawLimit
      */
     used?: number;
     /**
-     * 
+     * Date and time of the last change to the daily limit.
      * @type {Date}
      * @memberof GetUser200ResponseDailyWithdrawLimit
      */
     updatedAt?: Date;
     /**
-     * 
+     * Moment of the last reset of the daily usage.
      * @type {Date}
      * @memberof GetUser200ResponseDailyWithdrawLimit
      */
-    lastReset?: Date;
+    lastReset?: Date | null;
 }
 
 /**

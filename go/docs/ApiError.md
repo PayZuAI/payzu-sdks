@@ -4,19 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StatusCode** | **int32** | HTTP status code. | 
-**Error** | **string** | HTTP status text. | 
+**Status** | **string** | Fixed marker of an error response. | 
+**Error** | **string** | Name of the corresponding HTTP status. | 
+**ErrorCode** | **string** | Stable machine-readable error code, when available. | 
 **Message** | **string** | Human-readable error message. | 
+**StatusCode** | **int32** | HTTP status code. | 
 **RequestId** | **string** | Unique request correlation ID (cuid). Include it when contacting support. | 
-**ErrorCode** | Pointer to **string** | Stable machine-readable error code, when available. | [optional] 
-**RetryAfterSeconds** | Pointer to **int32** | Seconds to wait before retrying. Present only on 429 responses. | [optional] 
 **Details** | Pointer to [**[]ApiErrorDetailsInner**](ApiErrorDetailsInner.md) | Field-level validation errors, when applicable. | [optional] 
+**RetryAfterSeconds** | Pointer to **int32** | Seconds to wait before retrying. Present only on 429 responses. | [optional] 
 
 ## Methods
 
 ### NewApiError
 
-`func NewApiError(statusCode int32, error_ string, message string, requestId string, ) *ApiError`
+`func NewApiError(status string, error_ string, errorCode string, message string, statusCode int32, requestId string, ) *ApiError`
 
 NewApiError instantiates a new ApiError object
 This constructor will assign default values to properties that have it defined,
@@ -31,24 +32,24 @@ NewApiErrorWithDefaults instantiates a new ApiError object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetStatusCode
+### GetStatus
 
-`func (o *ApiError) GetStatusCode() int32`
+`func (o *ApiError) GetStatus() string`
 
-GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
+GetStatus returns the Status field if non-nil, zero value otherwise.
 
-### GetStatusCodeOk
+### GetStatusOk
 
-`func (o *ApiError) GetStatusCodeOk() (*int32, bool)`
+`func (o *ApiError) GetStatusOk() (*string, bool)`
 
-GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatusCode
+### SetStatus
 
-`func (o *ApiError) SetStatusCode(v int32)`
+`func (o *ApiError) SetStatus(v string)`
 
-SetStatusCode sets StatusCode field to given value.
+SetStatus sets Status field to given value.
 
 
 ### GetError
@@ -71,6 +72,26 @@ and a boolean to check if the value has been set.
 SetError sets Error field to given value.
 
 
+### GetErrorCode
+
+`func (o *ApiError) GetErrorCode() string`
+
+GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
+
+### GetErrorCodeOk
+
+`func (o *ApiError) GetErrorCodeOk() (*string, bool)`
+
+GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorCode
+
+`func (o *ApiError) SetErrorCode(v string)`
+
+SetErrorCode sets ErrorCode field to given value.
+
+
 ### GetMessage
 
 `func (o *ApiError) GetMessage() string`
@@ -89,6 +110,26 @@ and a boolean to check if the value has been set.
 `func (o *ApiError) SetMessage(v string)`
 
 SetMessage sets Message field to given value.
+
+
+### GetStatusCode
+
+`func (o *ApiError) GetStatusCode() int32`
+
+GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
+
+### GetStatusCodeOk
+
+`func (o *ApiError) GetStatusCodeOk() (*int32, bool)`
+
+GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatusCode
+
+`func (o *ApiError) SetStatusCode(v int32)`
+
+SetStatusCode sets StatusCode field to given value.
 
 
 ### GetRequestId
@@ -110,56 +151,6 @@ and a boolean to check if the value has been set.
 
 SetRequestId sets RequestId field to given value.
 
-
-### GetErrorCode
-
-`func (o *ApiError) GetErrorCode() string`
-
-GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
-
-### GetErrorCodeOk
-
-`func (o *ApiError) GetErrorCodeOk() (*string, bool)`
-
-GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetErrorCode
-
-`func (o *ApiError) SetErrorCode(v string)`
-
-SetErrorCode sets ErrorCode field to given value.
-
-### HasErrorCode
-
-`func (o *ApiError) HasErrorCode() bool`
-
-HasErrorCode returns a boolean if a field has been set.
-
-### GetRetryAfterSeconds
-
-`func (o *ApiError) GetRetryAfterSeconds() int32`
-
-GetRetryAfterSeconds returns the RetryAfterSeconds field if non-nil, zero value otherwise.
-
-### GetRetryAfterSecondsOk
-
-`func (o *ApiError) GetRetryAfterSecondsOk() (*int32, bool)`
-
-GetRetryAfterSecondsOk returns a tuple with the RetryAfterSeconds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRetryAfterSeconds
-
-`func (o *ApiError) SetRetryAfterSeconds(v int32)`
-
-SetRetryAfterSeconds sets RetryAfterSeconds field to given value.
-
-### HasRetryAfterSeconds
-
-`func (o *ApiError) HasRetryAfterSeconds() bool`
-
-HasRetryAfterSeconds returns a boolean if a field has been set.
 
 ### GetDetails
 
@@ -185,6 +176,31 @@ SetDetails sets Details field to given value.
 `func (o *ApiError) HasDetails() bool`
 
 HasDetails returns a boolean if a field has been set.
+
+### GetRetryAfterSeconds
+
+`func (o *ApiError) GetRetryAfterSeconds() int32`
+
+GetRetryAfterSeconds returns the RetryAfterSeconds field if non-nil, zero value otherwise.
+
+### GetRetryAfterSecondsOk
+
+`func (o *ApiError) GetRetryAfterSecondsOk() (*int32, bool)`
+
+GetRetryAfterSecondsOk returns a tuple with the RetryAfterSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryAfterSeconds
+
+`func (o *ApiError) SetRetryAfterSeconds(v int32)`
+
+SetRetryAfterSeconds sets RetryAfterSeconds field to given value.
+
+### HasRetryAfterSeconds
+
+`func (o *ApiError) HasRetryAfterSeconds() bool`
+
+HasRetryAfterSeconds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

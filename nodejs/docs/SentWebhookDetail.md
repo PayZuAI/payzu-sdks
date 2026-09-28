@@ -8,12 +8,11 @@ Name | Type
 ------------ | -------------
 `id` | string
 `webhookId` | string
-`userId` | string
 `transactionId` | string
 `url` | string
-`body` | { [key: string]: any; }
+`body` | string
 `status` | number
-`responseHeaders` | { [key: string]: any; }
+`responseHeaders` | string
 `responseBody` | string
 `error` | string
 `responseTime` | number
@@ -29,7 +28,6 @@ import type { SentWebhookDetail } from 'payzu-pix'
 const example = {
   "id": null,
   "webhookId": null,
-  "userId": null,
   "transactionId": null,
   "url": null,
   "body": null,

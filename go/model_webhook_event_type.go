@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// WebhookEventType Transaction event that triggers the webhook.
+// WebhookEventType Event that triggers the webhook.
 type WebhookEventType string
 
 // List of WebhookEventType
@@ -30,6 +30,7 @@ const (
 	TRANSACTION_SUSPECTED_FRAUD WebhookEventType = "TRANSACTION_SUSPECTED_FRAUD"
 	TRANSACTION_SUSPECTED_FRAUD_REVERSAL WebhookEventType = "TRANSACTION_SUSPECTED_FRAUD_REVERSAL"
 	INFRACTION_CHANGED WebhookEventType = "INFRACTION_CHANGED"
+	UNKNOWN_DEFAULT_OPEN_API WebhookEventType = "unknown_default_open_api"
 )
 
 // All allowed values of WebhookEventType enum
@@ -44,6 +45,7 @@ var AllowedWebhookEventTypeEnumValues = []WebhookEventType{
 	"TRANSACTION_SUSPECTED_FRAUD",
 	"TRANSACTION_SUSPECTED_FRAUD_REVERSAL",
 	"INFRACTION_CHANGED",
+	"unknown_default_open_api",
 }
 
 func (v *WebhookEventType) UnmarshalJSON(src []byte) error {
@@ -60,7 +62,8 @@ func (v *WebhookEventType) UnmarshalJSON(src []byte) error {
 		}
 	}
 
-	return fmt.Errorf("%+v is not a valid WebhookEventType", value)
+	*v = UNKNOWN_DEFAULT_OPEN_API
+	return nil
 }
 
 // NewWebhookEventTypeFromValue returns a pointer to a valid WebhookEventType

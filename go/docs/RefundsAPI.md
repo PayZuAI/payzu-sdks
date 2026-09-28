@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## PostRefund
 
-> Transaction PostRefund(ctx, transactionId).RefundRequest(refundRequest).Execute()
+> TransactionWithRefunds PostRefund(ctx, transactionId).RefundRequest(refundRequest).Execute()
 
 Refund a Pix
 
@@ -29,8 +29,8 @@ import (
 )
 
 func main() {
-	transactionId := "transactionId_example" // string | ID of the transaction to refund.
-	refundRequest := *openapiclient.NewRefundRequest() // RefundRequest |  (optional)
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID of the transaction to refund.
+	refundRequest := *openapiclient.NewRefundRequest() // RefundRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -39,7 +39,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RefundsAPI.PostRefund``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PostRefund`: Transaction
+	// response from `PostRefund`: TransactionWithRefunds
 	fmt.Fprintf(os.Stdout, "Response from `RefundsAPI.PostRefund`: %v\n", resp)
 }
 ```
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Transaction**](Transaction.md)
+[**TransactionWithRefunds**](TransactionWithRefunds.md)
 
 ### Authorization
 

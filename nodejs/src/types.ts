@@ -1,5 +1,13 @@
 import type {
   CallbackListResponse,
+  GetUserBankStatementsRequest,
+  GetUserDepositPendingRequest,
+  GetUserSummaryRequest,
+  GetUserWebhooksRequest,
+  RefundRequest,
+  SentWebhookDetailResponse,
+  WebhookCreateRequest,
+  WebhookUpdateRequest,
   DownloadUserReport200Response,
   GetInfractionsRequest,
   GetInternalTransferRequest,
@@ -25,6 +33,7 @@ import type {
   ResendUserCallbackSingle200Response,
   ResendUserCallbacks200Response,
   ResendUserCallbacksRequest,
+  ResendWebhookCallbacksRequest,
 } from './generated/index.js';
 
 export type Account = GetUser200Response;
@@ -53,3 +62,12 @@ export type ListReportsParams = Omit<ListUserReportsRequest, 'contentType'>;
 export type ListCallbacksParams = Omit<GetUserCallbacksRequest, 'contentType'>;
 export type ListInfractionsParams = Omit<GetInfractionsRequest, 'contentType'>;
 export type ProofOptions = Omit<GetProofRequest, 'contentType' | 'id'>;
+export type RefundParams = RefundRequest;
+export type CreateWebhookParams = WebhookCreateRequest;
+export type UpdateWebhookParams = WebhookUpdateRequest;
+export type ListWebhooksParams = GetUserWebhooksRequest;
+export type SentWebhook = SentWebhookDetailResponse;
+export type ListBankStatementsParams = GetUserBankStatementsRequest;
+export type ListPendingDepositsParams = GetUserDepositPendingRequest;
+export type SummaryParams = GetUserSummaryRequest;
+export type ResendWebhooksParams = ResendWebhookCallbacksRequest;

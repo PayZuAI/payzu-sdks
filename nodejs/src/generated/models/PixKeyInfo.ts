@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -50,17 +50,17 @@ export interface PixKeyInfo {
      */
     accountNumber?: string;
     /**
-     * Type of person.
+     * Type of person: PF, PJ, or empty when not informed.
      * @type {PixKeyInfoPersonTypeEnum}
      * @memberof PixKeyInfo
      */
     personType?: PixKeyInfoPersonTypeEnum;
     /**
-     * Type of account (CACC = Current Account, TRAN = Transactional Account, SVGS = Savings).
-     * @type {PixKeyInfoAccountTypeEnum}
+     * Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY.
+     * @type {string}
      * @memberof PixKeyInfo
      */
-    accountType?: PixKeyInfoAccountTypeEnum;
+    accountType?: string;
     /**
      * ISPB code of the financial institution.
      * @type {string}
@@ -87,19 +87,10 @@ export interface PixKeyInfo {
  */
 export const PixKeyInfoPersonTypeEnum = {
     Pf: 'PF',
-    Pj: 'PJ'
+    Pj: 'PJ',
+    Empty: ''
 } as const;
 export type PixKeyInfoPersonTypeEnum = typeof PixKeyInfoPersonTypeEnum[keyof typeof PixKeyInfoPersonTypeEnum];
-
-/**
- * @export
- */
-export const PixKeyInfoAccountTypeEnum = {
-    Cacc: 'CACC',
-    Tran: 'TRAN',
-    Svgs: 'SVGS'
-} as const;
-export type PixKeyInfoAccountTypeEnum = typeof PixKeyInfoAccountTypeEnum[keyof typeof PixKeyInfoAccountTypeEnum];
 
 
 /**

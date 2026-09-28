@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -25,7 +25,10 @@ type RefundRequest struct {
 	Description *string `json:"description,omitempty"`
 	// Idempotency key. Reusing it with the same amount replays the existing refund; reusing it with a different amount is rejected.
 	ClientReference *string `json:"clientReference,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RefundRequest RefundRequest
 
 // NewRefundRequest instantiates a new RefundRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o RefundRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClientReference) {
 		toSerialize["clientReference"] = o.ClientReference
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RefundRequest) UnmarshalJSON(data []byte) (err error) {
+	varRefundRequest := _RefundRequest{}
+
+	err = json.Unmarshal(data, &varRefundRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RefundRequest(varRefundRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "clientReference")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRefundRequest struct {

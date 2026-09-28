@@ -10,6 +10,9 @@ export { ReportsNamespace } from './namespaces/reports.js';
 export { CallbacksNamespace } from './namespaces/callbacks.js';
 export { InfractionsNamespace } from './namespaces/infractions.js';
 export { InternalTransferNamespace } from './namespaces/internal-transfer.js';
+export { KeysNamespace } from './namespaces/keys.js';
+export { RefundsNamespace } from './namespaces/refunds.js';
+export { WebhooksNamespace } from './namespaces/webhooks.js';
 export type {
   Account,
   Balance,
@@ -17,24 +20,33 @@ export type {
   CreateChargeParams,
   CreateInternalTransferParams,
   CreateReportParams,
+  CreateWebhookParams,
   CreateWithdrawParams,
   GetChargeParams,
   GetInternalTransferParams,
   GetWithdrawParams,
   InfractionList,
+  ListBankStatementsParams,
   ListCallbacksParams,
   ListInfractionsParams,
+  ListPendingDepositsParams,
   ListReportsParams,
   ListTransactionsParams,
+  ListWebhooksParams,
   Proof,
   ProofOptions,
   QrCodeRead,
   QrCodeWithdrawParams,
+  RefundParams,
   ReportDownload,
   ReportList,
   ResendCallbackResult,
   ResendCallbacksParams,
   ResendCallbacksResult,
+  ResendWebhooksParams,
+  SentWebhook,
+  SummaryParams,
   TransactionDetail,
   TransactionList,
+  UpdateWebhookParams,
 } from './types.js';

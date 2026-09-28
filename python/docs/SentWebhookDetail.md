@@ -5,19 +5,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**webhook_id** | **str** |  | [optional] 
-**user_id** | **str** |  | [optional] 
-**transaction_id** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
-**body** | **Dict[str, object]** |  | [optional] 
+**id** | **str** | Identifier of this delivery attempt. | [optional] 
+**webhook_id** | **str** | Webhook that originated the delivery. | [optional] 
+**transaction_id** | **str** | Pix transaction whose event was notified. | [optional] 
+**url** | **str** | Address this delivery was sent to, recorded at the time of the dispatch. | [optional] 
+**body** | **str** | Body sent in the delivery, as serialized JSON. | [optional] 
 **status** | **int** | HTTP status returned by your endpoint. | [optional] 
-**response_headers** | **Dict[str, object]** |  | [optional] 
-**response_body** | **str** |  | [optional] 
-**error** | **str** |  | [optional] 
+**response_headers** | **str** | Response headers, as serialized JSON. | [optional] 
+**response_body** | **str** | Body of the response received. | [optional] 
+**error** | **str** | Message of the delivery failure. | [optional] 
 **response_time** | **int** | Response time of your endpoint, in milliseconds. | [optional] 
-**event_type** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**event_type** | **str** | Event that triggered this delivery, the same value sent in the X-Callback-Event header. | [optional] 
+**created_at** | **datetime** | Moment of the delivery attempt. | [optional] 
 
 ## Example
 

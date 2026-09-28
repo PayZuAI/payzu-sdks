@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,19 +28,19 @@ import {
  */
 export interface GetUserTransactions200Response {
     /**
-     * 
+     * Number of transactions that match the query filters.
      * @type {number}
      * @memberof GetUserTransactions200Response
      */
     total?: number;
     /**
-     * 
+     * Number of pages for the limit provided, computed from total rounded up.
      * @type {number}
      * @memberof GetUserTransactions200Response
      */
     pages?: number;
     /**
-     * 
+     * Items of the requested page, ordered by sortBy and sortDirection.
      * @type {Array<Transaction>}
      * @memberof GetUserTransactions200Response
      */

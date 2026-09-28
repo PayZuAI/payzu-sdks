@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,29 +28,35 @@ import {
  */
 export interface Summary {
     /**
-     * 
+     * Number of transactions in the period.
      * @type {number}
      * @memberof Summary
      */
     totalTransactions?: number;
     /**
-     * 
+     * Summary of the account inflows in the period, that is, of the transactions of type DEPOSIT.
      * @type {SummaryBlock}
      * @memberof Summary
      */
     deposit?: SummaryBlock;
     /**
-     * 
+     * Summary of the account outflows in the period, that is, of the transactions of type WITHDRAW.
      * @type {SummaryBlock}
      * @memberof Summary
      */
     withdraw?: SummaryBlock;
     /**
-     * 
+     * Summary of the commissions credited to the account in the period (transactions of type COMMISSION).
      * @type {SummaryBlock}
      * @memberof Summary
      */
     commission?: SummaryBlock;
+    /**
+     * Summary of the adjustments in the period (transactions of type ADJUSTMENT).
+     * @type {SummaryBlock}
+     * @memberof Summary
+     */
+    adjustment?: SummaryBlock;
 }
 
 /**
@@ -74,6 +80,7 @@ export function SummaryFromJSONTyped(json: any, ignoreDiscriminator: boolean): S
         'deposit': json['deposit'] == null ? undefined : SummaryBlockFromJSON(json['deposit']),
         'withdraw': json['withdraw'] == null ? undefined : SummaryBlockFromJSON(json['withdraw']),
         'commission': json['commission'] == null ? undefined : SummaryBlockFromJSON(json['commission']),
+        'adjustment': json['adjustment'] == null ? undefined : SummaryBlockFromJSON(json['adjustment']),
     };
 }
 
@@ -92,6 +99,7 @@ export function SummaryToJSONTyped(value?: Summary | null, ignoreDiscriminator: 
         'deposit': SummaryBlockToJSON(value['deposit']),
         'withdraw': SummaryBlockToJSON(value['withdraw']),
         'commission': SummaryBlockToJSON(value['commission']),
+        'adjustment': SummaryBlockToJSON(value['adjustment']),
     };
 }
 

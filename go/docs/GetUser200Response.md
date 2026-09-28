@@ -4,22 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**AccountNumber** | Pointer to **string** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] 
+**AccountNumber** | Pointer to **NullableString** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] 
 **Branch** | Pointer to **string** | Branch number (4 digits). | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Role** | Pointer to **string** |  | [optional] 
-**BalanceAvailable** | Pointer to **float32** |  | [optional] 
-**BalanceBlocked** | Pointer to **float32** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**AllowWithdraw** | Pointer to **bool** |  | [optional] 
-**AllowDeposit** | Pointer to **bool** |  | [optional] 
-**AllowInfraction** | Pointer to **bool** |  | [optional] 
-**CashInTicketMin** | Pointer to **float32** |  | [optional] 
-**CashInTicketMax** | Pointer to **float32** |  | [optional] 
-**CashOutTicketMin** | Pointer to **float32** |  | [optional] 
-**CashOutTicketMax** | Pointer to **float32** |  | [optional] 
-**AutoWithdraw** | Pointer to **map[string]interface{}** |  | [optional] 
+**Name** | Pointer to **string** | Registered name of the account. | [optional] 
+**Role** | Pointer to **string** | Account role. | [optional] 
+**BalanceAvailable** | Pointer to **float32** | Balance free for withdrawals and transfers, in reais. | [optional] 
+**BalanceBlocked** | Pointer to **float32** | Part of the balance held, in reais. | [optional] 
+**Status** | Pointer to **string** | Account status. | [optional] 
+**AllowWithdraw** | Pointer to **bool** | When false, creating withdrawals is refused for lack of permission (PZS200). | [optional] 
+**AllowDeposit** | Pointer to **bool** | When false, creating inbound Pix charges is refused for lack of permission (PZD200). | [optional] 
+**CashInTicketMin** | Pointer to **float32** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] 
+**CashInTicketMax** | Pointer to **float32** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] 
+**CashOutTicketMin** | Pointer to **float32** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] 
+**CashOutTicketMax** | Pointer to **float32** | Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused. | [optional] 
 **ServiceFee** | Pointer to [**GetUser200ResponseServiceFee**](GetUser200ResponseServiceFee.md) |  | [optional] 
 **DailyWithdrawLimit** | Pointer to [**GetUser200ResponseDailyWithdrawLimit**](GetUser200ResponseDailyWithdrawLimit.md) |  | [optional] 
 
@@ -41,31 +38,6 @@ will change when the set of required properties is changed
 NewGetUser200ResponseWithDefaults instantiates a new GetUser200Response object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetId
-
-`func (o *GetUser200Response) GetId() string`
-
-GetId returns the Id field if non-nil, zero value otherwise.
-
-### GetIdOk
-
-`func (o *GetUser200Response) GetIdOk() (*string, bool)`
-
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetId
-
-`func (o *GetUser200Response) SetId(v string)`
-
-SetId sets Id field to given value.
-
-### HasId
-
-`func (o *GetUser200Response) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetAccountNumber
 
@@ -92,6 +64,16 @@ SetAccountNumber sets AccountNumber field to given value.
 
 HasAccountNumber returns a boolean if a field has been set.
 
+### SetAccountNumberNil
+
+`func (o *GetUser200Response) SetAccountNumberNil(b bool)`
+
+ SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+
+### UnsetAccountNumber
+`func (o *GetUser200Response) UnsetAccountNumber()`
+
+UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
 ### GetBranch
 
 `func (o *GetUser200Response) GetBranch() string`
@@ -292,31 +274,6 @@ SetAllowDeposit sets AllowDeposit field to given value.
 
 HasAllowDeposit returns a boolean if a field has been set.
 
-### GetAllowInfraction
-
-`func (o *GetUser200Response) GetAllowInfraction() bool`
-
-GetAllowInfraction returns the AllowInfraction field if non-nil, zero value otherwise.
-
-### GetAllowInfractionOk
-
-`func (o *GetUser200Response) GetAllowInfractionOk() (*bool, bool)`
-
-GetAllowInfractionOk returns a tuple with the AllowInfraction field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowInfraction
-
-`func (o *GetUser200Response) SetAllowInfraction(v bool)`
-
-SetAllowInfraction sets AllowInfraction field to given value.
-
-### HasAllowInfraction
-
-`func (o *GetUser200Response) HasAllowInfraction() bool`
-
-HasAllowInfraction returns a boolean if a field has been set.
-
 ### GetCashInTicketMin
 
 `func (o *GetUser200Response) GetCashInTicketMin() float32`
@@ -416,31 +373,6 @@ SetCashOutTicketMax sets CashOutTicketMax field to given value.
 `func (o *GetUser200Response) HasCashOutTicketMax() bool`
 
 HasCashOutTicketMax returns a boolean if a field has been set.
-
-### GetAutoWithdraw
-
-`func (o *GetUser200Response) GetAutoWithdraw() map[string]interface{}`
-
-GetAutoWithdraw returns the AutoWithdraw field if non-nil, zero value otherwise.
-
-### GetAutoWithdrawOk
-
-`func (o *GetUser200Response) GetAutoWithdrawOk() (*map[string]interface{}, bool)`
-
-GetAutoWithdrawOk returns a tuple with the AutoWithdraw field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoWithdraw
-
-`func (o *GetUser200Response) SetAutoWithdraw(v map[string]interface{})`
-
-SetAutoWithdraw sets AutoWithdraw field to given value.
-
-### HasAutoWithdraw
-
-`func (o *GetUser200Response) HasAutoWithdraw() bool`
-
-HasAutoWithdraw returns a boolean if a field has been set.
 
 ### GetServiceFee
 

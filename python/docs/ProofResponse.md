@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_base64** | **str** | Base64-encoded PDF receipt. | [optional] 
+**var_base64** | **str** | PDF receipt as a base64 data URI (&#x60;data:application/pdf;base64,...&#x60;), returned when type&#x3D;base64. | [optional] 
 
 ## Example
 

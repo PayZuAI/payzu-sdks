@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,13 +20,13 @@ import { mapValues } from '../runtime.js';
  */
 export interface PostWithdrawRequest {
     /**
-     * Amount in BRL. Must be >= 1.
+     * Amount in BRL, with at most 2 decimal places. Must be >= 0.01.
      * @type {number}
      * @memberof PostWithdrawRequest
      */
     amount: number;
     /**
-     * Destination Pix key.
+     * Destination Pix key in the format of pixType: CPF or CNPJ with valid check digits and no punctuation, phone as +55 followed by area code and number, email, or random key (EVP).
      * @type {string}
      * @memberof PostWithdrawRequest
      */
@@ -38,13 +38,13 @@ export interface PostWithdrawRequest {
      */
     pixType: PostWithdrawRequestPixTypeEnum;
     /**
-     * Webhook URL for status updates.
+     * URL for transaction notifications (http or https).
      * @type {string}
      * @memberof PostWithdrawRequest
      */
     callbackUrl?: string;
     /**
-     * External reference for this withdrawal.
+     * External reference for this withdrawal. Repeating it with the same amount and key returns the existing withdrawal; with different data, the request is rejected with PZC210.
      * @type {string}
      * @memberof PostWithdrawRequest
      */

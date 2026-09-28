@@ -42,7 +42,7 @@ async function example() {
 
   const body = {
     // string | Webhook id.
-    id: id_example,
+    id: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies DeleteUserWebhookRequest;
 
   try {
@@ -75,13 +75,17 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Webhook deleted. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -113,7 +117,7 @@ async function example() {
 
   const body = {
     // string | Webhook id.
-    id: id_example,
+    id: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies GetUserWebhookRequest;
 
   try {
@@ -153,13 +157,16 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getUserWebhookSentDetail
 
-> SentWebhookDetail getUserWebhookSentDetail(id, callbackId)
+> SentWebhookDetailResponse getUserWebhookSentDetail(id, callbackId)
 
 Get sent callback detail
 
@@ -184,9 +191,9 @@ async function example() {
 
   const body = {
     // string | Webhook id.
-    id: id_example,
+    id: cm3w7k1t40000q8f2r5b9x3ad,
     // string | Callback log id.
-    callbackId: callbackId_example,
+    callbackId: cm3w7l9v20001q8f2u6c1y4be,
   } satisfies GetUserWebhookSentDetailRequest;
 
   try {
@@ -211,7 +218,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**SentWebhookDetail**](SentWebhookDetail.md)
+[**SentWebhookDetailResponse**](SentWebhookDetailResponse.md)
 
 ### Authorization
 
@@ -227,6 +234,9 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Callback delivery detail. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -298,6 +308,8 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook list. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -308,7 +320,7 @@ example().catch(console.error);
 
 Count sent callbacks
 
-Returns how many callbacks were sent, optionally filtered by webhook.
+Returns how many webhook deliveries were made, optionally filtered by webhook.
 
 ### Example
 
@@ -329,7 +341,7 @@ async function example() {
 
   const body = {
     // string | Filter the count by webhook id. (optional)
-    webhookId: webhookId_example,
+    webhookId: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies GetUserWebhooksSentQuantityRequest;
 
   try {
@@ -369,6 +381,9 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Quantity. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -400,7 +415,7 @@ async function example() {
 
   const body = {
     // string | Webhook id.
-    id: id_example,
+    id: cm3w7k1t40000q8f2r5b9x3ad,
     // WebhookUpdateRequest
     webhookUpdateRequest: ...,
   } satisfies PatchUserWebhookRequest;
@@ -443,6 +458,11 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook updated. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | Resource not found |  -  |
+| **409** | Conflict with the current state of the resource |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -514,6 +534,10 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Webhook created. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **409** | Conflict with the current state of the resource |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -545,7 +569,7 @@ async function example() {
 
   const body = {
     // string | Webhook id.
-    id: id_example,
+    id: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies PostUserWebhookRotateSecretRequest;
 
   try {
@@ -585,6 +609,10 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | New secret. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

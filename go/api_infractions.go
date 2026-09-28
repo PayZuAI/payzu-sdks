@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -50,16 +50,17 @@ type ApiGetInfractionsRequest struct {
 	expiresAtTo *time.Time
 	updatedAtFrom *time.Time
 	updatedAtTo *time.Time
-	needsManualReview *bool
 	id *string
 	protocol *string
 }
 
+// Page number.
 func (r ApiGetInfractionsRequest) Page(page int32) ApiGetInfractionsRequest {
 	r.page = &page
 	return r
 }
 
+// Items per page.
 func (r ApiGetInfractionsRequest) Limit(limit int32) ApiGetInfractionsRequest {
 	r.limit = &limit
 	return r
@@ -77,27 +78,31 @@ func (r ApiGetInfractionsRequest) Type_(type_ string) ApiGetInfractionsRequest {
 	return r
 }
 
+// End-to-end ID of the Pix.
 func (r ApiGetInfractionsRequest) EndToEndId(endToEndId string) ApiGetInfractionsRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
+// Transaction ID.
 func (r ApiGetInfractionsRequest) TransactionId(transactionId string) ApiGetInfractionsRequest {
 	r.transactionId = &transactionId
 	return r
 }
 
+// Minimum amount.
 func (r ApiGetInfractionsRequest) AmountMin(amountMin float32) ApiGetInfractionsRequest {
 	r.amountMin = &amountMin
 	return r
 }
 
+// Maximum amount.
 func (r ApiGetInfractionsRequest) AmountMax(amountMax float32) ApiGetInfractionsRequest {
 	r.amountMax = &amountMax
 	return r
 }
 
-// Comma-separated AnalysisResult
+// Comma-separated AnalysisResult: AGREED, DISAGREED.
 func (r ApiGetInfractionsRequest) AnalysisResult(analysisResult string) ApiGetInfractionsRequest {
 	r.analysisResult = &analysisResult
 	return r
@@ -109,11 +114,13 @@ func (r ApiGetInfractionsRequest) ReportedBy(reportedBy string) ApiGetInfraction
 	return r
 }
 
+// CPF or CNPJ of the participant.
 func (r ApiGetInfractionsRequest) ParticipantDocument(participantDocument string) ApiGetInfractionsRequest {
 	r.participantDocument = &participantDocument
 	return r
 }
 
+// Name of the participant.
 func (r ApiGetInfractionsRequest) ParticipantName(participantName string) ApiGetInfractionsRequest {
 	r.participantName = &participantName
 	return r
@@ -176,12 +183,6 @@ func (r ApiGetInfractionsRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetI
 // Filter: updatedAt up to.
 func (r ApiGetInfractionsRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetInfractionsRequest {
 	r.updatedAtTo = &updatedAtTo
-	return r
-}
-
-// Filter: needs manual review.
-func (r ApiGetInfractionsRequest) NeedsManualReview(needsManualReview bool) ApiGetInfractionsRequest {
-	r.needsManualReview = &needsManualReview
 	return r
 }
 
@@ -283,9 +284,17 @@ func (a *InfractionsAPIService) GetInfractionsExecute(r ApiGetInfractionsRequest
 	}
 	if r.sortBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortBy", r.sortBy, "form", "")
+	} else {
+		var defaultValue string = "createdAt"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortBy", defaultValue, "form", "")
+		r.sortBy = &defaultValue
 	}
 	if r.sortDirection != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "desc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", defaultValue, "form", "")
+		r.sortDirection = &defaultValue
 	}
 	if r.reportedAtFrom != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "reportedAtFrom", r.reportedAtFrom, "form", "")
@@ -310,9 +319,6 @@ func (a *InfractionsAPIService) GetInfractionsExecute(r ApiGetInfractionsRequest
 	}
 	if r.updatedAtTo != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "form", "")
-	}
-	if r.needsManualReview != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "needsManualReview", r.needsManualReview, "form", "")
 	}
 	if r.id != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
@@ -371,17 +377,6 @@ func (a *InfractionsAPIService) GetInfractionsExecute(r ApiGetInfractionsRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -494,6 +489,17 @@ func (a *InfractionsAPIService) GetInfractionsByIdExecute(r ApiGetInfractionsByI
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -533,7 +539,7 @@ func (r ApiGetInfractionsDefenseByIdRequest) Execute() (*Defense, *http.Response
 /*
 GetInfractionsDefenseById Get Defense
 
-Get a specific defense for an infraction. **Requires support privileges**.
+Get a specific defense for an infraction.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param infractionId Infraction ID
@@ -611,6 +617,17 @@ func (a *InfractionsAPIService) GetInfractionsDefenseByIdExecute(r ApiGetInfract
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -649,7 +666,7 @@ func (r ApiGetInfractionsDefensesRequest) Execute() ([]Defense, *http.Response, 
 /*
 GetInfractionsDefenses List Defenses
 
-List all defenses for a specific infraction. **Requires support privileges**.
+List all defenses for a specific infraction.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Infraction ID
@@ -724,29 +741,7 @@ func (a *InfractionsAPIService) GetInfractionsDefensesExecute(r ApiGetInfraction
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -785,7 +780,7 @@ func (r ApiPostInfractionsDefenseRequest) Defense(defense string) ApiPostInfract
 	return r
 }
 
-// Evidence files (max: 10MB total)
+// Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
 func (r ApiPostInfractionsDefenseRequest) Files(files []*os.File) ApiPostInfractionsDefenseRequest {
 	r.files = files
 	return r
@@ -835,6 +830,9 @@ func (a *InfractionsAPIService) PostInfractionsDefenseExecute(r ApiPostInfractio
 	localVarFormParams := url.Values{}
 	if r.defense == nil {
 		return localVarReturnValue, nil, reportError("defense is required and must be specified")
+	}
+	if strlen(*r.defense) < 1 {
+		return localVarReturnValue, nil, reportError("defense must have at least 1 elements")
 	}
 	if strlen(*r.defense) > 1000 {
 		return localVarReturnValue, nil, reportError("defense must have less than 1000 elements")
@@ -909,7 +907,40 @@ func (a *InfractionsAPIService) PostInfractionsDefenseExecute(r ApiPostInfractio
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 413 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

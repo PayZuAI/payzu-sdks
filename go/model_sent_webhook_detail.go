@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,20 +20,29 @@ var _ MappedNullable = &SentWebhookDetail{}
 
 // SentWebhookDetail struct for SentWebhookDetail
 type SentWebhookDetail struct {
+	// Identifier of this delivery attempt.
 	Id *string `json:"id,omitempty"`
-	WebhookId *string `json:"webhookId,omitempty"`
-	UserId *string `json:"userId,omitempty"`
+	// Webhook that originated the delivery.
+	WebhookId NullableString `json:"webhookId,omitempty"`
+	// Pix transaction whose event was notified.
 	TransactionId *string `json:"transactionId,omitempty"`
+	// Address this delivery was sent to, recorded at the time of the dispatch.
 	Url *string `json:"url,omitempty"`
-	Body map[string]interface{} `json:"body,omitempty"`
+	// Body sent in the delivery, as serialized JSON.
+	Body *string `json:"body,omitempty"`
 	// HTTP status returned by your endpoint.
 	Status *int32 `json:"status,omitempty"`
-	ResponseHeaders map[string]interface{} `json:"responseHeaders,omitempty"`
+	// Response headers, as serialized JSON.
+	ResponseHeaders *string `json:"responseHeaders,omitempty"`
+	// Body of the response received.
 	ResponseBody *string `json:"responseBody,omitempty"`
-	Error *string `json:"error,omitempty"`
+	// Message of the delivery failure.
+	Error NullableString `json:"error,omitempty"`
 	// Response time of your endpoint, in milliseconds.
 	ResponseTime *int32 `json:"responseTime,omitempty"`
-	EventType *string `json:"eventType,omitempty"`
+	// Event that triggered this delivery, the same value sent in the X-Callback-Event header.
+	EventType NullableString `json:"eventType,omitempty"`
+	// Moment of the delivery attempt.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 }
 
@@ -86,68 +95,46 @@ func (o *SentWebhookDetail) SetId(v string) {
 	o.Id = &v
 }
 
-// GetWebhookId returns the WebhookId field value if set, zero value otherwise.
+// GetWebhookId returns the WebhookId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SentWebhookDetail) GetWebhookId() string {
-	if o == nil || IsNil(o.WebhookId) {
+	if o == nil || IsNil(o.WebhookId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.WebhookId
+	return *o.WebhookId.Get()
 }
 
 // GetWebhookIdOk returns a tuple with the WebhookId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SentWebhookDetail) GetWebhookIdOk() (*string, bool) {
-	if o == nil || IsNil(o.WebhookId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WebhookId, true
+	return o.WebhookId.Get(), o.WebhookId.IsSet()
 }
 
 // HasWebhookId returns a boolean if a field has been set.
 func (o *SentWebhookDetail) HasWebhookId() bool {
-	if o != nil && !IsNil(o.WebhookId) {
+	if o != nil && o.WebhookId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWebhookId gets a reference to the given string and assigns it to the WebhookId field.
+// SetWebhookId gets a reference to the given NullableString and assigns it to the WebhookId field.
 func (o *SentWebhookDetail) SetWebhookId(v string) {
-	o.WebhookId = &v
+	o.WebhookId.Set(&v)
+}
+// SetWebhookIdNil sets the value for WebhookId to be an explicit nil
+func (o *SentWebhookDetail) SetWebhookIdNil() {
+	o.WebhookId.Set(nil)
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *SentWebhookDetail) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
-		var ret string
-		return ret
-	}
-	return *o.UserId
-}
-
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SentWebhookDetail) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
-		return nil, false
-	}
-	return o.UserId, true
-}
-
-// HasUserId returns a boolean if a field has been set.
-func (o *SentWebhookDetail) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *SentWebhookDetail) SetUserId(v string) {
-	o.UserId = &v
+// UnsetWebhookId ensures that no value is present for WebhookId, not even an explicit nil
+func (o *SentWebhookDetail) UnsetWebhookId() {
+	o.WebhookId.Unset()
 }
 
 // GetTransactionId returns the TransactionId field value if set, zero value otherwise.
@@ -215,19 +202,19 @@ func (o *SentWebhookDetail) SetUrl(v string) {
 }
 
 // GetBody returns the Body field value if set, zero value otherwise.
-func (o *SentWebhookDetail) GetBody() map[string]interface{} {
+func (o *SentWebhookDetail) GetBody() string {
 	if o == nil || IsNil(o.Body) {
-		var ret map[string]interface{}
+		var ret string
 		return ret
 	}
-	return o.Body
+	return *o.Body
 }
 
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SentWebhookDetail) GetBodyOk() (map[string]interface{}, bool) {
+func (o *SentWebhookDetail) GetBodyOk() (*string, bool) {
 	if o == nil || IsNil(o.Body) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Body, true
 }
@@ -241,9 +228,9 @@ func (o *SentWebhookDetail) HasBody() bool {
 	return false
 }
 
-// SetBody gets a reference to the given map[string]interface{} and assigns it to the Body field.
-func (o *SentWebhookDetail) SetBody(v map[string]interface{}) {
-	o.Body = v
+// SetBody gets a reference to the given string and assigns it to the Body field.
+func (o *SentWebhookDetail) SetBody(v string) {
+	o.Body = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -279,19 +266,19 @@ func (o *SentWebhookDetail) SetStatus(v int32) {
 }
 
 // GetResponseHeaders returns the ResponseHeaders field value if set, zero value otherwise.
-func (o *SentWebhookDetail) GetResponseHeaders() map[string]interface{} {
+func (o *SentWebhookDetail) GetResponseHeaders() string {
 	if o == nil || IsNil(o.ResponseHeaders) {
-		var ret map[string]interface{}
+		var ret string
 		return ret
 	}
-	return o.ResponseHeaders
+	return *o.ResponseHeaders
 }
 
 // GetResponseHeadersOk returns a tuple with the ResponseHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SentWebhookDetail) GetResponseHeadersOk() (map[string]interface{}, bool) {
+func (o *SentWebhookDetail) GetResponseHeadersOk() (*string, bool) {
 	if o == nil || IsNil(o.ResponseHeaders) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.ResponseHeaders, true
 }
@@ -305,9 +292,9 @@ func (o *SentWebhookDetail) HasResponseHeaders() bool {
 	return false
 }
 
-// SetResponseHeaders gets a reference to the given map[string]interface{} and assigns it to the ResponseHeaders field.
-func (o *SentWebhookDetail) SetResponseHeaders(v map[string]interface{}) {
-	o.ResponseHeaders = v
+// SetResponseHeaders gets a reference to the given string and assigns it to the ResponseHeaders field.
+func (o *SentWebhookDetail) SetResponseHeaders(v string) {
+	o.ResponseHeaders = &v
 }
 
 // GetResponseBody returns the ResponseBody field value if set, zero value otherwise.
@@ -342,36 +329,46 @@ func (o *SentWebhookDetail) SetResponseBody(v string) {
 	o.ResponseBody = &v
 }
 
-// GetError returns the Error field value if set, zero value otherwise.
+// GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SentWebhookDetail) GetError() string {
-	if o == nil || IsNil(o.Error) {
+	if o == nil || IsNil(o.Error.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Error
+	return *o.Error.Get()
 }
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SentWebhookDetail) GetErrorOk() (*string, bool) {
-	if o == nil || IsNil(o.Error) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Error, true
+	return o.Error.Get(), o.Error.IsSet()
 }
 
 // HasError returns a boolean if a field has been set.
 func (o *SentWebhookDetail) HasError() bool {
-	if o != nil && !IsNil(o.Error) {
+	if o != nil && o.Error.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given string and assigns it to the Error field.
+// SetError gets a reference to the given NullableString and assigns it to the Error field.
 func (o *SentWebhookDetail) SetError(v string) {
-	o.Error = &v
+	o.Error.Set(&v)
+}
+// SetErrorNil sets the value for Error to be an explicit nil
+func (o *SentWebhookDetail) SetErrorNil() {
+	o.Error.Set(nil)
+}
+
+// UnsetError ensures that no value is present for Error, not even an explicit nil
+func (o *SentWebhookDetail) UnsetError() {
+	o.Error.Unset()
 }
 
 // GetResponseTime returns the ResponseTime field value if set, zero value otherwise.
@@ -406,36 +403,46 @@ func (o *SentWebhookDetail) SetResponseTime(v int32) {
 	o.ResponseTime = &v
 }
 
-// GetEventType returns the EventType field value if set, zero value otherwise.
+// GetEventType returns the EventType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SentWebhookDetail) GetEventType() string {
-	if o == nil || IsNil(o.EventType) {
+	if o == nil || IsNil(o.EventType.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.EventType
+	return *o.EventType.Get()
 }
 
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SentWebhookDetail) GetEventTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.EventType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EventType, true
+	return o.EventType.Get(), o.EventType.IsSet()
 }
 
 // HasEventType returns a boolean if a field has been set.
 func (o *SentWebhookDetail) HasEventType() bool {
-	if o != nil && !IsNil(o.EventType) {
+	if o != nil && o.EventType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEventType gets a reference to the given string and assigns it to the EventType field.
+// SetEventType gets a reference to the given NullableString and assigns it to the EventType field.
 func (o *SentWebhookDetail) SetEventType(v string) {
-	o.EventType = &v
+	o.EventType.Set(&v)
+}
+// SetEventTypeNil sets the value for EventType to be an explicit nil
+func (o *SentWebhookDetail) SetEventTypeNil() {
+	o.EventType.Set(nil)
+}
+
+// UnsetEventType ensures that no value is present for EventType, not even an explicit nil
+func (o *SentWebhookDetail) UnsetEventType() {
+	o.EventType.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -483,11 +490,8 @@ func (o SentWebhookDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.WebhookId) {
-		toSerialize["webhookId"] = o.WebhookId
-	}
-	if !IsNil(o.UserId) {
-		toSerialize["userId"] = o.UserId
+	if o.WebhookId.IsSet() {
+		toSerialize["webhookId"] = o.WebhookId.Get()
 	}
 	if !IsNil(o.TransactionId) {
 		toSerialize["transactionId"] = o.TransactionId
@@ -507,14 +511,14 @@ func (o SentWebhookDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ResponseBody) {
 		toSerialize["responseBody"] = o.ResponseBody
 	}
-	if !IsNil(o.Error) {
-		toSerialize["error"] = o.Error
+	if o.Error.IsSet() {
+		toSerialize["error"] = o.Error.Get()
 	}
 	if !IsNil(o.ResponseTime) {
 		toSerialize["responseTime"] = o.ResponseTime
 	}
-	if !IsNil(o.EventType) {
-		toSerialize["eventType"] = o.EventType
+	if o.EventType.IsSet() {
+		toSerialize["eventType"] = o.EventType.Get()
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt

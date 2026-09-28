@@ -32,10 +32,10 @@ import (
 )
 
 func main() {
-	id := "PAYZU20250817215911F49RDOBJ" // string | Transaction ID. (optional)
-	clientReference := "clientReference_example" // string | External reference provided when creating the charge. (optional)
-	endToEndId := "endToEndId_example" // string | Pix end-to-end ID. (optional)
-	virtualAccount := "virtualAccount_example" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+	id := "PAYZU20260811R4TZ8WD1NC000000" // string | Transaction ID. (optional)
+	clientReference := "order_12345" // string | External reference provided when creating the charge. (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | Pix end-to-end ID. (optional)
+	virtualAccount := "loja-centro-01" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-	transactionId := "transactionId_example" // string | 
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -124,7 +124,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**transactionId** | **string** |  | 
+**transactionId** | **string** | Transaction ID. | 
 
 ### Other Parameters
 
@@ -174,7 +174,7 @@ import (
 )
 
 func main() {
-	id := "PAYZU2025081418333632CYKN8M" // string | Transaction ID.
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
 	type_ := "pdf" // string | Return format. (optional) (default to "pdf")
 
 	configuration := openapiclient.NewConfiguration()

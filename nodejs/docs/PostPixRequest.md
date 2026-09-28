@@ -29,7 +29,7 @@ const example = {
   "generatedDocument": 12345678901,
   "expiresIn": 600,
   "clientReference": order_12345,
-  "virtualAccount": null,
+  "virtualAccount": loja-centro-01,
 } satisfies PostPixRequest
 
 console.log(example)

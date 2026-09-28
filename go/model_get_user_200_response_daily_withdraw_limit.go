@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -18,12 +18,16 @@ import (
 // checks if the GetUser200ResponseDailyWithdrawLimit type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetUser200ResponseDailyWithdrawLimit{}
 
-// GetUser200ResponseDailyWithdrawLimit struct for GetUser200ResponseDailyWithdrawLimit
+// GetUser200ResponseDailyWithdrawLimit Control of the daily outbound cap.
 type GetUser200ResponseDailyWithdrawLimit struct {
+	// Daily outbound cap, in reais, summing withdrawals and internal transfers.
 	Limit *float32 `json:"limit,omitempty"`
+	// Total of the cap consumed in the day, in reais, by withdrawals and internal transfers.
 	Used *float32 `json:"used,omitempty"`
+	// Date and time of the last change to the daily limit.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	LastReset *time.Time `json:"lastReset,omitempty"`
+	// Moment of the last reset of the daily usage.
+	LastReset NullableTime `json:"lastReset,omitempty"`
 }
 
 // NewGetUser200ResponseDailyWithdrawLimit instantiates a new GetUser200ResponseDailyWithdrawLimit object
@@ -139,36 +143,46 @@ func (o *GetUser200ResponseDailyWithdrawLimit) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
-// GetLastReset returns the LastReset field value if set, zero value otherwise.
+// GetLastReset returns the LastReset field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetUser200ResponseDailyWithdrawLimit) GetLastReset() time.Time {
-	if o == nil || IsNil(o.LastReset) {
+	if o == nil || IsNil(o.LastReset.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastReset
+	return *o.LastReset.Get()
 }
 
 // GetLastResetOk returns a tuple with the LastReset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetUser200ResponseDailyWithdrawLimit) GetLastResetOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.LastReset) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastReset, true
+	return o.LastReset.Get(), o.LastReset.IsSet()
 }
 
 // HasLastReset returns a boolean if a field has been set.
 func (o *GetUser200ResponseDailyWithdrawLimit) HasLastReset() bool {
-	if o != nil && !IsNil(o.LastReset) {
+	if o != nil && o.LastReset.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLastReset gets a reference to the given time.Time and assigns it to the LastReset field.
+// SetLastReset gets a reference to the given NullableTime and assigns it to the LastReset field.
 func (o *GetUser200ResponseDailyWithdrawLimit) SetLastReset(v time.Time) {
-	o.LastReset = &v
+	o.LastReset.Set(&v)
+}
+// SetLastResetNil sets the value for LastReset to be an explicit nil
+func (o *GetUser200ResponseDailyWithdrawLimit) SetLastResetNil() {
+	o.LastReset.Set(nil)
+}
+
+// UnsetLastReset ensures that no value is present for LastReset, not even an explicit nil
+func (o *GetUser200ResponseDailyWithdrawLimit) UnsetLastReset() {
+	o.LastReset.Unset()
 }
 
 func (o GetUser200ResponseDailyWithdrawLimit) MarshalJSON() ([]byte, error) {
@@ -190,8 +204,8 @@ func (o GetUser200ResponseDailyWithdrawLimit) ToMap() (map[string]interface{}, e
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !IsNil(o.LastReset) {
-		toSerialize["lastReset"] = o.LastReset
+	if o.LastReset.IsSet() {
+		toSerialize["lastReset"] = o.LastReset.Get()
 	}
 	return toSerialize, nil
 }

@@ -1,0 +1,17 @@
+generatorName: php
+outputDir: php
+templateDir: templates/php
+gitUserId: PayZuAI
+gitRepoId: payzu-sdks
+additionalProperties:
+  composerPackageName: payzu/pix
+  invokerPackage: PayZu\Pix
+  packageName: PayZuPix
+  artifactVersion: 2.0.0
+  artifactUrl: https://docs.payzu.com.br
+  licenseName: MIT
+  developerOrganization: PayZu
+  developerOrganizationUrl: https://payzu.com.br
+globalProperties:
+  apiTests: false
+  modelTests: false

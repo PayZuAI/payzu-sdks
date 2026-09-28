@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CashInMinimum** | Pointer to **float32** |  | [optional] 
-**CashInFixed** | Pointer to **float32** |  | [optional] 
-**CashInPercent** | Pointer to **float32** |  | [optional] 
-**CashOutMinimum** | Pointer to **float32** |  | [optional] 
-**CashOutFixed** | Pointer to **float32** |  | [optional] 
-**CashOutPercent** | Pointer to **float32** |  | [optional] 
+**CashInMinimum** | Pointer to **float32** | Floor of the cash-in fee, in reais. | [optional] 
+**CashInFixed** | Pointer to **float32** | Fixed part of the cash-in fee, in reais. | [optional] 
+**CashInPercent** | Pointer to **float32** | Percentage of the cash-in fee. | [optional] 
+**CashOutMinimum** | Pointer to **float32** | Floor of the withdrawal fee, in reais. | [optional] 
+**CashOutFixed** | Pointer to **float32** | Fixed part of the withdrawal fee, in reais. | [optional] 
+**CashOutPercent** | Pointer to **float32** | Percentage of the withdrawal fee. | [optional] 
 
 ## Methods
 

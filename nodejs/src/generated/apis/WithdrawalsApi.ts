@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -19,41 +19,6 @@ import {
     ApiErrorToJSON,
 } from '../models/ApiError.js';
 import {
-    type DictConsultResponse,
-    DictConsultResponseFromJSON,
-    DictConsultResponseToJSON,
-} from '../models/DictConsultResponse.js';
-import {
-    type GetPixKey400Response,
-    GetPixKey400ResponseFromJSON,
-    GetPixKey400ResponseToJSON,
-} from '../models/GetPixKey400Response.js';
-import {
-    type GetPixKey404Response,
-    GetPixKey404ResponseFromJSON,
-    GetPixKey404ResponseToJSON,
-} from '../models/GetPixKey404Response.js';
-import {
-    type PixKeyInfo,
-    PixKeyInfoFromJSON,
-    PixKeyInfoToJSON,
-} from '../models/PixKeyInfo.js';
-import {
-    type PostPixQrcodeRead400Response,
-    PostPixQrcodeRead400ResponseFromJSON,
-    PostPixQrcodeRead400ResponseToJSON,
-} from '../models/PostPixQrcodeRead400Response.js';
-import {
-    type PostPixQrcodeReadRequest,
-    PostPixQrcodeReadRequestFromJSON,
-    PostPixQrcodeReadRequestToJSON,
-} from '../models/PostPixQrcodeReadRequest.js';
-import {
-    type PostWithdrawQrcode400Response,
-    PostWithdrawQrcode400ResponseFromJSON,
-    PostWithdrawQrcode400ResponseToJSON,
-} from '../models/PostWithdrawQrcode400Response.js';
-import {
     type PostWithdrawQrcodeRequest,
     PostWithdrawQrcodeRequestFromJSON,
     PostWithdrawQrcodeRequestToJSON,
@@ -69,23 +34,10 @@ import {
     ProofResponseToJSON,
 } from '../models/ProofResponse.js';
 import {
-    type QRCodeReadResponse,
-    QRCodeReadResponseFromJSON,
-    QRCodeReadResponseToJSON,
-} from '../models/QRCodeReadResponse.js';
-import {
     type Transaction,
     TransactionFromJSON,
     TransactionToJSON,
 } from '../models/Transaction.js';
-
-export interface GetPixKeyRequest {
-    pixKey: string;
-}
-
-export interface GetUserDictRequest {
-    key: string;
-}
 
 export interface GetWithdrawRequest {
     id?: string;
@@ -97,10 +49,6 @@ export interface GetWithdrawRequest {
 export interface GetWithdrawProofRequest {
     id: string;
     type?: GetWithdrawProofTypeEnum;
-}
-
-export interface PostPixQrcodeReadOperationRequest {
-    postPixQrcodeReadRequest: PostPixQrcodeReadRequest;
 }
 
 export interface PostWithdrawOperationRequest {
@@ -119,54 +67,6 @@ export interface PostWithdrawQrcodeOperationRequest {
  */
 export interface WithdrawalsApiInterface {
     /**
-     * Creates request options for getPixKey without sending the request
-     * @param {string} pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
-     * @throws {RequiredError}
-     * @memberof WithdrawalsApiInterface
-     */
-    getPixKeyRequestOpts(requestParameters: GetPixKeyRequest): Promise<runtime.RequestOpts>;
-
-    /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.
-     * @summary Dict Pix Key Lookup
-     * @param {string} pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WithdrawalsApiInterface
-     */
-    getPixKeyRaw(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PixKeyInfo>>;
-
-    /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.
-     * Dict Pix Key Lookup
-     */
-    getPixKey(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PixKeyInfo>;
-
-    /**
-     * Creates request options for getUserDict without sending the request
-     * @param {string} key Pix key to look up (CPF, CNPJ, email, phone or EVP).
-     * @throws {RequiredError}
-     * @memberof WithdrawalsApiInterface
-     */
-    getUserDictRequestOpts(requestParameters: GetUserDictRequest): Promise<runtime.RequestOpts>;
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * @summary DICT key lookup
-     * @param {string} key Pix key to look up (CPF, CNPJ, email, phone or EVP).
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WithdrawalsApiInterface
-     */
-    getUserDictRaw(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DictConsultResponse>>;
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * DICT key lookup
-     */
-    getUserDict(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DictConsultResponse>;
-
-    /**
      * Creates request options for getWithdraw without sending the request
      * @param {string} [id] Transaction ID.
      * @param {string} [clientReference] External reference provided when creating the withdrawal.
@@ -178,7 +78,7 @@ export interface WithdrawalsApiInterface {
     getWithdrawRequestOpts(requestParameters: GetWithdrawRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Get the latest status and details for a withdrawal. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
      * @summary Retrieve Withdrawal
      * @param {string} [id] Transaction ID.
      * @param {string} [clientReference] External reference provided when creating the withdrawal.
@@ -191,7 +91,7 @@ export interface WithdrawalsApiInterface {
     getWithdrawRaw(requestParameters: GetWithdrawRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Get the latest status and details for a withdrawal. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
      * Retrieve Withdrawal
      */
     getWithdraw(requestParameters: GetWithdrawRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
@@ -206,7 +106,7 @@ export interface WithdrawalsApiInterface {
     getWithdrawProofRequestOpts(requestParameters: GetWithdrawProofRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * @summary Get Withdrawal Receipt
      * @param {string} id Transaction ID.
      * @param {'pdf' | 'base64'} [type] Return format.
@@ -217,34 +117,10 @@ export interface WithdrawalsApiInterface {
     getWithdrawProofRaw(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProofResponse>>;
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * Get Withdrawal Receipt
      */
     getWithdrawProof(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProofResponse>;
-
-    /**
-     * Creates request options for postPixQrcodeRead without sending the request
-     * @param {PostPixQrcodeReadRequest} postPixQrcodeReadRequest 
-     * @throws {RequiredError}
-     * @memberof WithdrawalsApiInterface
-     */
-    postPixQrcodeReadRequestOpts(requestParameters: PostPixQrcodeReadOperationRequest): Promise<runtime.RequestOpts>;
-
-    /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
-     * @summary Read QR Code
-     * @param {PostPixQrcodeReadRequest} postPixQrcodeReadRequest 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WithdrawalsApiInterface
-     */
-    postPixQrcodeReadRaw(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<QRCodeReadResponse>>;
-
-    /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
-     * Read QR Code
-     */
-    postPixQrcodeRead(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<QRCodeReadResponse>;
 
     /**
      * Creates request options for postWithdraw without sending the request
@@ -255,7 +131,7 @@ export interface WithdrawalsApiInterface {
     postWithdrawRequestOpts(requestParameters: PostWithdrawOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.
+     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
      * @summary Create Withdrawal (Pix key)
      * @param {PostWithdrawRequest} postWithdrawRequest 
      * @param {*} [options] Override http request option.
@@ -265,7 +141,7 @@ export interface WithdrawalsApiInterface {
     postWithdrawRaw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.
+     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
      * Create Withdrawal (Pix key)
      */
     postWithdraw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
@@ -279,7 +155,7 @@ export interface WithdrawalsApiInterface {
     postWithdrawQrcodeRequestOpts(requestParameters: PostWithdrawQrcodeOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
      * @summary Create Withdrawal using QR Code
      * @param {PostWithdrawQrcodeRequest} postWithdrawQrcodeRequest 
      * @param {*} [options] Override http request option.
@@ -289,7 +165,7 @@ export interface WithdrawalsApiInterface {
     postWithdrawQrcodeRaw(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
      * Create Withdrawal using QR Code
      */
     postWithdrawQrcode(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
@@ -300,122 +176,6 @@ export interface WithdrawalsApiInterface {
  * 
  */
 export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInterface {
-
-    /**
-     * Creates request options for getPixKey without sending the request
-     */
-    async getPixKeyRequestOpts(requestParameters: GetPixKeyRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['pixKey'] == null) {
-            throw new runtime.RequiredError(
-                'pixKey',
-                'Required parameter "pixKey" was null or undefined when calling getPixKey().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['pixKey'] != null) {
-            queryParameters['pixKey'] = requestParameters['pixKey'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("BearerAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-
-        let urlPath = `/pix/key`;
-
-        return {
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.
-     * Dict Pix Key Lookup
-     */
-    async getPixKeyRaw(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PixKeyInfo>> {
-        const requestOptions = await this.getPixKeyRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PixKeyInfoFromJSON(jsonValue));
-    }
-
-    /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.
-     * Dict Pix Key Lookup
-     */
-    async getPixKey(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PixKeyInfo> {
-        const response = await this.getPixKeyRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for getUserDict without sending the request
-     */
-    async getUserDictRequestOpts(requestParameters: GetUserDictRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['key'] == null) {
-            throw new runtime.RequiredError(
-                'key',
-                'Required parameter "key" was null or undefined when calling getUserDict().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['key'] != null) {
-            queryParameters['key'] = requestParameters['key'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("BearerAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-
-        let urlPath = `/user/dict`;
-
-        return {
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * DICT key lookup
-     */
-    async getUserDictRaw(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DictConsultResponse>> {
-        const requestOptions = await this.getUserDictRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => DictConsultResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * DICT key lookup
-     */
-    async getUserDict(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DictConsultResponse> {
-        const response = await this.getUserDictRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
 
     /**
      * Creates request options for getWithdraw without sending the request
@@ -461,7 +221,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Get the latest status and details for a withdrawal. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
      * Retrieve Withdrawal
      */
     async getWithdrawRaw(requestParameters: GetWithdrawRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
@@ -472,7 +232,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Get the latest status and details for a withdrawal. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
+     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
      * Retrieve Withdrawal
      */
     async getWithdraw(requestParameters: GetWithdrawRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
@@ -520,7 +280,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * Get Withdrawal Receipt
      */
     async getWithdrawProofRaw(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProofResponse>> {
@@ -531,68 +291,11 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
      * Get Withdrawal Receipt
      */
     async getWithdrawProof(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProofResponse> {
         const response = await this.getWithdrawProofRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for postPixQrcodeRead without sending the request
-     */
-    async postPixQrcodeReadRequestOpts(requestParameters: PostPixQrcodeReadOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['postPixQrcodeReadRequest'] == null) {
-            throw new runtime.RequiredError(
-                'postPixQrcodeReadRequest',
-                'Required parameter "postPixQrcodeReadRequest" was null or undefined when calling postPixQrcodeRead().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("BearerAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-
-        let urlPath = `/pix/qrcode/read`;
-
-        return {
-            path: urlPath,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PostPixQrcodeReadRequestToJSON(requestParameters['postPixQrcodeReadRequest']),
-        };
-    }
-
-    /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
-     * Read QR Code
-     */
-    async postPixQrcodeReadRaw(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<QRCodeReadResponse>> {
-        const requestOptions = await this.postPixQrcodeReadRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => QRCodeReadResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
-     * Read QR Code
-     */
-    async postPixQrcodeRead(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<QRCodeReadResponse> {
-        const response = await this.postPixQrcodeReadRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -634,7 +337,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.
+     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
      * Create Withdrawal (Pix key)
      */
     async postWithdrawRaw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
@@ -645,7 +348,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.
+     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
      * Create Withdrawal (Pix key)
      */
     async postWithdraw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
@@ -691,7 +394,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
      * Create Withdrawal using QR Code
      */
     async postWithdrawQrcodeRaw(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
@@ -702,7 +405,7 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.
+     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
      * Create Withdrawal using QR Code
      */
     async postWithdrawQrcode(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {

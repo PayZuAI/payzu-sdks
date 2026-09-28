@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -21,15 +21,15 @@ var _ MappedNullable = &PostWithdrawRequest{}
 
 // PostWithdrawRequest struct for PostWithdrawRequest
 type PostWithdrawRequest struct {
-	// Amount in BRL. Must be >= 1.
+	// Amount in BRL, with at most 2 decimal places. Must be >= 0.01.
 	Amount float32 `json:"amount"`
-	// Destination Pix key.
+	// Destination Pix key in the format of pixType: CPF or CNPJ with valid check digits and no punctuation, phone as +55 followed by area code and number, email, or random key (EVP).
 	PixKey string `json:"pixKey"`
 	// Pix key type.
 	PixType string `json:"pixType"`
-	// Webhook URL for status updates.
-	CallbackUrl *string `json:"callbackUrl,omitempty"`
-	// External reference for this withdrawal.
+	// URL for transaction notifications (http or https).
+	CallbackUrl *string `json:"callbackUrl,omitempty" validate:"regexp=^https?:\\/\\/"`
+	// External reference for this withdrawal. Repeating it with the same amount and key returns the existing withdrawal; with different data, the request is rejected with PZC210.
 	ClientReference *string `json:"clientReference,omitempty"`
 	// Optional description.
 	Description *string `json:"description,omitempty"`

@@ -1,4 +1,4 @@
-# OpenAPI\Client\ReportsApi
+# PayZu\Pix\ReportsApi
 
 Transaction history, reports, bank statements, and pending deposits
 
@@ -22,7 +22,7 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 ## `downloadUserReport()`
 
 ```php
-downloadUserReport($id): \OpenAPI\Client\Model\DownloadUserReport200Response
+downloadUserReport($id): \PayZu\Pix\Model\DownloadUserReport200Response
 ```
 
 Download report
@@ -37,16 +37,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string
+$id = 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78; // string | Report ID.
 
 try {
     $result = $apiInstance->downloadUserReport($id);
@@ -60,11 +60,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **id** | **string**| Report ID. | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\DownloadUserReport200Response**](../Model/DownloadUserReport200Response.md)
+[**\PayZu\Pix\Model\DownloadUserReport200Response**](../Model/DownloadUserReport200Response.md)
 
 ### Authorization
 
@@ -82,7 +82,7 @@ try {
 ## `getUserBankStatement()`
 
 ```php
-getUserBankStatement($id): \OpenAPI\Client\Model\BankStatement
+getUserBankStatement($id): \PayZu\Pix\Model\BankStatement
 ```
 
 Get bank statement
@@ -97,16 +97,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Statement entry id.
+$id = cm3w7q8s10004q8f2k9f5b7eh; // string | Statement entry id.
 
 try {
     $result = $apiInstance->getUserBankStatement($id);
@@ -124,7 +124,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\BankStatement**](../Model/BankStatement.md)
+[**\PayZu\Pix\Model\BankStatement**](../Model/BankStatement.md)
 
 ### Authorization
 
@@ -142,7 +142,7 @@ try {
 ## `getUserBankStatements()`
 
 ```php
-getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction): \OpenAPI\Client\Model\BankStatementListResponse
+getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction): \PayZu\Pix\Model\BankStatementListResponse
 ```
 
 List bank statements
@@ -157,27 +157,27 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$created_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Start date (required).
-$created_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | End date (required).
-$id = 'id_example'; // string
-$operation = 'operation_example'; // string
-$reason = 'reason_example'; // string
-$transaction_id = 'transaction_id_example'; // string
-$amount_from = 3.4; // float
-$amount_to = 3.4; // float
-$page = 1; // int
-$limit = 10; // int
-$sort_by = 'createdAt'; // string
-$sort_direction = 'desc'; // string
+$created_at_from = 2026-08-01; // \DateTime | Start date (required).
+$created_at_to = 2026-08-31; // \DateTime | End date (required).
+$id = cm3w7q8s10004q8f2k9f5b7eh; // string | Entry ID.
+$operation = 'operation_example'; // string | Operation type.  `INCREMENT` `DECREMENT`
+$reason = Estorno; // string | Reason for the entry.
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
+$amount_from = 10.9; // float | Minimum amount.
+$amount_to = 500; // float | Maximum amount.
+$page = 1; // int | Page number.
+$limit = 10; // int | Items per page.
+$sort_by = 'createdAt'; // string | Sort field.
+$sort_direction = 'desc'; // string | Sort direction.
 
 try {
     $result = $apiInstance->getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction);
@@ -193,20 +193,20 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **created_at_from** | **\DateTime**| Start date (required). | |
 | **created_at_to** | **\DateTime**| End date (required). | |
-| **id** | **string**|  | [optional] |
-| **operation** | **string**|  | [optional] |
-| **reason** | **string**|  | [optional] |
-| **transaction_id** | **string**|  | [optional] |
-| **amount_from** | **float**|  | [optional] |
-| **amount_to** | **float**|  | [optional] |
-| **page** | **int**|  | [optional] [default to 1] |
-| **limit** | **int**|  | [optional] [default to 10] |
-| **sort_by** | **string**|  | [optional] [default to &#39;createdAt&#39;] |
-| **sort_direction** | **string**|  | [optional] [default to &#39;desc&#39;] |
+| **id** | **string**| Entry ID. | [optional] |
+| **operation** | **string**| Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] |
+| **reason** | **string**| Reason for the entry. | [optional] |
+| **transaction_id** | **string**| Transaction ID. | [optional] |
+| **amount_from** | **float**| Minimum amount. | [optional] |
+| **amount_to** | **float**| Maximum amount. | [optional] |
+| **page** | **int**| Page number. | [optional] [default to 1] |
+| **limit** | **int**| Items per page. | [optional] [default to 10] |
+| **sort_by** | **string**| Sort field. | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**| Sort direction. | [optional] [default to &#39;desc&#39;] |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\BankStatementListResponse**](../Model/BankStatementListResponse.md)
+[**\PayZu\Pix\Model\BankStatementListResponse**](../Model/BankStatementListResponse.md)
 
 ### Authorization
 
@@ -224,7 +224,7 @@ try {
 ## `getUserDepositPending()`
 
 ```php
-getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit): \OpenAPI\Client\Model\DepositPendingListResponse
+getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit): \PayZu\Pix\Model\DepositPendingListResponse
 ```
 
 List pending deposits
@@ -239,25 +239,25 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$status = 'status_example'; // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-$document = 'document_example'; // string
-$name = 'name_example'; // string
-$end_to_end_id = 'end_to_end_id_example'; // string
-$amount_min = 3.4; // float
-$amount_max = 3.4; // float
-$created_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$created_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$page = 1; // int
-$limit = 20; // int
+$status = PENDING; // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+$document = 12345678901; // string | CPF or CNPJ, digits only.
+$name = John Doe; // string | Name of the payer or receiver.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | End-to-end ID of the Pix.
+$amount_min = 10.9; // float | Minimum amount.
+$amount_max = 500; // float | Maximum amount.
+$created_at_from = 2026-08-01; // \DateTime | Start of the creation date range.
+$created_at_to = 2026-08-31; // \DateTime | End of the creation date range.
+$page = 1; // int | Page number.
+$limit = 20; // int | Items per page.
 
 try {
     $result = $apiInstance->getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit);
@@ -272,19 +272,19 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **status** | **string**| Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [optional] |
-| **document** | **string**|  | [optional] |
-| **name** | **string**|  | [optional] |
-| **end_to_end_id** | **string**|  | [optional] |
-| **amount_min** | **float**|  | [optional] |
-| **amount_max** | **float**|  | [optional] |
-| **created_at_from** | **\DateTime**|  | [optional] |
-| **created_at_to** | **\DateTime**|  | [optional] |
-| **page** | **int**|  | [optional] [default to 1] |
-| **limit** | **int**|  | [optional] [default to 20] |
+| **document** | **string**| CPF or CNPJ, digits only. | [optional] |
+| **name** | **string**| Name of the payer or receiver. | [optional] |
+| **end_to_end_id** | **string**| End-to-end ID of the Pix. | [optional] |
+| **amount_min** | **float**| Minimum amount. | [optional] |
+| **amount_max** | **float**| Maximum amount. | [optional] |
+| **created_at_from** | **\DateTime**| Start of the creation date range. | [optional] |
+| **created_at_to** | **\DateTime**| End of the creation date range. | [optional] |
+| **page** | **int**| Page number. | [optional] [default to 1] |
+| **limit** | **int**| Items per page. | [optional] [default to 20] |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\DepositPendingListResponse**](../Model/DepositPendingListResponse.md)
+[**\PayZu\Pix\Model\DepositPendingListResponse**](../Model/DepositPendingListResponse.md)
 
 ### Authorization
 
@@ -302,7 +302,7 @@ try {
 ## `getUserDepositPendingById()`
 
 ```php
-getUserDepositPendingById($id): \OpenAPI\Client\Model\DepositPending
+getUserDepositPendingById($id): \PayZu\Pix\Model\DepositPending
 ```
 
 Get pending deposit
@@ -317,16 +317,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Pending deposit id.
+$id = cm3w7r1u50005q8f2m1g6c8fj; // string | Pending deposit id.
 
 try {
     $result = $apiInstance->getUserDepositPendingById($id);
@@ -344,7 +344,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\DepositPending**](../Model/DepositPending.md)
+[**\PayZu\Pix\Model\DepositPending**](../Model/DepositPending.md)
 
 ### Authorization
 
@@ -362,7 +362,7 @@ try {
 ## `getUserReport()`
 
 ```php
-getUserReport($id): \OpenAPI\Client\Model\ReportJob
+getUserReport($id): \PayZu\Pix\Model\ReportJobDetail
 ```
 
 Get report job status
@@ -377,16 +377,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string
+$id = 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78; // string | Report ID.
 
 try {
     $result = $apiInstance->getUserReport($id);
@@ -400,11 +400,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **id** | **string**| Report ID. | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\ReportJob**](../Model/ReportJob.md)
+[**\PayZu\Pix\Model\ReportJobDetail**](../Model/ReportJobDetail.md)
 
 ### Authorization
 
@@ -422,7 +422,7 @@ try {
 ## `getUserSummary()`
 
 ```php
-getUserSummary($date_from, $date_to, $group_by, $grouped): \OpenAPI\Client\Model\Summary
+getUserSummary($date_from, $date_to, $group_by, $grouped): \PayZu\Pix\Model\Summary
 ```
 
 Transaction summary
@@ -437,19 +437,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$date_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$date_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$group_by = 'day'; // string
-$grouped = True; // bool | When true, returns a series grouped by date.
+$date_from = 2026-08-01; // \DateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
+$date_to = 2026-08-31; // \DateTime | End date. Default: now.
+$group_by = 'day'; // string | Grouping applied to the transactions.
+$grouped = true; // bool | When true, returns a series grouped by date.
 
 try {
     $result = $apiInstance->getUserSummary($date_from, $date_to, $group_by, $grouped);
@@ -463,14 +463,14 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date_from** | **\DateTime**|  | [optional] |
-| **date_to** | **\DateTime**|  | [optional] |
-| **group_by** | **string**|  | [optional] [default to &#39;day&#39;] |
+| **date_from** | **\DateTime**| Start date. Default: start of the previous day (America/Sao_Paulo). | [optional] |
+| **date_to** | **\DateTime**| End date. Default: now. | [optional] |
+| **group_by** | **string**| Grouping applied to the transactions. | [optional] [default to &#39;day&#39;] |
 | **grouped** | **bool**| When true, returns a series grouped by date. | [optional] |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Summary**](../Model/Summary.md)
+[**\PayZu\Pix\Model\Summary**](../Model/Summary.md)
 
 ### Authorization
 
@@ -488,7 +488,7 @@ try {
 ## `getUserTransactionById()`
 
 ```php
-getUserTransactionById($id): \OpenAPI\Client\Model\GetUserTransactionById200Response
+getUserTransactionById($id): \PayZu\Pix\Model\GetUserTransactionById200Response
 ```
 
 List transaction details
@@ -503,16 +503,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string
+$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
 
 try {
     $result = $apiInstance->getUserTransactionById($id);
@@ -526,11 +526,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**|  | |
+| **id** | **string**| Transaction ID. | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\GetUserTransactionById200Response**](../Model/GetUserTransactionById200Response.md)
+[**\PayZu\Pix\Model\GetUserTransactionById200Response**](../Model/GetUserTransactionById200Response.md)
 
 ### Authorization
 
@@ -548,7 +548,7 @@ try {
 ## `getUserTransactions()`
 
 ```php
-getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account): \OpenAPI\Client\Model\GetUserTransactions200Response
+getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account, $has_qr_code): \PayZu\Pix\Model\GetUserTransactions200Response
 ```
 
 List Transactions
@@ -563,34 +563,35 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$date_from = 2025-08-01; // string | Start date (YYYY-MM-DD).
-$date_to = 2025-08-17; // string | End date (YYYY-MM-DD).
-$limit = 10; // float | Items per page (max 1000).
-$page = 1; // float | Page number (default 1).
-$id = PAYZU2025081418333632CYKN8M; // string | Transaction ID.
+$date_from = 2026-08-01; // \DateTime | Start date or date-time (ISO 8601).
+$date_to = 2026-08-31; // \DateTime | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+$limit = 10; // int | Items per page (max 1000).
+$page = 1; // int | Page number (default 1).
+$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
 $status = COMPLETED; // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-$type = DEPOSIT; // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION.
-$method = PIX; // string | Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER.
+$type = DEPOSIT; // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+$method = PIX; // string | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
 $amount = 15000; // float | Amount filter. Minimum 0.01.
 $document = 12345678901; // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
 $name = Alice; // string | Name filter.
-$end_to_end_id = E00360305202508141833bcf1f37b487; // string | Pix end-to-end ID.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | Pix end-to-end ID.
 $sort_by = 'createdAt'; // string | Field to sort by
 $sort_direction = 'desc'; // string | Sort direction
-$client_reference = 'client_reference_example'; // string | Filter by external reference
-$virtual_account = 'virtual_account_example'; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$client_reference = order_12345; // string | Filter by external reference
+$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$has_qr_code = True; // bool | Only transactions with (true) or without (false) QR Code.
 
 try {
-    $result = $apiInstance->getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account);
+    $result = $apiInstance->getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account, $has_qr_code);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ReportsApi->getUserTransactions: ', $e->getMessage(), PHP_EOL;
@@ -601,14 +602,14 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date_from** | **string**| Start date (YYYY-MM-DD). | [optional] |
-| **date_to** | **string**| End date (YYYY-MM-DD). | [optional] |
-| **limit** | **float**| Items per page (max 1000). | [optional] [default to 10] |
-| **page** | **float**| Page number (default 1). | [optional] [default to 1] |
+| **date_from** | **\DateTime**| Start date or date-time (ISO 8601). | [optional] |
+| **date_to** | **\DateTime**| End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [optional] |
+| **limit** | **int**| Items per page (max 1000). | [optional] [default to 10] |
+| **page** | **int**| Page number (default 1). | [optional] [default to 1] |
 | **id** | **string**| Transaction ID. | [optional] |
 | **status** | **string**| Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [optional] |
-| **type** | **string**| Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION. | [optional] |
-| **method** | **string**| Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER. | [optional] |
+| **type** | **string**| Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] |
+| **method** | **string**| Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | [optional] |
 | **amount** | **float**| Amount filter. Minimum 0.01. | [optional] |
 | **document** | **string**| CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [optional] |
 | **name** | **string**| Name filter. | [optional] |
@@ -617,10 +618,11 @@ try {
 | **sort_direction** | **string**| Sort direction | [optional] [default to &#39;desc&#39;] |
 | **client_reference** | **string**| Filter by external reference | [optional] |
 | **virtual_account** | **string**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **has_qr_code** | **bool**| Only transactions with (true) or without (false) QR Code. | [optional] |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\GetUserTransactions200Response**](../Model/GetUserTransactions200Response.md)
+[**\PayZu\Pix\Model\GetUserTransactions200Response**](../Model/GetUserTransactions200Response.md)
 
 ### Authorization
 
@@ -638,7 +640,7 @@ try {
 ## `listUserReports()`
 
 ```php
-listUserReports($page, $limit, $status, $created_at_from, $created_at_to, $updated_at_from, $updated_at_to, $sort_by, $sort_direction): \OpenAPI\Client\Model\ListUserReports200Response
+listUserReports($page, $limit, $status, $created_at_from, $created_at_to, $updated_at_from, $updated_at_to, $sort_by, $sort_direction): \PayZu\Pix\Model\ListUserReports200Response
 ```
 
 List report jobs
@@ -653,22 +655,22 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int
-$limit = 10; // int
-$status = 'status_example'; // string
-$created_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: created from.
-$created_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: created up to.
-$updated_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: updated from.
-$updated_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: updated up to.
+$page = 1; // int | Page number.
+$limit = 10; // int | Items per page.
+$status = COMPLETED,FAILED; // string | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
+$created_at_from = 2026-08-01; // \DateTime | Filter: created from.
+$created_at_to = 2026-08-31; // \DateTime | Filter: created up to.
+$updated_at_from = 2026-08-01; // \DateTime | Filter: updated from.
+$updated_at_to = 2026-08-31; // \DateTime | Filter: updated up to.
 $sort_by = 'createdAt'; // string | Sort field.
 $sort_direction = 'desc'; // string | Sort direction.
 
@@ -684,9 +686,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**|  | [optional] [default to 1] |
-| **limit** | **int**|  | [optional] [default to 10] |
-| **status** | **string**|  | [optional] |
+| **page** | **int**| Page number. | [optional] [default to 1] |
+| **limit** | **int**| Items per page. | [optional] [default to 10] |
+| **status** | **string**| Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] |
 | **created_at_from** | **\DateTime**| Filter: created from. | [optional] |
 | **created_at_to** | **\DateTime**| Filter: created up to. | [optional] |
 | **updated_at_from** | **\DateTime**| Filter: updated from. | [optional] |
@@ -696,7 +698,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\ListUserReports200Response**](../Model/ListUserReports200Response.md)
+[**\PayZu\Pix\Model\ListUserReports200Response**](../Model/ListUserReports200Response.md)
 
 ### Authorization
 
@@ -714,7 +716,7 @@ try {
 ## `postUserReport()`
 
 ```php
-postUserReport($post_user_report_request): \OpenAPI\Client\Model\ReportJob
+postUserReport($post_user_report_request): \PayZu\Pix\Model\ReportJobAccepted
 ```
 
 Generate transactions report
@@ -729,16 +731,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\ReportsApi(
+$apiInstance = new PayZu\Pix\Api\ReportsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$post_user_report_request = new \OpenAPI\Client\Model\PostUserReportRequest(); // \OpenAPI\Client\Model\PostUserReportRequest
+$post_user_report_request = new \PayZu\Pix\Model\PostUserReportRequest(); // \PayZu\Pix\Model\PostUserReportRequest
 
 try {
     $result = $apiInstance->postUserReport($post_user_report_request);
@@ -752,11 +754,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_user_report_request** | [**\OpenAPI\Client\Model\PostUserReportRequest**](../Model/PostUserReportRequest.md)|  | |
+| **post_user_report_request** | [**\PayZu\Pix\Model\PostUserReportRequest**](../Model/PostUserReportRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\ReportJob**](../Model/ReportJob.md)
+[**\PayZu\Pix\Model\ReportJobAccepted**](../Model/ReportJobAccepted.md)
 
 ### Authorization
 

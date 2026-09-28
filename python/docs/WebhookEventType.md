@@ -1,6 +1,6 @@
 # WebhookEventType
 
-Transaction event that triggers the webhook.
+Event that triggers the webhook.
 
 ## Enum
 

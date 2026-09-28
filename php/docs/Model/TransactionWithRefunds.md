@@ -1,0 +1,46 @@
+# TransactionWithRefunds
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **string** | Identifier of the transaction at PayZu. | [optional]
+**status** | **string** | PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR | [optional]
+**amount** | **float** | Amount of the transaction, before the fee. | [optional]
+**type** | **string** | Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT. | [optional]
+**qr_code_text** | **string** | Copy-and-paste Pix code. | [optional]
+**qr_code_base64** | **string** | PNG image of the QR Code in base64, without the data: prefix. | [optional]
+**qr_code_url** | **string** | Authenticated route that returns the PNG of the QR Code. | [optional]
+**generated_name** | **string** | Name used to build the charge. | [optional]
+**generated_document** | **string** | CPF or CNPJ used as the debtor of the charge. | [optional]
+**generated_email** | **string** | Email used to build the charge. | [optional]
+**payer_name** | **string** | Name of the holder of the account that sent the Pix, as reported by the originating institution. | [optional]
+**payer_document** | **string** | CPF or CNPJ of the payer of the Pix, reported by the originating institution. | [optional]
+**payer_institution_ispb** | **string** | ISPB code of the institution the Pix was sent from. | [optional]
+**payer_institution_name** | **string** | Name of the institution the Pix was sent from. | [optional]
+**payer_account_number** | **string** | Payer&#39;s PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions. | [optional]
+**service_fee_charged** | **float** | PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling. | [optional]
+**withdraw_pix_key** | **string** | Destination Pix key of the withdrawal, already normalized. | [optional]
+**withdraw_pix_type** | **string** | Type of the destination key of the withdrawal, with evp being the random key. | [optional]
+**receiver_name** | **string** | Name of the holder of the receiving account. | [optional]
+**receiver_document** | **string** | CPF or CNPJ of the receiver. | [optional]
+**receiver_institution_ispb** | **string** | ISPB code of the institution that receives the Pix. | [optional]
+**receiver_institution_name** | **string** | Name of the institution that receives the Pix. | [optional]
+**receiver_account_number** | **string** | Receiver&#39;s PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions. | [optional]
+**end_to_end_id** | **string** | Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return. | [optional]
+**created_at** | **string** | Date and time the transaction was recorded. | [optional]
+**updated_at** | **string** | Date and time of the last change. | [optional]
+**paid_at** | **string** | Date and time the Pix was settled, reported by the institution. | [optional]
+**client_reference** | **string** | Your identifier of the transaction, returned in queries and callbacks. | [optional]
+**refund_end_to_end_id** | **string** | End-to-end ID of the refund transaction | [optional]
+**refund_amount** | **float** | Amount refunded | [optional]
+**refund_status** | **string** | Refund status: PENDING, COMPLETED or CANCELED. | [optional]
+**refund_reason** | **string** | Reason for the refund | [optional]
+**refund_description** | **string** | Description of the refund | [optional]
+**refunded_at** | **string** | Date and time when the refund was processed | [optional]
+**cancellation_reason** | **string** | Reason for cancellation (if cancelled) | [optional]
+**virtual_account** | **string** | Virtual sub-account provided at creation. | [optional]
+**method** | **string** | Transaction method/rail. | [optional]
+**refunds** | [**\PayZu\Pix\Model\Refund[]**](Refund.md) | Refunds of the transaction, newest first. | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

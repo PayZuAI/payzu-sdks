@@ -24,9 +24,81 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: npm
           cache-dependency-path: nodejs/package-lock.json
       - run: npm ci
       - run: npm run build
+      - run: npm run typecheck
       - run: npm test
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install ./python
+      - run: python -c "import payzu_pix; print(payzu_pix.__version__)"
+
+  go:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - run: go build ./...
+
+  php:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: php
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: composer validate --strict
+      - run: composer install --no-interaction --no-progress
+      - run: find lib -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+
+  ruby:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ruby
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - run: gem build payzu-pix.gemspec
+      - run: gem install payzu-pix-*.gem
+      - run: ruby -e 'require "payzu-pix"; puts PayZuPix::VERSION'
+
+  java:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: java
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - run: mvn -B -DskipTests package

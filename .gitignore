@@ -1,1 +1,13 @@
 node_modules/
+nodejs-gen/
+php/vendor/
+php/composer.lock
+ruby/vendor/
+ruby/.bundle/
+ruby/Gemfile.lock
+*.gem
+java/target/
+python/build/
+python/dist/
+python/*.egg-info/
+__pycache__/

@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -23,13 +23,13 @@ var _ MappedNullable = &PostWithdrawQrcodeRequest{}
 type PostWithdrawQrcodeRequest struct {
 	// Pix QR Code payload (EMV format).
 	QrCode string `json:"qrCode"`
-	// Amount in BRL. Optional - if not provided, uses the QR Code's embedded value.
+	// Amount in BRL, with at most 2 decimal places. Optional: if not provided, uses the QR Code's embedded value.
 	Amount *float32 `json:"amount,omitempty"`
-	// Webhook URL for status updates.
-	CallbackUrl *string `json:"callbackUrl,omitempty"`
+	// URL for transaction notifications (http or https).
+	CallbackUrl *string `json:"callbackUrl,omitempty" validate:"regexp=^https?:\\/\\/"`
 	// Optional description for the payment.
 	Description *string `json:"description,omitempty"`
-	// External reference for this withdrawal.
+	// External reference for this withdrawal. Repeating it with the same amount and QR Code returns the existing withdrawal; with different data, the request is rejected with PZC210.
 	ClientReference *string `json:"clientReference,omitempty"`
 	// Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
 	VirtualAccount *string `json:"virtualAccount,omitempty"`

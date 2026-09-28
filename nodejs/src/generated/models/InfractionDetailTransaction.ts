@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,7 +14,7 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * 
+ * Summary of the disputed Pix.
  * @export
  * @interface InfractionDetailTransaction
  */
@@ -26,41 +26,41 @@ export interface InfractionDetailTransaction {
      */
     id?: string;
     /**
-     * 
+     * Amount of the disputed transaction, in reais with decimal places.
      * @type {number}
      * @memberof InfractionDetailTransaction
      */
     amount?: number;
     /**
-     * 
+     * Name of the Pix payer, as reported by the provider.
      * @type {string}
      * @memberof InfractionDetailTransaction
      */
-    payerName?: string;
+    payerName?: string | null;
     /**
-     * 
+     * CPF or CNPJ of the Pix payer, as reported by the provider.
      * @type {string}
      * @memberof InfractionDetailTransaction
      */
-    payerDocument?: string;
+    payerDocument?: string | null;
     /**
-     * 
+     * Name of the Pix receiver, as reported by the provider.
      * @type {string}
      * @memberof InfractionDetailTransaction
      */
-    receiverName?: string;
+    receiverName?: string | null;
     /**
-     * 
+     * CPF or CNPJ of the Pix receiver, as reported by the provider.
      * @type {string}
      * @memberof InfractionDetailTransaction
      */
-    receiverDocument?: string;
+    receiverDocument?: string | null;
     /**
-     * 
+     * End-to-end identifier of the Pix, reported by the provider at settlement.
      * @type {string}
      * @memberof InfractionDetailTransaction
      */
-    endToEndId?: string;
+    endToEndId?: string | null;
 }
 
 /**

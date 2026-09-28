@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at_from** | **\DateTime** | Period start (REQUIRED). Cannot be more than 30 days in the past. |
-**created_at_to** | **\DateTime** | Period end (REQUIRED). Period span cannot exceed 7 days. |
+**created_at_from** | **\DateTime** | Start of the period. At most 30 days ago. |
+**created_at_to** | **\DateTime** | End of the period, on or after createdAtFrom. The window between start and end cannot exceed 7 days. |
 **transaction_ids** | **string[]** | Restrict to specific transaction IDs | [optional]
 **transaction_types** | **string[]** | Filter by transaction type | [optional]
 **transaction_status** | **string[]** | Filter by transaction status | [optional]

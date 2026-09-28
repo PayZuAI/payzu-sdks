@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,41 +20,35 @@ import { mapValues } from '../runtime.js';
  */
 export interface SentWebhookDetail {
     /**
-     * 
+     * Identifier of this delivery attempt.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     id?: string;
     /**
-     * 
+     * Webhook that originated the delivery.
      * @type {string}
      * @memberof SentWebhookDetail
      */
-    webhookId?: string;
+    webhookId?: string | null;
     /**
-     * 
-     * @type {string}
-     * @memberof SentWebhookDetail
-     */
-    userId?: string;
-    /**
-     * 
+     * Pix transaction whose event was notified.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     transactionId?: string;
     /**
-     * 
+     * Address this delivery was sent to, recorded at the time of the dispatch.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     url?: string;
     /**
-     * 
-     * @type {{ [key: string]: any; }}
+     * Body sent in the delivery, as serialized JSON.
+     * @type {string}
      * @memberof SentWebhookDetail
      */
-    body?: { [key: string]: any; };
+    body?: string;
     /**
      * HTTP status returned by your endpoint.
      * @type {number}
@@ -62,23 +56,23 @@ export interface SentWebhookDetail {
      */
     status?: number;
     /**
-     * 
-     * @type {{ [key: string]: any; }}
+     * Response headers, as serialized JSON.
+     * @type {string}
      * @memberof SentWebhookDetail
      */
-    responseHeaders?: { [key: string]: any; };
+    responseHeaders?: string;
     /**
-     * 
+     * Body of the response received.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     responseBody?: string;
     /**
-     * 
+     * Message of the delivery failure.
      * @type {string}
      * @memberof SentWebhookDetail
      */
-    error?: string;
+    error?: string | null;
     /**
      * Response time of your endpoint, in milliseconds.
      * @type {number}
@@ -86,13 +80,13 @@ export interface SentWebhookDetail {
      */
     responseTime?: number;
     /**
-     * 
+     * Event that triggered this delivery, the same value sent in the X-Callback-Event header.
      * @type {string}
      * @memberof SentWebhookDetail
      */
-    eventType?: string;
+    eventType?: string | null;
     /**
-     * 
+     * Moment of the delivery attempt.
      * @type {Date}
      * @memberof SentWebhookDetail
      */
@@ -118,7 +112,6 @@ export function SentWebhookDetailFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'id': json['id'] == null ? undefined : json['id'],
         'webhookId': json['webhookId'] == null ? undefined : json['webhookId'],
-        'userId': json['userId'] == null ? undefined : json['userId'],
         'transactionId': json['transactionId'] == null ? undefined : json['transactionId'],
         'url': json['url'] == null ? undefined : json['url'],
         'body': json['body'] == null ? undefined : json['body'],
@@ -145,7 +138,6 @@ export function SentWebhookDetailToJSONTyped(value?: SentWebhookDetail | null, i
         
         'id': value['id'],
         'webhookId': value['webhookId'],
-        'userId': value['userId'],
         'transactionId': value['transactionId'],
         'url': value['url'],
         'body': value['body'],

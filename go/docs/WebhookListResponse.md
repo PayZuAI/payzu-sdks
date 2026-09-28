@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Webhooks** | Pointer to [**[]Webhook**](Webhook.md) |  | [optional] 
+**Webhooks** | Pointer to [**[]Webhook**](Webhook.md) | Webhooks registered on the account. | [optional] 
 
 ## Methods
 

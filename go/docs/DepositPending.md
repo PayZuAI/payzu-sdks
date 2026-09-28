@@ -4,29 +4,29 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
-**PayerDocument** | Pointer to **string** |  | [optional] 
-**PayerName** | Pointer to **string** |  | [optional] 
-**PayerAccountNumber** | Pointer to **string** |  | [optional] 
-**PayerInstitutionIspb** | Pointer to **string** |  | [optional] 
-**PayerInstitutionName** | Pointer to **string** |  | [optional] 
-**ReceiverDocument** | Pointer to **string** |  | [optional] 
-**ReceiverName** | Pointer to **string** |  | [optional] 
-**ReceiverAccountNumber** | Pointer to **string** |  | [optional] 
-**ReceiverInstitutionIspb** | Pointer to **string** |  | [optional] 
-**ReceiverInstitutionName** | Pointer to **string** |  | [optional] 
-**EndToEndId** | Pointer to **string** |  | [optional] 
-**PaidAt** | Pointer to **time.Time** |  | [optional] 
-**PixKey** | Pointer to **string** |  | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
-**ApprovedAt** | Pointer to **time.Time** |  | [optional] 
-**RejectedAt** | Pointer to **time.Time** |  | [optional] 
-**RejectionReason** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of the pending deposit. | [optional] 
+**Status** | Pointer to **string** | Deposit status: PENDING, COMPLETED or REJECTED. | [optional] 
+**Amount** | Pointer to **float32** | Amount received. | [optional] 
+**PayerDocument** | Pointer to **string** | CNPJ of the payer of the Pix. | [optional] 
+**PayerName** | Pointer to **NullableString** | Name of the payer of the Pix. | [optional] 
+**PayerAccountNumber** | Pointer to **NullableString** | Account number of the payer inside the platform. | [optional] 
+**PayerInstitutionIspb** | Pointer to **NullableString** | ISPB code of the institution the Pix was sent from. | [optional] 
+**PayerInstitutionName** | Pointer to **NullableString** | Name of the institution the Pix was sent from. | [optional] 
+**ReceiverDocument** | Pointer to **NullableString** | CPF or CNPJ of the account that received the Pix. | [optional] 
+**ReceiverName** | Pointer to **NullableString** | Name of the account that received the Pix. | [optional] 
+**ReceiverAccountNumber** | Pointer to **NullableString** | Number of your PayZu account that receives the credit if the deposit is approved. | [optional] 
+**ReceiverInstitutionIspb** | Pointer to **NullableString** | ISPB code of the institution that received the Pix. | [optional] 
+**ReceiverInstitutionName** | Pointer to **NullableString** | Name of the institution where the Pix was settled on the receiving side. | [optional] 
+**EndToEndId** | Pointer to **string** | End-to-end identifier of the Pix. | [optional] 
+**PaidAt** | Pointer to **NullableTime** | Date and time the Pix was settled. | [optional] 
+**PixKey** | Pointer to **NullableString** |  | [optional] 
+**Description** | Pointer to **NullableString** | Free text that would accompany the Pix. | [optional] 
+**ApprovedAt** | Pointer to **NullableTime** | Date and time the deposit was approved. | [optional] 
+**RejectedAt** | Pointer to **NullableTime** | Date and time the deposit was rejected. | [optional] 
+**RejectionReason** | Pointer to **NullableString** | Reason the deposit was rejected. | [optional] 
+**TransactionId** | Pointer to **NullableString** | Deposit transaction created on approval. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Moment the received Pix was recorded, before the credit. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Moment of the last change to the record, which changes when the deposit is approved or rejected. | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetPayerName sets PayerName field to given value.
 
 HasPayerName returns a boolean if a field has been set.
 
+### SetPayerNameNil
+
+`func (o *DepositPending) SetPayerNameNil(b bool)`
+
+ SetPayerNameNil sets the value for PayerName to be an explicit nil
+
+### UnsetPayerName
+`func (o *DepositPending) UnsetPayerName()`
+
+UnsetPayerName ensures that no value is present for PayerName, not even an explicit nil
 ### GetPayerAccountNumber
 
 `func (o *DepositPending) GetPayerAccountNumber() string`
@@ -197,6 +207,16 @@ SetPayerAccountNumber sets PayerAccountNumber field to given value.
 
 HasPayerAccountNumber returns a boolean if a field has been set.
 
+### SetPayerAccountNumberNil
+
+`func (o *DepositPending) SetPayerAccountNumberNil(b bool)`
+
+ SetPayerAccountNumberNil sets the value for PayerAccountNumber to be an explicit nil
+
+### UnsetPayerAccountNumber
+`func (o *DepositPending) UnsetPayerAccountNumber()`
+
+UnsetPayerAccountNumber ensures that no value is present for PayerAccountNumber, not even an explicit nil
 ### GetPayerInstitutionIspb
 
 `func (o *DepositPending) GetPayerInstitutionIspb() string`
@@ -222,6 +242,16 @@ SetPayerInstitutionIspb sets PayerInstitutionIspb field to given value.
 
 HasPayerInstitutionIspb returns a boolean if a field has been set.
 
+### SetPayerInstitutionIspbNil
+
+`func (o *DepositPending) SetPayerInstitutionIspbNil(b bool)`
+
+ SetPayerInstitutionIspbNil sets the value for PayerInstitutionIspb to be an explicit nil
+
+### UnsetPayerInstitutionIspb
+`func (o *DepositPending) UnsetPayerInstitutionIspb()`
+
+UnsetPayerInstitutionIspb ensures that no value is present for PayerInstitutionIspb, not even an explicit nil
 ### GetPayerInstitutionName
 
 `func (o *DepositPending) GetPayerInstitutionName() string`
@@ -247,6 +277,16 @@ SetPayerInstitutionName sets PayerInstitutionName field to given value.
 
 HasPayerInstitutionName returns a boolean if a field has been set.
 
+### SetPayerInstitutionNameNil
+
+`func (o *DepositPending) SetPayerInstitutionNameNil(b bool)`
+
+ SetPayerInstitutionNameNil sets the value for PayerInstitutionName to be an explicit nil
+
+### UnsetPayerInstitutionName
+`func (o *DepositPending) UnsetPayerInstitutionName()`
+
+UnsetPayerInstitutionName ensures that no value is present for PayerInstitutionName, not even an explicit nil
 ### GetReceiverDocument
 
 `func (o *DepositPending) GetReceiverDocument() string`
@@ -272,6 +312,16 @@ SetReceiverDocument sets ReceiverDocument field to given value.
 
 HasReceiverDocument returns a boolean if a field has been set.
 
+### SetReceiverDocumentNil
+
+`func (o *DepositPending) SetReceiverDocumentNil(b bool)`
+
+ SetReceiverDocumentNil sets the value for ReceiverDocument to be an explicit nil
+
+### UnsetReceiverDocument
+`func (o *DepositPending) UnsetReceiverDocument()`
+
+UnsetReceiverDocument ensures that no value is present for ReceiverDocument, not even an explicit nil
 ### GetReceiverName
 
 `func (o *DepositPending) GetReceiverName() string`
@@ -297,6 +347,16 @@ SetReceiverName sets ReceiverName field to given value.
 
 HasReceiverName returns a boolean if a field has been set.
 
+### SetReceiverNameNil
+
+`func (o *DepositPending) SetReceiverNameNil(b bool)`
+
+ SetReceiverNameNil sets the value for ReceiverName to be an explicit nil
+
+### UnsetReceiverName
+`func (o *DepositPending) UnsetReceiverName()`
+
+UnsetReceiverName ensures that no value is present for ReceiverName, not even an explicit nil
 ### GetReceiverAccountNumber
 
 `func (o *DepositPending) GetReceiverAccountNumber() string`
@@ -322,6 +382,16 @@ SetReceiverAccountNumber sets ReceiverAccountNumber field to given value.
 
 HasReceiverAccountNumber returns a boolean if a field has been set.
 
+### SetReceiverAccountNumberNil
+
+`func (o *DepositPending) SetReceiverAccountNumberNil(b bool)`
+
+ SetReceiverAccountNumberNil sets the value for ReceiverAccountNumber to be an explicit nil
+
+### UnsetReceiverAccountNumber
+`func (o *DepositPending) UnsetReceiverAccountNumber()`
+
+UnsetReceiverAccountNumber ensures that no value is present for ReceiverAccountNumber, not even an explicit nil
 ### GetReceiverInstitutionIspb
 
 `func (o *DepositPending) GetReceiverInstitutionIspb() string`
@@ -347,6 +417,16 @@ SetReceiverInstitutionIspb sets ReceiverInstitutionIspb field to given value.
 
 HasReceiverInstitutionIspb returns a boolean if a field has been set.
 
+### SetReceiverInstitutionIspbNil
+
+`func (o *DepositPending) SetReceiverInstitutionIspbNil(b bool)`
+
+ SetReceiverInstitutionIspbNil sets the value for ReceiverInstitutionIspb to be an explicit nil
+
+### UnsetReceiverInstitutionIspb
+`func (o *DepositPending) UnsetReceiverInstitutionIspb()`
+
+UnsetReceiverInstitutionIspb ensures that no value is present for ReceiverInstitutionIspb, not even an explicit nil
 ### GetReceiverInstitutionName
 
 `func (o *DepositPending) GetReceiverInstitutionName() string`
@@ -372,6 +452,16 @@ SetReceiverInstitutionName sets ReceiverInstitutionName field to given value.
 
 HasReceiverInstitutionName returns a boolean if a field has been set.
 
+### SetReceiverInstitutionNameNil
+
+`func (o *DepositPending) SetReceiverInstitutionNameNil(b bool)`
+
+ SetReceiverInstitutionNameNil sets the value for ReceiverInstitutionName to be an explicit nil
+
+### UnsetReceiverInstitutionName
+`func (o *DepositPending) UnsetReceiverInstitutionName()`
+
+UnsetReceiverInstitutionName ensures that no value is present for ReceiverInstitutionName, not even an explicit nil
 ### GetEndToEndId
 
 `func (o *DepositPending) GetEndToEndId() string`
@@ -422,6 +512,16 @@ SetPaidAt sets PaidAt field to given value.
 
 HasPaidAt returns a boolean if a field has been set.
 
+### SetPaidAtNil
+
+`func (o *DepositPending) SetPaidAtNil(b bool)`
+
+ SetPaidAtNil sets the value for PaidAt to be an explicit nil
+
+### UnsetPaidAt
+`func (o *DepositPending) UnsetPaidAt()`
+
+UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
 ### GetPixKey
 
 `func (o *DepositPending) GetPixKey() string`
@@ -447,6 +547,16 @@ SetPixKey sets PixKey field to given value.
 
 HasPixKey returns a boolean if a field has been set.
 
+### SetPixKeyNil
+
+`func (o *DepositPending) SetPixKeyNil(b bool)`
+
+ SetPixKeyNil sets the value for PixKey to be an explicit nil
+
+### UnsetPixKey
+`func (o *DepositPending) UnsetPixKey()`
+
+UnsetPixKey ensures that no value is present for PixKey, not even an explicit nil
 ### GetDescription
 
 `func (o *DepositPending) GetDescription() string`
@@ -472,6 +582,16 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### SetDescriptionNil
+
+`func (o *DepositPending) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *DepositPending) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetApprovedAt
 
 `func (o *DepositPending) GetApprovedAt() time.Time`
@@ -497,6 +617,16 @@ SetApprovedAt sets ApprovedAt field to given value.
 
 HasApprovedAt returns a boolean if a field has been set.
 
+### SetApprovedAtNil
+
+`func (o *DepositPending) SetApprovedAtNil(b bool)`
+
+ SetApprovedAtNil sets the value for ApprovedAt to be an explicit nil
+
+### UnsetApprovedAt
+`func (o *DepositPending) UnsetApprovedAt()`
+
+UnsetApprovedAt ensures that no value is present for ApprovedAt, not even an explicit nil
 ### GetRejectedAt
 
 `func (o *DepositPending) GetRejectedAt() time.Time`
@@ -522,6 +652,16 @@ SetRejectedAt sets RejectedAt field to given value.
 
 HasRejectedAt returns a boolean if a field has been set.
 
+### SetRejectedAtNil
+
+`func (o *DepositPending) SetRejectedAtNil(b bool)`
+
+ SetRejectedAtNil sets the value for RejectedAt to be an explicit nil
+
+### UnsetRejectedAt
+`func (o *DepositPending) UnsetRejectedAt()`
+
+UnsetRejectedAt ensures that no value is present for RejectedAt, not even an explicit nil
 ### GetRejectionReason
 
 `func (o *DepositPending) GetRejectionReason() string`
@@ -547,6 +687,16 @@ SetRejectionReason sets RejectionReason field to given value.
 
 HasRejectionReason returns a boolean if a field has been set.
 
+### SetRejectionReasonNil
+
+`func (o *DepositPending) SetRejectionReasonNil(b bool)`
+
+ SetRejectionReasonNil sets the value for RejectionReason to be an explicit nil
+
+### UnsetRejectionReason
+`func (o *DepositPending) UnsetRejectionReason()`
+
+UnsetRejectionReason ensures that no value is present for RejectionReason, not even an explicit nil
 ### GetTransactionId
 
 `func (o *DepositPending) GetTransactionId() string`
@@ -572,6 +722,16 @@ SetTransactionId sets TransactionId field to given value.
 
 HasTransactionId returns a boolean if a field has been set.
 
+### SetTransactionIdNil
+
+`func (o *DepositPending) SetTransactionIdNil(b bool)`
+
+ SetTransactionIdNil sets the value for TransactionId to be an explicit nil
+
+### UnsetTransactionId
+`func (o *DepositPending) UnsetTransactionId()`
+
+UnsetTransactionId ensures that no value is present for TransactionId, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *DepositPending) GetCreatedAt() time.Time`

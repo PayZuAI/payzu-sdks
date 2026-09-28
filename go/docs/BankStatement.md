@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of the balance entry. | [optional] 
+**Amount** | Pointer to **float32** | Amount of the entry. | [optional] 
 **Operation** | Pointer to **string** | INCREMENT credits the balance, DECREMENT debits it. | [optional] 
-**Reason** | Pointer to **string** | Internal reason for the credit/debit. | [optional] 
-**BalanceType** | Pointer to **string** |  | [optional] 
-**PreviousBalanceAvailable** | Pointer to **float32** |  | [optional] 
-**PreviousBalanceBlocked** | Pointer to **float32** |  | [optional] 
-**NewBalanceAvailable** | Pointer to **float32** |  | [optional] 
-**NewBalanceBlocked** | Pointer to **float32** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**InfractionId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Reason** | Pointer to **string** | Reason for the ledger entry. | [optional] 
+**BalanceType** | Pointer to **string** | Balance moved: AVAILABLE or BLOCKED. | [optional] 
+**PreviousBalanceAvailable** | Pointer to **float32** | Balance free for use that the account had, in reais, immediately before this entry. | [optional] 
+**PreviousBalanceBlocked** | Pointer to **float32** | Blocked balance before the entry, in reais. | [optional] 
+**NewBalanceAvailable** | Pointer to **float32** | Available balance after the entry, in reais. | [optional] 
+**NewBalanceBlocked** | Pointer to **float32** | Blocked balance after the entry, in reais. | [optional] 
+**TransactionId** | Pointer to **NullableString** | Transaction that originated the entry. | [optional] 
+**InfractionId** | Pointer to **NullableString** | Infraction related to the entry. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Date and time the balance movement was recorded. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the record. | [optional] 
 
 ## Methods
 
@@ -287,6 +287,16 @@ SetTransactionId sets TransactionId field to given value.
 
 HasTransactionId returns a boolean if a field has been set.
 
+### SetTransactionIdNil
+
+`func (o *BankStatement) SetTransactionIdNil(b bool)`
+
+ SetTransactionIdNil sets the value for TransactionId to be an explicit nil
+
+### UnsetTransactionId
+`func (o *BankStatement) UnsetTransactionId()`
+
+UnsetTransactionId ensures that no value is present for TransactionId, not even an explicit nil
 ### GetInfractionId
 
 `func (o *BankStatement) GetInfractionId() string`
@@ -312,6 +322,16 @@ SetInfractionId sets InfractionId field to given value.
 
 HasInfractionId returns a boolean if a field has been set.
 
+### SetInfractionIdNil
+
+`func (o *BankStatement) SetInfractionIdNil(b bool)`
+
+ SetInfractionIdNil sets the value for InfractionId to be an explicit nil
+
+### UnsetInfractionId
+`func (o *BankStatement) UnsetInfractionId()`
+
+UnsetInfractionId ensures that no value is present for InfractionId, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *BankStatement) GetCreatedAt() time.Time`

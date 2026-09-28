@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,12 +20,15 @@ var _ MappedNullable = &GetUserTransactionById200ResponseAllOfCallbackLogInner{}
 
 // GetUserTransactionById200ResponseAllOfCallbackLogInner struct for GetUserTransactionById200ResponseAllOfCallbackLogInner
 type GetUserTransactionById200ResponseAllOfCallbackLogInner struct {
+	// Identifier of the delivery record; there is one record per callback attempt of the transaction.
 	Id *string `json:"id,omitempty"`
+	// Address that received the callback: the callbackUrl of the transaction or the URL of the registered webhook.
 	Url *string `json:"url,omitempty"`
 	// HTTP status code returned by the receiver
 	Status *int32 `json:"status,omitempty"`
 	// Round-trip time in ms
 	ResponseTime *float32 `json:"responseTime,omitempty"`
+	// Date and time the callback delivery attempt was recorded.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 }
 

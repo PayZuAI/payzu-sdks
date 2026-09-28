@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -40,7 +40,7 @@ DownloadUserReport Download report
 Returns a short-lived signed URL to download the CSV file.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Report ID.
  @return ApiDownloadUserReportRequest
 */
 func (a *ReportsAPIService) DownloadUserReport(ctx context.Context, id string) ApiDownloadUserReportRequest {
@@ -111,6 +111,39 @@ func (a *ReportsAPIService) DownloadUserReportExecute(r ApiDownloadUserReportReq
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
@@ -247,6 +280,27 @@ func (a *ReportsAPIService) GetUserBankStatementExecute(r ApiGetUserBankStatemen
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -291,51 +345,61 @@ func (r ApiGetUserBankStatementsRequest) CreatedAtTo(createdAtTo time.Time) ApiG
 	return r
 }
 
+// Entry ID.
 func (r ApiGetUserBankStatementsRequest) Id(id string) ApiGetUserBankStatementsRequest {
 	r.id = &id
 	return r
 }
 
+// Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
 func (r ApiGetUserBankStatementsRequest) Operation(operation string) ApiGetUserBankStatementsRequest {
 	r.operation = &operation
 	return r
 }
 
+// Reason for the entry.
 func (r ApiGetUserBankStatementsRequest) Reason(reason string) ApiGetUserBankStatementsRequest {
 	r.reason = &reason
 	return r
 }
 
+// Transaction ID.
 func (r ApiGetUserBankStatementsRequest) TransactionId(transactionId string) ApiGetUserBankStatementsRequest {
 	r.transactionId = &transactionId
 	return r
 }
 
+// Minimum amount.
 func (r ApiGetUserBankStatementsRequest) AmountFrom(amountFrom float32) ApiGetUserBankStatementsRequest {
 	r.amountFrom = &amountFrom
 	return r
 }
 
+// Maximum amount.
 func (r ApiGetUserBankStatementsRequest) AmountTo(amountTo float32) ApiGetUserBankStatementsRequest {
 	r.amountTo = &amountTo
 	return r
 }
 
+// Page number.
 func (r ApiGetUserBankStatementsRequest) Page(page int32) ApiGetUserBankStatementsRequest {
 	r.page = &page
 	return r
 }
 
+// Items per page.
 func (r ApiGetUserBankStatementsRequest) Limit(limit int32) ApiGetUserBankStatementsRequest {
 	r.limit = &limit
 	return r
 }
 
+// Sort field.
 func (r ApiGetUserBankStatementsRequest) SortBy(sortBy string) ApiGetUserBankStatementsRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
+// Sort direction.
 func (r ApiGetUserBankStatementsRequest) SortDirection(sortDirection string) ApiGetUserBankStatementsRequest {
 	r.sortDirection = &sortDirection
 	return r
@@ -474,6 +538,27 @@ func (a *ReportsAPIService) GetUserBankStatementsExecute(r ApiGetUserBankStateme
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -510,46 +595,55 @@ func (r ApiGetUserDepositPendingRequest) Status(status string) ApiGetUserDeposit
 	return r
 }
 
+// CPF or CNPJ, digits only.
 func (r ApiGetUserDepositPendingRequest) Document(document string) ApiGetUserDepositPendingRequest {
 	r.document = &document
 	return r
 }
 
+// Name of the payer or receiver.
 func (r ApiGetUserDepositPendingRequest) Name(name string) ApiGetUserDepositPendingRequest {
 	r.name = &name
 	return r
 }
 
+// End-to-end ID of the Pix.
 func (r ApiGetUserDepositPendingRequest) EndToEndId(endToEndId string) ApiGetUserDepositPendingRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
+// Minimum amount.
 func (r ApiGetUserDepositPendingRequest) AmountMin(amountMin float32) ApiGetUserDepositPendingRequest {
 	r.amountMin = &amountMin
 	return r
 }
 
+// Maximum amount.
 func (r ApiGetUserDepositPendingRequest) AmountMax(amountMax float32) ApiGetUserDepositPendingRequest {
 	r.amountMax = &amountMax
 	return r
 }
 
+// Start of the creation date range.
 func (r ApiGetUserDepositPendingRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetUserDepositPendingRequest {
 	r.createdAtFrom = &createdAtFrom
 	return r
 }
 
+// End of the creation date range.
 func (r ApiGetUserDepositPendingRequest) CreatedAtTo(createdAtTo time.Time) ApiGetUserDepositPendingRequest {
 	r.createdAtTo = &createdAtTo
 	return r
 }
 
+// Page number.
 func (r ApiGetUserDepositPendingRequest) Page(page int32) ApiGetUserDepositPendingRequest {
 	r.page = &page
 	return r
 }
 
+// Items per page.
 func (r ApiGetUserDepositPendingRequest) Limit(limit int32) ApiGetUserDepositPendingRequest {
 	r.limit = &limit
 	return r
@@ -672,6 +766,27 @@ func (a *ReportsAPIService) GetUserDepositPendingExecute(r ApiGetUserDepositPend
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -775,6 +890,27 @@ func (a *ReportsAPIService) GetUserDepositPendingByIdExecute(r ApiGetUserDeposit
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -796,7 +932,7 @@ type ApiGetUserReportRequest struct {
 	id string
 }
 
-func (r ApiGetUserReportRequest) Execute() (*ReportJob, *http.Response, error) {
+func (r ApiGetUserReportRequest) Execute() (*ReportJobDetail, *http.Response, error) {
 	return r.ApiService.GetUserReportExecute(r)
 }
 
@@ -806,7 +942,7 @@ GetUserReport Get report job status
 Returns the status and metadata of a specific report job by `id`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Report ID.
  @return ApiGetUserReportRequest
 */
 func (a *ReportsAPIService) GetUserReport(ctx context.Context, id string) ApiGetUserReportRequest {
@@ -818,13 +954,13 @@ func (a *ReportsAPIService) GetUserReport(ctx context.Context, id string) ApiGet
 }
 
 // Execute executes the request
-//  @return ReportJob
-func (a *ReportsAPIService) GetUserReportExecute(r ApiGetUserReportRequest) (*ReportJob, *http.Response, error) {
+//  @return ReportJobDetail
+func (a *ReportsAPIService) GetUserReportExecute(r ApiGetUserReportRequest) (*ReportJobDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ReportJob
+		localVarReturnValue  *ReportJobDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetUserReport")
@@ -878,6 +1014,28 @@ func (a *ReportsAPIService) GetUserReportExecute(r ApiGetUserReportRequest) (*Re
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -912,16 +1070,19 @@ type ApiGetUserSummaryRequest struct {
 	grouped *bool
 }
 
+// Start date. Default: start of the previous day (America/Sao_Paulo).
 func (r ApiGetUserSummaryRequest) DateFrom(dateFrom time.Time) ApiGetUserSummaryRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
+// End date. Default: now.
 func (r ApiGetUserSummaryRequest) DateTo(dateTo time.Time) ApiGetUserSummaryRequest {
 	r.dateTo = &dateTo
 	return r
 }
 
+// Grouping applied to the transactions.
 func (r ApiGetUserSummaryRequest) GroupBy(groupBy string) ApiGetUserSummaryRequest {
 	r.groupBy = &groupBy
 	return r
@@ -1028,6 +1189,27 @@ func (a *ReportsAPIService) GetUserSummaryExecute(r ApiGetUserSummaryRequest) (*
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1059,7 +1241,7 @@ GetUserTransactionById List transaction details
 Retrieve a single transaction with its callback log and linked infractions.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Transaction ID.
  @return ApiGetUserTransactionByIdRequest
 */
 func (a *ReportsAPIService) GetUserTransactionById(ctx context.Context, id string) ApiGetUserTransactionByIdRequest {
@@ -1131,6 +1313,17 @@ func (a *ReportsAPIService) GetUserTransactionByIdExecute(r ApiGetUserTransactio
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1159,10 +1352,10 @@ func (a *ReportsAPIService) GetUserTransactionByIdExecute(r ApiGetUserTransactio
 type ApiGetUserTransactionsRequest struct {
 	ctx context.Context
 	ApiService *ReportsAPIService
-	dateFrom *string
-	dateTo *string
-	limit *float32
-	page *float32
+	dateFrom *time.Time
+	dateTo *time.Time
+	limit *int32
+	page *int32
 	id *string
 	status *string
 	type_ *string
@@ -1175,28 +1368,29 @@ type ApiGetUserTransactionsRequest struct {
 	sortDirection *string
 	clientReference *string
 	virtualAccount *string
+	hasQrCode *bool
 }
 
-// Start date (YYYY-MM-DD).
-func (r ApiGetUserTransactionsRequest) DateFrom(dateFrom string) ApiGetUserTransactionsRequest {
+// Start date or date-time (ISO 8601).
+func (r ApiGetUserTransactionsRequest) DateFrom(dateFrom time.Time) ApiGetUserTransactionsRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
-// End date (YYYY-MM-DD).
-func (r ApiGetUserTransactionsRequest) DateTo(dateTo string) ApiGetUserTransactionsRequest {
+// End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+func (r ApiGetUserTransactionsRequest) DateTo(dateTo time.Time) ApiGetUserTransactionsRequest {
 	r.dateTo = &dateTo
 	return r
 }
 
 // Items per page (max 1000).
-func (r ApiGetUserTransactionsRequest) Limit(limit float32) ApiGetUserTransactionsRequest {
+func (r ApiGetUserTransactionsRequest) Limit(limit int32) ApiGetUserTransactionsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Page number (default 1).
-func (r ApiGetUserTransactionsRequest) Page(page float32) ApiGetUserTransactionsRequest {
+func (r ApiGetUserTransactionsRequest) Page(page int32) ApiGetUserTransactionsRequest {
 	r.page = &page
 	return r
 }
@@ -1213,13 +1407,13 @@ func (r ApiGetUserTransactionsRequest) Status(status string) ApiGetUserTransacti
 	return r
 }
 
-// Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION.
+// Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
 func (r ApiGetUserTransactionsRequest) Type_(type_ string) ApiGetUserTransactionsRequest {
 	r.type_ = &type_
 	return r
 }
 
-// Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER.
+// Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
 func (r ApiGetUserTransactionsRequest) Method(method string) ApiGetUserTransactionsRequest {
 	r.method = &method
 	return r
@@ -1273,6 +1467,12 @@ func (r ApiGetUserTransactionsRequest) VirtualAccount(virtualAccount string) Api
 	return r
 }
 
+// Only transactions with (true) or without (false) QR Code.
+func (r ApiGetUserTransactionsRequest) HasQrCode(hasQrCode bool) ApiGetUserTransactionsRequest {
+	r.hasQrCode = &hasQrCode
+	return r
+}
+
 func (r ApiGetUserTransactionsRequest) Execute() (*GetUserTransactions200Response, *http.Response, error) {
 	return r.ApiService.GetUserTransactionsExecute(r)
 }
@@ -1322,14 +1522,14 @@ func (a *ReportsAPIService) GetUserTransactionsExecute(r ApiGetUserTransactionsR
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
-		var defaultValue float32 = 10
+		var defaultValue int32 = 10
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
 		r.limit = &defaultValue
 	}
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
-		var defaultValue float32 = 1
+		var defaultValue int32 = 1
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
 		r.page = &defaultValue
 	}
@@ -1376,6 +1576,9 @@ func (a *ReportsAPIService) GetUserTransactionsExecute(r ApiGetUserTransactionsR
 	}
 	if r.virtualAccount != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "virtualAccount", r.virtualAccount, "form", "")
+	}
+	if r.hasQrCode != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasQrCode", r.hasQrCode, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1436,17 +1639,6 @@ func (a *ReportsAPIService) GetUserTransactionsExecute(r ApiGetUserTransactionsR
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1477,16 +1669,19 @@ type ApiListUserReportsRequest struct {
 	sortDirection *string
 }
 
+// Page number.
 func (r ApiListUserReportsRequest) Page(page int32) ApiListUserReportsRequest {
 	r.page = &page
 	return r
 }
 
+// Items per page.
 func (r ApiListUserReportsRequest) Limit(limit int32) ApiListUserReportsRequest {
 	r.limit = &limit
 	return r
 }
 
+// Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
 func (r ApiListUserReportsRequest) Status(status string) ApiListUserReportsRequest {
 	r.status = &status
 	return r
@@ -1670,17 +1865,6 @@ func (a *ReportsAPIService) ListUserReportsExecute(r ApiListUserReportsRequest) 
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1708,7 +1892,7 @@ func (r ApiPostUserReportRequest) PostUserReportRequest(postUserReportRequest Po
 	return r
 }
 
-func (r ApiPostUserReportRequest) Execute() (*ReportJob, *http.Response, error) {
+func (r ApiPostUserReportRequest) Execute() (*ReportJobAccepted, *http.Response, error) {
 	return r.ApiService.PostUserReportExecute(r)
 }
 
@@ -1728,13 +1912,13 @@ func (a *ReportsAPIService) PostUserReport(ctx context.Context) ApiPostUserRepor
 }
 
 // Execute executes the request
-//  @return ReportJob
-func (a *ReportsAPIService) PostUserReportExecute(r ApiPostUserReportRequest) (*ReportJob, *http.Response, error) {
+//  @return ReportJobAccepted
+func (a *ReportsAPIService) PostUserReportExecute(r ApiPostUserReportRequest) (*ReportJobAccepted, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ReportJob
+		localVarReturnValue  *ReportJobAccepted
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.PostUserReport")
@@ -1791,6 +1975,39 @@ func (a *ReportsAPIService) PostUserReportExecute(r ApiPostUserReportRequest) (*
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ApiError

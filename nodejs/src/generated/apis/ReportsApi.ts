@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -64,10 +64,15 @@ import {
     PostUserReportRequestToJSON,
 } from '../models/PostUserReportRequest.js';
 import {
-    type ReportJob,
-    ReportJobFromJSON,
-    ReportJobToJSON,
-} from '../models/ReportJob.js';
+    type ReportJobAccepted,
+    ReportJobAcceptedFromJSON,
+    ReportJobAcceptedToJSON,
+} from '../models/ReportJobAccepted.js';
+import {
+    type ReportJobDetail,
+    ReportJobDetailFromJSON,
+    ReportJobDetailToJSON,
+} from '../models/ReportJobDetail.js';
 import {
     type Summary,
     SummaryFromJSON,
@@ -130,8 +135,8 @@ export interface GetUserTransactionByIdRequest {
 }
 
 export interface GetUserTransactionsRequest {
-    dateFrom?: string;
-    dateTo?: string;
+    dateFrom?: Date;
+    dateTo?: Date;
     limit?: number;
     page?: number;
     id?: string;
@@ -146,12 +151,13 @@ export interface GetUserTransactionsRequest {
     sortDirection?: GetUserTransactionsSortDirectionEnum;
     clientReference?: string;
     virtualAccount?: string;
+    hasQrCode?: boolean;
 }
 
 export interface ListUserReportsRequest {
     page?: number;
     limit?: number;
-    status?: ListUserReportsStatusEnum;
+    status?: string;
     createdAtFrom?: Date;
     createdAtTo?: Date;
     updatedAtFrom?: Date;
@@ -173,7 +179,7 @@ export interface PostUserReportOperationRequest {
 export interface ReportsApiInterface {
     /**
      * Creates request options for downloadUserReport without sending the request
-     * @param {string} id 
+     * @param {string} id Report ID.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
@@ -182,7 +188,7 @@ export interface ReportsApiInterface {
     /**
      * Returns a short-lived signed URL to download the CSV file.
      * @summary Download report
-     * @param {string} id 
+     * @param {string} id Report ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -223,16 +229,16 @@ export interface ReportsApiInterface {
      * Creates request options for getUserBankStatements without sending the request
      * @param {Date} createdAtFrom Start date (required).
      * @param {Date} createdAtTo End date (required).
-     * @param {string} [id] 
-     * @param {'INCREMENT' | 'DECREMENT'} [operation] 
-     * @param {string} [reason] 
-     * @param {string} [transactionId] 
-     * @param {number} [amountFrom] 
-     * @param {number} [amountTo] 
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {'createdAt' | 'amount'} [sortBy] 
-     * @param {'asc' | 'desc'} [sortDirection] 
+     * @param {string} [id] Entry ID.
+     * @param {'INCREMENT' | 'DECREMENT'} [operation] Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+     * @param {string} [reason] Reason for the entry.
+     * @param {string} [transactionId] Transaction ID.
+     * @param {number} [amountFrom] Minimum amount.
+     * @param {number} [amountTo] Maximum amount.
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
+     * @param {'createdAt' | 'amount'} [sortBy] Sort field.
+     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
@@ -243,16 +249,16 @@ export interface ReportsApiInterface {
      * @summary List bank statements
      * @param {Date} createdAtFrom Start date (required).
      * @param {Date} createdAtTo End date (required).
-     * @param {string} [id] 
-     * @param {'INCREMENT' | 'DECREMENT'} [operation] 
-     * @param {string} [reason] 
-     * @param {string} [transactionId] 
-     * @param {number} [amountFrom] 
-     * @param {number} [amountTo] 
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {'createdAt' | 'amount'} [sortBy] 
-     * @param {'asc' | 'desc'} [sortDirection] 
+     * @param {string} [id] Entry ID.
+     * @param {'INCREMENT' | 'DECREMENT'} [operation] Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+     * @param {string} [reason] Reason for the entry.
+     * @param {string} [transactionId] Transaction ID.
+     * @param {number} [amountFrom] Minimum amount.
+     * @param {number} [amountTo] Maximum amount.
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
+     * @param {'createdAt' | 'amount'} [sortBy] Sort field.
+     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -268,15 +274,15 @@ export interface ReportsApiInterface {
     /**
      * Creates request options for getUserDepositPending without sending the request
      * @param {string} [status] Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-     * @param {string} [document] 
-     * @param {string} [name] 
-     * @param {string} [endToEndId] 
-     * @param {number} [amountMin] 
-     * @param {number} [amountMax] 
-     * @param {Date} [createdAtFrom] 
-     * @param {Date} [createdAtTo] 
-     * @param {number} [page] 
-     * @param {number} [limit] 
+     * @param {string} [document] CPF or CNPJ, digits only.
+     * @param {string} [name] Name of the payer or receiver.
+     * @param {string} [endToEndId] End-to-end ID of the Pix.
+     * @param {number} [amountMin] Minimum amount.
+     * @param {number} [amountMax] Maximum amount.
+     * @param {Date} [createdAtFrom] Start of the creation date range.
+     * @param {Date} [createdAtTo] End of the creation date range.
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
@@ -286,15 +292,15 @@ export interface ReportsApiInterface {
      * Lists deposits that are pending / not yet reconciled.
      * @summary List pending deposits
      * @param {string} [status] Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-     * @param {string} [document] 
-     * @param {string} [name] 
-     * @param {string} [endToEndId] 
-     * @param {number} [amountMin] 
-     * @param {number} [amountMax] 
-     * @param {Date} [createdAtFrom] 
-     * @param {Date} [createdAtTo] 
-     * @param {number} [page] 
-     * @param {number} [limit] 
+     * @param {string} [document] CPF or CNPJ, digits only.
+     * @param {string} [name] Name of the payer or receiver.
+     * @param {string} [endToEndId] End-to-end ID of the Pix.
+     * @param {number} [amountMin] Minimum amount.
+     * @param {number} [amountMax] Maximum amount.
+     * @param {Date} [createdAtFrom] Start of the creation date range.
+     * @param {Date} [createdAtTo] End of the creation date range.
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -333,7 +339,7 @@ export interface ReportsApiInterface {
 
     /**
      * Creates request options for getUserReport without sending the request
-     * @param {string} id 
+     * @param {string} id Report ID.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
@@ -342,24 +348,24 @@ export interface ReportsApiInterface {
     /**
      * Returns the status and metadata of a specific report job by `id`.
      * @summary Get report job status
-     * @param {string} id 
+     * @param {string} id Report ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
-    getUserReportRaw(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJob>>;
+    getUserReportRaw(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobDetail>>;
 
     /**
      * Returns the status and metadata of a specific report job by `id`.
      * Get report job status
      */
-    getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJob>;
+    getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobDetail>;
 
     /**
      * Creates request options for getUserSummary without sending the request
-     * @param {Date} [dateFrom] 
-     * @param {Date} [dateTo] 
-     * @param {'day' | 'hour'} [groupBy] 
+     * @param {Date} [dateFrom] Start date. Default: start of the previous day (America/Sao_Paulo).
+     * @param {Date} [dateTo] End date. Default: now.
+     * @param {'day'} [groupBy] Grouping applied to the transactions.
      * @param {boolean} [grouped] When true, returns a series grouped by date.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -369,9 +375,9 @@ export interface ReportsApiInterface {
     /**
      * Aggregated totals for deposits, withdrawals and commission over a period.
      * @summary Transaction summary
-     * @param {Date} [dateFrom] 
-     * @param {Date} [dateTo] 
-     * @param {'day' | 'hour'} [groupBy] 
+     * @param {Date} [dateFrom] Start date. Default: start of the previous day (America/Sao_Paulo).
+     * @param {Date} [dateTo] End date. Default: now.
+     * @param {'day'} [groupBy] Grouping applied to the transactions.
      * @param {boolean} [grouped] When true, returns a series grouped by date.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -387,7 +393,7 @@ export interface ReportsApiInterface {
 
     /**
      * Creates request options for getUserTransactionById without sending the request
-     * @param {string} id 
+     * @param {string} id Transaction ID.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
@@ -396,7 +402,7 @@ export interface ReportsApiInterface {
     /**
      * Retrieve a single transaction with its callback log and linked infractions.
      * @summary List transaction details
-     * @param {string} id 
+     * @param {string} id Transaction ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -411,14 +417,14 @@ export interface ReportsApiInterface {
 
     /**
      * Creates request options for getUserTransactions without sending the request
-     * @param {string} [dateFrom] Start date (YYYY-MM-DD).
-     * @param {string} [dateTo] End date (YYYY-MM-DD).
+     * @param {Date} [dateFrom] Start date or date-time (ISO 8601).
+     * @param {Date} [dateTo] End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
      * @param {number} [limit] Items per page (max 1000).
      * @param {number} [page] Page number (default 1).
      * @param {string} [id] Transaction ID.
      * @param {string} [status] Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-     * @param {string} [type] Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION.
-     * @param {string} [method] Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER.
+     * @param {string} [type] Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+     * @param {string} [method] Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
      * @param {number} [amount] Amount filter. Minimum 0.01.
      * @param {string} [document] CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
      * @param {string} [name] Name filter.
@@ -427,6 +433,7 @@ export interface ReportsApiInterface {
      * @param {'asc' | 'desc'} [sortDirection] Sort direction
      * @param {string} [clientReference] Filter by external reference
      * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+     * @param {boolean} [hasQrCode] Only transactions with (true) or without (false) QR Code.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
@@ -435,14 +442,14 @@ export interface ReportsApiInterface {
     /**
      * Paginated list of account transactions with filters.
      * @summary List Transactions
-     * @param {string} [dateFrom] Start date (YYYY-MM-DD).
-     * @param {string} [dateTo] End date (YYYY-MM-DD).
+     * @param {Date} [dateFrom] Start date or date-time (ISO 8601).
+     * @param {Date} [dateTo] End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
      * @param {number} [limit] Items per page (max 1000).
      * @param {number} [page] Page number (default 1).
      * @param {string} [id] Transaction ID.
      * @param {string} [status] Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-     * @param {string} [type] Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION.
-     * @param {string} [method] Transaction method/rail. Accepts CSV: PIX,BANK_SLIP,INTERNAL_TRANSFER.
+     * @param {string} [type] Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+     * @param {string} [method] Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
      * @param {number} [amount] Amount filter. Minimum 0.01.
      * @param {string} [document] CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
      * @param {string} [name] Name filter.
@@ -451,6 +458,7 @@ export interface ReportsApiInterface {
      * @param {'asc' | 'desc'} [sortDirection] Sort direction
      * @param {string} [clientReference] Filter by external reference
      * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+     * @param {boolean} [hasQrCode] Only transactions with (true) or without (false) QR Code.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -465,9 +473,9 @@ export interface ReportsApiInterface {
 
     /**
      * Creates request options for listUserReports without sending the request
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {'PENDING' | 'RUNNING' | 'COMPLETED' | 'FAILED'} [status] 
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
+     * @param {string} [status] Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
      * @param {Date} [createdAtFrom] Filter: created from.
      * @param {Date} [createdAtTo] Filter: created up to.
      * @param {Date} [updatedAtFrom] Filter: updated from.
@@ -482,9 +490,9 @@ export interface ReportsApiInterface {
     /**
      * List report jobs created by the authenticated user.
      * @summary List report jobs
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {'PENDING' | 'RUNNING' | 'COMPLETED' | 'FAILED'} [status] 
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
+     * @param {string} [status] Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
      * @param {Date} [createdAtFrom] Filter: created from.
      * @param {Date} [createdAtTo] Filter: created up to.
      * @param {Date} [updatedAtFrom] Filter: updated from.
@@ -519,13 +527,13 @@ export interface ReportsApiInterface {
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
-    postUserReportRaw(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJob>>;
+    postUserReportRaw(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobAccepted>>;
 
     /**
      * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
      * Generate transactions report
      */
-    postUserReport(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJob>;
+    postUserReport(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobAccepted>;
 
 }
 
@@ -934,18 +942,18 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
      * Returns the status and metadata of a specific report job by `id`.
      * Get report job status
      */
-    async getUserReportRaw(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJob>> {
+    async getUserReportRaw(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobDetail>> {
         const requestOptions = await this.getUserReportRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ReportJobFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ReportJobDetailFromJSON(jsonValue));
     }
 
     /**
      * Returns the status and metadata of a specific report job by `id`.
      * Get report job status
      */
-    async getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJob> {
+    async getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobDetail> {
         const response = await this.getUserReportRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1075,11 +1083,11 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
         const queryParameters: any = {};
 
         if (requestParameters['dateFrom'] != null) {
-            queryParameters['dateFrom'] = requestParameters['dateFrom'];
+            queryParameters['dateFrom'] = (requestParameters['dateFrom'] as any).toISOString();
         }
 
         if (requestParameters['dateTo'] != null) {
-            queryParameters['dateTo'] = requestParameters['dateTo'];
+            queryParameters['dateTo'] = (requestParameters['dateTo'] as any).toISOString();
         }
 
         if (requestParameters['limit'] != null) {
@@ -1136,6 +1144,10 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
 
         if (requestParameters['virtualAccount'] != null) {
             queryParameters['virtualAccount'] = requestParameters['virtualAccount'];
+        }
+
+        if (requestParameters['hasQrCode'] != null) {
+            queryParameters['hasQrCode'] = requestParameters['hasQrCode'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -1303,18 +1315,18 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
      * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
      * Generate transactions report
      */
-    async postUserReportRaw(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJob>> {
+    async postUserReportRaw(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobAccepted>> {
         const requestOptions = await this.postUserReportRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ReportJobFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ReportJobAcceptedFromJSON(jsonValue));
     }
 
     /**
      * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
      * Generate transactions report
      */
-    async postUserReport(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJob> {
+    async postUserReport(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobAccepted> {
         const response = await this.postUserReportRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1349,8 +1361,7 @@ export type GetUserBankStatementsSortDirectionEnum = typeof GetUserBankStatement
  * @export
  */
 export const GetUserSummaryGroupByEnum = {
-    Day: 'day',
-    Hour: 'hour'
+    Day: 'day'
 } as const;
 export type GetUserSummaryGroupByEnum = typeof GetUserSummaryGroupByEnum[keyof typeof GetUserSummaryGroupByEnum];
 /**
@@ -1369,16 +1380,6 @@ export const GetUserTransactionsSortDirectionEnum = {
     Desc: 'desc'
 } as const;
 export type GetUserTransactionsSortDirectionEnum = typeof GetUserTransactionsSortDirectionEnum[keyof typeof GetUserTransactionsSortDirectionEnum];
-/**
- * @export
- */
-export const ListUserReportsStatusEnum = {
-    Pending: 'PENDING',
-    Running: 'RUNNING',
-    Completed: 'COMPLETED',
-    Failed: 'FAILED'
-} as const;
-export type ListUserReportsStatusEnum = typeof ListUserReportsStatusEnum[keyof typeof ListUserReportsStatusEnum];
 /**
  * @export
  */

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
-**MimeType** | Pointer to **string** |  | [optional] 
-**Size** | Pointer to **int32** |  | [optional] 
-**Url** | Pointer to **string** | Signed download URL (expires in 9 minutes). Present only when fetching an individual defense; absent in the listing. | [optional] 
+**Name** | Pointer to **string** | Name of the file sent with the defense. | [optional] 
+**MimeType** | Pointer to **string** | MIME type of the file, provided on upload, for example application/pdf or image/png. | [optional] 
+**Size** | Pointer to **int32** | Size of the file in bytes. | [optional] 
+**Url** | Pointer to **NullableString** | Signed download URL, valid for 9 minutes; null when unavailable. Returned when creating the defense and when fetching a single defense. | [optional] 
 
 ## Methods
 
@@ -128,6 +128,16 @@ SetUrl sets Url field to given value.
 
 HasUrl returns a boolean if a field has been set.
 
+### SetUrlNil
+
+`func (o *DefenseFilesInner) SetUrlNil(b bool)`
+
+ SetUrlNil sets the value for Url to be an explicit nil
+
+### UnsetUrl
+`func (o *DefenseFilesInner) UnsetUrl()`
+
+UnsetUrl ensures that no value is present for Url, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

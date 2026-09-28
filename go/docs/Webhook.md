@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Webhook id. | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
-**Active** | Pointer to **bool** |  | [optional] 
+**Url** | Pointer to **string** | Address in your system where PayZu sends the event notification. | [optional] 
+**Active** | Pointer to **bool** | Somente webhooks ativos recebem entregas. | [optional] 
 **Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | Subscribed events. Empty means all events. | [optional] 
-**HasSecret** | Pointer to **bool** | Whether the webhook has an HMAC signing secret. | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**HasSecretConfigured** | Pointer to **bool** | Whether the webhook has an HMAC signing secret. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Date and time the webhook was registered on the account. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the webhook. | [optional] 
 
 ## Methods
 
@@ -131,30 +131,30 @@ SetEvents sets Events field to given value.
 
 HasEvents returns a boolean if a field has been set.
 
-### GetHasSecret
+### GetHasSecretConfigured
 
-`func (o *Webhook) GetHasSecret() bool`
+`func (o *Webhook) GetHasSecretConfigured() bool`
 
-GetHasSecret returns the HasSecret field if non-nil, zero value otherwise.
+GetHasSecretConfigured returns the HasSecretConfigured field if non-nil, zero value otherwise.
 
-### GetHasSecretOk
+### GetHasSecretConfiguredOk
 
-`func (o *Webhook) GetHasSecretOk() (*bool, bool)`
+`func (o *Webhook) GetHasSecretConfiguredOk() (*bool, bool)`
 
-GetHasSecretOk returns a tuple with the HasSecret field if it's non-nil, zero value otherwise
+GetHasSecretConfiguredOk returns a tuple with the HasSecretConfigured field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasSecret
+### SetHasSecretConfigured
 
-`func (o *Webhook) SetHasSecret(v bool)`
+`func (o *Webhook) SetHasSecretConfigured(v bool)`
 
-SetHasSecret sets HasSecret field to given value.
+SetHasSecretConfigured sets HasSecretConfigured field to given value.
 
-### HasHasSecret
+### HasHasSecretConfigured
 
-`func (o *Webhook) HasHasSecret() bool`
+`func (o *Webhook) HasHasSecretConfigured() bool`
 
-HasHasSecret returns a boolean if a field has been set.
+HasHasSecretConfigured returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

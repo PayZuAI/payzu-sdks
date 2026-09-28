@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,14 +20,19 @@ var _ MappedNullable = &Defense{}
 
 // Defense struct for Defense
 type Defense struct {
+	// Defense identifier.
 	Id *string `json:"id,omitempty"`
 	// Defense text
 	Defense *string `json:"defense,omitempty"`
 	// Defense status
 	Status *string `json:"status,omitempty"`
+	// Identifies the infraction the defense belongs to.
 	InfractionId *string `json:"infractionId,omitempty"`
+	// Moment the defense was recorded at PayZu, saved together with the uploaded files.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Moment of the last change to the defense.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// Files sent with the defense, with name, type and size in bytes.
 	Files []DefenseFilesInner `json:"files,omitempty"`
 }
 

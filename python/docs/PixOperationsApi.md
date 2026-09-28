@@ -15,7 +15,9 @@ Method | HTTP request | Description
 
 Retrieve Charge
 
-Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+
+Token permission: `DEPOSIT`.
 
 ### Example
 
@@ -47,10 +49,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.PixOperationsApi(api_client)
-    id = 'PAYZU20250817215911F49RDOBJ' # str | Transaction ID. (optional)
-    client_reference = 'client_reference_example' # str | External reference provided when creating the charge. (optional)
-    end_to_end_id = 'end_to_end_id_example' # str | Pix end-to-end ID. (optional)
-    virtual_account = 'virtual_account_example' # str | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+    id = 'PAYZU20260811R4TZ8WD1NC000000' # str | Transaction ID. (optional)
+    client_reference = 'order_12345' # str | External reference provided when creating the charge. (optional)
+    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | Pix end-to-end ID. (optional)
+    virtual_account = 'loja-centro-01' # str | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
 
     try:
         # Retrieve Charge
@@ -92,7 +94,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Current transaction state |  -  |
 **400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**401** | Missing or invalid Bearer token |  -  |
+**403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
 **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -103,6 +106,8 @@ Name | Type | Description  | Notes
 Render Pix QR code (PNG)
 
 Render the Pix QR Code of a deposit as a binary PNG image
+
+Token permission: `DEPOSIT`.
 
 ### Example
 
@@ -133,7 +138,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.PixOperationsApi(api_client)
-    transaction_id = 'transaction_id_example' # str | 
+    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID.
 
     try:
         # Render Pix QR code (PNG)
@@ -151,7 +156,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transaction_id** | **str**|  | 
+ **transaction_id** | **str**| Transaction ID. | 
 
 ### Return type
 
@@ -172,6 +177,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | QR code image |  -  |
 **400** | Transaction is not a DEPOSIT or has no QR code |  -  |
+**401** | Authentication failure |  -  |
+**403** | Operation not allowed |  -  |
 **404** | Transaction not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -181,7 +188,7 @@ Name | Type | Description  | Notes
 
 Get Transaction Receipt
 
-Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
 
 ### Example
 
@@ -213,7 +220,7 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.PixOperationsApi(api_client)
-    id = 'PAYZU2025081418333632CYKN8M' # str | Transaction ID.
+    id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID.
     type = pdf # str | Return format. (optional) (default to pdf)
 
     try:
@@ -254,8 +261,10 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
 **400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**401** | Missing or invalid Bearer token |  -  |
 **404** | Resource not found |  -  |
+**422** | Operation refused |  -  |
+**500** | Internal error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -265,6 +274,8 @@ Name | Type | Description  | Notes
 Create Charge (Pix deposit)
 
 Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
+
+Token permission: `DEPOSIT`.
 
 ### Example
 
@@ -336,7 +347,10 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Charge created |  -  |
 **400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**401** | Missing or invalid Bearer token |  -  |
+**403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
+**422** | Operation refused |  -  |
+**424** | Failure at the financial institution |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

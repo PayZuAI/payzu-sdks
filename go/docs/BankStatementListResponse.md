@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Pagination** | Pointer to [**BankStatementListResponsePagination**](BankStatementListResponsePagination.md) |  | [optional] 
-**BankStatements** | Pointer to [**[]BankStatement**](BankStatement.md) |  | [optional] 
+**BankStatements** | Pointer to [**[]BankStatement**](BankStatement.md) | Entries of the queried page. | [optional] 
 
 ## Methods
 

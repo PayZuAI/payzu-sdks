@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BalanceAvailable** | Pointer to **float32** |  | [optional] 
-**BalanceBlocked** | Pointer to **float32** |  | [optional] 
+**BalanceAvailable** | Pointer to **float32** | Balance free for withdrawals and transfers, in reais, of the account that owns the token. | [optional] 
+**BalanceBlocked** | Pointer to **float32** | Balance held and unavailable, in reais. | [optional] 
 
 ## Methods
 

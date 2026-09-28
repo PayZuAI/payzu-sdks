@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,15 +20,21 @@ var _ MappedNullable = &WebhookWithSecret{}
 
 // WebhookWithSecret struct for WebhookWithSecret
 type WebhookWithSecret struct {
+	// Webhook identifier.
 	Id *string `json:"id,omitempty"`
+	// Address that receives the notifications.
 	Url *string `json:"url,omitempty"`
+	// Indicates whether the webhook starts out receiving events.
 	Active *bool `json:"active,omitempty"`
+	// Events subscribed by this webhook.
 	Events []WebhookEventType `json:"events,omitempty"`
-	HasSecret *bool `json:"hasSecret,omitempty"`
+	// Indicates whether the webhook has a signing secret.
+	HasSecretConfigured *bool `json:"hasSecret,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Date and time of the last change to the webhook.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// HMAC signing secret. Shown only on creation and on rotate-secret. Store it now.
-	Secret *string `json:"secret,omitempty"`
+	Secret NullableString `json:"secret,omitempty"`
 }
 
 // NewWebhookWithSecret instantiates a new WebhookWithSecret object
@@ -176,36 +182,36 @@ func (o *WebhookWithSecret) SetEvents(v []WebhookEventType) {
 	o.Events = v
 }
 
-// GetHasSecret returns the HasSecret field value if set, zero value otherwise.
-func (o *WebhookWithSecret) GetHasSecret() bool {
-	if o == nil || IsNil(o.HasSecret) {
+// GetHasSecretConfigured returns the HasSecretConfigured field value if set, zero value otherwise.
+func (o *WebhookWithSecret) GetHasSecretConfigured() bool {
+	if o == nil || IsNil(o.HasSecretConfigured) {
 		var ret bool
 		return ret
 	}
-	return *o.HasSecret
+	return *o.HasSecretConfigured
 }
 
-// GetHasSecretOk returns a tuple with the HasSecret field value if set, nil otherwise
+// GetHasSecretConfiguredOk returns a tuple with the HasSecretConfigured field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebhookWithSecret) GetHasSecretOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasSecret) {
+func (o *WebhookWithSecret) GetHasSecretConfiguredOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasSecretConfigured) {
 		return nil, false
 	}
-	return o.HasSecret, true
+	return o.HasSecretConfigured, true
 }
 
-// HasHasSecret returns a boolean if a field has been set.
-func (o *WebhookWithSecret) HasHasSecret() bool {
-	if o != nil && !IsNil(o.HasSecret) {
+// HasHasSecretConfigured returns a boolean if a field has been set.
+func (o *WebhookWithSecret) HasHasSecretConfigured() bool {
+	if o != nil && !IsNil(o.HasSecretConfigured) {
 		return true
 	}
 
 	return false
 }
 
-// SetHasSecret gets a reference to the given bool and assigns it to the HasSecret field.
-func (o *WebhookWithSecret) SetHasSecret(v bool) {
-	o.HasSecret = &v
+// SetHasSecretConfigured gets a reference to the given bool and assigns it to the HasSecretConfigured field.
+func (o *WebhookWithSecret) SetHasSecretConfigured(v bool) {
+	o.HasSecretConfigured = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -272,36 +278,46 @@ func (o *WebhookWithSecret) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
-// GetSecret returns the Secret field value if set, zero value otherwise.
+// GetSecret returns the Secret field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WebhookWithSecret) GetSecret() string {
-	if o == nil || IsNil(o.Secret) {
+	if o == nil || IsNil(o.Secret.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Secret
+	return *o.Secret.Get()
 }
 
 // GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookWithSecret) GetSecretOk() (*string, bool) {
-	if o == nil || IsNil(o.Secret) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Secret, true
+	return o.Secret.Get(), o.Secret.IsSet()
 }
 
 // HasSecret returns a boolean if a field has been set.
 func (o *WebhookWithSecret) HasSecret() bool {
-	if o != nil && !IsNil(o.Secret) {
+	if o != nil && o.Secret.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecret gets a reference to the given string and assigns it to the Secret field.
+// SetSecret gets a reference to the given NullableString and assigns it to the Secret field.
 func (o *WebhookWithSecret) SetSecret(v string) {
-	o.Secret = &v
+	o.Secret.Set(&v)
+}
+// SetSecretNil sets the value for Secret to be an explicit nil
+func (o *WebhookWithSecret) SetSecretNil() {
+	o.Secret.Set(nil)
+}
+
+// UnsetSecret ensures that no value is present for Secret, not even an explicit nil
+func (o *WebhookWithSecret) UnsetSecret() {
+	o.Secret.Unset()
 }
 
 func (o WebhookWithSecret) MarshalJSON() ([]byte, error) {
@@ -326,8 +342,8 @@ func (o WebhookWithSecret) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Events) {
 		toSerialize["events"] = o.Events
 	}
-	if !IsNil(o.HasSecret) {
-		toSerialize["hasSecret"] = o.HasSecret
+	if !IsNil(o.HasSecretConfigured) {
+		toSerialize["hasSecret"] = o.HasSecretConfigured
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
@@ -335,8 +351,8 @@ func (o WebhookWithSecret) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !IsNil(o.Secret) {
-		toSerialize["secret"] = o.Secret
+	if o.Secret.IsSet() {
+		toSerialize["secret"] = o.Secret.Get()
 	}
 	return toSerialize, nil
 }

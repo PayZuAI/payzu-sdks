@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,11 +19,14 @@ var _ MappedNullable = &DefenseFilesInner{}
 
 // DefenseFilesInner struct for DefenseFilesInner
 type DefenseFilesInner struct {
+	// Name of the file sent with the defense.
 	Name *string `json:"name,omitempty"`
+	// MIME type of the file, provided on upload, for example application/pdf or image/png.
 	MimeType *string `json:"mimeType,omitempty"`
+	// Size of the file in bytes.
 	Size *int32 `json:"size,omitempty"`
-	// Signed download URL (expires in 9 minutes). Present only when fetching an individual defense; absent in the listing.
-	Url *string `json:"url,omitempty"`
+	// Signed download URL, valid for 9 minutes; null when unavailable. Returned when creating the defense and when fetching a single defense.
+	Url NullableString `json:"url,omitempty"`
 }
 
 // NewDefenseFilesInner instantiates a new DefenseFilesInner object
@@ -139,36 +142,46 @@ func (o *DefenseFilesInner) SetSize(v int32) {
 	o.Size = &v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DefenseFilesInner) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil || IsNil(o.Url.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Url
+	return *o.Url.Get()
 }
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DefenseFilesInner) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return o.Url.Get(), o.Url.IsSet()
 }
 
 // HasUrl returns a boolean if a field has been set.
 func (o *DefenseFilesInner) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
+	if o != nil && o.Url.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl gets a reference to the given NullableString and assigns it to the Url field.
 func (o *DefenseFilesInner) SetUrl(v string) {
-	o.Url = &v
+	o.Url.Set(&v)
+}
+// SetUrlNil sets the value for Url to be an explicit nil
+func (o *DefenseFilesInner) SetUrlNil() {
+	o.Url.Set(nil)
+}
+
+// UnsetUrl ensures that no value is present for Url, not even an explicit nil
+func (o *DefenseFilesInner) UnsetUrl() {
+	o.Url.Unset()
 }
 
 func (o DefenseFilesInner) MarshalJSON() ([]byte, error) {
@@ -190,8 +203,8 @@ func (o DefenseFilesInner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
+	if o.Url.IsSet() {
+		toSerialize["url"] = o.Url.Get()
 	}
 	return toSerialize, nil
 }

@@ -22,14 +22,14 @@ import type { WebhookWithSecret } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": yl9k2m0c8x1,
+  "id": cm3w7k1t40000q8f2r5b9x3ad,
   "url": https://sualoja.com.br/webhook,
   "active": true,
   "events": null,
   "hasSecret": true,
   "createdAt": null,
   "updatedAt": null,
-  "secret": whsec_9f8a2b7c6d5e4f3a2b1c0d9e8f7a6b5c,
+  "secret": q7Kx2mV9pL4sR8tW1nB6cY3hJ5dF0gZ-aE_uT7iO2kM,
 } satisfies WebhookWithSecret
 
 console.log(example)

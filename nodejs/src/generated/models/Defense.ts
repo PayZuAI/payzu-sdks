@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,7 +28,7 @@ import {
  */
 export interface Defense {
     /**
-     * 
+     * Defense identifier.
      * @type {string}
      * @memberof Defense
      */
@@ -46,25 +46,25 @@ export interface Defense {
      */
     status?: DefenseStatusEnum;
     /**
-     * 
+     * Identifies the infraction the defense belongs to.
      * @type {string}
      * @memberof Defense
      */
     infractionId?: string;
     /**
-     * 
+     * Moment the defense was recorded at PayZu, saved together with the uploaded files.
      * @type {Date}
      * @memberof Defense
      */
     createdAt?: Date;
     /**
-     * 
+     * Moment of the last change to the defense.
      * @type {Date}
      * @memberof Defense
      */
     updatedAt?: Date;
     /**
-     * 
+     * Files sent with the defense, with name, type and size in bytes.
      * @type {Array<DefenseFilesInner>}
      * @memberof Defense
      */

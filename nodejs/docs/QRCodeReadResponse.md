@@ -16,6 +16,8 @@ Name | Type
 `additionalInfo` | string
 `expiresIn` | number
 `createdAt` | Date
+`amountEditable` | boolean
+`dueDate` | string
 
 ## Example
 
@@ -33,6 +35,8 @@ const example = {
   "additionalInfo": null,
   "expiresIn": null,
   "createdAt": null,
+  "amountEditable": null,
+  "dueDate": null,
 } satisfies QRCodeReadResponse
 
 console.log(example)

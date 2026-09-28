@@ -6,12 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Webhook id. | [optional] 
-**url** | **str** |  | [optional] 
-**active** | **bool** |  | [optional] 
+**url** | **str** | Address in your system where PayZu sends the event notification. | [optional] 
+**active** | **bool** | Somente webhooks ativos recebem entregas. | [optional] 
 **events** | [**List[WebhookEventType]**](WebhookEventType.md) | Subscribed events. Empty means all events. | [optional] 
 **has_secret** | **bool** | Whether the webhook has an HMAC signing secret. | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**created_at** | **datetime** | Date and time the webhook was registered on the account. | [optional] 
+**updated_at** | **datetime** | Date and time of the last change to the webhook. | [optional] 
 
 ## Example
 

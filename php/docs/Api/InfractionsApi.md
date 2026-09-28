@@ -1,4 +1,4 @@
-# OpenAPI\Client\InfractionsApi
+# PayZu\Pix\InfractionsApi
 
 Manage Pix infractions (disputes, fraud reports) and submit defenses
 
@@ -16,7 +16,7 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 ## `getInfractions()`
 
 ```php
-getInfractions($page, $limit, $status, $type, $end_to_end_id, $transaction_id, $amount_min, $amount_max, $analysis_result, $reported_by, $participant_document, $participant_name, $sort_by, $sort_direction, $reported_at_from, $reported_at_to, $created_at_from, $created_at_to, $expires_at_from, $expires_at_to, $updated_at_from, $updated_at_to, $needs_manual_review, $id, $protocol): \OpenAPI\Client\Model\InfractionListResponse
+getInfractions($page, $limit, $status, $type, $end_to_end_id, $transaction_id, $amount_min, $amount_max, $analysis_result, $reported_by, $participant_document, $participant_name, $sort_by, $sort_direction, $reported_at_from, $reported_at_to, $created_at_from, $created_at_to, $expires_at_from, $expires_at_to, $updated_at_from, $updated_at_to, $id, $protocol): \PayZu\Pix\Model\InfractionListResponse
 ```
 
 List Infractions
@@ -31,43 +31,42 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InfractionsApi(
+$apiInstance = new PayZu\Pix\Api\InfractionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int
-$limit = 10; // int
-$status = 'status_example'; // string | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
-$type = 'type_example'; // string | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-$end_to_end_id = 'end_to_end_id_example'; // string
-$transaction_id = 'transaction_id_example'; // string
-$amount_min = 3.4; // float
-$amount_max = 3.4; // float
-$analysis_result = 'analysis_result_example'; // string | Comma-separated AnalysisResult
-$reported_by = 'reported_by_example'; // string | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-$participant_document = 'participant_document_example'; // string
-$participant_name = 'participant_name_example'; // string
-$sort_by = 'sort_by_example'; // string | Sort field.
-$sort_direction = 'sort_direction_example'; // string | Sort direction.
-$reported_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: reportedAt from.
-$reported_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: reportedAt up to.
-$created_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: createdAt from.
-$created_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: createdAt up to.
-$expires_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: expiresAt from.
-$expires_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: expiresAt up to.
-$updated_at_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: updatedAt from.
-$updated_at_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Filter: updatedAt up to.
-$needs_manual_review = True; // bool | Filter: needs manual review.
-$id = 'id_example'; // string | Filter by infraction ID.
-$protocol = 'protocol_example'; // string | Filter by protocol.
+$page = 1; // int | Page number.
+$limit = 10; // int | Items per page.
+$status = OPEN; // string | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
+$type = REFUND_REQUEST; // string | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | End-to-end ID of the Pix.
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
+$amount_min = 10.9; // float | Minimum amount.
+$amount_max = 500; // float | Maximum amount.
+$analysis_result = AGREED; // string | Comma-separated AnalysisResult: AGREED, DISAGREED.
+$reported_by = DEBITED_PARTICIPANT; // string | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
+$participant_document = 12345678901; // string | CPF or CNPJ of the participant.
+$participant_name = John Doe; // string | Name of the participant.
+$sort_by = 'createdAt'; // string | Sort field.
+$sort_direction = 'desc'; // string | Sort direction.
+$reported_at_from = 2026-08-01; // \DateTime | Filter: reportedAt from.
+$reported_at_to = 2026-08-31; // \DateTime | Filter: reportedAt up to.
+$created_at_from = 2026-08-01; // \DateTime | Filter: createdAt from.
+$created_at_to = 2026-08-31; // \DateTime | Filter: createdAt up to.
+$expires_at_from = 2026-08-01; // \DateTime | Filter: expiresAt from.
+$expires_at_to = 2026-08-31; // \DateTime | Filter: expiresAt up to.
+$updated_at_from = 2026-08-01; // \DateTime | Filter: updatedAt from.
+$updated_at_to = 2026-08-31; // \DateTime | Filter: updatedAt up to.
+$id = cm3w7n2p60002q8f2h7d3z5cf; // string | Filter by infraction ID.
+$protocol = 2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210; // string | Filter by protocol.
 
 try {
-    $result = $apiInstance->getInfractions($page, $limit, $status, $type, $end_to_end_id, $transaction_id, $amount_min, $amount_max, $analysis_result, $reported_by, $participant_document, $participant_name, $sort_by, $sort_direction, $reported_at_from, $reported_at_to, $created_at_from, $created_at_to, $expires_at_from, $expires_at_to, $updated_at_from, $updated_at_to, $needs_manual_review, $id, $protocol);
+    $result = $apiInstance->getInfractions($page, $limit, $status, $type, $end_to_end_id, $transaction_id, $amount_min, $amount_max, $analysis_result, $reported_by, $participant_document, $participant_name, $sort_by, $sort_direction, $reported_at_from, $reported_at_to, $created_at_from, $created_at_to, $expires_at_from, $expires_at_to, $updated_at_from, $updated_at_to, $id, $protocol);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling InfractionsApi->getInfractions: ', $e->getMessage(), PHP_EOL;
@@ -78,20 +77,20 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**|  | [optional] [default to 1] |
-| **limit** | **int**|  | [optional] [default to 10] |
+| **page** | **int**| Page number. | [optional] [default to 1] |
+| **limit** | **int**| Items per page. | [optional] [default to 10] |
 | **status** | **string**| Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) | [optional] |
 | **type** | **string**| Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) | [optional] |
-| **end_to_end_id** | **string**|  | [optional] |
-| **transaction_id** | **string**|  | [optional] |
-| **amount_min** | **float**|  | [optional] |
-| **amount_max** | **float**|  | [optional] |
-| **analysis_result** | **string**| Comma-separated AnalysisResult | [optional] |
+| **end_to_end_id** | **string**| End-to-end ID of the Pix. | [optional] |
+| **transaction_id** | **string**| Transaction ID. | [optional] |
+| **amount_min** | **float**| Minimum amount. | [optional] |
+| **amount_max** | **float**| Maximum amount. | [optional] |
+| **analysis_result** | **string**| Comma-separated AnalysisResult: AGREED, DISAGREED. | [optional] |
 | **reported_by** | **string**| Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) | [optional] |
-| **participant_document** | **string**|  | [optional] |
-| **participant_name** | **string**|  | [optional] |
-| **sort_by** | **string**| Sort field. | [optional] |
-| **sort_direction** | **string**| Sort direction. | [optional] |
+| **participant_document** | **string**| CPF or CNPJ of the participant. | [optional] |
+| **participant_name** | **string**| Name of the participant. | [optional] |
+| **sort_by** | **string**| Sort field. | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**| Sort direction. | [optional] [default to &#39;desc&#39;] |
 | **reported_at_from** | **\DateTime**| Filter: reportedAt from. | [optional] |
 | **reported_at_to** | **\DateTime**| Filter: reportedAt up to. | [optional] |
 | **created_at_from** | **\DateTime**| Filter: createdAt from. | [optional] |
@@ -100,13 +99,12 @@ try {
 | **expires_at_to** | **\DateTime**| Filter: expiresAt up to. | [optional] |
 | **updated_at_from** | **\DateTime**| Filter: updatedAt from. | [optional] |
 | **updated_at_to** | **\DateTime**| Filter: updatedAt up to. | [optional] |
-| **needs_manual_review** | **bool**| Filter: needs manual review. | [optional] |
 | **id** | **string**| Filter by infraction ID. | [optional] |
 | **protocol** | **string**| Filter by protocol. | [optional] |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\InfractionListResponse**](../Model/InfractionListResponse.md)
+[**\PayZu\Pix\Model\InfractionListResponse**](../Model/InfractionListResponse.md)
 
 ### Authorization
 
@@ -124,7 +122,7 @@ try {
 ## `getInfractionsById()`
 
 ```php
-getInfractionsById($id): \OpenAPI\Client\Model\InfractionDetail
+getInfractionsById($id): \PayZu\Pix\Model\InfractionDetail
 ```
 
 Get Infraction
@@ -139,16 +137,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InfractionsApi(
+$apiInstance = new PayZu\Pix\Api\InfractionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Infraction ID
+$id = cm3w7n2p60002q8f2h7d3z5cf; // string | Infraction ID
 
 try {
     $result = $apiInstance->getInfractionsById($id);
@@ -166,7 +164,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\InfractionDetail**](../Model/InfractionDetail.md)
+[**\PayZu\Pix\Model\InfractionDetail**](../Model/InfractionDetail.md)
 
 ### Authorization
 
@@ -184,12 +182,12 @@ try {
 ## `getInfractionsDefenseById()`
 
 ```php
-getInfractionsDefenseById($infraction_id, $defense_id): \OpenAPI\Client\Model\Defense
+getInfractionsDefenseById($infraction_id, $defense_id): \PayZu\Pix\Model\Defense
 ```
 
 Get Defense
 
-Get a specific defense for an infraction. **Requires support privileges**.
+Get a specific defense for an infraction.
 
 ### Example
 
@@ -199,17 +197,17 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InfractionsApi(
+$apiInstance = new PayZu\Pix\Api\InfractionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$infraction_id = 'infraction_id_example'; // string | Infraction ID
-$defense_id = 'defense_id_example'; // string | Defense ID
+$infraction_id = cm3w7n2p60002q8f2h7d3z5cf; // string | Infraction ID
+$defense_id = cm3w7p5r90003q8f2j8e4a6dg; // string | Defense ID
 
 try {
     $result = $apiInstance->getInfractionsDefenseById($infraction_id, $defense_id);
@@ -228,7 +226,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Defense**](../Model/Defense.md)
+[**\PayZu\Pix\Model\Defense**](../Model/Defense.md)
 
 ### Authorization
 
@@ -246,12 +244,12 @@ try {
 ## `getInfractionsDefenses()`
 
 ```php
-getInfractionsDefenses($id): \OpenAPI\Client\Model\Defense[]
+getInfractionsDefenses($id): \PayZu\Pix\Model\Defense[]
 ```
 
 List Defenses
 
-List all defenses for a specific infraction. **Requires support privileges**.
+List all defenses for a specific infraction.
 
 ### Example
 
@@ -261,16 +259,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InfractionsApi(
+$apiInstance = new PayZu\Pix\Api\InfractionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Infraction ID
+$id = cm3w7n2p60002q8f2h7d3z5cf; // string | Infraction ID
 
 try {
     $result = $apiInstance->getInfractionsDefenses($id);
@@ -288,7 +286,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Defense[]**](../Model/Defense.md)
+[**\PayZu\Pix\Model\Defense[]**](../Model/Defense.md)
 
 ### Authorization
 
@@ -306,7 +304,7 @@ try {
 ## `postInfractionsDefense()`
 
 ```php
-postInfractionsDefense($id, $defense, $files): \OpenAPI\Client\Model\Defense
+postInfractionsDefense($id, $defense, $files): \PayZu\Pix\Model\Defense
 ```
 
 Create Defense
@@ -321,18 +319,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InfractionsApi(
+$apiInstance = new PayZu\Pix\Api\InfractionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Infraction ID
+$id = cm3w7n2p60002q8f2h7d3z5cf; // string | Infraction ID
 $defense = 'defense_example'; // string | Defense text (max: 1000 characters)
-$files = array('/path/to/file.txt'); // \SplFileObject[] | Evidence files (max: 10MB total)
+$files = array('/path/to/file.txt'); // \SplFileObject[] | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
 
 try {
     $result = $apiInstance->postInfractionsDefense($id, $defense, $files);
@@ -348,11 +346,11 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| Infraction ID | |
 | **defense** | **string**| Defense text (max: 1000 characters) | |
-| **files** | **\SplFileObject[]**| Evidence files (max: 10MB total) | [optional] |
+| **files** | **\SplFileObject[]**| Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. | [optional] |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Defense**](../Model/Defense.md)
+[**\PayZu\Pix\Model\Defense**](../Model/Defense.md)
 
 ### Authorization
 

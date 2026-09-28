@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,13 +20,13 @@ import { mapValues } from '../runtime.js';
  */
 export interface ResendUserCallbacksRequest {
     /**
-     * Period start (REQUIRED). Cannot be more than 30 days in the past.
+     * Start of the period. At most 30 days ago.
      * @type {Date}
      * @memberof ResendUserCallbacksRequest
      */
     createdAtFrom: Date;
     /**
-     * Period end (REQUIRED). Period span cannot exceed 7 days.
+     * End of the period, on or after createdAtFrom. The window between start and end cannot exceed 7 days.
      * @type {Date}
      * @memberof ResendUserCallbacksRequest
      */
@@ -64,7 +64,9 @@ export interface ResendUserCallbacksRequest {
 export const ResendUserCallbacksRequestTransactionTypesEnum = {
     Deposit: 'DEPOSIT',
     Withdraw: 'WITHDRAW',
-    Commission: 'COMMISSION'
+    Commission: 'COMMISSION',
+    Liquidation: 'LIQUIDATION',
+    Adjustment: 'ADJUSTMENT'
 } as const;
 export type ResendUserCallbacksRequestTransactionTypesEnum = typeof ResendUserCallbacksRequestTransactionTypesEnum[keyof typeof ResendUserCallbacksRequestTransactionTypesEnum];
 

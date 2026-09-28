@@ -86,3 +86,46 @@ test('reports.transaction consulta GET /user/transactions/{id}', async () => {
   assertJsonMediaTypeWhenPresent(server.lastRequest());
   assert.equal(detail.amount, 99.9);
 });
+
+test('reports.bankStatements consulta GET /user/bank-statements com o período', async () => {
+  server.enqueue(jsonFixture(200, { data: [], pagination: { page: 1 } }));
+  await client().reports.bankStatements({
+    createdAtFrom: new Date('2026-06-01T00:00:00.000Z'),
+    createdAtTo: new Date('2026-06-30T23:59:59.000Z'),
+    operation: 'INCREMENT',
+  });
+  assertRoute(server.lastRequest(), 'GET', '/v1/user/bank-statements');
+  assertQuery(server.lastRequest(), {
+    createdAtFrom: '2026-06-01T00:00:00.000Z',
+    createdAtTo: '2026-06-30T23:59:59.000Z',
+    operation: 'INCREMENT',
+  });
+  assertBearerToken(server.lastRequest());
+});
+
+test('reports.bankStatement consulta GET /user/bank-statements/{id}', async () => {
+  server.enqueue(jsonFixture(200, { id: 'bs_1', createdAt: CREATED_AT }));
+  const statement = await client().reports.bankStatement('bs_1');
+  assertRoute(server.lastRequest(), 'GET', '/v1/user/bank-statements/bs_1');
+  assert.equal(statement.id, 'bs_1');
+});
+
+test('reports.pendingDeposits consulta GET /user/deposit-pending', async () => {
+  server.enqueue(jsonFixture(200, { data: [] }));
+  await client().reports.pendingDeposits({ page: 2 });
+  assertRoute(server.lastRequest(), 'GET', '/v1/user/deposit-pending');
+  assertQuery(server.lastRequest(), { page: '2' });
+});
+
+test('reports.pendingDeposit consulta GET /user/deposit-pending/{id}', async () => {
+  server.enqueue(jsonFixture(200, { id: 'dp_1', createdAt: CREATED_AT }));
+  await client().reports.pendingDeposit('dp_1');
+  assertRoute(server.lastRequest(), 'GET', '/v1/user/deposit-pending/dp_1');
+});
+
+test('reports.summary consulta GET /user/summary', async () => {
+  server.enqueue(jsonFixture(200, {}));
+  await client().reports.summary({ grouped: true });
+  assertRoute(server.lastRequest(), 'GET', '/v1/user/summary');
+  assertQuery(server.lastRequest(), { grouped: 'true' });
+});

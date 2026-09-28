@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -17,13 +17,19 @@ import (
 // checks if the GetUser200ResponseServiceFee type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetUser200ResponseServiceFee{}
 
-// GetUser200ResponseServiceFee struct for GetUser200ResponseServiceFee
+// GetUser200ResponseServiceFee Cash-in and cash-out fees of the account, in reais.
 type GetUser200ResponseServiceFee struct {
+	// Floor of the cash-in fee, in reais.
 	CashInMinimum *float32 `json:"cashInMinimum,omitempty"`
+	// Fixed part of the cash-in fee, in reais.
 	CashInFixed *float32 `json:"cashInFixed,omitempty"`
+	// Percentage of the cash-in fee.
 	CashInPercent *float32 `json:"cashInPercent,omitempty"`
+	// Floor of the withdrawal fee, in reais.
 	CashOutMinimum *float32 `json:"cashOutMinimum,omitempty"`
+	// Fixed part of the withdrawal fee, in reais.
 	CashOutFixed *float32 `json:"cashOutFixed,omitempty"`
+	// Percentage of the withdrawal fee.
 	CashOutPercent *float32 `json:"cashOutPercent,omitempty"`
 }
 

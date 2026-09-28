@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,15 +14,20 @@
 
 import * as runtime from '../runtime.js';
 import {
+    type ApiError,
+    ApiErrorFromJSON,
+    ApiErrorToJSON,
+} from '../models/ApiError.js';
+import {
     type RotateSecretResponse,
     RotateSecretResponseFromJSON,
     RotateSecretResponseToJSON,
 } from '../models/RotateSecretResponse.js';
 import {
-    type SentWebhookDetail,
-    SentWebhookDetailFromJSON,
-    SentWebhookDetailToJSON,
-} from '../models/SentWebhookDetail.js';
+    type SentWebhookDetailResponse,
+    SentWebhookDetailResponseFromJSON,
+    SentWebhookDetailResponseToJSON,
+} from '../models/SentWebhookDetailResponse.js';
 import {
     type SentWebhooksQuantity,
     SentWebhooksQuantityFromJSON,
@@ -161,13 +166,13 @@ export interface WebhooksApiInterface {
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
-    getUserWebhookSentDetailRaw(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhookDetail>>;
+    getUserWebhookSentDetailRaw(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhookDetailResponse>>;
 
     /**
      * Returns the delivery detail of a single sent callback.
      * Get sent callback detail
      */
-    getUserWebhookSentDetail(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhookDetail>;
+    getUserWebhookSentDetail(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhookDetailResponse>;
 
     /**
      * Creates request options for getUserWebhooks without sending the request
@@ -202,7 +207,7 @@ export interface WebhooksApiInterface {
     getUserWebhooksSentQuantityRequestOpts(requestParameters: GetUserWebhooksSentQuantityRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns how many callbacks were sent, optionally filtered by webhook.
+     * Returns how many webhook deliveries were made, optionally filtered by webhook.
      * @summary Count sent callbacks
      * @param {string} [webhookId] Filter the count by webhook id.
      * @param {*} [options] Override http request option.
@@ -212,7 +217,7 @@ export interface WebhooksApiInterface {
     getUserWebhooksSentQuantityRaw(requestParameters: GetUserWebhooksSentQuantityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhooksQuantity>>;
 
     /**
-     * Returns how many callbacks were sent, optionally filtered by webhook.
+     * Returns how many webhook deliveries were made, optionally filtered by webhook.
      * Count sent callbacks
      */
     getUserWebhooksSentQuantity(requestParameters: GetUserWebhooksSentQuantityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhooksQuantity>;
@@ -454,18 +459,18 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
      * Returns the delivery detail of a single sent callback.
      * Get sent callback detail
      */
-    async getUserWebhookSentDetailRaw(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhookDetail>> {
+    async getUserWebhookSentDetailRaw(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhookDetailResponse>> {
         const requestOptions = await this.getUserWebhookSentDetailRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SentWebhookDetailFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SentWebhookDetailResponseFromJSON(jsonValue));
     }
 
     /**
      * Returns the delivery detail of a single sent callback.
      * Get sent callback detail
      */
-    async getUserWebhookSentDetail(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhookDetail> {
+    async getUserWebhookSentDetail(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhookDetailResponse> {
         const response = await this.getUserWebhookSentDetailRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -553,7 +558,7 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns how many callbacks were sent, optionally filtered by webhook.
+     * Returns how many webhook deliveries were made, optionally filtered by webhook.
      * Count sent callbacks
      */
     async getUserWebhooksSentQuantityRaw(requestParameters: GetUserWebhooksSentQuantityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhooksQuantity>> {
@@ -564,7 +569,7 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns how many callbacks were sent, optionally filtered by webhook.
+     * Returns how many webhook deliveries were made, optionally filtered by webhook.
      * Count sent callbacks
      */
     async getUserWebhooksSentQuantity(requestParameters: GetUserWebhooksSentQuantityRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhooksQuantity> {

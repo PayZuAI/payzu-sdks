@@ -4,20 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Protocol** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**Type** | Pointer to **string** |  | [optional] 
-**ReportedBy** | Pointer to **string** |  | [optional] 
-**ReportDetails** | Pointer to **string** |  | [optional] 
-**AnalysisResult** | Pointer to **string** |  | [optional] 
-**AnalysisDetails** | Pointer to **string** |  | [optional] 
-**ReportedAt** | Pointer to **time.Time** |  | [optional] 
-**ExpiresAt** | Pointer to **time.Time** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of the infraction inside PayZu, used in the query routes and when sending the defense. | [optional] 
+**Protocol** | Pointer to **string** | Infraction code at Bacen. | [optional] 
+**Status** | Pointer to **string** | Current state of the infraction. | [optional] 
+**Type** | Pointer to **string** | Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED. | [optional] 
+**ReportedBy** | Pointer to **string** | Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT. | [optional] 
+**ReportDetails** | Pointer to **NullableString** | Reason given by whoever opened the infraction, in the text sent by the partner bank. | [optional] 
+**AnalysisResult** | Pointer to **NullableString** | Analysis outcome: AGREED or DISAGREED. | [optional] 
+**AnalysisDetails** | Pointer to **NullableString** | Additional text about the analysis decision, when the partner bank sends that information. | [optional] 
+**ReportedAt** | Pointer to **time.Time** | Moment the infraction was opened. | [optional] 
+**ExpiresAt** | Pointer to **NullableTime** | Deadline to send the defense of this infraction. | [optional] 
 **Transaction** | Pointer to [**InfractionDetailTransaction**](InfractionDetailTransaction.md) |  | [optional] 
-**DefenseHistory** | Pointer to [**[]Defense**](Defense.md) |  | [optional] 
+**DefenseHistory** | Pointer to [**[]DefenseHistoryEntry**](DefenseHistoryEntry.md) | Defenses already sent for this infraction, each with text, status and files. | [optional] 
 
 ## Methods
 
@@ -188,6 +186,16 @@ SetReportDetails sets ReportDetails field to given value.
 
 HasReportDetails returns a boolean if a field has been set.
 
+### SetReportDetailsNil
+
+`func (o *InfractionDetail) SetReportDetailsNil(b bool)`
+
+ SetReportDetailsNil sets the value for ReportDetails to be an explicit nil
+
+### UnsetReportDetails
+`func (o *InfractionDetail) UnsetReportDetails()`
+
+UnsetReportDetails ensures that no value is present for ReportDetails, not even an explicit nil
 ### GetAnalysisResult
 
 `func (o *InfractionDetail) GetAnalysisResult() string`
@@ -213,6 +221,16 @@ SetAnalysisResult sets AnalysisResult field to given value.
 
 HasAnalysisResult returns a boolean if a field has been set.
 
+### SetAnalysisResultNil
+
+`func (o *InfractionDetail) SetAnalysisResultNil(b bool)`
+
+ SetAnalysisResultNil sets the value for AnalysisResult to be an explicit nil
+
+### UnsetAnalysisResult
+`func (o *InfractionDetail) UnsetAnalysisResult()`
+
+UnsetAnalysisResult ensures that no value is present for AnalysisResult, not even an explicit nil
 ### GetAnalysisDetails
 
 `func (o *InfractionDetail) GetAnalysisDetails() string`
@@ -238,6 +256,16 @@ SetAnalysisDetails sets AnalysisDetails field to given value.
 
 HasAnalysisDetails returns a boolean if a field has been set.
 
+### SetAnalysisDetailsNil
+
+`func (o *InfractionDetail) SetAnalysisDetailsNil(b bool)`
+
+ SetAnalysisDetailsNil sets the value for AnalysisDetails to be an explicit nil
+
+### UnsetAnalysisDetails
+`func (o *InfractionDetail) UnsetAnalysisDetails()`
+
+UnsetAnalysisDetails ensures that no value is present for AnalysisDetails, not even an explicit nil
 ### GetReportedAt
 
 `func (o *InfractionDetail) GetReportedAt() time.Time`
@@ -288,56 +316,16 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
-### GetCreatedAt
+### SetExpiresAtNil
 
-`func (o *InfractionDetail) GetCreatedAt() time.Time`
+`func (o *InfractionDetail) SetExpiresAtNil(b bool)`
 
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+ SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
 
-### GetCreatedAtOk
+### UnsetExpiresAt
+`func (o *InfractionDetail) UnsetExpiresAt()`
 
-`func (o *InfractionDetail) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *InfractionDetail) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
-### HasCreatedAt
-
-`func (o *InfractionDetail) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *InfractionDetail) GetUpdatedAt() time.Time`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *InfractionDetail) GetUpdatedAtOk() (*time.Time, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *InfractionDetail) SetUpdatedAt(v time.Time)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *InfractionDetail) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
-
+UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 ### GetTransaction
 
 `func (o *InfractionDetail) GetTransaction() InfractionDetailTransaction`
@@ -365,20 +353,20 @@ HasTransaction returns a boolean if a field has been set.
 
 ### GetDefenseHistory
 
-`func (o *InfractionDetail) GetDefenseHistory() []Defense`
+`func (o *InfractionDetail) GetDefenseHistory() []DefenseHistoryEntry`
 
 GetDefenseHistory returns the DefenseHistory field if non-nil, zero value otherwise.
 
 ### GetDefenseHistoryOk
 
-`func (o *InfractionDetail) GetDefenseHistoryOk() (*[]Defense, bool)`
+`func (o *InfractionDetail) GetDefenseHistoryOk() (*[]DefenseHistoryEntry, bool)`
 
 GetDefenseHistoryOk returns a tuple with the DefenseHistory field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDefenseHistory
 
-`func (o *InfractionDetail) SetDefenseHistory(v []Defense)`
+`func (o *InfractionDetail) SetDefenseHistory(v []DefenseHistoryEntry)`
 
 SetDefenseHistory sets DefenseHistory field to given value.
 

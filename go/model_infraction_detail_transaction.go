@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -17,15 +17,21 @@ import (
 // checks if the InfractionDetailTransaction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InfractionDetailTransaction{}
 
-// InfractionDetailTransaction struct for InfractionDetailTransaction
+// InfractionDetailTransaction Summary of the disputed Pix.
 type InfractionDetailTransaction struct {
 	Id *string `json:"id,omitempty"`
+	// Amount of the disputed transaction, in reais with decimal places.
 	Amount *float32 `json:"amount,omitempty"`
-	PayerName *string `json:"payerName,omitempty"`
-	PayerDocument *string `json:"payerDocument,omitempty"`
-	ReceiverName *string `json:"receiverName,omitempty"`
-	ReceiverDocument *string `json:"receiverDocument,omitempty"`
-	EndToEndId *string `json:"endToEndId,omitempty"`
+	// Name of the Pix payer, as reported by the provider.
+	PayerName NullableString `json:"payerName,omitempty"`
+	// CPF or CNPJ of the Pix payer, as reported by the provider.
+	PayerDocument NullableString `json:"payerDocument,omitempty"`
+	// Name of the Pix receiver, as reported by the provider.
+	ReceiverName NullableString `json:"receiverName,omitempty"`
+	// CPF or CNPJ of the Pix receiver, as reported by the provider.
+	ReceiverDocument NullableString `json:"receiverDocument,omitempty"`
+	// End-to-end identifier of the Pix, reported by the provider at settlement.
+	EndToEndId NullableString `json:"endToEndId,omitempty"`
 }
 
 // NewInfractionDetailTransaction instantiates a new InfractionDetailTransaction object
@@ -109,164 +115,214 @@ func (o *InfractionDetailTransaction) SetAmount(v float32) {
 	o.Amount = &v
 }
 
-// GetPayerName returns the PayerName field value if set, zero value otherwise.
+// GetPayerName returns the PayerName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetailTransaction) GetPayerName() string {
-	if o == nil || IsNil(o.PayerName) {
+	if o == nil || IsNil(o.PayerName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerName
+	return *o.PayerName.Get()
 }
 
 // GetPayerNameOk returns a tuple with the PayerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetailTransaction) GetPayerNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerName, true
+	return o.PayerName.Get(), o.PayerName.IsSet()
 }
 
 // HasPayerName returns a boolean if a field has been set.
 func (o *InfractionDetailTransaction) HasPayerName() bool {
-	if o != nil && !IsNil(o.PayerName) {
+	if o != nil && o.PayerName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerName gets a reference to the given string and assigns it to the PayerName field.
+// SetPayerName gets a reference to the given NullableString and assigns it to the PayerName field.
 func (o *InfractionDetailTransaction) SetPayerName(v string) {
-	o.PayerName = &v
+	o.PayerName.Set(&v)
+}
+// SetPayerNameNil sets the value for PayerName to be an explicit nil
+func (o *InfractionDetailTransaction) SetPayerNameNil() {
+	o.PayerName.Set(nil)
 }
 
-// GetPayerDocument returns the PayerDocument field value if set, zero value otherwise.
+// UnsetPayerName ensures that no value is present for PayerName, not even an explicit nil
+func (o *InfractionDetailTransaction) UnsetPayerName() {
+	o.PayerName.Unset()
+}
+
+// GetPayerDocument returns the PayerDocument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetailTransaction) GetPayerDocument() string {
-	if o == nil || IsNil(o.PayerDocument) {
+	if o == nil || IsNil(o.PayerDocument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerDocument
+	return *o.PayerDocument.Get()
 }
 
 // GetPayerDocumentOk returns a tuple with the PayerDocument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetailTransaction) GetPayerDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerDocument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerDocument, true
+	return o.PayerDocument.Get(), o.PayerDocument.IsSet()
 }
 
 // HasPayerDocument returns a boolean if a field has been set.
 func (o *InfractionDetailTransaction) HasPayerDocument() bool {
-	if o != nil && !IsNil(o.PayerDocument) {
+	if o != nil && o.PayerDocument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerDocument gets a reference to the given string and assigns it to the PayerDocument field.
+// SetPayerDocument gets a reference to the given NullableString and assigns it to the PayerDocument field.
 func (o *InfractionDetailTransaction) SetPayerDocument(v string) {
-	o.PayerDocument = &v
+	o.PayerDocument.Set(&v)
+}
+// SetPayerDocumentNil sets the value for PayerDocument to be an explicit nil
+func (o *InfractionDetailTransaction) SetPayerDocumentNil() {
+	o.PayerDocument.Set(nil)
 }
 
-// GetReceiverName returns the ReceiverName field value if set, zero value otherwise.
+// UnsetPayerDocument ensures that no value is present for PayerDocument, not even an explicit nil
+func (o *InfractionDetailTransaction) UnsetPayerDocument() {
+	o.PayerDocument.Unset()
+}
+
+// GetReceiverName returns the ReceiverName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetailTransaction) GetReceiverName() string {
-	if o == nil || IsNil(o.ReceiverName) {
+	if o == nil || IsNil(o.ReceiverName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverName
+	return *o.ReceiverName.Get()
 }
 
 // GetReceiverNameOk returns a tuple with the ReceiverName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetailTransaction) GetReceiverNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverName, true
+	return o.ReceiverName.Get(), o.ReceiverName.IsSet()
 }
 
 // HasReceiverName returns a boolean if a field has been set.
 func (o *InfractionDetailTransaction) HasReceiverName() bool {
-	if o != nil && !IsNil(o.ReceiverName) {
+	if o != nil && o.ReceiverName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverName gets a reference to the given string and assigns it to the ReceiverName field.
+// SetReceiverName gets a reference to the given NullableString and assigns it to the ReceiverName field.
 func (o *InfractionDetailTransaction) SetReceiverName(v string) {
-	o.ReceiverName = &v
+	o.ReceiverName.Set(&v)
+}
+// SetReceiverNameNil sets the value for ReceiverName to be an explicit nil
+func (o *InfractionDetailTransaction) SetReceiverNameNil() {
+	o.ReceiverName.Set(nil)
 }
 
-// GetReceiverDocument returns the ReceiverDocument field value if set, zero value otherwise.
+// UnsetReceiverName ensures that no value is present for ReceiverName, not even an explicit nil
+func (o *InfractionDetailTransaction) UnsetReceiverName() {
+	o.ReceiverName.Unset()
+}
+
+// GetReceiverDocument returns the ReceiverDocument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetailTransaction) GetReceiverDocument() string {
-	if o == nil || IsNil(o.ReceiverDocument) {
+	if o == nil || IsNil(o.ReceiverDocument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverDocument
+	return *o.ReceiverDocument.Get()
 }
 
 // GetReceiverDocumentOk returns a tuple with the ReceiverDocument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetailTransaction) GetReceiverDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverDocument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverDocument, true
+	return o.ReceiverDocument.Get(), o.ReceiverDocument.IsSet()
 }
 
 // HasReceiverDocument returns a boolean if a field has been set.
 func (o *InfractionDetailTransaction) HasReceiverDocument() bool {
-	if o != nil && !IsNil(o.ReceiverDocument) {
+	if o != nil && o.ReceiverDocument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverDocument gets a reference to the given string and assigns it to the ReceiverDocument field.
+// SetReceiverDocument gets a reference to the given NullableString and assigns it to the ReceiverDocument field.
 func (o *InfractionDetailTransaction) SetReceiverDocument(v string) {
-	o.ReceiverDocument = &v
+	o.ReceiverDocument.Set(&v)
+}
+// SetReceiverDocumentNil sets the value for ReceiverDocument to be an explicit nil
+func (o *InfractionDetailTransaction) SetReceiverDocumentNil() {
+	o.ReceiverDocument.Set(nil)
 }
 
-// GetEndToEndId returns the EndToEndId field value if set, zero value otherwise.
+// UnsetReceiverDocument ensures that no value is present for ReceiverDocument, not even an explicit nil
+func (o *InfractionDetailTransaction) UnsetReceiverDocument() {
+	o.ReceiverDocument.Unset()
+}
+
+// GetEndToEndId returns the EndToEndId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetailTransaction) GetEndToEndId() string {
-	if o == nil || IsNil(o.EndToEndId) {
+	if o == nil || IsNil(o.EndToEndId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.EndToEndId
+	return *o.EndToEndId.Get()
 }
 
 // GetEndToEndIdOk returns a tuple with the EndToEndId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetailTransaction) GetEndToEndIdOk() (*string, bool) {
-	if o == nil || IsNil(o.EndToEndId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EndToEndId, true
+	return o.EndToEndId.Get(), o.EndToEndId.IsSet()
 }
 
 // HasEndToEndId returns a boolean if a field has been set.
 func (o *InfractionDetailTransaction) HasEndToEndId() bool {
-	if o != nil && !IsNil(o.EndToEndId) {
+	if o != nil && o.EndToEndId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEndToEndId gets a reference to the given string and assigns it to the EndToEndId field.
+// SetEndToEndId gets a reference to the given NullableString and assigns it to the EndToEndId field.
 func (o *InfractionDetailTransaction) SetEndToEndId(v string) {
-	o.EndToEndId = &v
+	o.EndToEndId.Set(&v)
+}
+// SetEndToEndIdNil sets the value for EndToEndId to be an explicit nil
+func (o *InfractionDetailTransaction) SetEndToEndIdNil() {
+	o.EndToEndId.Set(nil)
+}
+
+// UnsetEndToEndId ensures that no value is present for EndToEndId, not even an explicit nil
+func (o *InfractionDetailTransaction) UnsetEndToEndId() {
+	o.EndToEndId.Unset()
 }
 
 func (o InfractionDetailTransaction) MarshalJSON() ([]byte, error) {
@@ -285,20 +341,20 @@ func (o InfractionDetailTransaction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
-	if !IsNil(o.PayerName) {
-		toSerialize["payerName"] = o.PayerName
+	if o.PayerName.IsSet() {
+		toSerialize["payerName"] = o.PayerName.Get()
 	}
-	if !IsNil(o.PayerDocument) {
-		toSerialize["payerDocument"] = o.PayerDocument
+	if o.PayerDocument.IsSet() {
+		toSerialize["payerDocument"] = o.PayerDocument.Get()
 	}
-	if !IsNil(o.ReceiverName) {
-		toSerialize["receiverName"] = o.ReceiverName
+	if o.ReceiverName.IsSet() {
+		toSerialize["receiverName"] = o.ReceiverName.Get()
 	}
-	if !IsNil(o.ReceiverDocument) {
-		toSerialize["receiverDocument"] = o.ReceiverDocument
+	if o.ReceiverDocument.IsSet() {
+		toSerialize["receiverDocument"] = o.ReceiverDocument.Get()
 	}
-	if !IsNil(o.EndToEndId) {
-		toSerialize["endToEndId"] = o.EndToEndId
+	if o.EndToEndId.IsSet() {
+		toSerialize["endToEndId"] = o.EndToEndId.Get()
 	}
 	return toSerialize, nil
 }

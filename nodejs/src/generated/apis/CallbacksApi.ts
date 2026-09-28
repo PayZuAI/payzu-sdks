@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -29,10 +29,15 @@ import {
     CallbackListResponseToJSON,
 } from '../models/CallbackListResponse.js';
 import {
-    type CallbackResendResponse,
-    CallbackResendResponseFromJSON,
-    CallbackResendResponseToJSON,
-} from '../models/CallbackResendResponse.js';
+    type CallbackSecretResponse,
+    CallbackSecretResponseFromJSON,
+    CallbackSecretResponseToJSON,
+} from '../models/CallbackSecretResponse.js';
+import {
+    type EnqueuedCallback,
+    EnqueuedCallbackFromJSON,
+    EnqueuedCallbackToJSON,
+} from '../models/EnqueuedCallback.js';
 import {
     type ResendUserCallbackSingle200Response,
     ResendUserCallbackSingle200ResponseFromJSON,
@@ -48,6 +53,21 @@ import {
     ResendUserCallbacksRequestFromJSON,
     ResendUserCallbacksRequestToJSON,
 } from '../models/ResendUserCallbacksRequest.js';
+import {
+    type ResendWebhookCallbacksRequest,
+    ResendWebhookCallbacksRequestFromJSON,
+    ResendWebhookCallbacksRequestToJSON,
+} from '../models/ResendWebhookCallbacksRequest.js';
+import {
+    type RotateCallbackSecretResponse,
+    RotateCallbackSecretResponseFromJSON,
+    RotateCallbackSecretResponseToJSON,
+} from '../models/RotateCallbackSecretResponse.js';
+import {
+    type WebhookEventType,
+    WebhookEventTypeFromJSON,
+    WebhookEventTypeToJSON,
+} from '../models/WebhookEventType.js';
 
 export interface GetUserCallbackByIdRequest {
     id: string;
@@ -65,6 +85,8 @@ export interface GetUserCallbacksRequest {
     hasError?: boolean;
     createdAtFrom?: Date;
     createdAtTo?: Date;
+    webhookId?: string;
+    eventType?: WebhookEventType;
 }
 
 export interface ResendUserCallbackSingleRequest {
@@ -79,6 +101,10 @@ export interface ResendUserCallbacksWebhookRequest {
     webhookId: string;
 }
 
+export interface ResendUserCallbacksWebhooksRequest {
+    resendWebhookCallbacksRequest: ResendWebhookCallbacksRequest;
+}
+
 /**
  * CallbacksApi - interface
  * 
@@ -86,6 +112,28 @@ export interface ResendUserCallbacksWebhookRequest {
  * @interface CallbacksApiInterface
  */
 export interface CallbacksApiInterface {
+    /**
+     * Creates request options for createUserCallbackSecret without sending the request
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    createUserCallbackSecretRequestOpts(): Promise<runtime.RequestOpts>;
+
+    /**
+     * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+     * @summary Create callback secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    createUserCallbackSecretRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CallbackSecretResponse>>;
+
+    /**
+     * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+     * Create callback secret
+     */
+    createUserCallbackSecret(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CallbackSecretResponse>;
+
     /**
      * Creates request options for getUserCallbackById without sending the request
      * @param {string} id Unique callback ID
@@ -112,17 +160,19 @@ export interface CallbacksApiInterface {
 
     /**
      * Creates request options for getUserCallbacks without sending the request
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {'createdAt' | 'status'} [sortBy] 
-     * @param {'asc' | 'desc'} [sortDirection] 
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
+     * @param {'createdAt' | 'status'} [sortBy] Sort field.
+     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
      * @param {string} [id] Filter by callback ID
      * @param {string} [url] Filter by callback URL
      * @param {number} [status] HTTP status code
-     * @param {string} [transactionId] 
+     * @param {string} [transactionId] Transaction ID.
      * @param {boolean} [hasError] Filter callbacks that errored
-     * @param {Date} [createdAtFrom] 
-     * @param {Date} [createdAtTo] 
+     * @param {Date} [createdAtFrom] Start of the creation date range.
+     * @param {Date} [createdAtTo] End of the creation date range.
+     * @param {string} [webhookId] Webhook id.
+     * @param {WebhookEventType} [eventType] Webhook event type.
      * @throws {RequiredError}
      * @memberof CallbacksApiInterface
      */
@@ -131,17 +181,19 @@ export interface CallbacksApiInterface {
     /**
      * Returns a paginated list of webhook callback logs for the user\'s transactions.
      * @summary List Callbacks
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {'createdAt' | 'status'} [sortBy] 
-     * @param {'asc' | 'desc'} [sortDirection] 
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
+     * @param {'createdAt' | 'status'} [sortBy] Sort field.
+     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
      * @param {string} [id] Filter by callback ID
      * @param {string} [url] Filter by callback URL
      * @param {number} [status] HTTP status code
-     * @param {string} [transactionId] 
+     * @param {string} [transactionId] Transaction ID.
      * @param {boolean} [hasError] Filter callbacks that errored
-     * @param {Date} [createdAtFrom] 
-     * @param {Date} [createdAtTo] 
+     * @param {Date} [createdAtFrom] Start of the creation date range.
+     * @param {Date} [createdAtTo] End of the creation date range.
+     * @param {string} [webhookId] Webhook id.
+     * @param {WebhookEventType} [eventType] Webhook event type.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CallbacksApiInterface
@@ -156,7 +208,7 @@ export interface CallbacksApiInterface {
 
     /**
      * Creates request options for resendUserCallbackSingle without sending the request
-     * @param {string} transactionId 
+     * @param {string} transactionId Transaction ID.
      * @throws {RequiredError}
      * @memberof CallbacksApiInterface
      */
@@ -165,7 +217,7 @@ export interface CallbacksApiInterface {
     /**
      * Resend the callback of a single transaction.
      * @summary Re-send callback (single)
-     * @param {string} transactionId 
+     * @param {string} transactionId Transaction ID.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CallbacksApiInterface
@@ -218,13 +270,59 @@ export interface CallbacksApiInterface {
      * @throws {RequiredError}
      * @memberof CallbacksApiInterface
      */
-    resendUserCallbacksWebhookRaw(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CallbackResendResponse>>;
+    resendUserCallbacksWebhookRaw(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EnqueuedCallback>>;
 
     /**
      * Queues a bulk resend of the failed callbacks of a given webhook.
      * Resend callbacks by webhook
      */
-    resendUserCallbacksWebhook(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CallbackResendResponse>;
+    resendUserCallbacksWebhook(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EnqueuedCallback>;
+
+    /**
+     * Creates request options for resendUserCallbacksWebhooks without sending the request
+     * @param {ResendWebhookCallbacksRequest} resendWebhookCallbacksRequest 
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    resendUserCallbacksWebhooksRequestOpts(requestParameters: ResendUserCallbacksWebhooksRequest): Promise<runtime.RequestOpts>;
+
+    /**
+     * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+     * @summary Resend webhook callbacks by filters
+     * @param {ResendWebhookCallbacksRequest} resendWebhookCallbacksRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    resendUserCallbacksWebhooksRaw(requestParameters: ResendUserCallbacksWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EnqueuedCallback>>;
+
+    /**
+     * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+     * Resend webhook callbacks by filters
+     */
+    resendUserCallbacksWebhooks(requestParameters: ResendUserCallbacksWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EnqueuedCallback>;
+
+    /**
+     * Creates request options for rotateUserCallbackSecret without sending the request
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    rotateUserCallbackSecretRequestOpts(): Promise<runtime.RequestOpts>;
+
+    /**
+     * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+     * @summary Rotate callback secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CallbacksApiInterface
+     */
+    rotateUserCallbackSecretRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RotateCallbackSecretResponse>>;
+
+    /**
+     * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+     * Rotate callback secret
+     */
+    rotateUserCallbackSecret(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RotateCallbackSecretResponse>;
 
 }
 
@@ -232,6 +330,53 @@ export interface CallbacksApiInterface {
  * 
  */
 export class CallbacksApi extends runtime.BaseAPI implements CallbacksApiInterface {
+
+    /**
+     * Creates request options for createUserCallbackSecret without sending the request
+     */
+    async createUserCallbackSecretRequestOpts(): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/callbacks/secret`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+     * Create callback secret
+     */
+    async createUserCallbackSecretRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CallbackSecretResponse>> {
+        const requestOptions = await this.createUserCallbackSecretRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CallbackSecretResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+     * Create callback secret
+     */
+    async createUserCallbackSecret(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CallbackSecretResponse> {
+        const response = await this.createUserCallbackSecretRaw(initOverrides);
+        return await response.value();
+    }
 
     /**
      * Creates request options for getUserCallbackById without sending the request
@@ -336,6 +481,14 @@ export class CallbacksApi extends runtime.BaseAPI implements CallbacksApiInterfa
 
         if (requestParameters['createdAtTo'] != null) {
             queryParameters['createdAtTo'] = (requestParameters['createdAtTo'] as any).toISOString();
+        }
+
+        if (requestParameters['webhookId'] != null) {
+            queryParameters['webhookId'] = requestParameters['webhookId'];
+        }
+
+        if (requestParameters['eventType'] != null) {
+            queryParameters['eventType'] = requestParameters['eventType'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -530,19 +683,123 @@ export class CallbacksApi extends runtime.BaseAPI implements CallbacksApiInterfa
      * Queues a bulk resend of the failed callbacks of a given webhook.
      * Resend callbacks by webhook
      */
-    async resendUserCallbacksWebhookRaw(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CallbackResendResponse>> {
+    async resendUserCallbacksWebhookRaw(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EnqueuedCallback>> {
         const requestOptions = await this.resendUserCallbacksWebhookRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CallbackResendResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EnqueuedCallbackFromJSON(jsonValue));
     }
 
     /**
      * Queues a bulk resend of the failed callbacks of a given webhook.
      * Resend callbacks by webhook
      */
-    async resendUserCallbacksWebhook(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CallbackResendResponse> {
+    async resendUserCallbacksWebhook(requestParameters: ResendUserCallbacksWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EnqueuedCallback> {
         const response = await this.resendUserCallbacksWebhookRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for resendUserCallbacksWebhooks without sending the request
+     */
+    async resendUserCallbacksWebhooksRequestOpts(requestParameters: ResendUserCallbacksWebhooksRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['resendWebhookCallbacksRequest'] == null) {
+            throw new runtime.RequiredError(
+                'resendWebhookCallbacksRequest',
+                'Required parameter "resendWebhookCallbacksRequest" was null or undefined when calling resendUserCallbacksWebhooks().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/callbacks/resend/webhook`;
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ResendWebhookCallbacksRequestToJSON(requestParameters['resendWebhookCallbacksRequest']),
+        };
+    }
+
+    /**
+     * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+     * Resend webhook callbacks by filters
+     */
+    async resendUserCallbacksWebhooksRaw(requestParameters: ResendUserCallbacksWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EnqueuedCallback>> {
+        const requestOptions = await this.resendUserCallbacksWebhooksRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EnqueuedCallbackFromJSON(jsonValue));
+    }
+
+    /**
+     * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+     * Resend webhook callbacks by filters
+     */
+    async resendUserCallbacksWebhooks(requestParameters: ResendUserCallbacksWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EnqueuedCallback> {
+        const response = await this.resendUserCallbacksWebhooksRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for rotateUserCallbackSecret without sending the request
+     */
+    async rotateUserCallbackSecretRequestOpts(): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/callbacks/secret/rotate`;
+
+        return {
+            path: urlPath,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+     * Rotate callback secret
+     */
+    async rotateUserCallbackSecretRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RotateCallbackSecretResponse>> {
+        const requestOptions = await this.rotateUserCallbackSecretRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => RotateCallbackSecretResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+     * Rotate callback secret
+     */
+    async rotateUserCallbackSecret(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RotateCallbackSecretResponse> {
+        const response = await this.rotateUserCallbackSecretRaw(initOverrides);
         return await response.value();
     }
 

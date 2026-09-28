@@ -20,8 +20,8 @@ import type { ResendUserCallbacksRequest } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "createdAtFrom": null,
-  "createdAtTo": null,
+  "createdAtFrom": 2026-08-05T00:00:00Z,
+  "createdAtTo": 2026-08-11T23:59:59Z,
   "transactionIds": null,
   "transactionTypes": null,
   "transactionStatus": null,

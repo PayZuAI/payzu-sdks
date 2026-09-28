@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -35,17 +35,11 @@ import {
  */
 export interface GetUser200Response {
     /**
-     * 
-     * @type {string}
-     * @memberof GetUser200Response
-     */
-    id?: string;
-    /**
      * Public account identifier (6 digits, unique). Used as destination for internal transfers.
      * @type {string}
      * @memberof GetUser200Response
      */
-    accountNumber?: string;
+    accountNumber?: string | null;
     /**
      * Branch number (4 digits).
      * @type {string}
@@ -53,83 +47,71 @@ export interface GetUser200Response {
      */
     branch?: string;
     /**
-     * 
+     * Registered name of the account.
      * @type {string}
      * @memberof GetUser200Response
      */
     name?: string;
     /**
-     * 
-     * @type {string}
+     * Account role.
+     * @type {GetUser200ResponseRoleEnum}
      * @memberof GetUser200Response
      */
-    role?: string;
+    role?: GetUser200ResponseRoleEnum;
     /**
-     * 
+     * Balance free for withdrawals and transfers, in reais.
      * @type {number}
      * @memberof GetUser200Response
      */
     balanceAvailable?: number;
     /**
-     * 
+     * Part of the balance held, in reais.
      * @type {number}
      * @memberof GetUser200Response
      */
     balanceBlocked?: number;
     /**
-     * 
-     * @type {string}
+     * Account status.
+     * @type {GetUser200ResponseStatusEnum}
      * @memberof GetUser200Response
      */
-    status?: string;
+    status?: GetUser200ResponseStatusEnum;
     /**
-     * 
+     * When false, creating withdrawals is refused for lack of permission (PZS200).
      * @type {boolean}
      * @memberof GetUser200Response
      */
     allowWithdraw?: boolean;
     /**
-     * 
+     * When false, creating inbound Pix charges is refused for lack of permission (PZD200).
      * @type {boolean}
      * @memberof GetUser200Response
      */
     allowDeposit?: boolean;
     /**
-     * 
-     * @type {boolean}
-     * @memberof GetUser200Response
-     */
-    allowInfraction?: boolean;
-    /**
-     * 
+     * Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashInTicketMin?: number;
     /**
-     * 
+     * Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashInTicketMax?: number;
     /**
-     * 
+     * Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashOutTicketMin?: number;
     /**
-     * 
+     * Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashOutTicketMax?: number;
-    /**
-     * 
-     * @type {object}
-     * @memberof GetUser200Response
-     */
-    autoWithdraw?: object;
     /**
      * 
      * @type {GetUser200ResponseServiceFee}
@@ -143,6 +125,24 @@ export interface GetUser200Response {
      */
     dailyWithdrawLimit?: GetUser200ResponseDailyWithdrawLimit;
 }
+
+
+/**
+ * @export
+ */
+export const GetUser200ResponseRoleEnum = {
+    User: 'USER'
+} as const;
+export type GetUser200ResponseRoleEnum = typeof GetUser200ResponseRoleEnum[keyof typeof GetUser200ResponseRoleEnum];
+
+/**
+ * @export
+ */
+export const GetUser200ResponseStatusEnum = {
+    Active: 'ACTIVE'
+} as const;
+export type GetUser200ResponseStatusEnum = typeof GetUser200ResponseStatusEnum[keyof typeof GetUser200ResponseStatusEnum];
+
 
 /**
  * Check if a given object implements the GetUser200Response interface.
@@ -161,7 +161,6 @@ export function GetUser200ResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'id': json['id'] == null ? undefined : json['id'],
         'accountNumber': json['accountNumber'] == null ? undefined : json['accountNumber'],
         'branch': json['branch'] == null ? undefined : json['branch'],
         'name': json['name'] == null ? undefined : json['name'],
@@ -171,12 +170,10 @@ export function GetUser200ResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'status': json['status'] == null ? undefined : json['status'],
         'allowWithdraw': json['allowWithdraw'] == null ? undefined : json['allowWithdraw'],
         'allowDeposit': json['allowDeposit'] == null ? undefined : json['allowDeposit'],
-        'allowInfraction': json['allowInfraction'] == null ? undefined : json['allowInfraction'],
         'cashInTicketMin': json['cashInTicketMin'] == null ? undefined : json['cashInTicketMin'],
         'cashInTicketMax': json['cashInTicketMax'] == null ? undefined : json['cashInTicketMax'],
         'cashOutTicketMin': json['cashOutTicketMin'] == null ? undefined : json['cashOutTicketMin'],
         'cashOutTicketMax': json['cashOutTicketMax'] == null ? undefined : json['cashOutTicketMax'],
-        'autoWithdraw': json['AutoWithdraw'] == null ? undefined : json['AutoWithdraw'],
         'serviceFee': json['ServiceFee'] == null ? undefined : GetUser200ResponseServiceFeeFromJSON(json['ServiceFee']),
         'dailyWithdrawLimit': json['DailyWithdrawLimit'] == null ? undefined : GetUser200ResponseDailyWithdrawLimitFromJSON(json['DailyWithdrawLimit']),
     };
@@ -193,7 +190,6 @@ export function GetUser200ResponseToJSONTyped(value?: GetUser200Response | null,
 
     return {
         
-        'id': value['id'],
         'accountNumber': value['accountNumber'],
         'branch': value['branch'],
         'name': value['name'],
@@ -203,12 +199,10 @@ export function GetUser200ResponseToJSONTyped(value?: GetUser200Response | null,
         'status': value['status'],
         'allowWithdraw': value['allowWithdraw'],
         'allowDeposit': value['allowDeposit'],
-        'allowInfraction': value['allowInfraction'],
         'cashInTicketMin': value['cashInTicketMin'],
         'cashInTicketMax': value['cashInTicketMax'],
         'cashOutTicketMin': value['cashOutTicketMin'],
         'cashOutTicketMax': value['cashOutTicketMax'],
-        'AutoWithdraw': value['autoWithdraw'],
         'ServiceFee': GetUser200ResponseServiceFeeToJSON(value['serviceFee']),
         'DailyWithdrawLimit': GetUser200ResponseDailyWithdrawLimitToJSON(value['dailyWithdrawLimit']),
     };

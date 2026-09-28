@@ -18,8 +18,8 @@ import type { WebhookUpdateRequest } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "url": null,
-  "active": null,
+  "url": https://sualoja.com.br/webhook,
+  "active": true,
   "events": null,
 } satisfies WebhookUpdateRequest
 

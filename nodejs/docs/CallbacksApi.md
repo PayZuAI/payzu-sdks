@@ -4,12 +4,81 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**createUserCallbackSecret**](CallbacksApi.md#createusercallbacksecret) | **POST** /user/callbacks/secret | Create callback secret |
 | [**getUserCallbackById**](CallbacksApi.md#getusercallbackbyid) | **GET** /user/callbacks/{id} | Get Callback |
 | [**getUserCallbacks**](CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | List Callbacks |
 | [**resendUserCallbackSingle**](CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single) |
 | [**resendUserCallbacks**](CallbacksApi.md#resendusercallbacksoperation) | **POST** /user/callbacks/resend | Re-send callbacks (bulk) |
 | [**resendUserCallbacksWebhook**](CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook |
+| [**resendUserCallbacksWebhooks**](CallbacksApi.md#resendusercallbackswebhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters |
+| [**rotateUserCallbackSecret**](CallbacksApi.md#rotateusercallbacksecret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret |
 
+
+
+## createUserCallbackSecret
+
+> CallbackSecretResponse createUserCallbackSecret()
+
+Create callback secret
+
+Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CallbacksApi,
+} from 'payzu-pix';
+import type { CreateUserCallbackSecretRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new CallbacksApi(config);
+
+  try {
+    const data = await api.createUserCallbackSecret();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CallbackSecretResponse**](CallbackSecretResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Create callback secret |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Operation not allowed |  -  |
+| **409** | Account already has a callback secret. Use the rotate route. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getUserCallbackById
@@ -39,7 +108,7 @@ async function example() {
 
   const body = {
     // string | Unique callback ID
-    id: id_example,
+    id: cm3w7l9v20001q8f2u6c1y4be,
   } satisfies GetUserCallbackByIdRequest;
 
   try {
@@ -79,6 +148,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Callback details |  -  |
+| **401** | Authentication failure |  -  |
 | **404** | Callback not found or does not belong to the user |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -86,7 +156,7 @@ example().catch(console.error);
 
 ## getUserCallbacks
 
-> CallbackListResponse getUserCallbacks(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo)
+> CallbackListResponse getUserCallbacks(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo, webhookId, eventType)
 
 List Callbacks
 
@@ -110,28 +180,32 @@ async function example() {
   const api = new CallbacksApi(config);
 
   const body = {
-    // number (optional)
+    // number | Page number. (optional)
     page: 56,
-    // number (optional)
+    // number | Items per page. (optional)
     limit: 56,
-    // 'createdAt' | 'status' (optional)
+    // 'createdAt' | 'status' | Sort field. (optional)
     sortBy: sortBy_example,
-    // 'asc' | 'desc' (optional)
+    // 'asc' | 'desc' | Sort direction. (optional)
     sortDirection: sortDirection_example,
     // string | Filter by callback ID (optional)
-    id: id_example,
+    id: cm3w7l9v20001q8f2u6c1y4be,
     // string | Filter by callback URL (optional)
-    url: url_example,
+    url: https://webhook.cool/,
     // number | HTTP status code (optional)
-    status: 56,
-    // string (optional)
-    transactionId: transactionId_example,
+    status: 200,
+    // string | Transaction ID. (optional)
+    transactionId: PAYZU20260814T6NX1CV9MK000000,
     // boolean | Filter callbacks that errored (optional)
     hasError: true,
-    // Date (optional)
-    createdAtFrom: 2013-10-20T19:20:30+01:00,
-    // Date (optional)
-    createdAtTo: 2013-10-20T19:20:30+01:00,
+    // Date | Start of the creation date range. (optional)
+    createdAtFrom: 2026-08-01,
+    // Date | End of the creation date range. (optional)
+    createdAtTo: 2026-08-31,
+    // string | Webhook id. (optional)
+    webhookId: webhookId_example,
+    // WebhookEventType | Webhook event type. (optional)
+    eventType: ...,
   } satisfies GetUserCallbacksRequest;
 
   try {
@@ -151,17 +225,19 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | `number` |  | [Optional] [Defaults to `1`] |
-| **limit** | `number` |  | [Optional] [Defaults to `10`] |
-| **sortBy** | `createdAt`, `status` |  | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, status] |
-| **sortDirection** | `asc`, `desc` |  | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
+| **page** | `number` | Page number. | [Optional] [Defaults to `1`] |
+| **limit** | `number` | Items per page. | [Optional] [Defaults to `10`] |
+| **sortBy** | `createdAt`, `status` | Sort field. | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, status] |
+| **sortDirection** | `asc`, `desc` | Sort direction. | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
 | **id** | `string` | Filter by callback ID | [Optional] [Defaults to `undefined`] |
 | **url** | `string` | Filter by callback URL | [Optional] [Defaults to `undefined`] |
 | **status** | `number` | HTTP status code | [Optional] [Defaults to `undefined`] |
-| **transactionId** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **transactionId** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
 | **hasError** | `boolean` | Filter callbacks that errored | [Optional] [Defaults to `undefined`] |
-| **createdAtFrom** | `Date` |  | [Optional] [Defaults to `undefined`] |
-| **createdAtTo** | `Date` |  | [Optional] [Defaults to `undefined`] |
+| **createdAtFrom** | `Date` | Start of the creation date range. | [Optional] [Defaults to `undefined`] |
+| **createdAtTo** | `Date` | End of the creation date range. | [Optional] [Defaults to `undefined`] |
+| **webhookId** | `string` | Webhook id. | [Optional] [Defaults to `undefined`] |
+| **eventType** | `WebhookEventType` | Webhook event type. | [Optional] [Defaults to `undefined`] [Enum: TRANSACTION_PENDING, TRANSACTION_COMPLETED, TRANSACTION_CANCELED, TRANSACTION_WAITING_FOR_REFUND, TRANSACTION_REFUNDED, TRANSACTION_EXPIRED, TRANSACTION_ERROR, TRANSACTION_SUSPECTED_FRAUD, TRANSACTION_SUSPECTED_FRAUD_REVERSAL, INFRACTION_CHANGED] |
 
 ### Return type
 
@@ -183,7 +259,6 @@ example().catch(console.error);
 | **200** | List of callback logs with pagination |  -  |
 | **400** | Bad Request, payload or query string failed validation |  -  |
 | **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
-| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -214,8 +289,8 @@ async function example() {
   const api = new CallbacksApi(config);
 
   const body = {
-    // string
-    transactionId: transactionId_example,
+    // string | Transaction ID.
+    transactionId: PAYZU20260814T6NX1CV9MK000000,
   } satisfies ResendUserCallbackSingleRequest;
 
   try {
@@ -235,7 +310,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | `string` |  | [Defaults to `undefined`] |
+| **transactionId** | `string` | Transaction ID. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -255,8 +330,10 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Resend dispatched |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
 | **404** | Transaction not found or has no callbackUrl configured |  -  |
-| **429** | Rate limit exceeded (5/min) |  -  |
+| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -328,15 +405,18 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Resend dispatched |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
 | **404** | No matching transactions |  -  |
-| **429** | Rate limit exceeded (5/min) |  -  |
+| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## resendUserCallbacksWebhook
 
-> CallbackResendResponse resendUserCallbacksWebhook(webhookId)
+> EnqueuedCallback resendUserCallbacksWebhook(webhookId)
 
 Resend callbacks by webhook
 
@@ -361,7 +441,7 @@ async function example() {
 
   const body = {
     // string | Webhook id.
-    webhookId: webhookId_example,
+    webhookId: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies ResendUserCallbacksWebhookRequest;
 
   try {
@@ -385,7 +465,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**CallbackResendResponse**](CallbackResendResponse.md)
+[**EnqueuedCallback**](EnqueuedCallback.md)
 
 ### Authorization
 
@@ -400,7 +480,154 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Resend queued. |  -  |
+| **200** | Callbacks accepted for resend. Acceptance is not delivery: the queueing runs after the response. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | Webhook not found, inactive or owned by another account (PZW300), or no failed callback matched the filters (PZW310). |  -  |
+| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## resendUserCallbacksWebhooks
+
+> EnqueuedCallback resendUserCallbacksWebhooks(resendWebhookCallbacksRequest)
+
+Resend webhook callbacks by filters
+
+Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CallbacksApi,
+} from 'payzu-pix';
+import type { ResendUserCallbacksWebhooksRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new CallbacksApi(config);
+
+  const body = {
+    // ResendWebhookCallbacksRequest
+    resendWebhookCallbacksRequest: ...,
+  } satisfies ResendUserCallbacksWebhooksRequest;
+
+  try {
+    const data = await api.resendUserCallbacksWebhooks(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **resendWebhookCallbacksRequest** | [ResendWebhookCallbacksRequest](ResendWebhookCallbacksRequest.md) |  | |
+
+### Return type
+
+[**EnqueuedCallback**](EnqueuedCallback.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Callbacks accepted for resend. Acceptance is not delivery: the queueing runs after the response. |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | No active webhook matched the criteria (PZW301), or no failed callback matched the filters (PZW311). |  -  |
+| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## rotateUserCallbackSecret
+
+> RotateCallbackSecretResponse rotateUserCallbackSecret()
+
+Rotate callback secret
+
+Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  CallbacksApi,
+} from 'payzu-pix';
+import type { RotateUserCallbackSecretRequest } from 'payzu-pix';
+
+async function example() {
+  console.log("🚀 Testing payzu-pix SDK...");
+  const config = new Configuration({ 
+    // Configure HTTP bearer authorization: BearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new CallbacksApi(config);
+
+  try {
+    const data = await api.rotateUserCallbackSecret();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**RotateCallbackSecretResponse**](RotateCallbackSecretResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Rotate callback secret |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Operation not allowed |  -  |
+| **404** | Account has no callback secret to rotate. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

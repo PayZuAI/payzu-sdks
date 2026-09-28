@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **QrCode** | **string** | Pix QR Code payload (EMV format). | 
-**Amount** | Pointer to **float32** | Amount in BRL. Optional - if not provided, uses the QR Code&#39;s embedded value. | [optional] 
-**CallbackUrl** | Pointer to **string** | Webhook URL for status updates. | [optional] 
+**Amount** | Pointer to **float32** | Amount in BRL, with at most 2 decimal places. Optional: if not provided, uses the QR Code&#39;s embedded value. | [optional] 
+**CallbackUrl** | Pointer to **string** | URL for transaction notifications (http or https). | [optional] 
 **Description** | Pointer to **string** | Optional description for the payment. | [optional] 
-**ClientReference** | Pointer to **string** | External reference for this withdrawal. | [optional] 
+**ClientReference** | Pointer to **string** | External reference for this withdrawal. Repeating it with the same amount and QR Code returns the existing withdrawal; with different data, the request is rejected with PZC210. | [optional] 
 **VirtualAccount** | Pointer to **string** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
 
 ## Methods

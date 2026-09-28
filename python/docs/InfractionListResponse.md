@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**infractions** | [**List[InfractionDetail]**](InfractionDetail.md) |  | [optional] 
+**infractions** | [**List[InfractionDetail]**](InfractionDetail.md) | Infractions of the requested page, each in the same format as the detail. | [optional] 
 **pagination** | [**InfractionListResponsePagination**](InfractionListResponsePagination.md) |  | [optional] 
 
 ## Example

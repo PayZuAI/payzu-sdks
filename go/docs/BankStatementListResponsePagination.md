@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to **int32** |  | [optional] 
-**Limit** | Pointer to **int32** |  | [optional] 
-**HasNextPage** | Pointer to **bool** |  | [optional] 
+**Page** | Pointer to **int32** | Page returned, the same as the page parameter sent in the query; when omitted, it is 1. | [optional] 
+**Limit** | Pointer to **int32** | Page size applied in the query; when omitted it is 10 and the maximum accepted is 100. | [optional] 
+**HasNextPage** | Pointer to **bool** | Indicates whether there is a next page, detected by fetching one item beyond the limit. | [optional] 
 
 ## Methods
 

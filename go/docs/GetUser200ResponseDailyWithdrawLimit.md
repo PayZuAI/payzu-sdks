@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Limit** | Pointer to **float32** |  | [optional] 
-**Used** | Pointer to **float32** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**LastReset** | Pointer to **time.Time** |  | [optional] 
+**Limit** | Pointer to **float32** | Daily outbound cap, in reais, summing withdrawals and internal transfers. | [optional] 
+**Used** | Pointer to **float32** | Total of the cap consumed in the day, in reais, by withdrawals and internal transfers. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the daily limit. | [optional] 
+**LastReset** | Pointer to **NullableTime** | Moment of the last reset of the daily usage. | [optional] 
 
 ## Methods
 
@@ -128,6 +128,16 @@ SetLastReset sets LastReset field to given value.
 
 HasLastReset returns a boolean if a field has been set.
 
+### SetLastResetNil
+
+`func (o *GetUser200ResponseDailyWithdrawLimit) SetLastResetNil(b bool)`
+
+ SetLastResetNil sets the value for LastReset to be an explicit nil
+
+### UnsetLastReset
+`func (o *GetUser200ResponseDailyWithdrawLimit) UnsetLastReset()`
+
+UnsetLastReset ensures that no value is present for LastReset, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

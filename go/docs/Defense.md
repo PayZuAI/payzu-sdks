@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Defense identifier. | [optional] 
 **Defense** | Pointer to **string** | Defense text | [optional] 
 **Status** | Pointer to **string** | Defense status | [optional] 
-**InfractionId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**Files** | Pointer to [**[]DefenseFilesInner**](DefenseFilesInner.md) |  | [optional] 
+**InfractionId** | Pointer to **string** | Identifies the infraction the defense belongs to. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Moment the defense was recorded at PayZu, saved together with the uploaded files. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Moment of the last change to the defense. | [optional] 
+**Files** | Pointer to [**[]DefenseFilesInner**](DefenseFilesInner.md) | Files sent with the defense, with name, type and size in bytes. | [optional] 
 
 ## Methods
 

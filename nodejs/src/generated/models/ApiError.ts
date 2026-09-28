@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,17 +28,23 @@ import {
  */
 export interface ApiError {
     /**
-     * HTTP status code.
-     * @type {number}
+     * Fixed marker of an error response.
+     * @type {ApiErrorStatusEnum}
      * @memberof ApiError
      */
-    statusCode: number;
+    status: ApiErrorStatusEnum;
     /**
-     * HTTP status text.
+     * Name of the corresponding HTTP status.
      * @type {string}
      * @memberof ApiError
      */
     error: string;
+    /**
+     * Stable machine-readable error code, when available.
+     * @type {string}
+     * @memberof ApiError
+     */
+    errorCode: string;
     /**
      * Human-readable error message.
      * @type {string}
@@ -46,38 +52,50 @@ export interface ApiError {
      */
     message: string;
     /**
+     * HTTP status code.
+     * @type {number}
+     * @memberof ApiError
+     */
+    statusCode: number;
+    /**
      * Unique request correlation ID (cuid). Include it when contacting support.
      * @type {string}
      * @memberof ApiError
      */
     requestId: string;
     /**
-     * Stable machine-readable error code, when available.
-     * @type {string}
+     * Field-level validation errors, when applicable.
+     * @type {Array<ApiErrorDetailsInner>}
      * @memberof ApiError
      */
-    errorCode?: string;
+    details?: Array<ApiErrorDetailsInner>;
     /**
      * Seconds to wait before retrying. Present only on 429 responses.
      * @type {number}
      * @memberof ApiError
      */
     retryAfterSeconds?: number;
-    /**
-     * Field-level validation errors, when applicable.
-     * @type {Array<ApiErrorDetailsInner>}
-     * @memberof ApiError
-     */
-    details?: Array<ApiErrorDetailsInner>;
 }
+
+
+/**
+ * @export
+ */
+export const ApiErrorStatusEnum = {
+    Error: 'ERROR'
+} as const;
+export type ApiErrorStatusEnum = typeof ApiErrorStatusEnum[keyof typeof ApiErrorStatusEnum];
+
 
 /**
  * Check if a given object implements the ApiError interface.
  */
 export function instanceOfApiError(value: object): value is ApiError {
-    if (!('statusCode' in value) || value['statusCode'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
     if (!('error' in value) || value['error'] === undefined) return false;
+    if (!('errorCode' in value) || value['errorCode'] === undefined) return false;
     if (!('message' in value) || value['message'] === undefined) return false;
+    if (!('statusCode' in value) || value['statusCode'] === undefined) return false;
     if (!('requestId' in value) || value['requestId'] === undefined) return false;
     return true;
 }
@@ -92,13 +110,14 @@ export function ApiErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'statusCode': json['statusCode'],
+        'status': json['status'],
         'error': json['error'],
+        'errorCode': json['errorCode'],
         'message': json['message'],
+        'statusCode': json['statusCode'],
         'requestId': json['requestId'],
-        'errorCode': json['errorCode'] == null ? undefined : json['errorCode'],
-        'retryAfterSeconds': json['retryAfterSeconds'] == null ? undefined : json['retryAfterSeconds'],
         'details': json['details'] == null ? undefined : ((json['details'] as Array<any>).map(ApiErrorDetailsInnerFromJSON)),
+        'retryAfterSeconds': json['retryAfterSeconds'] == null ? undefined : json['retryAfterSeconds'],
     };
 }
 
@@ -113,13 +132,14 @@ export function ApiErrorToJSONTyped(value?: ApiError | null, ignoreDiscriminator
 
     return {
         
-        'statusCode': value['statusCode'],
+        'status': value['status'],
         'error': value['error'],
-        'message': value['message'],
-        'requestId': value['requestId'],
         'errorCode': value['errorCode'],
-        'retryAfterSeconds': value['retryAfterSeconds'],
+        'message': value['message'],
+        'statusCode': value['statusCode'],
+        'requestId': value['requestId'],
         'details': value['details'] == null ? undefined : ((value['details'] as Array<any>).map(ApiErrorDetailsInnerToJSON)),
+        'retryAfterSeconds': value['retryAfterSeconds'],
     };
 }
 

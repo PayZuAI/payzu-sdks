@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -24,14 +24,14 @@ import {
     RefundRequestToJSON,
 } from '../models/RefundRequest.js';
 import {
-    type Transaction,
-    TransactionFromJSON,
-    TransactionToJSON,
-} from '../models/Transaction.js';
+    type TransactionWithRefunds,
+    TransactionWithRefundsFromJSON,
+    TransactionWithRefundsToJSON,
+} from '../models/TransactionWithRefunds.js';
 
 export interface PostRefundRequest {
     transactionId: string;
-    refundRequest?: RefundRequest;
+    refundRequest: RefundRequest;
 }
 
 /**
@@ -44,28 +44,28 @@ export interface RefundsApiInterface {
     /**
      * Creates request options for postRefund without sending the request
      * @param {string} transactionId ID of the transaction to refund.
-     * @param {RefundRequest} [refundRequest] 
+     * @param {RefundRequest} refundRequest 
      * @throws {RequiredError}
      * @memberof RefundsApiInterface
      */
     postRefundRequestOpts(requestParameters: PostRefundRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
      * @summary Refund a Pix
      * @param {string} transactionId ID of the transaction to refund.
-     * @param {RefundRequest} [refundRequest] 
+     * @param {RefundRequest} refundRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RefundsApiInterface
      */
-    postRefundRaw(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
+    postRefundRaw(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TransactionWithRefunds>>;
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
      * Refund a Pix
      */
-    postRefund(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
+    postRefund(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TransactionWithRefunds>;
 
 }
 
@@ -82,6 +82,13 @@ export class RefundsApi extends runtime.BaseAPI implements RefundsApiInterface {
             throw new runtime.RequiredError(
                 'transactionId',
                 'Required parameter "transactionId" was null or undefined when calling postRefund().'
+            );
+        }
+
+        if (requestParameters['refundRequest'] == null) {
+            throw new runtime.RequiredError(
+                'refundRequest',
+                'Required parameter "refundRequest" was null or undefined when calling postRefund().'
             );
         }
 
@@ -113,21 +120,21 @@ export class RefundsApi extends runtime.BaseAPI implements RefundsApiInterface {
     }
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
      * Refund a Pix
      */
-    async postRefundRaw(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
+    async postRefundRaw(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TransactionWithRefunds>> {
         const requestOptions = await this.postRefundRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TransactionFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => TransactionWithRefundsFromJSON(jsonValue));
     }
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
      * Refund a Pix
      */
-    async postRefund(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
+    async postRefund(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TransactionWithRefunds> {
         const response = await this.postRefundRaw(requestParameters, initOverrides);
         return await response.value();
     }

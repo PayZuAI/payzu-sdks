@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**id** | **str** | Identifier of the infraction linked to this transaction. | [optional] 
+**status** | **str** | Current state of the infraction. | [optional] 
+**created_at** | **datetime** | Date and time the infraction was recorded at PayZu. | [optional] 
+**updated_at** | **datetime** | Date and time of the last change to the infraction record. | [optional] 
 
 ## Example
 

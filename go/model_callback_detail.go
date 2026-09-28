@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -30,11 +30,11 @@ type CallbackDetail struct {
 	TransactionId *string `json:"transactionId,omitempty"`
 	// Date and time when the callback log was created
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Request body sent (parsed JSON)
+	// Request body sent (parsed JSON). When the content is not valid JSON, it comes as `{ \"raw\": \"<text>\" }`.
 	Body map[string]interface{} `json:"body,omitempty"`
 	// Response body received (string)
 	ResponseBody *string `json:"responseBody,omitempty"`
-	// Response headers (parsed JSON)
+	// Response headers (parsed JSON). When the content is not valid JSON, it comes as `{ \"raw\": \"<text>\" }`.
 	ResponseHeaders map[string]interface{} `json:"responseHeaders,omitempty"`
 	// Webhook round-trip time in milliseconds
 	ResponseTime *float32 `json:"responseTime,omitempty"`

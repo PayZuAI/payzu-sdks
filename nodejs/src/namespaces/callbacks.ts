@@ -1,8 +1,15 @@
-import type { CallbackDetail, CallbacksApi } from '../generated/index.js';
+import type {
+  CallbackDetail,
+  CallbacksApi,
+  CallbackSecretResponse,
+  EnqueuedCallback,
+  RotateCallbackSecretResponse,
+} from '../generated/index.js';
 import { invoke, withJsonMediaType } from '../http.js';
 import type {
   CallbackList,
   ListCallbacksParams,
+  ResendWebhooksParams,
   ResendCallbackResult,
   ResendCallbacksParams,
   ResendCallbacksResult,
@@ -25,5 +32,21 @@ export class CallbacksNamespace {
 
   resendBatch(params: ResendCallbacksParams): Promise<ResendCallbacksResult> {
     return invoke(() => this.api.resendUserCallbacks({ resendUserCallbacksRequest: params }));
+  }
+
+  resendWebhooks(params: ResendWebhooksParams): Promise<EnqueuedCallback> {
+    return invoke(() => this.api.resendUserCallbacksWebhooks({ resendWebhookCallbacksRequest: params }));
+  }
+
+  resendByWebhook(webhookId: string): Promise<EnqueuedCallback> {
+    return invoke(() => this.api.resendUserCallbacksWebhook({ webhookId }));
+  }
+
+  createSecret(): Promise<CallbackSecretResponse> {
+    return invoke(() => this.api.createUserCallbackSecret());
+  }
+
+  rotateSecret(): Promise<RotateCallbackSecretResponse> {
+    return invoke(() => this.api.rotateUserCallbackSecret());
   }
 }

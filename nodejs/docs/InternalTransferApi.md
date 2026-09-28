@@ -15,7 +15,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 
 Get internal transfer
 
-Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).
+Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
 
 ### Example
 
@@ -36,11 +36,11 @@ async function example() {
 
   const body = {
     // string | Transaction ID (optional)
-    id: id_example,
+    id: PAYZU20260814T6NX1CV9MK000000,
     // string | External reference (optional)
-    clientReference: clientReference_example,
+    clientReference: order_12345,
     // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-    virtualAccount: virtualAccount_example,
+    virtualAccount: loja-centro-01,
   } satisfies GetInternalTransferRequest;
 
   try {
@@ -83,6 +83,8 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Transfer details |  -  |
 | **400** | Provide either &#x60;id&#x60; or &#x60;clientReference&#x60; |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
 | **404** | Transfer not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -94,7 +96,7 @@ example().catch(console.error);
 
 Create internal transfer
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.
+Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
 
 ### Example
 
@@ -156,9 +158,12 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Transfer completed |  -  |
 | **400** | Invalid payload (e.g. payerAccountNumber does not belong to the requester) |  -  |
+| **401** | Authentication failure |  -  |
 | **403** | allowInternalTransfer disabled or token missing WITHDRAW permission |  -  |
 | **404** | Receiver account not found |  -  |
+| **409** | Conflict with the current state of the resource |  -  |
 | **422** | Insufficient balance / amount below ticket minimum |  -  |
+| **429** | Rate limit exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

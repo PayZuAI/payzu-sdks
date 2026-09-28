@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -21,12 +21,16 @@ var _ MappedNullable = &DictConsultResponse{}
 type DictConsultResponse struct {
 	// Normalized Pix key.
 	PixKey *string `json:"pixKey,omitempty"`
+	// Name of the key holder as returned by the institution queried.
 	Name *string `json:"name,omitempty"`
 	// Masked CPF/CNPJ of the key holder.
 	Document *string `json:"document,omitempty"`
+	// Type of person: PF, PJ, or empty when not informed.
 	PersonType *string `json:"personType,omitempty"`
 	AccountType *string `json:"accountType,omitempty"`
+	// ISPB code of the account institution.
 	InstitutionIspb *string `json:"institutionIspb,omitempty"`
+	// Name of the institution where the holder account is registered, as the lookup returns it.
 	InstitutionName *string `json:"institutionName,omitempty"`
 }
 

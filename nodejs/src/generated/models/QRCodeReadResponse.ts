@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -30,49 +30,61 @@ export interface QRCodeReadResponse {
      * @type {string}
      * @memberof QRCodeReadResponse
      */
-    name?: string;
+    name?: string | null;
     /**
      * CPF or CNPJ of the receiver.
      * @type {string}
      * @memberof QRCodeReadResponse
      */
-    document?: string;
+    document?: string | null;
     /**
      * Amount to be paid (may differ from originalAmount for dynamic QR Codes).
      * @type {number}
      * @memberof QRCodeReadResponse
      */
-    amount?: number;
+    amount?: number | null;
     /**
      * Original amount embedded in the QR Code.
      * @type {number}
      * @memberof QRCodeReadResponse
      */
-    originalAmount?: number;
+    originalAmount?: number | null;
     /**
      * Transaction identifier.
      * @type {string}
      * @memberof QRCodeReadResponse
      */
-    txid?: string;
+    txid?: string | null;
     /**
      * Additional information or description.
      * @type {string}
      * @memberof QRCodeReadResponse
      */
-    additionalInfo?: string;
+    additionalInfo?: string | null;
     /**
      * Seconds until QR Code expires (0 for static QR Codes).
      * @type {number}
      * @memberof QRCodeReadResponse
      */
-    expiresIn?: number;
+    expiresIn?: number | null;
     /**
      * Creation date of the QR Code (for dynamic QR Codes).
      * @type {Date}
      * @memberof QRCodeReadResponse
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
+    /**
+     * Whether the payer can change the amount.
+     * @type {boolean}
+     * @memberof QRCodeReadResponse
+     */
+    amountEditable?: boolean | null;
+    /**
+     * Due date of the charge, when the QR Code has one.
+     * @type {string}
+     * @memberof QRCodeReadResponse
+     */
+    dueDate?: string | null;
 }
 
 
@@ -112,6 +124,8 @@ export function QRCodeReadResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'additionalInfo': json['additionalInfo'] == null ? undefined : json['additionalInfo'],
         'expiresIn': json['expiresIn'] == null ? undefined : json['expiresIn'],
         'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
+        'amountEditable': json['amountEditable'] == null ? undefined : json['amountEditable'],
+        'dueDate': json['dueDate'] == null ? undefined : json['dueDate'],
     };
 }
 
@@ -135,6 +149,8 @@ export function QRCodeReadResponseToJSONTyped(value?: QRCodeReadResponse | null,
         'additionalInfo': value['additionalInfo'],
         'expiresIn': value['expiresIn'],
         'createdAt': value['createdAt'] == null ? value['createdAt'] : value['createdAt'].toISOString(),
+        'amountEditable': value['amountEditable'],
+        'dueDate': value['dueDate'],
     };
 }
 

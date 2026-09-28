@@ -1,0 +1,28 @@
+generatorName: java
+outputDir: java
+gitUserId: PayZuAI
+gitRepoId: payzu-sdks
+additionalProperties:
+  enumUnknownDefaultCase: true
+  library: native
+  groupId: br.com.payzu
+  artifactId: payzu-pix
+  artifactVersion: 2.0.0
+  artifactDescription: "SDK oficial Java da API PayZu Pix: depósitos, saques, transferências internas, infrações, relatórios e callbacks."
+  artifactUrl: https://docs.payzu.com.br
+  invokerPackage: br.com.payzu.pix
+  apiPackage: br.com.payzu.pix.api
+  modelPackage: br.com.payzu.pix.model
+  licenseName: MIT
+  licenseUrl: https://opensource.org/licenses/MIT
+  developerName: PayZu
+  developerEmail: suporte@payzu.com.br
+  developerOrganization: PayZu
+  developerOrganizationUrl: https://payzu.com.br
+  scmConnection: scm:git:https://github.com/PayZuAI/payzu-sdks.git
+  scmDeveloperConnection: scm:git:https://github.com/PayZuAI/payzu-sdks.git
+  scmUrl: https://github.com/PayZuAI/payzu-sdks
+  hideGenerationTimestamp: true
+globalProperties:
+  apiTests: false
+  modelTests: false

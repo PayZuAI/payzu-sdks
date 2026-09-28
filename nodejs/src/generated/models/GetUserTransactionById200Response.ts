@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -35,85 +35,85 @@ import {
  */
 export interface GetUserTransactionById200Response {
     /**
-     * 
+     * Identifier of the transaction at PayZu.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     id?: string;
     /**
      * PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
-     * @type {string}
+     * @type {GetUserTransactionById200ResponseStatusEnum}
      * @memberof GetUserTransactionById200Response
      */
-    status?: string;
+    status?: GetUserTransactionById200ResponseStatusEnum;
     /**
-     * 
+     * Amount of the transaction, before the fee.
      * @type {number}
      * @memberof GetUserTransactionById200Response
      */
     amount?: number;
     /**
-     * DEPOSIT or WITHDRAW
-     * @type {string}
+     * Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
+     * @type {GetUserTransactionById200ResponseTypeEnum}
      * @memberof GetUserTransactionById200Response
      */
-    type?: string;
+    type?: GetUserTransactionById200ResponseTypeEnum;
     /**
-     * 
+     * Copy-and-paste Pix code.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     qrCodeText?: string;
     /**
-     * 
+     * PNG image of the QR Code in base64, without the data: prefix.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     qrCodeBase64?: string;
     /**
-     * 
+     * Authenticated route that returns the PNG of the QR Code.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     qrCodeUrl?: string;
     /**
-     * 
+     * Name used to build the charge.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     generatedName?: string;
     /**
-     * 
+     * CPF or CNPJ used as the debtor of the charge.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     generatedDocument?: string;
     /**
-     * 
+     * Email used to build the charge.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     generatedEmail?: string;
     /**
-     * 
+     * Name of the holder of the account that sent the Pix, as reported by the originating institution.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     payerName?: string;
     /**
-     * 
+     * CPF or CNPJ of the payer of the Pix, reported by the originating institution.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     payerDocument?: string;
     /**
-     * 
+     * ISPB code of the institution the Pix was sent from.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     payerInstitutionIspb?: string;
     /**
-     * 
+     * Name of the institution the Pix was sent from.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
@@ -125,43 +125,43 @@ export interface GetUserTransactionById200Response {
      */
     payerAccountNumber?: string;
     /**
-     * 
+     * PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
      * @type {number}
      * @memberof GetUserTransactionById200Response
      */
     serviceFeeCharged?: number;
     /**
-     * 
+     * Destination Pix key of the withdrawal, already normalized.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     withdrawPixKey?: string;
     /**
-     * 
-     * @type {string}
+     * Type of the destination key of the withdrawal, with evp being the random key.
+     * @type {GetUserTransactionById200ResponseWithdrawPixTypeEnum}
      * @memberof GetUserTransactionById200Response
      */
-    withdrawPixType?: string;
+    withdrawPixType?: GetUserTransactionById200ResponseWithdrawPixTypeEnum | null;
     /**
-     * 
+     * Name of the holder of the receiving account.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     receiverName?: string;
     /**
-     * 
+     * CPF or CNPJ of the receiver.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     receiverDocument?: string;
     /**
-     * 
+     * ISPB code of the institution that receives the Pix.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     receiverInstitutionIspb?: string;
     /**
-     * 
+     * Name of the institution that receives the Pix.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
@@ -173,31 +173,31 @@ export interface GetUserTransactionById200Response {
      */
     receiverAccountNumber?: string;
     /**
-     * 
+     * Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     endToEndId?: string;
     /**
-     * 
+     * Date and time the transaction was recorded.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     createdAt?: string;
     /**
-     * 
+     * Date and time of the last change.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     updatedAt?: string;
     /**
-     * 
+     * Date and time the Pix was settled, reported by the institution.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
     paidAt?: string;
     /**
-     * 
+     * Your identifier of the transaction, returned in queries and callbacks.
      * @type {string}
      * @memberof GetUserTransactionById200Response
      */
@@ -215,17 +215,17 @@ export interface GetUserTransactionById200Response {
      */
     refundAmount?: number;
     /**
-     * Status of the refund (PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR)
-     * @type {string}
+     * Refund status: PENDING, COMPLETED or CANCELED.
+     * @type {GetUserTransactionById200ResponseRefundStatusEnum}
      * @memberof GetUserTransactionById200Response
      */
-    refundStatus?: string;
+    refundStatus?: GetUserTransactionById200ResponseRefundStatusEnum | null;
     /**
      * Reason for the refund
-     * @type {string}
+     * @type {GetUserTransactionById200ResponseRefundReasonEnum}
      * @memberof GetUserTransactionById200Response
      */
-    refundReason?: string;
+    refundReason?: GetUserTransactionById200ResponseRefundReasonEnum | null;
     /**
      * Description of the refund
      * @type {string}
@@ -274,9 +274,65 @@ export interface GetUserTransactionById200Response {
 /**
  * @export
  */
+export const GetUserTransactionById200ResponseStatusEnum = {
+    Pending: 'PENDING',
+    Completed: 'COMPLETED',
+    Canceled: 'CANCELED',
+    WaitingForRefund: 'WAITING_FOR_REFUND',
+    Refunded: 'REFUNDED',
+    Expired: 'EXPIRED',
+    Error: 'ERROR'
+} as const;
+export type GetUserTransactionById200ResponseStatusEnum = typeof GetUserTransactionById200ResponseStatusEnum[keyof typeof GetUserTransactionById200ResponseStatusEnum];
+
+/**
+ * @export
+ */
+export const GetUserTransactionById200ResponseTypeEnum = {
+    Deposit: 'DEPOSIT',
+    Withdraw: 'WITHDRAW',
+    Commission: 'COMMISSION',
+    Liquidation: 'LIQUIDATION',
+    Adjustment: 'ADJUSTMENT'
+} as const;
+export type GetUserTransactionById200ResponseTypeEnum = typeof GetUserTransactionById200ResponseTypeEnum[keyof typeof GetUserTransactionById200ResponseTypeEnum];
+
+/**
+ * @export
+ */
+export const GetUserTransactionById200ResponseWithdrawPixTypeEnum = {
+    Cpf: 'cpf',
+    Cnpj: 'cnpj',
+    Email: 'email',
+    Phone: 'phone',
+    Evp: 'evp'
+} as const;
+export type GetUserTransactionById200ResponseWithdrawPixTypeEnum = typeof GetUserTransactionById200ResponseWithdrawPixTypeEnum[keyof typeof GetUserTransactionById200ResponseWithdrawPixTypeEnum];
+
+/**
+ * @export
+ */
+export const GetUserTransactionById200ResponseRefundStatusEnum = {
+    Pending: 'PENDING',
+    Completed: 'COMPLETED',
+    Canceled: 'CANCELED'
+} as const;
+export type GetUserTransactionById200ResponseRefundStatusEnum = typeof GetUserTransactionById200ResponseRefundStatusEnum[keyof typeof GetUserTransactionById200ResponseRefundStatusEnum];
+
+/**
+ * @export
+ */
+export const GetUserTransactionById200ResponseRefundReasonEnum = {
+    CustomerRequest: 'CUSTOMER_REQUEST',
+    Infraction: 'INFRACTION'
+} as const;
+export type GetUserTransactionById200ResponseRefundReasonEnum = typeof GetUserTransactionById200ResponseRefundReasonEnum[keyof typeof GetUserTransactionById200ResponseRefundReasonEnum];
+
+/**
+ * @export
+ */
 export const GetUserTransactionById200ResponseMethodEnum = {
     Pix: 'PIX',
-    BankSlip: 'BANK_SLIP',
     InternalTransfer: 'INTERNAL_TRANSFER'
 } as const;
 export type GetUserTransactionById200ResponseMethodEnum = typeof GetUserTransactionById200ResponseMethodEnum[keyof typeof GetUserTransactionById200ResponseMethodEnum];

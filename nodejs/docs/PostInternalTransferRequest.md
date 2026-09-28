@@ -21,13 +21,13 @@ import type { PostInternalTransferRequest } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "payerAccountNumber": 513579,
+  "payerAccountNumber": 000000,
   "receiverAccountNumber": 987654,
   "amount": 100.5,
   "description": Pagamento referente a fatura #1234,
   "callbackUrl": https://webhook.cool/,
   "clientReference": transfer_abc_123,
-  "virtualAccount": null,
+  "virtualAccount": loja-centro-01,
 } satisfies PostInternalTransferRequest
 
 console.log(example)

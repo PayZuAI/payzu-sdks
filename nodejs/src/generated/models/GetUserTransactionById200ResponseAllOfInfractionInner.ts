@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,30 +20,47 @@ import { mapValues } from '../runtime.js';
  */
 export interface GetUserTransactionById200ResponseAllOfInfractionInner {
     /**
-     * 
+     * Identifier of the infraction linked to this transaction.
      * @type {string}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
     id?: string;
     /**
-     * 
-     * @type {string}
+     * Current state of the infraction.
+     * @type {GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
-    status?: string;
+    status?: GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum;
     /**
-     * 
+     * Date and time the infraction was recorded at PayZu.
      * @type {Date}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
     createdAt?: Date;
     /**
-     * 
+     * Date and time of the last change to the infraction record.
      * @type {Date}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
     updatedAt?: Date;
 }
+
+
+/**
+ * @export
+ */
+export const GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum = {
+    WaitingPsp: 'WAITING_PSP',
+    Closed: 'CLOSED',
+    Open: 'OPEN',
+    Cancelled: 'CANCELLED',
+    Acknowledged: 'ACKNOWLEDGED',
+    Defended: 'DEFENDED',
+    Answered: 'ANSWERED',
+    WaitingAdjustments: 'WAITING_ADJUSTMENTS'
+} as const;
+export type GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum = typeof GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum[keyof typeof GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum];
+
 
 /**
  * Check if a given object implements the GetUserTransactionById200ResponseAllOfInfractionInner interface.

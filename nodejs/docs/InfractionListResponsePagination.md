@@ -1,6 +1,7 @@
 
 # InfractionListResponsePagination
 
+Page, limit, total of items and of pages.
 
 ## Properties
 

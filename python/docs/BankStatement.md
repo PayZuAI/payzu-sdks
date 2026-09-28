@@ -5,19 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**amount** | **float** |  | [optional] 
+**id** | **str** | Identifier of the balance entry. | [optional] 
+**amount** | **float** | Amount of the entry. | [optional] 
 **operation** | **str** | INCREMENT credits the balance, DECREMENT debits it. | [optional] 
-**reason** | **str** | Internal reason for the credit/debit. | [optional] 
-**balance_type** | **str** |  | [optional] 
-**previous_balance_available** | **float** |  | [optional] 
-**previous_balance_blocked** | **float** |  | [optional] 
-**new_balance_available** | **float** |  | [optional] 
-**new_balance_blocked** | **float** |  | [optional] 
-**transaction_id** | **str** |  | [optional] 
-**infraction_id** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**reason** | **str** | Reason for the ledger entry. | [optional] 
+**balance_type** | **str** | Balance moved: AVAILABLE or BLOCKED. | [optional] 
+**previous_balance_available** | **float** | Balance free for use that the account had, in reais, immediately before this entry. | [optional] 
+**previous_balance_blocked** | **float** | Blocked balance before the entry, in reais. | [optional] 
+**new_balance_available** | **float** | Available balance after the entry, in reais. | [optional] 
+**new_balance_blocked** | **float** | Blocked balance after the entry, in reais. | [optional] 
+**transaction_id** | **str** | Transaction that originated the entry. | [optional] 
+**infraction_id** | **str** | Infraction related to the entry. | [optional] 
+**created_at** | **datetime** | Date and time the balance movement was recorded. | [optional] 
+**updated_at** | **datetime** | Date and time of the last change to the record. | [optional] 
 
 ## Example
 

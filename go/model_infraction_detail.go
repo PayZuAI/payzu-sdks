@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,20 +20,29 @@ var _ MappedNullable = &InfractionDetail{}
 
 // InfractionDetail struct for InfractionDetail
 type InfractionDetail struct {
+	// Identifier of the infraction inside PayZu, used in the query routes and when sending the defense.
 	Id *string `json:"id,omitempty"`
+	// Infraction code at Bacen.
 	Protocol *string `json:"protocol,omitempty"`
+	// Current state of the infraction.
 	Status *string `json:"status,omitempty"`
+	// Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED.
 	Type *string `json:"type,omitempty"`
+	// Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT.
 	ReportedBy *string `json:"reportedBy,omitempty"`
-	ReportDetails *string `json:"reportDetails,omitempty"`
-	AnalysisResult *string `json:"analysisResult,omitempty"`
-	AnalysisDetails *string `json:"analysisDetails,omitempty"`
+	// Reason given by whoever opened the infraction, in the text sent by the partner bank.
+	ReportDetails NullableString `json:"reportDetails,omitempty"`
+	// Analysis outcome: AGREED or DISAGREED.
+	AnalysisResult NullableString `json:"analysisResult,omitempty"`
+	// Additional text about the analysis decision, when the partner bank sends that information.
+	AnalysisDetails NullableString `json:"analysisDetails,omitempty"`
+	// Moment the infraction was opened.
 	ReportedAt *time.Time `json:"reportedAt,omitempty"`
-	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// Deadline to send the defense of this infraction.
+	ExpiresAt NullableTime `json:"expiresAt,omitempty"`
 	Transaction *InfractionDetailTransaction `json:"transaction,omitempty"`
-	DefenseHistory []Defense `json:"defenseHistory,omitempty"`
+	// Defenses already sent for this infraction, each with text, status and files.
+	DefenseHistory []DefenseHistoryEntry `json:"defenseHistory,omitempty"`
 }
 
 // NewInfractionDetail instantiates a new InfractionDetail object
@@ -213,100 +222,130 @@ func (o *InfractionDetail) SetReportedBy(v string) {
 	o.ReportedBy = &v
 }
 
-// GetReportDetails returns the ReportDetails field value if set, zero value otherwise.
+// GetReportDetails returns the ReportDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetail) GetReportDetails() string {
-	if o == nil || IsNil(o.ReportDetails) {
+	if o == nil || IsNil(o.ReportDetails.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReportDetails
+	return *o.ReportDetails.Get()
 }
 
 // GetReportDetailsOk returns a tuple with the ReportDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetail) GetReportDetailsOk() (*string, bool) {
-	if o == nil || IsNil(o.ReportDetails) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReportDetails, true
+	return o.ReportDetails.Get(), o.ReportDetails.IsSet()
 }
 
 // HasReportDetails returns a boolean if a field has been set.
 func (o *InfractionDetail) HasReportDetails() bool {
-	if o != nil && !IsNil(o.ReportDetails) {
+	if o != nil && o.ReportDetails.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReportDetails gets a reference to the given string and assigns it to the ReportDetails field.
+// SetReportDetails gets a reference to the given NullableString and assigns it to the ReportDetails field.
 func (o *InfractionDetail) SetReportDetails(v string) {
-	o.ReportDetails = &v
+	o.ReportDetails.Set(&v)
+}
+// SetReportDetailsNil sets the value for ReportDetails to be an explicit nil
+func (o *InfractionDetail) SetReportDetailsNil() {
+	o.ReportDetails.Set(nil)
 }
 
-// GetAnalysisResult returns the AnalysisResult field value if set, zero value otherwise.
+// UnsetReportDetails ensures that no value is present for ReportDetails, not even an explicit nil
+func (o *InfractionDetail) UnsetReportDetails() {
+	o.ReportDetails.Unset()
+}
+
+// GetAnalysisResult returns the AnalysisResult field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetail) GetAnalysisResult() string {
-	if o == nil || IsNil(o.AnalysisResult) {
+	if o == nil || IsNil(o.AnalysisResult.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AnalysisResult
+	return *o.AnalysisResult.Get()
 }
 
 // GetAnalysisResultOk returns a tuple with the AnalysisResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetail) GetAnalysisResultOk() (*string, bool) {
-	if o == nil || IsNil(o.AnalysisResult) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AnalysisResult, true
+	return o.AnalysisResult.Get(), o.AnalysisResult.IsSet()
 }
 
 // HasAnalysisResult returns a boolean if a field has been set.
 func (o *InfractionDetail) HasAnalysisResult() bool {
-	if o != nil && !IsNil(o.AnalysisResult) {
+	if o != nil && o.AnalysisResult.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAnalysisResult gets a reference to the given string and assigns it to the AnalysisResult field.
+// SetAnalysisResult gets a reference to the given NullableString and assigns it to the AnalysisResult field.
 func (o *InfractionDetail) SetAnalysisResult(v string) {
-	o.AnalysisResult = &v
+	o.AnalysisResult.Set(&v)
+}
+// SetAnalysisResultNil sets the value for AnalysisResult to be an explicit nil
+func (o *InfractionDetail) SetAnalysisResultNil() {
+	o.AnalysisResult.Set(nil)
 }
 
-// GetAnalysisDetails returns the AnalysisDetails field value if set, zero value otherwise.
+// UnsetAnalysisResult ensures that no value is present for AnalysisResult, not even an explicit nil
+func (o *InfractionDetail) UnsetAnalysisResult() {
+	o.AnalysisResult.Unset()
+}
+
+// GetAnalysisDetails returns the AnalysisDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetail) GetAnalysisDetails() string {
-	if o == nil || IsNil(o.AnalysisDetails) {
+	if o == nil || IsNil(o.AnalysisDetails.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AnalysisDetails
+	return *o.AnalysisDetails.Get()
 }
 
 // GetAnalysisDetailsOk returns a tuple with the AnalysisDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetail) GetAnalysisDetailsOk() (*string, bool) {
-	if o == nil || IsNil(o.AnalysisDetails) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AnalysisDetails, true
+	return o.AnalysisDetails.Get(), o.AnalysisDetails.IsSet()
 }
 
 // HasAnalysisDetails returns a boolean if a field has been set.
 func (o *InfractionDetail) HasAnalysisDetails() bool {
-	if o != nil && !IsNil(o.AnalysisDetails) {
+	if o != nil && o.AnalysisDetails.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAnalysisDetails gets a reference to the given string and assigns it to the AnalysisDetails field.
+// SetAnalysisDetails gets a reference to the given NullableString and assigns it to the AnalysisDetails field.
 func (o *InfractionDetail) SetAnalysisDetails(v string) {
-	o.AnalysisDetails = &v
+	o.AnalysisDetails.Set(&v)
+}
+// SetAnalysisDetailsNil sets the value for AnalysisDetails to be an explicit nil
+func (o *InfractionDetail) SetAnalysisDetailsNil() {
+	o.AnalysisDetails.Set(nil)
+}
+
+// UnsetAnalysisDetails ensures that no value is present for AnalysisDetails, not even an explicit nil
+func (o *InfractionDetail) UnsetAnalysisDetails() {
+	o.AnalysisDetails.Unset()
 }
 
 // GetReportedAt returns the ReportedAt field value if set, zero value otherwise.
@@ -341,100 +380,46 @@ func (o *InfractionDetail) SetReportedAt(v time.Time) {
 	o.ReportedAt = &v
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InfractionDetail) GetExpiresAt() time.Time {
-	if o == nil || IsNil(o.ExpiresAt) {
+	if o == nil || IsNil(o.ExpiresAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.ExpiresAt
+	return *o.ExpiresAt.Get()
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InfractionDetail) GetExpiresAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ExpiresAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpiresAt, true
+	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
 func (o *InfractionDetail) HasExpiresAt() bool {
-	if o != nil && !IsNil(o.ExpiresAt) {
+	if o != nil && o.ExpiresAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
+// SetExpiresAt gets a reference to the given NullableTime and assigns it to the ExpiresAt field.
 func (o *InfractionDetail) SetExpiresAt(v time.Time) {
-	o.ExpiresAt = &v
+	o.ExpiresAt.Set(&v)
+}
+// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+func (o *InfractionDetail) SetExpiresAtNil() {
+	o.ExpiresAt.Set(nil)
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *InfractionDetail) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InfractionDetail) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *InfractionDetail) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *InfractionDetail) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *InfractionDetail) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InfractionDetail) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *InfractionDetail) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *InfractionDetail) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+func (o *InfractionDetail) UnsetExpiresAt() {
+	o.ExpiresAt.Unset()
 }
 
 // GetTransaction returns the Transaction field value if set, zero value otherwise.
@@ -470,9 +455,9 @@ func (o *InfractionDetail) SetTransaction(v InfractionDetailTransaction) {
 }
 
 // GetDefenseHistory returns the DefenseHistory field value if set, zero value otherwise.
-func (o *InfractionDetail) GetDefenseHistory() []Defense {
+func (o *InfractionDetail) GetDefenseHistory() []DefenseHistoryEntry {
 	if o == nil || IsNil(o.DefenseHistory) {
-		var ret []Defense
+		var ret []DefenseHistoryEntry
 		return ret
 	}
 	return o.DefenseHistory
@@ -480,7 +465,7 @@ func (o *InfractionDetail) GetDefenseHistory() []Defense {
 
 // GetDefenseHistoryOk returns a tuple with the DefenseHistory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InfractionDetail) GetDefenseHistoryOk() ([]Defense, bool) {
+func (o *InfractionDetail) GetDefenseHistoryOk() ([]DefenseHistoryEntry, bool) {
 	if o == nil || IsNil(o.DefenseHistory) {
 		return nil, false
 	}
@@ -496,8 +481,8 @@ func (o *InfractionDetail) HasDefenseHistory() bool {
 	return false
 }
 
-// SetDefenseHistory gets a reference to the given []Defense and assigns it to the DefenseHistory field.
-func (o *InfractionDetail) SetDefenseHistory(v []Defense) {
+// SetDefenseHistory gets a reference to the given []DefenseHistoryEntry and assigns it to the DefenseHistory field.
+func (o *InfractionDetail) SetDefenseHistory(v []DefenseHistoryEntry) {
 	o.DefenseHistory = v
 }
 
@@ -526,26 +511,20 @@ func (o InfractionDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReportedBy) {
 		toSerialize["reportedBy"] = o.ReportedBy
 	}
-	if !IsNil(o.ReportDetails) {
-		toSerialize["reportDetails"] = o.ReportDetails
+	if o.ReportDetails.IsSet() {
+		toSerialize["reportDetails"] = o.ReportDetails.Get()
 	}
-	if !IsNil(o.AnalysisResult) {
-		toSerialize["analysisResult"] = o.AnalysisResult
+	if o.AnalysisResult.IsSet() {
+		toSerialize["analysisResult"] = o.AnalysisResult.Get()
 	}
-	if !IsNil(o.AnalysisDetails) {
-		toSerialize["analysisDetails"] = o.AnalysisDetails
+	if o.AnalysisDetails.IsSet() {
+		toSerialize["analysisDetails"] = o.AnalysisDetails.Get()
 	}
 	if !IsNil(o.ReportedAt) {
 		toSerialize["reportedAt"] = o.ReportedAt
 	}
-	if !IsNil(o.ExpiresAt) {
-		toSerialize["expiresAt"] = o.ExpiresAt
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
+	if o.ExpiresAt.IsSet() {
+		toSerialize["expiresAt"] = o.ExpiresAt.Get()
 	}
 	if !IsNil(o.Transaction) {
 		toSerialize["transaction"] = o.Transaction

@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,13 +20,13 @@ import { mapValues } from '../runtime.js';
  */
 export interface GetUserTransactionById200ResponseAllOfCallbackLogInner {
     /**
-     * 
+     * Identifier of the delivery record; there is one record per callback attempt of the transaction.
      * @type {string}
      * @memberof GetUserTransactionById200ResponseAllOfCallbackLogInner
      */
     id?: string;
     /**
-     * 
+     * Address that received the callback: the callbackUrl of the transaction or the URL of the registered webhook.
      * @type {string}
      * @memberof GetUserTransactionById200ResponseAllOfCallbackLogInner
      */
@@ -44,7 +44,7 @@ export interface GetUserTransactionById200ResponseAllOfCallbackLogInner {
      */
     responseTime?: number;
     /**
-     * 
+     * Date and time the callback delivery attempt was recorded.
      * @type {Date}
      * @memberof GetUserTransactionById200ResponseAllOfCallbackLogInner
      */

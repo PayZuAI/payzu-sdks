@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -21,20 +21,22 @@ var _ MappedNullable = &ApiError{}
 
 // ApiError struct for ApiError
 type ApiError struct {
-	// HTTP status code.
-	StatusCode int32 `json:"statusCode"`
-	// HTTP status text.
+	// Fixed marker of an error response.
+	Status string `json:"status"`
+	// Name of the corresponding HTTP status.
 	Error string `json:"error"`
+	// Stable machine-readable error code, when available.
+	ErrorCode string `json:"errorCode"`
 	// Human-readable error message.
 	Message string `json:"message"`
+	// HTTP status code.
+	StatusCode int32 `json:"statusCode"`
 	// Unique request correlation ID (cuid). Include it when contacting support.
 	RequestId string `json:"requestId"`
-	// Stable machine-readable error code, when available.
-	ErrorCode *string `json:"errorCode,omitempty"`
-	// Seconds to wait before retrying. Present only on 429 responses.
-	RetryAfterSeconds *int32 `json:"retryAfterSeconds,omitempty"`
 	// Field-level validation errors, when applicable.
 	Details []ApiErrorDetailsInner `json:"details,omitempty"`
+	// Seconds to wait before retrying. Present only on 429 responses.
+	RetryAfterSeconds *int32 `json:"retryAfterSeconds,omitempty"`
 }
 
 type _ApiError ApiError
@@ -43,11 +45,13 @@ type _ApiError ApiError
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiError(statusCode int32, error_ string, message string, requestId string) *ApiError {
+func NewApiError(status string, error_ string, errorCode string, message string, statusCode int32, requestId string) *ApiError {
 	this := ApiError{}
-	this.StatusCode = statusCode
+	this.Status = status
 	this.Error = error_
+	this.ErrorCode = errorCode
 	this.Message = message
+	this.StatusCode = statusCode
 	this.RequestId = requestId
 	return &this
 }
@@ -60,28 +64,28 @@ func NewApiErrorWithDefaults() *ApiError {
 	return &this
 }
 
-// GetStatusCode returns the StatusCode field value
-func (o *ApiError) GetStatusCode() int32 {
+// GetStatus returns the Status field value
+func (o *ApiError) GetStatus() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
-	return o.StatusCode
+	return o.Status
 }
 
-// GetStatusCodeOk returns a tuple with the StatusCode field value
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ApiError) GetStatusCodeOk() (*int32, bool) {
+func (o *ApiError) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StatusCode, true
+	return &o.Status, true
 }
 
-// SetStatusCode sets field value
-func (o *ApiError) SetStatusCode(v int32) {
-	o.StatusCode = v
+// SetStatus sets field value
+func (o *ApiError) SetStatus(v string) {
+	o.Status = v
 }
 
 // GetError returns the Error field value
@@ -108,6 +112,30 @@ func (o *ApiError) SetError(v string) {
 	o.Error = v
 }
 
+// GetErrorCode returns the ErrorCode field value
+func (o *ApiError) GetErrorCode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ErrorCode
+}
+
+// GetErrorCodeOk returns a tuple with the ErrorCode field value
+// and a boolean to check if the value has been set.
+func (o *ApiError) GetErrorCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ErrorCode, true
+}
+
+// SetErrorCode sets field value
+func (o *ApiError) SetErrorCode(v string) {
+	o.ErrorCode = v
+}
+
 // GetMessage returns the Message field value
 func (o *ApiError) GetMessage() string {
 	if o == nil {
@@ -132,6 +160,30 @@ func (o *ApiError) SetMessage(v string) {
 	o.Message = v
 }
 
+// GetStatusCode returns the StatusCode field value
+func (o *ApiError) GetStatusCode() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.StatusCode
+}
+
+// GetStatusCodeOk returns a tuple with the StatusCode field value
+// and a boolean to check if the value has been set.
+func (o *ApiError) GetStatusCodeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StatusCode, true
+}
+
+// SetStatusCode sets field value
+func (o *ApiError) SetStatusCode(v int32) {
+	o.StatusCode = v
+}
+
 // GetRequestId returns the RequestId field value
 func (o *ApiError) GetRequestId() string {
 	if o == nil {
@@ -154,70 +206,6 @@ func (o *ApiError) GetRequestIdOk() (*string, bool) {
 // SetRequestId sets field value
 func (o *ApiError) SetRequestId(v string) {
 	o.RequestId = v
-}
-
-// GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
-func (o *ApiError) GetErrorCode() string {
-	if o == nil || IsNil(o.ErrorCode) {
-		var ret string
-		return ret
-	}
-	return *o.ErrorCode
-}
-
-// GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ApiError) GetErrorCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.ErrorCode) {
-		return nil, false
-	}
-	return o.ErrorCode, true
-}
-
-// HasErrorCode returns a boolean if a field has been set.
-func (o *ApiError) HasErrorCode() bool {
-	if o != nil && !IsNil(o.ErrorCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetErrorCode gets a reference to the given string and assigns it to the ErrorCode field.
-func (o *ApiError) SetErrorCode(v string) {
-	o.ErrorCode = &v
-}
-
-// GetRetryAfterSeconds returns the RetryAfterSeconds field value if set, zero value otherwise.
-func (o *ApiError) GetRetryAfterSeconds() int32 {
-	if o == nil || IsNil(o.RetryAfterSeconds) {
-		var ret int32
-		return ret
-	}
-	return *o.RetryAfterSeconds
-}
-
-// GetRetryAfterSecondsOk returns a tuple with the RetryAfterSeconds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ApiError) GetRetryAfterSecondsOk() (*int32, bool) {
-	if o == nil || IsNil(o.RetryAfterSeconds) {
-		return nil, false
-	}
-	return o.RetryAfterSeconds, true
-}
-
-// HasRetryAfterSeconds returns a boolean if a field has been set.
-func (o *ApiError) HasRetryAfterSeconds() bool {
-	if o != nil && !IsNil(o.RetryAfterSeconds) {
-		return true
-	}
-
-	return false
-}
-
-// SetRetryAfterSeconds gets a reference to the given int32 and assigns it to the RetryAfterSeconds field.
-func (o *ApiError) SetRetryAfterSeconds(v int32) {
-	o.RetryAfterSeconds = &v
 }
 
 // GetDetails returns the Details field value if set, zero value otherwise.
@@ -252,6 +240,38 @@ func (o *ApiError) SetDetails(v []ApiErrorDetailsInner) {
 	o.Details = v
 }
 
+// GetRetryAfterSeconds returns the RetryAfterSeconds field value if set, zero value otherwise.
+func (o *ApiError) GetRetryAfterSeconds() int32 {
+	if o == nil || IsNil(o.RetryAfterSeconds) {
+		var ret int32
+		return ret
+	}
+	return *o.RetryAfterSeconds
+}
+
+// GetRetryAfterSecondsOk returns a tuple with the RetryAfterSeconds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApiError) GetRetryAfterSecondsOk() (*int32, bool) {
+	if o == nil || IsNil(o.RetryAfterSeconds) {
+		return nil, false
+	}
+	return o.RetryAfterSeconds, true
+}
+
+// HasRetryAfterSeconds returns a boolean if a field has been set.
+func (o *ApiError) HasRetryAfterSeconds() bool {
+	if o != nil && !IsNil(o.RetryAfterSeconds) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryAfterSeconds gets a reference to the given int32 and assigns it to the RetryAfterSeconds field.
+func (o *ApiError) SetRetryAfterSeconds(v int32) {
+	o.RetryAfterSeconds = &v
+}
+
 func (o ApiError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -262,18 +282,17 @@ func (o ApiError) MarshalJSON() ([]byte, error) {
 
 func (o ApiError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["statusCode"] = o.StatusCode
+	toSerialize["status"] = o.Status
 	toSerialize["error"] = o.Error
+	toSerialize["errorCode"] = o.ErrorCode
 	toSerialize["message"] = o.Message
+	toSerialize["statusCode"] = o.StatusCode
 	toSerialize["requestId"] = o.RequestId
-	if !IsNil(o.ErrorCode) {
-		toSerialize["errorCode"] = o.ErrorCode
+	if !IsNil(o.Details) {
+		toSerialize["details"] = o.Details
 	}
 	if !IsNil(o.RetryAfterSeconds) {
 		toSerialize["retryAfterSeconds"] = o.RetryAfterSeconds
-	}
-	if !IsNil(o.Details) {
-		toSerialize["details"] = o.Details
 	}
 	return toSerialize, nil
 }
@@ -283,9 +302,11 @@ func (o *ApiError) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"statusCode",
+		"status",
 		"error",
+		"errorCode",
 		"message",
+		"statusCode",
 		"requestId",
 	}
 

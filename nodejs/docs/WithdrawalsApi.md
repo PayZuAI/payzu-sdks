@@ -4,158 +4,11 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPixKey**](WithdrawalsApi.md#getpixkey) | **GET** /pix/key | Dict Pix Key Lookup |
-| [**getUserDict**](WithdrawalsApi.md#getuserdict) | **GET** /user/dict | DICT key lookup |
 | [**getWithdraw**](WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Retrieve Withdrawal |
 | [**getWithdrawProof**](WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
-| [**postPixQrcodeRead**](WithdrawalsApi.md#postpixqrcodereadoperation) | **POST** /pix/qrcode/read | Read QR Code |
 | [**postWithdraw**](WithdrawalsApi.md#postwithdrawoperation) | **POST** /withdraw | Create Withdrawal (Pix key) |
 | [**postWithdrawQrcode**](WithdrawalsApi.md#postwithdrawqrcodeoperation) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code |
 
-
-
-## getPixKey
-
-> PixKeyInfo getPixKey(pixKey)
-
-Dict Pix Key Lookup
-
-Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\&#39;s details and associated financial institution.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  WithdrawalsApi,
-} from 'payzu-pix';
-import type { GetPixKeyRequest } from 'payzu-pix';
-
-async function example() {
-  console.log("🚀 Testing payzu-pix SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: BearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new WithdrawalsApi(config);
-
-  const body = {
-    // string | The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
-    pixKey: example@payzu.com.br,
-  } satisfies GetPixKeyRequest;
-
-  try {
-    const data = await api.getPixKey(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **pixKey** | `string` | The Pix key to lookup (CPF, CNPJ, email, phone, or EVP). | [Defaults to `undefined`] |
-
-### Return type
-
-[**PixKeyInfo**](PixKeyInfo.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Pix key information retrieved successfully |  -  |
-| **400** | Invalid Pix key format |  -  |
-| **404** | Pix key not found in DICT |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## getUserDict
-
-> DictConsultResponse getUserDict(key)
-
-DICT key lookup
-
-Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  WithdrawalsApi,
-} from 'payzu-pix';
-import type { GetUserDictRequest } from 'payzu-pix';
-
-async function example() {
-  console.log("🚀 Testing payzu-pix SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: BearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new WithdrawalsApi(config);
-
-  const body = {
-    // string | Pix key to look up (CPF, CNPJ, email, phone or EVP).
-    key: key_example,
-  } satisfies GetUserDictRequest;
-
-  try {
-    const data = await api.getUserDict(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **key** | `string` | Pix key to look up (CPF, CNPJ, email, phone or EVP). | [Defaults to `undefined`] |
-
-### Return type
-
-[**DictConsultResponse**](DictConsultResponse.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Key holder details. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getWithdraw
@@ -164,7 +17,7 @@ example().catch(console.error);
 
 Retrieve Withdrawal
 
-Get the latest status and details for a withdrawal. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
+Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
 
 ### Example
 
@@ -185,13 +38,13 @@ async function example() {
 
   const body = {
     // string | Transaction ID. (optional)
-    id: PAYZU2025081721512946OOLK75,
+    id: PAYZU20260817B3PL8SG5WQ000000,
     // string | External reference provided when creating the withdrawal. (optional)
-    clientReference: clientReference_example,
+    clientReference: order_12345,
     // string | Pix end-to-end ID. (optional)
-    endToEndId: endToEndId_example,
+    endToEndId: E00000000202508172159kZ8dQ2mNb1x,
     // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-    virtualAccount: virtualAccount_example,
+    virtualAccount: loja-centro-01,
   } satisfies GetWithdrawRequest;
 
   try {
@@ -235,7 +88,8 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Current withdrawal state |  -  |
 | **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+| **401** | Missing or invalid Bearer token |  -  |
+| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
 | **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
@@ -247,7 +101,7 @@ example().catch(console.error);
 
 Get Withdrawal Receipt
 
-Returns the transaction receipt as JSON with a &#x60;base64&#x60; field (encoded PDF). Decode it to display or save as &#x60;.pdf&#x60;.
+Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
 
 ### Example
 
@@ -268,7 +122,7 @@ async function example() {
 
   const body = {
     // string | Transaction ID.
-    id: PAYZU2025081721512946OOLK75,
+    id: PAYZU20260817B3PL8SG5WQ000000,
     // 'pdf' | 'base64' | Return format. (optional)
     type: pdf,
   } satisfies GetWithdrawProofRequest;
@@ -312,80 +166,10 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
 | **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+| **401** | Missing or invalid Bearer token |  -  |
 | **404** | Resource not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## postPixQrcodeRead
-
-> QRCodeReadResponse postPixQrcodeRead(postPixQrcodeReadRequest)
-
-Read QR Code
-
-Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  WithdrawalsApi,
-} from 'payzu-pix';
-import type { PostPixQrcodeReadOperationRequest } from 'payzu-pix';
-
-async function example() {
-  console.log("🚀 Testing payzu-pix SDK...");
-  const config = new Configuration({ 
-    // Configure HTTP bearer authorization: BearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new WithdrawalsApi(config);
-
-  const body = {
-    // PostPixQrcodeReadRequest
-    postPixQrcodeReadRequest: ...,
-  } satisfies PostPixQrcodeReadOperationRequest;
-
-  try {
-    const data = await api.postPixQrcodeRead(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **postPixQrcodeReadRequest** | [PostPixQrcodeReadRequest](PostPixQrcodeReadRequest.md) |  | |
-
-### Return type
-
-[**QRCodeReadResponse**](QRCodeReadResponse.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | QR Code decoded successfully |  -  |
-| **400** | Invalid QR Code format |  -  |
+| **422** | Operation refused |  -  |
+| **500** | Internal error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -396,7 +180,7 @@ example().catch(console.error);
 
 Create Withdrawal (Pix key)
 
-Send a Pix **cash out** to the specified Pix key.
+Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
 
 ### Example
 
@@ -458,7 +242,10 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Withdrawal created |  -  |
 | **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+| **401** | Missing or invalid Bearer token |  -  |
+| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
+| **422** | Operation refused |  -  |
+| **424** | Failure at the financial institution |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -469,7 +256,7 @@ example().catch(console.error);
 
 Create Withdrawal using QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code\&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.
+Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code\&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
 
 ### Example
 
@@ -531,6 +318,11 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Withdrawal created from QR Code |  -  |
 | **400** | Invalid QR Code or missing amount for static QR Code without value |  -  |
+| **401** | Authentication failure |  -  |
+| **403** | Operation not allowed |  -  |
+| **422** | Operation refused |  -  |
+| **424** | Failure at the financial institution |  -  |
+| **429** | Rate limit exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

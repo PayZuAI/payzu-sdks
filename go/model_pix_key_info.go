@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -29,9 +29,9 @@ type PixKeyInfo struct {
 	Branch *string `json:"branch,omitempty"`
 	// Account number (masked).
 	AccountNumber *string `json:"accountNumber,omitempty"`
-	// Type of person.
+	// Type of person: PF, PJ, or empty when not informed.
 	PersonType *string `json:"personType,omitempty"`
-	// Type of account (CACC = Current Account, TRAN = Transactional Account, SVGS = Savings).
+	// Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY.
 	AccountType *string `json:"accountType,omitempty"`
 	// ISPB code of the financial institution.
 	InstitutionIspb *string `json:"institutionIspb,omitempty"`

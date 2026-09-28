@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,8 +19,11 @@ var _ MappedNullable = &GetUserTransactions200Response{}
 
 // GetUserTransactions200Response struct for GetUserTransactions200Response
 type GetUserTransactions200Response struct {
+	// Number of transactions that match the query filters.
 	Total *int32 `json:"total,omitempty"`
+	// Number of pages for the limit provided, computed from total rounded up.
 	Pages *int32 `json:"pages,omitempty"`
+	// Items of the requested page, ordered by sortBy and sortDirection.
 	Transactions []Transaction `json:"transactions,omitempty"`
 }
 

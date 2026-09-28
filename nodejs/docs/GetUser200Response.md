@@ -6,7 +6,6 @@
 
 Name | Type
 ------------ | -------------
-`id` | string
 `accountNumber` | string
 `branch` | string
 `name` | string
@@ -16,12 +15,10 @@ Name | Type
 `status` | string
 `allowWithdraw` | boolean
 `allowDeposit` | boolean
-`allowInfraction` | boolean
 `cashInTicketMin` | number
 `cashInTicketMax` | number
 `cashOutTicketMin` | number
 `cashOutTicketMax` | number
-`autoWithdraw` | object
 `serviceFee` | [GetUser200ResponseServiceFee](GetUser200ResponseServiceFee.md)
 `dailyWithdrawLimit` | [GetUser200ResponseDailyWithdrawLimit](GetUser200ResponseDailyWithdrawLimit.md)
 
@@ -32,7 +29,6 @@ import type { GetUser200Response } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
   "accountNumber": null,
   "branch": 0001,
   "name": null,
@@ -42,12 +38,10 @@ const example = {
   "status": null,
   "allowWithdraw": null,
   "allowDeposit": null,
-  "allowInfraction": null,
   "cashInTicketMin": null,
   "cashInTicketMax": null,
   "cashOutTicketMin": null,
   "cashOutTicketMax": null,
-  "autoWithdraw": null,
   "serviceFee": null,
   "dailyWithdrawLimit": null,
 } satisfies GetUser200Response

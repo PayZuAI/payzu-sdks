@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
+**Date** | Pointer to **string** | Day (YYYY-MM-DD, America/Sao_Paulo time zone). | [optional] 
+**Amount** | Pointer to **float32** | Sum of the amounts, in reais, of the completed transactions of the day. | [optional] 
 
 ## Methods
 

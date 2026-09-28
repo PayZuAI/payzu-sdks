@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,29 +20,29 @@ import { mapValues } from '../runtime.js';
  */
 export interface DefenseFilesInner {
     /**
-     * 
+     * Name of the file sent with the defense.
      * @type {string}
      * @memberof DefenseFilesInner
      */
     name?: string;
     /**
-     * 
+     * MIME type of the file, provided on upload, for example application/pdf or image/png.
      * @type {string}
      * @memberof DefenseFilesInner
      */
     mimeType?: string;
     /**
-     * 
+     * Size of the file in bytes.
      * @type {number}
      * @memberof DefenseFilesInner
      */
     size?: number;
     /**
-     * Signed download URL (expires in 9 minutes). Present only when fetching an individual defense; absent in the listing.
+     * Signed download URL, valid for 9 minutes; null when unavailable. Returned when creating the defense and when fetching a single defense.
      * @type {string}
      * @memberof DefenseFilesInner
      */
-    url?: string;
+    url?: string | null;
 }
 
 /**

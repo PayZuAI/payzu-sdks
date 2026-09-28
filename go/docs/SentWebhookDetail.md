@@ -4,19 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**WebhookId** | Pointer to **string** |  | [optional] 
-**UserId** | Pointer to **string** |  | [optional] 
-**TransactionId** | Pointer to **string** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
-**Body** | Pointer to **map[string]interface{}** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of this delivery attempt. | [optional] 
+**WebhookId** | Pointer to **NullableString** | Webhook that originated the delivery. | [optional] 
+**TransactionId** | Pointer to **string** | Pix transaction whose event was notified. | [optional] 
+**Url** | Pointer to **string** | Address this delivery was sent to, recorded at the time of the dispatch. | [optional] 
+**Body** | Pointer to **string** | Body sent in the delivery, as serialized JSON. | [optional] 
 **Status** | Pointer to **int32** | HTTP status returned by your endpoint. | [optional] 
-**ResponseHeaders** | Pointer to **map[string]interface{}** |  | [optional] 
-**ResponseBody** | Pointer to **string** |  | [optional] 
-**Error** | Pointer to **string** |  | [optional] 
+**ResponseHeaders** | Pointer to **string** | Response headers, as serialized JSON. | [optional] 
+**ResponseBody** | Pointer to **string** | Body of the response received. | [optional] 
+**Error** | Pointer to **NullableString** | Message of the delivery failure. | [optional] 
 **ResponseTime** | Pointer to **int32** | Response time of your endpoint, in milliseconds. | [optional] 
-**EventType** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
+**EventType** | Pointer to **NullableString** | Event that triggered this delivery, the same value sent in the X-Callback-Event header. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Moment of the delivery attempt. | [optional] 
 
 ## Methods
 
@@ -87,31 +86,16 @@ SetWebhookId sets WebhookId field to given value.
 
 HasWebhookId returns a boolean if a field has been set.
 
-### GetUserId
+### SetWebhookIdNil
 
-`func (o *SentWebhookDetail) GetUserId() string`
+`func (o *SentWebhookDetail) SetWebhookIdNil(b bool)`
 
-GetUserId returns the UserId field if non-nil, zero value otherwise.
+ SetWebhookIdNil sets the value for WebhookId to be an explicit nil
 
-### GetUserIdOk
+### UnsetWebhookId
+`func (o *SentWebhookDetail) UnsetWebhookId()`
 
-`func (o *SentWebhookDetail) GetUserIdOk() (*string, bool)`
-
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserId
-
-`func (o *SentWebhookDetail) SetUserId(v string)`
-
-SetUserId sets UserId field to given value.
-
-### HasUserId
-
-`func (o *SentWebhookDetail) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
-
+UnsetWebhookId ensures that no value is present for WebhookId, not even an explicit nil
 ### GetTransactionId
 
 `func (o *SentWebhookDetail) GetTransactionId() string`
@@ -164,20 +148,20 @@ HasUrl returns a boolean if a field has been set.
 
 ### GetBody
 
-`func (o *SentWebhookDetail) GetBody() map[string]interface{}`
+`func (o *SentWebhookDetail) GetBody() string`
 
 GetBody returns the Body field if non-nil, zero value otherwise.
 
 ### GetBodyOk
 
-`func (o *SentWebhookDetail) GetBodyOk() (*map[string]interface{}, bool)`
+`func (o *SentWebhookDetail) GetBodyOk() (*string, bool)`
 
 GetBodyOk returns a tuple with the Body field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBody
 
-`func (o *SentWebhookDetail) SetBody(v map[string]interface{})`
+`func (o *SentWebhookDetail) SetBody(v string)`
 
 SetBody sets Body field to given value.
 
@@ -214,20 +198,20 @@ HasStatus returns a boolean if a field has been set.
 
 ### GetResponseHeaders
 
-`func (o *SentWebhookDetail) GetResponseHeaders() map[string]interface{}`
+`func (o *SentWebhookDetail) GetResponseHeaders() string`
 
 GetResponseHeaders returns the ResponseHeaders field if non-nil, zero value otherwise.
 
 ### GetResponseHeadersOk
 
-`func (o *SentWebhookDetail) GetResponseHeadersOk() (*map[string]interface{}, bool)`
+`func (o *SentWebhookDetail) GetResponseHeadersOk() (*string, bool)`
 
 GetResponseHeadersOk returns a tuple with the ResponseHeaders field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponseHeaders
 
-`func (o *SentWebhookDetail) SetResponseHeaders(v map[string]interface{})`
+`func (o *SentWebhookDetail) SetResponseHeaders(v string)`
 
 SetResponseHeaders sets ResponseHeaders field to given value.
 
@@ -287,6 +271,16 @@ SetError sets Error field to given value.
 
 HasError returns a boolean if a field has been set.
 
+### SetErrorNil
+
+`func (o *SentWebhookDetail) SetErrorNil(b bool)`
+
+ SetErrorNil sets the value for Error to be an explicit nil
+
+### UnsetError
+`func (o *SentWebhookDetail) UnsetError()`
+
+UnsetError ensures that no value is present for Error, not even an explicit nil
 ### GetResponseTime
 
 `func (o *SentWebhookDetail) GetResponseTime() int32`
@@ -337,6 +331,16 @@ SetEventType sets EventType field to given value.
 
 HasEventType returns a boolean if a field has been set.
 
+### SetEventTypeNil
+
+`func (o *SentWebhookDetail) SetEventTypeNil(b bool)`
+
+ SetEventTypeNil sets the value for EventType to be an explicit nil
+
+### UnsetEventType
+`func (o *SentWebhookDetail) UnsetEventType()`
+
+UnsetEventType ensures that no value is present for EventType, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *SentWebhookDetail) GetCreatedAt() time.Time`

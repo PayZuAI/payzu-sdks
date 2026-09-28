@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **payer_account_number** | **str** | Payer account number (6 digits). Must match the authenticated user&#39;s accountNumber. | 
 **receiver_account_number** | **str** | Destination account number (6 digits). | 
-**amount** | **float** | Transfer amount in BRL. | 
+**amount** | **float** | Transfer amount in BRL, with at most 2 decimal places. | 
 **description** | **str** | Optional transfer description. | [optional] 
-**callback_url** | **str** | URL to receive transaction-update webhooks. | [optional] 
+**callback_url** | **str** | URL for transaction notifications (http or https). | [optional] 
 **client_reference** | **str** | External reference for idempotency / reconciliation. | [optional] 
 **virtual_account** | **str** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
 

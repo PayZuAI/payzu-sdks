@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,13 +20,13 @@ import { mapValues } from '../runtime.js';
  */
 export interface BankStatement {
     /**
-     * 
+     * Identifier of the balance entry.
      * @type {string}
      * @memberof BankStatement
      */
     id?: string;
     /**
-     * 
+     * Amount of the entry.
      * @type {number}
      * @memberof BankStatement
      */
@@ -38,61 +38,61 @@ export interface BankStatement {
      */
     operation?: BankStatementOperationEnum;
     /**
-     * Internal reason for the credit/debit.
+     * Reason for the ledger entry.
      * @type {string}
      * @memberof BankStatement
      */
     reason?: string;
     /**
-     * 
+     * Balance moved: AVAILABLE or BLOCKED.
      * @type {BankStatementBalanceTypeEnum}
      * @memberof BankStatement
      */
     balanceType?: BankStatementBalanceTypeEnum;
     /**
-     * 
+     * Balance free for use that the account had, in reais, immediately before this entry.
      * @type {number}
      * @memberof BankStatement
      */
     previousBalanceAvailable?: number;
     /**
-     * 
+     * Blocked balance before the entry, in reais.
      * @type {number}
      * @memberof BankStatement
      */
     previousBalanceBlocked?: number;
     /**
-     * 
+     * Available balance after the entry, in reais.
      * @type {number}
      * @memberof BankStatement
      */
     newBalanceAvailable?: number;
     /**
-     * 
+     * Blocked balance after the entry, in reais.
      * @type {number}
      * @memberof BankStatement
      */
     newBalanceBlocked?: number;
     /**
-     * 
+     * Transaction that originated the entry.
      * @type {string}
      * @memberof BankStatement
      */
-    transactionId?: string;
+    transactionId?: string | null;
     /**
-     * 
+     * Infraction related to the entry.
      * @type {string}
      * @memberof BankStatement
      */
-    infractionId?: string;
+    infractionId?: string | null;
     /**
-     * 
+     * Date and time the balance movement was recorded.
      * @type {Date}
      * @memberof BankStatement
      */
     createdAt?: Date;
     /**
-     * 
+     * Date and time of the last change to the record.
      * @type {Date}
      * @memberof BankStatement
      */

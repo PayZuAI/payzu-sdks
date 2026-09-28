@@ -1,11 +1,6 @@
 name: Generate SDKs
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'openapi.json'
-      - '.github/workflows/generate.yml'
   workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'
@@ -14,13 +9,15 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: generate-sdks
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-java@v4
         with:
@@ -29,76 +26,40 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
+          cache: npm
           cache-dependency-path: nodejs/package-lock.json
 
       - name: Sync openapi.json
-        run: |
-          for url in https://docs.payzu.com.br/openapi.json https://payzu-docs.web.app/openapi.json; do
-            if curl -sf "$url" -o openapi.json.new; then
-              if ! cmp -s openapi.json openapi.json.new; then
-                mv openapi.json.new openapi.json
-              fi
-              break
-            fi
-          done
-          rm -f openapi.json.new
+        run: curl -sf https://docs.payzu.com.br/openapi.json -o openapi.json
 
-      - name: Install openapi-generator-cli
-        run: npm install --no-save @openapitools/openapi-generator-cli@2.39.1
-
-      - name: Generate Node.js core
-        run: |
-          rm -rf nodejs-gen
-          npx openapi-generator-cli generate \
-            -i openapi.json -g typescript-fetch -o nodejs-gen \
-            --git-user-id=PayZuAI --git-repo-id=payzu-sdks \
-            --additional-properties=npmName=payzu-pix,supportsES6=true,withInterfaces=true,typescriptThreePlus=true,importFileExtension=.js
-          rm -rf nodejs/src/generated nodejs/docs
-          mkdir -p nodejs/src/generated nodejs/docs
-          cp -R nodejs-gen/src/. nodejs/src/generated/
-          cp -R nodejs-gen/docs/. nodejs/docs/
-          rm -rf nodejs-gen
+      - name: Generate
+        run: ./scripts/generate.sh
 
       - name: Validate Node.js SDK
         working-directory: nodejs
         run: |
           npm ci
           npm run build
+          npm run typecheck
           npm test
 
-      - name: Generate Python SDK
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          rm -rf python
-          npx openapi-generator-cli generate \
-            -i openapi.json -g python -o python \
-            --additional-properties=packageName=payzu_pix,projectName=payzu-pix,packageVersion=0.1.0
-
-      - name: Generate Go SDK
-        run: |
-          rm -rf go
-          npx openapi-generator-cli generate \
-            -i openapi.json -g go -o go \
-            --git-user-id=PayZuAI --git-repo-id=payzu-sdks/go \
-            --additional-properties=packageName=payzupix,packageVersion=0.1.0
-
-      - name: Generate PHP SDK
-        run: |
-          rm -rf php
-          npx openapi-generator-cli generate \
-            -i openapi.json -g php -o php \
-            --git-user-id=PayZuAI --git-repo-id=payzu-sdks \
-            --additional-properties=composerVendorName=payzu,composerProjectName=pix,packageName=PayZuPix,artifactVersion=0.1.0
-
-      - name: Create PR
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: "chore(sdks): regenerar de openapi.json"
-          title: "chore(sdks): regenerar SDKs de openapi.json"
-          body: SDKs regenerados automaticamente.
-          branch: bot/regenerate-sdks
-          delete-branch: true
-          base: main
-          author: PayZu SDK Bot <noreply@payzu.com.br>
-          committer: PayZu SDK Bot <noreply@payzu.com.br>
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "SDKs já em dia com openapi.json"
+            exit 0
+          fi
+          git config user.name "PayZu SDK Bot"
+          git config user.email "noreply@payzu.com.br"
+          git switch -C bot/regenerate-sdks
+          git add -A
+          git commit -m "chore(sdks): regenerar de openapi.json"
+          git push --force origin bot/regenerate-sdks
+          if [ -z "$(gh pr list --head bot/regenerate-sdks --state open --json number --jq '.[].number')" ]; then
+            gh pr create --base main --head bot/regenerate-sdks \
+              --title "chore(sdks): regenerar SDKs de openapi.json" \
+              --body "SDKs regenerados a partir de docs.payzu.com.br/openapi.json."
+          fi

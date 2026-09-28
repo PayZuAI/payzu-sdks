@@ -1,13 +1,15 @@
 # PayZu SDKs
 
-SDKs oficiais da API PayZu Pix, mantidos em paridade com o [OpenAPI](./openapi.json).
+SDKs oficiais da API PayZu Pix, gerados do [OpenAPI](./openapi.json) publicado em [docs.payzu.com.br](https://docs.payzu.com.br).
 
 | Linguagem | Pacote | Instalação |
 | --------- | ------ | ---------- |
-| Node.js   | [`payzu-pix`](./nodejs) | `npm install payzu-pix` |
-| Python    | `payzu-pix` | `pip install payzu-pix` |
+| Node.js   | [`payzu-pix`](https://www.npmjs.com/package/payzu-pix) | `npm install payzu-pix` |
+| Python    | [`payzu-pix`](https://pypi.org/project/payzu-pix/) | `pip install payzu-pix` |
+| PHP       | [`payzu/pix`](https://packagist.org/packages/payzu/pix) | `composer require payzu/pix` |
+| Ruby      | [`payzu-pix`](https://rubygems.org/gems/payzu-pix) | `gem install payzu-pix` |
+| Java      | [`br.com.payzu:payzu-pix`](https://central.sonatype.com/artifact/br.com.payzu/payzu-pix) | Maven ou Gradle |
 | Go        | `github.com/PayZuAI/payzu-sdks/go` | `go get github.com/PayZuAI/payzu-sdks/go` |
-| PHP       | indisponível no momento | |
 
 ## Uso rápido (Node.js)
 
@@ -27,17 +29,22 @@ Veja o [README do SDK Node.js](./nodejs/README.md) para a lista completa de mét
 
 ## Arquitetura
 
-O SDK Node.js tem duas camadas: uma facade escrita à mão (`nodejs/src`), que é o contrato estável do pacote, e um core gerado pelo OpenAPI Generator (`nodejs/src/generated`), que espelha o spec e é reescrito pelo bot a cada regeneração. Nunca edite `nodejs/src/generated` manualmente. As demais linguagens são 100% geradas.
+O SDK Node.js tem duas camadas: uma facade escrita à mão (`nodejs/src`), que é o contrato estável do pacote, e um core gerado pelo OpenAPI Generator (`nodejs/src/generated`). As demais linguagens são 100% geradas. Nunca edite código gerado à mão: a configuração de cada linguagem fica em `config/` e os templates próprios em `templates/`.
+
+Os SDKs aceitam valor de enum que ainda não está no spec sem falhar a leitura da resposta, para que um valor novo na API não quebre a integração.
+
+## Sincronização
+
+`openapi.json` segue [docs.payzu.com.br/openapi.json](https://docs.payzu.com.br/openapi.json). O workflow `generate.yml` roda `scripts/generate.sh` todo dia e abre PR quando o spec muda.
+
+## Release
+
+Uma release `vX.Y.Z` no GitHub publica Node, Python, PHP, Ruby e Java na mesma versão (`publish.yml`). O PHP sai pelo repositório espelho [PayZuAI/payzu-php](https://github.com/PayZuAI/payzu-php), que o Packagist lê: o workflow de lá copia a pasta `php/` de cada release daqui e cria a mesma tag. O Go versiona à parte, com tag `go/vX.Y.Z`.
 
 ## Documentação
 
 - Doc: [docs.payzu.com.br](https://docs.payzu.com.br)
-- Postman: [dev.payzu.com.br](https://dev.payzu.com.br)
 - OpenAPI: [openapi.json](./openapi.json)
-
-## Sincronização
-
-`openapi.json` é mantido em paridade com [docs.payzu.com.br/openapi.json](https://docs.payzu.com.br/openapi.json). O workflow `generate.yml` regenera os SDKs diariamente e abre PR de revisão.
 
 ## Suporte
 

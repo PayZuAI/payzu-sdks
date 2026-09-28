@@ -1,0 +1,10 @@
+generatorName: typescript-fetch
+outputDir: nodejs-gen
+gitUserId: PayZuAI
+gitRepoId: payzu-sdks
+additionalProperties:
+  npmName: payzu-pix
+  supportsES6: true
+  withInterfaces: true
+  typescriptThreePlus: true
+  importFileExtension: .js

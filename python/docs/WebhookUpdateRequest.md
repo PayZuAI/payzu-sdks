@@ -6,9 +6,9 @@ Provide at least one field.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** |  | [optional] 
-**active** | **bool** |  | [optional] 
-**events** | [**List[WebhookEventType]**](WebhookEventType.md) |  | [optional] 
+**url** | **str** | New delivery address, which applies to the following dispatches. | [optional] 
+**active** | **bool** | Turns the webhook deliveries on or pauses them. | [optional] 
+**events** | [**List[WebhookEventType]**](WebhookEventType.md) | New list of subscribed events, which replaces the previous one entirely. | [optional] 
 
 ## Example
 

@@ -21,7 +21,7 @@ import type { Webhook } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": yl9k2m0c8x1,
+  "id": cm3w7k1t40000q8f2r5b9x3ad,
   "url": https://sualoja.com.br/webhook,
   "active": true,
   "events": null,

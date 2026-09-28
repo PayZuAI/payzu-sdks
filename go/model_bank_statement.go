@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,20 +20,31 @@ var _ MappedNullable = &BankStatement{}
 
 // BankStatement struct for BankStatement
 type BankStatement struct {
+	// Identifier of the balance entry.
 	Id *string `json:"id,omitempty"`
+	// Amount of the entry.
 	Amount *float32 `json:"amount,omitempty"`
 	// INCREMENT credits the balance, DECREMENT debits it.
 	Operation *string `json:"operation,omitempty"`
-	// Internal reason for the credit/debit.
+	// Reason for the ledger entry.
 	Reason *string `json:"reason,omitempty"`
+	// Balance moved: AVAILABLE or BLOCKED.
 	BalanceType *string `json:"balanceType,omitempty"`
+	// Balance free for use that the account had, in reais, immediately before this entry.
 	PreviousBalanceAvailable *float32 `json:"previousBalanceAvailable,omitempty"`
+	// Blocked balance before the entry, in reais.
 	PreviousBalanceBlocked *float32 `json:"previousBalanceBlocked,omitempty"`
+	// Available balance after the entry, in reais.
 	NewBalanceAvailable *float32 `json:"newBalanceAvailable,omitempty"`
+	// Blocked balance after the entry, in reais.
 	NewBalanceBlocked *float32 `json:"newBalanceBlocked,omitempty"`
-	TransactionId *string `json:"transactionId,omitempty"`
-	InfractionId *string `json:"infractionId,omitempty"`
+	// Transaction that originated the entry.
+	TransactionId NullableString `json:"transactionId,omitempty"`
+	// Infraction related to the entry.
+	InfractionId NullableString `json:"infractionId,omitempty"`
+	// Date and time the balance movement was recorded.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Date and time of the last change to the record.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 
@@ -342,68 +353,88 @@ func (o *BankStatement) SetNewBalanceBlocked(v float32) {
 	o.NewBalanceBlocked = &v
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// GetTransactionId returns the TransactionId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BankStatement) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil || IsNil(o.TransactionId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+	return *o.TransactionId.Get()
 }
 
 // GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BankStatement) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return o.TransactionId.Get(), o.TransactionId.IsSet()
 }
 
 // HasTransactionId returns a boolean if a field has been set.
 func (o *BankStatement) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
+	if o != nil && o.TransactionId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId gets a reference to the given NullableString and assigns it to the TransactionId field.
 func (o *BankStatement) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId.Set(&v)
+}
+// SetTransactionIdNil sets the value for TransactionId to be an explicit nil
+func (o *BankStatement) SetTransactionIdNil() {
+	o.TransactionId.Set(nil)
 }
 
-// GetInfractionId returns the InfractionId field value if set, zero value otherwise.
+// UnsetTransactionId ensures that no value is present for TransactionId, not even an explicit nil
+func (o *BankStatement) UnsetTransactionId() {
+	o.TransactionId.Unset()
+}
+
+// GetInfractionId returns the InfractionId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BankStatement) GetInfractionId() string {
-	if o == nil || IsNil(o.InfractionId) {
+	if o == nil || IsNil(o.InfractionId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.InfractionId
+	return *o.InfractionId.Get()
 }
 
 // GetInfractionIdOk returns a tuple with the InfractionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BankStatement) GetInfractionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.InfractionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InfractionId, true
+	return o.InfractionId.Get(), o.InfractionId.IsSet()
 }
 
 // HasInfractionId returns a boolean if a field has been set.
 func (o *BankStatement) HasInfractionId() bool {
-	if o != nil && !IsNil(o.InfractionId) {
+	if o != nil && o.InfractionId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInfractionId gets a reference to the given string and assigns it to the InfractionId field.
+// SetInfractionId gets a reference to the given NullableString and assigns it to the InfractionId field.
 func (o *BankStatement) SetInfractionId(v string) {
-	o.InfractionId = &v
+	o.InfractionId.Set(&v)
+}
+// SetInfractionIdNil sets the value for InfractionId to be an explicit nil
+func (o *BankStatement) SetInfractionIdNil() {
+	o.InfractionId.Set(nil)
+}
+
+// UnsetInfractionId ensures that no value is present for InfractionId, not even an explicit nil
+func (o *BankStatement) UnsetInfractionId() {
+	o.InfractionId.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -507,11 +538,11 @@ func (o BankStatement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NewBalanceBlocked) {
 		toSerialize["newBalanceBlocked"] = o.NewBalanceBlocked
 	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transactionId"] = o.TransactionId
+	if o.TransactionId.IsSet() {
+		toSerialize["transactionId"] = o.TransactionId.Get()
 	}
-	if !IsNil(o.InfractionId) {
-		toSerialize["infractionId"] = o.InfractionId
+	if o.InfractionId.IsSet() {
+		toSerialize["infractionId"] = o.InfractionId.Get()
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt

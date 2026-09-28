@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -47,7 +47,7 @@ export interface GetInfractionsRequest {
     reportedBy?: string;
     participantDocument?: string;
     participantName?: string;
-    sortBy?: string;
+    sortBy?: GetInfractionsSortByEnum;
     sortDirection?: GetInfractionsSortDirectionEnum;
     reportedAtFrom?: Date;
     reportedAtTo?: Date;
@@ -57,7 +57,6 @@ export interface GetInfractionsRequest {
     expiresAtTo?: Date;
     updatedAtFrom?: Date;
     updatedAtTo?: Date;
-    needsManualReview?: boolean;
     id?: string;
     protocol?: string;
 }
@@ -90,19 +89,19 @@ export interface PostInfractionsDefenseRequest {
 export interface InfractionsApiInterface {
     /**
      * Creates request options for getInfractions without sending the request
-     * @param {number} [page] 
-     * @param {number} [limit] 
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
      * @param {string} [status] Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
      * @param {string} [type] Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-     * @param {string} [endToEndId] 
-     * @param {string} [transactionId] 
-     * @param {number} [amountMin] 
-     * @param {number} [amountMax] 
-     * @param {string} [analysisResult] Comma-separated AnalysisResult
+     * @param {string} [endToEndId] End-to-end ID of the Pix.
+     * @param {string} [transactionId] Transaction ID.
+     * @param {number} [amountMin] Minimum amount.
+     * @param {number} [amountMax] Maximum amount.
+     * @param {string} [analysisResult] Comma-separated AnalysisResult: AGREED, DISAGREED.
      * @param {string} [reportedBy] Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-     * @param {string} [participantDocument] 
-     * @param {string} [participantName] 
-     * @param {string} [sortBy] Sort field.
+     * @param {string} [participantDocument] CPF or CNPJ of the participant.
+     * @param {string} [participantName] Name of the participant.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Sort field.
      * @param {'asc' | 'desc'} [sortDirection] Sort direction.
      * @param {Date} [reportedAtFrom] Filter: reportedAt from.
      * @param {Date} [reportedAtTo] Filter: reportedAt up to.
@@ -112,7 +111,6 @@ export interface InfractionsApiInterface {
      * @param {Date} [expiresAtTo] Filter: expiresAt up to.
      * @param {Date} [updatedAtFrom] Filter: updatedAt from.
      * @param {Date} [updatedAtTo] Filter: updatedAt up to.
-     * @param {boolean} [needsManualReview] Filter: needs manual review.
      * @param {string} [id] Filter by infraction ID.
      * @param {string} [protocol] Filter by protocol.
      * @throws {RequiredError}
@@ -123,19 +121,19 @@ export interface InfractionsApiInterface {
     /**
      * List all infractions for the authenticated user with pagination and filters.
      * @summary List Infractions
-     * @param {number} [page] 
-     * @param {number} [limit] 
+     * @param {number} [page] Page number.
+     * @param {number} [limit] Items per page.
      * @param {string} [status] Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
      * @param {string} [type] Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-     * @param {string} [endToEndId] 
-     * @param {string} [transactionId] 
-     * @param {number} [amountMin] 
-     * @param {number} [amountMax] 
-     * @param {string} [analysisResult] Comma-separated AnalysisResult
+     * @param {string} [endToEndId] End-to-end ID of the Pix.
+     * @param {string} [transactionId] Transaction ID.
+     * @param {number} [amountMin] Minimum amount.
+     * @param {number} [amountMax] Maximum amount.
+     * @param {string} [analysisResult] Comma-separated AnalysisResult: AGREED, DISAGREED.
      * @param {string} [reportedBy] Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-     * @param {string} [participantDocument] 
-     * @param {string} [participantName] 
-     * @param {string} [sortBy] Sort field.
+     * @param {string} [participantDocument] CPF or CNPJ of the participant.
+     * @param {string} [participantName] Name of the participant.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Sort field.
      * @param {'asc' | 'desc'} [sortDirection] Sort direction.
      * @param {Date} [reportedAtFrom] Filter: reportedAt from.
      * @param {Date} [reportedAtTo] Filter: reportedAt up to.
@@ -145,7 +143,6 @@ export interface InfractionsApiInterface {
      * @param {Date} [expiresAtTo] Filter: expiresAt up to.
      * @param {Date} [updatedAtFrom] Filter: updatedAt from.
      * @param {Date} [updatedAtTo] Filter: updatedAt up to.
-     * @param {boolean} [needsManualReview] Filter: needs manual review.
      * @param {string} [id] Filter by infraction ID.
      * @param {string} [protocol] Filter by protocol.
      * @param {*} [options] Override http request option.
@@ -194,7 +191,7 @@ export interface InfractionsApiInterface {
     getInfractionsDefenseByIdRequestOpts(requestParameters: GetInfractionsDefenseByIdRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Get a specific defense for an infraction. **Requires support privileges**.
+     * Get a specific defense for an infraction.
      * @summary Get Defense
      * @param {string} infractionId Infraction ID
      * @param {string} defenseId Defense ID
@@ -205,7 +202,7 @@ export interface InfractionsApiInterface {
     getInfractionsDefenseByIdRaw(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Defense>>;
 
     /**
-     * Get a specific defense for an infraction. **Requires support privileges**.
+     * Get a specific defense for an infraction.
      * Get Defense
      */
     getInfractionsDefenseById(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Defense>;
@@ -219,7 +216,7 @@ export interface InfractionsApiInterface {
     getInfractionsDefensesRequestOpts(requestParameters: GetInfractionsDefensesRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * List all defenses for a specific infraction. **Requires support privileges**.
+     * List all defenses for a specific infraction.
      * @summary List Defenses
      * @param {string} id Infraction ID
      * @param {*} [options] Override http request option.
@@ -229,7 +226,7 @@ export interface InfractionsApiInterface {
     getInfractionsDefensesRaw(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Defense>>>;
 
     /**
-     * List all defenses for a specific infraction. **Requires support privileges**.
+     * List all defenses for a specific infraction.
      * List Defenses
      */
     getInfractionsDefenses(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Defense>>;
@@ -238,7 +235,7 @@ export interface InfractionsApiInterface {
      * Creates request options for postInfractionsDefense without sending the request
      * @param {string} id Infraction ID
      * @param {string} defense Defense text (max: 1000 characters)
-     * @param {Array<Blob>} [files] Evidence files (max: 10MB total)
+     * @param {Array<Blob>} [files] Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
@@ -249,7 +246,7 @@ export interface InfractionsApiInterface {
      * @summary Create Defense
      * @param {string} id Infraction ID
      * @param {string} defense Defense text (max: 1000 characters)
-     * @param {Array<Blob>} [files] Evidence files (max: 10MB total)
+     * @param {Array<Blob>} [files] Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
@@ -361,10 +358,6 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
 
         if (requestParameters['updatedAtTo'] != null) {
             queryParameters['updatedAtTo'] = (requestParameters['updatedAtTo'] as any).toISOString();
-        }
-
-        if (requestParameters['needsManualReview'] != null) {
-            queryParameters['needsManualReview'] = requestParameters['needsManualReview'];
         }
 
         if (requestParameters['id'] != null) {
@@ -515,7 +508,7 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Get a specific defense for an infraction. **Requires support privileges**.
+     * Get a specific defense for an infraction.
      * Get Defense
      */
     async getInfractionsDefenseByIdRaw(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Defense>> {
@@ -526,7 +519,7 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Get a specific defense for an infraction. **Requires support privileges**.
+     * Get a specific defense for an infraction.
      * Get Defense
      */
     async getInfractionsDefenseById(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Defense> {
@@ -570,7 +563,7 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * List all defenses for a specific infraction. **Requires support privileges**.
+     * List all defenses for a specific infraction.
      * List Defenses
      */
     async getInfractionsDefensesRaw(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Defense>>> {
@@ -581,7 +574,7 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * List all defenses for a specific infraction. **Requires support privileges**.
+     * List all defenses for a specific infraction.
      * List Defenses
      */
     async getInfractionsDefenses(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Defense>> {
@@ -680,6 +673,14 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
 
 }
 
+/**
+ * @export
+ */
+export const GetInfractionsSortByEnum = {
+    CreatedAt: 'createdAt',
+    UpdatedAt: 'updatedAt'
+} as const;
+export type GetInfractionsSortByEnum = typeof GetInfractionsSortByEnum[keyof typeof GetInfractionsSortByEnum];
 /**
  * @export
  */

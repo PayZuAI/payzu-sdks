@@ -1,6 +1,6 @@
-# OpenAPI\Client\AccountApi
+# PayZu\Pix\AccountApi
 
-Account profile, balance, and auto-withdraw configuration
+Account profile, balance
 
 All URIs are relative to https://api.payzu.processamento.com/v1, except if the operation defines another base path.
 
@@ -13,7 +13,7 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 ## `getUser()`
 
 ```php
-getUser(): \OpenAPI\Client\Model\GetUser200Response
+getUser(): \PayZu\Pix\Model\GetUser200Response
 ```
 
 Account Info
@@ -28,10 +28,10 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\AccountApi(
+$apiInstance = new PayZu\Pix\Api\AccountApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -52,7 +52,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\OpenAPI\Client\Model\GetUser200Response**](../Model/GetUser200Response.md)
+[**\PayZu\Pix\Model\GetUser200Response**](../Model/GetUser200Response.md)
 
 ### Authorization
 
@@ -70,7 +70,7 @@ This endpoint does not need any parameter.
 ## `getUserBalance()`
 
 ```php
-getUserBalance(): \OpenAPI\Client\Model\GetUserBalance200Response
+getUserBalance(): \PayZu\Pix\Model\GetUserBalance200Response
 ```
 
 Account Balance
@@ -85,10 +85,10 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\AccountApi(
+$apiInstance = new PayZu\Pix\Api\AccountApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -109,7 +109,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\OpenAPI\Client\Model\GetUserBalance200Response**](../Model/GetUserBalance200Response.md)
+[**\PayZu\Pix\Model\GetUserBalance200Response**](../Model/GetUserBalance200Response.md)
 
 ### Authorization
 

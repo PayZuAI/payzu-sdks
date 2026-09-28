@@ -1,4 +1,4 @@
-import type { PixKeyInfo, Transaction, WithdrawalsApi } from '../generated/index.js';
+import type { KeysAndDICTApi, PixKeyInfo, Transaction, WithdrawalsApi } from '../generated/index.js';
 import { invoke, withJsonMediaType } from '../http.js';
 import type {
   CreateWithdrawParams,
@@ -10,7 +10,10 @@ import type {
 } from '../types.js';
 
 export class WithdrawNamespace {
-  constructor(private readonly api: WithdrawalsApi) {}
+  constructor(
+    private readonly api: WithdrawalsApi,
+    private readonly keys: KeysAndDICTApi,
+  ) {}
 
   create(params: CreateWithdrawParams): Promise<Transaction> {
     return invoke(() => this.api.postWithdraw({ postWithdrawRequest: params }));
@@ -29,10 +32,10 @@ export class WithdrawNamespace {
   }
 
   readQrCode(emv: string): Promise<QrCodeRead> {
-    return invoke(() => this.api.postPixQrcodeRead({ postPixQrcodeReadRequest: { emv } }));
+    return invoke(() => this.keys.postPixQrcodeRead({ postPixQrcodeReadRequest: { emv } }));
   }
 
   pixKey(pixKey: string): Promise<PixKeyInfo> {
-    return invoke(() => this.api.getPixKey(withJsonMediaType({ pixKey })));
+    return invoke(() => this.keys.getPixKey({ pixKey }));
   }
 }

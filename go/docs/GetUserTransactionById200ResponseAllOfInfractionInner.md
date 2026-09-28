@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of the infraction linked to this transaction. | [optional] 
+**Status** | Pointer to **string** | Current state of the infraction. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Date and time the infraction was recorded at PayZu. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the infraction record. | [optional] 
 
 ## Methods
 

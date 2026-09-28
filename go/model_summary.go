@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,10 +19,16 @@ var _ MappedNullable = &Summary{}
 
 // Summary struct for Summary
 type Summary struct {
+	// Number of transactions in the period.
 	TotalTransactions *int32 `json:"totalTransactions,omitempty"`
+	// Summary of the account inflows in the period, that is, of the transactions of type DEPOSIT.
 	Deposit *SummaryBlock `json:"deposit,omitempty"`
+	// Summary of the account outflows in the period, that is, of the transactions of type WITHDRAW.
 	Withdraw *SummaryBlock `json:"withdraw,omitempty"`
+	// Summary of the commissions credited to the account in the period (transactions of type COMMISSION).
 	Commission *SummaryBlock `json:"commission,omitempty"`
+	// Summary of the adjustments in the period (transactions of type ADJUSTMENT).
+	Adjustment *SummaryBlock `json:"adjustment,omitempty"`
 }
 
 // NewSummary instantiates a new Summary object
@@ -170,6 +176,38 @@ func (o *Summary) SetCommission(v SummaryBlock) {
 	o.Commission = &v
 }
 
+// GetAdjustment returns the Adjustment field value if set, zero value otherwise.
+func (o *Summary) GetAdjustment() SummaryBlock {
+	if o == nil || IsNil(o.Adjustment) {
+		var ret SummaryBlock
+		return ret
+	}
+	return *o.Adjustment
+}
+
+// GetAdjustmentOk returns a tuple with the Adjustment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Summary) GetAdjustmentOk() (*SummaryBlock, bool) {
+	if o == nil || IsNil(o.Adjustment) {
+		return nil, false
+	}
+	return o.Adjustment, true
+}
+
+// HasAdjustment returns a boolean if a field has been set.
+func (o *Summary) HasAdjustment() bool {
+	if o != nil && !IsNil(o.Adjustment) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdjustment gets a reference to the given SummaryBlock and assigns it to the Adjustment field.
+func (o *Summary) SetAdjustment(v SummaryBlock) {
+	o.Adjustment = &v
+}
+
 func (o Summary) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -191,6 +229,9 @@ func (o Summary) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Commission) {
 		toSerialize["commission"] = o.Commission
+	}
+	if !IsNil(o.Adjustment) {
+		toSerialize["adjustment"] = o.Adjustment
 	}
 	return toSerialize, nil
 }

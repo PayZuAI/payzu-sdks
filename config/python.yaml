@@ -1,0 +1,10 @@
+generatorName: python
+outputDir: python
+templateDir: templates/python
+additionalProperties:
+  packageName: payzu_pix
+  projectName: payzu-pix
+  packageVersion: 2.0.0
+globalProperties:
+  apiTests: false
+  modelTests: false

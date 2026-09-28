@@ -1,4 +1,4 @@
-# OpenAPI\Client\WebhooksApi
+# PayZu\Pix\WebhooksApi
 
 Register and manage webhook endpoints that receive transaction notifications
 
@@ -34,16 +34,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
 
 try {
     $apiInstance->deleteUserWebhook($id);
@@ -69,7 +69,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -78,7 +78,7 @@ void (empty response body)
 ## `getUserWebhook()`
 
 ```php
-getUserWebhook($id): \OpenAPI\Client\Model\Webhook
+getUserWebhook($id): \PayZu\Pix\Model\Webhook
 ```
 
 Get webhook
@@ -93,16 +93,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
 
 try {
     $result = $apiInstance->getUserWebhook($id);
@@ -120,7 +120,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Webhook**](../Model/Webhook.md)
+[**\PayZu\Pix\Model\Webhook**](../Model/Webhook.md)
 
 ### Authorization
 
@@ -138,7 +138,7 @@ try {
 ## `getUserWebhookSentDetail()`
 
 ```php
-getUserWebhookSentDetail($id, $callback_id): \OpenAPI\Client\Model\SentWebhookDetail
+getUserWebhookSentDetail($id, $callback_id): \PayZu\Pix\Model\SentWebhookDetailResponse
 ```
 
 Get sent callback detail
@@ -153,17 +153,17 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Webhook id.
-$callback_id = 'callback_id_example'; // string | Callback log id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$callback_id = cm3w7l9v20001q8f2u6c1y4be; // string | Callback log id.
 
 try {
     $result = $apiInstance->getUserWebhookSentDetail($id, $callback_id);
@@ -182,7 +182,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\SentWebhookDetail**](../Model/SentWebhookDetail.md)
+[**\PayZu\Pix\Model\SentWebhookDetailResponse**](../Model/SentWebhookDetailResponse.md)
 
 ### Authorization
 
@@ -200,7 +200,7 @@ try {
 ## `getUserWebhooks()`
 
 ```php
-getUserWebhooks($active): \OpenAPI\Client\Model\WebhookListResponse
+getUserWebhooks($active): \PayZu\Pix\Model\WebhookListResponse
 ```
 
 List webhooks
@@ -215,16 +215,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$active = True; // bool | Filter by active status.
+$active = true; // bool | Filter by active status.
 
 try {
     $result = $apiInstance->getUserWebhooks($active);
@@ -242,7 +242,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\WebhookListResponse**](../Model/WebhookListResponse.md)
+[**\PayZu\Pix\Model\WebhookListResponse**](../Model/WebhookListResponse.md)
 
 ### Authorization
 
@@ -260,12 +260,12 @@ try {
 ## `getUserWebhooksSentQuantity()`
 
 ```php
-getUserWebhooksSentQuantity($webhook_id): \OpenAPI\Client\Model\SentWebhooksQuantity
+getUserWebhooksSentQuantity($webhook_id): \PayZu\Pix\Model\SentWebhooksQuantity
 ```
 
 Count sent callbacks
 
-Returns how many callbacks were sent, optionally filtered by webhook.
+Returns how many webhook deliveries were made, optionally filtered by webhook.
 
 ### Example
 
@@ -275,16 +275,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_id = 'webhook_id_example'; // string | Filter the count by webhook id.
+$webhook_id = cm3w7k1t40000q8f2r5b9x3ad; // string | Filter the count by webhook id.
 
 try {
     $result = $apiInstance->getUserWebhooksSentQuantity($webhook_id);
@@ -302,7 +302,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\SentWebhooksQuantity**](../Model/SentWebhooksQuantity.md)
+[**\PayZu\Pix\Model\SentWebhooksQuantity**](../Model/SentWebhooksQuantity.md)
 
 ### Authorization
 
@@ -320,7 +320,7 @@ try {
 ## `patchUserWebhook()`
 
 ```php
-patchUserWebhook($id, $webhook_update_request): \OpenAPI\Client\Model\Webhook
+patchUserWebhook($id, $webhook_update_request): \PayZu\Pix\Model\Webhook
 ```
 
 Update webhook
@@ -335,17 +335,17 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Webhook id.
-$webhook_update_request = new \OpenAPI\Client\Model\WebhookUpdateRequest(); // \OpenAPI\Client\Model\WebhookUpdateRequest
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$webhook_update_request = new \PayZu\Pix\Model\WebhookUpdateRequest(); // \PayZu\Pix\Model\WebhookUpdateRequest
 
 try {
     $result = $apiInstance->patchUserWebhook($id, $webhook_update_request);
@@ -360,11 +360,11 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| Webhook id. | |
-| **webhook_update_request** | [**\OpenAPI\Client\Model\WebhookUpdateRequest**](../Model/WebhookUpdateRequest.md)|  | |
+| **webhook_update_request** | [**\PayZu\Pix\Model\WebhookUpdateRequest**](../Model/WebhookUpdateRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Webhook**](../Model/Webhook.md)
+[**\PayZu\Pix\Model\Webhook**](../Model/Webhook.md)
 
 ### Authorization
 
@@ -382,7 +382,7 @@ try {
 ## `postUserWebhook()`
 
 ```php
-postUserWebhook($webhook_create_request): \OpenAPI\Client\Model\WebhookWithSecret
+postUserWebhook($webhook_create_request): \PayZu\Pix\Model\WebhookWithSecret
 ```
 
 Create webhook
@@ -397,16 +397,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_create_request = new \OpenAPI\Client\Model\WebhookCreateRequest(); // \OpenAPI\Client\Model\WebhookCreateRequest
+$webhook_create_request = new \PayZu\Pix\Model\WebhookCreateRequest(); // \PayZu\Pix\Model\WebhookCreateRequest
 
 try {
     $result = $apiInstance->postUserWebhook($webhook_create_request);
@@ -420,11 +420,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **webhook_create_request** | [**\OpenAPI\Client\Model\WebhookCreateRequest**](../Model/WebhookCreateRequest.md)|  | |
+| **webhook_create_request** | [**\PayZu\Pix\Model\WebhookCreateRequest**](../Model/WebhookCreateRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\WebhookWithSecret**](../Model/WebhookWithSecret.md)
+[**\PayZu\Pix\Model\WebhookWithSecret**](../Model/WebhookWithSecret.md)
 
 ### Authorization
 
@@ -442,7 +442,7 @@ try {
 ## `postUserWebhookRotateSecret()`
 
 ```php
-postUserWebhookRotateSecret($id): \OpenAPI\Client\Model\RotateSecretResponse
+postUserWebhookRotateSecret($id): \PayZu\Pix\Model\RotateSecretResponse
 ```
 
 Rotate webhook secret
@@ -457,16 +457,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\WebhooksApi(
+$apiInstance = new PayZu\Pix\Api\WebhooksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
 
 try {
     $result = $apiInstance->postUserWebhookRotateSecret($id);
@@ -484,7 +484,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\RotateSecretResponse**](../Model/RotateSecretResponse.md)
+[**\PayZu\Pix\Model\RotateSecretResponse**](../Model/RotateSecretResponse.md)
 
 ### Authorization
 

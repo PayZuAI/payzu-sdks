@@ -16,10 +16,8 @@ Name | Type
 `analysisDetails` | string
 `reportedAt` | Date
 `expiresAt` | Date
-`createdAt` | Date
-`updatedAt` | Date
 `transaction` | [InfractionDetailTransaction](InfractionDetailTransaction.md)
-`defenseHistory` | [Array&lt;Defense&gt;](Defense.md)
+`defenseHistory` | [Array&lt;DefenseHistoryEntry&gt;](DefenseHistoryEntry.md)
 
 ## Example
 
@@ -38,8 +36,6 @@ const example = {
   "analysisDetails": null,
   "reportedAt": null,
   "expiresAt": null,
-  "createdAt": null,
-  "updatedAt": null,
   "transaction": null,
   "defenseHistory": null,
 } satisfies InfractionDetail

@@ -1,4 +1,4 @@
-# OpenAPI\Client\PixOperationsApi
+# PayZu\Pix\PixOperationsApi
 
 
 
@@ -15,12 +15,12 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 ## `getPix()`
 
 ```php
-getPix($id, $client_reference, $end_to_end_id, $virtual_account): \OpenAPI\Client\Model\Transaction
+getPix($id, $client_reference, $end_to_end_id, $virtual_account): \PayZu\Pix\Model\Transaction
 ```
 
 Retrieve Charge
 
-Get the latest status and details for a Pix **deposit (charge)**. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
+Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
 
 ### Example
 
@@ -30,19 +30,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\PixOperationsApi(
+$apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20250817215911F49RDOBJ; // string | Transaction ID.
-$client_reference = 'client_reference_example'; // string | External reference provided when creating the charge.
-$end_to_end_id = 'end_to_end_id_example'; // string | Pix end-to-end ID.
-$virtual_account = 'virtual_account_example'; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$id = PAYZU20260811R4TZ8WD1NC000000; // string | Transaction ID.
+$client_reference = order_12345; // string | External reference provided when creating the charge.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | Pix end-to-end ID.
+$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
 
 try {
     $result = $apiInstance->getPix($id, $client_reference, $end_to_end_id, $virtual_account);
@@ -63,7 +63,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 
@@ -86,7 +86,7 @@ getPixQrcode($transaction_id): \SplFileObject
 
 Render Pix QR code (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image
+Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
 
 ### Example
 
@@ -96,16 +96,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\PixOperationsApi(
+$apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$transaction_id = 'transaction_id_example'; // string
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
 
 try {
     $result = $apiInstance->getPixQrcode($transaction_id);
@@ -119,7 +119,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **transaction_id** | **string**|  | |
+| **transaction_id** | **string**| Transaction ID. | |
 
 ### Return type
 
@@ -141,12 +141,12 @@ try {
 ## `getProof()`
 
 ```php
-getProof($id, $type): \OpenAPI\Client\Model\ProofResponse
+getProof($id, $type): \PayZu\Pix\Model\ProofResponse
 ```
 
 Get Transaction Receipt
 
-Returns the transaction receipt as JSON with a `base64` field (encoded PDF). Decode it to display or save as `.pdf`.
+Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
 
 ### Example
 
@@ -156,16 +156,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\PixOperationsApi(
+$apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU2025081418333632CYKN8M; // string | Transaction ID.
+$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
 $type = pdf; // string | Return format.
 
 try {
@@ -185,7 +185,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\ProofResponse**](../Model/ProofResponse.md)
+[**\PayZu\Pix\Model\ProofResponse**](../Model/ProofResponse.md)
 
 ### Authorization
 
@@ -203,12 +203,12 @@ try {
 ## `postPix()`
 
 ```php
-postPix($post_pix_request): \OpenAPI\Client\Model\Transaction
+postPix($post_pix_request): \PayZu\Pix\Model\Transaction
 ```
 
 Create Charge (Pix deposit)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
+Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
 
 ### Example
 
@@ -218,16 +218,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\PixOperationsApi(
+$apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$post_pix_request = new \OpenAPI\Client\Model\PostPixRequest(); // \OpenAPI\Client\Model\PostPixRequest
+$post_pix_request = new \PayZu\Pix\Model\PostPixRequest(); // \PayZu\Pix\Model\PostPixRequest
 
 try {
     $result = $apiInstance->postPix($post_pix_request);
@@ -241,11 +241,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_pix_request** | [**\OpenAPI\Client\Model\PostPixRequest**](../Model/PostPixRequest.md)|  | |
+| **post_pix_request** | [**\PayZu\Pix\Model\PostPixRequest**](../Model/PostPixRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 

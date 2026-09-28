@@ -1,4 +1,4 @@
-# OpenAPI\Client\RefundsApi
+# PayZu\Pix\RefundsApi
 
 Refund received Pix charges, full or partial
 
@@ -12,12 +12,12 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 ## `postRefund()`
 
 ```php
-postRefund($transaction_id, $refund_request): \OpenAPI\Client\Model\Transaction
+postRefund($transaction_id, $refund_request): \PayZu\Pix\Model\TransactionWithRefunds
 ```
 
 Refund a Pix
 
-Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -27,17 +27,17 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\RefundsApi(
+$apiInstance = new PayZu\Pix\Api\RefundsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$transaction_id = 'transaction_id_example'; // string | ID of the transaction to refund.
-$refund_request = new \OpenAPI\Client\Model\RefundRequest(); // \OpenAPI\Client\Model\RefundRequest
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | ID of the transaction to refund.
+$refund_request = new \PayZu\Pix\Model\RefundRequest(); // \PayZu\Pix\Model\RefundRequest
 
 try {
     $result = $apiInstance->postRefund($transaction_id, $refund_request);
@@ -52,11 +52,11 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **transaction_id** | **string**| ID of the transaction to refund. | |
-| **refund_request** | [**\OpenAPI\Client\Model\RefundRequest**](../Model/RefundRequest.md)|  | [optional] |
+| **refund_request** | [**\PayZu\Pix\Model\RefundRequest**](../Model/RefundRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\TransactionWithRefunds**](../Model/TransactionWithRefunds.md)
 
 ### Authorization
 

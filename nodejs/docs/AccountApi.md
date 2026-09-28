@@ -69,7 +69,6 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | Account data |  -  |
 | **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
-| **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

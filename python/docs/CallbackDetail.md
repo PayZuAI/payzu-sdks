@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **status** | **float** | HTTP response status code | [optional] 
 **transaction_id** | **str** | Related transaction ID | [optional] 
 **created_at** | **datetime** | Date and time when the callback log was created | [optional] 
-**body** | **object** | Request body sent (parsed JSON) | [optional] 
+**body** | **object** | Request body sent (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] 
 **response_body** | **str** | Response body received (string) | [optional] 
-**response_headers** | **object** | Response headers (parsed JSON) | [optional] 
+**response_headers** | **object** | Response headers (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] 
 **response_time** | **float** | Webhook round-trip time in milliseconds | [optional] 
 
 ## Example

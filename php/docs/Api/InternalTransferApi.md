@@ -1,4 +1,4 @@
-# OpenAPI\Client\InternalTransferApi
+# PayZu\Pix\InternalTransferApi
 
 
 
@@ -13,12 +13,12 @@ All URIs are relative to https://api.payzu.processamento.com/v1, except if the o
 ## `getInternalTransfer()`
 
 ```php
-getInternalTransfer($id, $client_reference, $virtual_account): \OpenAPI\Client\Model\Transaction
+getInternalTransfer($id, $client_reference, $virtual_account): \PayZu\Pix\Model\Transaction
 ```
 
 Get internal transfer
 
-Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).
+Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -28,18 +28,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InternalTransferApi(
+$apiInstance = new PayZu\Pix\Api\InternalTransferApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 'id_example'; // string | Transaction ID
-$client_reference = 'client_reference_example'; // string | External reference
-$virtual_account = 'virtual_account_example'; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID
+$client_reference = order_12345; // string | External reference
+$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
 
 try {
     $result = $apiInstance->getInternalTransfer($id, $client_reference, $virtual_account);
@@ -59,7 +59,7 @@ try {
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 
@@ -77,12 +77,12 @@ try {
 ## `postInternalTransfer()`
 
 ```php
-postInternalTransfer($post_internal_transfer_request): \OpenAPI\Client\Model\Transaction
+postInternalTransfer($post_internal_transfer_request): \PayZu\Pix\Model\Transaction
 ```
 
 Create internal transfer
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.
+Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
 
 ### Example
 
@@ -92,16 +92,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\InternalTransferApi(
+$apiInstance = new PayZu\Pix\Api\InternalTransferApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$post_internal_transfer_request = new \OpenAPI\Client\Model\PostInternalTransferRequest(); // \OpenAPI\Client\Model\PostInternalTransferRequest
+$post_internal_transfer_request = new \PayZu\Pix\Model\PostInternalTransferRequest(); // \PayZu\Pix\Model\PostInternalTransferRequest
 
 try {
     $result = $apiInstance->postInternalTransfer($post_internal_transfer_request);
@@ -115,11 +115,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **post_internal_transfer_request** | [**\OpenAPI\Client\Model\PostInternalTransferRequest**](../Model/PostInternalTransferRequest.md)|  | |
+| **post_internal_transfer_request** | [**\PayZu\Pix\Model\PostInternalTransferRequest**](../Model/PostInternalTransferRequest.md)|  | |
 
 ### Return type
 
-[**\OpenAPI\Client\Model\Transaction**](../Model/Transaction.md)
+[**\PayZu\Pix\Model\Transaction**](../Model/Transaction.md)
 
 ### Authorization
 

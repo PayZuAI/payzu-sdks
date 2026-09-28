@@ -4,38 +4,38 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Identifier of the transaction at PayZu. | [optional] 
 **Status** | Pointer to **string** | PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
-**Type** | Pointer to **string** | DEPOSIT or WITHDRAW | [optional] 
-**QrCodeText** | Pointer to **string** |  | [optional] 
-**QrCodeBase64** | Pointer to **string** |  | [optional] 
-**QrCodeUrl** | Pointer to **string** |  | [optional] 
-**GeneratedName** | Pointer to **string** |  | [optional] 
-**GeneratedDocument** | Pointer to **string** |  | [optional] 
-**GeneratedEmail** | Pointer to **string** |  | [optional] 
-**PayerName** | Pointer to **string** |  | [optional] 
-**PayerDocument** | Pointer to **string** |  | [optional] 
-**PayerInstitutionIspb** | Pointer to **string** |  | [optional] 
-**PayerInstitutionName** | Pointer to **string** |  | [optional] 
+**Amount** | Pointer to **float32** | Amount of the transaction, before the fee. | [optional] 
+**Type** | Pointer to **string** | Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT. | [optional] 
+**QrCodeText** | Pointer to **string** | Copy-and-paste Pix code. | [optional] 
+**QrCodeBase64** | Pointer to **string** | PNG image of the QR Code in base64, without the data: prefix. | [optional] 
+**QrCodeUrl** | Pointer to **string** | Authenticated route that returns the PNG of the QR Code. | [optional] 
+**GeneratedName** | Pointer to **string** | Name used to build the charge. | [optional] 
+**GeneratedDocument** | Pointer to **string** | CPF or CNPJ used as the debtor of the charge. | [optional] 
+**GeneratedEmail** | Pointer to **string** | Email used to build the charge. | [optional] 
+**PayerName** | Pointer to **string** | Name of the holder of the account that sent the Pix, as reported by the originating institution. | [optional] 
+**PayerDocument** | Pointer to **string** | CPF or CNPJ of the payer of the Pix, reported by the originating institution. | [optional] 
+**PayerInstitutionIspb** | Pointer to **string** | ISPB code of the institution the Pix was sent from. | [optional] 
+**PayerInstitutionName** | Pointer to **string** | Name of the institution the Pix was sent from. | [optional] 
 **PayerAccountNumber** | Pointer to **string** | Payer&#39;s PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions. | [optional] 
-**ServiceFeeCharged** | Pointer to **float32** |  | [optional] 
-**WithdrawPixKey** | Pointer to **string** |  | [optional] 
-**WithdrawPixType** | Pointer to **string** |  | [optional] 
-**ReceiverName** | Pointer to **string** |  | [optional] 
-**ReceiverDocument** | Pointer to **string** |  | [optional] 
-**ReceiverInstitutionIspb** | Pointer to **string** |  | [optional] 
-**ReceiverInstitutionName** | Pointer to **string** |  | [optional] 
+**ServiceFeeCharged** | Pointer to **float32** | PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling. | [optional] 
+**WithdrawPixKey** | Pointer to **string** | Destination Pix key of the withdrawal, already normalized. | [optional] 
+**WithdrawPixType** | Pointer to **NullableString** | Type of the destination key of the withdrawal, with evp being the random key. | [optional] 
+**ReceiverName** | Pointer to **string** | Name of the holder of the receiving account. | [optional] 
+**ReceiverDocument** | Pointer to **string** | CPF or CNPJ of the receiver. | [optional] 
+**ReceiverInstitutionIspb** | Pointer to **string** | ISPB code of the institution that receives the Pix. | [optional] 
+**ReceiverInstitutionName** | Pointer to **string** | Name of the institution that receives the Pix. | [optional] 
 **ReceiverAccountNumber** | Pointer to **string** | Receiver&#39;s PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions. | [optional] 
-**EndToEndId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **string** |  | [optional] 
-**PaidAt** | Pointer to **string** |  | [optional] 
-**ClientReference** | Pointer to **string** |  | [optional] 
+**EndToEndId** | Pointer to **string** | Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return. | [optional] 
+**CreatedAt** | Pointer to **string** | Date and time the transaction was recorded. | [optional] 
+**UpdatedAt** | Pointer to **string** | Date and time of the last change. | [optional] 
+**PaidAt** | Pointer to **string** | Date and time the Pix was settled, reported by the institution. | [optional] 
+**ClientReference** | Pointer to **string** | Your identifier of the transaction, returned in queries and callbacks. | [optional] 
 **RefundEndToEndId** | Pointer to **string** | End-to-end ID of the refund transaction | [optional] 
 **RefundAmount** | Pointer to **float32** | Amount refunded | [optional] 
-**RefundStatus** | Pointer to **string** | Status of the refund (PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR) | [optional] 
-**RefundReason** | Pointer to **string** | Reason for the refund | [optional] 
+**RefundStatus** | Pointer to **NullableString** | Refund status: PENDING, COMPLETED or CANCELED. | [optional] 
+**RefundReason** | Pointer to **NullableString** | Reason for the refund | [optional] 
 **RefundDescription** | Pointer to **string** | Description of the refund | [optional] 
 **RefundedAt** | Pointer to **string** | Date and time when the refund was processed | [optional] 
 **CancellationReason** | Pointer to **string** | Reason for cancellation (if cancelled) | [optional] 
@@ -513,6 +513,16 @@ SetWithdrawPixType sets WithdrawPixType field to given value.
 
 HasWithdrawPixType returns a boolean if a field has been set.
 
+### SetWithdrawPixTypeNil
+
+`func (o *GetUserTransactionById200Response) SetWithdrawPixTypeNil(b bool)`
+
+ SetWithdrawPixTypeNil sets the value for WithdrawPixType to be an explicit nil
+
+### UnsetWithdrawPixType
+`func (o *GetUserTransactionById200Response) UnsetWithdrawPixType()`
+
+UnsetWithdrawPixType ensures that no value is present for WithdrawPixType, not even an explicit nil
 ### GetReceiverName
 
 `func (o *GetUserTransactionById200Response) GetReceiverName() string`
@@ -838,6 +848,16 @@ SetRefundStatus sets RefundStatus field to given value.
 
 HasRefundStatus returns a boolean if a field has been set.
 
+### SetRefundStatusNil
+
+`func (o *GetUserTransactionById200Response) SetRefundStatusNil(b bool)`
+
+ SetRefundStatusNil sets the value for RefundStatus to be an explicit nil
+
+### UnsetRefundStatus
+`func (o *GetUserTransactionById200Response) UnsetRefundStatus()`
+
+UnsetRefundStatus ensures that no value is present for RefundStatus, not even an explicit nil
 ### GetRefundReason
 
 `func (o *GetUserTransactionById200Response) GetRefundReason() string`
@@ -863,6 +883,16 @@ SetRefundReason sets RefundReason field to given value.
 
 HasRefundReason returns a boolean if a field has been set.
 
+### SetRefundReasonNil
+
+`func (o *GetUserTransactionById200Response) SetRefundReasonNil(b bool)`
+
+ SetRefundReasonNil sets the value for RefundReason to be an explicit nil
+
+### UnsetRefundReason
+`func (o *GetUserTransactionById200Response) UnsetRefundReason()`
+
+UnsetRefundReason ensures that no value is present for RefundReason, not even an explicit nil
 ### GetRefundDescription
 
 `func (o *GetUserTransactionById200Response) GetRefundDescription() string`

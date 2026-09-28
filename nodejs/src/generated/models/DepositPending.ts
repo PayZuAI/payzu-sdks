@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,139 +20,139 @@ import { mapValues } from '../runtime.js';
  */
 export interface DepositPending {
     /**
-     * 
+     * Identifier of the pending deposit.
      * @type {string}
      * @memberof DepositPending
      */
     id?: string;
     /**
-     * 
+     * Deposit status: PENDING, COMPLETED or REJECTED.
      * @type {DepositPendingStatusEnum}
      * @memberof DepositPending
      */
     status?: DepositPendingStatusEnum;
     /**
-     * 
+     * Amount received.
      * @type {number}
      * @memberof DepositPending
      */
     amount?: number;
     /**
-     * 
+     * CNPJ of the payer of the Pix.
      * @type {string}
      * @memberof DepositPending
      */
     payerDocument?: string;
     /**
-     * 
+     * Name of the payer of the Pix.
      * @type {string}
      * @memberof DepositPending
      */
-    payerName?: string;
+    payerName?: string | null;
     /**
-     * 
+     * Account number of the payer inside the platform.
      * @type {string}
      * @memberof DepositPending
      */
-    payerAccountNumber?: string;
+    payerAccountNumber?: string | null;
     /**
-     * 
+     * ISPB code of the institution the Pix was sent from.
      * @type {string}
      * @memberof DepositPending
      */
-    payerInstitutionIspb?: string;
+    payerInstitutionIspb?: string | null;
     /**
-     * 
+     * Name of the institution the Pix was sent from.
      * @type {string}
      * @memberof DepositPending
      */
-    payerInstitutionName?: string;
+    payerInstitutionName?: string | null;
     /**
-     * 
+     * CPF or CNPJ of the account that received the Pix.
      * @type {string}
      * @memberof DepositPending
      */
-    receiverDocument?: string;
+    receiverDocument?: string | null;
     /**
-     * 
+     * Name of the account that received the Pix.
      * @type {string}
      * @memberof DepositPending
      */
-    receiverName?: string;
+    receiverName?: string | null;
     /**
-     * 
+     * Number of your PayZu account that receives the credit if the deposit is approved.
      * @type {string}
      * @memberof DepositPending
      */
-    receiverAccountNumber?: string;
+    receiverAccountNumber?: string | null;
     /**
-     * 
+     * ISPB code of the institution that received the Pix.
      * @type {string}
      * @memberof DepositPending
      */
-    receiverInstitutionIspb?: string;
+    receiverInstitutionIspb?: string | null;
     /**
-     * 
+     * Name of the institution where the Pix was settled on the receiving side.
      * @type {string}
      * @memberof DepositPending
      */
-    receiverInstitutionName?: string;
+    receiverInstitutionName?: string | null;
     /**
-     * 
+     * End-to-end identifier of the Pix.
      * @type {string}
      * @memberof DepositPending
      */
     endToEndId?: string;
     /**
-     * 
+     * Date and time the Pix was settled.
      * @type {Date}
      * @memberof DepositPending
      */
-    paidAt?: Date;
+    paidAt?: Date | null;
     /**
      * 
      * @type {string}
      * @memberof DepositPending
      */
-    pixKey?: string;
+    pixKey?: string | null;
     /**
-     * 
+     * Free text that would accompany the Pix.
      * @type {string}
      * @memberof DepositPending
      */
-    description?: string;
+    description?: string | null;
     /**
-     * 
+     * Date and time the deposit was approved.
      * @type {Date}
      * @memberof DepositPending
      */
-    approvedAt?: Date;
+    approvedAt?: Date | null;
     /**
-     * 
+     * Date and time the deposit was rejected.
      * @type {Date}
      * @memberof DepositPending
      */
-    rejectedAt?: Date;
+    rejectedAt?: Date | null;
     /**
-     * 
+     * Reason the deposit was rejected.
      * @type {string}
      * @memberof DepositPending
      */
-    rejectionReason?: string;
+    rejectionReason?: string | null;
     /**
-     * 
+     * Deposit transaction created on approval.
      * @type {string}
      * @memberof DepositPending
      */
-    transactionId?: string;
+    transactionId?: string | null;
     /**
-     * 
+     * Moment the received Pix was recorded, before the credit.
      * @type {Date}
      * @memberof DepositPending
      */
     createdAt?: Date;
     /**
-     * 
+     * Moment of the last change to the record, which changes when the deposit is approved or rejected.
      * @type {Date}
      * @memberof DepositPending
      */

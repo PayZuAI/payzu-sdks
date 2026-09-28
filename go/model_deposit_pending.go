@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -20,28 +20,50 @@ var _ MappedNullable = &DepositPending{}
 
 // DepositPending struct for DepositPending
 type DepositPending struct {
+	// Identifier of the pending deposit.
 	Id *string `json:"id,omitempty"`
+	// Deposit status: PENDING, COMPLETED or REJECTED.
 	Status *string `json:"status,omitempty"`
+	// Amount received.
 	Amount *float32 `json:"amount,omitempty"`
+	// CNPJ of the payer of the Pix.
 	PayerDocument *string `json:"payerDocument,omitempty"`
-	PayerName *string `json:"payerName,omitempty"`
-	PayerAccountNumber *string `json:"payerAccountNumber,omitempty"`
-	PayerInstitutionIspb *string `json:"payerInstitutionIspb,omitempty"`
-	PayerInstitutionName *string `json:"payerInstitutionName,omitempty"`
-	ReceiverDocument *string `json:"receiverDocument,omitempty"`
-	ReceiverName *string `json:"receiverName,omitempty"`
-	ReceiverAccountNumber *string `json:"receiverAccountNumber,omitempty"`
-	ReceiverInstitutionIspb *string `json:"receiverInstitutionIspb,omitempty"`
-	ReceiverInstitutionName *string `json:"receiverInstitutionName,omitempty"`
+	// Name of the payer of the Pix.
+	PayerName NullableString `json:"payerName,omitempty"`
+	// Account number of the payer inside the platform.
+	PayerAccountNumber NullableString `json:"payerAccountNumber,omitempty"`
+	// ISPB code of the institution the Pix was sent from.
+	PayerInstitutionIspb NullableString `json:"payerInstitutionIspb,omitempty"`
+	// Name of the institution the Pix was sent from.
+	PayerInstitutionName NullableString `json:"payerInstitutionName,omitempty"`
+	// CPF or CNPJ of the account that received the Pix.
+	ReceiverDocument NullableString `json:"receiverDocument,omitempty"`
+	// Name of the account that received the Pix.
+	ReceiverName NullableString `json:"receiverName,omitempty"`
+	// Number of your PayZu account that receives the credit if the deposit is approved.
+	ReceiverAccountNumber NullableString `json:"receiverAccountNumber,omitempty"`
+	// ISPB code of the institution that received the Pix.
+	ReceiverInstitutionIspb NullableString `json:"receiverInstitutionIspb,omitempty"`
+	// Name of the institution where the Pix was settled on the receiving side.
+	ReceiverInstitutionName NullableString `json:"receiverInstitutionName,omitempty"`
+	// End-to-end identifier of the Pix.
 	EndToEndId *string `json:"endToEndId,omitempty"`
-	PaidAt *time.Time `json:"paidAt,omitempty"`
-	PixKey *string `json:"pixKey,omitempty"`
-	Description *string `json:"description,omitempty"`
-	ApprovedAt *time.Time `json:"approvedAt,omitempty"`
-	RejectedAt *time.Time `json:"rejectedAt,omitempty"`
-	RejectionReason *string `json:"rejectionReason,omitempty"`
-	TransactionId *string `json:"transactionId,omitempty"`
+	// Date and time the Pix was settled.
+	PaidAt NullableTime `json:"paidAt,omitempty"`
+	PixKey NullableString `json:"pixKey,omitempty"`
+	// Free text that would accompany the Pix.
+	Description NullableString `json:"description,omitempty"`
+	// Date and time the deposit was approved.
+	ApprovedAt NullableTime `json:"approvedAt,omitempty"`
+	// Date and time the deposit was rejected.
+	RejectedAt NullableTime `json:"rejectedAt,omitempty"`
+	// Reason the deposit was rejected.
+	RejectionReason NullableString `json:"rejectionReason,omitempty"`
+	// Deposit transaction created on approval.
+	TransactionId NullableString `json:"transactionId,omitempty"`
+	// Moment the received Pix was recorded, before the credit.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Moment of the last change to the record, which changes when the deposit is approved or rejected.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 
@@ -190,292 +212,382 @@ func (o *DepositPending) SetPayerDocument(v string) {
 	o.PayerDocument = &v
 }
 
-// GetPayerName returns the PayerName field value if set, zero value otherwise.
+// GetPayerName returns the PayerName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetPayerName() string {
-	if o == nil || IsNil(o.PayerName) {
+	if o == nil || IsNil(o.PayerName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerName
+	return *o.PayerName.Get()
 }
 
 // GetPayerNameOk returns a tuple with the PayerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetPayerNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerName, true
+	return o.PayerName.Get(), o.PayerName.IsSet()
 }
 
 // HasPayerName returns a boolean if a field has been set.
 func (o *DepositPending) HasPayerName() bool {
-	if o != nil && !IsNil(o.PayerName) {
+	if o != nil && o.PayerName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerName gets a reference to the given string and assigns it to the PayerName field.
+// SetPayerName gets a reference to the given NullableString and assigns it to the PayerName field.
 func (o *DepositPending) SetPayerName(v string) {
-	o.PayerName = &v
+	o.PayerName.Set(&v)
+}
+// SetPayerNameNil sets the value for PayerName to be an explicit nil
+func (o *DepositPending) SetPayerNameNil() {
+	o.PayerName.Set(nil)
 }
 
-// GetPayerAccountNumber returns the PayerAccountNumber field value if set, zero value otherwise.
+// UnsetPayerName ensures that no value is present for PayerName, not even an explicit nil
+func (o *DepositPending) UnsetPayerName() {
+	o.PayerName.Unset()
+}
+
+// GetPayerAccountNumber returns the PayerAccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetPayerAccountNumber() string {
-	if o == nil || IsNil(o.PayerAccountNumber) {
+	if o == nil || IsNil(o.PayerAccountNumber.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerAccountNumber
+	return *o.PayerAccountNumber.Get()
 }
 
 // GetPayerAccountNumberOk returns a tuple with the PayerAccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetPayerAccountNumberOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerAccountNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerAccountNumber, true
+	return o.PayerAccountNumber.Get(), o.PayerAccountNumber.IsSet()
 }
 
 // HasPayerAccountNumber returns a boolean if a field has been set.
 func (o *DepositPending) HasPayerAccountNumber() bool {
-	if o != nil && !IsNil(o.PayerAccountNumber) {
+	if o != nil && o.PayerAccountNumber.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerAccountNumber gets a reference to the given string and assigns it to the PayerAccountNumber field.
+// SetPayerAccountNumber gets a reference to the given NullableString and assigns it to the PayerAccountNumber field.
 func (o *DepositPending) SetPayerAccountNumber(v string) {
-	o.PayerAccountNumber = &v
+	o.PayerAccountNumber.Set(&v)
+}
+// SetPayerAccountNumberNil sets the value for PayerAccountNumber to be an explicit nil
+func (o *DepositPending) SetPayerAccountNumberNil() {
+	o.PayerAccountNumber.Set(nil)
 }
 
-// GetPayerInstitutionIspb returns the PayerInstitutionIspb field value if set, zero value otherwise.
+// UnsetPayerAccountNumber ensures that no value is present for PayerAccountNumber, not even an explicit nil
+func (o *DepositPending) UnsetPayerAccountNumber() {
+	o.PayerAccountNumber.Unset()
+}
+
+// GetPayerInstitutionIspb returns the PayerInstitutionIspb field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetPayerInstitutionIspb() string {
-	if o == nil || IsNil(o.PayerInstitutionIspb) {
+	if o == nil || IsNil(o.PayerInstitutionIspb.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerInstitutionIspb
+	return *o.PayerInstitutionIspb.Get()
 }
 
 // GetPayerInstitutionIspbOk returns a tuple with the PayerInstitutionIspb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetPayerInstitutionIspbOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerInstitutionIspb) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerInstitutionIspb, true
+	return o.PayerInstitutionIspb.Get(), o.PayerInstitutionIspb.IsSet()
 }
 
 // HasPayerInstitutionIspb returns a boolean if a field has been set.
 func (o *DepositPending) HasPayerInstitutionIspb() bool {
-	if o != nil && !IsNil(o.PayerInstitutionIspb) {
+	if o != nil && o.PayerInstitutionIspb.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerInstitutionIspb gets a reference to the given string and assigns it to the PayerInstitutionIspb field.
+// SetPayerInstitutionIspb gets a reference to the given NullableString and assigns it to the PayerInstitutionIspb field.
 func (o *DepositPending) SetPayerInstitutionIspb(v string) {
-	o.PayerInstitutionIspb = &v
+	o.PayerInstitutionIspb.Set(&v)
+}
+// SetPayerInstitutionIspbNil sets the value for PayerInstitutionIspb to be an explicit nil
+func (o *DepositPending) SetPayerInstitutionIspbNil() {
+	o.PayerInstitutionIspb.Set(nil)
 }
 
-// GetPayerInstitutionName returns the PayerInstitutionName field value if set, zero value otherwise.
+// UnsetPayerInstitutionIspb ensures that no value is present for PayerInstitutionIspb, not even an explicit nil
+func (o *DepositPending) UnsetPayerInstitutionIspb() {
+	o.PayerInstitutionIspb.Unset()
+}
+
+// GetPayerInstitutionName returns the PayerInstitutionName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetPayerInstitutionName() string {
-	if o == nil || IsNil(o.PayerInstitutionName) {
+	if o == nil || IsNil(o.PayerInstitutionName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PayerInstitutionName
+	return *o.PayerInstitutionName.Get()
 }
 
 // GetPayerInstitutionNameOk returns a tuple with the PayerInstitutionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetPayerInstitutionNameOk() (*string, bool) {
-	if o == nil || IsNil(o.PayerInstitutionName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PayerInstitutionName, true
+	return o.PayerInstitutionName.Get(), o.PayerInstitutionName.IsSet()
 }
 
 // HasPayerInstitutionName returns a boolean if a field has been set.
 func (o *DepositPending) HasPayerInstitutionName() bool {
-	if o != nil && !IsNil(o.PayerInstitutionName) {
+	if o != nil && o.PayerInstitutionName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPayerInstitutionName gets a reference to the given string and assigns it to the PayerInstitutionName field.
+// SetPayerInstitutionName gets a reference to the given NullableString and assigns it to the PayerInstitutionName field.
 func (o *DepositPending) SetPayerInstitutionName(v string) {
-	o.PayerInstitutionName = &v
+	o.PayerInstitutionName.Set(&v)
+}
+// SetPayerInstitutionNameNil sets the value for PayerInstitutionName to be an explicit nil
+func (o *DepositPending) SetPayerInstitutionNameNil() {
+	o.PayerInstitutionName.Set(nil)
 }
 
-// GetReceiverDocument returns the ReceiverDocument field value if set, zero value otherwise.
+// UnsetPayerInstitutionName ensures that no value is present for PayerInstitutionName, not even an explicit nil
+func (o *DepositPending) UnsetPayerInstitutionName() {
+	o.PayerInstitutionName.Unset()
+}
+
+// GetReceiverDocument returns the ReceiverDocument field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetReceiverDocument() string {
-	if o == nil || IsNil(o.ReceiverDocument) {
+	if o == nil || IsNil(o.ReceiverDocument.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverDocument
+	return *o.ReceiverDocument.Get()
 }
 
 // GetReceiverDocumentOk returns a tuple with the ReceiverDocument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetReceiverDocumentOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverDocument) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverDocument, true
+	return o.ReceiverDocument.Get(), o.ReceiverDocument.IsSet()
 }
 
 // HasReceiverDocument returns a boolean if a field has been set.
 func (o *DepositPending) HasReceiverDocument() bool {
-	if o != nil && !IsNil(o.ReceiverDocument) {
+	if o != nil && o.ReceiverDocument.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverDocument gets a reference to the given string and assigns it to the ReceiverDocument field.
+// SetReceiverDocument gets a reference to the given NullableString and assigns it to the ReceiverDocument field.
 func (o *DepositPending) SetReceiverDocument(v string) {
-	o.ReceiverDocument = &v
+	o.ReceiverDocument.Set(&v)
+}
+// SetReceiverDocumentNil sets the value for ReceiverDocument to be an explicit nil
+func (o *DepositPending) SetReceiverDocumentNil() {
+	o.ReceiverDocument.Set(nil)
 }
 
-// GetReceiverName returns the ReceiverName field value if set, zero value otherwise.
+// UnsetReceiverDocument ensures that no value is present for ReceiverDocument, not even an explicit nil
+func (o *DepositPending) UnsetReceiverDocument() {
+	o.ReceiverDocument.Unset()
+}
+
+// GetReceiverName returns the ReceiverName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetReceiverName() string {
-	if o == nil || IsNil(o.ReceiverName) {
+	if o == nil || IsNil(o.ReceiverName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverName
+	return *o.ReceiverName.Get()
 }
 
 // GetReceiverNameOk returns a tuple with the ReceiverName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetReceiverNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverName, true
+	return o.ReceiverName.Get(), o.ReceiverName.IsSet()
 }
 
 // HasReceiverName returns a boolean if a field has been set.
 func (o *DepositPending) HasReceiverName() bool {
-	if o != nil && !IsNil(o.ReceiverName) {
+	if o != nil && o.ReceiverName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverName gets a reference to the given string and assigns it to the ReceiverName field.
+// SetReceiverName gets a reference to the given NullableString and assigns it to the ReceiverName field.
 func (o *DepositPending) SetReceiverName(v string) {
-	o.ReceiverName = &v
+	o.ReceiverName.Set(&v)
+}
+// SetReceiverNameNil sets the value for ReceiverName to be an explicit nil
+func (o *DepositPending) SetReceiverNameNil() {
+	o.ReceiverName.Set(nil)
 }
 
-// GetReceiverAccountNumber returns the ReceiverAccountNumber field value if set, zero value otherwise.
+// UnsetReceiverName ensures that no value is present for ReceiverName, not even an explicit nil
+func (o *DepositPending) UnsetReceiverName() {
+	o.ReceiverName.Unset()
+}
+
+// GetReceiverAccountNumber returns the ReceiverAccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetReceiverAccountNumber() string {
-	if o == nil || IsNil(o.ReceiverAccountNumber) {
+	if o == nil || IsNil(o.ReceiverAccountNumber.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverAccountNumber
+	return *o.ReceiverAccountNumber.Get()
 }
 
 // GetReceiverAccountNumberOk returns a tuple with the ReceiverAccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetReceiverAccountNumberOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverAccountNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverAccountNumber, true
+	return o.ReceiverAccountNumber.Get(), o.ReceiverAccountNumber.IsSet()
 }
 
 // HasReceiverAccountNumber returns a boolean if a field has been set.
 func (o *DepositPending) HasReceiverAccountNumber() bool {
-	if o != nil && !IsNil(o.ReceiverAccountNumber) {
+	if o != nil && o.ReceiverAccountNumber.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverAccountNumber gets a reference to the given string and assigns it to the ReceiverAccountNumber field.
+// SetReceiverAccountNumber gets a reference to the given NullableString and assigns it to the ReceiverAccountNumber field.
 func (o *DepositPending) SetReceiverAccountNumber(v string) {
-	o.ReceiverAccountNumber = &v
+	o.ReceiverAccountNumber.Set(&v)
+}
+// SetReceiverAccountNumberNil sets the value for ReceiverAccountNumber to be an explicit nil
+func (o *DepositPending) SetReceiverAccountNumberNil() {
+	o.ReceiverAccountNumber.Set(nil)
 }
 
-// GetReceiverInstitutionIspb returns the ReceiverInstitutionIspb field value if set, zero value otherwise.
+// UnsetReceiverAccountNumber ensures that no value is present for ReceiverAccountNumber, not even an explicit nil
+func (o *DepositPending) UnsetReceiverAccountNumber() {
+	o.ReceiverAccountNumber.Unset()
+}
+
+// GetReceiverInstitutionIspb returns the ReceiverInstitutionIspb field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetReceiverInstitutionIspb() string {
-	if o == nil || IsNil(o.ReceiverInstitutionIspb) {
+	if o == nil || IsNil(o.ReceiverInstitutionIspb.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverInstitutionIspb
+	return *o.ReceiverInstitutionIspb.Get()
 }
 
 // GetReceiverInstitutionIspbOk returns a tuple with the ReceiverInstitutionIspb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetReceiverInstitutionIspbOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverInstitutionIspb) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverInstitutionIspb, true
+	return o.ReceiverInstitutionIspb.Get(), o.ReceiverInstitutionIspb.IsSet()
 }
 
 // HasReceiverInstitutionIspb returns a boolean if a field has been set.
 func (o *DepositPending) HasReceiverInstitutionIspb() bool {
-	if o != nil && !IsNil(o.ReceiverInstitutionIspb) {
+	if o != nil && o.ReceiverInstitutionIspb.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverInstitutionIspb gets a reference to the given string and assigns it to the ReceiverInstitutionIspb field.
+// SetReceiverInstitutionIspb gets a reference to the given NullableString and assigns it to the ReceiverInstitutionIspb field.
 func (o *DepositPending) SetReceiverInstitutionIspb(v string) {
-	o.ReceiverInstitutionIspb = &v
+	o.ReceiverInstitutionIspb.Set(&v)
+}
+// SetReceiverInstitutionIspbNil sets the value for ReceiverInstitutionIspb to be an explicit nil
+func (o *DepositPending) SetReceiverInstitutionIspbNil() {
+	o.ReceiverInstitutionIspb.Set(nil)
 }
 
-// GetReceiverInstitutionName returns the ReceiverInstitutionName field value if set, zero value otherwise.
+// UnsetReceiverInstitutionIspb ensures that no value is present for ReceiverInstitutionIspb, not even an explicit nil
+func (o *DepositPending) UnsetReceiverInstitutionIspb() {
+	o.ReceiverInstitutionIspb.Unset()
+}
+
+// GetReceiverInstitutionName returns the ReceiverInstitutionName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetReceiverInstitutionName() string {
-	if o == nil || IsNil(o.ReceiverInstitutionName) {
+	if o == nil || IsNil(o.ReceiverInstitutionName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ReceiverInstitutionName
+	return *o.ReceiverInstitutionName.Get()
 }
 
 // GetReceiverInstitutionNameOk returns a tuple with the ReceiverInstitutionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetReceiverInstitutionNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ReceiverInstitutionName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReceiverInstitutionName, true
+	return o.ReceiverInstitutionName.Get(), o.ReceiverInstitutionName.IsSet()
 }
 
 // HasReceiverInstitutionName returns a boolean if a field has been set.
 func (o *DepositPending) HasReceiverInstitutionName() bool {
-	if o != nil && !IsNil(o.ReceiverInstitutionName) {
+	if o != nil && o.ReceiverInstitutionName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReceiverInstitutionName gets a reference to the given string and assigns it to the ReceiverInstitutionName field.
+// SetReceiverInstitutionName gets a reference to the given NullableString and assigns it to the ReceiverInstitutionName field.
 func (o *DepositPending) SetReceiverInstitutionName(v string) {
-	o.ReceiverInstitutionName = &v
+	o.ReceiverInstitutionName.Set(&v)
+}
+// SetReceiverInstitutionNameNil sets the value for ReceiverInstitutionName to be an explicit nil
+func (o *DepositPending) SetReceiverInstitutionNameNil() {
+	o.ReceiverInstitutionName.Set(nil)
+}
+
+// UnsetReceiverInstitutionName ensures that no value is present for ReceiverInstitutionName, not even an explicit nil
+func (o *DepositPending) UnsetReceiverInstitutionName() {
+	o.ReceiverInstitutionName.Unset()
 }
 
 // GetEndToEndId returns the EndToEndId field value if set, zero value otherwise.
@@ -510,228 +622,298 @@ func (o *DepositPending) SetEndToEndId(v string) {
 	o.EndToEndId = &v
 }
 
-// GetPaidAt returns the PaidAt field value if set, zero value otherwise.
+// GetPaidAt returns the PaidAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetPaidAt() time.Time {
-	if o == nil || IsNil(o.PaidAt) {
+	if o == nil || IsNil(o.PaidAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.PaidAt
+	return *o.PaidAt.Get()
 }
 
 // GetPaidAtOk returns a tuple with the PaidAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetPaidAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.PaidAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PaidAt, true
+	return o.PaidAt.Get(), o.PaidAt.IsSet()
 }
 
 // HasPaidAt returns a boolean if a field has been set.
 func (o *DepositPending) HasPaidAt() bool {
-	if o != nil && !IsNil(o.PaidAt) {
+	if o != nil && o.PaidAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaidAt gets a reference to the given time.Time and assigns it to the PaidAt field.
+// SetPaidAt gets a reference to the given NullableTime and assigns it to the PaidAt field.
 func (o *DepositPending) SetPaidAt(v time.Time) {
-	o.PaidAt = &v
+	o.PaidAt.Set(&v)
+}
+// SetPaidAtNil sets the value for PaidAt to be an explicit nil
+func (o *DepositPending) SetPaidAtNil() {
+	o.PaidAt.Set(nil)
 }
 
-// GetPixKey returns the PixKey field value if set, zero value otherwise.
+// UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
+func (o *DepositPending) UnsetPaidAt() {
+	o.PaidAt.Unset()
+}
+
+// GetPixKey returns the PixKey field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetPixKey() string {
-	if o == nil || IsNil(o.PixKey) {
+	if o == nil || IsNil(o.PixKey.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PixKey
+	return *o.PixKey.Get()
 }
 
 // GetPixKeyOk returns a tuple with the PixKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetPixKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.PixKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PixKey, true
+	return o.PixKey.Get(), o.PixKey.IsSet()
 }
 
 // HasPixKey returns a boolean if a field has been set.
 func (o *DepositPending) HasPixKey() bool {
-	if o != nil && !IsNil(o.PixKey) {
+	if o != nil && o.PixKey.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPixKey gets a reference to the given string and assigns it to the PixKey field.
+// SetPixKey gets a reference to the given NullableString and assigns it to the PixKey field.
 func (o *DepositPending) SetPixKey(v string) {
-	o.PixKey = &v
+	o.PixKey.Set(&v)
+}
+// SetPixKeyNil sets the value for PixKey to be an explicit nil
+func (o *DepositPending) SetPixKeyNil() {
+	o.PixKey.Set(nil)
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// UnsetPixKey ensures that no value is present for PixKey, not even an explicit nil
+func (o *DepositPending) UnsetPixKey() {
+	o.PixKey.Unset()
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *DepositPending) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *DepositPending) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *DepositPending) SetDescriptionNil() {
+	o.Description.Set(nil)
 }
 
-// GetApprovedAt returns the ApprovedAt field value if set, zero value otherwise.
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *DepositPending) UnsetDescription() {
+	o.Description.Unset()
+}
+
+// GetApprovedAt returns the ApprovedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetApprovedAt() time.Time {
-	if o == nil || IsNil(o.ApprovedAt) {
+	if o == nil || IsNil(o.ApprovedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.ApprovedAt
+	return *o.ApprovedAt.Get()
 }
 
 // GetApprovedAtOk returns a tuple with the ApprovedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetApprovedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ApprovedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApprovedAt, true
+	return o.ApprovedAt.Get(), o.ApprovedAt.IsSet()
 }
 
 // HasApprovedAt returns a boolean if a field has been set.
 func (o *DepositPending) HasApprovedAt() bool {
-	if o != nil && !IsNil(o.ApprovedAt) {
+	if o != nil && o.ApprovedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetApprovedAt gets a reference to the given time.Time and assigns it to the ApprovedAt field.
+// SetApprovedAt gets a reference to the given NullableTime and assigns it to the ApprovedAt field.
 func (o *DepositPending) SetApprovedAt(v time.Time) {
-	o.ApprovedAt = &v
+	o.ApprovedAt.Set(&v)
+}
+// SetApprovedAtNil sets the value for ApprovedAt to be an explicit nil
+func (o *DepositPending) SetApprovedAtNil() {
+	o.ApprovedAt.Set(nil)
 }
 
-// GetRejectedAt returns the RejectedAt field value if set, zero value otherwise.
+// UnsetApprovedAt ensures that no value is present for ApprovedAt, not even an explicit nil
+func (o *DepositPending) UnsetApprovedAt() {
+	o.ApprovedAt.Unset()
+}
+
+// GetRejectedAt returns the RejectedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetRejectedAt() time.Time {
-	if o == nil || IsNil(o.RejectedAt) {
+	if o == nil || IsNil(o.RejectedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.RejectedAt
+	return *o.RejectedAt.Get()
 }
 
 // GetRejectedAtOk returns a tuple with the RejectedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetRejectedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.RejectedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RejectedAt, true
+	return o.RejectedAt.Get(), o.RejectedAt.IsSet()
 }
 
 // HasRejectedAt returns a boolean if a field has been set.
 func (o *DepositPending) HasRejectedAt() bool {
-	if o != nil && !IsNil(o.RejectedAt) {
+	if o != nil && o.RejectedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRejectedAt gets a reference to the given time.Time and assigns it to the RejectedAt field.
+// SetRejectedAt gets a reference to the given NullableTime and assigns it to the RejectedAt field.
 func (o *DepositPending) SetRejectedAt(v time.Time) {
-	o.RejectedAt = &v
+	o.RejectedAt.Set(&v)
+}
+// SetRejectedAtNil sets the value for RejectedAt to be an explicit nil
+func (o *DepositPending) SetRejectedAtNil() {
+	o.RejectedAt.Set(nil)
 }
 
-// GetRejectionReason returns the RejectionReason field value if set, zero value otherwise.
+// UnsetRejectedAt ensures that no value is present for RejectedAt, not even an explicit nil
+func (o *DepositPending) UnsetRejectedAt() {
+	o.RejectedAt.Unset()
+}
+
+// GetRejectionReason returns the RejectionReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetRejectionReason() string {
-	if o == nil || IsNil(o.RejectionReason) {
+	if o == nil || IsNil(o.RejectionReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RejectionReason
+	return *o.RejectionReason.Get()
 }
 
 // GetRejectionReasonOk returns a tuple with the RejectionReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetRejectionReasonOk() (*string, bool) {
-	if o == nil || IsNil(o.RejectionReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RejectionReason, true
+	return o.RejectionReason.Get(), o.RejectionReason.IsSet()
 }
 
 // HasRejectionReason returns a boolean if a field has been set.
 func (o *DepositPending) HasRejectionReason() bool {
-	if o != nil && !IsNil(o.RejectionReason) {
+	if o != nil && o.RejectionReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRejectionReason gets a reference to the given string and assigns it to the RejectionReason field.
+// SetRejectionReason gets a reference to the given NullableString and assigns it to the RejectionReason field.
 func (o *DepositPending) SetRejectionReason(v string) {
-	o.RejectionReason = &v
+	o.RejectionReason.Set(&v)
+}
+// SetRejectionReasonNil sets the value for RejectionReason to be an explicit nil
+func (o *DepositPending) SetRejectionReasonNil() {
+	o.RejectionReason.Set(nil)
 }
 
-// GetTransactionId returns the TransactionId field value if set, zero value otherwise.
+// UnsetRejectionReason ensures that no value is present for RejectionReason, not even an explicit nil
+func (o *DepositPending) UnsetRejectionReason() {
+	o.RejectionReason.Unset()
+}
+
+// GetTransactionId returns the TransactionId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DepositPending) GetTransactionId() string {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil || IsNil(o.TransactionId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.TransactionId
+	return *o.TransactionId.Get()
 }
 
 // GetTransactionIdOk returns a tuple with the TransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DepositPending) GetTransactionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TransactionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TransactionId, true
+	return o.TransactionId.Get(), o.TransactionId.IsSet()
 }
 
 // HasTransactionId returns a boolean if a field has been set.
 func (o *DepositPending) HasTransactionId() bool {
-	if o != nil && !IsNil(o.TransactionId) {
+	if o != nil && o.TransactionId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
+// SetTransactionId gets a reference to the given NullableString and assigns it to the TransactionId field.
 func (o *DepositPending) SetTransactionId(v string) {
-	o.TransactionId = &v
+	o.TransactionId.Set(&v)
+}
+// SetTransactionIdNil sets the value for TransactionId to be an explicit nil
+func (o *DepositPending) SetTransactionIdNil() {
+	o.TransactionId.Set(nil)
+}
+
+// UnsetTransactionId ensures that no value is present for TransactionId, not even an explicit nil
+func (o *DepositPending) UnsetTransactionId() {
+	o.TransactionId.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -820,56 +1002,56 @@ func (o DepositPending) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PayerDocument) {
 		toSerialize["payerDocument"] = o.PayerDocument
 	}
-	if !IsNil(o.PayerName) {
-		toSerialize["payerName"] = o.PayerName
+	if o.PayerName.IsSet() {
+		toSerialize["payerName"] = o.PayerName.Get()
 	}
-	if !IsNil(o.PayerAccountNumber) {
-		toSerialize["payerAccountNumber"] = o.PayerAccountNumber
+	if o.PayerAccountNumber.IsSet() {
+		toSerialize["payerAccountNumber"] = o.PayerAccountNumber.Get()
 	}
-	if !IsNil(o.PayerInstitutionIspb) {
-		toSerialize["payerInstitutionIspb"] = o.PayerInstitutionIspb
+	if o.PayerInstitutionIspb.IsSet() {
+		toSerialize["payerInstitutionIspb"] = o.PayerInstitutionIspb.Get()
 	}
-	if !IsNil(o.PayerInstitutionName) {
-		toSerialize["payerInstitutionName"] = o.PayerInstitutionName
+	if o.PayerInstitutionName.IsSet() {
+		toSerialize["payerInstitutionName"] = o.PayerInstitutionName.Get()
 	}
-	if !IsNil(o.ReceiverDocument) {
-		toSerialize["receiverDocument"] = o.ReceiverDocument
+	if o.ReceiverDocument.IsSet() {
+		toSerialize["receiverDocument"] = o.ReceiverDocument.Get()
 	}
-	if !IsNil(o.ReceiverName) {
-		toSerialize["receiverName"] = o.ReceiverName
+	if o.ReceiverName.IsSet() {
+		toSerialize["receiverName"] = o.ReceiverName.Get()
 	}
-	if !IsNil(o.ReceiverAccountNumber) {
-		toSerialize["receiverAccountNumber"] = o.ReceiverAccountNumber
+	if o.ReceiverAccountNumber.IsSet() {
+		toSerialize["receiverAccountNumber"] = o.ReceiverAccountNumber.Get()
 	}
-	if !IsNil(o.ReceiverInstitutionIspb) {
-		toSerialize["receiverInstitutionIspb"] = o.ReceiverInstitutionIspb
+	if o.ReceiverInstitutionIspb.IsSet() {
+		toSerialize["receiverInstitutionIspb"] = o.ReceiverInstitutionIspb.Get()
 	}
-	if !IsNil(o.ReceiverInstitutionName) {
-		toSerialize["receiverInstitutionName"] = o.ReceiverInstitutionName
+	if o.ReceiverInstitutionName.IsSet() {
+		toSerialize["receiverInstitutionName"] = o.ReceiverInstitutionName.Get()
 	}
 	if !IsNil(o.EndToEndId) {
 		toSerialize["endToEndId"] = o.EndToEndId
 	}
-	if !IsNil(o.PaidAt) {
-		toSerialize["paidAt"] = o.PaidAt
+	if o.PaidAt.IsSet() {
+		toSerialize["paidAt"] = o.PaidAt.Get()
 	}
-	if !IsNil(o.PixKey) {
-		toSerialize["pixKey"] = o.PixKey
+	if o.PixKey.IsSet() {
+		toSerialize["pixKey"] = o.PixKey.Get()
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.ApprovedAt) {
-		toSerialize["approvedAt"] = o.ApprovedAt
+	if o.ApprovedAt.IsSet() {
+		toSerialize["approvedAt"] = o.ApprovedAt.Get()
 	}
-	if !IsNil(o.RejectedAt) {
-		toSerialize["rejectedAt"] = o.RejectedAt
+	if o.RejectedAt.IsSet() {
+		toSerialize["rejectedAt"] = o.RejectedAt.Get()
 	}
-	if !IsNil(o.RejectionReason) {
-		toSerialize["rejectionReason"] = o.RejectionReason
+	if o.RejectionReason.IsSet() {
+		toSerialize["rejectionReason"] = o.RejectionReason.Get()
 	}
-	if !IsNil(o.TransactionId) {
-		toSerialize["transactionId"] = o.TransactionId
+	if o.TransactionId.IsSet() {
+		toSerialize["transactionId"] = o.TransactionId.Get()
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt

@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PixKey** | Pointer to **string** | Normalized Pix key. | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** | Name of the key holder as returned by the institution queried. | [optional] 
 **Document** | Pointer to **string** | Masked CPF/CNPJ of the key holder. | [optional] 
-**PersonType** | Pointer to **string** |  | [optional] 
+**PersonType** | Pointer to **string** | Type of person: PF, PJ, or empty when not informed. | [optional] 
 **AccountType** | Pointer to **string** |  | [optional] 
-**InstitutionIspb** | Pointer to **string** |  | [optional] 
-**InstitutionName** | Pointer to **string** |  | [optional] 
+**InstitutionIspb** | Pointer to **string** | ISPB code of the account institution. | [optional] 
+**InstitutionName** | Pointer to **string** | Name of the institution where the holder account is registered, as the lookup returns it. | [optional] 
 
 ## Methods
 

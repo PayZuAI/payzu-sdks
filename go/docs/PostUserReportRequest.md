@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DateFrom** | **time.Time** |  | 
-**DateTo** | **time.Time** |  | 
-**Status** | Pointer to **[]string** |  | [optional] 
-**Type** | Pointer to **[]string** |  | [optional] 
+**DateFrom** | **time.Time** | Start of the report period. | 
+**DateTo** | **time.Time** | End of the report period. | 
+**Status** | Pointer to **[]string** | Transaction statuses included in the file. Empty or omitted: all. | [optional] 
+**Type** | Pointer to **[]string** | Transaction types included in the file. Empty or omitted: all. | [optional] 
 
 ## Methods
 

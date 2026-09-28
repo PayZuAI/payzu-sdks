@@ -1,6 +1,7 @@
 
 # InfractionDetailTransaction
 
+Summary of the disputed Pix.
 
 ## Properties
 

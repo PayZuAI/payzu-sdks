@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_amount** | **float** |  | [optional] 
-**total_transactions** | **int** |  | [optional] 
+**total_amount** | **float** | Sum of the amounts in the period. | [optional] 
+**total_transactions** | **int** | Number of transactions of that type in the period, also summing all statuses. | [optional] 
 **statuses** | [**SummaryBlockStatuses**](SummaryBlockStatuses.md) |  | [optional] 
 **grouped** | [**List[SummaryBlockGroupedInner]**](SummaryBlockGroupedInner.md) | Present only when grouped&#x3D;true. | [optional] 
 

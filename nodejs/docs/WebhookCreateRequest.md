@@ -21,7 +21,7 @@ const example = {
   "url": https://sualoja.com.br/webhook,
   "events": null,
   "generateSecret": null,
-  "active": null,
+  "active": true,
 } satisfies WebhookCreateRequest
 
 console.log(example)

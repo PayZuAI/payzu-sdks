@@ -62,3 +62,42 @@ test('callbacks.resendBatch envia POST /user/callbacks/resend com o período em 
   });
   assert.equal(result.total, 3);
 });
+
+test('callbacks.resendByWebhook envia POST /user/callbacks/resend/webhook/{webhookId}', async () => {
+  server.enqueue(jsonFixture(200, { enqueued: { count: 2, truncated: false, items: [] } }));
+  const result = await client().callbacks.resendByWebhook('wh_1');
+  assertRoute(server.lastRequest(), 'POST', '/v1/user/callbacks/resend/webhook/wh_1');
+  assertBearerToken(server.lastRequest());
+  assert.equal(result.enqueued?.count, 2);
+});
+
+test('callbacks.createSecret envia POST /user/callbacks/secret', async () => {
+  server.enqueue(jsonFixture(201, { secret: 's3cr3t' }));
+  const result = await client().callbacks.createSecret();
+  assertRoute(server.lastRequest(), 'POST', '/v1/user/callbacks/secret');
+  assert.equal(result.secret, 's3cr3t');
+});
+
+test('callbacks.rotateSecret envia PATCH /user/callbacks/secret/rotate', async () => {
+  server.enqueue(jsonFixture(200, { secret: 'novo' }));
+  const result = await client().callbacks.rotateSecret();
+  assertRoute(server.lastRequest(), 'PATCH', '/v1/user/callbacks/secret/rotate');
+  assert.equal(result.secret, 'novo');
+});
+
+test('callbacks.resendWebhooks envia POST /user/callbacks/resend/webhook com filtros', async () => {
+  server.enqueue(jsonFixture(200, { enqueued: { count: 1, truncated: false, items: [] } }));
+  const result = await client().callbacks.resendWebhooks({
+    createdAtFrom: new Date('2026-08-05T00:00:00.000Z'),
+    createdAtTo: new Date('2026-08-11T23:59:59.000Z'),
+    webhookIds: ['wh_1'],
+  });
+  assertRoute(server.lastRequest(), 'POST', '/v1/user/callbacks/resend/webhook');
+  assertBearerToken(server.lastRequest());
+  assertJsonBody(server.lastRequest(), {
+    createdAtFrom: '2026-08-05T00:00:00.000Z',
+    createdAtTo: '2026-08-11T23:59:59.000Z',
+    webhookIds: ['wh_1'],
+  });
+  assert.equal(result.enqueued?.count, 1);
+});

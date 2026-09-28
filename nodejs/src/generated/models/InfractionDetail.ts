@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime.js';
+import type { DefenseHistoryEntry } from './DefenseHistoryEntry.js';
+import {
+    DefenseHistoryEntryFromJSON,
+    DefenseHistoryEntryFromJSONTyped,
+    DefenseHistoryEntryToJSON,
+    DefenseHistoryEntryToJSONTyped,
+} from './DefenseHistoryEntry.js';
 import type { InfractionDetailTransaction } from './InfractionDetailTransaction.js';
 import {
     InfractionDetailTransactionFromJSON,
@@ -20,13 +27,6 @@ import {
     InfractionDetailTransactionToJSON,
     InfractionDetailTransactionToJSONTyped,
 } from './InfractionDetailTransaction.js';
-import type { Defense } from './Defense.js';
-import {
-    DefenseFromJSON,
-    DefenseFromJSONTyped,
-    DefenseToJSON,
-    DefenseToJSONTyped,
-} from './Defense.js';
 
 /**
  * 
@@ -35,77 +35,65 @@ import {
  */
 export interface InfractionDetail {
     /**
-     * 
+     * Identifier of the infraction inside PayZu, used in the query routes and when sending the defense.
      * @type {string}
      * @memberof InfractionDetail
      */
     id?: string;
     /**
-     * 
+     * Infraction code at Bacen.
      * @type {string}
      * @memberof InfractionDetail
      */
     protocol?: string;
     /**
-     * 
+     * Current state of the infraction.
      * @type {InfractionDetailStatusEnum}
      * @memberof InfractionDetail
      */
     status?: InfractionDetailStatusEnum;
     /**
-     * 
+     * Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED.
      * @type {InfractionDetailTypeEnum}
      * @memberof InfractionDetail
      */
     type?: InfractionDetailTypeEnum;
     /**
-     * 
+     * Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT.
      * @type {InfractionDetailReportedByEnum}
      * @memberof InfractionDetail
      */
     reportedBy?: InfractionDetailReportedByEnum;
     /**
-     * 
+     * Reason given by whoever opened the infraction, in the text sent by the partner bank.
      * @type {string}
      * @memberof InfractionDetail
      */
-    reportDetails?: string;
+    reportDetails?: string | null;
     /**
-     * 
+     * Analysis outcome: AGREED or DISAGREED.
      * @type {InfractionDetailAnalysisResultEnum}
      * @memberof InfractionDetail
      */
-    analysisResult?: InfractionDetailAnalysisResultEnum;
+    analysisResult?: InfractionDetailAnalysisResultEnum | null;
     /**
-     * 
+     * Additional text about the analysis decision, when the partner bank sends that information.
      * @type {string}
      * @memberof InfractionDetail
      */
-    analysisDetails?: string;
+    analysisDetails?: string | null;
     /**
-     * 
+     * Moment the infraction was opened.
      * @type {Date}
      * @memberof InfractionDetail
      */
     reportedAt?: Date;
     /**
-     * 
+     * Deadline to send the defense of this infraction.
      * @type {Date}
      * @memberof InfractionDetail
      */
-    expiresAt?: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof InfractionDetail
-     */
-    createdAt?: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof InfractionDetail
-     */
-    updatedAt?: Date;
+    expiresAt?: Date | null;
     /**
      * 
      * @type {InfractionDetailTransaction}
@@ -113,11 +101,11 @@ export interface InfractionDetail {
      */
     transaction?: InfractionDetailTransaction;
     /**
-     * 
-     * @type {Array<Defense>}
+     * Defenses already sent for this infraction, each with text, status and files.
+     * @type {Array<DefenseHistoryEntry>}
      * @memberof InfractionDetail
      */
-    defenseHistory?: Array<Defense>;
+    defenseHistory?: Array<DefenseHistoryEntry>;
 }
 
 
@@ -192,10 +180,8 @@ export function InfractionDetailFromJSONTyped(json: any, ignoreDiscriminator: bo
         'analysisDetails': json['analysisDetails'] == null ? undefined : json['analysisDetails'],
         'reportedAt': json['reportedAt'] == null ? undefined : (new Date(json['reportedAt'])),
         'expiresAt': json['expiresAt'] == null ? undefined : (new Date(json['expiresAt'])),
-        'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
-        'updatedAt': json['updatedAt'] == null ? undefined : (new Date(json['updatedAt'])),
         'transaction': json['transaction'] == null ? undefined : InfractionDetailTransactionFromJSON(json['transaction']),
-        'defenseHistory': json['defenseHistory'] == null ? undefined : ((json['defenseHistory'] as Array<any>).map(DefenseFromJSON)),
+        'defenseHistory': json['defenseHistory'] == null ? undefined : ((json['defenseHistory'] as Array<any>).map(DefenseHistoryEntryFromJSON)),
     };
 }
 
@@ -220,10 +206,8 @@ export function InfractionDetailToJSONTyped(value?: InfractionDetail | null, ign
         'analysisDetails': value['analysisDetails'],
         'reportedAt': value['reportedAt'] == null ? value['reportedAt'] : value['reportedAt'].toISOString(),
         'expiresAt': value['expiresAt'] == null ? value['expiresAt'] : value['expiresAt'].toISOString(),
-        'createdAt': value['createdAt'] == null ? value['createdAt'] : value['createdAt'].toISOString(),
-        'updatedAt': value['updatedAt'] == null ? value['updatedAt'] : value['updatedAt'].toISOString(),
         'transaction': InfractionDetailTransactionToJSON(value['transaction']),
-        'defenseHistory': value['defenseHistory'] == null ? undefined : ((value['defenseHistory'] as Array<any>).map(DefenseToJSON)),
+        'defenseHistory': value['defenseHistory'] == null ? undefined : ((value['defenseHistory'] as Array<any>).map(DefenseHistoryEntryToJSON)),
     };
 }
 

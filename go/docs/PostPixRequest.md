@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **float32** | Amount in BRL. Must be &gt;&#x3D; 1. | 
-**CallbackUrl** | Pointer to **string** | URL to receive &#x60;transaction updated&#x60; webhooks. | [optional] 
+**CallbackUrl** | Pointer to **string** | URL for transaction notifications (http or https). | [optional] 
 **GeneratedName** | Pointer to **string** | Payer full name. Letters and spaces only. | [optional] 
 **GeneratedEmail** | Pointer to **string** | Payer email (optional). | [optional] 
-**GeneratedDocument** | Pointer to **string** | Payer CPF (11 digits) or CNPJ (14 digits), no punctuation. | [optional] 
-**ExpiresIn** | Pointer to **float32** | Seconds until the QR Code expires. Default: 600. | [optional] 
-**ClientReference** | Pointer to **string** | External reference (order, invoice, etc.). | [optional] 
+**GeneratedDocument** | Pointer to **string** | Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits. | [optional] 
+**ExpiresIn** | Pointer to **float32** | Seconds until the QR Code expires. | [optional] 
+**ClientReference** | Pointer to **string** | External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it. | [optional] 
 **VirtualAccount** | Pointer to **string** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
 
 ## Methods

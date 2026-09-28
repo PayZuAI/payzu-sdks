@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Base64** | Pointer to **string** | Base64-encoded PDF receipt. | [optional] 
+**Base64** | Pointer to **string** | PDF receipt as a base64 data URI (&#x60;data:application/pdf;base64,...&#x60;), returned when type&#x3D;base64. | [optional] 
 
 ## Methods
 

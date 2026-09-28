@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total** | **int** |  | [optional] 
-**pages** | **int** |  | [optional] 
-**transactions** | [**List[Transaction]**](Transaction.md) |  | [optional] 
+**total** | **int** | Number of transactions that match the query filters. | [optional] 
+**pages** | **int** | Number of pages for the limit provided, computed from total rounded up. | [optional] 
+**transactions** | [**List[Transaction]**](Transaction.md) | Items of the requested page, ordered by sortBy and sortDirection. | [optional] 
 
 ## Example
 

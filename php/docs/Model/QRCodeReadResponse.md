@@ -13,5 +13,7 @@ Name | Type | Description | Notes
 **additional_info** | **string** | Additional information or description. | [optional]
 **expires_in** | **float** | Seconds until QR Code expires (0 for static QR Codes). | [optional]
 **created_at** | **\DateTime** | Creation date of the QR Code (for dynamic QR Codes). | [optional]
+**amount_editable** | **bool** | Whether the payer can change the amount. | [optional]
+**due_date** | **string** | Due date of the charge, when the QR Code has one. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

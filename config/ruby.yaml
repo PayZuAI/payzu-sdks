@@ -1,0 +1,22 @@
+generatorName: ruby
+outputDir: ruby
+templateDir: templates/ruby
+gitUserId: PayZuAI
+gitRepoId: payzu-sdks
+modelNameMappings:
+  ApiError: ErrorResponse
+additionalProperties:
+  gemName: payzu-pix
+  moduleName: PayZuPix
+  gemVersion: 2.0.0
+  gemLicense: MIT
+  gemAuthor: PayZu
+  gemAuthorEmail: suporte@payzu.com.br
+  gemHomepage: https://docs.payzu.com.br
+  gemSummary: SDK oficial Ruby da API PayZu Pix
+  gemDescription: "SDK oficial Ruby da API PayZu Pix: depósitos, saques, transferências internas, infrações, relatórios e callbacks."
+  gemRequiredRubyVersion: ">= 3.0"
+  library: faraday
+globalProperties:
+  apiTests: false
+  modelTests: false

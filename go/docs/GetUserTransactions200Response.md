@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Total** | Pointer to **int32** |  | [optional] 
-**Pages** | Pointer to **int32** |  | [optional] 
-**Transactions** | Pointer to [**[]Transaction**](Transaction.md) |  | [optional] 
+**Total** | Pointer to **int32** | Number of transactions that match the query filters. | [optional] 
+**Pages** | Pointer to **int32** | Number of pages for the limit provided, computed from total rounded up. | [optional] 
+**Transactions** | Pointer to [**[]Transaction**](Transaction.md) | Items of the requested page, ordered by sortBy and sortDirection. | [optional] 
 
 ## Methods
 

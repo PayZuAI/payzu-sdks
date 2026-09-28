@@ -11,6 +11,8 @@ Name | Type
 `createdAt` | Date
 `updatedAt` | Date
 `expiresAt` | Date
+`params` | object
+`writtenRows` | number
 
 ## Example
 
@@ -24,6 +26,8 @@ const example = {
   "createdAt": null,
   "updatedAt": null,
   "expiresAt": null,
+  "params": null,
+  "writtenRows": null,
 } satisfies ReportJob
 
 console.log(example)

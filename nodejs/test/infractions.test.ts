@@ -14,9 +14,9 @@ function client(): PayZu {
 
 test('infractions.list consulta GET /user/infractions com filtros', async () => {
   server.enqueue(jsonFixture(200, { infractions: [{ id: 'inf_1', status: 'OPEN' }] }));
-  const list = await client().infractions.list({ status: 'OPEN', needsManualReview: true });
+  const list = await client().infractions.list({ status: 'OPEN' });
   assertRoute(server.lastRequest(), 'GET', '/v1/user/infractions');
-  assertQuery(server.lastRequest(), { status: 'OPEN', needsManualReview: 'true' });
+  assertQuery(server.lastRequest(), { status: 'OPEN' });
   assertBearerToken(server.lastRequest());
   assertJsonMediaTypeWhenPresent(server.lastRequest());
   assert.equal(list.infractions?.[0]?.id, 'inf_1');

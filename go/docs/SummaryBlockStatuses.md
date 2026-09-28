@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Pending** | Pointer to [**SummaryStatus**](SummaryStatus.md) |  | [optional] 
-**Completed** | Pointer to [**SummaryStatus**](SummaryStatus.md) |  | [optional] 
-**Canceled** | Pointer to [**SummaryStatus**](SummaryStatus.md) |  | [optional] 
-**Expired** | Pointer to [**SummaryStatus**](SummaryStatus.md) |  | [optional] 
-**Refunded** | Pointer to [**SummaryStatus**](SummaryStatus.md) |  | [optional] 
+**Pending** | Pointer to [**SummaryStatus**](SummaryStatus.md) | Count and sum of the amounts, in reais, of the transactions with status PENDING in the queried period. | [optional] 
+**Completed** | Pointer to [**SummaryStatus**](SummaryStatus.md) | Count and sum of the completed transactions, in reais. | [optional] 
+**Canceled** | Pointer to [**SummaryStatus**](SummaryStatus.md) | Count and sum of the canceled transactions, in reais. | [optional] 
+**Expired** | Pointer to [**SummaryStatus**](SummaryStatus.md) | Count and sum of the expired transactions, in reais. | [optional] 
+**Refunded** | Pointer to [**SummaryStatus**](SummaryStatus.md) | Count and refunded amount in the period, in reais. | [optional] 
 
 ## Methods
 

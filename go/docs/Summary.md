@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalTransactions** | Pointer to **int32** |  | [optional] 
-**Deposit** | Pointer to [**SummaryBlock**](SummaryBlock.md) |  | [optional] 
-**Withdraw** | Pointer to [**SummaryBlock**](SummaryBlock.md) |  | [optional] 
-**Commission** | Pointer to [**SummaryBlock**](SummaryBlock.md) |  | [optional] 
+**TotalTransactions** | Pointer to **int32** | Number of transactions in the period. | [optional] 
+**Deposit** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the account inflows in the period, that is, of the transactions of type DEPOSIT. | [optional] 
+**Withdraw** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the account outflows in the period, that is, of the transactions of type WITHDRAW. | [optional] 
+**Commission** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the commissions credited to the account in the period (transactions of type COMMISSION). | [optional] 
+**Adjustment** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the adjustments in the period (transactions of type ADJUSTMENT). | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetCommission sets Commission field to given value.
 `func (o *Summary) HasCommission() bool`
 
 HasCommission returns a boolean if a field has been set.
+
+### GetAdjustment
+
+`func (o *Summary) GetAdjustment() SummaryBlock`
+
+GetAdjustment returns the Adjustment field if non-nil, zero value otherwise.
+
+### GetAdjustmentOk
+
+`func (o *Summary) GetAdjustmentOk() (*SummaryBlock, bool)`
+
+GetAdjustmentOk returns a tuple with the Adjustment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdjustment
+
+`func (o *Summary) SetAdjustment(v SummaryBlock)`
+
+SetAdjustment sets Adjustment field to given value.
+
+### HasAdjustment
+
+`func (o *Summary) HasAdjustment() bool`
+
+HasAdjustment returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

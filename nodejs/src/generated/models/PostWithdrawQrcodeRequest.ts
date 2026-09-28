@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -26,13 +26,13 @@ export interface PostWithdrawQrcodeRequest {
      */
     qrCode: string;
     /**
-     * Amount in BRL. Optional - if not provided, uses the QR Code's embedded value.
+     * Amount in BRL, with at most 2 decimal places. Optional: if not provided, uses the QR Code's embedded value.
      * @type {number}
      * @memberof PostWithdrawQrcodeRequest
      */
     amount?: number;
     /**
-     * Webhook URL for status updates.
+     * URL for transaction notifications (http or https).
      * @type {string}
      * @memberof PostWithdrawQrcodeRequest
      */
@@ -44,7 +44,7 @@ export interface PostWithdrawQrcodeRequest {
      */
     description?: string;
     /**
-     * External reference for this withdrawal.
+     * External reference for this withdrawal. Repeating it with the same amount and QR Code returns the existing withdrawal; with different data, the request is rejected with PZC210.
      * @type {string}
      * @memberof PostWithdrawQrcodeRequest
      */

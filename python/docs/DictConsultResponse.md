@@ -6,12 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pix_key** | **str** | Normalized Pix key. | [optional] 
-**name** | **str** |  | [optional] 
+**name** | **str** | Name of the key holder as returned by the institution queried. | [optional] 
 **document** | **str** | Masked CPF/CNPJ of the key holder. | [optional] 
-**person_type** | **str** |  | [optional] 
+**person_type** | **str** | Type of person: PF, PJ, or empty when not informed. | [optional] 
 **account_type** | **str** |  | [optional] 
-**institution_ispb** | **str** |  | [optional] 
-**institution_name** | **str** |  | [optional] 
+**institution_ispb** | **str** | ISPB code of the account institution. | [optional] 
+**institution_name** | **str** | Name of the institution where the holder account is registered, as the lookup returns it. | [optional] 
 
 ## Example
 

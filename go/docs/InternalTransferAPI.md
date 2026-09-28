@@ -30,9 +30,9 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Transaction ID (optional)
-	clientReference := "clientReference_example" // string | External reference (optional)
-	virtualAccount := "virtualAccount_example" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID (optional)
+	clientReference := "order_12345" // string | External reference (optional)
+	virtualAccount := "loja-centro-01" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-	postInternalTransferRequest := *openapiclient.NewPostInternalTransferRequest("513579", "987654", float32(100.5)) // PostInternalTransferRequest | 
+	postInternalTransferRequest := *openapiclient.NewPostInternalTransferRequest("000000", "987654", float32(100.5)) // PostInternalTransferRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

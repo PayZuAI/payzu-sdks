@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,24 +19,32 @@ var _ MappedNullable = &GetUser200Response{}
 
 // GetUser200Response struct for GetUser200Response
 type GetUser200Response struct {
-	Id *string `json:"id,omitempty"`
 	// Public account identifier (6 digits, unique). Used as destination for internal transfers.
-	AccountNumber *string `json:"accountNumber,omitempty"`
+	AccountNumber NullableString `json:"accountNumber,omitempty"`
 	// Branch number (4 digits).
 	Branch *string `json:"branch,omitempty" validate:"regexp=^[0-9]{4}$"`
+	// Registered name of the account.
 	Name *string `json:"name,omitempty"`
+	// Account role.
 	Role *string `json:"role,omitempty"`
+	// Balance free for withdrawals and transfers, in reais.
 	BalanceAvailable *float32 `json:"balanceAvailable,omitempty"`
+	// Part of the balance held, in reais.
 	BalanceBlocked *float32 `json:"balanceBlocked,omitempty"`
+	// Account status.
 	Status *string `json:"status,omitempty"`
+	// When false, creating withdrawals is refused for lack of permission (PZS200).
 	AllowWithdraw *bool `json:"allowWithdraw,omitempty"`
+	// When false, creating inbound Pix charges is refused for lack of permission (PZD200).
 	AllowDeposit *bool `json:"allowDeposit,omitempty"`
-	AllowInfraction *bool `json:"allowInfraction,omitempty"`
+	// Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
 	CashInTicketMin *float32 `json:"cashInTicketMin,omitempty"`
+	// Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
 	CashInTicketMax *float32 `json:"cashInTicketMax,omitempty"`
+	// Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused.
 	CashOutTicketMin *float32 `json:"cashOutTicketMin,omitempty"`
+	// Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused.
 	CashOutTicketMax *float32 `json:"cashOutTicketMax,omitempty"`
-	AutoWithdraw map[string]interface{} `json:"AutoWithdraw,omitempty"`
 	ServiceFee *GetUser200ResponseServiceFee `json:"ServiceFee,omitempty"`
 	DailyWithdrawLimit *GetUser200ResponseDailyWithdrawLimit `json:"DailyWithdrawLimit,omitempty"`
 }
@@ -58,68 +66,46 @@ func NewGetUser200ResponseWithDefaults() *GetUser200Response {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *GetUser200Response) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *GetUser200Response) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *GetUser200Response) SetId(v string) {
-	o.Id = &v
-}
-
-// GetAccountNumber returns the AccountNumber field value if set, zero value otherwise.
+// GetAccountNumber returns the AccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GetUser200Response) GetAccountNumber() string {
-	if o == nil || IsNil(o.AccountNumber) {
+	if o == nil || IsNil(o.AccountNumber.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.AccountNumber
+	return *o.AccountNumber.Get()
 }
 
 // GetAccountNumberOk returns a tuple with the AccountNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GetUser200Response) GetAccountNumberOk() (*string, bool) {
-	if o == nil || IsNil(o.AccountNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountNumber, true
+	return o.AccountNumber.Get(), o.AccountNumber.IsSet()
 }
 
 // HasAccountNumber returns a boolean if a field has been set.
 func (o *GetUser200Response) HasAccountNumber() bool {
-	if o != nil && !IsNil(o.AccountNumber) {
+	if o != nil && o.AccountNumber.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccountNumber gets a reference to the given string and assigns it to the AccountNumber field.
+// SetAccountNumber gets a reference to the given NullableString and assigns it to the AccountNumber field.
 func (o *GetUser200Response) SetAccountNumber(v string) {
-	o.AccountNumber = &v
+	o.AccountNumber.Set(&v)
+}
+// SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+func (o *GetUser200Response) SetAccountNumberNil() {
+	o.AccountNumber.Set(nil)
+}
+
+// UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
+func (o *GetUser200Response) UnsetAccountNumber() {
+	o.AccountNumber.Unset()
 }
 
 // GetBranch returns the Branch field value if set, zero value otherwise.
@@ -378,38 +364,6 @@ func (o *GetUser200Response) SetAllowDeposit(v bool) {
 	o.AllowDeposit = &v
 }
 
-// GetAllowInfraction returns the AllowInfraction field value if set, zero value otherwise.
-func (o *GetUser200Response) GetAllowInfraction() bool {
-	if o == nil || IsNil(o.AllowInfraction) {
-		var ret bool
-		return ret
-	}
-	return *o.AllowInfraction
-}
-
-// GetAllowInfractionOk returns a tuple with the AllowInfraction field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetAllowInfractionOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowInfraction) {
-		return nil, false
-	}
-	return o.AllowInfraction, true
-}
-
-// HasAllowInfraction returns a boolean if a field has been set.
-func (o *GetUser200Response) HasAllowInfraction() bool {
-	if o != nil && !IsNil(o.AllowInfraction) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowInfraction gets a reference to the given bool and assigns it to the AllowInfraction field.
-func (o *GetUser200Response) SetAllowInfraction(v bool) {
-	o.AllowInfraction = &v
-}
-
 // GetCashInTicketMin returns the CashInTicketMin field value if set, zero value otherwise.
 func (o *GetUser200Response) GetCashInTicketMin() float32 {
 	if o == nil || IsNil(o.CashInTicketMin) {
@@ -538,38 +492,6 @@ func (o *GetUser200Response) SetCashOutTicketMax(v float32) {
 	o.CashOutTicketMax = &v
 }
 
-// GetAutoWithdraw returns the AutoWithdraw field value if set, zero value otherwise.
-func (o *GetUser200Response) GetAutoWithdraw() map[string]interface{} {
-	if o == nil || IsNil(o.AutoWithdraw) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.AutoWithdraw
-}
-
-// GetAutoWithdrawOk returns a tuple with the AutoWithdraw field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetAutoWithdrawOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.AutoWithdraw) {
-		return map[string]interface{}{}, false
-	}
-	return o.AutoWithdraw, true
-}
-
-// HasAutoWithdraw returns a boolean if a field has been set.
-func (o *GetUser200Response) HasAutoWithdraw() bool {
-	if o != nil && !IsNil(o.AutoWithdraw) {
-		return true
-	}
-
-	return false
-}
-
-// SetAutoWithdraw gets a reference to the given map[string]interface{} and assigns it to the AutoWithdraw field.
-func (o *GetUser200Response) SetAutoWithdraw(v map[string]interface{}) {
-	o.AutoWithdraw = v
-}
-
 // GetServiceFee returns the ServiceFee field value if set, zero value otherwise.
 func (o *GetUser200Response) GetServiceFee() GetUser200ResponseServiceFee {
 	if o == nil || IsNil(o.ServiceFee) {
@@ -644,11 +566,8 @@ func (o GetUser200Response) MarshalJSON() ([]byte, error) {
 
 func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.AccountNumber) {
-		toSerialize["accountNumber"] = o.AccountNumber
+	if o.AccountNumber.IsSet() {
+		toSerialize["accountNumber"] = o.AccountNumber.Get()
 	}
 	if !IsNil(o.Branch) {
 		toSerialize["branch"] = o.Branch
@@ -674,9 +593,6 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AllowDeposit) {
 		toSerialize["allowDeposit"] = o.AllowDeposit
 	}
-	if !IsNil(o.AllowInfraction) {
-		toSerialize["allowInfraction"] = o.AllowInfraction
-	}
 	if !IsNil(o.CashInTicketMin) {
 		toSerialize["cashInTicketMin"] = o.CashInTicketMin
 	}
@@ -688,9 +604,6 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CashOutTicketMax) {
 		toSerialize["cashOutTicketMax"] = o.CashOutTicketMax
-	}
-	if !IsNil(o.AutoWithdraw) {
-		toSerialize["AutoWithdraw"] = o.AutoWithdraw
 	}
 	if !IsNil(o.ServiceFee) {
 		toSerialize["ServiceFee"] = o.ServiceFee

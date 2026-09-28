@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** |  | [optional] 
+**message** | **str** | Confirmation that the callbacks were queued. | [optional] 
 **total** | **int** | Number of callbacks dispatched | [optional] 
 
 ## Example

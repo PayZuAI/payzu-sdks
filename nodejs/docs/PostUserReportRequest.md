@@ -18,8 +18,8 @@ import type { PostUserReportRequest } from 'payzu-pix'
 
 // TODO: Update the object below with actual values
 const example = {
-  "dateFrom": null,
-  "dateTo": null,
+  "dateFrom": 2026-07-01T00:00:00Z,
+  "dateTo": 2026-07-31T23:59:59Z,
   "status": null,
   "type": null,
 } satisfies PostUserReportRequest

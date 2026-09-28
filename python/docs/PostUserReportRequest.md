@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**date_from** | **datetime** |  | 
-**date_to** | **datetime** |  | 
-**status** | **List[str]** |  | [optional] 
-**type** | **List[str]** |  | [optional] 
+**date_from** | **datetime** | Start of the report period. | 
+**date_to** | **datetime** | End of the report period. | 
+**status** | **List[str]** | Transaction statuses included in the file. Empty or omitted: all. | [optional] 
+**type** | **List[str]** | Transaction types included in the file. Empty or omitted: all. | [optional] 
 
 ## Example
 

@@ -6,8 +6,10 @@ REST API for Pix operations on the PayZu platform, deposits, withdrawals, intern
 
 - Node.js: `npm install payzu-pix`
 - Python: `pip install payzu-pix`
-- Go: `go get github.com/PayZuAI/payzu-sdks/go`
 - PHP: `composer require payzu/pix`
+- Ruby: `gem install payzu-pix`
+- Java: `br.com.payzu:payzu-pix` (Maven Central)
+- Go: `go get github.com/PayZuAI/payzu-sdks/go`
 
 Repo: https://github.com/PayZuAI/payzu-sdks
 
@@ -60,10 +62,10 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure Bearer authorization: BearerAuth
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = PayZu\Pix\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new OpenAPI\Client\Api\AccountApi(
+$apiInstance = new PayZu\Pix\Api\AccountApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -87,11 +89,14 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountApi* | [**getUser**](docs/Api/AccountApi.md#getuser) | **GET** /user | Account Info
 *AccountApi* | [**getUserBalance**](docs/Api/AccountApi.md#getuserbalance) | **GET** /user/balance | Account Balance
+*CallbacksApi* | [**createUserCallbackSecret**](docs/Api/CallbacksApi.md#createusercallbacksecret) | **POST** /user/callbacks/secret | Create callback secret
 *CallbacksApi* | [**getUserCallbackById**](docs/Api/CallbacksApi.md#getusercallbackbyid) | **GET** /user/callbacks/{id} | Get Callback
 *CallbacksApi* | [**getUserCallbacks**](docs/Api/CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | List Callbacks
 *CallbacksApi* | [**resendUserCallbackSingle**](docs/Api/CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single)
 *CallbacksApi* | [**resendUserCallbacks**](docs/Api/CallbacksApi.md#resendusercallbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk)
 *CallbacksApi* | [**resendUserCallbacksWebhook**](docs/Api/CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
+*CallbacksApi* | [**resendUserCallbacksWebhooks**](docs/Api/CallbacksApi.md#resendusercallbackswebhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters
+*CallbacksApi* | [**rotateUserCallbackSecret**](docs/Api/CallbacksApi.md#rotateusercallbacksecret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret
 *InfractionsApi* | [**getInfractions**](docs/Api/InfractionsApi.md#getinfractions) | **GET** /user/infractions | List Infractions
 *InfractionsApi* | [**getInfractionsById**](docs/Api/InfractionsApi.md#getinfractionsbyid) | **GET** /user/infractions/{id} | Get Infraction
 *InfractionsApi* | [**getInfractionsDefenseById**](docs/Api/InfractionsApi.md#getinfractionsdefensebyid) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Get Defense
@@ -99,6 +104,9 @@ Class | Method | HTTP request | Description
 *InfractionsApi* | [**postInfractionsDefense**](docs/Api/InfractionsApi.md#postinfractionsdefense) | **POST** /user/infractions/{id}/defenses | Create Defense
 *InternalTransferApi* | [**getInternalTransfer**](docs/Api/InternalTransferApi.md#getinternaltransfer) | **GET** /internal-transfer | Get internal transfer
 *InternalTransferApi* | [**postInternalTransfer**](docs/Api/InternalTransferApi.md#postinternaltransfer) | **POST** /internal-transfer | Create internal transfer
+*KeysAndDICTApi* | [**getPixKey**](docs/Api/KeysAndDICTApi.md#getpixkey) | **GET** /pix/key | Pix key lookup (DICT)
+*KeysAndDICTApi* | [**getUserDict**](docs/Api/KeysAndDICTApi.md#getuserdict) | **GET** /user/dict | Resolve DICT key
+*KeysAndDICTApi* | [**postPixQrcodeRead**](docs/Api/KeysAndDICTApi.md#postpixqrcoderead) | **POST** /pix/qrcode/read | Read QR Code
 *PixOperationsApi* | [**getPix**](docs/Api/PixOperationsApi.md#getpix) | **GET** /pix | Retrieve Charge
 *PixOperationsApi* | [**getPixQrcode**](docs/Api/PixOperationsApi.md#getpixqrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG)
 *PixOperationsApi* | [**getProof**](docs/Api/PixOperationsApi.md#getproof) | **GET** /proof/{id} | Get Transaction Receipt
@@ -123,11 +131,8 @@ Class | Method | HTTP request | Description
 *WebhooksApi* | [**patchUserWebhook**](docs/Api/WebhooksApi.md#patchuserwebhook) | **PATCH** /user/webhooks/{id} | Update webhook
 *WebhooksApi* | [**postUserWebhook**](docs/Api/WebhooksApi.md#postuserwebhook) | **POST** /user/webhooks | Create webhook
 *WebhooksApi* | [**postUserWebhookRotateSecret**](docs/Api/WebhooksApi.md#postuserwebhookrotatesecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret
-*WithdrawalsApi* | [**getPixKey**](docs/Api/WithdrawalsApi.md#getpixkey) | **GET** /pix/key | Dict Pix Key Lookup
-*WithdrawalsApi* | [**getUserDict**](docs/Api/WithdrawalsApi.md#getuserdict) | **GET** /user/dict | DICT key lookup
 *WithdrawalsApi* | [**getWithdraw**](docs/Api/WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Retrieve Withdrawal
 *WithdrawalsApi* | [**getWithdrawProof**](docs/Api/WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt
-*WithdrawalsApi* | [**postPixQrcodeRead**](docs/Api/WithdrawalsApi.md#postpixqrcoderead) | **POST** /pix/qrcode/read | Read QR Code
 *WithdrawalsApi* | [**postWithdraw**](docs/Api/WithdrawalsApi.md#postwithdraw) | **POST** /withdraw | Create Withdrawal (Pix key)
 *WithdrawalsApi* | [**postWithdrawQrcode**](docs/Api/WithdrawalsApi.md#postwithdrawqrcode) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code
 
@@ -141,16 +146,18 @@ Class | Method | HTTP request | Description
 - [CallbackDetail](docs/Model/CallbackDetail.md)
 - [CallbackListResponse](docs/Model/CallbackListResponse.md)
 - [CallbackListResponsePagination](docs/Model/CallbackListResponsePagination.md)
-- [CallbackResendResponse](docs/Model/CallbackResendResponse.md)
+- [CallbackSecretResponse](docs/Model/CallbackSecretResponse.md)
 - [Defense](docs/Model/Defense.md)
 - [DefenseFilesInner](docs/Model/DefenseFilesInner.md)
+- [DefenseHistoryEntry](docs/Model/DefenseHistoryEntry.md)
+- [DefenseHistoryEntryFilesInner](docs/Model/DefenseHistoryEntryFilesInner.md)
 - [DepositPending](docs/Model/DepositPending.md)
 - [DepositPendingListResponse](docs/Model/DepositPendingListResponse.md)
 - [DictConsultResponse](docs/Model/DictConsultResponse.md)
 - [DownloadUserReport200Response](docs/Model/DownloadUserReport200Response.md)
-- [GetPixKey400Response](docs/Model/GetPixKey400Response.md)
-- [GetPixKey404Response](docs/Model/GetPixKey404Response.md)
-- [GetPixQrcode404Response](docs/Model/GetPixQrcode404Response.md)
+- [EnqueuedCallback](docs/Model/EnqueuedCallback.md)
+- [EnqueuedCallbackEnqueued](docs/Model/EnqueuedCallbackEnqueued.md)
+- [EnqueuedCallbackItem](docs/Model/EnqueuedCallbackItem.md)
 - [GetUser200Response](docs/Model/GetUser200Response.md)
 - [GetUser200ResponseDailyWithdrawLimit](docs/Model/GetUser200ResponseDailyWithdrawLimit.md)
 - [GetUser200ResponseServiceFee](docs/Model/GetUser200ResponseServiceFee.md)
@@ -166,22 +173,26 @@ Class | Method | HTTP request | Description
 - [ListUserReports200Response](docs/Model/ListUserReports200Response.md)
 - [PixKeyInfo](docs/Model/PixKeyInfo.md)
 - [PostInternalTransferRequest](docs/Model/PostInternalTransferRequest.md)
-- [PostPixQrcodeRead400Response](docs/Model/PostPixQrcodeRead400Response.md)
 - [PostPixQrcodeReadRequest](docs/Model/PostPixQrcodeReadRequest.md)
 - [PostPixRequest](docs/Model/PostPixRequest.md)
 - [PostUserReportRequest](docs/Model/PostUserReportRequest.md)
-- [PostWithdrawQrcode400Response](docs/Model/PostWithdrawQrcode400Response.md)
 - [PostWithdrawQrcodeRequest](docs/Model/PostWithdrawQrcodeRequest.md)
 - [PostWithdrawRequest](docs/Model/PostWithdrawRequest.md)
 - [ProofResponse](docs/Model/ProofResponse.md)
 - [QRCodeReadResponse](docs/Model/QRCodeReadResponse.md)
+- [Refund](docs/Model/Refund.md)
 - [RefundRequest](docs/Model/RefundRequest.md)
 - [ReportJob](docs/Model/ReportJob.md)
+- [ReportJobAccepted](docs/Model/ReportJobAccepted.md)
+- [ReportJobDetail](docs/Model/ReportJobDetail.md)
 - [ResendUserCallbackSingle200Response](docs/Model/ResendUserCallbackSingle200Response.md)
 - [ResendUserCallbacks200Response](docs/Model/ResendUserCallbacks200Response.md)
 - [ResendUserCallbacksRequest](docs/Model/ResendUserCallbacksRequest.md)
+- [ResendWebhookCallbacksRequest](docs/Model/ResendWebhookCallbacksRequest.md)
+- [RotateCallbackSecretResponse](docs/Model/RotateCallbackSecretResponse.md)
 - [RotateSecretResponse](docs/Model/RotateSecretResponse.md)
 - [SentWebhookDetail](docs/Model/SentWebhookDetail.md)
+- [SentWebhookDetailResponse](docs/Model/SentWebhookDetailResponse.md)
 - [SentWebhooksQuantity](docs/Model/SentWebhooksQuantity.md)
 - [Summary](docs/Model/Summary.md)
 - [SummaryBlock](docs/Model/SummaryBlock.md)
@@ -189,6 +200,7 @@ Class | Method | HTTP request | Description
 - [SummaryBlockStatuses](docs/Model/SummaryBlockStatuses.md)
 - [SummaryStatus](docs/Model/SummaryStatus.md)
 - [Transaction](docs/Model/Transaction.md)
+- [TransactionWithRefunds](docs/Model/TransactionWithRefunds.md)
 - [Webhook](docs/Model/Webhook.md)
 - [WebhookCreateRequest](docs/Model/WebhookCreateRequest.md)
 - [WebhookEventType](docs/Model/WebhookEventType.md)
@@ -221,6 +233,6 @@ vendor/bin/phpunit
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.8.0`
-    - Package version: `0.1.0`
+    - Package version: `2.0.0`
     - Generator version: `7.22.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

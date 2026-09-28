@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## GetInfractions
 
-> InfractionListResponse GetInfractions(ctx).Page(page).Limit(limit).Status(status).Type_(type_).EndToEndId(endToEndId).TransactionId(transactionId).AmountMin(amountMin).AmountMax(amountMax).AnalysisResult(analysisResult).ReportedBy(reportedBy).ParticipantDocument(participantDocument).ParticipantName(participantName).SortBy(sortBy).SortDirection(sortDirection).ReportedAtFrom(reportedAtFrom).ReportedAtTo(reportedAtTo).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).ExpiresAtFrom(expiresAtFrom).ExpiresAtTo(expiresAtTo).UpdatedAtFrom(updatedAtFrom).UpdatedAtTo(updatedAtTo).NeedsManualReview(needsManualReview).Id(id).Protocol(protocol).Execute()
+> InfractionListResponse GetInfractions(ctx).Page(page).Limit(limit).Status(status).Type_(type_).EndToEndId(endToEndId).TransactionId(transactionId).AmountMin(amountMin).AmountMax(amountMax).AnalysisResult(analysisResult).ReportedBy(reportedBy).ParticipantDocument(participantDocument).ParticipantName(participantName).SortBy(sortBy).SortDirection(sortDirection).ReportedAtFrom(reportedAtFrom).ReportedAtTo(reportedAtTo).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).ExpiresAtFrom(expiresAtFrom).ExpiresAtTo(expiresAtTo).UpdatedAtFrom(updatedAtFrom).UpdatedAtTo(updatedAtTo).Id(id).Protocol(protocol).Execute()
 
 List Infractions
 
@@ -34,20 +34,20 @@ import (
 )
 
 func main() {
-	page := int32(56) // int32 |  (optional) (default to 1)
-	limit := int32(56) // int32 |  (optional) (default to 10)
-	status := "status_example" // string | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
-	type_ := "type__example" // string | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
-	endToEndId := "endToEndId_example" // string |  (optional)
-	transactionId := "transactionId_example" // string |  (optional)
-	amountMin := float32(8.14) // float32 |  (optional)
-	amountMax := float32(8.14) // float32 |  (optional)
-	analysisResult := "analysisResult_example" // string | Comma-separated AnalysisResult (optional)
-	reportedBy := "reportedBy_example" // string | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
-	participantDocument := "participantDocument_example" // string |  (optional)
-	participantName := "participantName_example" // string |  (optional)
-	sortBy := "sortBy_example" // string | Sort field. (optional)
-	sortDirection := "sortDirection_example" // string | Sort direction. (optional)
+	page := int32(56) // int32 | Page number. (optional) (default to 1)
+	limit := int32(56) // int32 | Items per page. (optional) (default to 10)
+	status := "OPEN" // string | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
+	type_ := "REFUND_REQUEST" // string | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | End-to-end ID of the Pix. (optional)
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
+	amountMin := float32(10.9) // float32 | Minimum amount. (optional)
+	amountMax := float32(500) // float32 | Maximum amount. (optional)
+	analysisResult := "AGREED" // string | Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
+	reportedBy := "DEBITED_PARTICIPANT" // string | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
+	participantDocument := "12345678901" // string | CPF or CNPJ of the participant. (optional)
+	participantName := "John Doe" // string | Name of the participant. (optional)
+	sortBy := "sortBy_example" // string | Sort field. (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string | Sort direction. (optional) (default to "desc")
 	reportedAtFrom := time.Now() // time.Time | Filter: reportedAt from. (optional)
 	reportedAtTo := time.Now() // time.Time | Filter: reportedAt up to. (optional)
 	createdAtFrom := time.Now() // time.Time | Filter: createdAt from. (optional)
@@ -56,13 +56,12 @@ func main() {
 	expiresAtTo := time.Now() // time.Time | Filter: expiresAt up to. (optional)
 	updatedAtFrom := time.Now() // time.Time | Filter: updatedAt from. (optional)
 	updatedAtTo := time.Now() // time.Time | Filter: updatedAt up to. (optional)
-	needsManualReview := true // bool | Filter: needs manual review. (optional)
-	id := "id_example" // string | Filter by infraction ID. (optional)
-	protocol := "protocol_example" // string | Filter by protocol. (optional)
+	id := "cm3w7n2p60002q8f2h7d3z5cf" // string | Filter by infraction ID. (optional)
+	protocol := "2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210" // string | Filter by protocol. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.InfractionsAPI.GetInfractions(context.Background()).Page(page).Limit(limit).Status(status).Type_(type_).EndToEndId(endToEndId).TransactionId(transactionId).AmountMin(amountMin).AmountMax(amountMax).AnalysisResult(analysisResult).ReportedBy(reportedBy).ParticipantDocument(participantDocument).ParticipantName(participantName).SortBy(sortBy).SortDirection(sortDirection).ReportedAtFrom(reportedAtFrom).ReportedAtTo(reportedAtTo).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).ExpiresAtFrom(expiresAtFrom).ExpiresAtTo(expiresAtTo).UpdatedAtFrom(updatedAtFrom).UpdatedAtTo(updatedAtTo).NeedsManualReview(needsManualReview).Id(id).Protocol(protocol).Execute()
+	resp, r, err := apiClient.InfractionsAPI.GetInfractions(context.Background()).Page(page).Limit(limit).Status(status).Type_(type_).EndToEndId(endToEndId).TransactionId(transactionId).AmountMin(amountMin).AmountMax(amountMax).AnalysisResult(analysisResult).ReportedBy(reportedBy).ParticipantDocument(participantDocument).ParticipantName(participantName).SortBy(sortBy).SortDirection(sortDirection).ReportedAtFrom(reportedAtFrom).ReportedAtTo(reportedAtTo).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).ExpiresAtFrom(expiresAtFrom).ExpiresAtTo(expiresAtTo).UpdatedAtFrom(updatedAtFrom).UpdatedAtTo(updatedAtTo).Id(id).Protocol(protocol).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `InfractionsAPI.GetInfractions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -83,20 +82,20 @@ Other parameters are passed through a pointer to a apiGetInfractionsRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int32** |  | [default to 1]
- **limit** | **int32** |  | [default to 10]
+ **page** | **int32** | Page number. | [default to 1]
+ **limit** | **int32** | Items per page. | [default to 10]
  **status** | **string** | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) | 
  **type_** | **string** | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) | 
- **endToEndId** | **string** |  | 
- **transactionId** | **string** |  | 
- **amountMin** | **float32** |  | 
- **amountMax** | **float32** |  | 
- **analysisResult** | **string** | Comma-separated AnalysisResult | 
+ **endToEndId** | **string** | End-to-end ID of the Pix. | 
+ **transactionId** | **string** | Transaction ID. | 
+ **amountMin** | **float32** | Minimum amount. | 
+ **amountMax** | **float32** | Maximum amount. | 
+ **analysisResult** | **string** | Comma-separated AnalysisResult: AGREED, DISAGREED. | 
  **reportedBy** | **string** | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) | 
- **participantDocument** | **string** |  | 
- **participantName** | **string** |  | 
- **sortBy** | **string** | Sort field. | 
- **sortDirection** | **string** | Sort direction. | 
+ **participantDocument** | **string** | CPF or CNPJ of the participant. | 
+ **participantName** | **string** | Name of the participant. | 
+ **sortBy** | **string** | Sort field. | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** | Sort direction. | [default to &quot;desc&quot;]
  **reportedAtFrom** | **time.Time** | Filter: reportedAt from. | 
  **reportedAtTo** | **time.Time** | Filter: reportedAt up to. | 
  **createdAtFrom** | **time.Time** | Filter: createdAt from. | 
@@ -105,7 +104,6 @@ Name | Type | Description  | Notes
  **expiresAtTo** | **time.Time** | Filter: expiresAt up to. | 
  **updatedAtFrom** | **time.Time** | Filter: updatedAt from. | 
  **updatedAtTo** | **time.Time** | Filter: updatedAt up to. | 
- **needsManualReview** | **bool** | Filter: needs manual review. | 
  **id** | **string** | Filter by infraction ID. | 
  **protocol** | **string** | Filter by protocol. | 
 
@@ -148,7 +146,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Infraction ID
+	id := "cm3w7n2p60002q8f2h7d3z5cf" // string | Infraction ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -218,8 +216,8 @@ import (
 )
 
 func main() {
-	infractionId := "infractionId_example" // string | Infraction ID
-	defenseId := "defenseId_example" // string | Defense ID
+	infractionId := "cm3w7n2p60002q8f2h7d3z5cf" // string | Infraction ID
+	defenseId := "cm3w7p5r90003q8f2j8e4a6dg" // string | Defense ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -291,7 +289,7 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Infraction ID
+	id := "cm3w7n2p60002q8f2h7d3z5cf" // string | Infraction ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -361,9 +359,9 @@ import (
 )
 
 func main() {
-	id := "id_example" // string | Infraction ID
+	id := "cm3w7n2p60002q8f2h7d3z5cf" // string | Infraction ID
 	defense := "defense_example" // string | Defense text (max: 1000 characters)
-	files := []*os.File{"TODO"} // []*os.File | Evidence files (max: 10MB total) (optional)
+	files := []*os.File{"TODO"} // []*os.File | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -394,7 +392,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **defense** | **string** | Defense text (max: 1000 characters) | 
- **files** | **[]*os.File** | Evidence files (max: 10MB total) | 
+ **files** | **[]*os.File** | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. | 
 
 ### Return type
 

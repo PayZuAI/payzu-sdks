@@ -18,7 +18,7 @@ import type { RefundRequest } from 'payzu-pix'
 // TODO: Update the object below with actual values
 const example = {
   "amount": 30.5,
-  "description": null,
+  "description": Estorno solicitado pelo cliente,
   "clientReference": refund-2026-0001,
 } satisfies RefundRequest
 

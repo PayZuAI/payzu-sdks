@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -19,9 +19,13 @@ var _ MappedNullable = &DepositPendingListResponse{}
 
 // DepositPendingListResponse struct for DepositPendingListResponse
 type DepositPendingListResponse struct {
+	// Page returned in this response.
 	Page *int32 `json:"page,omitempty"`
+	// Maximum number of records per page used in this query.
 	Limit *int32 `json:"limit,omitempty"`
+	// Comes back true when there is still a record after this page.
 	HasNextPage *bool `json:"hasNextPage,omitempty"`
+	// Pending deposits of this page, ordered from the most recent creation to the oldest.
 	Data []DepositPending `json:"data,omitempty"`
 }
 

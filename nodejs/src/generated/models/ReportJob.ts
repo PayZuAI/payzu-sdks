@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - Go: `go get github.com/PayZuAI/payzu-sdks/go` - PHP: `composer require payzu/pix`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,25 +20,25 @@ import { mapValues } from '../runtime.js';
  */
 export interface ReportJob {
     /**
-     * 
+     * Report identifier (UUID), generated when the report is requested.
      * @type {string}
      * @memberof ReportJob
      */
     id?: string;
     /**
-     * 
+     * Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
      * @type {ReportJobStatusEnum}
      * @memberof ReportJob
      */
     status?: ReportJobStatusEnum;
     /**
-     * 
+     * Date and time the report generation was requested.
      * @type {Date}
      * @memberof ReportJob
      */
     createdAt?: Date;
     /**
-     * 
+     * Date and time of the last change to the report record.
      * @type {Date}
      * @memberof ReportJob
      */
@@ -48,7 +48,19 @@ export interface ReportJob {
      * @type {Date}
      * @memberof ReportJob
      */
-    expiresAt?: Date;
+    expiresAt?: Date | null;
+    /**
+     * Filters used to generate the report.
+     * @type {object}
+     * @memberof ReportJob
+     */
+    params?: object;
+    /**
+     * Rows written to the file. Null until the report is COMPLETED.
+     * @type {number}
+     * @memberof ReportJob
+     */
+    writtenRows?: number | null;
 }
 
 
@@ -86,6 +98,8 @@ export function ReportJobFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
         'updatedAt': json['updatedAt'] == null ? undefined : (new Date(json['updatedAt'])),
         'expiresAt': json['expiresAt'] == null ? undefined : (new Date(json['expiresAt'])),
+        'params': json['params'] == null ? undefined : json['params'],
+        'writtenRows': json['writtenRows'] == null ? undefined : json['writtenRows'],
     };
 }
 
@@ -105,6 +119,8 @@ export function ReportJobToJSONTyped(value?: ReportJob | null, ignoreDiscriminat
         'createdAt': value['createdAt'] == null ? value['createdAt'] : value['createdAt'].toISOString(),
         'updatedAt': value['updatedAt'] == null ? value['updatedAt'] : value['updatedAt'].toISOString(),
         'expiresAt': value['expiresAt'] == null ? value['expiresAt'] : value['expiresAt'].toISOString(),
+        'params': value['params'],
+        'writtenRows': value['writtenRows'],
     };
 }
 

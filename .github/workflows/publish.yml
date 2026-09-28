@@ -19,12 +19,17 @@ env:
 jobs:
   npm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
+      - name: Update npm for trusted publishing
+        run: npm install -g npm@latest
       - name: Build
         working-directory: nodejs
         run: |
@@ -68,6 +73,9 @@ jobs:
 
   rubygems:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -80,15 +88,19 @@ jobs:
           gem build payzu-pix.gemspec
       - name: Publish
         working-directory: ruby
-        env:
-          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
         run: |
           VERSION="${RELEASE_TAG#v}"
           if gem list --remote --exact payzu-pix --all | grep -q "[( ]$VERSION[,)]"; then
             echo "payzu-pix $VERSION já publicado"
-          else
-            gem push "payzu-pix-$VERSION.gem"
+            exit 0
           fi
+          OIDC=$(curl -sf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=rubygems.org" | jq -r .value)
+          GEM_HOST_API_KEY=$(curl -sf -X POST -H "Content-Type: application/json" \
+            -d "{\"jwt\":\"$OIDC\"}" \
+            https://rubygems.org/api/v1/oidc/trusted_publisher/exchange_token | jq -r .rubygems_api_key)
+          export GEM_HOST_API_KEY
+          gem push "payzu-pix-$VERSION.gem"
 
   maven-central:
     runs-on: ubuntu-latest

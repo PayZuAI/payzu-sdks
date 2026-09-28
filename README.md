@@ -9,7 +9,7 @@ SDKs oficiais da API PayZu Pix, gerados do [OpenAPI](./openapi.json) publicado e
 | PHP       | [`payzu/pix`](https://packagist.org/packages/payzu/pix) | `composer require payzu/pix` |
 | Ruby      | [`payzu-pix`](https://rubygems.org/gems/payzu-pix) | `gem install payzu-pix` |
 | Java      | [`br.com.payzu:payzu-pix`](https://central.sonatype.com/artifact/br.com.payzu/payzu-pix) | Maven ou Gradle |
-| Go        | `github.com/PayZuAI/payzu-sdks/go` | `go get github.com/PayZuAI/payzu-sdks/go` |
+| Go        | `github.com/PayZuAI/payzu-sdks/go/v2` | `go get github.com/PayZuAI/payzu-sdks/go/v2` |
 
 ## Uso rápido (Node.js)
 
@@ -39,7 +39,7 @@ Os SDKs aceitam valor de enum que ainda não está no spec sem falhar a leitura 
 
 ## Release
 
-Uma release `vX.Y.Z` no GitHub publica Node, Python, PHP, Ruby e Java na mesma versão (`publish.yml`). O PHP sai pelo repositório espelho [PayZuAI/payzu-php](https://github.com/PayZuAI/payzu-php), que o Packagist lê: o workflow de lá copia a pasta `php/` de cada release daqui e cria a mesma tag. O Go versiona à parte, com tag `go/vX.Y.Z`.
+Uma release `X.Y.Z` no GitHub publica Node, Python, Ruby e Java na mesma versão (`publish.yml`). O PHP sai pelo repositório espelho [PayZuAI/payzu-php](https://github.com/PayZuAI/payzu-php), que o Packagist lê: o workflow de lá copia a pasta `php/` de cada release daqui e cria a mesma tag. O Go usa a tag `go/vX.Y.Z` com a mesma versão; a cada versão maior, o caminho do módulo muda (`/go/v2`, `/go/v3`).
 
 ## Documentação
 

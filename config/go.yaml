@@ -1,13 +1,13 @@
 generatorName: go
 outputDir: go
 gitUserId: PayZuAI
-gitRepoId: payzu-sdks/go
+gitRepoId: payzu-sdks/go/v2
 nameMappings:
   hasSecret: HasSecretConfigured
 additionalProperties:
   enumUnknownDefaultCase: true
   packageName: payzupix
-  packageVersion: 1.0.0
+  packageVersion: 2.0.0
 globalProperties:
   apiTests: false
   modelTests: false

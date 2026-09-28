@@ -14,4 +14,5 @@ Todas as linguagens passam a sair na mesma versão. PHP, Ruby e Java ganham paco
 ### Mudanças incompatíveis
 
 - Os tipos gerados seguem o OpenAPI atual: filtros e enums mudaram (por exemplo, o filtro `needsManualReview` de infrações saiu, `Transaction.type` ganhou `LIQUIDATION` e `ADJUSTMENT` e o `groupBy` do resumo aceita só `day`).
+- Go: o módulo passa a ser `github.com/PayZuAI/payzu-sdks/go/v2`.
 - `getPixKey`, `getUserDict` e `postPixQrcodeRead` saíram de `WithdrawalsApi` para `KeysAndDICTApi` no código gerado. No Node.js, `payzu.withdraw.pixKey` e `payzu.withdraw.readQrCode` continuam funcionando.

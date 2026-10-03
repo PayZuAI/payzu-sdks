@@ -44,7 +44,7 @@ export interface AccountApiInterface {
     getUserRequestOpts(): Promise<runtime.RequestOpts>;
 
     /**
-     * Account profile, permissions, limits and fee rules.
+     * Account profile, limits and fee rules.
      * @summary Account Info
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -53,7 +53,7 @@ export interface AccountApiInterface {
     getUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUser200Response>>;
 
     /**
-     * Account profile, permissions, limits and fee rules.
+     * Account profile, limits and fee rules.
      * Account Info
      */
     getUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUser200Response>;
@@ -115,7 +115,7 @@ export class AccountApi extends runtime.BaseAPI implements AccountApiInterface {
     }
 
     /**
-     * Account profile, permissions, limits and fee rules.
+     * Account profile, limits and fee rules.
      * Account Info
      */
     async getUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUser200Response>> {
@@ -126,7 +126,7 @@ export class AccountApi extends runtime.BaseAPI implements AccountApiInterface {
     }
 
     /**
-     * Account profile, permissions, limits and fee rules.
+     * Account profile, limits and fee rules.
      * Account Info
      */
     async getUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUser200Response> {

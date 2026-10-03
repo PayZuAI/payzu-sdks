@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Account Info
 
-Account profile, permissions, limits and fee rules.
+Account profile, limits and fee rules.
 
 ### Example
 

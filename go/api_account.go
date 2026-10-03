@@ -34,7 +34,7 @@ func (r ApiGetUserRequest) Execute() (*GetUser200Response, *http.Response, error
 /*
 GetUser Account Info
 
-Account profile, permissions, limits and fee rules.
+Account profile, limits and fee rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserRequest

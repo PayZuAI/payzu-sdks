@@ -77,18 +77,6 @@ export interface GetUser200Response {
      */
     status?: GetUser200ResponseStatusEnum;
     /**
-     * When false, creating withdrawals is refused for lack of permission (PZS200).
-     * @type {boolean}
-     * @memberof GetUser200Response
-     */
-    allowWithdraw?: boolean;
-    /**
-     * When false, creating inbound Pix charges is refused for lack of permission (PZD200).
-     * @type {boolean}
-     * @memberof GetUser200Response
-     */
-    allowDeposit?: boolean;
-    /**
      * Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
      * @type {number}
      * @memberof GetUser200Response
@@ -168,8 +156,6 @@ export function GetUser200ResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'balanceAvailable': json['balanceAvailable'] == null ? undefined : json['balanceAvailable'],
         'balanceBlocked': json['balanceBlocked'] == null ? undefined : json['balanceBlocked'],
         'status': json['status'] == null ? undefined : json['status'],
-        'allowWithdraw': json['allowWithdraw'] == null ? undefined : json['allowWithdraw'],
-        'allowDeposit': json['allowDeposit'] == null ? undefined : json['allowDeposit'],
         'cashInTicketMin': json['cashInTicketMin'] == null ? undefined : json['cashInTicketMin'],
         'cashInTicketMax': json['cashInTicketMax'] == null ? undefined : json['cashInTicketMax'],
         'cashOutTicketMin': json['cashOutTicketMin'] == null ? undefined : json['cashOutTicketMin'],
@@ -197,8 +183,6 @@ export function GetUser200ResponseToJSONTyped(value?: GetUser200Response | null,
         'balanceAvailable': value['balanceAvailable'],
         'balanceBlocked': value['balanceBlocked'],
         'status': value['status'],
-        'allowWithdraw': value['allowWithdraw'],
-        'allowDeposit': value['allowDeposit'],
         'cashInTicketMin': value['cashInTicketMin'],
         'cashInTicketMax': value['cashInTicketMax'],
         'cashOutTicketMin': value['cashOutTicketMin'],

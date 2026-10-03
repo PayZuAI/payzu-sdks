@@ -2699,7 +2699,7 @@
     "/user": {
       "get": {
         "summary": "Account Info",
-        "description": "Account profile, permissions, limits and fee rules.",
+        "description": "Account profile, limits and fee rules.",
         "operationId": "get_user",
         "tags": [
           "Account"
@@ -2755,14 +2755,6 @@
                       "enum": [
                         "ACTIVE"
                       ]
-                    },
-                    "allowWithdraw": {
-                      "type": "boolean",
-                      "description": "When false, creating withdrawals is refused for lack of permission (PZS200)."
-                    },
-                    "allowDeposit": {
-                      "type": "boolean",
-                      "description": "When false, creating inbound Pix charges is refused for lack of permission (PZD200)."
                     },
                     "cashInTicketMin": {
                       "type": "number",
@@ -2856,8 +2848,6 @@
                       "balanceAvailable": 231.46,
                       "balanceBlocked": 0,
                       "status": "ACTIVE",
-                      "allowWithdraw": true,
-                      "allowDeposit": true,
                       "cashInTicketMin": 1,
                       "cashInTicketMax": 5000,
                       "cashOutTicketMin": 1,

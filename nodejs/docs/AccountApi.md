@@ -15,7 +15,7 @@ All URIs are relative to *https://api.payzu.processamento.com/v1*
 
 Account Info
 
-Account profile, permissions, limits and fee rules.
+Account profile, limits and fee rules.
 
 ### Example
 

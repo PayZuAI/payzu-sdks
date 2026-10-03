@@ -2404,7 +2404,7 @@ paths:
           print(response.json())
   /user:
     get:
-      description: "Account profile, permissions, limits and fee rules."
+      description: "Account profile, limits and fee rules."
       operationId: get_user
       responses:
         "200":
@@ -2421,8 +2421,6 @@ paths:
                     balanceAvailable: 231.46
                     balanceBlocked: 0
                     status: ACTIVE
-                    allowWithdraw: true
-                    allowDeposit: true
                     cashInTicketMin: 1
                     cashInTicketMax: 5000
                     cashOutTicketMin: 1
@@ -11546,7 +11544,6 @@ components:
         cashOutTicketMax: 2.3021358869347655
         balanceAvailable: 0.8008281904610115
         cashInTicketMin: 1.4658129805029452
-        allowDeposit: true
         accountNumber: accountNumber
         branch: "0001"
         cashOutTicketMin: 5.637376656633329
@@ -11563,7 +11560,6 @@ components:
           used: 1.0246457001441578
           lastReset: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        allowWithdraw: true
         status: ACTIVE
       properties:
         accountNumber:
@@ -11595,14 +11591,6 @@ components:
           enum:
           - ACTIVE
           type: string
-        allowWithdraw:
-          description: "When false, creating withdrawals is refused for lack of permission\
-            \ (PZS200)."
-          type: boolean
-        allowDeposit:
-          description: "When false, creating inbound Pix charges is refused for lack\
-            \ of permission (PZD200)."
-          type: boolean
         cashInTicketMin:
           description: "Minimum amount accepted in each inbound charge, in reais;\
             \ below the floor the creation is refused."

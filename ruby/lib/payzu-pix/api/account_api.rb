@@ -20,7 +20,7 @@ module PayZuPix
       @api_client = api_client
     end
     # Account Info
-    # Account profile, permissions, limits and fee rules.
+    # Account profile, limits and fee rules.
     # @param [Hash] opts the optional parameters
     # @return [GetUser200Response]
     def get_user(opts = {})
@@ -29,7 +29,7 @@ module PayZuPix
     end
 
     # Account Info
-    # Account profile, permissions, limits and fee rules.
+    # Account profile, limits and fee rules.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetUser200Response, Integer, Hash)>] GetUser200Response data, response status code and response headers
     def get_user_with_http_info(opts = {})

@@ -47,8 +47,6 @@ import br.com.payzu.pix.ApiClient;
   GetUser200Response.JSON_PROPERTY_BALANCE_AVAILABLE,
   GetUser200Response.JSON_PROPERTY_BALANCE_BLOCKED,
   GetUser200Response.JSON_PROPERTY_STATUS,
-  GetUser200Response.JSON_PROPERTY_ALLOW_WITHDRAW,
-  GetUser200Response.JSON_PROPERTY_ALLOW_DEPOSIT,
   GetUser200Response.JSON_PROPERTY_CASH_IN_TICKET_MIN,
   GetUser200Response.JSON_PROPERTY_CASH_IN_TICKET_MAX,
   GetUser200Response.JSON_PROPERTY_CASH_OUT_TICKET_MIN,
@@ -154,14 +152,6 @@ public class GetUser200Response {
   public static final String JSON_PROPERTY_STATUS = "status";
   @javax.annotation.Nullable
   private StatusEnum status;
-
-  public static final String JSON_PROPERTY_ALLOW_WITHDRAW = "allowWithdraw";
-  @javax.annotation.Nullable
-  private Boolean allowWithdraw;
-
-  public static final String JSON_PROPERTY_ALLOW_DEPOSIT = "allowDeposit";
-  @javax.annotation.Nullable
-  private Boolean allowDeposit;
 
   public static final String JSON_PROPERTY_CASH_IN_TICKET_MIN = "cashInTicketMin";
   @javax.annotation.Nullable
@@ -366,54 +356,6 @@ public class GetUser200Response {
   }
 
 
-  public GetUser200Response allowWithdraw(@javax.annotation.Nullable Boolean allowWithdraw) {
-    this.allowWithdraw = allowWithdraw;
-    return this;
-  }
-
-  /**
-   * When false, creating withdrawals is refused for lack of permission (PZS200).
-   * @return allowWithdraw
-   */
-  @javax.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ALLOW_WITHDRAW, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getAllowWithdraw() {
-    return allowWithdraw;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_ALLOW_WITHDRAW, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAllowWithdraw(@javax.annotation.Nullable Boolean allowWithdraw) {
-    this.allowWithdraw = allowWithdraw;
-  }
-
-
-  public GetUser200Response allowDeposit(@javax.annotation.Nullable Boolean allowDeposit) {
-    this.allowDeposit = allowDeposit;
-    return this;
-  }
-
-  /**
-   * When false, creating inbound Pix charges is refused for lack of permission (PZD200).
-   * @return allowDeposit
-   */
-  @javax.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ALLOW_DEPOSIT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getAllowDeposit() {
-    return allowDeposit;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_ALLOW_DEPOSIT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAllowDeposit(@javax.annotation.Nullable Boolean allowDeposit) {
-    this.allowDeposit = allowDeposit;
-  }
-
-
   public GetUser200Response cashInTicketMin(@javax.annotation.Nullable BigDecimal cashInTicketMin) {
     this.cashInTicketMin = cashInTicketMin;
     return this;
@@ -577,8 +519,6 @@ public class GetUser200Response {
         Objects.equals(this.balanceAvailable, getUser200Response.balanceAvailable) &&
         Objects.equals(this.balanceBlocked, getUser200Response.balanceBlocked) &&
         Objects.equals(this.status, getUser200Response.status) &&
-        Objects.equals(this.allowWithdraw, getUser200Response.allowWithdraw) &&
-        Objects.equals(this.allowDeposit, getUser200Response.allowDeposit) &&
         Objects.equals(this.cashInTicketMin, getUser200Response.cashInTicketMin) &&
         Objects.equals(this.cashInTicketMax, getUser200Response.cashInTicketMax) &&
         Objects.equals(this.cashOutTicketMin, getUser200Response.cashOutTicketMin) &&
@@ -593,7 +533,7 @@ public class GetUser200Response {
 
   @Override
   public int hashCode() {
-    return Objects.hash(hashCodeNullable(accountNumber), branch, name, role, balanceAvailable, balanceBlocked, status, allowWithdraw, allowDeposit, cashInTicketMin, cashInTicketMax, cashOutTicketMin, cashOutTicketMax, serviceFee, dailyWithdrawLimit);
+    return Objects.hash(hashCodeNullable(accountNumber), branch, name, role, balanceAvailable, balanceBlocked, status, cashInTicketMin, cashInTicketMax, cashOutTicketMin, cashOutTicketMax, serviceFee, dailyWithdrawLimit);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -614,8 +554,6 @@ public class GetUser200Response {
     sb.append("    balanceAvailable: ").append(toIndentedString(balanceAvailable)).append("\n");
     sb.append("    balanceBlocked: ").append(toIndentedString(balanceBlocked)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    allowWithdraw: ").append(toIndentedString(allowWithdraw)).append("\n");
-    sb.append("    allowDeposit: ").append(toIndentedString(allowDeposit)).append("\n");
     sb.append("    cashInTicketMin: ").append(toIndentedString(cashInTicketMin)).append("\n");
     sb.append("    cashInTicketMax: ").append(toIndentedString(cashInTicketMax)).append("\n");
     sb.append("    cashOutTicketMin: ").append(toIndentedString(cashOutTicketMin)).append("\n");
@@ -699,16 +637,6 @@ public class GetUser200Response {
     // add `status` to the URL query string
     if (getStatus() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sstatus%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getStatus()))));
-    }
-
-    // add `allowWithdraw` to the URL query string
-    if (getAllowWithdraw() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sallowWithdraw%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAllowWithdraw()))));
-    }
-
-    // add `allowDeposit` to the URL query string
-    if (getAllowDeposit() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sallowDeposit%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAllowDeposit()))));
     }
 
     // add `cashInTicketMin` to the URL query string

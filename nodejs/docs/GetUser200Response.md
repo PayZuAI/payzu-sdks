@@ -13,8 +13,6 @@ Name | Type
 `balanceAvailable` | number
 `balanceBlocked` | number
 `status` | string
-`allowWithdraw` | boolean
-`allowDeposit` | boolean
 `cashInTicketMin` | number
 `cashInTicketMax` | number
 `cashOutTicketMin` | number
@@ -36,8 +34,6 @@ const example = {
   "balanceAvailable": null,
   "balanceBlocked": null,
   "status": null,
-  "allowWithdraw": null,
-  "allowDeposit": null,
   "cashInTicketMin": null,
   "cashInTicketMax": null,
   "cashOutTicketMin": null,

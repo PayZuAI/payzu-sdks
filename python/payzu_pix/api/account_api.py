@@ -54,7 +54,7 @@ class AccountApi:
     ) -> GetUser200Response:
         """Account Info
 
-        Account profile, permissions, limits and fee rules.
+        Account profile, limits and fee rules.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -118,7 +118,7 @@ class AccountApi:
     ) -> ApiResponse[GetUser200Response]:
         """Account Info
 
-        Account profile, permissions, limits and fee rules.
+        Account profile, limits and fee rules.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -182,7 +182,7 @@ class AccountApi:
     ) -> RESTResponseType:
         """Account Info
 
-        Account profile, permissions, limits and fee rules.
+        Account profile, limits and fee rules.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

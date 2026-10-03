@@ -11,8 +11,6 @@
 | **balance_available** | **Float** | Balance free for withdrawals and transfers, in reais. | [optional] |
 | **balance_blocked** | **Float** | Part of the balance held, in reais. | [optional] |
 | **status** | **String** | Account status. | [optional] |
-| **allow_withdraw** | **Boolean** | When false, creating withdrawals is refused for lack of permission (PZS200). | [optional] |
-| **allow_deposit** | **Boolean** | When false, creating inbound Pix charges is refused for lack of permission (PZD200). | [optional] |
 | **cash_in_ticket_min** | **Float** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] |
 | **cash_in_ticket_max** | **Float** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] |
 | **cash_out_ticket_min** | **Float** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] |
@@ -33,8 +31,6 @@ instance = PayZuPix::GetUser200Response.new(
   balance_available: null,
   balance_blocked: null,
   status: null,
-  allow_withdraw: null,
-  allow_deposit: null,
   cash_in_ticket_min: null,
   cash_in_ticket_max: null,
   cash_out_ticket_min: null,

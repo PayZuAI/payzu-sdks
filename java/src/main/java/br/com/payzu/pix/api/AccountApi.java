@@ -166,7 +166,7 @@ public class AccountApi {
 
   /**
    * Account Info
-   * Account profile, permissions, limits and fee rules.
+   * Account profile, limits and fee rules.
    * @return GetUser200Response
    * @throws ApiException if fails to make API call
    */
@@ -176,7 +176,7 @@ public class AccountApi {
 
   /**
    * Account Info
-   * Account profile, permissions, limits and fee rules.
+   * Account profile, limits and fee rules.
    * @param headers Optional headers to include in the request
    * @return GetUser200Response
    * @throws ApiException if fails to make API call
@@ -188,7 +188,7 @@ public class AccountApi {
 
   /**
    * Account Info
-   * Account profile, permissions, limits and fee rules.
+   * Account profile, limits and fee rules.
    * @return ApiResponse&lt;GetUser200Response&gt;
    * @throws ApiException if fails to make API call
    */
@@ -198,7 +198,7 @@ public class AccountApi {
 
   /**
    * Account Info
-   * Account profile, permissions, limits and fee rules.
+   * Account profile, limits and fee rules.
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;GetUser200Response&gt;
    * @throws ApiException if fails to make API call

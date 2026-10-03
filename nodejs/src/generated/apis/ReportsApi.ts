@@ -417,8 +417,8 @@ export interface ReportsApiInterface {
 
     /**
      * Creates request options for getUserTransactions without sending the request
-     * @param {Date} [dateFrom] Start date or date-time (ISO 8601).
-     * @param {Date} [dateTo] End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+     * @param {Date} [dateFrom] Start date-time (ISO 8601).
+     * @param {Date} [dateTo] End date-time (ISO 8601).
      * @param {number} [limit] Items per page (max 1000).
      * @param {number} [page] Page number (default 1).
      * @param {string} [id] Transaction ID.
@@ -442,8 +442,8 @@ export interface ReportsApiInterface {
     /**
      * Paginated list of account transactions with filters.
      * @summary List Transactions
-     * @param {Date} [dateFrom] Start date or date-time (ISO 8601).
-     * @param {Date} [dateTo] End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+     * @param {Date} [dateFrom] Start date-time (ISO 8601).
+     * @param {Date} [dateTo] End date-time (ISO 8601).
      * @param {number} [limit] Items per page (max 1000).
      * @param {number} [page] Page number (default 1).
      * @param {string} [id] Transaction ID.

@@ -175,8 +175,8 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-created_at_from = Time.parse('2026-08-01') # Time | Start date (required).
-created_at_to = Time.parse('2026-08-31') # Time | End date (required).
+created_at_from = Time.parse('2026-08-01T00:00:00-03:00') # Time | Start date (required).
+created_at_to = Time.parse('2026-08-31T23:59:59-03:00') # Time | End date (required).
 opts = {
   id: 'cm3w7q8s10004q8f2k9f5b7eh', # String | Entry ID.
   operation: 'INCREMENT', # String | Operation type.  `INCREMENT` `DECREMENT`
@@ -496,8 +496,8 @@ end
 
 api_instance = PayZuPix::ReportsApi.new
 opts = {
-  date_from: Time.parse('2026-08-01'), # Time | Start date. Default: start of the previous day (America/Sao_Paulo).
-  date_to: Time.parse('2026-08-31'), # Time | End date. Default: now.
+  date_from: Time.parse('2026-08-01T00:00:00-03:00'), # Time | Start date. Default: start of the previous day (America/Sao_Paulo).
+  date_to: Time.parse('2026-08-31T23:59:59-03:00'), # Time | End date. Default: now.
   group_by: 'day', # String | Grouping applied to the transactions.
   grouped: true # Boolean | When true, returns a series grouped by date.
 }
@@ -642,8 +642,8 @@ end
 
 api_instance = PayZuPix::ReportsApi.new
 opts = {
-  date_from: Time.parse('2026-08-01'), # Time | Start date or date-time (ISO 8601).
-  date_to: Time.parse('2026-08-31'), # Time | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+  date_from: Time.parse('2026-08-01T00:00:00-03:00'), # Time | Start date-time (ISO 8601).
+  date_to: Time.parse('2026-08-31T23:59:59-03:00'), # Time | End date-time (ISO 8601).
   limit: 10, # Integer | Items per page (max 1000).
   page: 1, # Integer | Page number (default 1).
   id: 'PAYZU20260814T6NX1CV9MK000000', # String | Transaction ID.
@@ -692,8 +692,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **date_from** | **Time** | Start date or date-time (ISO 8601). | [optional] |
-| **date_to** | **Time** | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [optional] |
+| **date_from** | **Time** | Start date-time (ISO 8601). | [optional] |
+| **date_to** | **Time** | End date-time (ISO 8601). | [optional] |
 | **limit** | **Integer** | Items per page (max 1000). | [optional][default to 10] |
 | **page** | **Integer** | Page number (default 1). | [optional][default to 1] |
 | **id** | **String** | Transaction ID. | [optional] |

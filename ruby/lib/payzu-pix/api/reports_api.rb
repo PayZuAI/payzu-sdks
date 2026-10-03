@@ -647,8 +647,8 @@ module PayZuPix
     # List Transactions
     # Paginated list of account transactions with filters.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date or date-time (ISO 8601).
-    # @option opts [Time] :date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+    # @option opts [Time] :date_from Start date-time (ISO 8601).
+    # @option opts [Time] :date_to End date-time (ISO 8601).
     # @option opts [Integer] :limit Items per page (max 1000). (default to 10)
     # @option opts [Integer] :page Page number (default 1). (default to 1)
     # @option opts [String] :id Transaction ID.
@@ -673,8 +673,8 @@ module PayZuPix
     # List Transactions
     # Paginated list of account transactions with filters.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date or date-time (ISO 8601).
-    # @option opts [Time] :date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+    # @option opts [Time] :date_from Start date-time (ISO 8601).
+    # @option opts [Time] :date_to End date-time (ISO 8601).
     # @option opts [Integer] :limit Items per page (max 1000). (default to 10)
     # @option opts [Integer] :page Page number (default 1). (default to 1)
     # @option opts [String] :id Transaction ID.

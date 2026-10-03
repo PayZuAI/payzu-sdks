@@ -166,8 +166,8 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$created_at_from = 2026-08-01; // \DateTime | Start date (required).
-$created_at_to = 2026-08-31; // \DateTime | End date (required).
+$created_at_from = 2026-08-01T00:00:00-03:00; // \DateTime | Start date (required).
+$created_at_to = 2026-08-31T23:59:59-03:00; // \DateTime | End date (required).
 $id = cm3w7q8s10004q8f2k9f5b7eh; // string | Entry ID.
 $operation = 'operation_example'; // string | Operation type.  `INCREMENT` `DECREMENT`
 $reason = Estorno; // string | Reason for the entry.
@@ -446,8 +446,8 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$date_from = 2026-08-01; // \DateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
-$date_to = 2026-08-31; // \DateTime | End date. Default: now.
+$date_from = 2026-08-01T00:00:00-03:00; // \DateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
+$date_to = 2026-08-31T23:59:59-03:00; // \DateTime | End date. Default: now.
 $group_by = 'day'; // string | Grouping applied to the transactions.
 $grouped = true; // bool | When true, returns a series grouped by date.
 
@@ -572,8 +572,8 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$date_from = 2026-08-01; // \DateTime | Start date or date-time (ISO 8601).
-$date_to = 2026-08-31; // \DateTime | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+$date_from = 2026-08-01T00:00:00-03:00; // \DateTime | Start date-time (ISO 8601).
+$date_to = 2026-08-31T23:59:59-03:00; // \DateTime | End date-time (ISO 8601).
 $limit = 10; // int | Items per page (max 1000).
 $page = 1; // int | Page number (default 1).
 $id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
@@ -602,8 +602,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date_from** | **\DateTime**| Start date or date-time (ISO 8601). | [optional] |
-| **date_to** | **\DateTime**| End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [optional] |
+| **date_from** | **\DateTime**| Start date-time (ISO 8601). | [optional] |
+| **date_to** | **\DateTime**| End date-time (ISO 8601). | [optional] |
 | **limit** | **int**| Items per page (max 1000). | [optional] [default to 10] |
 | **page** | **int**| Page number (default 1). | [optional] [default to 1] |
 | **id** | **string**| Transaction ID. | [optional] |

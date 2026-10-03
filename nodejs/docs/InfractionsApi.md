@@ -448,11 +448,11 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Defense created |  -  |
-| **400** | Invalid request or file |  -  |
+| **400** | Invalid request or file: files above 10 MB in total or with a blocked extension |  -  |
 | **401** | Authentication failure |  -  |
 | **403** | Operation not allowed |  -  |
 | **404** | Infraction not found |  -  |
-| **413** | More than 5 files or a file larger than 10 MB |  -  |
+| **413** | More than 5 files or a single file larger than 10 MB |  -  |
 | **422** | Infraction not open for defense |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)

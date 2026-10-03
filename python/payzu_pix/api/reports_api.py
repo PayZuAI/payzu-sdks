@@ -2656,8 +2656,8 @@ class ReportsApi:
     @validate_call
     def get_user_transactions(
         self,
-        date_from: Annotated[Optional[datetime], Field(description="Start date or date-time (ISO 8601).")] = None,
-        date_to: Annotated[Optional[datetime], Field(description="End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.")] = None,
+        date_from: Annotated[Optional[datetime], Field(description="Start date-time (ISO 8601).")] = None,
+        date_to: Annotated[Optional[datetime], Field(description="End date-time (ISO 8601).")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Items per page (max 1000).")] = None,
         page: Annotated[Optional[Annotated[int, Field(le=100000, strict=True, ge=1)]], Field(description="Page number (default 1).")] = None,
         id: Annotated[Optional[StrictStr], Field(description="Transaction ID.")] = None,
@@ -2690,9 +2690,9 @@ class ReportsApi:
 
         Paginated list of account transactions with filters.
 
-        :param date_from: Start date or date-time (ISO 8601).
+        :param date_from: Start date-time (ISO 8601).
         :type date_from: datetime
-        :param date_to: End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+        :param date_to: End date-time (ISO 8601).
         :type date_to: datetime
         :param limit: Items per page (max 1000).
         :type limit: int
@@ -2789,8 +2789,8 @@ class ReportsApi:
     @validate_call
     def get_user_transactions_with_http_info(
         self,
-        date_from: Annotated[Optional[datetime], Field(description="Start date or date-time (ISO 8601).")] = None,
-        date_to: Annotated[Optional[datetime], Field(description="End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.")] = None,
+        date_from: Annotated[Optional[datetime], Field(description="Start date-time (ISO 8601).")] = None,
+        date_to: Annotated[Optional[datetime], Field(description="End date-time (ISO 8601).")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Items per page (max 1000).")] = None,
         page: Annotated[Optional[Annotated[int, Field(le=100000, strict=True, ge=1)]], Field(description="Page number (default 1).")] = None,
         id: Annotated[Optional[StrictStr], Field(description="Transaction ID.")] = None,
@@ -2823,9 +2823,9 @@ class ReportsApi:
 
         Paginated list of account transactions with filters.
 
-        :param date_from: Start date or date-time (ISO 8601).
+        :param date_from: Start date-time (ISO 8601).
         :type date_from: datetime
-        :param date_to: End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+        :param date_to: End date-time (ISO 8601).
         :type date_to: datetime
         :param limit: Items per page (max 1000).
         :type limit: int
@@ -2922,8 +2922,8 @@ class ReportsApi:
     @validate_call
     def get_user_transactions_without_preload_content(
         self,
-        date_from: Annotated[Optional[datetime], Field(description="Start date or date-time (ISO 8601).")] = None,
-        date_to: Annotated[Optional[datetime], Field(description="End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.")] = None,
+        date_from: Annotated[Optional[datetime], Field(description="Start date-time (ISO 8601).")] = None,
+        date_to: Annotated[Optional[datetime], Field(description="End date-time (ISO 8601).")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Items per page (max 1000).")] = None,
         page: Annotated[Optional[Annotated[int, Field(le=100000, strict=True, ge=1)]], Field(description="Page number (default 1).")] = None,
         id: Annotated[Optional[StrictStr], Field(description="Transaction ID.")] = None,
@@ -2956,9 +2956,9 @@ class ReportsApi:
 
         Paginated list of account transactions with filters.
 
-        :param date_from: Start date or date-time (ISO 8601).
+        :param date_from: Start date-time (ISO 8601).
         :type date_from: datetime
-        :param date_to: End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+        :param date_to: End date-time (ISO 8601).
         :type date_to: datetime
         :param limit: Items per page (max 1000).
         :type limit: int

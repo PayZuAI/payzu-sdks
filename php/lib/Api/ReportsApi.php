@@ -2999,8 +2999,8 @@ class ReportsApi
      *
      * List Transactions
      *
-     * @param  \DateTime|null $date_from Start date or date-time (ISO 8601). (optional)
-     * @param  \DateTime|null $date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+     * @param  \DateTime|null $date_from Start date-time (ISO 8601). (optional)
+     * @param  \DateTime|null $date_to End date-time (ISO 8601). (optional)
      * @param  int|null $limit Items per page (max 1000). (optional, default to 10)
      * @param  int|null $page Page number (default 1). (optional, default to 1)
      * @param  string|null $id Transaction ID. (optional)
@@ -3033,8 +3033,8 @@ class ReportsApi
      *
      * List Transactions
      *
-     * @param  \DateTime|null $date_from Start date or date-time (ISO 8601). (optional)
-     * @param  \DateTime|null $date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+     * @param  \DateTime|null $date_from Start date-time (ISO 8601). (optional)
+     * @param  \DateTime|null $date_to End date-time (ISO 8601). (optional)
      * @param  int|null $limit Items per page (max 1000). (optional, default to 10)
      * @param  int|null $page Page number (default 1). (optional, default to 1)
      * @param  string|null $id Transaction ID. (optional)
@@ -3162,8 +3162,8 @@ class ReportsApi
      *
      * List Transactions
      *
-     * @param  \DateTime|null $date_from Start date or date-time (ISO 8601). (optional)
-     * @param  \DateTime|null $date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+     * @param  \DateTime|null $date_from Start date-time (ISO 8601). (optional)
+     * @param  \DateTime|null $date_to End date-time (ISO 8601). (optional)
      * @param  int|null $limit Items per page (max 1000). (optional, default to 10)
      * @param  int|null $page Page number (default 1). (optional, default to 1)
      * @param  string|null $id Transaction ID. (optional)
@@ -3199,8 +3199,8 @@ class ReportsApi
      *
      * List Transactions
      *
-     * @param  \DateTime|null $date_from Start date or date-time (ISO 8601). (optional)
-     * @param  \DateTime|null $date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+     * @param  \DateTime|null $date_from Start date-time (ISO 8601). (optional)
+     * @param  \DateTime|null $date_to End date-time (ISO 8601). (optional)
      * @param  int|null $limit Items per page (max 1000). (optional, default to 10)
      * @param  int|null $page Page number (default 1). (optional, default to 1)
      * @param  string|null $id Transaction ID. (optional)
@@ -3265,8 +3265,8 @@ class ReportsApi
     /**
      * Create request for operation 'getUserTransactions'
      *
-     * @param  \DateTime|null $date_from Start date or date-time (ISO 8601). (optional)
-     * @param  \DateTime|null $date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+     * @param  \DateTime|null $date_from Start date-time (ISO 8601). (optional)
+     * @param  \DateTime|null $date_to End date-time (ISO 8601). (optional)
      * @param  int|null $limit Items per page (max 1000). (optional, default to 10)
      * @param  int|null $page Page number (default 1). (optional, default to 1)
      * @param  string|null $id Transaction ID. (optional)

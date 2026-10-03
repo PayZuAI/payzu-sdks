@@ -218,8 +218,8 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    created_at_from = '2026-08-01' # datetime | Start date (required).
-    created_at_to = '2026-08-31' # datetime | End date (required).
+    created_at_from = '2026-08-01T00:00:00-03:00' # datetime | Start date (required).
+    created_at_to = '2026-08-31T23:59:59-03:00' # datetime | End date (required).
     id = 'cm3w7q8s10004q8f2k9f5b7eh' # str | Entry ID. (optional)
     operation = 'operation_example' # str | Operation type.  `INCREMENT` `DECREMENT` (optional)
     reason = 'Estorno' # str | Reason for the entry. (optional)
@@ -579,8 +579,8 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    date_from = '2026-08-01' # datetime | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-    date_to = '2026-08-31' # datetime | End date. Default: now. (optional)
+    date_from = '2026-08-01T00:00:00-03:00' # datetime | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
+    date_to = '2026-08-31T23:59:59-03:00' # datetime | End date. Default: now. (optional)
     group_by = day # str | Grouping applied to the transactions. (optional) (default to day)
     grouped = true # bool | When true, returns a series grouped by date. (optional)
 
@@ -745,8 +745,8 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    date_from = '2026-08-01' # datetime | Start date or date-time (ISO 8601). (optional)
-    date_to = '2026-08-31' # datetime | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+    date_from = '2026-08-01T00:00:00-03:00' # datetime | Start date-time (ISO 8601). (optional)
+    date_to = '2026-08-31T23:59:59-03:00' # datetime | End date-time (ISO 8601). (optional)
     limit = 10 # int | Items per page (max 1000). (optional) (default to 10)
     page = 1 # int | Page number (default 1). (optional) (default to 1)
     id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID. (optional)
@@ -779,8 +779,8 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **date_from** | **datetime**| Start date or date-time (ISO 8601). | [optional] 
- **date_to** | **datetime**| End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [optional] 
+ **date_from** | **datetime**| Start date-time (ISO 8601). | [optional] 
+ **date_to** | **datetime**| End date-time (ISO 8601). | [optional] 
  **limit** | **int**| Items per page (max 1000). | [optional] [default to 10]
  **page** | **int**| Page number (default 1). | [optional] [default to 1]
  **id** | **str**| Transaction ID. | [optional] 

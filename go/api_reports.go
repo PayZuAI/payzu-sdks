@@ -1371,13 +1371,13 @@ type ApiGetUserTransactionsRequest struct {
 	hasQrCode *bool
 }
 
-// Start date or date-time (ISO 8601).
+// Start date-time (ISO 8601).
 func (r ApiGetUserTransactionsRequest) DateFrom(dateFrom time.Time) ApiGetUserTransactionsRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
-// End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+// End date-time (ISO 8601).
 func (r ApiGetUserTransactionsRequest) DateTo(dateTo time.Time) ApiGetUserTransactionsRequest {
 	r.dateTo = &dateTo
 	return r

@@ -362,8 +362,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         ReportsApi apiInstance = new ReportsApi(defaultClient);
-        OffsetDateTime createdAtFrom = OffsetDateTime.parse("2026-08-01"); // OffsetDateTime | Start date (required).
-        OffsetDateTime createdAtTo = OffsetDateTime.parse("2026-08-31"); // OffsetDateTime | End date (required).
+        OffsetDateTime createdAtFrom = OffsetDateTime.parse("2026-08-01T00:00:00-03:00"); // OffsetDateTime | Start date (required).
+        OffsetDateTime createdAtTo = OffsetDateTime.parse("2026-08-31T23:59:59-03:00"); // OffsetDateTime | End date (required).
         String id = "cm3w7q8s10004q8f2k9f5b7eh"; // String | Entry ID.
         String operation = "INCREMENT"; // String | Operation type.  `INCREMENT` `DECREMENT`
         String reason = "Estorno"; // String | Reason for the entry.
@@ -457,8 +457,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         ReportsApi apiInstance = new ReportsApi(defaultClient);
-        OffsetDateTime createdAtFrom = OffsetDateTime.parse("2026-08-01"); // OffsetDateTime | Start date (required).
-        OffsetDateTime createdAtTo = OffsetDateTime.parse("2026-08-31"); // OffsetDateTime | End date (required).
+        OffsetDateTime createdAtFrom = OffsetDateTime.parse("2026-08-01T00:00:00-03:00"); // OffsetDateTime | Start date (required).
+        OffsetDateTime createdAtTo = OffsetDateTime.parse("2026-08-31T23:59:59-03:00"); // OffsetDateTime | End date (required).
         String id = "cm3w7q8s10004q8f2k9f5b7eh"; // String | Entry ID.
         String operation = "INCREMENT"; // String | Operation type.  `INCREMENT` `DECREMENT`
         String reason = "Estorno"; // String | Reason for the entry.
@@ -1036,8 +1036,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         ReportsApi apiInstance = new ReportsApi(defaultClient);
-        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01"); // OffsetDateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
-        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31"); // OffsetDateTime | End date. Default: now.
+        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01T00:00:00-03:00"); // OffsetDateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
+        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31T23:59:59-03:00"); // OffsetDateTime | End date. Default: now.
         String groupBy = "day"; // String | Grouping applied to the transactions.
         Boolean grouped = true; // Boolean | When true, returns a series grouped by date.
         try {
@@ -1115,8 +1115,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         ReportsApi apiInstance = new ReportsApi(defaultClient);
-        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01"); // OffsetDateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
-        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31"); // OffsetDateTime | End date. Default: now.
+        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01T00:00:00-03:00"); // OffsetDateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
+        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31T23:59:59-03:00"); // OffsetDateTime | End date. Default: now.
         String groupBy = "day"; // String | Grouping applied to the transactions.
         Boolean grouped = true; // Boolean | When true, returns a series grouped by date.
         try {
@@ -1344,8 +1344,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         ReportsApi apiInstance = new ReportsApi(defaultClient);
-        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01"); // OffsetDateTime | Start date or date-time (ISO 8601).
-        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31"); // OffsetDateTime | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01T00:00:00-03:00"); // OffsetDateTime | Start date-time (ISO 8601).
+        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31T23:59:59-03:00"); // OffsetDateTime | End date-time (ISO 8601).
         Integer limit = 10; // Integer | Items per page (max 1000).
         Integer page = 1; // Integer | Page number (default 1).
         String id = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID.
@@ -1380,8 +1380,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dateFrom** | **OffsetDateTime**| Start date or date-time (ISO 8601). | [optional] |
-| **dateTo** | **OffsetDateTime**| End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [optional] |
+| **dateFrom** | **OffsetDateTime**| Start date-time (ISO 8601). | [optional] |
+| **dateTo** | **OffsetDateTime**| End date-time (ISO 8601). | [optional] |
 | **limit** | **Integer**| Items per page (max 1000). | [optional] [default to 10] |
 | **page** | **Integer**| Page number (default 1). | [optional] [default to 1] |
 | **id** | **String**| Transaction ID. | [optional] |
@@ -1449,8 +1449,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         ReportsApi apiInstance = new ReportsApi(defaultClient);
-        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01"); // OffsetDateTime | Start date or date-time (ISO 8601).
-        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31"); // OffsetDateTime | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+        OffsetDateTime dateFrom = OffsetDateTime.parse("2026-08-01T00:00:00-03:00"); // OffsetDateTime | Start date-time (ISO 8601).
+        OffsetDateTime dateTo = OffsetDateTime.parse("2026-08-31T23:59:59-03:00"); // OffsetDateTime | End date-time (ISO 8601).
         Integer limit = 10; // Integer | Items per page (max 1000).
         Integer page = 1; // Integer | Page number (default 1).
         String id = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID.
@@ -1487,8 +1487,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dateFrom** | **OffsetDateTime**| Start date or date-time (ISO 8601). | [optional] |
-| **dateTo** | **OffsetDateTime**| End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [optional] |
+| **dateFrom** | **OffsetDateTime**| Start date-time (ISO 8601). | [optional] |
+| **dateTo** | **OffsetDateTime**| End date-time (ISO 8601). | [optional] |
 | **limit** | **Integer**| Items per page (max 1000). | [optional] [default to 10] |
 | **page** | **Integer**| Page number (default 1). | [optional] [default to 1] |
 | **id** | **String**| Transaction ID. | [optional] |

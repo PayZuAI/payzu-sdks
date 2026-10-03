@@ -1370,8 +1370,8 @@ public class ReportsApi {
   /**
    * List Transactions
    * Paginated list of account transactions with filters.
-   * @param dateFrom Start date or date-time (ISO 8601). (optional)
-   * @param dateTo End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+   * @param dateFrom Start date-time (ISO 8601). (optional)
+   * @param dateTo End date-time (ISO 8601). (optional)
    * @param limit Items per page (max 1000). (optional, default to 10)
    * @param page Page number (default 1). (optional, default to 1)
    * @param id Transaction ID. (optional)
@@ -1399,8 +1399,8 @@ public class ReportsApi {
   /**
    * List Transactions
    * Paginated list of account transactions with filters.
-   * @param dateFrom Start date or date-time (ISO 8601). (optional)
-   * @param dateTo End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+   * @param dateFrom Start date-time (ISO 8601). (optional)
+   * @param dateTo End date-time (ISO 8601). (optional)
    * @param limit Items per page (max 1000). (optional, default to 10)
    * @param page Page number (default 1). (optional, default to 1)
    * @param id Transaction ID. (optional)
@@ -1430,8 +1430,8 @@ public class ReportsApi {
   /**
    * List Transactions
    * Paginated list of account transactions with filters.
-   * @param dateFrom Start date or date-time (ISO 8601). (optional)
-   * @param dateTo End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+   * @param dateFrom Start date-time (ISO 8601). (optional)
+   * @param dateTo End date-time (ISO 8601). (optional)
    * @param limit Items per page (max 1000). (optional, default to 10)
    * @param page Page number (default 1). (optional, default to 1)
    * @param id Transaction ID. (optional)
@@ -1459,8 +1459,8 @@ public class ReportsApi {
   /**
    * List Transactions
    * Paginated list of account transactions with filters.
-   * @param dateFrom Start date or date-time (ISO 8601). (optional)
-   * @param dateTo End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+   * @param dateFrom Start date-time (ISO 8601). (optional)
+   * @param dateTo End date-time (ISO 8601). (optional)
    * @param limit Items per page (max 1000). (optional, default to 10)
    * @param page Page number (default 1). (optional, default to 1)
    * @param id Transaction ID. (optional)

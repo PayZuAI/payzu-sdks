@@ -637,8 +637,8 @@ import (
 )
 
 func main() {
-	dateFrom := time.Now() // time.Time | Start date or date-time (ISO 8601). (optional)
-	dateTo := time.Now() // time.Time | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
+	dateFrom := time.Now() // time.Time | Start date-time (ISO 8601). (optional)
+	dateTo := time.Now() // time.Time | End date-time (ISO 8601). (optional)
 	limit := int32(10) // int32 | Items per page (max 1000). (optional) (default to 10)
 	page := int32(1) // int32 | Page number (default 1). (optional) (default to 1)
 	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
@@ -678,8 +678,8 @@ Other parameters are passed through a pointer to a apiGetUserTransactionsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dateFrom** | **time.Time** | Start date or date-time (ISO 8601). | 
- **dateTo** | **time.Time** | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | 
+ **dateFrom** | **time.Time** | Start date-time (ISO 8601). | 
+ **dateTo** | **time.Time** | End date-time (ISO 8601). | 
  **limit** | **int32** | Items per page (max 1000). | [default to 10]
  **page** | **int32** | Page number (default 1). | [default to 1]
  **id** | **string** | Transaction ID. | 

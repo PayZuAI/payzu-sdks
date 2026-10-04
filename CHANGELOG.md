@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0
+
+### Mudanças incompatíveis
+
+- `GetUser200Response` não traz mais `allowWithdraw` e `allowDeposit`, nem os acessores deles, porque o `GET /user` da API parou de devolver os dois campos. Quem lia esses campos precisa tirar a leitura: com o SDK 2.x eles já chegavam vazios.
+- Go: o módulo passa a ser `github.com/PayZuAI/payzu-sdks/go/v3`.
+
+### Outras mudanças
+
+- O código gerado acompanha o OpenAPI publicado em docs.payzu.com.br, que estava à frente deste repositório. Mudam só textos: filtros `dateFrom` e `dateTo` dos relatórios, limites de arquivo da defesa de infração e exemplos de erro `PZS202` e `PZS206` do saque. A assinatura dos métodos é a mesma.
+- Payload antigo com `allowWithdraw` e `allowDeposit` continua sendo lido sem erro em Python, Ruby e Java.
+
 ## 2.0.0
 
 Todas as linguagens passam a sair na mesma versão. PHP, Ruby e Java ganham pacote publicado.

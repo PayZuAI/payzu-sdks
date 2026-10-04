@@ -8,7 +8,7 @@ modelNameMappings:
 additionalProperties:
   gemName: payzu-pix
   moduleName: PayZuPix
-  gemVersion: 2.0.0
+  gemVersion: 3.0.0
   gemLicense: MIT
   gemAuthor: PayZu
   gemAuthorEmail: suporte@payzu.com.br

@@ -7,7 +7,7 @@ additionalProperties:
   composerPackageName: payzu/pix
   invokerPackage: PayZu\Pix
   packageName: PayZuPix
-  artifactVersion: 2.0.0
+  artifactVersion: 3.0.0
   artifactUrl: https://docs.payzu.com.br
   licenseName: MIT
   developerOrganization: PayZu

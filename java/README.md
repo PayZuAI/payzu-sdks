@@ -15,7 +15,7 @@ REST API for Pix operations on the PayZu platform, deposits, withdrawals, intern
 - PHP: `composer require payzu/pix`
 - Ruby: `gem install payzu-pix`
 - Java: `br.com.payzu:payzu-pix` (Maven Central)
-- Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`
+- Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`
 
 Repo: https://github.com/PayZuAI/payzu-sdks
 
@@ -55,7 +55,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>br.com.payzu</groupId>
   <artifactId>payzu-pix</artifactId>
-  <version>2.0.0</version>
+  <version>3.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -65,7 +65,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "br.com.payzu:payzu-pix:2.0.0"
+compile "br.com.payzu:payzu-pix:3.0.0"
 ```
 
 ### Others
@@ -78,7 +78,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/payzu-pix-2.0.0.jar`
+- `target/payzu-pix-3.0.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

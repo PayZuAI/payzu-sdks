@@ -8,4 +8,4 @@ script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build payzu-pix.gemspec
-  - gem install ./payzu-pix-2.0.0.gem
+  - gem install ./payzu-pix-3.0.0.gem

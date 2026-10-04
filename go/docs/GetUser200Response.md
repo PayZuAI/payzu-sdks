@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **BalanceAvailable** | Pointer to **float32** | Balance free for withdrawals and transfers, in reais. | [optional] 
 **BalanceBlocked** | Pointer to **float32** | Part of the balance held, in reais. | [optional] 
 **Status** | Pointer to **string** | Account status. | [optional] 
-**AllowWithdraw** | Pointer to **bool** | When false, creating withdrawals is refused for lack of permission (PZS200). | [optional] 
-**AllowDeposit** | Pointer to **bool** | When false, creating inbound Pix charges is refused for lack of permission (PZD200). | [optional] 
 **CashInTicketMin** | Pointer to **float32** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] 
 **CashInTicketMax** | Pointer to **float32** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] 
 **CashOutTicketMin** | Pointer to **float32** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] 
@@ -223,56 +221,6 @@ SetStatus sets Status field to given value.
 `func (o *GetUser200Response) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetAllowWithdraw
-
-`func (o *GetUser200Response) GetAllowWithdraw() bool`
-
-GetAllowWithdraw returns the AllowWithdraw field if non-nil, zero value otherwise.
-
-### GetAllowWithdrawOk
-
-`func (o *GetUser200Response) GetAllowWithdrawOk() (*bool, bool)`
-
-GetAllowWithdrawOk returns a tuple with the AllowWithdraw field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowWithdraw
-
-`func (o *GetUser200Response) SetAllowWithdraw(v bool)`
-
-SetAllowWithdraw sets AllowWithdraw field to given value.
-
-### HasAllowWithdraw
-
-`func (o *GetUser200Response) HasAllowWithdraw() bool`
-
-HasAllowWithdraw returns a boolean if a field has been set.
-
-### GetAllowDeposit
-
-`func (o *GetUser200Response) GetAllowDeposit() bool`
-
-GetAllowDeposit returns the AllowDeposit field if non-nil, zero value otherwise.
-
-### GetAllowDepositOk
-
-`func (o *GetUser200Response) GetAllowDepositOk() (*bool, bool)`
-
-GetAllowDepositOk returns a tuple with the AllowDeposit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowDeposit
-
-`func (o *GetUser200Response) SetAllowDeposit(v bool)`
-
-SetAllowDeposit sets AllowDeposit field to given value.
-
-### HasAllowDeposit
-
-`func (o *GetUser200Response) HasAllowDeposit() bool`
-
-HasAllowDeposit returns a boolean if a field has been set.
 
 ### GetCashInTicketMin
 

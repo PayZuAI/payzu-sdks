@@ -195,9 +195,9 @@ async function example() {
 
   const body = {
     // Date | Start date (required).
-    createdAtFrom: 2026-08-01,
+    createdAtFrom: 2026-08-01T00:00:00-03:00,
     // Date | End date (required).
-    createdAtTo: 2026-08-31,
+    createdAtTo: 2026-08-31T23:59:59-03:00,
     // string | Entry ID. (optional)
     id: cm3w7q8s10004q8f2k9f5b7eh,
     // 'INCREMENT' | 'DECREMENT' | Operation type.  `INCREMENT` `DECREMENT` (optional)
@@ -548,9 +548,9 @@ async function example() {
 
   const body = {
     // Date | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-    dateFrom: 2026-08-01,
+    dateFrom: 2026-08-01T00:00:00-03:00,
     // Date | End date. Default: now. (optional)
-    dateTo: 2026-08-31,
+    dateTo: 2026-08-31T23:59:59-03:00,
     // 'day' | Grouping applied to the transactions. (optional)
     groupBy: groupBy_example,
     // boolean | When true, returns a series grouped by date. (optional)
@@ -702,10 +702,10 @@ async function example() {
   const api = new ReportsApi(config);
 
   const body = {
-    // Date | Start date or date-time (ISO 8601). (optional)
-    dateFrom: 2026-08-01,
-    // Date | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. (optional)
-    dateTo: 2026-08-31,
+    // Date | Start date-time (ISO 8601). (optional)
+    dateFrom: 2026-08-01T00:00:00-03:00,
+    // Date | End date-time (ISO 8601). (optional)
+    dateTo: 2026-08-31T23:59:59-03:00,
     // number | Items per page (max 1000). (optional)
     limit: 10,
     // number | Page number (default 1). (optional)
@@ -755,8 +755,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **dateFrom** | `Date` | Start date or date-time (ISO 8601). | [Optional] [Defaults to `undefined`] |
-| **dateTo** | `Date` | End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day. | [Optional] [Defaults to `undefined`] |
+| **dateFrom** | `Date` | Start date-time (ISO 8601). | [Optional] [Defaults to `undefined`] |
+| **dateTo** | `Date` | End date-time (ISO 8601). | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Items per page (max 1000). | [Optional] [Defaults to `10`] |
 | **page** | `number` | Page number (default 1). | [Optional] [Defaults to `1`] |
 | **id** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |

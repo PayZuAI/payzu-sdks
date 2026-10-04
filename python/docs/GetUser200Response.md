@@ -12,8 +12,6 @@ Name | Type | Description | Notes
 **balance_available** | **float** | Balance free for withdrawals and transfers, in reais. | [optional] 
 **balance_blocked** | **float** | Part of the balance held, in reais. | [optional] 
 **status** | **str** | Account status. | [optional] 
-**allow_withdraw** | **bool** | When false, creating withdrawals is refused for lack of permission (PZS200). | [optional] 
-**allow_deposit** | **bool** | When false, creating inbound Pix charges is refused for lack of permission (PZD200). | [optional] 
 **cash_in_ticket_min** | **float** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] 
 **cash_in_ticket_max** | **float** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] 
 **cash_out_ticket_min** | **float** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] 

@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 The version of the OpenAPI document: 1.8.0
 
@@ -35,12 +35,6 @@ module PayZuPix
 
     # Account status.
     attr_accessor :status
-
-    # When false, creating withdrawals is refused for lack of permission (PZS200).
-    attr_accessor :allow_withdraw
-
-    # When false, creating inbound Pix charges is refused for lack of permission (PZD200).
-    attr_accessor :allow_deposit
 
     # Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
     attr_accessor :cash_in_ticket_min
@@ -90,8 +84,6 @@ module PayZuPix
         :'balance_available' => :'balanceAvailable',
         :'balance_blocked' => :'balanceBlocked',
         :'status' => :'status',
-        :'allow_withdraw' => :'allowWithdraw',
-        :'allow_deposit' => :'allowDeposit',
         :'cash_in_ticket_min' => :'cashInTicketMin',
         :'cash_in_ticket_max' => :'cashInTicketMax',
         :'cash_out_ticket_min' => :'cashOutTicketMin',
@@ -121,8 +113,6 @@ module PayZuPix
         :'balance_available' => :'Float',
         :'balance_blocked' => :'Float',
         :'status' => :'String',
-        :'allow_withdraw' => :'Boolean',
-        :'allow_deposit' => :'Boolean',
         :'cash_in_ticket_min' => :'Float',
         :'cash_in_ticket_max' => :'Float',
         :'cash_out_ticket_min' => :'Float',
@@ -181,14 +171,6 @@ module PayZuPix
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'allow_withdraw')
-        self.allow_withdraw = attributes[:'allow_withdraw']
-      end
-
-      if attributes.key?(:'allow_deposit')
-        self.allow_deposit = attributes[:'allow_deposit']
       end
 
       if attributes.key?(:'cash_in_ticket_min')
@@ -268,8 +250,6 @@ module PayZuPix
           balance_available == o.balance_available &&
           balance_blocked == o.balance_blocked &&
           status == o.status &&
-          allow_withdraw == o.allow_withdraw &&
-          allow_deposit == o.allow_deposit &&
           cash_in_ticket_min == o.cash_in_ticket_min &&
           cash_in_ticket_max == o.cash_in_ticket_max &&
           cash_out_ticket_min == o.cash_out_ticket_min &&
@@ -287,7 +267,7 @@ module PayZuPix
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_number, branch, name, role, balance_available, balance_blocked, status, allow_withdraw, allow_deposit, cash_in_ticket_min, cash_in_ticket_max, cash_out_ticket_min, cash_out_ticket_max, service_fee, daily_withdraw_limit].hash
+      [account_number, branch, name, role, balance_available, balance_blocked, status, cash_in_ticket_min, cash_in_ticket_max, cash_out_ticket_min, cash_out_ticket_max, service_fee, daily_withdraw_limit].hash
     end
 
     # Builds the object from hash

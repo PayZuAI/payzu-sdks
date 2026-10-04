@@ -3,7 +3,7 @@
   "info": {
     "version": "1.8.0",
     "title": "PayZu Pix API",
-    "description": "REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.\n\n## SDKs oficiais\n\n- Node.js: `npm install payzu-pix`\n- Python: `pip install payzu-pix`\n- PHP: `composer require payzu/pix`\n- Ruby: `gem install payzu-pix`\n- Java: `br.com.payzu:payzu-pix` (Maven Central)\n- Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`\n\nRepo: https://github.com/PayZuAI/payzu-sdks\n",
+    "description": "REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.\n\n## SDKs oficiais\n\n- Node.js: `npm install payzu-pix`\n- Python: `pip install payzu-pix`\n- PHP: `composer require payzu/pix`\n- Ruby: `gem install payzu-pix`\n- Java: `br.com.payzu:payzu-pix` (Maven Central)\n- Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`\n\nRepo: https://github.com/PayZuAI/payzu-sdks\n",
     "contact": {
       "name": "Suporte PayZu",
       "url": "https://suporte.payzu.com.br"
@@ -1681,6 +1681,28 @@
                       "statusCode": 422,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
+                  },
+                  "PZS202": {
+                    "summary": "Daily withdrawal limit exceeded.",
+                    "value": {
+                      "status": "ERROR",
+                      "error": "Unprocessable Entity",
+                      "errorCode": "PZS202",
+                      "message": "Daily withdrawal limit exceeded.",
+                      "statusCode": 422,
+                      "requestId": "cmbz0f8qk0001js04hp3e2n0f"
+                    }
+                  },
+                  "PZS206": {
+                    "summary": "Daily limit not configured for this account.",
+                    "value": {
+                      "status": "ERROR",
+                      "error": "Unprocessable Entity",
+                      "errorCode": "PZS206",
+                      "message": "Daily limit not configured for this account.",
+                      "statusCode": 422,
+                      "requestId": "cmbz0f8qk0001js04hp3e2n0f"
+                    }
                   }
                 }
               }
@@ -2335,6 +2357,28 @@
                       "statusCode": 422,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
+                  },
+                  "PZS202": {
+                    "summary": "Daily withdrawal limit exceeded.",
+                    "value": {
+                      "status": "ERROR",
+                      "error": "Unprocessable Entity",
+                      "errorCode": "PZS202",
+                      "message": "Daily withdrawal limit exceeded.",
+                      "statusCode": 422,
+                      "requestId": "cmbz0f8qk0001js04hp3e2n0f"
+                    }
+                  },
+                  "PZS206": {
+                    "summary": "Daily limit not configured for this account.",
+                    "value": {
+                      "status": "ERROR",
+                      "error": "Unprocessable Entity",
+                      "errorCode": "PZS206",
+                      "message": "Daily limit not configured for this account.",
+                      "statusCode": 422,
+                      "requestId": "cmbz0f8qk0001js04hp3e2n0f"
+                    }
                   }
                 }
               }
@@ -2655,7 +2699,7 @@
     "/user": {
       "get": {
         "summary": "Account Info",
-        "description": "Account profile, permissions, limits and fee rules.",
+        "description": "Account profile, limits and fee rules.",
         "operationId": "get_user",
         "tags": [
           "Account"
@@ -2711,14 +2755,6 @@
                       "enum": [
                         "ACTIVE"
                       ]
-                    },
-                    "allowWithdraw": {
-                      "type": "boolean",
-                      "description": "When false, creating withdrawals is refused for lack of permission (PZS200)."
-                    },
-                    "allowDeposit": {
-                      "type": "boolean",
-                      "description": "When false, creating inbound Pix charges is refused for lack of permission (PZD200)."
                     },
                     "cashInTicketMin": {
                       "type": "number",
@@ -2812,8 +2848,6 @@
                       "balanceAvailable": 231.46,
                       "balanceBlocked": 0,
                       "status": "ACTIVE",
-                      "allowWithdraw": true,
-                      "allowDeposit": true,
                       "cashInTicketMin": 1,
                       "cashInTicketMax": 5000,
                       "cashOutTicketMin": 1,
@@ -2991,23 +3025,23 @@
             "in": "query",
             "name": "dateFrom",
             "required": false,
-            "description": "Start date or date-time (ISO 8601).",
+            "description": "Start date-time (ISO 8601).",
             "schema": {
               "type": "string",
               "format": "date-time"
             },
-            "example": "2026-08-01"
+            "example": "2026-08-01T00:00:00-03:00"
           },
           {
             "in": "query",
             "name": "dateTo",
             "required": false,
-            "description": "End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.",
+            "description": "End date-time (ISO 8601).",
             "schema": {
               "type": "string",
               "format": "date-time"
             },
-            "example": "2026-08-31"
+            "example": "2026-08-31T23:59:59-03:00"
           },
           {
             "in": "query",
@@ -4357,7 +4391,7 @@
             }
           },
           "400": {
-            "description": "Invalid request or file",
+            "description": "Invalid request or file: files above 10 MB in total or with a blocked extension",
             "content": {
               "application/json": {
                 "schema": {
@@ -4455,7 +4489,7 @@
             }
           },
           "413": {
-            "description": "More than 5 files or a file larger than 10 MB",
+            "description": "More than 5 files or a single file larger than 10 MB",
             "content": {
               "application/json": {
                 "schema": {
@@ -9125,7 +9159,7 @@
               "type": "string",
               "format": "date-time"
             },
-            "example": "2026-08-01"
+            "example": "2026-08-01T00:00:00-03:00"
           },
           {
             "in": "query",
@@ -9136,7 +9170,7 @@
               "type": "string",
               "format": "date-time"
             },
-            "example": "2026-08-31"
+            "example": "2026-08-31T23:59:59-03:00"
           },
           {
             "in": "query",
@@ -9350,19 +9384,19 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01&createdAtTo=2026-08-31' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
           },
           {
             "id": "js",
             "lang": "js",
             "label": "Node.js",
-            "source": "const url = 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01&createdAtTo=2026-08-31';\n\nconst response = await fetch(url, {\n  method: 'GET',\n  headers: {\n    Authorization: `Bearer ${process.env.PAYZU_TOKEN}`,\n  },\n});\n\nconst data = await response.json();\nconsole.log(data);"
+            "source": "const url = 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00';\n\nconst response = await fetch(url, {\n  method: 'GET',\n  headers: {\n    Authorization: `Bearer ${process.env.PAYZU_TOKEN}`,\n  },\n});\n\nconst data = await response.json();\nconsole.log(data);"
           },
           {
             "id": "python",
             "lang": "python",
             "label": "Python",
-            "source": "import os\nimport requests\n\nresponse = requests.get(\n    'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01&createdAtTo=2026-08-31',\n    headers={\n        'Authorization': f'Bearer {os.environ[\"PAYZU_TOKEN\"]}',\n    },\n)\n\nprint(response.json())"
+            "source": "import os\nimport requests\n\nresponse = requests.get(\n    'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00',\n    headers={\n        'Authorization': f'Bearer {os.environ[\"PAYZU_TOKEN\"]}',\n    },\n)\n\nprint(response.json())"
           }
         ],
         "externalDocs": {
@@ -9860,7 +9894,7 @@
               "type": "string",
               "format": "date-time"
             },
-            "example": "2026-08-01",
+            "example": "2026-08-01T00:00:00-03:00",
             "description": "Start date. Default: start of the previous day (America/Sao_Paulo)."
           },
           {
@@ -9871,7 +9905,7 @@
               "type": "string",
               "format": "date-time"
             },
-            "example": "2026-08-31",
+            "example": "2026-08-31T23:59:59-03:00",
             "description": "End date. Default: now."
           },
           {

@@ -14,8 +14,6 @@
 |**balanceAvailable** | **BigDecimal** | Balance free for withdrawals and transfers, in reais. |  [optional] |
 |**balanceBlocked** | **BigDecimal** | Part of the balance held, in reais. |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) | Account status. |  [optional] |
-|**allowWithdraw** | **Boolean** | When false, creating withdrawals is refused for lack of permission (PZS200). |  [optional] |
-|**allowDeposit** | **Boolean** | When false, creating inbound Pix charges is refused for lack of permission (PZD200). |  [optional] |
 |**cashInTicketMin** | **BigDecimal** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. |  [optional] |
 |**cashInTicketMax** | **BigDecimal** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. |  [optional] |
 |**cashOutTicketMin** | **BigDecimal** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. |  [optional] |

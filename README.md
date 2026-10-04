@@ -9,7 +9,7 @@ SDKs oficiais da API PayZu Pix, gerados do [OpenAPI](./openapi.json) publicado e
 | PHP       | [`payzu/pix`](https://packagist.org/packages/payzu/pix) | `composer require payzu/pix` |
 | Ruby      | [`payzu-pix`](https://rubygems.org/gems/payzu-pix) | `gem install payzu-pix` |
 | Java      | [`br.com.payzu:payzu-pix`](https://central.sonatype.com/artifact/br.com.payzu/payzu-pix) | Maven ou Gradle |
-| Go        | `github.com/PayZuAI/payzu-sdks/go/v2` | `go get github.com/PayZuAI/payzu-sdks/go/v2` |
+| Go        | `github.com/PayZuAI/payzu-sdks/go/v3` | `go get github.com/PayZuAI/payzu-sdks/go/v3` |
 
 ## Uso rápido (Node.js)
 

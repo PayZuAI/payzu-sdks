@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 The version of the OpenAPI document: 1.8.0
 
@@ -647,8 +647,8 @@ module PayZuPix
     # List Transactions
     # Paginated list of account transactions with filters.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date or date-time (ISO 8601).
-    # @option opts [Time] :date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+    # @option opts [Time] :date_from Start date-time (ISO 8601).
+    # @option opts [Time] :date_to End date-time (ISO 8601).
     # @option opts [Integer] :limit Items per page (max 1000). (default to 10)
     # @option opts [Integer] :page Page number (default 1). (default to 1)
     # @option opts [String] :id Transaction ID.
@@ -673,8 +673,8 @@ module PayZuPix
     # List Transactions
     # Paginated list of account transactions with filters.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date or date-time (ISO 8601).
-    # @option opts [Time] :date_to End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+    # @option opts [Time] :date_from Start date-time (ISO 8601).
+    # @option opts [Time] :date_to End date-time (ISO 8601).
     # @option opts [Integer] :limit Items per page (max 1000). (default to 10)
     # @option opts [Integer] :page Page number (default 1). (default to 1)
     # @option opts [String] :id Transaction ID.

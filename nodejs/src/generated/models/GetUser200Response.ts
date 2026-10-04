@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -76,18 +76,6 @@ export interface GetUser200Response {
      * @memberof GetUser200Response
      */
     status?: GetUser200ResponseStatusEnum;
-    /**
-     * When false, creating withdrawals is refused for lack of permission (PZS200).
-     * @type {boolean}
-     * @memberof GetUser200Response
-     */
-    allowWithdraw?: boolean;
-    /**
-     * When false, creating inbound Pix charges is refused for lack of permission (PZD200).
-     * @type {boolean}
-     * @memberof GetUser200Response
-     */
-    allowDeposit?: boolean;
     /**
      * Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
      * @type {number}
@@ -168,8 +156,6 @@ export function GetUser200ResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'balanceAvailable': json['balanceAvailable'] == null ? undefined : json['balanceAvailable'],
         'balanceBlocked': json['balanceBlocked'] == null ? undefined : json['balanceBlocked'],
         'status': json['status'] == null ? undefined : json['status'],
-        'allowWithdraw': json['allowWithdraw'] == null ? undefined : json['allowWithdraw'],
-        'allowDeposit': json['allowDeposit'] == null ? undefined : json['allowDeposit'],
         'cashInTicketMin': json['cashInTicketMin'] == null ? undefined : json['cashInTicketMin'],
         'cashInTicketMax': json['cashInTicketMax'] == null ? undefined : json['cashInTicketMax'],
         'cashOutTicketMin': json['cashOutTicketMin'] == null ? undefined : json['cashOutTicketMin'],
@@ -197,8 +183,6 @@ export function GetUser200ResponseToJSONTyped(value?: GetUser200Response | null,
         'balanceAvailable': value['balanceAvailable'],
         'balanceBlocked': value['balanceBlocked'],
         'status': value['status'],
-        'allowWithdraw': value['allowWithdraw'],
-        'allowDeposit': value['allowDeposit'],
         'cashInTicketMin': value['cashInTicketMin'],
         'cashInTicketMax': value['cashInTicketMax'],
         'cashOutTicketMin': value['cashOutTicketMin'],

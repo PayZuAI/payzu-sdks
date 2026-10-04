@@ -13,7 +13,7 @@ info:
     - PHP: `composer require payzu/pix`
     - Ruby: `gem install payzu-pix`
     - Java: `br.com.payzu:payzu-pix` (Maven Central)
-    - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`
+    - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`
 
     Repo: https://github.com/PayZuAI/payzu-sdks
   title: PayZu Pix API
@@ -1730,6 +1730,24 @@ paths:
                     message: Withdrawal not allowed for this account at the moment.
                     statusCode: 422
                     requestId: cmbz0f8qk0001js04hp3e2n0f
+                PZS202:
+                  summary: Daily withdrawal limit exceeded.
+                  value:
+                    status: ERROR
+                    error: Unprocessable Entity
+                    errorCode: PZS202
+                    message: Daily withdrawal limit exceeded.
+                    statusCode: 422
+                    requestId: cmbz0f8qk0001js04hp3e2n0f
+                PZS206:
+                  summary: Daily limit not configured for this account.
+                  value:
+                    status: ERROR
+                    error: Unprocessable Entity
+                    errorCode: PZS206
+                    message: Daily limit not configured for this account.
+                    statusCode: 422
+                    requestId: cmbz0f8qk0001js04hp3e2n0f
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Operation refused
@@ -2080,6 +2098,24 @@ paths:
                     message: Withdrawal not allowed for this account at the moment.
                     statusCode: 422
                     requestId: cmbz0f8qk0001js04hp3e2n0f
+                PZS202:
+                  summary: Daily withdrawal limit exceeded.
+                  value:
+                    status: ERROR
+                    error: Unprocessable Entity
+                    errorCode: PZS202
+                    message: Daily withdrawal limit exceeded.
+                    statusCode: 422
+                    requestId: cmbz0f8qk0001js04hp3e2n0f
+                PZS206:
+                  summary: Daily limit not configured for this account.
+                  value:
+                    status: ERROR
+                    error: Unprocessable Entity
+                    errorCode: PZS206
+                    message: Daily limit not configured for this account.
+                    statusCode: 422
+                    requestId: cmbz0f8qk0001js04hp3e2n0f
               schema:
                 $ref: "#/components/schemas/ApiError"
           description: Operation refused
@@ -2392,7 +2428,7 @@ paths:
       - application/pdf
   /user:
     get:
-      description: "Account profile, permissions, limits and fee rules."
+      description: "Account profile, limits and fee rules."
       operationId: get_user
       responses:
         "200":
@@ -2409,8 +2445,6 @@ paths:
                     balanceAvailable: 231.46
                     balanceBlocked: 0
                     status: ACTIVE
-                    allowWithdraw: true
-                    allowDeposit: true
                     cashInTicketMin: 1
                     cashInTicketMax: 5000
                     cashOutTicketMin: 1
@@ -2579,8 +2613,8 @@ paths:
         url: /docs/pix-processamento/tutoriais/reconciliation
       operationId: get_user_transactions
       parameters:
-      - description: Start date or date-time (ISO 8601).
-        example: 2026-08-01
+      - description: Start date-time (ISO 8601).
+        example: 2026-08-01T00:00:00-03:00
         explode: true
         in: query
         name: dateFrom
@@ -2589,9 +2623,8 @@ paths:
           format: date-time
           type: string
         style: form
-      - description: End date or date-time (ISO 8601). A date without time means 00:00
-          UTC of that day.
-        example: 2026-08-31
+      - description: End date-time (ISO 8601).
+        example: 2026-08-31T23:59:59-03:00
         explode: true
         in: query
         name: dateTo
@@ -3925,7 +3958,8 @@ paths:
                       message: The defense text is required
               schema:
                 $ref: "#/components/schemas/ApiError"
-          description: Invalid request or file
+          description: "Invalid request or file: files above 10 MB in total or with\
+            \ a blocked extension"
         "401":
           content:
             application/json:
@@ -3981,7 +4015,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiError"
-          description: More than 5 files or a file larger than 10 MB
+          description: More than 5 files or a single file larger than 10 MB
         "422":
           content:
             application/json:
@@ -8037,7 +8071,7 @@ paths:
       operationId: get_user_bank_statements
       parameters:
       - description: Start date (required).
-        example: 2026-08-01
+        example: 2026-08-01T00:00:00-03:00
         explode: true
         in: query
         name: createdAtFrom
@@ -8047,7 +8081,7 @@ paths:
           type: string
         style: form
       - description: End date (required).
-        example: 2026-08-31
+        example: 2026-08-31T23:59:59-03:00
         explode: true
         in: query
         name: createdAtTo
@@ -8234,13 +8268,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01&createdAtTo=2026-08-31' \
+            --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01&createdAtTo=2026-08-31';
+          const url = 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -8259,7 +8293,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01&createdAtTo=2026-08-31',
+              'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -8704,7 +8738,7 @@ paths:
       operationId: get_user_summary
       parameters:
       - description: "Start date. Default: start of the previous day (America/Sao_Paulo)."
-        example: 2026-08-01
+        example: 2026-08-01T00:00:00-03:00
         explode: true
         in: query
         name: dateFrom
@@ -8714,7 +8748,7 @@ paths:
           type: string
         style: form
       - description: "End date. Default: now."
-        example: 2026-08-31
+        example: 2026-08-31T23:59:59-03:00
         explode: true
         in: query
         name: dateTo
@@ -11621,7 +11655,6 @@ components:
         cashOutTicketMax: 2.3021358869347655
         balanceAvailable: 0.8008281904610115
         cashInTicketMin: 1.4658129805029452
-        allowDeposit: true
         accountNumber: accountNumber
         branch: "0001"
         cashOutTicketMin: 5.637376656633329
@@ -11638,7 +11671,6 @@ components:
           used: 1.0246457001441578
           lastReset: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        allowWithdraw: true
         status: ACTIVE
       properties:
         accountNumber:
@@ -11670,14 +11702,6 @@ components:
           enum:
           - ACTIVE
           type: string
-        allowWithdraw:
-          description: "When false, creating withdrawals is refused for lack of permission\
-            \ (PZS200)."
-          type: boolean
-        allowDeposit:
-          description: "When false, creating inbound Pix charges is refused for lack\
-            \ of permission (PZD200)."
-          type: boolean
         cashInTicketMin:
           description: "Minimum amount accepted in each inbound charge, in reais;\
             \ below the floor the creation is refused."

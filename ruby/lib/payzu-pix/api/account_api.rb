@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 The version of the OpenAPI document: 1.8.0
 
@@ -20,7 +20,7 @@ module PayZuPix
       @api_client = api_client
     end
     # Account Info
-    # Account profile, permissions, limits and fee rules.
+    # Account profile, limits and fee rules.
     # @param [Hash] opts the optional parameters
     # @return [GetUser200Response]
     def get_user(opts = {})
@@ -29,7 +29,7 @@ module PayZuPix
     end
 
     # Account Info
-    # Account profile, permissions, limits and fee rules.
+    # Account profile, limits and fee rules.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetUser200Response, Integer, Hash)>] GetUser200Response data, response status code and response headers
     def get_user_with_http_info(opts = {})

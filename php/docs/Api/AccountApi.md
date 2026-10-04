@@ -18,7 +18,7 @@ getUser(): \PayZu\Pix\Model\GetUser200Response
 
 Account Info
 
-Account profile, permissions, limits and fee rules.
+Account profile, limits and fee rules.
 
 ### Example
 

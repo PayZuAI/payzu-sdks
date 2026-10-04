@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -417,8 +417,8 @@ export interface ReportsApiInterface {
 
     /**
      * Creates request options for getUserTransactions without sending the request
-     * @param {Date} [dateFrom] Start date or date-time (ISO 8601).
-     * @param {Date} [dateTo] End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+     * @param {Date} [dateFrom] Start date-time (ISO 8601).
+     * @param {Date} [dateTo] End date-time (ISO 8601).
      * @param {number} [limit] Items per page (max 1000).
      * @param {number} [page] Page number (default 1).
      * @param {string} [id] Transaction ID.
@@ -442,8 +442,8 @@ export interface ReportsApiInterface {
     /**
      * Paginated list of account transactions with filters.
      * @summary List Transactions
-     * @param {Date} [dateFrom] Start date or date-time (ISO 8601).
-     * @param {Date} [dateTo] End date or date-time (ISO 8601). A date without time means 00:00 UTC of that day.
+     * @param {Date} [dateFrom] Start date-time (ISO 8601).
+     * @param {Date} [dateTo] End date-time (ISO 8601).
      * @param {number} [limit] Items per page (max 1000).
      * @param {number} [page] Page number (default 1).
      * @param {string} [id] Transaction ID.

@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v2`  Repo: https://github.com/PayZuAI/payzu-sdks 
+REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
 
 API version: 1.8.0
 */
@@ -33,10 +33,6 @@ type GetUser200Response struct {
 	BalanceBlocked *float32 `json:"balanceBlocked,omitempty"`
 	// Account status.
 	Status *string `json:"status,omitempty"`
-	// When false, creating withdrawals is refused for lack of permission (PZS200).
-	AllowWithdraw *bool `json:"allowWithdraw,omitempty"`
-	// When false, creating inbound Pix charges is refused for lack of permission (PZD200).
-	AllowDeposit *bool `json:"allowDeposit,omitempty"`
 	// Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
 	CashInTicketMin *float32 `json:"cashInTicketMin,omitempty"`
 	// Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
@@ -300,70 +296,6 @@ func (o *GetUser200Response) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetAllowWithdraw returns the AllowWithdraw field value if set, zero value otherwise.
-func (o *GetUser200Response) GetAllowWithdraw() bool {
-	if o == nil || IsNil(o.AllowWithdraw) {
-		var ret bool
-		return ret
-	}
-	return *o.AllowWithdraw
-}
-
-// GetAllowWithdrawOk returns a tuple with the AllowWithdraw field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetAllowWithdrawOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowWithdraw) {
-		return nil, false
-	}
-	return o.AllowWithdraw, true
-}
-
-// HasAllowWithdraw returns a boolean if a field has been set.
-func (o *GetUser200Response) HasAllowWithdraw() bool {
-	if o != nil && !IsNil(o.AllowWithdraw) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowWithdraw gets a reference to the given bool and assigns it to the AllowWithdraw field.
-func (o *GetUser200Response) SetAllowWithdraw(v bool) {
-	o.AllowWithdraw = &v
-}
-
-// GetAllowDeposit returns the AllowDeposit field value if set, zero value otherwise.
-func (o *GetUser200Response) GetAllowDeposit() bool {
-	if o == nil || IsNil(o.AllowDeposit) {
-		var ret bool
-		return ret
-	}
-	return *o.AllowDeposit
-}
-
-// GetAllowDepositOk returns a tuple with the AllowDeposit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetAllowDepositOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowDeposit) {
-		return nil, false
-	}
-	return o.AllowDeposit, true
-}
-
-// HasAllowDeposit returns a boolean if a field has been set.
-func (o *GetUser200Response) HasAllowDeposit() bool {
-	if o != nil && !IsNil(o.AllowDeposit) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowDeposit gets a reference to the given bool and assigns it to the AllowDeposit field.
-func (o *GetUser200Response) SetAllowDeposit(v bool) {
-	o.AllowDeposit = &v
-}
-
 // GetCashInTicketMin returns the CashInTicketMin field value if set, zero value otherwise.
 func (o *GetUser200Response) GetCashInTicketMin() float32 {
 	if o == nil || IsNil(o.CashInTicketMin) {
@@ -586,12 +518,6 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.AllowWithdraw) {
-		toSerialize["allowWithdraw"] = o.AllowWithdraw
-	}
-	if !IsNil(o.AllowDeposit) {
-		toSerialize["allowDeposit"] = o.AllowDeposit
 	}
 	if !IsNil(o.CashInTicketMin) {
 		toSerialize["cashInTicketMin"] = o.CashInTicketMin

@@ -263,7 +263,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/pix' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -514,7 +514,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/pix' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "amount": 10.9,
@@ -794,7 +794,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/pix/key?pixKey=example%40payzu.com.br' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -996,7 +996,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/pix/qrcode/read' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "emv": "00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55"
@@ -1193,7 +1193,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/proof/PAYZU20260814T6NX1CV9MK000000' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -1408,23 +1408,24 @@ paths:
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA203:
-                  summary: Access not allowed from this IP address.
+                  summary: Access not allowed from IP address 203.0.113.10.
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA203
-                    message: Access not allowed from this IP address.
+                    message: Access not allowed from IP address 203.0.113.10.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA205:
-                  summary: No IP address registered in the whitelist. Register the
-                    source IP before oper...
+                  summary: An account with a withdrawal token requires an IP registered
+                    in the whitelist...
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA205
-                    message: No IP address registered in the whitelist. Register the
-                      source IP before operating.
+                    message: An account with a withdrawal token requires an IP registered
+                      in the whitelist. Register the source IP (203.0.113.10) before
+                      operating.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
               schema:
@@ -1459,7 +1460,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/withdraw' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -1668,23 +1669,24 @@ paths:
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA203:
-                  summary: Access not allowed from this IP address.
+                  summary: Access not allowed from IP address 203.0.113.10.
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA203
-                    message: Access not allowed from this IP address.
+                    message: Access not allowed from IP address 203.0.113.10.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA205:
-                  summary: No IP address registered in the whitelist. Register the
-                    source IP before oper...
+                  summary: An account with a withdrawal token requires an IP registered
+                    in the whitelist...
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA205
-                    message: No IP address registered in the whitelist. Register the
-                      source IP before operating.
+                    message: An account with a withdrawal token requires an IP registered
+                      in the whitelist. Register the source IP (203.0.113.10) before
+                      operating.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA206:
@@ -1767,7 +1769,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/withdraw' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "amount": 2,
@@ -2034,23 +2036,24 @@ paths:
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA203:
-                  summary: Access not allowed from this IP address.
+                  summary: Access not allowed from IP address 203.0.113.10.
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA203
-                    message: Access not allowed from this IP address.
+                    message: Access not allowed from IP address 203.0.113.10.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA205:
-                  summary: No IP address registered in the whitelist. Register the
-                    source IP before oper...
+                  summary: An account with a withdrawal token requires an IP registered
+                    in the whitelist...
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA205
-                    message: No IP address registered in the whitelist. Register the
-                      source IP before operating.
+                    message: An account with a withdrawal token requires an IP registered
+                      in the whitelist. Register the source IP (203.0.113.10) before
+                      operating.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA206:
@@ -2159,7 +2162,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/withdraw/qrcode' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "qrCode": "00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55",
@@ -2371,7 +2374,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -2469,7 +2472,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -2546,7 +2549,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/balance' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -2889,7 +2892,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/transactions' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -3132,7 +3135,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -3248,7 +3251,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -3605,7 +3608,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/infractions' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -3727,7 +3730,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -3824,7 +3827,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -4004,7 +4007,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --form 'defense=A cobranca foi autorizada pelo titular. Comprovante em anexo.' \
             --form 'files=@evidencia.pdf'
       - id: js
@@ -4134,7 +4137,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -4301,23 +4304,24 @@ paths:
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA203:
-                  summary: Access not allowed from this IP address.
+                  summary: Access not allowed from IP address 203.0.113.10.
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA203
-                    message: Access not allowed from this IP address.
+                    message: Access not allowed from IP address 203.0.113.10.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA205:
-                  summary: No IP address registered in the whitelist. Register the
-                    source IP before oper...
+                  summary: An account with a withdrawal token requires an IP registered
+                    in the whitelist...
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA205
-                    message: No IP address registered in the whitelist. Register the
-                      source IP before operating.
+                    message: An account with a withdrawal token requires an IP registered
+                      in the whitelist. Register the source IP (203.0.113.10) before
+                      operating.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
               schema:
@@ -4351,7 +4355,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/internal-transfer' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -4539,23 +4543,24 @@ paths:
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA203:
-                  summary: Access not allowed from this IP address.
+                  summary: Access not allowed from IP address 203.0.113.10.
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA203
-                    message: Access not allowed from this IP address.
+                    message: Access not allowed from IP address 203.0.113.10.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA205:
-                  summary: No IP address registered in the whitelist. Register the
-                    source IP before oper...
+                  summary: An account with a withdrawal token requires an IP registered
+                    in the whitelist...
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA205
-                    message: No IP address registered in the whitelist. Register the
-                      source IP before operating.
+                    message: An account with a withdrawal token requires an IP registered
+                      in the whitelist. Register the source IP (203.0.113.10) before
+                      operating.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA206:
@@ -4671,7 +4676,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/internal-transfer' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "payerAccountNumber": "000000",
@@ -4801,7 +4806,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -5000,7 +5005,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/report' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -5148,7 +5153,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/report' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "dateFrom": "2026-07-01T00:00:00Z",
@@ -5314,7 +5319,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -5488,7 +5493,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -5658,7 +5663,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "createdAtFrom": "2026-08-05T00:00:00Z",
@@ -5847,7 +5852,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -5982,7 +5987,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -6165,23 +6170,24 @@ paths:
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA203:
-                  summary: Access not allowed from this IP address.
+                  summary: Access not allowed from IP address 203.0.113.10.
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA203
-                    message: Access not allowed from this IP address.
+                    message: Access not allowed from IP address 203.0.113.10.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA205:
-                  summary: No IP address registered in the whitelist. Register the
-                    source IP before oper...
+                  summary: An account with a withdrawal token requires an IP registered
+                    in the whitelist...
                   value:
                     status: ERROR
                     error: Forbidden
                     errorCode: PZA205
-                    message: No IP address registered in the whitelist. Register the
-                      source IP before operating.
+                    message: An account with a withdrawal token requires an IP registered
+                      in the whitelist. Register the source IP (203.0.113.10) before
+                      operating.
                     statusCode: 403
                     requestId: cmbz0f8qk0001js04hp3e2n0f
                 PZA206:
@@ -6311,7 +6317,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/refund/PAYZU20260814T6NX1CV9MK000000' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "amount": 30.5,
@@ -6444,7 +6450,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -6600,7 +6606,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "url": "https://sualoja.com.br/webhook",
@@ -6764,7 +6770,7 @@ paths:
         source: |-
           curl --request DELETE \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -6778,8 +6784,7 @@ paths:
             },
           });
 
-          const data = await response.json();
-          console.log(data);
+          console.log(response.status);
       - id: python
         lang: python
         label: Python
@@ -6794,7 +6799,7 @@ paths:
               },
           )
 
-          print(response.json())
+          print(response.status_code)
     get:
       description: Returns a single webhook.
       externalDocs:
@@ -6893,7 +6898,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -7074,7 +7079,7 @@ paths:
         source: |-
           curl --request PATCH \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "url": "https://sualoja.com.br/webhook",
@@ -7250,7 +7255,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -7373,7 +7378,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks/sent/quantity' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -7500,7 +7505,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -7690,7 +7695,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -7875,7 +7880,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN' \
+            --header "Authorization: Bearer $PAYZU_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{
             "createdAtFrom": "2026-08-05T00:00:00Z",
@@ -8174,7 +8179,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -8273,7 +8278,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -8495,7 +8500,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/deposit-pending' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -8594,7 +8599,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -8794,7 +8799,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/summary' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -9017,7 +9022,7 @@ paths:
         source: |-
           curl --request GET \
             --url 'https://api.payzu.processamento.com/v1/user/dict?key=john.doe%40example.com' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -9119,7 +9124,7 @@ paths:
         source: |-
           curl --request POST \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js
@@ -9219,7 +9224,7 @@ paths:
         source: |-
           curl --request PATCH \
             --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret/rotate' \
-            --header 'Authorization: Bearer $PAYZU_TOKEN'
+            --header "Authorization: Bearer $PAYZU_TOKEN"
       - id: js
         lang: js
         label: Node.js

@@ -4,7 +4,7 @@ SDKs oficiais da API PayZu Pix, gerados do [OpenAPI](./openapi.json) publicado e
 
 | Linguagem | Pacote | Instalação |
 | --------- | ------ | ---------- |
-| Node.js   | [`payzu-pix`](https://www.npmjs.com/package/payzu-pix) | `npm install payzu-pix` |
+| Node.js   | [`@payzu/pix`](https://www.npmjs.com/package/@payzu/pix) | `npm install @payzu/pix` |
 | Python    | [`payzu-pix`](https://pypi.org/project/payzu-pix/) | `pip install payzu-pix` |
 | PHP       | [`payzu/pix`](https://packagist.org/packages/payzu/pix) | `composer require payzu/pix` |
 | Ruby      | [`payzu-pix`](https://rubygems.org/gems/payzu-pix) | `gem install payzu-pix` |
@@ -14,7 +14,7 @@ SDKs oficiais da API PayZu Pix, gerados do [OpenAPI](./openapi.json) publicado e
 ## Uso rápido (Node.js)
 
 ```ts
-import { PayZu } from 'payzu-pix';
+import { PayZu } from '@payzu/pix';
 
 const payzu = new PayZu({ token: process.env.PAYZU_TOKEN });
 

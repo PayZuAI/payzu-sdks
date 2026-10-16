@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0
+
+### Outras mudanças
+
+- Node.js: o pacote passa a se chamar `@payzu/pix`, na organização PayZu do npm. `payzu-pix` fica marcado como descontinuado apontando para o nome novo; código e API iguais. Os pacotes dos outros registros não mudam de nome.
+
 ## 3.0.0
 
 ### Mudanças incompatíveis

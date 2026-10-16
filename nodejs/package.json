@@ -1,9 +1,12 @@
 {
-  "name": "payzu-pix",
+  "name": "@payzu/pix",
   "version": "3.0.0",
   "description": "SDK oficial Node.js da API PayZu Pix: depósitos, saques, transferências internas, infrações, relatórios e callbacks.",
   "author": "PayZu <suporte@payzu.com.br>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://docs.payzu.com.br",
   "repository": {
     "type": "git",

@@ -1,11 +1,11 @@
-# payzu-pix
+# @payzu/pix
 
 SDK oficial Node.js da API PayZu Pix: depósitos, saques, transferências internas, infrações, relatórios e callbacks.
 
 ## Instalação
 
 ```bash
-npm install payzu-pix
+npm install @payzu/pix
 ```
 
 ## Requisitos
@@ -16,7 +16,7 @@ npm install payzu-pix
 ## Uso rápido
 
 ```ts
-import { PayZu } from 'payzu-pix';
+import { PayZu } from '@payzu/pix';
 
 const payzu = new PayZu({ token: process.env.PAYZU_TOKEN });
 
@@ -112,7 +112,7 @@ const payzu = new PayZu({
 Toda falha vira `PayZuError`, com `status`, `code`, `requestId` e `body` quando disponíveis. Falhas de rede usam `code: 'NETWORK_ERROR'`.
 
 ```ts
-import { PayZu, PayZuError } from 'payzu-pix';
+import { PayZu, PayZuError } from '@payzu/pix';
 
 try {
   await payzu.pix.create({ amount: 0.5 });

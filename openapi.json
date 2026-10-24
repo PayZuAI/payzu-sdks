@@ -329,7 +329,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/pix' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"amount\": 10.9,\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"generatedName\": \"John Doe\",\n  \"generatedEmail\": \"john.doe@example.com\",\n  \"generatedDocument\": \"12345678901\",\n  \"expiresIn\": 600,\n  \"clientReference\": \"order_12345\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/pix' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"amount\": 10.9,\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"generatedName\": \"John Doe\",\n  \"generatedEmail\": \"john.doe@example.com\",\n  \"generatedDocument\": \"12345678901\",\n  \"expiresIn\": 600,\n  \"clientReference\": \"order_12345\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
           },
           {
             "id": "js",
@@ -602,7 +602,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/pix' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/pix' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -912,7 +912,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/pix/key?pixKey=example%40payzu.com.br' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/pix/key?pixKey=example%40payzu.com.br' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -1160,7 +1160,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/pix/qrcode/read' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"emv\": \"00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55\"\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/pix/qrcode/read' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"emv\": \"00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55\"\n}'"
           },
           {
             "id": "js",
@@ -1385,7 +1385,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/proof/PAYZU20260814T6NX1CV9MK000000' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/proof/PAYZU20260814T6NX1CV9MK000000' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -1627,23 +1627,23 @@
                     }
                   },
                   "PZA203": {
-                    "summary": "Access not allowed from this IP address.",
+                    "summary": "Access not allowed from IP address 203.0.113.10.",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA203",
-                      "message": "Access not allowed from this IP address.",
+                      "message": "Access not allowed from IP address 203.0.113.10.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
                   },
                   "PZA205": {
-                    "summary": "No IP address registered in the whitelist. Register the source IP before oper...",
+                    "summary": "An account with a withdrawal token requires an IP registered in the whitelist...",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA205",
-                      "message": "No IP address registered in the whitelist. Register the source IP before operating.",
+                      "message": "An account with a withdrawal token requires an IP registered in the whitelist. Register the source IP (203.0.113.10) before operating.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
@@ -1739,7 +1739,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"amount\": 2,\n  \"pixKey\": \"teste@teste.com\",\n  \"pixType\": \"email\",\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"clientReference\": \"withdraw_98765\",\n  \"description\": \"Weekly payout\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"amount\": 2,\n  \"pixKey\": \"teste@teste.com\",\n  \"pixType\": \"email\",\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"clientReference\": \"withdraw_98765\",\n  \"description\": \"Weekly payout\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
           },
           {
             "id": "js",
@@ -1980,23 +1980,23 @@
                     }
                   },
                   "PZA203": {
-                    "summary": "Access not allowed from this IP address.",
+                    "summary": "Access not allowed from IP address 203.0.113.10.",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA203",
-                      "message": "Access not allowed from this IP address.",
+                      "message": "Access not allowed from IP address 203.0.113.10.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
                   },
                   "PZA205": {
-                    "summary": "No IP address registered in the whitelist. Register the source IP before oper...",
+                    "summary": "An account with a withdrawal token requires an IP registered in the whitelist...",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA205",
-                      "message": "No IP address registered in the whitelist. Register the source IP before operating.",
+                      "message": "An account with a withdrawal token requires an IP registered in the whitelist. Register the source IP (203.0.113.10) before operating.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
@@ -2034,7 +2034,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -2303,23 +2303,23 @@
                     }
                   },
                   "PZA203": {
-                    "summary": "Access not allowed from this IP address.",
+                    "summary": "Access not allowed from IP address 203.0.113.10.",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA203",
-                      "message": "Access not allowed from this IP address.",
+                      "message": "Access not allowed from IP address 203.0.113.10.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
                   },
                   "PZA205": {
-                    "summary": "No IP address registered in the whitelist. Register the source IP before oper...",
+                    "summary": "An account with a withdrawal token requires an IP registered in the whitelist...",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA205",
-                      "message": "No IP address registered in the whitelist. Register the source IP before operating.",
+                      "message": "An account with a withdrawal token requires an IP registered in the whitelist. Register the source IP (203.0.113.10) before operating.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
@@ -2450,7 +2450,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw/qrcode' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"qrCode\": \"00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55\",\n  \"amount\": 20,\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"description\": \"Pagamento via QR Code\",\n  \"clientReference\": \"order-123\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw/qrcode' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"qrCode\": \"00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55\",\n  \"amount\": 20,\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"description\": \"Pagamento via QR Code\",\n  \"clientReference\": \"order-123\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
           },
           {
             "id": "js",
@@ -2675,7 +2675,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -2901,7 +2901,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -2990,7 +2990,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/balance' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/balance' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -3380,7 +3380,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/transactions' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/transactions' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -3646,7 +3646,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -3777,7 +3777,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -4166,7 +4166,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -4302,7 +4302,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -4527,7 +4527,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --form 'defense=A cobranca foi autorizada pelo titular. Comprovante em anexo.' \\\n  --form 'files=@evidencia.pdf'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --form 'defense=A cobranca foi autorizada pelo titular. Comprovante em anexo.' \\\n  --form 'files=@evidencia.pdf'"
           },
           {
             "id": "js",
@@ -4630,7 +4630,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -4770,7 +4770,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -4994,23 +4994,23 @@
                     }
                   },
                   "PZA203": {
-                    "summary": "Access not allowed from this IP address.",
+                    "summary": "Access not allowed from IP address 203.0.113.10.",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA203",
-                      "message": "Access not allowed from this IP address.",
+                      "message": "Access not allowed from IP address 203.0.113.10.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
                   },
                   "PZA205": {
-                    "summary": "No IP address registered in the whitelist. Register the source IP before oper...",
+                    "summary": "An account with a withdrawal token requires an IP registered in the whitelist...",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA205",
-                      "message": "No IP address registered in the whitelist. Register the source IP before operating.",
+                      "message": "An account with a withdrawal token requires an IP registered in the whitelist. Register the source IP (203.0.113.10) before operating.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
@@ -5152,7 +5152,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/internal-transfer' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"payerAccountNumber\": \"000000\",\n  \"receiverAccountNumber\": \"987654\",\n  \"amount\": 100.5,\n  \"description\": \"Pagamento referente a fatura #1234\",\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"clientReference\": \"transfer_abc_123\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/internal-transfer' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"payerAccountNumber\": \"000000\",\n  \"receiverAccountNumber\": \"987654\",\n  \"amount\": 100.5,\n  \"description\": \"Pagamento referente a fatura #1234\",\n  \"callbackUrl\": \"https://webhook.cool/\",\n  \"clientReference\": \"transfer_abc_123\",\n  \"virtualAccount\": \"loja-centro-01\"\n}'"
           },
           {
             "id": "js",
@@ -5341,23 +5341,23 @@
                     }
                   },
                   "PZA203": {
-                    "summary": "Access not allowed from this IP address.",
+                    "summary": "Access not allowed from IP address 203.0.113.10.",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA203",
-                      "message": "Access not allowed from this IP address.",
+                      "message": "Access not allowed from IP address 203.0.113.10.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
                   },
                   "PZA205": {
-                    "summary": "No IP address registered in the whitelist. Register the source IP before oper...",
+                    "summary": "An account with a withdrawal token requires an IP registered in the whitelist...",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA205",
-                      "message": "No IP address registered in the whitelist. Register the source IP before operating.",
+                      "message": "An account with a withdrawal token requires an IP registered in the whitelist. Register the source IP (203.0.113.10) before operating.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
@@ -5395,7 +5395,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/internal-transfer' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/internal-transfer' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -5580,7 +5580,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -5759,7 +5759,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/report' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"dateFrom\": \"2026-07-01T00:00:00Z\",\n  \"dateTo\": \"2026-07-31T23:59:59Z\",\n  \"status\": [\n    \"PENDING\"\n  ],\n  \"type\": [\n    \"DEPOSIT\"\n  ]\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/report' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"dateFrom\": \"2026-07-01T00:00:00Z\",\n  \"dateTo\": \"2026-07-31T23:59:59Z\",\n  \"status\": [\n    \"PENDING\"\n  ],\n  \"type\": [\n    \"DEPOSIT\"\n  ]\n}'"
           },
           {
             "id": "js",
@@ -5998,7 +5998,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/report' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/report' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -6155,7 +6155,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -6383,7 +6383,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -6606,7 +6606,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"createdAtFrom\": \"2026-08-05T00:00:00Z\",\n  \"createdAtTo\": \"2026-08-11T23:59:59Z\",\n  \"transactionIds\": [\n    \"PAYZU20260814T6NX1CV9MK000000\"\n  ],\n  \"transactionTypes\": [\n    \"DEPOSIT\"\n  ],\n  \"transactionStatus\": [\n    \"PENDING\"\n  ],\n  \"transactionEndToEndIds\": [\n    \"E12345678202608121200ABCDEFGHIJK\"\n  ]\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"createdAtFrom\": \"2026-08-05T00:00:00Z\",\n  \"createdAtTo\": \"2026-08-11T23:59:59Z\",\n  \"transactionIds\": [\n    \"PAYZU20260814T6NX1CV9MK000000\"\n  ],\n  \"transactionTypes\": [\n    \"DEPOSIT\"\n  ],\n  \"transactionStatus\": [\n    \"PENDING\"\n  ],\n  \"transactionEndToEndIds\": [\n    \"E12345678202608121200ABCDEFGHIJK\"\n  ]\n}'"
           },
           {
             "id": "js",
@@ -6774,7 +6774,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -6930,7 +6930,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -7145,23 +7145,23 @@
                     }
                   },
                   "PZA203": {
-                    "summary": "Access not allowed from this IP address.",
+                    "summary": "Access not allowed from IP address 203.0.113.10.",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA203",
-                      "message": "Access not allowed from this IP address.",
+                      "message": "Access not allowed from IP address 203.0.113.10.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
                   },
                   "PZA205": {
-                    "summary": "No IP address registered in the whitelist. Register the source IP before oper...",
+                    "summary": "An account with a withdrawal token requires an IP registered in the whitelist...",
                     "value": {
                       "status": "ERROR",
                       "error": "Forbidden",
                       "errorCode": "PZA205",
-                      "message": "No IP address registered in the whitelist. Register the source IP before operating.",
+                      "message": "An account with a withdrawal token requires an IP registered in the whitelist. Register the source IP (203.0.113.10) before operating.",
                       "statusCode": 403,
                       "requestId": "cmbz0f8qk0001js04hp3e2n0f"
                     }
@@ -7325,7 +7325,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/refund/PAYZU20260814T6NX1CV9MK000000' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"amount\": 30.5,\n  \"description\": \"Estorno solicitado pelo cliente\",\n  \"clientReference\": \"refund-2026-0001\"\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/refund/PAYZU20260814T6NX1CV9MK000000' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"amount\": 30.5,\n  \"description\": \"Estorno solicitado pelo cliente\",\n  \"clientReference\": \"refund-2026-0001\"\n}'"
           },
           {
             "id": "js",
@@ -7512,7 +7512,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"url\": \"https://sualoja.com.br/webhook\",\n  \"events\": [],\n  \"generateSecret\": false,\n  \"active\": true\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"url\": \"https://sualoja.com.br/webhook\",\n  \"events\": [],\n  \"generateSecret\": false,\n  \"active\": true\n}'"
           },
           {
             "id": "js",
@@ -7645,7 +7645,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -7799,7 +7799,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -8018,7 +8018,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request PATCH \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"url\": \"https://sualoja.com.br/webhook\",\n  \"active\": true,\n  \"events\": [\n    \"TRANSACTION_PENDING\"\n  ]\n}'"
+            "source": "curl --request PATCH \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"url\": \"https://sualoja.com.br/webhook\",\n  \"active\": true,\n  \"events\": [\n    \"TRANSACTION_PENDING\"\n  ]\n}'"
           },
           {
             "id": "js",
@@ -8181,19 +8181,19 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request DELETE \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request DELETE \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
             "lang": "js",
             "label": "Node.js",
-            "source": "const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';\n\nconst response = await fetch(url, {\n  method: 'DELETE',\n  headers: {\n    Authorization: `Bearer ${process.env.PAYZU_TOKEN}`,\n  },\n});\n\nconst data = await response.json();\nconsole.log(data);"
+            "source": "const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';\n\nconst response = await fetch(url, {\n  method: 'DELETE',\n  headers: {\n    Authorization: `Bearer ${process.env.PAYZU_TOKEN}`,\n  },\n});\n\nconsole.log(response.status);"
           },
           {
             "id": "python",
             "lang": "python",
             "label": "Python",
-            "source": "import os\nimport requests\n\nresponse = requests.delete(\n    'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',\n    headers={\n        'Authorization': f'Bearer {os.environ[\"PAYZU_TOKEN\"]}',\n    },\n)\n\nprint(response.json())"
+            "source": "import os\nimport requests\n\nresponse = requests.delete(\n    'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',\n    headers={\n        'Authorization': f'Bearer {os.environ[\"PAYZU_TOKEN\"]}',\n    },\n)\n\nprint(response.status_code)"
           }
         ],
         "externalDocs": {
@@ -8360,7 +8360,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -8505,7 +8505,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/sent/quantity' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/sent/quantity' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -8653,7 +8653,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -8887,7 +8887,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -9119,7 +9119,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"createdAtFrom\": \"2026-08-05T00:00:00Z\",\n  \"createdAtTo\": \"2026-08-11T23:59:59Z\",\n  \"webhookIds\": [\n    \"cm3w7k1t40000q8f2r5b9x3ad\"\n  ],\n  \"transactionIds\": [\n    \"PAYZU20260814T6NX1CV9MK000000\"\n  ],\n  \"transactionTypes\": [\n    \"DEPOSIT\"\n  ],\n  \"transactionStatus\": [\n    \"PENDING\"\n  ],\n  \"transactionEndToEndIds\": [\n    \"E12345678202608121200ABCDEFGHIJK\"\n  ]\n}'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"createdAtFrom\": \"2026-08-05T00:00:00Z\",\n  \"createdAtTo\": \"2026-08-11T23:59:59Z\",\n  \"webhookIds\": [\n    \"cm3w7k1t40000q8f2r5b9x3ad\"\n  ],\n  \"transactionIds\": [\n    \"PAYZU20260814T6NX1CV9MK000000\"\n  ],\n  \"transactionTypes\": [\n    \"DEPOSIT\"\n  ],\n  \"transactionStatus\": [\n    \"PENDING\"\n  ],\n  \"transactionEndToEndIds\": [\n    \"E12345678202608121200ABCDEFGHIJK\"\n  ]\n}'"
           },
           {
             "id": "js",
@@ -9384,7 +9384,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -9493,7 +9493,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -9742,7 +9742,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/deposit-pending' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/deposit-pending' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -9851,7 +9851,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -10091,7 +10091,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/summary' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/summary' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -10371,7 +10371,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/dict?key=john.doe%40example.com' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request GET \\\n  --url 'https://api.payzu.processamento.com/v1/user/dict?key=john.doe%40example.com' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -10487,7 +10487,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request POST \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",
@@ -10598,7 +10598,7 @@
             "id": "curl",
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request PATCH \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret/rotate' \\\n  --header 'Authorization: Bearer $PAYZU_TOKEN'"
+            "source": "curl --request PATCH \\\n  --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret/rotate' \\\n  --header \"Authorization: Bearer $PAYZU_TOKEN\""
           },
           {
             "id": "js",

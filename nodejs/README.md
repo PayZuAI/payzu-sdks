@@ -67,7 +67,7 @@ const payzu = new PayZu({
 | `payzu.withdraw.readQrCode(emv)` | `POST /pix/qrcode/read` | `QrCodeRead` |
 | `payzu.withdraw.pixKey(pixKey)` | `GET /pix/key` | `PixKeyInfo` |
 | `payzu.keys.lookup(pixKey)` | `GET /pix/key` | `PixKeyInfo` |
-| `payzu.keys.dict(key)` | `GET /user/dict` | `DictConsultResponse` |
+| `payzu.keys.dict(key)` (descontinuado: a API responde 404; use `keys.lookup`) | `GET /user/dict` | `DictConsultResponse` |
 | `payzu.keys.readQrCode(emv)` | `POST /pix/qrcode/read` | `QrCodeRead` |
 | `payzu.account.get()` | `GET /user` | `Account` |
 | `payzu.account.balance()` | `GET /user/balance` | `Balance` |

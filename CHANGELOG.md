@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0
+
+### Outras mudanças
+
+- Node.js: `payzu.keys.dict()` fica descontinuado. A API não tem mais `GET /user/dict` e responde 404 a essa rota. Na primeira chamada o método emite um `DeprecationWarning` (código `PAYZU_KEYS_DICT`) e segue devolvendo o erro da API como `PayZuError`. Use `payzu.keys.lookup()`, que consulta `GET /pix/key` e devolve o titular com agência e conta. O método sai na próxima versão major.
+
 ## 3.1.0
 
 ### Outras mudanças

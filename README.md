@@ -39,7 +39,7 @@ Os SDKs aceitam valor de enum que ainda não está no spec sem falhar a leitura 
 
 ## Release
 
-Uma release `X.Y.Z` no GitHub publica Node, Python, Ruby e Java na mesma versão (`publish.yml`). O PHP sai pelo repositório espelho [PayZuAI/payzu-php](https://github.com/PayZuAI/payzu-php), que o Packagist lê: o workflow de lá copia a pasta `php/` de cada release daqui e cria a mesma tag. O Go usa a tag `go/vX.Y.Z` com a mesma versão; a cada versão maior, o caminho do módulo muda (`/go/v2`, `/go/v3`).
+Uma release `X.Y.Z` no GitHub publica Node, Python, Ruby e Java na mesma versão (`publish.yml`). O PHP sai pelo repositório espelho [PayZuAI/payzu-php](https://github.com/PayZuAI/payzu-php), que o Packagist lê: o workflow de lá copia a pasta `php/` de cada release daqui e cria a mesma tag. O Go usa a tag `go/vX.Y.Z` com a mesma versão; a cada versão maior, o caminho do módulo muda (`/go/v2`, `/go/v3`, `/go/v4`).
 
 ## Documentação
 

@@ -17,14 +17,16 @@
 
 - `GET /user/pix-keys` (`AccountApi.getUserPixKeys`): chave Pix de recebimento da conta, com o titular e a instituição.
 - `AllowlistApi`, com os CNPJs (`GET /user/whitelist/cnpj`) e as chaves Pix (`GET /user/whitelist/pix-key`) autorizados na conta, com filtros por período e situação e paginação por cursor.
+- Node.js: as duas rotas acima ficam no core gerado, sem método na fachada `PayZu`. Use `new AccountApi(createConfiguration({ token }))` e `new AllowlistApi(createConfiguration({ token }))`.
 - Modelos dos eventos de webhook, para tipar o corpo que a PayZu envia ao seu endpoint: `TransactionPendingEvent`, `TransactionCompletedEvent`, `TransactionCanceledEvent`, `TransactionExpiredEvent`, `TransactionWaitingForRefundEvent`, `TransactionRefundedEvent`, `TransactionErrorEvent` e `InfractionChangedEvent` (com `InfractionChangedData`). São só modelos: o SDK não chama essas rotas.
 - Valores novos de enum: `Transaction.method` aceita `BANK_SLIP` e `TED`; `Refund.reason` e `Transaction.refundReason` aceitam `DENY_COMPANY_DEPOSIT` e `ADMIN_REQUEST`.
 
 ### Outras mudanças
 
-- Respostas de erro documentadas com `ApiError`: 403 nas consultas, 409 nos saques, 410 na leitura de QR Code e no saque por QR Code e 424 no estorno.
-- O sandbox `https://pix.sandbox.payzu.dev/v1` entra como segundo servidor da configuração. O endereço padrão continua `https://api.pix.payzu.com.br/v1`.
+- Respostas de erro documentadas com `ApiError`: 403 nas consultas, 409 nos saques, 410 na leitura de QR Code e no saque por QR Code e 424 no estorno. O `POST /internal-transfer` deixa de documentar o 404.
+- O sandbox `https://pix.sandbox.payzu.dev/v1` entra como segundo servidor da configuração em Go, PHP, Python e Ruby. Em Java e Node.js, o endereço do sandbox se informa na configuração do cliente. O padrão continua `https://api.pix.payzu.com.br/v1`.
 - Os filtros `amountMin` e `amountMax` de infrações passam a ter mínimo de 0,01, conferido antes da chamada em Python, PHP e Ruby.
+- `url` de `WebhookCreateRequest` e `WebhookUpdateRequest` passa a exigir `http://` ou `https://`, conferido antes da chamada em Python, PHP e Ruby.
 - As descrições do código gerado e da documentação de cada linguagem passam a ser em português.
 - Java: Jackson 2.21.7.
 

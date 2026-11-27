@@ -2,7 +2,7 @@
 
 Send money via Pix (cash out) by Pix key or QR Code
 
-All URIs are relative to https://api.payzu.processamento.com/v1, except if the operation defines another base path.
+All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |

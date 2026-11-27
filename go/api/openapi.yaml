@@ -23,7 +23,7 @@ externalDocs:
   url: https://docs.payzu.com.br/docs/pix-processamento
 servers:
 - description: Production
-  url: https://api.payzu.processamento.com/v1
+  url: https://api.pix.payzu.com.br/v1
 tags:
 - description: Create and manage Pix charges (deposits)
   name: Pix Operations
@@ -262,13 +262,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/pix' \
+            --url 'https://api.pix.payzu.com.br/v1/pix' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/pix';
+          const url = 'https://api.pix.payzu.com.br/v1/pix';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -287,7 +287,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/pix',
+              'https://api.pix.payzu.com.br/v1/pix',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -513,7 +513,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/pix' \
+            --url 'https://api.pix.payzu.com.br/v1/pix' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -554,7 +554,7 @@ paths:
           import payzu_pix
 
           config = payzu_pix.Configuration(
-              host='https://api.payzu.processamento.com/v1',
+              host='https://api.pix.payzu.com.br/v1',
               access_token=os.environ['PAYZU_TOKEN'],
           )
 
@@ -793,13 +793,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/pix/key?pixKey=example%40payzu.com.br' \
+            --url 'https://api.pix.payzu.com.br/v1/pix/key?pixKey=example%40payzu.com.br' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/pix/key?pixKey=example%40payzu.com.br';
+          const url = 'https://api.pix.payzu.com.br/v1/pix/key?pixKey=example%40payzu.com.br';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -818,7 +818,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/pix/key?pixKey=example%40payzu.com.br',
+              'https://api.pix.payzu.com.br/v1/pix/key?pixKey=example%40payzu.com.br',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -995,7 +995,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/pix/qrcode/read' \
+            --url 'https://api.pix.payzu.com.br/v1/pix/qrcode/read' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -1005,7 +1005,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/pix/qrcode/read';
+          const url = 'https://api.pix.payzu.com.br/v1/pix/qrcode/read';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -1028,7 +1028,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/pix/qrcode/read',
+              'https://api.pix.payzu.com.br/v1/pix/qrcode/read',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -1192,13 +1192,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/proof/PAYZU20260814T6NX1CV9MK000000' \
+            --url 'https://api.pix.payzu.com.br/v1/proof/PAYZU20260814T6NX1CV9MK000000' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/proof/PAYZU20260814T6NX1CV9MK000000';
+          const url = 'https://api.pix.payzu.com.br/v1/proof/PAYZU20260814T6NX1CV9MK000000';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -1217,7 +1217,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/proof/PAYZU20260814T6NX1CV9MK000000',
+              'https://api.pix.payzu.com.br/v1/proof/PAYZU20260814T6NX1CV9MK000000',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -1458,13 +1458,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/withdraw' \
+            --url 'https://api.pix.payzu.com.br/v1/withdraw' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/withdraw';
+          const url = 'https://api.pix.payzu.com.br/v1/withdraw';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -1483,7 +1483,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/withdraw',
+              'https://api.pix.payzu.com.br/v1/withdraw',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -1766,7 +1766,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/withdraw' \
+            --url 'https://api.pix.payzu.com.br/v1/withdraw' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -1782,7 +1782,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/withdraw';
+          const url = 'https://api.pix.payzu.com.br/v1/withdraw';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -1811,7 +1811,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/withdraw',
+              'https://api.pix.payzu.com.br/v1/withdraw',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -2158,7 +2158,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/withdraw/qrcode' \
+            --url 'https://api.pix.payzu.com.br/v1/withdraw/qrcode' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -2173,7 +2173,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/withdraw/qrcode';
+          const url = 'https://api.pix.payzu.com.br/v1/withdraw/qrcode';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -2201,7 +2201,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/withdraw/qrcode',
+              'https://api.pix.payzu.com.br/v1/withdraw/qrcode',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -2370,13 +2370,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000' \
+            --url 'https://api.pix.payzu.com.br/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000';
+          const url = 'https://api.pix.payzu.com.br/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -2395,7 +2395,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000',
+              'https://api.pix.payzu.com.br/v1/withdraw/proof/PAYZU20260817B3PL8SG5WQ000000',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -2468,13 +2468,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user' \
+            --url 'https://api.pix.payzu.com.br/v1/user' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user';
+          const url = 'https://api.pix.payzu.com.br/v1/user';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -2493,7 +2493,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user',
+              'https://api.pix.payzu.com.br/v1/user',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -2545,13 +2545,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/balance' \
+            --url 'https://api.pix.payzu.com.br/v1/user/balance' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/balance';
+          const url = 'https://api.pix.payzu.com.br/v1/user/balance';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -2570,7 +2570,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/balance',
+              'https://api.pix.payzu.com.br/v1/user/balance',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -2888,13 +2888,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/transactions' \
+            --url 'https://api.pix.payzu.com.br/v1/user/transactions' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/transactions';
+          const url = 'https://api.pix.payzu.com.br/v1/user/transactions';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -2913,7 +2913,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/transactions',
+              'https://api.pix.payzu.com.br/v1/user/transactions',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -3131,13 +3131,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -3156,7 +3156,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/callbacks',
+              'https://api.pix.payzu.com.br/v1/user/callbacks',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -3247,13 +3247,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -3272,7 +3272,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/cm3w7l9v20001q8f2u6c1y4be',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -3604,13 +3604,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/infractions' \
+            --url 'https://api.pix.payzu.com.br/v1/user/infractions' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/infractions';
+          const url = 'https://api.pix.payzu.com.br/v1/user/infractions';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -3629,7 +3629,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/infractions',
+              'https://api.pix.payzu.com.br/v1/user/infractions',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -3726,13 +3726,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf' \
+            --url 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf';
+          const url = 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -3751,7 +3751,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf',
+              'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -3823,13 +3823,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \
+            --url 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses';
+          const url = 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -3848,7 +3848,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses',
+              'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -4003,7 +4003,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \
+            --url 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --form 'defense=A cobranca foi autorizada pelo titular. Comprovante em anexo.' \
             --form 'files=@evidencia.pdf'
@@ -4011,7 +4011,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses';
+          const url = 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses';
 
           const form = new FormData();
           form.append('defense', 'A cobranca foi autorizada pelo titular. Comprovante em anexo.');
@@ -4035,7 +4035,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses',
+              'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses',
               headers={'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}'},
               data={'defense': 'A cobranca foi autorizada pelo titular. Comprovante em anexo.'},
               files={'files': open('evidencia.pdf', 'rb')},
@@ -4133,13 +4133,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg' \
+            --url 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg';
+          const url = 'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -4158,7 +4158,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg',
+              'https://api.pix.payzu.com.br/v1/user/infractions/cm3w7n2p60002q8f2h7d3z5cf/defenses/cm3w7p5r90003q8f2j8e4a6dg',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -4350,13 +4350,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/internal-transfer' \
+            --url 'https://api.pix.payzu.com.br/v1/internal-transfer' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/internal-transfer';
+          const url = 'https://api.pix.payzu.com.br/v1/internal-transfer';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -4375,7 +4375,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/internal-transfer',
+              'https://api.pix.payzu.com.br/v1/internal-transfer',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -4670,7 +4670,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/internal-transfer' \
+            --url 'https://api.pix.payzu.com.br/v1/internal-transfer' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -4686,7 +4686,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/internal-transfer';
+          const url = 'https://api.pix.payzu.com.br/v1/internal-transfer';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -4715,7 +4715,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/internal-transfer',
+              'https://api.pix.payzu.com.br/v1/internal-transfer',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -4800,13 +4800,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000' \
+            --url 'https://api.pix.payzu.com.br/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000';
+          const url = 'https://api.pix.payzu.com.br/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -4825,7 +4825,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000',
+              'https://api.pix.payzu.com.br/v1/user/transactions/PAYZU20260814T6NX1CV9MK000000',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -4999,13 +4999,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/report' \
+            --url 'https://api.pix.payzu.com.br/v1/user/report' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/report';
+          const url = 'https://api.pix.payzu.com.br/v1/user/report';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -5024,7 +5024,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/report',
+              'https://api.pix.payzu.com.br/v1/user/report',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -5147,7 +5147,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/report' \
+            --url 'https://api.pix.payzu.com.br/v1/user/report' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -5164,7 +5164,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/report';
+          const url = 'https://api.pix.payzu.com.br/v1/user/report';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -5194,7 +5194,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/report',
+              'https://api.pix.payzu.com.br/v1/user/report',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -5313,13 +5313,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' \
+            --url 'https://api.pix.payzu.com.br/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78';
+          const url = 'https://api.pix.payzu.com.br/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -5338,7 +5338,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78',
+              'https://api.pix.payzu.com.br/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -5487,13 +5487,13 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download' \
+            --url 'https://api.pix.payzu.com.br/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download';
+          const url = 'https://api.pix.payzu.com.br/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -5512,7 +5512,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download',
+              'https://api.pix.payzu.com.br/v1/user/report/01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78/download',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -5657,7 +5657,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/resend' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -5680,7 +5680,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/resend';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/resend';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -5716,7 +5716,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/callbacks/resend',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/resend',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -5846,13 +5846,13 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -5871,7 +5871,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/resend/PAYZU20260814T6NX1CV9MK000000',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -5981,13 +5981,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000' \
+            --url 'https://api.pix.payzu.com.br/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000';
+          const url = 'https://api.pix.payzu.com.br/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -6006,7 +6006,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000',
+              'https://api.pix.payzu.com.br/v1/pix/qr-code/PAYZU20260814T6NX1CV9MK000000',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -6310,7 +6310,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/refund/PAYZU20260814T6NX1CV9MK000000' \
+            --url 'https://api.pix.payzu.com.br/v1/refund/PAYZU20260814T6NX1CV9MK000000' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -6322,7 +6322,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/refund/PAYZU20260814T6NX1CV9MK000000';
+          const url = 'https://api.pix.payzu.com.br/v1/refund/PAYZU20260814T6NX1CV9MK000000';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -6347,7 +6347,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/refund/PAYZU20260814T6NX1CV9MK000000',
+              'https://api.pix.payzu.com.br/v1/refund/PAYZU20260814T6NX1CV9MK000000',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -6443,13 +6443,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -6468,7 +6468,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/webhooks',
+              'https://api.pix.payzu.com.br/v1/user/webhooks',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -6599,7 +6599,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -6612,7 +6612,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -6638,7 +6638,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/webhooks',
+              'https://api.pix.payzu.com.br/v1/user/webhooks',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -6763,13 +6763,13 @@ paths:
         label: cURL
         source: |-
           curl --request DELETE \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';
 
           const response = await fetch(url, {
             method: 'DELETE',
@@ -6788,7 +6788,7 @@ paths:
           import requests
 
           response = requests.delete(
-              'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',
+              'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -6892,13 +6892,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -6917,7 +6917,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',
+              'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -7073,7 +7073,7 @@ paths:
         label: cURL
         source: |-
           curl --request PATCH \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -7087,7 +7087,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad';
 
           const response = await fetch(url, {
             method: 'PATCH',
@@ -7114,7 +7114,7 @@ paths:
           import requests
 
           response = requests.patch(
-              'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',
+              'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -7249,13 +7249,13 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -7274,7 +7274,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret',
+              'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/rotate-secret',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -7372,13 +7372,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks/sent/quantity' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks/sent/quantity' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks/sent/quantity';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks/sent/quantity';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -7397,7 +7397,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/webhooks/sent/quantity',
+              'https://api.pix.payzu.com.br/v1/user/webhooks/sent/quantity',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -7499,13 +7499,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be' \
+            --url 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be';
+          const url = 'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -7524,7 +7524,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be',
+              'https://api.pix.payzu.com.br/v1/user/webhooks/cm3w7k1t40000q8f2r5b9x3ad/sent/cm3w7l9v20001q8f2u6c1y4be',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -7689,13 +7689,13 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -7714,7 +7714,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/resend/webhook/cm3w7k1t40000q8f2r5b9x3ad',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -7874,7 +7874,7 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/resend/webhook' \
             --header 'Authorization: Bearer $PAYZU_TOKEN' \
             --header 'Content-Type: application/json' \
             --data '{
@@ -7900,7 +7900,7 @@ paths:
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/resend/webhook';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -7939,7 +7939,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/callbacks/resend/webhook',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/resend/webhook',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
                   'Content-Type': 'application/json',
@@ -8173,13 +8173,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \
+            --url 'https://api.pix.payzu.com.br/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00';
+          const url = 'https://api.pix.payzu.com.br/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -8198,7 +8198,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00',
+              'https://api.pix.payzu.com.br/v1/user/bank-statements?createdAtFrom=2026-08-01T00%3A00%3A00-03%3A00&createdAtTo=2026-08-31T23%3A59%3A59-03%3A00',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -8272,13 +8272,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh' \
+            --url 'https://api.pix.payzu.com.br/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh';
+          const url = 'https://api.pix.payzu.com.br/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -8297,7 +8297,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh',
+              'https://api.pix.payzu.com.br/v1/user/bank-statements/cm3w7q8s10004q8f2k9f5b7eh',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -8494,13 +8494,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/deposit-pending' \
+            --url 'https://api.pix.payzu.com.br/v1/user/deposit-pending' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/deposit-pending';
+          const url = 'https://api.pix.payzu.com.br/v1/user/deposit-pending';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -8519,7 +8519,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/deposit-pending',
+              'https://api.pix.payzu.com.br/v1/user/deposit-pending',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -8593,13 +8593,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj' \
+            --url 'https://api.pix.payzu.com.br/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj';
+          const url = 'https://api.pix.payzu.com.br/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -8618,7 +8618,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj',
+              'https://api.pix.payzu.com.br/v1/user/deposit-pending/cm3w7r1u50005q8f2m1g6c8fj',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -8793,13 +8793,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/summary' \
+            --url 'https://api.pix.payzu.com.br/v1/user/summary' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/summary';
+          const url = 'https://api.pix.payzu.com.br/v1/user/summary';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -8818,7 +8818,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/summary',
+              'https://api.pix.payzu.com.br/v1/user/summary',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -9016,13 +9016,13 @@ paths:
         label: cURL
         source: |-
           curl --request GET \
-            --url 'https://api.payzu.processamento.com/v1/user/dict?key=john.doe%40example.com' \
+            --url 'https://api.pix.payzu.com.br/v1/user/dict?key=john.doe%40example.com' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/dict?key=john.doe%40example.com';
+          const url = 'https://api.pix.payzu.com.br/v1/user/dict?key=john.doe%40example.com';
 
           const response = await fetch(url, {
             method: 'GET',
@@ -9041,7 +9041,7 @@ paths:
           import requests
 
           response = requests.get(
-              'https://api.payzu.processamento.com/v1/user/dict?key=john.doe%40example.com',
+              'https://api.pix.payzu.com.br/v1/user/dict?key=john.doe%40example.com',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -9118,13 +9118,13 @@ paths:
         label: cURL
         source: |-
           curl --request POST \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/secret' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/secret';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/secret';
 
           const response = await fetch(url, {
             method: 'POST',
@@ -9143,7 +9143,7 @@ paths:
           import requests
 
           response = requests.post(
-              'https://api.payzu.processamento.com/v1/user/callbacks/secret',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/secret',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },
@@ -9218,13 +9218,13 @@ paths:
         label: cURL
         source: |-
           curl --request PATCH \
-            --url 'https://api.payzu.processamento.com/v1/user/callbacks/secret/rotate' \
+            --url 'https://api.pix.payzu.com.br/v1/user/callbacks/secret/rotate' \
             --header 'Authorization: Bearer $PAYZU_TOKEN'
       - id: js
         lang: js
         label: Node.js
         source: |-
-          const url = 'https://api.payzu.processamento.com/v1/user/callbacks/secret/rotate';
+          const url = 'https://api.pix.payzu.com.br/v1/user/callbacks/secret/rotate';
 
           const response = await fetch(url, {
             method: 'PATCH',
@@ -9243,7 +9243,7 @@ paths:
           import requests
 
           response = requests.patch(
-              'https://api.payzu.processamento.com/v1/user/callbacks/secret/rotate',
+              'https://api.pix.payzu.com.br/v1/user/callbacks/secret/rotate',
               headers={
                   'Authorization': f'Bearer {os.environ["PAYZU_TOKEN"]}',
               },

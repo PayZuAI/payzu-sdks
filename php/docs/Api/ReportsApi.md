@@ -2,7 +2,7 @@
 
 Transaction history, reports, bank statements, and pending deposits
 
-All URIs are relative to https://api.payzu.processamento.com/v1, except if the operation defines another base path.
+All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |

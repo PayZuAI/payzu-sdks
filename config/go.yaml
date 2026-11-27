@@ -7,7 +7,7 @@ nameMappings:
 additionalProperties:
   enumUnknownDefaultCase: true
   packageName: payzupix
-  packageVersion: 3.0.0
+  packageVersion: 3.2.0
 globalProperties:
   apiTests: false
   modelTests: false

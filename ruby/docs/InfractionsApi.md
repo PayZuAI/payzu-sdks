@@ -1,6 +1,6 @@
 # PayZuPix::InfractionsApi
 
-All URIs are relative to *https://api.payzu.processamento.com/v1*
+All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |

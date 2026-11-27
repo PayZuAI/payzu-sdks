@@ -1,6 +1,6 @@
 # payzu_pix.ReportsApi
 
-All URIs are relative to *https://api.payzu.processamento.com/v1*
+All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -34,10 +34,10 @@ from payzu_pix.models.download_user_report200_response import DownloadUserReport
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -118,10 +118,10 @@ from payzu_pix.models.bank_statement import BankStatement
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -198,10 +198,10 @@ from payzu_pix.models.bank_statement_list_response import BankStatementListRespo
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -300,10 +300,10 @@ from payzu_pix.models.deposit_pending_list_response import DepositPendingListRes
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -398,10 +398,10 @@ from payzu_pix.models.deposit_pending import DepositPending
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -478,10 +478,10 @@ from payzu_pix.models.report_job_detail import ReportJobDetail
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -559,10 +559,10 @@ from payzu_pix.models.summary import Summary
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -645,10 +645,10 @@ from payzu_pix.models.get_user_transaction_by_id200_response import GetUserTrans
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -725,10 +725,10 @@ from payzu_pix.models.get_user_transactions200_response import GetUserTransactio
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -837,10 +837,10 @@ from payzu_pix.models.list_user_reports200_response import ListUserReports200Res
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -934,10 +934,10 @@ from payzu_pix.models.report_job_accepted import ReportJobAccepted
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters

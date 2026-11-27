@@ -1,6 +1,6 @@
 # payzu_pix.CallbacksApi
 
-All URIs are relative to *https://api.payzu.processamento.com/v1*
+All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,10 +31,10 @@ from payzu_pix.models.callback_secret_response import CallbackSecretResponse
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -108,10 +108,10 @@ from payzu_pix.models.callback_detail import CallbackDetail
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -189,10 +189,10 @@ from payzu_pix.models.webhook_event_type import WebhookEventType
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -293,10 +293,10 @@ from payzu_pix.models.resend_user_callback_single200_response import ResendUserC
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -376,10 +376,10 @@ from payzu_pix.models.resend_user_callbacks_request import ResendUserCallbacksRe
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -459,10 +459,10 @@ from payzu_pix.models.enqueued_callback import EnqueuedCallback
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -543,10 +543,10 @@ from payzu_pix.models.resend_webhook_callbacks_request import ResendWebhookCallb
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -626,10 +626,10 @@ from payzu_pix.models.rotate_callback_secret_response import RotateCallbackSecre
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters

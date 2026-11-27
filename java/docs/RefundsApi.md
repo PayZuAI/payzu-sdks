@@ -31,7 +31,7 @@ import br.com.payzu.pix.api.RefundsApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://api.pix.payzu.com.br/v1");
+        defaultClient.updateBaseUri("https://api.pix.payzu.com.br/v1");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -112,7 +112,7 @@ import br.com.payzu.pix.api.RefundsApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://api.pix.payzu.com.br/v1");
+        defaultClient.updateBaseUri("https://api.pix.payzu.com.br/v1");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");

@@ -1,5 +1,6 @@
 generatorName: java
 outputDir: java
+templateDir: templates/java
 gitUserId: PayZuAI
 gitRepoId: payzu-sdks
 additionalProperties:

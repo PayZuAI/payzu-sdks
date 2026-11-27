@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,39 +15,39 @@ require 'time'
 
 module PayZuPix
   class InfractionDetail < ApiModelBase
-    # Identifier of the infraction inside PayZu, used in the query routes and when sending the defense.
+    # Identificador da contestação dentro da PayZu, usado nas rotas de consulta e no envio da defesa.
     attr_accessor :id
 
-    # Infraction code at Bacen.
+    # Código da contestação no Bacen.
     attr_accessor :protocol
 
-    # Current state of the infraction.
+    # Situação atual da contestação.
     attr_accessor :status
 
-    # Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED.
+    # Tipo da contestação: REFUND_REQUEST, FRAUD ou REFUND_CANCELLED.
     attr_accessor :type
 
-    # Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT.
+    # Lado que abriu a contestação: DEBITED_PARTICIPANT ou CREDITED_PARTICIPANT.
     attr_accessor :reported_by
 
-    # Reason given by whoever opened the infraction, in the text sent by the partner bank.
+    # Motivo informado por quem abriu a contestação, no texto enviado pelo banco parceiro.
     attr_accessor :report_details
 
-    # Analysis outcome: AGREED or DISAGREED.
+    # Desfecho da análise: AGREED ou DISAGREED.
     attr_accessor :analysis_result
 
-    # Additional text about the analysis decision, when the partner bank sends that information.
+    # Texto complementar sobre a decisão da análise, quando o banco parceiro envia essa informação.
     attr_accessor :analysis_details
 
-    # Moment the infraction was opened.
+    # Momento em que a contestação foi aberta.
     attr_accessor :reported_at
 
-    # Deadline to send the defense of this infraction.
+    # Prazo final para enviar a defesa desta contestação.
     attr_accessor :expires_at
 
     attr_accessor :transaction
 
-    # Defenses already sent for this infraction, each with text, status and files.
+    # Defesas já enviadas para esta contestação, com texto, status e anexos de cada uma.
     attr_accessor :defense_history
 
     class EnumAttributeValidator

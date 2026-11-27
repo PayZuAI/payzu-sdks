@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Field** | **string** | Path of the field rejected in validation, without the leading slash. | 
-**Message** | **string** | Reason that field was rejected, in Portuguese. | 
+**Field** | **string** | Caminho do campo rejeitado na validação, sem a barra inicial. | 
+**Message** | **string** | Motivo da rejeição daquele campo, em português. | 
 
 ## Methods
 

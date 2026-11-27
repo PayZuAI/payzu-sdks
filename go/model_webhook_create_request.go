@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -21,13 +21,13 @@ var _ MappedNullable = &WebhookCreateRequest{}
 
 // WebhookCreateRequest struct for WebhookCreateRequest
 type WebhookCreateRequest struct {
-	// URL (http or https) that will receive the notifications.
-	Url string `json:"url"`
-	// Events to subscribe to. Omit or leave empty to receive all events.
+	// URL que vai receber as notificações: http ou https, pública, sem usuário e senha e sem IPv6 literal.
+	Url string `json:"url" validate:"regexp=^https?:\\/\\/"`
+	// Eventos a assinar.
 	Events []WebhookEventType `json:"events,omitempty"`
-	// Generate an HMAC signing secret for this webhook.
+	// Gera um segredo de assinatura HMAC para este webhook.
 	GenerateSecret *bool `json:"generateSecret,omitempty"`
-	// Whether the webhook starts active.
+	// Se o webhook começa ativo.
 	Active *bool `json:"active,omitempty"`
 }
 

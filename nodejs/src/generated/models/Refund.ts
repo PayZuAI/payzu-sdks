@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,55 +20,55 @@ import { mapValues } from '../runtime.js';
  */
 export interface Refund {
     /**
-     * Refund identifier.
+     * Identificador da devolução.
      * @type {string}
      * @memberof Refund
      */
     id?: string;
     /**
-     * Refunded amount in BRL.
+     * Valor devolvido em BRL.
      * @type {number}
      * @memberof Refund
      */
     amount?: number;
     /**
-     * Refund reason.
+     * Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
      * @type {RefundReasonEnum}
      * @memberof Refund
      */
     reason?: RefundReasonEnum;
     /**
-     * Refund description.
+     * Descrição da devolução.
      * @type {string}
      * @memberof Refund
      */
     description?: string | null;
     /**
-     * Refund status.
+     * Status da devolução.
      * @type {RefundStatusEnum}
      * @memberof Refund
      */
     status?: RefundStatusEnum;
     /**
-     * End-to-end ID of the refund Pix.
+     * End-to-end ID do Pix de devolução.
      * @type {string}
      * @memberof Refund
      */
     endToEndId?: string | null;
     /**
-     * When the refund was completed.
+     * Quando a devolução foi concluída.
      * @type {Date}
      * @memberof Refund
      */
     refundedAt?: Date | null;
     /**
-     * When the refund was requested.
+     * Quando a devolução foi pedida.
      * @type {Date}
      * @memberof Refund
      */
     createdAt?: Date;
     /**
-     * Last change to the refund.
+     * Última alteração da devolução.
      * @type {Date}
      * @memberof Refund
      */
@@ -81,7 +81,9 @@ export interface Refund {
  */
 export const RefundReasonEnum = {
     CustomerRequest: 'CUSTOMER_REQUEST',
-    Infraction: 'INFRACTION'
+    Infraction: 'INFRACTION',
+    DenyCompanyDeposit: 'DENY_COMPANY_DEPOSIT',
+    AdminRequest: 'ADMIN_REQUEST'
 } as const;
 export type RefundReasonEnum = typeof RefundReasonEnum[keyof typeof RefundReasonEnum];
 

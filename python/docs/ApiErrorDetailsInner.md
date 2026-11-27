@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_field** | **str** | Path of the field rejected in validation, without the leading slash. | 
-**message** | **str** | Reason that field was rejected, in Portuguese. | 
+**var_field** | **str** | Caminho do campo rejeitado na validação, sem a barra inicial. | 
+**message** | **str** | Motivo da rejeição daquele campo, em português. | 
 
 ## Example
 

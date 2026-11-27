@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | Pointer to **int32** | Total number of callbacks sent for queueing. Not limited by the size of items. | [optional] 
-**Truncated** | Pointer to **bool** | True when items lists only part of the callbacks. The resend still covers all of them. | [optional] 
-**Items** | Pointer to [**[]EnqueuedCallbackItem**](EnqueuedCallbackItem.md) | Queued callbacks, capped at 500 entries. | [optional] 
+**Count** | Pointer to **int32** | Total de callbacks enviados para enfileiramento. Não é limitado pelo tamanho de items. | [optional] 
+**Truncated** | Pointer to **bool** | true quando items lista apenas parte dos callbacks. O reenvio cobre todos mesmo assim. | [optional] 
+**Items** | Pointer to [**[]EnqueuedCallbackItem**](EnqueuedCallbackItem.md) | Callbacks enfileirados, no máximo 500 entradas. | [optional] 
 
 ## Methods
 

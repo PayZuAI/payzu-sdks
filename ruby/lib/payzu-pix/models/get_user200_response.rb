@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,37 +15,34 @@ require 'time'
 
 module PayZuPix
   class GetUser200Response < ApiModelBase
-    # Public account identifier (6 digits, unique). Used as destination for internal transfers.
+    # Identificador público da conta.
     attr_accessor :account_number
 
-    # Branch number (4 digits).
+    # Agência da conta.
     attr_accessor :branch
 
-    # Registered name of the account.
+    # Nome cadastrado da conta.
     attr_accessor :name
 
-    # Account role.
-    attr_accessor :role
-
-    # Balance free for withdrawals and transfers, in reais.
+    # Saldo livre para saques e transferências, em reais.
     attr_accessor :balance_available
 
-    # Part of the balance held, in reais.
+    # Parte do saldo retida, em reais.
     attr_accessor :balance_blocked
 
-    # Account status.
+    # Situação da conta.
     attr_accessor :status
 
-    # Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
+    # Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada.
     attr_accessor :cash_in_ticket_min
 
-    # Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
+    # Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada.
     attr_accessor :cash_in_ticket_max
 
-    # Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused.
+    # Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado.
     attr_accessor :cash_out_ticket_min
 
-    # Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused.
+    # Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado.
     attr_accessor :cash_out_ticket_max
 
     attr_accessor :service_fee
@@ -80,7 +77,6 @@ module PayZuPix
         :'account_number' => :'accountNumber',
         :'branch' => :'branch',
         :'name' => :'name',
-        :'role' => :'role',
         :'balance_available' => :'balanceAvailable',
         :'balance_blocked' => :'balanceBlocked',
         :'status' => :'status',
@@ -109,7 +105,6 @@ module PayZuPix
         :'account_number' => :'String',
         :'branch' => :'String',
         :'name' => :'String',
-        :'role' => :'String',
         :'balance_available' => :'Float',
         :'balance_blocked' => :'Float',
         :'status' => :'String',
@@ -155,10 +150,6 @@ module PayZuPix
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'role')
-        self.role = attributes[:'role']
       end
 
       if attributes.key?(:'balance_available')
@@ -216,8 +207,6 @@ module PayZuPix
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@branch.nil? && @branch !~ Regexp.new(/^[0-9]{4}$/)
-      role_validator = EnumAttributeValidator.new('String', ["USER"])
-      return false unless role_validator.valid?(@role)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE"])
       return false unless status_validator.valid?(@status)
       true
@@ -246,7 +235,6 @@ module PayZuPix
           account_number == o.account_number &&
           branch == o.branch &&
           name == o.name &&
-          role == o.role &&
           balance_available == o.balance_available &&
           balance_blocked == o.balance_blocked &&
           status == o.status &&
@@ -267,7 +255,7 @@ module PayZuPix
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_number, branch, name, role, balance_available, balance_blocked, status, cash_in_ticket_min, cash_in_ticket_max, cash_out_ticket_min, cash_out_ticket_max, service_fee, daily_withdraw_limit].hash
+      [account_number, branch, name, balance_available, balance_blocked, status, cash_in_ticket_min, cash_in_ticket_max, cash_out_ticket_min, cash_out_ticket_max, service_fee, daily_withdraw_limit].hash
     end
 
     # Builds the object from hash

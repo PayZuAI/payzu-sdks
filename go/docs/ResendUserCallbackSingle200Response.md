@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | Pointer to **string** | Fixed text confirming that the resend of the given transaction was queued. | [optional] 
+**Message** | Pointer to **string** | Texto fixo confirmando o enfileiramento do reenvio da transação informada. | [optional] 
 
 ## Methods
 

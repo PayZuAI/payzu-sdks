@@ -6,8 +6,8 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getInternalTransfer()**](InternalTransferApi.md#getInternalTransfer) | **GET** /internal-transfer | Get internal transfer |
-| [**postInternalTransfer()**](InternalTransferApi.md#postInternalTransfer) | **POST** /internal-transfer | Create internal transfer |
+| [**getInternalTransfer()**](InternalTransferApi.md#getInternalTransfer) | **GET** /internal-transfer | Obter transferência interna |
+| [**postInternalTransfer()**](InternalTransferApi.md#postInternalTransfer) | **POST** /internal-transfer | Criar transferência interna |
 
 
 ## `getInternalTransfer()`
@@ -16,9 +16,9 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 getInternalTransfer($id, $client_reference, $virtual_account): \PayZu\Pix\Model\Transaction
 ```
 
-Get internal transfer
+Obter transferência interna
 
-Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
+Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
 
 ### Example
 
@@ -37,9 +37,9 @@ $apiInstance = new PayZu\Pix\Api\InternalTransferApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID
-$client_reference = order_12345; // string | External reference
-$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação
+$client_reference = order_12345; // string | Referência externa
+$virtual_account = loja-centro-01; // string | Subconta usada na criação.
 
 try {
     $result = $apiInstance->getInternalTransfer($id, $client_reference, $virtual_account);
@@ -53,9 +53,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Transaction ID | [optional] |
-| **client_reference** | **string**| External reference | [optional] |
-| **virtual_account** | **string**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **string**| ID da transação | [optional] |
+| **client_reference** | **string**| Referência externa | [optional] |
+| **virtual_account** | **string**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -80,9 +80,9 @@ try {
 postInternalTransfer($post_internal_transfer_request): \PayZu\Pix\Model\Transaction
 ```
 
-Create internal transfer
+Criar transferência interna
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
+Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
 
 ### Example
 

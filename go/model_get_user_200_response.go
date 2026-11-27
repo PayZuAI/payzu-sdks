@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -19,27 +19,25 @@ var _ MappedNullable = &GetUser200Response{}
 
 // GetUser200Response struct for GetUser200Response
 type GetUser200Response struct {
-	// Public account identifier (6 digits, unique). Used as destination for internal transfers.
+	// Identificador público da conta.
 	AccountNumber NullableString `json:"accountNumber,omitempty"`
-	// Branch number (4 digits).
+	// Agência da conta.
 	Branch *string `json:"branch,omitempty" validate:"regexp=^[0-9]{4}$"`
-	// Registered name of the account.
+	// Nome cadastrado da conta.
 	Name *string `json:"name,omitempty"`
-	// Account role.
-	Role *string `json:"role,omitempty"`
-	// Balance free for withdrawals and transfers, in reais.
+	// Saldo livre para saques e transferências, em reais.
 	BalanceAvailable *float32 `json:"balanceAvailable,omitempty"`
-	// Part of the balance held, in reais.
+	// Parte do saldo retida, em reais.
 	BalanceBlocked *float32 `json:"balanceBlocked,omitempty"`
-	// Account status.
+	// Situação da conta.
 	Status *string `json:"status,omitempty"`
-	// Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
+	// Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada.
 	CashInTicketMin *float32 `json:"cashInTicketMin,omitempty"`
-	// Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
+	// Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada.
 	CashInTicketMax *float32 `json:"cashInTicketMax,omitempty"`
-	// Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused.
+	// Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado.
 	CashOutTicketMin *float32 `json:"cashOutTicketMin,omitempty"`
-	// Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused.
+	// Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado.
 	CashOutTicketMax *float32 `json:"cashOutTicketMax,omitempty"`
 	ServiceFee *GetUser200ResponseServiceFee `json:"ServiceFee,omitempty"`
 	DailyWithdrawLimit *GetUser200ResponseDailyWithdrawLimit `json:"DailyWithdrawLimit,omitempty"`
@@ -166,38 +164,6 @@ func (o *GetUser200Response) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *GetUser200Response) SetName(v string) {
 	o.Name = &v
-}
-
-// GetRole returns the Role field value if set, zero value otherwise.
-func (o *GetUser200Response) GetRole() string {
-	if o == nil || IsNil(o.Role) {
-		var ret string
-		return ret
-	}
-	return *o.Role
-}
-
-// GetRoleOk returns a tuple with the Role field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetUser200Response) GetRoleOk() (*string, bool) {
-	if o == nil || IsNil(o.Role) {
-		return nil, false
-	}
-	return o.Role, true
-}
-
-// HasRole returns a boolean if a field has been set.
-func (o *GetUser200Response) HasRole() bool {
-	if o != nil && !IsNil(o.Role) {
-		return true
-	}
-
-	return false
-}
-
-// SetRole gets a reference to the given string and assigns it to the Role field.
-func (o *GetUser200Response) SetRole(v string) {
-	o.Role = &v
 }
 
 // GetBalanceAvailable returns the BalanceAvailable field value if set, zero value otherwise.
@@ -506,9 +472,6 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Role) {
-		toSerialize["role"] = o.Role
 	}
 	if !IsNil(o.BalanceAvailable) {
 		toSerialize["balanceAvailable"] = o.BalanceAvailable

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | Pointer to **int32** | Number of transactions in that state within the period. | [optional] 
-**Amount** | Pointer to **float32** | Sum of the amounts of those transactions. | [optional] 
-**ServiceFeeCharged** | Pointer to **float32** | Sum of the fees charged on those transactions, in BRL. | [optional] 
+**Count** | Pointer to **int32** | Quantidade de transações nessa situação dentro do período. | [optional] 
+**Amount** | Pointer to **float32** | Soma dos valores dessas transações. | [optional] 
+**ServiceFeeCharged** | Pointer to **float32** | Soma das taxas cobradas nessas transações, em reais. | [optional] 
 
 ## Methods
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**QrCodeType** | Pointer to **string** | Type of QR Code. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the payment receiver. | [optional] 
-**Document** | Pointer to **NullableString** | CPF or CNPJ of the receiver. | [optional] 
-**Amount** | Pointer to **NullableFloat32** | Amount to be paid (may differ from originalAmount for dynamic QR Codes). | [optional] 
-**OriginalAmount** | Pointer to **NullableFloat32** | Original amount embedded in the QR Code. | [optional] 
-**Txid** | Pointer to **NullableString** | Transaction identifier. | [optional] 
-**AdditionalInfo** | Pointer to **NullableString** | Additional information or description. | [optional] 
-**ExpiresIn** | Pointer to **NullableFloat32** | Seconds until QR Code expires (0 for static QR Codes). | [optional] 
-**CreatedAt** | Pointer to **NullableTime** | Creation date of the QR Code (for dynamic QR Codes). | [optional] 
-**AmountEditable** | Pointer to **NullableBool** | Whether the payer can change the amount. | [optional] 
-**DueDate** | Pointer to **NullableString** | Due date of the charge, when the QR Code has one. | [optional] 
+**QrCodeType** | Pointer to **string** | Tipo de QR Code. | [optional] 
+**Name** | Pointer to **NullableString** | Nome do recebedor do pagamento. | [optional] 
+**Document** | Pointer to **NullableString** | CPF ou CNPJ do recebedor. | [optional] 
+**Amount** | Pointer to **NullableFloat32** | Valor a ser pago. | [optional] 
+**OriginalAmount** | Pointer to **NullableFloat32** | Valor embutido no QR Code. | [optional] 
+**Txid** | Pointer to **NullableString** | Identificador da transação. | [optional] 
+**AdditionalInfo** | Pointer to **NullableString** | Informações adicionais ou descrição. | [optional] 
+**ExpiresIn** | Pointer to **NullableFloat32** | Segundos até o QR Code expirar (0 para QR Codes estáticos). | [optional] 
+**CreatedAt** | Pointer to **NullableString** | Data de criação do QR Code dinâmico, como veio no QR Code: o horário pode vir sem fuso. | [optional] 
+**AmountEditable** | Pointer to **NullableBool** | Indica se o pagador pode alterar o valor. | [optional] 
+**DueDate** | Pointer to **NullableString** | Data de vencimento da cobrança, quando o QR Code tiver. | [optional] 
 
 ## Methods
 
@@ -307,20 +307,20 @@ HasExpiresIn returns a boolean if a field has been set.
 UnsetExpiresIn ensures that no value is present for ExpiresIn, not even an explicit nil
 ### GetCreatedAt
 
-`func (o *QRCodeReadResponse) GetCreatedAt() time.Time`
+`func (o *QRCodeReadResponse) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *QRCodeReadResponse) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *QRCodeReadResponse) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *QRCodeReadResponse) SetCreatedAt(v time.Time)`
+`func (o *QRCodeReadResponse) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 

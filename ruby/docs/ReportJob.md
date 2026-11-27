@@ -4,13 +4,13 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Report identifier (UUID), generated when the report is requested. | [optional] |
-| **status** | **String** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional] |
-| **created_at** | **Time** | Date and time the report generation was requested. | [optional] |
-| **updated_at** | **Time** | Date and time of the last change to the report record. | [optional] |
-| **expires_at** | **Time** | When the file expires from storage (typically 7 days after creation) | [optional] |
-| **params** | **Object** | Filters used to generate the report. | [optional] |
-| **written_rows** | **Integer** | Rows written to the file. Null until the report is COMPLETED. | [optional] |
+| **id** | **String** | Identificador (UUID) do relatório, gerado no momento da solicitação. | [optional] |
+| **status** | **String** | Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED. | [optional] |
+| **created_at** | **Time** | Data e hora em que a geração do relatório foi solicitada. | [optional] |
+| **updated_at** | **Time** | Data e hora da última alteração no registro do relatório. | [optional] |
+| **expires_at** | **Time** | Quando o arquivo expira do armazenamento (normalmente 7 dias após a criação) | [optional] |
+| **params** | **Object** | Filtros usados para gerar o relatório. | [optional] |
+| **written_rows** | **Integer** | Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED. | [optional] |
 
 ## Example
 

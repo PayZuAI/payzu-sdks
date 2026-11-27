@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAtFrom** | **time.Time** | Start of the delivery period. At most 30 days ago. | 
-**CreatedAtTo** | **time.Time** | End of the delivery period, on or after createdAtFrom. The window cannot exceed 7 days. | 
-**WebhookIds** | Pointer to **[]string** | Webhooks to resend. Omitted: all active webhooks of the account. | [optional] 
-**TransactionIds** | Pointer to **[]string** | Restrict to specific transaction IDs. | [optional] 
-**TransactionTypes** | Pointer to **[]string** | Filter by transaction type. | [optional] 
-**TransactionStatus** | Pointer to **[]string** | Filter by the current transaction status. | [optional] 
-**TransactionEndToEndIds** | Pointer to **[]string** | Restrict to specific end-to-end IDs. | [optional] 
+**CreatedAtFrom** | **time.Time** | Início do período das entregas. No máximo 30 dias atrás. | 
+**CreatedAtTo** | **time.Time** | Fim do período das entregas, igual ou posterior a createdAtFrom. A janela não pode passar de 7 dias. | 
+**WebhookIds** | Pointer to **[]string** | Webhooks a reenviar. Omitido: todos os webhooks ativos da conta. | [optional] 
+**TransactionIds** | Pointer to **[]string** | Restringe a IDs de transação específicos. | [optional] 
+**TransactionTypes** | Pointer to **[]string** | Filtra pelo tipo da transação. | [optional] 
+**TransactionStatus** | Pointer to **[]string** | Filtra pelo status atual da transação. | [optional] 
+**TransactionEndToEndIds** | Pointer to **[]string** | Restringe a end-to-end IDs específicos. | [optional] 
 
 ## Methods
 

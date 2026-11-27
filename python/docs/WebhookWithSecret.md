@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Webhook identifier. | [optional] 
-**url** | **str** | Address that receives the notifications. | [optional] 
-**active** | **bool** | Indicates whether the webhook starts out receiving events. | [optional] 
-**events** | [**List[WebhookEventType]**](WebhookEventType.md) | Events subscribed by this webhook. | [optional] 
-**has_secret** | **bool** | Indicates whether the webhook has a signing secret. | [optional] 
+**id** | **str** | Identificador do webhook. | [optional] 
+**url** | **str** | Endereço que recebe as notificações. | [optional] 
+**active** | **bool** | Indica se o webhook já começa recebendo eventos. | [optional] 
+**events** | [**List[WebhookEventType]**](WebhookEventType.md) | Eventos assinados por este webhook. | [optional] 
+**has_secret** | **bool** | Indica se o webhook tem segredo de assinatura. | [optional] 
 **created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** | Date and time of the last change to the webhook. | [optional] 
-**secret** | **str** | HMAC signing secret. Shown only on creation and on rotate-secret. Store it now. | [optional] 
+**updated_at** | **datetime** | Data e hora da última alteração do webhook. | [optional] 
+**secret** | **str** | Segredo de assinatura HMAC. | [optional] 
 
 ## Example
 

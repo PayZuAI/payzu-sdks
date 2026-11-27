@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,6 +28,11 @@ import {
     GetUserBalance200ResponseFromJSON,
     GetUserBalance200ResponseToJSON,
 } from '../models/GetUserBalance200Response.js';
+import {
+    type GetUserPixKeys200Response,
+    GetUserPixKeys200ResponseFromJSON,
+    GetUserPixKeys200ResponseToJSON,
+} from '../models/GetUserPixKeys200Response.js';
 
 /**
  * AccountApi - interface
@@ -44,8 +49,8 @@ export interface AccountApiInterface {
     getUserRequestOpts(): Promise<runtime.RequestOpts>;
 
     /**
-     * Account profile, limits and fee rules.
-     * @summary Account Info
+     * Perfil da conta, limites e regras de tarifas.
+     * @summary Informações da conta
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountApiInterface
@@ -53,8 +58,8 @@ export interface AccountApiInterface {
     getUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUser200Response>>;
 
     /**
-     * Account profile, limits and fee rules.
-     * Account Info
+     * Perfil da conta, limites e regras de tarifas.
+     * Informações da conta
      */
     getUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUser200Response>;
 
@@ -66,8 +71,8 @@ export interface AccountApiInterface {
     getUserBalanceRequestOpts(): Promise<runtime.RequestOpts>;
 
     /**
-     * Available and blocked balances.
-     * @summary Account Balance
+     * Saldos disponíveis e bloqueados.
+     * @summary Saldo da conta
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountApiInterface
@@ -75,10 +80,32 @@ export interface AccountApiInterface {
     getUserBalanceRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserBalance200Response>>;
 
     /**
-     * Available and blocked balances.
-     * Account Balance
+     * Saldos disponíveis e bloqueados.
+     * Saldo da conta
      */
     getUserBalance(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserBalance200Response>;
+
+    /**
+     * Creates request options for getUserPixKeys without sending the request
+     * @throws {RequiredError}
+     * @memberof AccountApiInterface
+     */
+    getUserPixKeysRequestOpts(): Promise<runtime.RequestOpts>;
+
+    /**
+     * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+     * @summary Chave Pix de recebimento da conta
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApiInterface
+     */
+    getUserPixKeysRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserPixKeys200Response>>;
+
+    /**
+     * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+     * Chave Pix de recebimento da conta
+     */
+    getUserPixKeys(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserPixKeys200Response>;
 
 }
 
@@ -115,8 +142,8 @@ export class AccountApi extends runtime.BaseAPI implements AccountApiInterface {
     }
 
     /**
-     * Account profile, limits and fee rules.
-     * Account Info
+     * Perfil da conta, limites e regras de tarifas.
+     * Informações da conta
      */
     async getUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUser200Response>> {
         const requestOptions = await this.getUserRequestOpts();
@@ -126,8 +153,8 @@ export class AccountApi extends runtime.BaseAPI implements AccountApiInterface {
     }
 
     /**
-     * Account profile, limits and fee rules.
-     * Account Info
+     * Perfil da conta, limites e regras de tarifas.
+     * Informações da conta
      */
     async getUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUser200Response> {
         const response = await this.getUserRaw(initOverrides);
@@ -162,8 +189,8 @@ export class AccountApi extends runtime.BaseAPI implements AccountApiInterface {
     }
 
     /**
-     * Available and blocked balances.
-     * Account Balance
+     * Saldos disponíveis e bloqueados.
+     * Saldo da conta
      */
     async getUserBalanceRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserBalance200Response>> {
         const requestOptions = await this.getUserBalanceRequestOpts();
@@ -173,11 +200,58 @@ export class AccountApi extends runtime.BaseAPI implements AccountApiInterface {
     }
 
     /**
-     * Available and blocked balances.
-     * Account Balance
+     * Saldos disponíveis e bloqueados.
+     * Saldo da conta
      */
     async getUserBalance(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserBalance200Response> {
         const response = await this.getUserBalanceRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for getUserPixKeys without sending the request
+     */
+    async getUserPixKeysRequestOpts(): Promise<runtime.RequestOpts> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("BearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+
+        let urlPath = `/user/pix-keys`;
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+     * Chave Pix de recebimento da conta
+     */
+    async getUserPixKeysRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserPixKeys200Response>> {
+        const requestOptions = await this.getUserPixKeysRequestOpts();
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetUserPixKeys200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+     * Chave Pix de recebimento da conta
+     */
+    async getUserPixKeys(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserPixKeys200Response> {
+        const response = await this.getUserPixKeysRaw(initOverrides);
         return await response.value();
     }
 

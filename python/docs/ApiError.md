@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | Fixed marker of an error response. | 
-**error** | **str** | Name of the corresponding HTTP status. | 
-**error_code** | **str** | Stable machine-readable error code, when available. | 
-**message** | **str** | Human-readable error message. | 
-**status_code** | **int** | HTTP status code. | 
-**request_id** | **str** | Unique request correlation ID (cuid). Include it when contacting support. | 
-**details** | [**List[ApiErrorDetailsInner]**](ApiErrorDetailsInner.md) | Field-level validation errors, when applicable. | [optional] 
-**retry_after_seconds** | **int** | Seconds to wait before retrying. Present only on 429 responses. | [optional] 
+**status** | **str** | Marcador fixo de resposta de erro. | 
+**error** | **str** | Nome do status HTTP correspondente. | 
+**error_code** | **str** | Código de erro estável e legível por máquina, quando disponível. | 
+**message** | **str** | Mensagem de erro legível. | 
+**status_code** | **int** | Código de status HTTP. | 
+**request_id** | **str** | ID único de correlação da requisição (cuid). | 
+**details** | [**List[ApiErrorDetailsInner]**](ApiErrorDetailsInner.md) | Erros de validação por campo, quando aplicável. | [optional] 
+**retry_after_seconds** | **int** | Segundos a aguardar antes de tentar novamente. | [optional] 
 
 ## Example
 

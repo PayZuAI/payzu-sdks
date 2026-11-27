@@ -4,23 +4,23 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_user_callback_secret**](CallbacksApi.md#create_user_callback_secret) | **POST** /user/callbacks/secret | Create callback secret |
-| [**get_user_callback_by_id**](CallbacksApi.md#get_user_callback_by_id) | **GET** /user/callbacks/{id} | Get Callback |
-| [**get_user_callbacks**](CallbacksApi.md#get_user_callbacks) | **GET** /user/callbacks | List Callbacks |
-| [**resend_user_callback_single**](CallbacksApi.md#resend_user_callback_single) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single) |
-| [**resend_user_callbacks**](CallbacksApi.md#resend_user_callbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk) |
-| [**resend_user_callbacks_webhook**](CallbacksApi.md#resend_user_callbacks_webhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook |
-| [**resend_user_callbacks_webhooks**](CallbacksApi.md#resend_user_callbacks_webhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters |
-| [**rotate_user_callback_secret**](CallbacksApi.md#rotate_user_callback_secret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret |
+| [**create_user_callback_secret**](CallbacksApi.md#create_user_callback_secret) | **POST** /user/callbacks/secret | Criar segredo de callback |
+| [**get_user_callback_by_id**](CallbacksApi.md#get_user_callback_by_id) | **GET** /user/callbacks/{id} | Obter Callback |
+| [**get_user_callbacks**](CallbacksApi.md#get_user_callbacks) | **GET** /user/callbacks | Listar Callbacks |
+| [**resend_user_callback_single**](CallbacksApi.md#resend_user_callback_single) | **POST** /user/callbacks/resend/{transactionId} | Reenviar callback (individual) |
+| [**resend_user_callbacks**](CallbacksApi.md#resend_user_callbacks) | **POST** /user/callbacks/resend | Reenviar callbacks (em lote) |
+| [**resend_user_callbacks_webhook**](CallbacksApi.md#resend_user_callbacks_webhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Reenviar callbacks por webhook |
+| [**resend_user_callbacks_webhooks**](CallbacksApi.md#resend_user_callbacks_webhooks) | **POST** /user/callbacks/resend/webhook | Reenviar callbacks de webhook por filtros |
+| [**rotate_user_callback_secret**](CallbacksApi.md#rotate_user_callback_secret) | **PATCH** /user/callbacks/secret/rotate | Rotacionar segredo de callback |
 
 
 ## create_user_callback_secret
 
 > <CallbackSecretResponse> create_user_callback_secret
 
-Create callback secret
+Criar segredo de callback
 
-Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
 
 ### Examples
 
@@ -36,7 +36,7 @@ end
 api_instance = PayZuPix::CallbacksApi.new
 
 begin
-  # Create callback secret
+  # Criar segredo de callback
   result = api_instance.create_user_callback_secret
   p result
 rescue PayZuPix::ApiError => e
@@ -52,7 +52,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create callback secret
+  # Criar segredo de callback
   data, status_code, headers = api_instance.create_user_callback_secret_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -84,9 +84,9 @@ This endpoint does not need any parameter.
 
 > <CallbackDetail> get_user_callback_by_id(id)
 
-Get Callback
+Obter Callback
 
-Returns the details of a specific callback log.
+Retorna os detalhes de um log de callback específico.
 
 ### Examples
 
@@ -100,10 +100,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::CallbacksApi.new
-id = 'cm3w7l9v20001q8f2u6c1y4be' # String | Unique callback ID
+id = 'cm3w7l9v20001q8f2u6c1y4be' # String | ID único do callback
 
 begin
-  # Get Callback
+  # Obter Callback
   result = api_instance.get_user_callback_by_id(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -119,7 +119,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Callback
+  # Obter Callback
   data, status_code, headers = api_instance.get_user_callback_by_id_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -133,7 +133,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique callback ID |  |
+| **id** | **String** | ID único do callback |  |
 
 ### Return type
 
@@ -153,9 +153,9 @@ end
 
 > <CallbackListResponse> get_user_callbacks(opts)
 
-List Callbacks
+Listar Callbacks
 
-Returns a paginated list of webhook callback logs for the user's transactions.
+Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
 
 ### Examples
 
@@ -170,23 +170,23 @@ end
 
 api_instance = PayZuPix::CallbacksApi.new
 opts = {
-  page: 56, # Integer | Page number.
-  limit: 56, # Integer | Items per page.
-  sort_by: 'createdAt', # String | Sort field.
-  sort_direction: 'asc', # String | Sort direction.
-  id: 'cm3w7l9v20001q8f2u6c1y4be', # String | Filter by callback ID
-  url: 'https://webhook.cool/', # String | Filter by callback URL
-  status: 200, # Integer | HTTP status code
-  transaction_id: 'PAYZU20260814T6NX1CV9MK000000', # String | Transaction ID.
-  has_error: true, # Boolean | Filter callbacks that errored
-  created_at_from: Time.parse('2026-08-01'), # Time | Start of the creation date range.
-  created_at_to: Time.parse('2026-08-31'), # Time | End of the creation date range.
-  webhook_id: 'webhook_id_example', # String | Webhook id.
-  event_type: PayZuPix::WebhookEventType::TRANSACTION_PENDING # WebhookEventType | Webhook event type.
+  page: 56, # Integer | Número da página.
+  limit: 56, # Integer | Itens por página.
+  sort_by: 'createdAt', # String | Campo de ordenação.
+  sort_direction: 'asc', # String | Direção da ordenação.
+  id: 'cm3w7l9v20001q8f2u6c1y4be', # String | Filtra por ID de callback
+  url: 'https://webhook.cool/', # String | Filtra por callback URL
+  status: 200, # Integer | Status HTTP devolvido pelo seu endpoint.
+  transaction_id: 'PAYZU20260814T6NX1CV9MK000000', # String | ID da transação.
+  has_error: true, # Boolean | Filtra callbacks que apresentaram erro
+  created_at_from: Time.parse('2026-08-01'), # Time | Data de criação inicial.
+  created_at_to: Time.parse('2026-08-31'), # Time | Data de criação final.
+  webhook_id: 'webhook_id_example', # String | Id do webhook.
+  event_type: PayZuPix::WebhookEventType::TRANSACTION_PENDING # WebhookEventType | Tipo de evento do webhook.
 }
 
 begin
-  # List Callbacks
+  # Listar Callbacks
   result = api_instance.get_user_callbacks(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -202,7 +202,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List Callbacks
+  # Listar Callbacks
   data, status_code, headers = api_instance.get_user_callbacks_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -216,19 +216,19 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **page** | **Integer** | Page number. | [optional][default to 1] |
-| **limit** | **Integer** | Items per page. | [optional][default to 10] |
-| **sort_by** | **String** | Sort field. | [optional][default to &#39;createdAt&#39;] |
-| **sort_direction** | **String** | Sort direction. | [optional][default to &#39;desc&#39;] |
-| **id** | **String** | Filter by callback ID | [optional] |
-| **url** | **String** | Filter by callback URL | [optional] |
-| **status** | **Integer** | HTTP status code | [optional] |
-| **transaction_id** | **String** | Transaction ID. | [optional] |
-| **has_error** | **Boolean** | Filter callbacks that errored | [optional] |
-| **created_at_from** | **Time** | Start of the creation date range. | [optional] |
-| **created_at_to** | **Time** | End of the creation date range. | [optional] |
-| **webhook_id** | **String** | Webhook id. | [optional] |
-| **event_type** | [**WebhookEventType**](.md) | Webhook event type. | [optional] |
+| **page** | **Integer** | Número da página. | [optional][default to 1] |
+| **limit** | **Integer** | Itens por página. | [optional][default to 10] |
+| **sort_by** | **String** | Campo de ordenação. | [optional][default to &#39;createdAt&#39;] |
+| **sort_direction** | **String** | Direção da ordenação. | [optional][default to &#39;desc&#39;] |
+| **id** | **String** | Filtra por ID de callback | [optional] |
+| **url** | **String** | Filtra por callback URL | [optional] |
+| **status** | **Integer** | Status HTTP devolvido pelo seu endpoint. | [optional] |
+| **transaction_id** | **String** | ID da transação. | [optional] |
+| **has_error** | **Boolean** | Filtra callbacks que apresentaram erro | [optional] |
+| **created_at_from** | **Time** | Data de criação inicial. | [optional] |
+| **created_at_to** | **Time** | Data de criação final. | [optional] |
+| **webhook_id** | **String** | Id do webhook. | [optional] |
+| **event_type** | [**WebhookEventType**](.md) | Tipo de evento do webhook. | [optional] |
 
 ### Return type
 
@@ -248,9 +248,9 @@ end
 
 > <ResendUserCallbackSingle200Response> resend_user_callback_single(transaction_id)
 
-Re-send callback (single)
+Reenviar callback (individual)
 
-Resend the callback of a single transaction.
+Reenvia o callback de uma única transação.
 
 ### Examples
 
@@ -264,10 +264,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::CallbacksApi.new
-transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # String | Transaction ID.
+transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # String | ID da transação.
 
 begin
-  # Re-send callback (single)
+  # Reenviar callback (individual)
   result = api_instance.resend_user_callback_single(transaction_id)
   p result
 rescue PayZuPix::ApiError => e
@@ -283,7 +283,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Re-send callback (single)
+  # Reenviar callback (individual)
   data, status_code, headers = api_instance.resend_user_callback_single_with_http_info(transaction_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -297,7 +297,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **transaction_id** | **String** | Transaction ID. |  |
+| **transaction_id** | **String** | ID da transação. |  |
 
 ### Return type
 
@@ -317,9 +317,9 @@ end
 
 > <ResendUserCallbacks200Response> resend_user_callbacks(resend_user_callbacks_request)
 
-Re-send callbacks (bulk)
+Reenviar callbacks (em lote)
 
-Resend callbacks in bulk for transactions matching the given filters.
+Reenvia callbacks em lote para transações que correspondem aos filtros informados.
 
 ### Examples
 
@@ -336,7 +336,7 @@ api_instance = PayZuPix::CallbacksApi.new
 resend_user_callbacks_request = PayZuPix::ResendUserCallbacksRequest.new({created_at_from: Time.parse('2026-08-05T00:00:00Z'), created_at_to: Time.parse('2026-08-11T23:59:59Z')}) # ResendUserCallbacksRequest | 
 
 begin
-  # Re-send callbacks (bulk)
+  # Reenviar callbacks (em lote)
   result = api_instance.resend_user_callbacks(resend_user_callbacks_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -352,7 +352,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Re-send callbacks (bulk)
+  # Reenviar callbacks (em lote)
   data, status_code, headers = api_instance.resend_user_callbacks_with_http_info(resend_user_callbacks_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -386,9 +386,9 @@ end
 
 > <EnqueuedCallback> resend_user_callbacks_webhook(webhook_id)
 
-Resend callbacks by webhook
+Reenviar callbacks por webhook
 
-Queues a bulk resend of the failed callbacks of a given webhook.
+Enfileira o reenvio em lote dos callbacks falhos de um webhook.
 
 ### Examples
 
@@ -402,10 +402,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::CallbacksApi.new
-webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Webhook id.
+webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Id do webhook.
 
 begin
-  # Resend callbacks by webhook
+  # Reenviar callbacks por webhook
   result = api_instance.resend_user_callbacks_webhook(webhook_id)
   p result
 rescue PayZuPix::ApiError => e
@@ -421,7 +421,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Resend callbacks by webhook
+  # Reenviar callbacks por webhook
   data, status_code, headers = api_instance.resend_user_callbacks_webhook_with_http_info(webhook_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -435,7 +435,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **webhook_id** | **String** | Webhook id. |  |
+| **webhook_id** | **String** | Id do webhook. |  |
 
 ### Return type
 
@@ -455,9 +455,9 @@ end
 
 > <EnqueuedCallback> resend_user_callbacks_webhooks(resend_webhook_callbacks_request)
 
-Resend webhook callbacks by filters
+Reenviar callbacks de webhook por filtros
 
-Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
 
 ### Examples
 
@@ -474,7 +474,7 @@ api_instance = PayZuPix::CallbacksApi.new
 resend_webhook_callbacks_request = PayZuPix::ResendWebhookCallbacksRequest.new({created_at_from: Time.parse('2026-08-05T00:00:00Z'), created_at_to: Time.parse('2026-08-11T23:59:59Z')}) # ResendWebhookCallbacksRequest | 
 
 begin
-  # Resend webhook callbacks by filters
+  # Reenviar callbacks de webhook por filtros
   result = api_instance.resend_user_callbacks_webhooks(resend_webhook_callbacks_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -490,7 +490,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Resend webhook callbacks by filters
+  # Reenviar callbacks de webhook por filtros
   data, status_code, headers = api_instance.resend_user_callbacks_webhooks_with_http_info(resend_webhook_callbacks_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -524,9 +524,9 @@ end
 
 > <RotateCallbackSecretResponse> rotate_user_callback_secret
 
-Rotate callback secret
+Rotacionar segredo de callback
 
-Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
 
 ### Examples
 
@@ -542,7 +542,7 @@ end
 api_instance = PayZuPix::CallbacksApi.new
 
 begin
-  # Rotate callback secret
+  # Rotacionar segredo de callback
   result = api_instance.rotate_user_callback_secret
   p result
 rescue PayZuPix::ApiError => e
@@ -558,7 +558,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Rotate callback secret
+  # Rotacionar segredo de callback
   data, status_code, headers = api_instance.rotate_user_callback_secret_with_http_info
   p status_code # => 2xx
   p headers # => { ... }

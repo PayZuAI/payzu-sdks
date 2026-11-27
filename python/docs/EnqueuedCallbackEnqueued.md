@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**count** | **int** | Total number of callbacks sent for queueing. Not limited by the size of items. | [optional] 
-**truncated** | **bool** | True when items lists only part of the callbacks. The resend still covers all of them. | [optional] 
-**items** | [**List[EnqueuedCallbackItem]**](EnqueuedCallbackItem.md) | Queued callbacks, capped at 500 entries. | [optional] 
+**count** | **int** | Total de callbacks enviados para enfileiramento. Não é limitado pelo tamanho de items. | [optional] 
+**truncated** | **bool** | true quando items lista apenas parte dos callbacks. O reenvio cobre todos mesmo assim. | [optional] 
+**items** | [**List[EnqueuedCallbackItem]**](EnqueuedCallbackItem.md) | Callbacks enfileirados, no máximo 500 entradas. | [optional] 
 
 ## Example
 

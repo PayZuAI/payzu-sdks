@@ -13,5 +13,8 @@ additionalProperties:
   developerOrganization: PayZu
   developerOrganizationUrl: https://payzu.com.br
 globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: ""
   apiTests: false
   modelTests: false

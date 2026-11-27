@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPix**](PixOperationsApi.md#getPix) | **GET** /pix | Retrieve Charge |
-| [**getPixWithHttpInfo**](PixOperationsApi.md#getPixWithHttpInfo) | **GET** /pix | Retrieve Charge |
-| [**getPixQrcode**](PixOperationsApi.md#getPixQrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG) |
-| [**getPixQrcodeWithHttpInfo**](PixOperationsApi.md#getPixQrcodeWithHttpInfo) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG) |
-| [**getProof**](PixOperationsApi.md#getProof) | **GET** /proof/{id} | Get Transaction Receipt |
-| [**getProofWithHttpInfo**](PixOperationsApi.md#getProofWithHttpInfo) | **GET** /proof/{id} | Get Transaction Receipt |
-| [**postPix**](PixOperationsApi.md#postPix) | **POST** /pix | Create Charge (Pix deposit) |
-| [**postPixWithHttpInfo**](PixOperationsApi.md#postPixWithHttpInfo) | **POST** /pix | Create Charge (Pix deposit) |
+| [**getPix**](PixOperationsApi.md#getPix) | **GET** /pix | Recuperar Cobrança |
+| [**getPixWithHttpInfo**](PixOperationsApi.md#getPixWithHttpInfo) | **GET** /pix | Recuperar Cobrança |
+| [**getPixQrcode**](PixOperationsApi.md#getPixQrcode) | **GET** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG) |
+| [**getPixQrcodeWithHttpInfo**](PixOperationsApi.md#getPixQrcodeWithHttpInfo) | **GET** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG) |
+| [**getProof**](PixOperationsApi.md#getProof) | **GET** /proof/{id} | Obter comprovante da transação |
+| [**getProofWithHttpInfo**](PixOperationsApi.md#getProofWithHttpInfo) | **GET** /proof/{id} | Obter comprovante da transação |
+| [**postPix**](PixOperationsApi.md#postPix) | **POST** /pix | Criar Cobrança (depósito Pix) |
+| [**postPixWithHttpInfo**](PixOperationsApi.md#postPixWithHttpInfo) | **POST** /pix | Criar Cobrança (depósito Pix) |
 
 
 
@@ -19,9 +19,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > Transaction getPix(id, clientReference, endToEndId, virtualAccount)
 
-Retrieve Charge
+Recuperar Cobrança
 
-Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
+Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
 
 ### Example
 
@@ -44,10 +44,10 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         PixOperationsApi apiInstance = new PixOperationsApi(defaultClient);
-        String id = "PAYZU20260811R4TZ8WD1NC000000"; // String | Transaction ID.
-        String clientReference = "order_12345"; // String | External reference provided when creating the charge.
-        String endToEndId = "E00000000202508172159kZ8dQ2mNb1x"; // String | Pix end-to-end ID.
-        String virtualAccount = "loja-centro-01"; // String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+        String id = "PAYZU20260811R4TZ8WD1NC000000"; // String | ID da transação.
+        String clientReference = "order_12345"; // String | Referência externa fornecida na criação da cobrança.
+        String endToEndId = "E00000000202508172159kZ8dQ2mNb1x"; // String | ID end-to-end do Pix.
+        String virtualAccount = "loja-centro-01"; // String | Subconta usada na criação.
         try {
             Transaction result = apiInstance.getPix(id, clientReference, endToEndId, virtualAccount);
             System.out.println(result);
@@ -67,10 +67,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Transaction ID. | [optional] |
-| **clientReference** | **String**| External reference provided when creating the charge. | [optional] |
-| **endToEndId** | **String**| Pix end-to-end ID. | [optional] |
-| **virtualAccount** | **String**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String**| ID da transação. | [optional] |
+| **clientReference** | **String**| Referência externa fornecida na criação da cobrança. | [optional] |
+| **endToEndId** | **String**| ID end-to-end do Pix. | [optional] |
+| **virtualAccount** | **String**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -89,19 +89,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Current transaction state |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Estado atual da transação |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 ## getPixWithHttpInfo
 
 > ApiResponse<Transaction> getPixWithHttpInfo(id, clientReference, endToEndId, virtualAccount)
 
-Retrieve Charge
+Recuperar Cobrança
 
-Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
+Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
 
 ### Example
 
@@ -125,10 +125,10 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         PixOperationsApi apiInstance = new PixOperationsApi(defaultClient);
-        String id = "PAYZU20260811R4TZ8WD1NC000000"; // String | Transaction ID.
-        String clientReference = "order_12345"; // String | External reference provided when creating the charge.
-        String endToEndId = "E00000000202508172159kZ8dQ2mNb1x"; // String | Pix end-to-end ID.
-        String virtualAccount = "loja-centro-01"; // String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+        String id = "PAYZU20260811R4TZ8WD1NC000000"; // String | ID da transação.
+        String clientReference = "order_12345"; // String | Referência externa fornecida na criação da cobrança.
+        String endToEndId = "E00000000202508172159kZ8dQ2mNb1x"; // String | ID end-to-end do Pix.
+        String virtualAccount = "loja-centro-01"; // String | Subconta usada na criação.
         try {
             ApiResponse<Transaction> response = apiInstance.getPixWithHttpInfo(id, clientReference, endToEndId, virtualAccount);
             System.out.println("Status code: " + response.getStatusCode());
@@ -150,10 +150,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Transaction ID. | [optional] |
-| **clientReference** | **String**| External reference provided when creating the charge. | [optional] |
-| **endToEndId** | **String**| Pix end-to-end ID. | [optional] |
-| **virtualAccount** | **String**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String**| ID da transação. | [optional] |
+| **clientReference** | **String**| Referência externa fornecida na criação da cobrança. | [optional] |
+| **endToEndId** | **String**| ID end-to-end do Pix. | [optional] |
+| **virtualAccount** | **String**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -172,20 +172,20 @@ ApiResponse<[**Transaction**](Transaction.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Current transaction state |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Estado atual da transação |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 
 ## getPixQrcode
 
 > File getPixQrcode(transactionId)
 
-Render Pix QR code (PNG)
+Renderiza o QR Code Pix (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
+Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
 
 ### Example
 
@@ -208,7 +208,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         PixOperationsApi apiInstance = new PixOperationsApi(defaultClient);
-        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID.
+        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação.
         try {
             File result = apiInstance.getPixQrcode(transactionId);
             System.out.println(result);
@@ -228,7 +228,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | **String**| Transaction ID. | |
+| **transactionId** | **String**| ID da transação. | |
 
 ### Return type
 
@@ -247,19 +247,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | QR code image |  -  |
-| **400** | Transaction is not a DEPOSIT or has no QR code |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Transaction not found |  -  |
+| **200** | Imagem do QR Code |  -  |
+| **400** | Transação sem QR Code |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Transação não encontrada |  -  |
 
 ## getPixQrcodeWithHttpInfo
 
 > ApiResponse<File> getPixQrcodeWithHttpInfo(transactionId)
 
-Render Pix QR code (PNG)
+Renderiza o QR Code Pix (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
+Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
 
 ### Example
 
@@ -283,7 +283,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         PixOperationsApi apiInstance = new PixOperationsApi(defaultClient);
-        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID.
+        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação.
         try {
             ApiResponse<File> response = apiInstance.getPixQrcodeWithHttpInfo(transactionId);
             System.out.println("Status code: " + response.getStatusCode());
@@ -305,7 +305,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | **String**| Transaction ID. | |
+| **transactionId** | **String**| ID da transação. | |
 
 ### Return type
 
@@ -324,20 +324,20 @@ ApiResponse<[**File**](File.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | QR code image |  -  |
-| **400** | Transaction is not a DEPOSIT or has no QR code |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Transaction not found |  -  |
+| **200** | Imagem do QR Code |  -  |
+| **400** | Transação sem QR Code |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Transação não encontrada |  -  |
 
 
 ## getProof
 
 > ProofResponse getProof(id, type)
 
-Get Transaction Receipt
+Obter comprovante da transação
 
-Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
 
 ### Example
 
@@ -360,8 +360,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         PixOperationsApi apiInstance = new PixOperationsApi(defaultClient);
-        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID.
-        String type = "pdf"; // String | Return format.
+        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação.
+        String type = "pdf"; // String | Formato de retorno.
         try {
             ProofResponse result = apiInstance.getProof(id, type);
             System.out.println(result);
@@ -381,8 +381,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Transaction ID. | |
-| **type** | **String**| Return format. | [optional] [default to pdf] [enum: pdf, base64] |
+| **id** | **String**| ID da transação. | |
+| **type** | **String**| Formato de retorno. | [optional] [default to pdf] [enum: pdf, base64] |
 
 ### Return type
 
@@ -401,20 +401,21 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **404** | Resource not found |  -  |
-| **422** | Operation refused |  -  |
-| **500** | Internal error |  -  |
+| **200** | Comprovante em PDF ou base64 |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **422** | Operação recusada |  -  |
+| **500** | Erro interno |  -  |
 
 ## getProofWithHttpInfo
 
 > ApiResponse<ProofResponse> getProofWithHttpInfo(id, type)
 
-Get Transaction Receipt
+Obter comprovante da transação
 
-Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
 
 ### Example
 
@@ -438,8 +439,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         PixOperationsApi apiInstance = new PixOperationsApi(defaultClient);
-        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID.
-        String type = "pdf"; // String | Return format.
+        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação.
+        String type = "pdf"; // String | Formato de retorno.
         try {
             ApiResponse<ProofResponse> response = apiInstance.getProofWithHttpInfo(id, type);
             System.out.println("Status code: " + response.getStatusCode());
@@ -461,8 +462,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Transaction ID. | |
-| **type** | **String**| Return format. | [optional] [default to pdf] [enum: pdf, base64] |
+| **id** | **String**| ID da transação. | |
+| **type** | **String**| Formato de retorno. | [optional] [default to pdf] [enum: pdf, base64] |
 
 ### Return type
 
@@ -481,21 +482,22 @@ ApiResponse<[**ProofResponse**](ProofResponse.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **404** | Resource not found |  -  |
-| **422** | Operation refused |  -  |
-| **500** | Internal error |  -  |
+| **200** | Comprovante em PDF ou base64 |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **422** | Operação recusada |  -  |
+| **500** | Erro interno |  -  |
 
 
 ## postPix
 
 > Transaction postPix(postPixRequest)
 
-Create Charge (Pix deposit)
+Criar Cobrança (depósito Pix)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
 
 ### Example
 
@@ -557,20 +559,20 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Charge created |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **422** | Operation refused |  -  |
-| **424** | Failure at the financial institution |  -  |
+| **200** | Cobrança criada |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **422** | Operação recusada |  -  |
+| **424** | Falha na instituição financeira |  -  |
 
 ## postPixWithHttpInfo
 
 > ApiResponse<Transaction> postPixWithHttpInfo(postPixRequest)
 
-Create Charge (Pix deposit)
+Criar Cobrança (depósito Pix)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
 
 ### Example
 
@@ -635,10 +637,10 @@ ApiResponse<[**Transaction**](Transaction.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Charge created |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **422** | Operation refused |  -  |
-| **424** | Failure at the financial institution |  -  |
+| **200** | Cobrança criada |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **422** | Operação recusada |  -  |
+| **424** | Falha na instituição financeira |  -  |
 

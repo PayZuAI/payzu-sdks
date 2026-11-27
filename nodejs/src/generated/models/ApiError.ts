@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,49 +28,49 @@ import {
  */
 export interface ApiError {
     /**
-     * Fixed marker of an error response.
+     * Marcador fixo de resposta de erro.
      * @type {ApiErrorStatusEnum}
      * @memberof ApiError
      */
     status: ApiErrorStatusEnum;
     /**
-     * Name of the corresponding HTTP status.
+     * Nome do status HTTP correspondente.
      * @type {string}
      * @memberof ApiError
      */
     error: string;
     /**
-     * Stable machine-readable error code, when available.
+     * Código de erro estável e legível por máquina, quando disponível.
      * @type {string}
      * @memberof ApiError
      */
     errorCode: string;
     /**
-     * Human-readable error message.
+     * Mensagem de erro legível.
      * @type {string}
      * @memberof ApiError
      */
     message: string;
     /**
-     * HTTP status code.
+     * Código de status HTTP.
      * @type {number}
      * @memberof ApiError
      */
     statusCode: number;
     /**
-     * Unique request correlation ID (cuid). Include it when contacting support.
+     * ID único de correlação da requisição (cuid).
      * @type {string}
      * @memberof ApiError
      */
     requestId: string;
     /**
-     * Field-level validation errors, when applicable.
+     * Erros de validação por campo, quando aplicável.
      * @type {Array<ApiErrorDetailsInner>}
      * @memberof ApiError
      */
     details?: Array<ApiErrorDetailsInner>;
     /**
-     * Seconds to wait before retrying. Present only on 429 responses.
+     * Segundos a aguardar antes de tentar novamente.
      * @type {number}
      * @memberof ApiError
      */

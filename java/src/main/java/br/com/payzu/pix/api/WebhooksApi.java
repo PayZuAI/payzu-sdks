@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -177,52 +177,44 @@ public class WebhooksApi {
   }
 
   /**
-   * Delete webhook
-   * Removes a webhook.
-   * @param id Webhook id. (required)
+   * Remover webhook
+   * Remove um webhook.
+   * @param id Id do webhook. (required)
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Delete webhook Documentation</a>
    */
   public void deleteUserWebhook(@javax.annotation.Nonnull String id) throws ApiException {
     deleteUserWebhook(id, null);
   }
 
   /**
-   * Delete webhook
-   * Removes a webhook.
-   * @param id Webhook id. (required)
+   * Remover webhook
+   * Remove um webhook.
+   * @param id Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Delete webhook Documentation</a>
    */
   public void deleteUserWebhook(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     deleteUserWebhookWithHttpInfo(id, headers);
   }
 
   /**
-   * Delete webhook
-   * Removes a webhook.
-   * @param id Webhook id. (required)
+   * Remover webhook
+   * Remove um webhook.
+   * @param id Id do webhook. (required)
    * @return ApiResponse&lt;Void&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Delete webhook Documentation</a>
    */
   public ApiResponse<Void> deleteUserWebhookWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return deleteUserWebhookWithHttpInfo(id, null);
   }
 
   /**
-   * Delete webhook
-   * Removes a webhook.
-   * @param id Webhook id. (required)
+   * Remover webhook
+   * Remove um webhook.
+   * @param id Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Void&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Delete webhook Documentation</a>
    */
   public ApiResponse<Void> deleteUserWebhookWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = deleteUserWebhookRequestBuilder(id, headers);
@@ -289,27 +281,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Get webhook
-   * Returns a single webhook.
-   * @param id Webhook id. (required)
+   * Consultar webhook
+   * Retorna um webhook.
+   * @param id Id do webhook. (required)
    * @return Webhook
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get webhook Documentation</a>
    */
   public Webhook getUserWebhook(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserWebhook(id, null);
   }
 
   /**
-   * Get webhook
-   * Returns a single webhook.
-   * @param id Webhook id. (required)
+   * Consultar webhook
+   * Retorna um webhook.
+   * @param id Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return Webhook
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get webhook Documentation</a>
    */
   public Webhook getUserWebhook(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<Webhook> localVarResponse = getUserWebhookWithHttpInfo(id, headers);
@@ -317,27 +305,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Get webhook
-   * Returns a single webhook.
-   * @param id Webhook id. (required)
+   * Consultar webhook
+   * Retorna um webhook.
+   * @param id Id do webhook. (required)
    * @return ApiResponse&lt;Webhook&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get webhook Documentation</a>
    */
   public ApiResponse<Webhook> getUserWebhookWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserWebhookWithHttpInfo(id, null);
   }
 
   /**
-   * Get webhook
-   * Returns a single webhook.
-   * @param id Webhook id. (required)
+   * Consultar webhook
+   * Retorna um webhook.
+   * @param id Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Webhook&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get webhook Documentation</a>
    */
   public ApiResponse<Webhook> getUserWebhookWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserWebhookRequestBuilder(id, headers);
@@ -415,29 +399,25 @@ public class WebhooksApi {
   }
 
   /**
-   * Get sent callback detail
-   * Returns the delivery detail of a single sent callback.
-   * @param id Webhook id. (required)
-   * @param callbackId Callback log id. (required)
+   * Detalhe de callback enviado
+   * Retorna o detalhe de entrega de um callback enviado.
+   * @param id Id do webhook. (required)
+   * @param callbackId Id do log de callback. (required)
    * @return SentWebhookDetailResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get sent callback detail Documentation</a>
    */
   public SentWebhookDetailResponse getUserWebhookSentDetail(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String callbackId) throws ApiException {
     return getUserWebhookSentDetail(id, callbackId, null);
   }
 
   /**
-   * Get sent callback detail
-   * Returns the delivery detail of a single sent callback.
-   * @param id Webhook id. (required)
-   * @param callbackId Callback log id. (required)
+   * Detalhe de callback enviado
+   * Retorna o detalhe de entrega de um callback enviado.
+   * @param id Id do webhook. (required)
+   * @param callbackId Id do log de callback. (required)
    * @param headers Optional headers to include in the request
    * @return SentWebhookDetailResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get sent callback detail Documentation</a>
    */
   public SentWebhookDetailResponse getUserWebhookSentDetail(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String callbackId, Map<String, String> headers) throws ApiException {
     ApiResponse<SentWebhookDetailResponse> localVarResponse = getUserWebhookSentDetailWithHttpInfo(id, callbackId, headers);
@@ -445,29 +425,25 @@ public class WebhooksApi {
   }
 
   /**
-   * Get sent callback detail
-   * Returns the delivery detail of a single sent callback.
-   * @param id Webhook id. (required)
-   * @param callbackId Callback log id. (required)
+   * Detalhe de callback enviado
+   * Retorna o detalhe de entrega de um callback enviado.
+   * @param id Id do webhook. (required)
+   * @param callbackId Id do log de callback. (required)
    * @return ApiResponse&lt;SentWebhookDetailResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get sent callback detail Documentation</a>
    */
   public ApiResponse<SentWebhookDetailResponse> getUserWebhookSentDetailWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String callbackId) throws ApiException {
     return getUserWebhookSentDetailWithHttpInfo(id, callbackId, null);
   }
 
   /**
-   * Get sent callback detail
-   * Returns the delivery detail of a single sent callback.
-   * @param id Webhook id. (required)
-   * @param callbackId Callback log id. (required)
+   * Detalhe de callback enviado
+   * Retorna o detalhe de entrega de um callback enviado.
+   * @param id Id do webhook. (required)
+   * @param callbackId Id do log de callback. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;SentWebhookDetailResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get sent callback detail Documentation</a>
    */
   public ApiResponse<SentWebhookDetailResponse> getUserWebhookSentDetailWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String callbackId, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserWebhookSentDetailRequestBuilder(id, callbackId, headers);
@@ -550,27 +526,23 @@ public class WebhooksApi {
   }
 
   /**
-   * List webhooks
-   * Lists the webhooks registered for the account.
-   * @param active Filter by active status. (optional)
+   * Listar webhooks
+   * Lista os webhooks cadastrados na conta.
+   * @param active Filtra pelo status ativo. (optional)
    * @return WebhookListResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List webhooks Documentation</a>
    */
   public WebhookListResponse getUserWebhooks(@javax.annotation.Nullable Boolean active) throws ApiException {
     return getUserWebhooks(active, null);
   }
 
   /**
-   * List webhooks
-   * Lists the webhooks registered for the account.
-   * @param active Filter by active status. (optional)
+   * Listar webhooks
+   * Lista os webhooks cadastrados na conta.
+   * @param active Filtra pelo status ativo. (optional)
    * @param headers Optional headers to include in the request
    * @return WebhookListResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List webhooks Documentation</a>
    */
   public WebhookListResponse getUserWebhooks(@javax.annotation.Nullable Boolean active, Map<String, String> headers) throws ApiException {
     ApiResponse<WebhookListResponse> localVarResponse = getUserWebhooksWithHttpInfo(active, headers);
@@ -578,27 +550,23 @@ public class WebhooksApi {
   }
 
   /**
-   * List webhooks
-   * Lists the webhooks registered for the account.
-   * @param active Filter by active status. (optional)
+   * Listar webhooks
+   * Lista os webhooks cadastrados na conta.
+   * @param active Filtra pelo status ativo. (optional)
    * @return ApiResponse&lt;WebhookListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List webhooks Documentation</a>
    */
   public ApiResponse<WebhookListResponse> getUserWebhooksWithHttpInfo(@javax.annotation.Nullable Boolean active) throws ApiException {
     return getUserWebhooksWithHttpInfo(active, null);
   }
 
   /**
-   * List webhooks
-   * Lists the webhooks registered for the account.
-   * @param active Filter by active status. (optional)
+   * Listar webhooks
+   * Lista os webhooks cadastrados na conta.
+   * @param active Filtra pelo status ativo. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;WebhookListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List webhooks Documentation</a>
    */
   public ApiResponse<WebhookListResponse> getUserWebhooksWithHttpInfo(@javax.annotation.Nullable Boolean active, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserWebhooksRequestBuilder(active, headers);
@@ -686,27 +654,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Count sent callbacks
-   * Returns how many webhook deliveries were made, optionally filtered by webhook.
-   * @param webhookId Filter the count by webhook id. (optional)
+   * Contar callbacks enviados
+   * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+   * @param webhookId Filtra a contagem por id de webhook. (optional)
    * @return SentWebhooksQuantity
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Count sent callbacks Documentation</a>
    */
   public SentWebhooksQuantity getUserWebhooksSentQuantity(@javax.annotation.Nullable String webhookId) throws ApiException {
     return getUserWebhooksSentQuantity(webhookId, null);
   }
 
   /**
-   * Count sent callbacks
-   * Returns how many webhook deliveries were made, optionally filtered by webhook.
-   * @param webhookId Filter the count by webhook id. (optional)
+   * Contar callbacks enviados
+   * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+   * @param webhookId Filtra a contagem por id de webhook. (optional)
    * @param headers Optional headers to include in the request
    * @return SentWebhooksQuantity
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Count sent callbacks Documentation</a>
    */
   public SentWebhooksQuantity getUserWebhooksSentQuantity(@javax.annotation.Nullable String webhookId, Map<String, String> headers) throws ApiException {
     ApiResponse<SentWebhooksQuantity> localVarResponse = getUserWebhooksSentQuantityWithHttpInfo(webhookId, headers);
@@ -714,27 +678,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Count sent callbacks
-   * Returns how many webhook deliveries were made, optionally filtered by webhook.
-   * @param webhookId Filter the count by webhook id. (optional)
+   * Contar callbacks enviados
+   * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+   * @param webhookId Filtra a contagem por id de webhook. (optional)
    * @return ApiResponse&lt;SentWebhooksQuantity&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Count sent callbacks Documentation</a>
    */
   public ApiResponse<SentWebhooksQuantity> getUserWebhooksSentQuantityWithHttpInfo(@javax.annotation.Nullable String webhookId) throws ApiException {
     return getUserWebhooksSentQuantityWithHttpInfo(webhookId, null);
   }
 
   /**
-   * Count sent callbacks
-   * Returns how many webhook deliveries were made, optionally filtered by webhook.
-   * @param webhookId Filter the count by webhook id. (optional)
+   * Contar callbacks enviados
+   * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+   * @param webhookId Filtra a contagem por id de webhook. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;SentWebhooksQuantity&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Count sent callbacks Documentation</a>
    */
   public ApiResponse<SentWebhooksQuantity> getUserWebhooksSentQuantityWithHttpInfo(@javax.annotation.Nullable String webhookId, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserWebhooksSentQuantityRequestBuilder(webhookId, headers);
@@ -822,29 +782,25 @@ public class WebhooksApi {
   }
 
   /**
-   * Update webhook
-   * Updates the url, active flag or events of a webhook. Provide at least one field.
-   * @param id Webhook id. (required)
+   * Atualizar webhook
+   * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+   * @param id Id do webhook. (required)
    * @param webhookUpdateRequest  (required)
    * @return Webhook
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Update webhook Documentation</a>
    */
   public Webhook patchUserWebhook(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull WebhookUpdateRequest webhookUpdateRequest) throws ApiException {
     return patchUserWebhook(id, webhookUpdateRequest, null);
   }
 
   /**
-   * Update webhook
-   * Updates the url, active flag or events of a webhook. Provide at least one field.
-   * @param id Webhook id. (required)
+   * Atualizar webhook
+   * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+   * @param id Id do webhook. (required)
    * @param webhookUpdateRequest  (required)
    * @param headers Optional headers to include in the request
    * @return Webhook
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Update webhook Documentation</a>
    */
   public Webhook patchUserWebhook(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull WebhookUpdateRequest webhookUpdateRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<Webhook> localVarResponse = patchUserWebhookWithHttpInfo(id, webhookUpdateRequest, headers);
@@ -852,29 +808,25 @@ public class WebhooksApi {
   }
 
   /**
-   * Update webhook
-   * Updates the url, active flag or events of a webhook. Provide at least one field.
-   * @param id Webhook id. (required)
+   * Atualizar webhook
+   * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+   * @param id Id do webhook. (required)
    * @param webhookUpdateRequest  (required)
    * @return ApiResponse&lt;Webhook&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Update webhook Documentation</a>
    */
   public ApiResponse<Webhook> patchUserWebhookWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull WebhookUpdateRequest webhookUpdateRequest) throws ApiException {
     return patchUserWebhookWithHttpInfo(id, webhookUpdateRequest, null);
   }
 
   /**
-   * Update webhook
-   * Updates the url, active flag or events of a webhook. Provide at least one field.
-   * @param id Webhook id. (required)
+   * Atualizar webhook
+   * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+   * @param id Id do webhook. (required)
    * @param webhookUpdateRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Webhook&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Update webhook Documentation</a>
    */
   public ApiResponse<Webhook> patchUserWebhookWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull WebhookUpdateRequest webhookUpdateRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = patchUserWebhookRequestBuilder(id, webhookUpdateRequest, headers);
@@ -962,27 +914,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Create webhook
-   * Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+   * Criar webhook
+   * Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
    * @param webhookCreateRequest  (required)
    * @return WebhookWithSecret
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Create webhook Documentation</a>
    */
   public WebhookWithSecret postUserWebhook(@javax.annotation.Nonnull WebhookCreateRequest webhookCreateRequest) throws ApiException {
     return postUserWebhook(webhookCreateRequest, null);
   }
 
   /**
-   * Create webhook
-   * Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+   * Criar webhook
+   * Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
    * @param webhookCreateRequest  (required)
    * @param headers Optional headers to include in the request
    * @return WebhookWithSecret
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Create webhook Documentation</a>
    */
   public WebhookWithSecret postUserWebhook(@javax.annotation.Nonnull WebhookCreateRequest webhookCreateRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<WebhookWithSecret> localVarResponse = postUserWebhookWithHttpInfo(webhookCreateRequest, headers);
@@ -990,27 +938,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Create webhook
-   * Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+   * Criar webhook
+   * Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
    * @param webhookCreateRequest  (required)
    * @return ApiResponse&lt;WebhookWithSecret&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Create webhook Documentation</a>
    */
   public ApiResponse<WebhookWithSecret> postUserWebhookWithHttpInfo(@javax.annotation.Nonnull WebhookCreateRequest webhookCreateRequest) throws ApiException {
     return postUserWebhookWithHttpInfo(webhookCreateRequest, null);
   }
 
   /**
-   * Create webhook
-   * Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+   * Criar webhook
+   * Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
    * @param webhookCreateRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;WebhookWithSecret&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Create webhook Documentation</a>
    */
   public ApiResponse<WebhookWithSecret> postUserWebhookWithHttpInfo(@javax.annotation.Nonnull WebhookCreateRequest webhookCreateRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postUserWebhookRequestBuilder(webhookCreateRequest, headers);
@@ -1093,27 +1037,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Rotate webhook secret
-   * Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
-   * @param id Webhook id. (required)
+   * Rotacionar segredo do webhook
+   * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
+   * @param id Id do webhook. (required)
    * @return RotateSecretResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Rotate webhook secret Documentation</a>
    */
   public RotateSecretResponse postUserWebhookRotateSecret(@javax.annotation.Nonnull String id) throws ApiException {
     return postUserWebhookRotateSecret(id, null);
   }
 
   /**
-   * Rotate webhook secret
-   * Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
-   * @param id Webhook id. (required)
+   * Rotacionar segredo do webhook
+   * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
+   * @param id Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return RotateSecretResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Rotate webhook secret Documentation</a>
    */
   public RotateSecretResponse postUserWebhookRotateSecret(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<RotateSecretResponse> localVarResponse = postUserWebhookRotateSecretWithHttpInfo(id, headers);
@@ -1121,27 +1061,23 @@ public class WebhooksApi {
   }
 
   /**
-   * Rotate webhook secret
-   * Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
-   * @param id Webhook id. (required)
+   * Rotacionar segredo do webhook
+   * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
+   * @param id Id do webhook. (required)
    * @return ApiResponse&lt;RotateSecretResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Rotate webhook secret Documentation</a>
    */
   public ApiResponse<RotateSecretResponse> postUserWebhookRotateSecretWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return postUserWebhookRotateSecretWithHttpInfo(id, null);
   }
 
   /**
-   * Rotate webhook secret
-   * Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
-   * @param id Webhook id. (required)
+   * Rotacionar segredo do webhook
+   * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
+   * @param id Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;RotateSecretResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Rotate webhook secret Documentation</a>
    */
   public ApiResponse<RotateSecretResponse> postUserWebhookRotateSecretWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postUserWebhookRotateSecretRequestBuilder(id, headers);

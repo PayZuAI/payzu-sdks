@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -43,7 +43,7 @@ export interface PostRefundRequest {
 export interface RefundsApiInterface {
     /**
      * Creates request options for postRefund without sending the request
-     * @param {string} transactionId ID of the transaction to refund.
+     * @param {string} transactionId ID da transação a devolver.
      * @param {RefundRequest} refundRequest 
      * @throws {RequiredError}
      * @memberof RefundsApiInterface
@@ -51,9 +51,9 @@ export interface RefundsApiInterface {
     postRefundRequestOpts(requestParameters: PostRefundRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
-     * @summary Refund a Pix
-     * @param {string} transactionId ID of the transaction to refund.
+     * Devolve um Pix recebido. Informe `amount` para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com `refundStatus: PENDING`; a conclusão é confirmada depois pelo callback.  Envie `{}` para devolver o valor total. O corpo só aceita `amount`, `description` e `clientReference`; outro campo é recusado com 400.
+     * @summary Solicitar a devolução de um Pix recebido
+     * @param {string} transactionId ID da transação a devolver.
      * @param {RefundRequest} refundRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -62,8 +62,8 @@ export interface RefundsApiInterface {
     postRefundRaw(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TransactionWithRefunds>>;
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
-     * Refund a Pix
+     * Devolve um Pix recebido. Informe `amount` para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com `refundStatus: PENDING`; a conclusão é confirmada depois pelo callback.  Envie `{}` para devolver o valor total. O corpo só aceita `amount`, `description` e `clientReference`; outro campo é recusado com 400.
+     * Solicitar a devolução de um Pix recebido
      */
     postRefund(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TransactionWithRefunds>;
 
@@ -120,8 +120,8 @@ export class RefundsApi extends runtime.BaseAPI implements RefundsApiInterface {
     }
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
-     * Refund a Pix
+     * Devolve um Pix recebido. Informe `amount` para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com `refundStatus: PENDING`; a conclusão é confirmada depois pelo callback.  Envie `{}` para devolver o valor total. O corpo só aceita `amount`, `description` e `clientReference`; outro campo é recusado com 400.
+     * Solicitar a devolução de um Pix recebido
      */
     async postRefundRaw(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TransactionWithRefunds>> {
         const requestOptions = await this.postRefundRequestOpts(requestParameters);
@@ -131,8 +131,8 @@ export class RefundsApi extends runtime.BaseAPI implements RefundsApiInterface {
     }
 
     /**
-     * Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.  Send `{}` to refund the full amount.  Token permission: `WITHDRAW`.
-     * Refund a Pix
+     * Devolve um Pix recebido. Informe `amount` para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com `refundStatus: PENDING`; a conclusão é confirmada depois pelo callback.  Envie `{}` para devolver o valor total. O corpo só aceita `amount`, `description` e `clientReference`; outro campo é recusado com 400.
+     * Solicitar a devolução de um Pix recebido
      */
     async postRefund(requestParameters: PostRefundRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TransactionWithRefunds> {
         const response = await this.postRefundRaw(requestParameters, initOverrides);

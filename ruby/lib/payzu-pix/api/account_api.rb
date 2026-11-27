@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,8 +19,8 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Account Info
-    # Account profile, limits and fee rules.
+    # Informações da conta
+    # Perfil da conta, limites e regras de tarifas.
     # @param [Hash] opts the optional parameters
     # @return [GetUser200Response]
     def get_user(opts = {})
@@ -28,8 +28,8 @@ module PayZuPix
       data
     end
 
-    # Account Info
-    # Account profile, limits and fee rules.
+    # Informações da conta
+    # Perfil da conta, limites e regras de tarifas.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetUser200Response, Integer, Hash)>] GetUser200Response data, response status code and response headers
     def get_user_with_http_info(opts = {})
@@ -76,8 +76,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Account Balance
-    # Available and blocked balances.
+    # Saldo da conta
+    # Saldos disponíveis e bloqueados.
     # @param [Hash] opts the optional parameters
     # @return [GetUserBalance200Response]
     def get_user_balance(opts = {})
@@ -85,8 +85,8 @@ module PayZuPix
       data
     end
 
-    # Account Balance
-    # Available and blocked balances.
+    # Saldo da conta
+    # Saldos disponíveis e bloqueados.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetUserBalance200Response, Integer, Hash)>] GetUserBalance200Response data, response status code and response headers
     def get_user_balance_with_http_info(opts = {})
@@ -129,6 +129,63 @@ module PayZuPix
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AccountApi#get_user_balance\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Chave Pix de recebimento da conta
+    # Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+    # @param [Hash] opts the optional parameters
+    # @return [GetUserPixKeys200Response]
+    def get_user_pix_keys(opts = {})
+      data, _status_code, _headers = get_user_pix_keys_with_http_info(opts)
+      data
+    end
+
+    # Chave Pix de recebimento da conta
+    # Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetUserPixKeys200Response, Integer, Hash)>] GetUserPixKeys200Response data, response status code and response headers
+    def get_user_pix_keys_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountApi.get_user_pix_keys ...'
+      end
+      # resource path
+      local_var_path = '/user/pix-keys'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetUserPixKeys200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['BearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountApi.get_user_pix_keys",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountApi#get_user_pix_keys\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -84,7 +84,7 @@ public class Webhook {
   }
 
   /**
-   * Webhook id.
+   * Id do webhook.
    * @return id
    */
   @javax.annotation.Nullable
@@ -108,7 +108,7 @@ public class Webhook {
   }
 
   /**
-   * Address in your system where PayZu sends the event notification.
+   * Endereço do seu sistema para onde a PayZu envia a notificação do evento.
    * @return url
    */
   @javax.annotation.Nullable
@@ -164,7 +164,7 @@ public class Webhook {
   }
 
   /**
-   * Subscribed events. Empty means all events.
+   * Eventos assinados.
    * @return events
    */
   @javax.annotation.Nullable
@@ -188,7 +188,7 @@ public class Webhook {
   }
 
   /**
-   * Whether the webhook has an HMAC signing secret.
+   * Indica se o webhook tem segredo de assinatura HMAC.
    * @return hasSecret
    */
   @javax.annotation.Nullable
@@ -212,7 +212,7 @@ public class Webhook {
   }
 
   /**
-   * Date and time the webhook was registered on the account.
+   * Data e hora em que o webhook foi cadastrado na conta.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -236,7 +236,7 @@ public class Webhook {
   }
 
   /**
-   * Date and time of the last change to the webhook.
+   * Data e hora da última alteração do webhook.
    * @return updatedAt
    */
   @javax.annotation.Nullable

@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,53 +14,53 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * Report job just queued.
+ * Job de relatório recém-enfileirado.
  * @export
  * @interface ReportJobAccepted
  */
 export interface ReportJobAccepted {
     /**
-     * Report identifier (UUID), generated when the report is requested.
+     * Identificador (UUID) do relatório, gerado no momento da solicitação.
      * @type {string}
      * @memberof ReportJobAccepted
      */
     id?: string;
     /**
-     * Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+     * Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
      * @type {ReportJobAcceptedStatusEnum}
      * @memberof ReportJobAccepted
      */
     status?: ReportJobAcceptedStatusEnum;
     /**
-     * Date and time the report generation was requested.
+     * Data e hora em que a geração do relatório foi solicitada.
      * @type {Date}
      * @memberof ReportJobAccepted
      */
     createdAt?: Date;
     /**
-     * Date and time of the last change to the report record.
+     * Data e hora da última alteração no registro do relatório.
      * @type {Date}
      * @memberof ReportJobAccepted
      */
     updatedAt?: Date;
     /**
-     * Filters used when the report was created.
+     * Filtros usados na criação do relatório.
      * @type {{ [key: string]: any; }}
      * @memberof ReportJobAccepted
      */
     params?: { [key: string]: any; };
     /**
-     * Rows written to the file. Null until the report is COMPLETED.
+     * Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED.
      * @type {number}
      * @memberof ReportJobAccepted
      */
     writtenRows?: number | null;
     /**
-     * Date the report file expires.
+     * Data em que o arquivo do relatório expira.
      * @type {Date}
      * @memberof ReportJobAccepted
      */
-    storageExpiresAt?: Date | null;
+    expiresAt?: Date | null;
 }
 
 
@@ -99,7 +99,7 @@ export function ReportJobAcceptedFromJSONTyped(json: any, ignoreDiscriminator: b
         'updatedAt': json['updatedAt'] == null ? undefined : (new Date(json['updatedAt'])),
         'params': json['params'] == null ? undefined : json['params'],
         'writtenRows': json['writtenRows'] == null ? undefined : json['writtenRows'],
-        'storageExpiresAt': json['storageExpiresAt'] == null ? undefined : (new Date(json['storageExpiresAt'])),
+        'expiresAt': json['expiresAt'] == null ? undefined : (new Date(json['expiresAt'])),
     };
 }
 
@@ -120,7 +120,7 @@ export function ReportJobAcceptedToJSONTyped(value?: ReportJobAccepted | null, i
         'updatedAt': value['updatedAt'] == null ? value['updatedAt'] : value['updatedAt'].toISOString(),
         'params': value['params'],
         'writtenRows': value['writtenRows'],
-        'storageExpiresAt': value['storageExpiresAt'] == null ? value['storageExpiresAt'] : value['storageExpiresAt'].toISOString(),
+        'expiresAt': value['expiresAt'] == null ? value['expiresAt'] : value['expiresAt'].toISOString(),
     };
 }
 

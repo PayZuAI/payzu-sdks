@@ -4,19 +4,19 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_pix**](PixOperationsApi.md#get_pix) | **GET** /pix | Retrieve Charge |
-| [**get_pix_qrcode**](PixOperationsApi.md#get_pix_qrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG) |
-| [**get_proof**](PixOperationsApi.md#get_proof) | **GET** /proof/{id} | Get Transaction Receipt |
-| [**post_pix**](PixOperationsApi.md#post_pix) | **POST** /pix | Create Charge (Pix deposit) |
+| [**get_pix**](PixOperationsApi.md#get_pix) | **GET** /pix | Recuperar Cobrança |
+| [**get_pix_qrcode**](PixOperationsApi.md#get_pix_qrcode) | **GET** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG) |
+| [**get_proof**](PixOperationsApi.md#get_proof) | **GET** /proof/{id} | Obter comprovante da transação |
+| [**post_pix**](PixOperationsApi.md#post_pix) | **POST** /pix | Criar Cobrança (depósito Pix) |
 
 
 ## get_pix
 
 > <Transaction> get_pix(opts)
 
-Retrieve Charge
+Recuperar Cobrança
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
+Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre `id`, `clientReference` ou `endToEndId` (`virtualAccount` também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
 
 ### Examples
 
@@ -31,14 +31,14 @@ end
 
 api_instance = PayZuPix::PixOperationsApi.new
 opts = {
-  id: 'PAYZU20260811R4TZ8WD1NC000000', # String | Transaction ID.
-  client_reference: 'order_12345', # String | External reference provided when creating the charge.
-  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | Pix end-to-end ID.
-  virtual_account: 'loja-centro-01' # String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+  id: 'PAYZU20260811R4TZ8WD1NC000000', # String | ID da transação.
+  client_reference: 'order_12345', # String | Referência externa fornecida na criação da cobrança.
+  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | ID end-to-end do Pix.
+  virtual_account: 'loja-centro-01' # String | Subconta usada na criação.
 }
 
 begin
-  # Retrieve Charge
+  # Recuperar Cobrança
   result = api_instance.get_pix(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -54,7 +54,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Retrieve Charge
+  # Recuperar Cobrança
   data, status_code, headers = api_instance.get_pix_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -68,10 +68,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Transaction ID. | [optional] |
-| **client_reference** | **String** | External reference provided when creating the charge. | [optional] |
-| **end_to_end_id** | **String** | Pix end-to-end ID. | [optional] |
-| **virtual_account** | **String** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String** | ID da transação. | [optional] |
+| **client_reference** | **String** | Referência externa fornecida na criação da cobrança. | [optional] |
+| **end_to_end_id** | **String** | ID end-to-end do Pix. | [optional] |
+| **virtual_account** | **String** | Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -91,9 +91,9 @@ end
 
 > File get_pix_qrcode(transaction_id)
 
-Render Pix QR code (PNG)
+Renderiza o QR Code Pix (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
+Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
 
 ### Examples
 
@@ -107,10 +107,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::PixOperationsApi.new
-transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # String | Transaction ID.
+transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # String | ID da transação.
 
 begin
-  # Render Pix QR code (PNG)
+  # Renderiza o QR Code Pix (PNG)
   result = api_instance.get_pix_qrcode(transaction_id)
   p result
 rescue PayZuPix::ApiError => e
@@ -126,7 +126,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Render Pix QR code (PNG)
+  # Renderiza o QR Code Pix (PNG)
   data, status_code, headers = api_instance.get_pix_qrcode_with_http_info(transaction_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -140,7 +140,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **transaction_id** | **String** | Transaction ID. |  |
+| **transaction_id** | **String** | ID da transação. |  |
 
 ### Return type
 
@@ -160,9 +160,9 @@ end
 
 > <ProofResponse> get_proof(id, opts)
 
-Get Transaction Receipt
+Obter comprovante da transação
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
 ### Examples
 
@@ -176,13 +176,13 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::PixOperationsApi.new
-id = 'PAYZU20260814T6NX1CV9MK000000' # String | Transaction ID.
+id = 'PAYZU20260814T6NX1CV9MK000000' # String | ID da transação.
 opts = {
-  type: 'pdf' # String | Return format.
+  type: 'pdf' # String | Formato de retorno.
 }
 
 begin
-  # Get Transaction Receipt
+  # Obter comprovante da transação
   result = api_instance.get_proof(id, opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -198,7 +198,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Transaction Receipt
+  # Obter comprovante da transação
   data, status_code, headers = api_instance.get_proof_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -212,8 +212,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Transaction ID. |  |
-| **type** | **String** | Return format. | [optional][default to &#39;pdf&#39;] |
+| **id** | **String** | ID da transação. |  |
+| **type** | **String** | Formato de retorno. | [optional][default to &#39;pdf&#39;] |
 
 ### Return type
 
@@ -233,9 +233,9 @@ end
 
 > <Transaction> post_pix(post_pix_request)
 
-Create Charge (Pix deposit)
+Criar Cobrança (depósito Pix)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
+Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
 
 ### Examples
 
@@ -252,7 +252,7 @@ api_instance = PayZuPix::PixOperationsApi.new
 post_pix_request = PayZuPix::PostPixRequest.new({amount: 10.9}) # PostPixRequest | 
 
 begin
-  # Create Charge (Pix deposit)
+  # Criar Cobrança (depósito Pix)
   result = api_instance.post_pix(post_pix_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -268,7 +268,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create Charge (Pix deposit)
+  # Criar Cobrança (depósito Pix)
   data, status_code, headers = api_instance.post_pix_with_http_info(post_pix_request)
   p status_code # => 2xx
   p headers # => { ... }

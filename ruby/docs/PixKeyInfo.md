@@ -4,16 +4,16 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **pix_key** | **String** | The Pix key that was looked up. | [optional] |
-| **document** | **String** | CPF or CNPJ of the owner (partially masked for privacy). | [optional] |
-| **name** | **String** | Name of the Pix key owner. | [optional] |
-| **branch** | **String** | Bank branch number (masked). | [optional] |
-| **account_number** | **String** | Account number (masked). | [optional] |
-| **person_type** | **String** | Type of person: PF, PJ, or empty when not informed. | [optional] |
-| **account_type** | **String** | Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY. | [optional] |
-| **institution_ispb** | **String** | ISPB code of the financial institution. | [optional] |
-| **institution_code** | **String** | COMPE code of the financial institution. | [optional] |
-| **institution_name** | **String** | Name of the financial institution. | [optional] |
+| **pix_key** | **String** | A chave Pix que foi consultada. | [optional] |
+| **document** | **String** | CPF ou CNPJ do titular (parcialmente mascarado por privacidade). | [optional] |
+| **name** | **String** | Nome do titular da chave Pix. | [optional] |
+| **branch** | **String** | Número da agência bancária (mascarado). | [optional] |
+| **account_number** | **String** | Número da conta (mascarado). | [optional] |
+| **person_type** | **String** | Tipo de pessoa: PF, PJ ou vazio quando não informado. | [optional] |
+| **account_type** | **String** | Tipo de conta devolvido pelo DICT, como CACC, SVGS, TRAN ou SLRY. | [optional] |
+| **institution_ispb** | **String** | Código ISPB da instituição financeira. | [optional] |
+| **institution_code** | **String** | Código COMPE da instituição financeira. | [optional] |
+| **institution_name** | **String** | Nome da instituição financeira. | [optional] |
 
 ## Example
 

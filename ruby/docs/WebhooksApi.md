@@ -4,23 +4,23 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**delete_user_webhook**](WebhooksApi.md#delete_user_webhook) | **DELETE** /user/webhooks/{id} | Delete webhook |
-| [**get_user_webhook**](WebhooksApi.md#get_user_webhook) | **GET** /user/webhooks/{id} | Get webhook |
-| [**get_user_webhook_sent_detail**](WebhooksApi.md#get_user_webhook_sent_detail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail |
-| [**get_user_webhooks**](WebhooksApi.md#get_user_webhooks) | **GET** /user/webhooks | List webhooks |
-| [**get_user_webhooks_sent_quantity**](WebhooksApi.md#get_user_webhooks_sent_quantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks |
-| [**patch_user_webhook**](WebhooksApi.md#patch_user_webhook) | **PATCH** /user/webhooks/{id} | Update webhook |
-| [**post_user_webhook**](WebhooksApi.md#post_user_webhook) | **POST** /user/webhooks | Create webhook |
-| [**post_user_webhook_rotate_secret**](WebhooksApi.md#post_user_webhook_rotate_secret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret |
+| [**delete_user_webhook**](WebhooksApi.md#delete_user_webhook) | **DELETE** /user/webhooks/{id} | Remover webhook |
+| [**get_user_webhook**](WebhooksApi.md#get_user_webhook) | **GET** /user/webhooks/{id} | Consultar webhook |
+| [**get_user_webhook_sent_detail**](WebhooksApi.md#get_user_webhook_sent_detail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado |
+| [**get_user_webhooks**](WebhooksApi.md#get_user_webhooks) | **GET** /user/webhooks | Listar webhooks |
+| [**get_user_webhooks_sent_quantity**](WebhooksApi.md#get_user_webhooks_sent_quantity) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados |
+| [**patch_user_webhook**](WebhooksApi.md#patch_user_webhook) | **PATCH** /user/webhooks/{id} | Atualizar webhook |
+| [**post_user_webhook**](WebhooksApi.md#post_user_webhook) | **POST** /user/webhooks | Criar webhook |
+| [**post_user_webhook_rotate_secret**](WebhooksApi.md#post_user_webhook_rotate_secret) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook |
 
 
 ## delete_user_webhook
 
 > delete_user_webhook(id)
 
-Delete webhook
+Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
 ### Examples
 
@@ -34,10 +34,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WebhooksApi.new
-id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Webhook id.
+id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Id do webhook.
 
 begin
-  # Delete webhook
+  # Remover webhook
   api_instance.delete_user_webhook(id)
 rescue PayZuPix::ApiError => e
   puts "Error when calling WebhooksApi->delete_user_webhook: #{e}"
@@ -52,7 +52,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Delete webhook
+  # Remover webhook
   data, status_code, headers = api_instance.delete_user_webhook_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -66,7 +66,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Webhook id. |  |
+| **id** | **String** | Id do webhook. |  |
 
 ### Return type
 
@@ -86,9 +86,9 @@ nil (empty response body)
 
 > <Webhook> get_user_webhook(id)
 
-Get webhook
+Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
 ### Examples
 
@@ -102,10 +102,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WebhooksApi.new
-id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Webhook id.
+id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Id do webhook.
 
 begin
-  # Get webhook
+  # Consultar webhook
   result = api_instance.get_user_webhook(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -121,7 +121,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get webhook
+  # Consultar webhook
   data, status_code, headers = api_instance.get_user_webhook_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -135,7 +135,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Webhook id. |  |
+| **id** | **String** | Id do webhook. |  |
 
 ### Return type
 
@@ -155,9 +155,9 @@ end
 
 > <SentWebhookDetailResponse> get_user_webhook_sent_detail(id, callback_id)
 
-Get sent callback detail
+Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
 ### Examples
 
@@ -171,11 +171,11 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WebhooksApi.new
-id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Webhook id.
-callback_id = 'cm3w7l9v20001q8f2u6c1y4be' # String | Callback log id.
+id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Id do webhook.
+callback_id = 'cm3w7l9v20001q8f2u6c1y4be' # String | Id do log de callback.
 
 begin
-  # Get sent callback detail
+  # Detalhe de callback enviado
   result = api_instance.get_user_webhook_sent_detail(id, callback_id)
   p result
 rescue PayZuPix::ApiError => e
@@ -191,7 +191,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get sent callback detail
+  # Detalhe de callback enviado
   data, status_code, headers = api_instance.get_user_webhook_sent_detail_with_http_info(id, callback_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -205,8 +205,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Webhook id. |  |
-| **callback_id** | **String** | Callback log id. |  |
+| **id** | **String** | Id do webhook. |  |
+| **callback_id** | **String** | Id do log de callback. |  |
 
 ### Return type
 
@@ -226,9 +226,9 @@ end
 
 > <WebhookListResponse> get_user_webhooks(opts)
 
-List webhooks
+Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
 ### Examples
 
@@ -243,11 +243,11 @@ end
 
 api_instance = PayZuPix::WebhooksApi.new
 opts = {
-  active: true # Boolean | Filter by active status.
+  active: true # Boolean | Filtra pelo status ativo.
 }
 
 begin
-  # List webhooks
+  # Listar webhooks
   result = api_instance.get_user_webhooks(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -263,7 +263,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List webhooks
+  # Listar webhooks
   data, status_code, headers = api_instance.get_user_webhooks_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -277,7 +277,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **active** | **Boolean** | Filter by active status. | [optional] |
+| **active** | **Boolean** | Filtra pelo status ativo. | [optional] |
 
 ### Return type
 
@@ -297,9 +297,9 @@ end
 
 > <SentWebhooksQuantity> get_user_webhooks_sent_quantity(opts)
 
-Count sent callbacks
+Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
 ### Examples
 
@@ -314,11 +314,11 @@ end
 
 api_instance = PayZuPix::WebhooksApi.new
 opts = {
-  webhook_id: 'cm3w7k1t40000q8f2r5b9x3ad' # String | Filter the count by webhook id.
+  webhook_id: 'cm3w7k1t40000q8f2r5b9x3ad' # String | Filtra a contagem por id de webhook.
 }
 
 begin
-  # Count sent callbacks
+  # Contar callbacks enviados
   result = api_instance.get_user_webhooks_sent_quantity(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -334,7 +334,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Count sent callbacks
+  # Contar callbacks enviados
   data, status_code, headers = api_instance.get_user_webhooks_sent_quantity_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -348,7 +348,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **webhook_id** | **String** | Filter the count by webhook id. | [optional] |
+| **webhook_id** | **String** | Filtra a contagem por id de webhook. | [optional] |
 
 ### Return type
 
@@ -368,9 +368,9 @@ end
 
 > <Webhook> patch_user_webhook(id, webhook_update_request)
 
-Update webhook
+Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
 ### Examples
 
@@ -384,11 +384,11 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WebhooksApi.new
-id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Webhook id.
+id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Id do webhook.
 webhook_update_request = PayZuPix::WebhookUpdateRequest.new # WebhookUpdateRequest | 
 
 begin
-  # Update webhook
+  # Atualizar webhook
   result = api_instance.patch_user_webhook(id, webhook_update_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -404,7 +404,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update webhook
+  # Atualizar webhook
   data, status_code, headers = api_instance.patch_user_webhook_with_http_info(id, webhook_update_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -418,7 +418,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Webhook id. |  |
+| **id** | **String** | Id do webhook. |  |
 | **webhook_update_request** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md) |  |  |
 
 ### Return type
@@ -439,9 +439,9 @@ end
 
 > <WebhookWithSecret> post_user_webhook(webhook_create_request)
 
-Create webhook
+Criar webhook
 
-Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
+Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
 
 ### Examples
 
@@ -458,7 +458,7 @@ api_instance = PayZuPix::WebhooksApi.new
 webhook_create_request = PayZuPix::WebhookCreateRequest.new({url: 'https://sualoja.com.br/webhook'}) # WebhookCreateRequest | 
 
 begin
-  # Create webhook
+  # Criar webhook
   result = api_instance.post_user_webhook(webhook_create_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -474,7 +474,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create webhook
+  # Criar webhook
   data, status_code, headers = api_instance.post_user_webhook_with_http_info(webhook_create_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -508,9 +508,9 @@ end
 
 > <RotateSecretResponse> post_user_webhook_rotate_secret(id)
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
 
 ### Examples
 
@@ -524,10 +524,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WebhooksApi.new
-id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Webhook id.
+id = 'cm3w7k1t40000q8f2r5b9x3ad' # String | Id do webhook.
 
 begin
-  # Rotate webhook secret
+  # Rotacionar segredo do webhook
   result = api_instance.post_user_webhook_rotate_secret(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -543,7 +543,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Rotate webhook secret
+  # Rotacionar segredo do webhook
   data, status_code, headers = api_instance.post_user_webhook_rotate_secret_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -557,7 +557,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Webhook id. |  |
+| **id** | **String** | Id do webhook. |  |
 
 ### Return type
 

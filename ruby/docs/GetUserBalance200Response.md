@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **balance_available** | **Float** | Balance free for withdrawals and transfers, in reais, of the account that owns the token. | [optional] |
-| **balance_blocked** | **Float** | Balance held and unavailable, in reais. | [optional] |
+| **balance_available** | **Float** | Saldo livre para saques e transferências, em reais, da conta dona do token. | [optional] |
+| **balance_blocked** | **Float** | Saldo retido e indisponível, em reais. | [optional] |
 
 ## Example
 

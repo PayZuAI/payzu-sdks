@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -89,7 +89,7 @@ public class GetUserTransactionById200Response {
   private String id;
 
   /**
-   * PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
+   * Status atual da transação.
    */
   public enum StatusEnum {
     PENDING(String.valueOf("PENDING")),
@@ -144,7 +144,7 @@ public class GetUserTransactionById200Response {
   private BigDecimal amount;
 
   /**
-   * Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
+   * Tipo da transação: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION ou ADJUSTMENT.
    */
   public enum TypeEnum {
     DEPOSIT(String.valueOf("DEPOSIT")),
@@ -243,7 +243,7 @@ public class GetUserTransactionById200Response {
   private String withdrawPixKey;
 
   /**
-   * Type of the destination key of the withdrawal, with evp being the random key.
+   * Tipo da chave de destino do saque, sendo evp a chave aleatória.
    */
   public enum WithdrawPixTypeEnum {
     CPF(String.valueOf("cpf")),
@@ -337,7 +337,7 @@ public class GetUserTransactionById200Response {
   private BigDecimal refundAmount;
 
   /**
-   * Refund status: PENDING, COMPLETED or CANCELED.
+   * Status da devolução.
    */
   public enum RefundStatusEnum {
     PENDING(String.valueOf("PENDING")),
@@ -379,12 +379,16 @@ public class GetUserTransactionById200Response {
   private JsonNullable<RefundStatusEnum> refundStatus = JsonNullable.<RefundStatusEnum>undefined();
 
   /**
-   * Reason for the refund
+   * Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
    */
   public enum RefundReasonEnum {
     CUSTOMER_REQUEST(String.valueOf("CUSTOMER_REQUEST")),
     
     INFRACTION(String.valueOf("INFRACTION")),
+    
+    DENY_COMPANY_DEPOSIT(String.valueOf("DENY_COMPANY_DEPOSIT")),
+    
+    ADMIN_REQUEST(String.valueOf("ADMIN_REQUEST")),
     
     UNKNOWN_DEFAULT_OPEN_API(String.valueOf("unknown_default_open_api"));
 
@@ -435,12 +439,16 @@ public class GetUserTransactionById200Response {
   private String virtualAccount;
 
   /**
-   * Transaction method/rail.
+   * &#x60;PIX&#x60;, &#x60;INTERNAL_TRANSFER&#x60; (transferência entre contas PayZu), &#x60;BANK_SLIP&#x60; (boleto) ou &#x60;TED&#x60;.
    */
   public enum MethodEnum {
     PIX(String.valueOf("PIX")),
     
     INTERNAL_TRANSFER(String.valueOf("INTERNAL_TRANSFER")),
+    
+    BANK_SLIP(String.valueOf("BANK_SLIP")),
+    
+    TED(String.valueOf("TED")),
     
     UNKNOWN_DEFAULT_OPEN_API(String.valueOf("unknown_default_open_api"));
 
@@ -492,7 +500,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Identifier of the transaction at PayZu.
+   * Identificador da transação na PayZu.
    * @return id
    */
   @javax.annotation.Nullable
@@ -516,7 +524,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
+   * Status atual da transação.
    * @return status
    */
   @javax.annotation.Nullable
@@ -540,7 +548,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Amount of the transaction, before the fee.
+   * Valor da transação, antes da taxa.
    * @return amount
    */
   @javax.annotation.Nullable
@@ -564,7 +572,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
+   * Tipo da transação: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION ou ADJUSTMENT.
    * @return type
    */
   @javax.annotation.Nullable
@@ -588,7 +596,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Copy-and-paste Pix code.
+   * Código copia e cola do Pix.
    * @return qrCodeText
    */
   @javax.annotation.Nullable
@@ -612,7 +620,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * PNG image of the QR Code in base64, without the data: prefix.
+   * Imagem PNG do QR Code em base64, sem o prefixo data:.
    * @return qrCodeBase64
    */
   @javax.annotation.Nullable
@@ -636,7 +644,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Authenticated route that returns the PNG of the QR Code.
+   * Rota autenticada que devolve o PNG do QR Code.
    * @return qrCodeUrl
    */
   @javax.annotation.Nullable
@@ -660,7 +668,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Name used to build the charge.
+   * Nome usado para montar a cobrança.
    * @return generatedName
    */
   @javax.annotation.Nullable
@@ -684,7 +692,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * CPF or CNPJ used as the debtor of the charge.
+   * CPF ou CNPJ usado como devedor na cobrança.
    * @return generatedDocument
    */
   @javax.annotation.Nullable
@@ -708,7 +716,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Email used to build the charge.
+   * E-mail usado para montar a cobrança.
    * @return generatedEmail
    */
   @javax.annotation.Nullable
@@ -732,7 +740,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Name of the holder of the account that sent the Pix, as reported by the originating institution.
+   * Nome do titular da conta que enviou o Pix, como informado pela instituição de origem.
    * @return payerName
    */
   @javax.annotation.Nullable
@@ -756,7 +764,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * CPF or CNPJ of the payer of the Pix, reported by the originating institution.
+   * CPF ou CNPJ de quem enviou o Pix, informado pela instituição de origem.
    * @return payerDocument
    */
   @javax.annotation.Nullable
@@ -780,7 +788,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * ISPB code of the institution the Pix was sent from.
+   * Código ISPB da instituição de onde saiu o Pix.
    * @return payerInstitutionIspb
    */
   @javax.annotation.Nullable
@@ -804,7 +812,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Name of the institution the Pix was sent from.
+   * Nome da instituição de onde saiu o Pix.
    * @return payerInstitutionName
    */
   @javax.annotation.Nullable
@@ -828,7 +836,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Payer&#39;s PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions.
+   * Conta PayZu do pagador.
    * @return payerAccountNumber
    */
   @javax.annotation.Nullable
@@ -852,7 +860,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
+   * Tarifa PayZu cobrada na operação, em reais. Pode ter mais de duas casas decimais: não arredonde ao conciliar.
    * @return serviceFeeCharged
    */
   @javax.annotation.Nullable
@@ -876,7 +884,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Destination Pix key of the withdrawal, already normalized.
+   * Chave Pix de destino do saque, já normalizada.
    * @return withdrawPixKey
    */
   @javax.annotation.Nullable
@@ -900,7 +908,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Type of the destination key of the withdrawal, with evp being the random key.
+   * Tipo da chave de destino do saque, sendo evp a chave aleatória.
    * @return withdrawPixType
    */
   @javax.annotation.Nullable
@@ -932,7 +940,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Name of the holder of the receiving account.
+   * Nome do titular da conta que recebe.
    * @return receiverName
    */
   @javax.annotation.Nullable
@@ -956,7 +964,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * CPF or CNPJ of the receiver.
+   * CPF ou CNPJ de quem recebe.
    * @return receiverDocument
    */
   @javax.annotation.Nullable
@@ -980,7 +988,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * ISPB code of the institution that receives the Pix.
+   * Código ISPB da instituição que recebe o Pix.
    * @return receiverInstitutionIspb
    */
   @javax.annotation.Nullable
@@ -1004,7 +1012,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Name of the institution that receives the Pix.
+   * Nome da instituição que recebe o Pix.
    * @return receiverInstitutionName
    */
   @javax.annotation.Nullable
@@ -1028,7 +1036,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Receiver&#39;s PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions.
+   * Conta PayZu do recebedor.
    * @return receiverAccountNumber
    */
   @javax.annotation.Nullable
@@ -1052,7 +1060,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
+   * Identificador do Pix no arranjo do Bacen, usado para rastrear a liquidação e pedir devolução.
    * @return endToEndId
    */
   @javax.annotation.Nullable
@@ -1076,7 +1084,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Date and time the transaction was recorded.
+   * Data e hora do registro da transação.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -1100,7 +1108,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Date and time of the last change.
+   * Data e hora da última alteração.
    * @return updatedAt
    */
   @javax.annotation.Nullable
@@ -1124,7 +1132,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Date and time the Pix was settled, reported by the institution.
+   * Data e hora da liquidação do Pix, informada pela instituição.
    * @return paidAt
    */
   @javax.annotation.Nullable
@@ -1148,7 +1156,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Your identifier of the transaction, returned in queries and callbacks.
+   * Seu identificador da transação, devolvido em consultas e callbacks.
    * @return clientReference
    */
   @javax.annotation.Nullable
@@ -1172,7 +1180,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * End-to-end ID of the refund transaction
+   * ID end-to-end do Pix de devolução.
    * @return refundEndToEndId
    */
   @javax.annotation.Nullable
@@ -1196,7 +1204,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Amount refunded
+   * Valor devolvido.
    * @return refundAmount
    */
   @javax.annotation.Nullable
@@ -1220,7 +1228,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Refund status: PENDING, COMPLETED or CANCELED.
+   * Status da devolução.
    * @return refundStatus
    */
   @javax.annotation.Nullable
@@ -1252,7 +1260,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Reason for the refund
+   * Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
    * @return refundReason
    */
   @javax.annotation.Nullable
@@ -1284,7 +1292,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Description of the refund
+   * Descrição da devolução.
    * @return refundDescription
    */
   @javax.annotation.Nullable
@@ -1308,7 +1316,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Date and time when the refund was processed
+   * Data e hora em que a devolução foi processada.
    * @return refundedAt
    */
   @javax.annotation.Nullable
@@ -1332,7 +1340,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Reason for cancellation (if cancelled)
+   * Motivo do cancelamento (se cancelada)
    * @return cancellationReason
    */
   @javax.annotation.Nullable
@@ -1356,7 +1364,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Virtual sub-account provided at creation.
+   * Subconta virtual informada na criação.
    * @return virtualAccount
    */
   @javax.annotation.Nullable
@@ -1380,7 +1388,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Transaction method/rail.
+   * &#x60;PIX&#x60;, &#x60;INTERNAL_TRANSFER&#x60; (transferência entre contas PayZu), &#x60;BANK_SLIP&#x60; (boleto) ou &#x60;TED&#x60;.
    * @return method
    */
   @javax.annotation.Nullable
@@ -1412,7 +1420,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Complete infraction history for this transaction.
+   * Histórico completo de infrações desta transação.
    * @return infraction
    */
   @javax.annotation.Nullable
@@ -1444,7 +1452,7 @@ public class GetUserTransactionById200Response {
   }
 
   /**
-   * Webhook delivery attempts for this transaction (most recent first)
+   * Tentativas de entrega do webhook desta transação (mais recentes primeiro)
    * @return callbackLog
    */
   @javax.annotation.Nullable

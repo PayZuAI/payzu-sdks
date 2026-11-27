@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,26 +19,26 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Retrieve Charge
-    # Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
+    # Recuperar Cobrança
+    # Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre `id`, `clientReference` ou `endToEndId` (`virtualAccount` também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Transaction ID.
-    # @option opts [String] :client_reference External reference provided when creating the charge.
-    # @option opts [String] :end_to_end_id Pix end-to-end ID.
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+    # @option opts [String] :id ID da transação.
+    # @option opts [String] :client_reference Referência externa fornecida na criação da cobrança.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :virtual_account Subconta usada na criação.
     # @return [Transaction]
     def get_pix(opts = {})
       data, _status_code, _headers = get_pix_with_http_info(opts)
       data
     end
 
-    # Retrieve Charge
-    # Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
+    # Recuperar Cobrança
+    # Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Transaction ID.
-    # @option opts [String] :client_reference External reference provided when creating the charge.
-    # @option opts [String] :end_to_end_id Pix end-to-end ID.
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+    # @option opts [String] :id ID da transação.
+    # @option opts [String] :client_reference Referência externa fornecida na criação da cobrança.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :virtual_account Subconta usada na criação.
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers
     def get_pix_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -96,9 +96,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Render Pix QR code (PNG)
-    # Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
-    # @param transaction_id [String] Transaction ID.
+    # Renderiza o QR Code Pix (PNG)
+    # Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
+    # @param transaction_id [String] ID da transação.
     # @param [Hash] opts the optional parameters
     # @return [File]
     def get_pix_qrcode(transaction_id, opts = {})
@@ -106,9 +106,9 @@ module PayZuPix
       data
     end
 
-    # Render Pix QR code (PNG)
-    # Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
-    # @param transaction_id [String] Transaction ID.
+    # Renderiza o QR Code Pix (PNG)
+    # Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
+    # @param transaction_id [String] ID da transação.
     # @param [Hash] opts the optional parameters
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def get_pix_qrcode_with_http_info(transaction_id, opts = {})
@@ -159,22 +159,22 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get Transaction Receipt
-    # Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
-    # @param id [String] Transaction ID.
+    # Obter comprovante da transação
+    # Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
+    # @param id [String] ID da transação.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Return format. (default to 'pdf')
+    # @option opts [String] :type Formato de retorno. (default to 'pdf')
     # @return [ProofResponse]
     def get_proof(id, opts = {})
       data, _status_code, _headers = get_proof_with_http_info(id, opts)
       data
     end
 
-    # Get Transaction Receipt
-    # Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-    # @param id [String] Transaction ID.
+    # Obter comprovante da transação
+    # Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+    # @param id [String] ID da transação.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Return format. (default to 'pdf')
+    # @option opts [String] :type Formato de retorno. (default to 'pdf')
     # @return [Array<(ProofResponse, Integer, Hash)>] ProofResponse data, response status code and response headers
     def get_proof_with_http_info(id, opts = {})
       if @api_client.config.debugging
@@ -229,8 +229,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Create Charge (Pix deposit)
-    # Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
+    # Criar Cobrança (depósito Pix)
+    # Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
     # @param post_pix_request [PostPixRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Transaction]
@@ -239,8 +239,8 @@ module PayZuPix
       data
     end
 
-    # Create Charge (Pix deposit)
-    # Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+    # Criar Cobrança (depósito Pix)
+    # Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
     # @param post_pix_request [PostPixRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers

@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -17,20 +17,20 @@ import (
 // checks if the InfractionDetailTransaction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InfractionDetailTransaction{}
 
-// InfractionDetailTransaction Summary of the disputed Pix.
+// InfractionDetailTransaction Resumo do Pix contestado.
 type InfractionDetailTransaction struct {
 	Id *string `json:"id,omitempty"`
-	// Amount of the disputed transaction, in reais with decimal places.
+	// Valor da transação contestada, em reais com casas decimais.
 	Amount *float32 `json:"amount,omitempty"`
-	// Name of the Pix payer, as reported by the provider.
+	// Nome do pagador do Pix, conforme informado pelo provedor.
 	PayerName NullableString `json:"payerName,omitempty"`
-	// CPF or CNPJ of the Pix payer, as reported by the provider.
+	// CPF ou CNPJ do pagador do Pix, conforme informado pelo provedor.
 	PayerDocument NullableString `json:"payerDocument,omitempty"`
-	// Name of the Pix receiver, as reported by the provider.
+	// Nome do recebedor do Pix, conforme informado pelo provedor.
 	ReceiverName NullableString `json:"receiverName,omitempty"`
-	// CPF or CNPJ of the Pix receiver, as reported by the provider.
+	// CPF ou CNPJ do recebedor do Pix, conforme informado pelo provedor.
 	ReceiverDocument NullableString `json:"receiverDocument,omitempty"`
-	// End-to-end identifier of the Pix, reported by the provider at settlement.
+	// Identificador fim a fim do Pix, informado pelo provedor na liquidação.
 	EndToEndId NullableString `json:"endToEndId,omitempty"`
 }
 

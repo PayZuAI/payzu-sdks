@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,31 +15,31 @@ require 'time'
 
 module PayZuPix
   class Refund < ApiModelBase
-    # Refund identifier.
+    # Identificador da devolução.
     attr_accessor :id
 
-    # Refunded amount in BRL.
+    # Valor devolvido em BRL.
     attr_accessor :amount
 
-    # Refund reason.
+    # Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
     attr_accessor :reason
 
-    # Refund description.
+    # Descrição da devolução.
     attr_accessor :description
 
-    # Refund status.
+    # Status da devolução.
     attr_accessor :status
 
-    # End-to-end ID of the refund Pix.
+    # End-to-end ID do Pix de devolução.
     attr_accessor :end_to_end_id
 
-    # When the refund was completed.
+    # Quando a devolução foi concluída.
     attr_accessor :refunded_at
 
-    # When the refund was requested.
+    # Quando a devolução foi pedida.
     attr_accessor :created_at
 
-    # Last change to the refund.
+    # Última alteração da devolução.
     attr_accessor :updated_at
 
     class EnumAttributeValidator
@@ -178,7 +178,7 @@ module PayZuPix
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      reason_validator = EnumAttributeValidator.new('String', ["CUSTOMER_REQUEST", "INFRACTION"])
+      reason_validator = EnumAttributeValidator.new('String', ["CUSTOMER_REQUEST", "INFRACTION", "DENY_COMPANY_DEPOSIT", "ADMIN_REQUEST"])
       return false unless reason_validator.valid?(@reason)
       status_validator = EnumAttributeValidator.new('String', ["PENDING", "COMPLETED", "CANCELED"])
       return false unless status_validator.valid?(@status)

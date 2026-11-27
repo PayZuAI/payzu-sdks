@@ -1,10 +1,10 @@
 # PayZuPix
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.
 
 ## SDKs oficiais
 
-- Node.js: `npm install payzu-pix`
+- Node.js: `npm install @payzu/pix`
 - Python: `pip install payzu-pix`
 - PHP: `composer require payzu/pix`
 - Ruby: `gem install payzu-pix`
@@ -12,7 +12,6 @@ REST API for Pix operations on the PayZu platform, deposits, withdrawals, intern
 - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`
 
 Repo: https://github.com/PayZuAI/payzu-sdks
-
 
 For more information, please visit [https://suporte.payzu.com.br](https://suporte.payzu.com.br).
 
@@ -87,54 +86,56 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccountApi* | [**getUser**](docs/Api/AccountApi.md#getuser) | **GET** /user | Account Info
-*AccountApi* | [**getUserBalance**](docs/Api/AccountApi.md#getuserbalance) | **GET** /user/balance | Account Balance
-*CallbacksApi* | [**createUserCallbackSecret**](docs/Api/CallbacksApi.md#createusercallbacksecret) | **POST** /user/callbacks/secret | Create callback secret
-*CallbacksApi* | [**getUserCallbackById**](docs/Api/CallbacksApi.md#getusercallbackbyid) | **GET** /user/callbacks/{id} | Get Callback
-*CallbacksApi* | [**getUserCallbacks**](docs/Api/CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | List Callbacks
-*CallbacksApi* | [**resendUserCallbackSingle**](docs/Api/CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single)
-*CallbacksApi* | [**resendUserCallbacks**](docs/Api/CallbacksApi.md#resendusercallbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk)
-*CallbacksApi* | [**resendUserCallbacksWebhook**](docs/Api/CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
-*CallbacksApi* | [**resendUserCallbacksWebhooks**](docs/Api/CallbacksApi.md#resendusercallbackswebhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters
-*CallbacksApi* | [**rotateUserCallbackSecret**](docs/Api/CallbacksApi.md#rotateusercallbacksecret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret
-*InfractionsApi* | [**getInfractions**](docs/Api/InfractionsApi.md#getinfractions) | **GET** /user/infractions | List Infractions
-*InfractionsApi* | [**getInfractionsById**](docs/Api/InfractionsApi.md#getinfractionsbyid) | **GET** /user/infractions/{id} | Get Infraction
-*InfractionsApi* | [**getInfractionsDefenseById**](docs/Api/InfractionsApi.md#getinfractionsdefensebyid) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Get Defense
-*InfractionsApi* | [**getInfractionsDefenses**](docs/Api/InfractionsApi.md#getinfractionsdefenses) | **GET** /user/infractions/{id}/defenses | List Defenses
-*InfractionsApi* | [**postInfractionsDefense**](docs/Api/InfractionsApi.md#postinfractionsdefense) | **POST** /user/infractions/{id}/defenses | Create Defense
-*InternalTransferApi* | [**getInternalTransfer**](docs/Api/InternalTransferApi.md#getinternaltransfer) | **GET** /internal-transfer | Get internal transfer
-*InternalTransferApi* | [**postInternalTransfer**](docs/Api/InternalTransferApi.md#postinternaltransfer) | **POST** /internal-transfer | Create internal transfer
-*KeysAndDICTApi* | [**getPixKey**](docs/Api/KeysAndDICTApi.md#getpixkey) | **GET** /pix/key | Pix key lookup (DICT)
-*KeysAndDICTApi* | [**getUserDict**](docs/Api/KeysAndDICTApi.md#getuserdict) | **GET** /user/dict | Resolve DICT key
-*KeysAndDICTApi* | [**postPixQrcodeRead**](docs/Api/KeysAndDICTApi.md#postpixqrcoderead) | **POST** /pix/qrcode/read | Read QR Code
-*PixOperationsApi* | [**getPix**](docs/Api/PixOperationsApi.md#getpix) | **GET** /pix | Retrieve Charge
-*PixOperationsApi* | [**getPixQrcode**](docs/Api/PixOperationsApi.md#getpixqrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG)
-*PixOperationsApi* | [**getProof**](docs/Api/PixOperationsApi.md#getproof) | **GET** /proof/{id} | Get Transaction Receipt
-*PixOperationsApi* | [**postPix**](docs/Api/PixOperationsApi.md#postpix) | **POST** /pix | Create Charge (Pix deposit)
-*RefundsApi* | [**postRefund**](docs/Api/RefundsApi.md#postrefund) | **POST** /refund/{transactionId} | Refund a Pix
-*ReportsApi* | [**downloadUserReport**](docs/Api/ReportsApi.md#downloaduserreport) | **POST** /user/report/{id}/download | Download report
-*ReportsApi* | [**getUserBankStatement**](docs/Api/ReportsApi.md#getuserbankstatement) | **GET** /user/bank-statements/{id} | Get bank statement
-*ReportsApi* | [**getUserBankStatements**](docs/Api/ReportsApi.md#getuserbankstatements) | **GET** /user/bank-statements | List bank statements
-*ReportsApi* | [**getUserDepositPending**](docs/Api/ReportsApi.md#getuserdepositpending) | **GET** /user/deposit-pending | List pending deposits
-*ReportsApi* | [**getUserDepositPendingById**](docs/Api/ReportsApi.md#getuserdepositpendingbyid) | **GET** /user/deposit-pending/{id} | Get pending deposit
-*ReportsApi* | [**getUserReport**](docs/Api/ReportsApi.md#getuserreport) | **GET** /user/report/{id} | Get report job status
-*ReportsApi* | [**getUserSummary**](docs/Api/ReportsApi.md#getusersummary) | **GET** /user/summary | Transaction summary
-*ReportsApi* | [**getUserTransactionById**](docs/Api/ReportsApi.md#getusertransactionbyid) | **GET** /user/transactions/{id} | List transaction details
-*ReportsApi* | [**getUserTransactions**](docs/Api/ReportsApi.md#getusertransactions) | **GET** /user/transactions | List Transactions
-*ReportsApi* | [**listUserReports**](docs/Api/ReportsApi.md#listuserreports) | **GET** /user/report | List report jobs
-*ReportsApi* | [**postUserReport**](docs/Api/ReportsApi.md#postuserreport) | **POST** /user/report | Generate transactions report
-*WebhooksApi* | [**deleteUserWebhook**](docs/Api/WebhooksApi.md#deleteuserwebhook) | **DELETE** /user/webhooks/{id} | Delete webhook
-*WebhooksApi* | [**getUserWebhook**](docs/Api/WebhooksApi.md#getuserwebhook) | **GET** /user/webhooks/{id} | Get webhook
-*WebhooksApi* | [**getUserWebhookSentDetail**](docs/Api/WebhooksApi.md#getuserwebhooksentdetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail
-*WebhooksApi* | [**getUserWebhooks**](docs/Api/WebhooksApi.md#getuserwebhooks) | **GET** /user/webhooks | List webhooks
-*WebhooksApi* | [**getUserWebhooksSentQuantity**](docs/Api/WebhooksApi.md#getuserwebhookssentquantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks
-*WebhooksApi* | [**patchUserWebhook**](docs/Api/WebhooksApi.md#patchuserwebhook) | **PATCH** /user/webhooks/{id} | Update webhook
-*WebhooksApi* | [**postUserWebhook**](docs/Api/WebhooksApi.md#postuserwebhook) | **POST** /user/webhooks | Create webhook
-*WebhooksApi* | [**postUserWebhookRotateSecret**](docs/Api/WebhooksApi.md#postuserwebhookrotatesecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret
-*WithdrawalsApi* | [**getWithdraw**](docs/Api/WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Retrieve Withdrawal
-*WithdrawalsApi* | [**getWithdrawProof**](docs/Api/WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt
-*WithdrawalsApi* | [**postWithdraw**](docs/Api/WithdrawalsApi.md#postwithdraw) | **POST** /withdraw | Create Withdrawal (Pix key)
-*WithdrawalsApi* | [**postWithdrawQrcode**](docs/Api/WithdrawalsApi.md#postwithdrawqrcode) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code
+*AccountApi* | [**getUser**](docs/Api/AccountApi.md#getuser) | **GET** /user | Informações da conta
+*AccountApi* | [**getUserBalance**](docs/Api/AccountApi.md#getuserbalance) | **GET** /user/balance | Saldo da conta
+*AccountApi* | [**getUserPixKeys**](docs/Api/AccountApi.md#getuserpixkeys) | **GET** /user/pix-keys | Chave Pix de recebimento da conta
+*AllowlistApi* | [**getUserWhitelistCnpj**](docs/Api/AllowlistApi.md#getuserwhitelistcnpj) | **GET** /user/whitelist/cnpj | Listar CNPJs autorizados
+*AllowlistApi* | [**getUserWhitelistPixKey**](docs/Api/AllowlistApi.md#getuserwhitelistpixkey) | **GET** /user/whitelist/pix-key | Listar chaves Pix autorizadas
+*CallbacksApi* | [**createUserCallbackSecret**](docs/Api/CallbacksApi.md#createusercallbacksecret) | **POST** /user/callbacks/secret | Criar segredo de callback
+*CallbacksApi* | [**getUserCallbackById**](docs/Api/CallbacksApi.md#getusercallbackbyid) | **GET** /user/callbacks/{id} | Obter Callback
+*CallbacksApi* | [**getUserCallbacks**](docs/Api/CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | Listar Callbacks
+*CallbacksApi* | [**resendUserCallbackSingle**](docs/Api/CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Reenviar callback (individual)
+*CallbacksApi* | [**resendUserCallbacks**](docs/Api/CallbacksApi.md#resendusercallbacks) | **POST** /user/callbacks/resend | Reenviar callbacks (em lote)
+*CallbacksApi* | [**resendUserCallbacksWebhook**](docs/Api/CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Reenviar callbacks por webhook
+*CallbacksApi* | [**resendUserCallbacksWebhooks**](docs/Api/CallbacksApi.md#resendusercallbackswebhooks) | **POST** /user/callbacks/resend/webhook | Reenviar callbacks de webhook por filtros
+*CallbacksApi* | [**rotateUserCallbackSecret**](docs/Api/CallbacksApi.md#rotateusercallbacksecret) | **PATCH** /user/callbacks/secret/rotate | Rotacionar segredo de callback
+*InfractionsApi* | [**getInfractions**](docs/Api/InfractionsApi.md#getinfractions) | **GET** /user/infractions | Listar infrações
+*InfractionsApi* | [**getInfractionsById**](docs/Api/InfractionsApi.md#getinfractionsbyid) | **GET** /user/infractions/{id} | Obter Infração
+*InfractionsApi* | [**getInfractionsDefenseById**](docs/Api/InfractionsApi.md#getinfractionsdefensebyid) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Obter Defesa
+*InfractionsApi* | [**getInfractionsDefenses**](docs/Api/InfractionsApi.md#getinfractionsdefenses) | **GET** /user/infractions/{id}/defenses | Listar Defesas
+*InfractionsApi* | [**postInfractionsDefense**](docs/Api/InfractionsApi.md#postinfractionsdefense) | **POST** /user/infractions/{id}/defenses | Criar Defesa
+*InternalTransferApi* | [**getInternalTransfer**](docs/Api/InternalTransferApi.md#getinternaltransfer) | **GET** /internal-transfer | Obter transferência interna
+*InternalTransferApi* | [**postInternalTransfer**](docs/Api/InternalTransferApi.md#postinternaltransfer) | **POST** /internal-transfer | Criar transferência interna
+*KeysAndDICTApi* | [**getPixKey**](docs/Api/KeysAndDICTApi.md#getpixkey) | **GET** /pix/key | Consulta de chave Pix no DICT
+*KeysAndDICTApi* | [**postPixQrcodeRead**](docs/Api/KeysAndDICTApi.md#postpixqrcoderead) | **POST** /pix/qrcode/read | Ler QR Code
+*PixOperationsApi* | [**getPix**](docs/Api/PixOperationsApi.md#getpix) | **GET** /pix | Recuperar Cobrança
+*PixOperationsApi* | [**getPixQrcode**](docs/Api/PixOperationsApi.md#getpixqrcode) | **GET** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG)
+*PixOperationsApi* | [**getProof**](docs/Api/PixOperationsApi.md#getproof) | **GET** /proof/{id} | Obter comprovante da transação
+*PixOperationsApi* | [**postPix**](docs/Api/PixOperationsApi.md#postpix) | **POST** /pix | Criar Cobrança (depósito Pix)
+*RefundsApi* | [**postRefund**](docs/Api/RefundsApi.md#postrefund) | **POST** /refund/{transactionId} | Solicitar a devolução de um Pix recebido
+*ReportsApi* | [**downloadUserReport**](docs/Api/ReportsApi.md#downloaduserreport) | **POST** /user/report/{id}/download | Baixar relatório
+*ReportsApi* | [**getUserBankStatement**](docs/Api/ReportsApi.md#getuserbankstatement) | **GET** /user/bank-statements/{id} | Consultar lançamento
+*ReportsApi* | [**getUserBankStatements**](docs/Api/ReportsApi.md#getuserbankstatements) | **GET** /user/bank-statements | Listar extrato
+*ReportsApi* | [**getUserDepositPending**](docs/Api/ReportsApi.md#getuserdepositpending) | **GET** /user/deposit-pending | Listar depósitos via chave Pix
+*ReportsApi* | [**getUserDepositPendingById**](docs/Api/ReportsApi.md#getuserdepositpendingbyid) | **GET** /user/deposit-pending/{id} | Consultar depósito via chave Pix
+*ReportsApi* | [**getUserReport**](docs/Api/ReportsApi.md#getuserreport) | **GET** /user/report/{id} | Consultar status do relatório
+*ReportsApi* | [**getUserSummary**](docs/Api/ReportsApi.md#getusersummary) | **GET** /user/summary | Resumo de transações
+*ReportsApi* | [**getUserTransactionById**](docs/Api/ReportsApi.md#getusertransactionbyid) | **GET** /user/transactions/{id} | Listar detalhes da transação
+*ReportsApi* | [**getUserTransactions**](docs/Api/ReportsApi.md#getusertransactions) | **GET** /user/transactions | Listar transações
+*ReportsApi* | [**listUserReports**](docs/Api/ReportsApi.md#listuserreports) | **GET** /user/report | Listar jobs de relatório
+*ReportsApi* | [**postUserReport**](docs/Api/ReportsApi.md#postuserreport) | **POST** /user/report | Gerar relatório de transações
+*WebhooksApi* | [**deleteUserWebhook**](docs/Api/WebhooksApi.md#deleteuserwebhook) | **DELETE** /user/webhooks/{id} | Remover webhook
+*WebhooksApi* | [**getUserWebhook**](docs/Api/WebhooksApi.md#getuserwebhook) | **GET** /user/webhooks/{id} | Consultar webhook
+*WebhooksApi* | [**getUserWebhookSentDetail**](docs/Api/WebhooksApi.md#getuserwebhooksentdetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado
+*WebhooksApi* | [**getUserWebhooks**](docs/Api/WebhooksApi.md#getuserwebhooks) | **GET** /user/webhooks | Listar webhooks
+*WebhooksApi* | [**getUserWebhooksSentQuantity**](docs/Api/WebhooksApi.md#getuserwebhookssentquantity) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados
+*WebhooksApi* | [**patchUserWebhook**](docs/Api/WebhooksApi.md#patchuserwebhook) | **PATCH** /user/webhooks/{id} | Atualizar webhook
+*WebhooksApi* | [**postUserWebhook**](docs/Api/WebhooksApi.md#postuserwebhook) | **POST** /user/webhooks | Criar webhook
+*WebhooksApi* | [**postUserWebhookRotateSecret**](docs/Api/WebhooksApi.md#postuserwebhookrotatesecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook
+*WithdrawalsApi* | [**getWithdraw**](docs/Api/WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Consultar Saque
+*WithdrawalsApi* | [**getWithdrawProof**](docs/Api/WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Obter comprovante de saque
+*WithdrawalsApi* | [**postWithdraw**](docs/Api/WithdrawalsApi.md#postwithdraw) | **POST** /withdraw | Criar saque (chave Pix)
+*WithdrawalsApi* | [**postWithdrawQrcode**](docs/Api/WithdrawalsApi.md#postwithdrawqrcode) | **POST** /withdraw/qrcode | Criar Saque usando QR Code
 
 ## Models
 
@@ -151,6 +152,7 @@ Class | Method | HTTP request | Description
 - [DefenseFilesInner](docs/Model/DefenseFilesInner.md)
 - [DefenseHistoryEntry](docs/Model/DefenseHistoryEntry.md)
 - [DefenseHistoryEntryFilesInner](docs/Model/DefenseHistoryEntryFilesInner.md)
+- [DefenseListItem](docs/Model/DefenseListItem.md)
 - [DepositPending](docs/Model/DepositPending.md)
 - [DepositPendingListResponse](docs/Model/DepositPendingListResponse.md)
 - [DictConsultResponse](docs/Model/DictConsultResponse.md)
@@ -162,10 +164,19 @@ Class | Method | HTTP request | Description
 - [GetUser200ResponseDailyWithdrawLimit](docs/Model/GetUser200ResponseDailyWithdrawLimit.md)
 - [GetUser200ResponseServiceFee](docs/Model/GetUser200ResponseServiceFee.md)
 - [GetUserBalance200Response](docs/Model/GetUserBalance200Response.md)
+- [GetUserPixKeys200Response](docs/Model/GetUserPixKeys200Response.md)
 - [GetUserTransactionById200Response](docs/Model/GetUserTransactionById200Response.md)
 - [GetUserTransactionById200ResponseAllOfCallbackLogInner](docs/Model/GetUserTransactionById200ResponseAllOfCallbackLogInner.md)
 - [GetUserTransactionById200ResponseAllOfInfractionInner](docs/Model/GetUserTransactionById200ResponseAllOfInfractionInner.md)
 - [GetUserTransactions200Response](docs/Model/GetUserTransactions200Response.md)
+- [GetUserWhitelistCnpj200Response](docs/Model/GetUserWhitelistCnpj200Response.md)
+- [GetUserWhitelistCnpj200ResponseDataInner](docs/Model/GetUserWhitelistCnpj200ResponseDataInner.md)
+- [GetUserWhitelistCnpj200ResponsePageInfo](docs/Model/GetUserWhitelistCnpj200ResponsePageInfo.md)
+- [GetUserWhitelistPixKey200Response](docs/Model/GetUserWhitelistPixKey200Response.md)
+- [GetUserWhitelistPixKey200ResponseDataInner](docs/Model/GetUserWhitelistPixKey200ResponseDataInner.md)
+- [GetUserWhitelistPixKey200ResponsePageInfo](docs/Model/GetUserWhitelistPixKey200ResponsePageInfo.md)
+- [InfractionChangedData](docs/Model/InfractionChangedData.md)
+- [InfractionChangedEvent](docs/Model/InfractionChangedEvent.md)
 - [InfractionDetail](docs/Model/InfractionDetail.md)
 - [InfractionDetailTransaction](docs/Model/InfractionDetailTransaction.md)
 - [InfractionListResponse](docs/Model/InfractionListResponse.md)
@@ -200,6 +211,13 @@ Class | Method | HTTP request | Description
 - [SummaryBlockStatuses](docs/Model/SummaryBlockStatuses.md)
 - [SummaryStatus](docs/Model/SummaryStatus.md)
 - [Transaction](docs/Model/Transaction.md)
+- [TransactionCanceledEvent](docs/Model/TransactionCanceledEvent.md)
+- [TransactionCompletedEvent](docs/Model/TransactionCompletedEvent.md)
+- [TransactionErrorEvent](docs/Model/TransactionErrorEvent.md)
+- [TransactionExpiredEvent](docs/Model/TransactionExpiredEvent.md)
+- [TransactionPendingEvent](docs/Model/TransactionPendingEvent.md)
+- [TransactionRefundedEvent](docs/Model/TransactionRefundedEvent.md)
+- [TransactionWaitingForRefundEvent](docs/Model/TransactionWaitingForRefundEvent.md)
 - [TransactionWithRefunds](docs/Model/TransactionWithRefunds.md)
 - [Webhook](docs/Model/Webhook.md)
 - [WebhookCreateRequest](docs/Model/WebhookCreateRequest.md)

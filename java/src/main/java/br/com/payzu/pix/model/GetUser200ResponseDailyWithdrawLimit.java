@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Control of the daily outbound cap.
+ * Controle do teto diário de saída.
  */
 @JsonPropertyOrder({
   GetUser200ResponseDailyWithdrawLimit.JSON_PROPERTY_LIMIT,
@@ -70,7 +70,7 @@ public class GetUser200ResponseDailyWithdrawLimit {
   }
 
   /**
-   * Daily outbound cap, in reais, summing withdrawals and internal transfers.
+   * Teto diário de saída, em reais, somando saques e transferências internas.
    * @return limit
    */
   @javax.annotation.Nullable
@@ -94,7 +94,7 @@ public class GetUser200ResponseDailyWithdrawLimit {
   }
 
   /**
-   * Total of the cap consumed in the day, in reais, by withdrawals and internal transfers.
+   * Total consumido do teto no dia, em reais, por saques e transferências internas.
    * @return used
    */
   @javax.annotation.Nullable
@@ -118,7 +118,7 @@ public class GetUser200ResponseDailyWithdrawLimit {
   }
 
   /**
-   * Date and time of the last change to the daily limit.
+   * Data e hora da última alteração do limite diário.
    * @return updatedAt
    */
   @javax.annotation.Nullable
@@ -142,7 +142,7 @@ public class GetUser200ResponseDailyWithdrawLimit {
   }
 
   /**
-   * Moment of the last reset of the daily usage.
+   * Momento da última zeragem do consumo diário.
    * @return lastReset
    */
   @javax.annotation.Nullable

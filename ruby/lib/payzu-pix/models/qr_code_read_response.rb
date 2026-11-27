@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -14,39 +14,39 @@ require 'date'
 require 'time'
 
 module PayZuPix
-  # Decoded information from a Pix QR Code.
+  # Informações decodificadas de um QR Code Pix.
   class QRCodeReadResponse < ApiModelBase
-    # Type of QR Code.
+    # Tipo de QR Code.
     attr_accessor :qr_code_type
 
-    # Name of the payment receiver.
+    # Nome do recebedor do pagamento.
     attr_accessor :name
 
-    # CPF or CNPJ of the receiver.
+    # CPF ou CNPJ do recebedor.
     attr_accessor :document
 
-    # Amount to be paid (may differ from originalAmount for dynamic QR Codes).
+    # Valor a ser pago.
     attr_accessor :amount
 
-    # Original amount embedded in the QR Code.
+    # Valor embutido no QR Code.
     attr_accessor :original_amount
 
-    # Transaction identifier.
+    # Identificador da transação.
     attr_accessor :txid
 
-    # Additional information or description.
+    # Informações adicionais ou descrição.
     attr_accessor :additional_info
 
-    # Seconds until QR Code expires (0 for static QR Codes).
+    # Segundos até o QR Code expirar (0 para QR Codes estáticos).
     attr_accessor :expires_in
 
-    # Creation date of the QR Code (for dynamic QR Codes).
+    # Data de criação do QR Code dinâmico, como veio no QR Code: o horário pode vir sem fuso.
     attr_accessor :created_at
 
-    # Whether the payer can change the amount.
+    # Indica se o pagador pode alterar o valor.
     attr_accessor :amount_editable
 
-    # Due date of the charge, when the QR Code has one.
+    # Data de vencimento da cobrança, quando o QR Code tiver.
     attr_accessor :due_date
 
     class EnumAttributeValidator
@@ -109,7 +109,7 @@ module PayZuPix
         :'txid' => :'String',
         :'additional_info' => :'String',
         :'expires_in' => :'Float',
-        :'created_at' => :'Time',
+        :'created_at' => :'String',
         :'amount_editable' => :'Boolean',
         :'due_date' => :'String'
       }

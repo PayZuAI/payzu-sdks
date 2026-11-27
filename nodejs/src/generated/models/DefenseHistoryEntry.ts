@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -22,43 +22,43 @@ import {
 } from './DefenseHistoryEntryFilesInner.js';
 
 /**
- * Defense recorded in the infraction history, without the infractionId field.
+ * Defesa registrada no histórico da infração, sem o campo infractionId.
  * @export
  * @interface DefenseHistoryEntry
  */
 export interface DefenseHistoryEntry {
     /**
-     * Defense identifier.
+     * Identificador da defesa.
      * @type {string}
      * @memberof DefenseHistoryEntry
      */
     id?: string;
     /**
-     * Defense text
+     * Texto da defesa
      * @type {string}
      * @memberof DefenseHistoryEntry
      */
     defense?: string;
     /**
-     * Defense status
+     * Status da defesa
      * @type {DefenseHistoryEntryStatusEnum}
      * @memberof DefenseHistoryEntry
      */
     status?: DefenseHistoryEntryStatusEnum;
     /**
-     * Moment the defense was recorded at PayZu, saved together with the uploaded files.
+     * Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos.
      * @type {Date}
      * @memberof DefenseHistoryEntry
      */
     createdAt?: Date;
     /**
-     * Moment of the last change to the defense.
+     * Momento da última alteração da defesa.
      * @type {Date}
      * @memberof DefenseHistoryEntry
      */
     updatedAt?: Date;
     /**
-     * Files sent with the defense, with name, type and size in bytes.
+     * Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes.
      * @type {Array<DefenseHistoryEntryFilesInner>}
      * @memberof DefenseHistoryEntry
      */

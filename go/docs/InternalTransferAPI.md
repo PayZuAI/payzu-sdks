@@ -4,8 +4,8 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetInternalTransfer**](InternalTransferAPI.md#GetInternalTransfer) | **Get** /internal-transfer | Get internal transfer
-[**PostInternalTransfer**](InternalTransferAPI.md#PostInternalTransfer) | **Post** /internal-transfer | Create internal transfer
+[**GetInternalTransfer**](InternalTransferAPI.md#GetInternalTransfer) | **Get** /internal-transfer | Obter transferência interna
+[**PostInternalTransfer**](InternalTransferAPI.md#PostInternalTransfer) | **Post** /internal-transfer | Criar transferência interna
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > Transaction GetInternalTransfer(ctx).Id(id).ClientReference(clientReference).VirtualAccount(virtualAccount).Execute()
 
-Get internal transfer
+Obter transferência interna
 
 
 
@@ -30,9 +30,9 @@ import (
 )
 
 func main() {
-	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID (optional)
-	clientReference := "order_12345" // string | External reference (optional)
-	virtualAccount := "loja-centro-01" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação (optional)
+	clientReference := "order_12345" // string | Referência externa (optional)
+	virtualAccount := "loja-centro-01" // string | Subconta usada na criação. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -57,9 +57,9 @@ Other parameters are passed through a pointer to a apiGetInternalTransferRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string** | Transaction ID | 
- **clientReference** | **string** | External reference | 
- **virtualAccount** | **string** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | 
+ **id** | **string** | ID da transação | 
+ **clientReference** | **string** | Referência externa | 
+ **virtualAccount** | **string** | Subconta usada na criação. | 
 
 ### Return type
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 > Transaction PostInternalTransfer(ctx).PostInternalTransferRequest(postInternalTransferRequest).Execute()
 
-Create internal transfer
+Criar transferência interna
 
 
 

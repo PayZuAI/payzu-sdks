@@ -4,22 +4,22 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_user_callback_secret**](CallbacksApi.md#create_user_callback_secret) | **POST** /user/callbacks/secret | Create callback secret
-[**get_user_callback_by_id**](CallbacksApi.md#get_user_callback_by_id) | **GET** /user/callbacks/{id} | Get Callback
-[**get_user_callbacks**](CallbacksApi.md#get_user_callbacks) | **GET** /user/callbacks | List Callbacks
-[**resend_user_callback_single**](CallbacksApi.md#resend_user_callback_single) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single)
-[**resend_user_callbacks**](CallbacksApi.md#resend_user_callbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk)
-[**resend_user_callbacks_webhook**](CallbacksApi.md#resend_user_callbacks_webhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
-[**resend_user_callbacks_webhooks**](CallbacksApi.md#resend_user_callbacks_webhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters
-[**rotate_user_callback_secret**](CallbacksApi.md#rotate_user_callback_secret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret
+[**create_user_callback_secret**](CallbacksApi.md#create_user_callback_secret) | **POST** /user/callbacks/secret | Criar segredo de callback
+[**get_user_callback_by_id**](CallbacksApi.md#get_user_callback_by_id) | **GET** /user/callbacks/{id} | Obter Callback
+[**get_user_callbacks**](CallbacksApi.md#get_user_callbacks) | **GET** /user/callbacks | Listar Callbacks
+[**resend_user_callback_single**](CallbacksApi.md#resend_user_callback_single) | **POST** /user/callbacks/resend/{transactionId} | Reenviar callback (individual)
+[**resend_user_callbacks**](CallbacksApi.md#resend_user_callbacks) | **POST** /user/callbacks/resend | Reenviar callbacks (em lote)
+[**resend_user_callbacks_webhook**](CallbacksApi.md#resend_user_callbacks_webhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Reenviar callbacks por webhook
+[**resend_user_callbacks_webhooks**](CallbacksApi.md#resend_user_callbacks_webhooks) | **POST** /user/callbacks/resend/webhook | Reenviar callbacks de webhook por filtros
+[**rotate_user_callback_secret**](CallbacksApi.md#rotate_user_callback_secret) | **PATCH** /user/callbacks/secret/rotate | Rotacionar segredo de callback
 
 
 # **create_user_callback_secret**
 > CallbackSecretResponse create_user_callback_secret()
 
-Create callback secret
+Criar segredo de callback
 
-Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
 
 ### Example
 
@@ -53,7 +53,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     api_instance = payzu_pix.CallbacksApi(api_client)
 
     try:
-        # Create callback secret
+        # Criar segredo de callback
         api_response = api_instance.create_user_callback_secret()
         print("The response of CallbacksApi->create_user_callback_secret:\n")
         pprint(api_response)
@@ -84,19 +84,19 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Create callback secret |  -  |
+**201** | Criar segredo de callback |  -  |
 **401** | Unauthorized |  -  |
-**403** | Operation not allowed |  -  |
-**409** | Account already has a callback secret. Use the rotate route. |  -  |
+**403** | Operação não permitida |  -  |
+**409** | A conta já possui segredo de callback. Use a rota de rotação. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_callback_by_id**
 > CallbackDetail get_user_callback_by_id(id)
 
-Get Callback
+Obter Callback
 
-Returns the details of a specific callback log.
+Retorna os detalhes de um log de callback específico.
 
 ### Example
 
@@ -128,10 +128,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.CallbacksApi(api_client)
-    id = 'cm3w7l9v20001q8f2u6c1y4be' # str | Unique callback ID
+    id = 'cm3w7l9v20001q8f2u6c1y4be' # str | ID único do callback
 
     try:
-        # Get Callback
+        # Obter Callback
         api_response = api_instance.get_user_callback_by_id(id)
         print("The response of CallbacksApi->get_user_callback_by_id:\n")
         pprint(api_response)
@@ -146,7 +146,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Unique callback ID | 
+ **id** | **str**| ID único do callback | 
 
 ### Return type
 
@@ -165,18 +165,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Callback details |  -  |
-**401** | Authentication failure |  -  |
-**404** | Callback not found or does not belong to the user |  -  |
+**200** | Detalhes do callback |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Callback não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_callbacks**
 > CallbackListResponse get_user_callbacks(page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction, id=id, url=url, status=status, transaction_id=transaction_id, has_error=has_error, created_at_from=created_at_from, created_at_to=created_at_to, webhook_id=webhook_id, event_type=event_type)
 
-List Callbacks
+Listar Callbacks
 
-Returns a paginated list of webhook callback logs for the user's transactions.
+Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
 
 ### Example
 
@@ -209,22 +210,22 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.CallbacksApi(api_client)
-    page = 1 # int | Page number. (optional) (default to 1)
-    limit = 10 # int | Items per page. (optional) (default to 10)
-    sort_by = createdAt # str | Sort field. (optional) (default to createdAt)
-    sort_direction = desc # str | Sort direction. (optional) (default to desc)
-    id = 'cm3w7l9v20001q8f2u6c1y4be' # str | Filter by callback ID (optional)
-    url = 'https://webhook.cool/' # str | Filter by callback URL (optional)
-    status = 200 # int | HTTP status code (optional)
-    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID. (optional)
-    has_error = true # bool | Filter callbacks that errored (optional)
-    created_at_from = '2026-08-01' # datetime | Start of the creation date range. (optional)
-    created_at_to = '2026-08-31' # datetime | End of the creation date range. (optional)
-    webhook_id = 'webhook_id_example' # str | Webhook id. (optional)
-    event_type = payzu_pix.WebhookEventType() # WebhookEventType | Webhook event type. (optional)
+    page = 1 # int | Número da página. (optional) (default to 1)
+    limit = 10 # int | Itens por página. (optional) (default to 10)
+    sort_by = createdAt # str | Campo de ordenação. (optional) (default to createdAt)
+    sort_direction = desc # str | Direção da ordenação. (optional) (default to desc)
+    id = 'cm3w7l9v20001q8f2u6c1y4be' # str | Filtra por ID de callback (optional)
+    url = 'https://webhook.cool/' # str | Filtra por callback URL (optional)
+    status = 200 # int | Status HTTP devolvido pelo seu endpoint. (optional)
+    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação. (optional)
+    has_error = true # bool | Filtra callbacks que apresentaram erro (optional)
+    created_at_from = '2026-08-01' # datetime | Data de criação inicial. (optional)
+    created_at_to = '2026-08-31' # datetime | Data de criação final. (optional)
+    webhook_id = 'webhook_id_example' # str | Id do webhook. (optional)
+    event_type = payzu_pix.WebhookEventType() # WebhookEventType | Tipo de evento do webhook. (optional)
 
     try:
-        # List Callbacks
+        # Listar Callbacks
         api_response = api_instance.get_user_callbacks(page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction, id=id, url=url, status=status, transaction_id=transaction_id, has_error=has_error, created_at_from=created_at_from, created_at_to=created_at_to, webhook_id=webhook_id, event_type=event_type)
         print("The response of CallbacksApi->get_user_callbacks:\n")
         pprint(api_response)
@@ -239,19 +240,19 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int**| Page number. | [optional] [default to 1]
- **limit** | **int**| Items per page. | [optional] [default to 10]
- **sort_by** | **str**| Sort field. | [optional] [default to createdAt]
- **sort_direction** | **str**| Sort direction. | [optional] [default to desc]
- **id** | **str**| Filter by callback ID | [optional] 
- **url** | **str**| Filter by callback URL | [optional] 
- **status** | **int**| HTTP status code | [optional] 
- **transaction_id** | **str**| Transaction ID. | [optional] 
- **has_error** | **bool**| Filter callbacks that errored | [optional] 
- **created_at_from** | **datetime**| Start of the creation date range. | [optional] 
- **created_at_to** | **datetime**| End of the creation date range. | [optional] 
- **webhook_id** | **str**| Webhook id. | [optional] 
- **event_type** | [**WebhookEventType**](.md)| Webhook event type. | [optional] 
+ **page** | **int**| Número da página. | [optional] [default to 1]
+ **limit** | **int**| Itens por página. | [optional] [default to 10]
+ **sort_by** | **str**| Campo de ordenação. | [optional] [default to createdAt]
+ **sort_direction** | **str**| Direção da ordenação. | [optional] [default to desc]
+ **id** | **str**| Filtra por ID de callback | [optional] 
+ **url** | **str**| Filtra por callback URL | [optional] 
+ **status** | **int**| Status HTTP devolvido pelo seu endpoint. | [optional] 
+ **transaction_id** | **str**| ID da transação. | [optional] 
+ **has_error** | **bool**| Filtra callbacks que apresentaram erro | [optional] 
+ **created_at_from** | **datetime**| Data de criação inicial. | [optional] 
+ **created_at_to** | **datetime**| Data de criação final. | [optional] 
+ **webhook_id** | **str**| Id do webhook. | [optional] 
+ **event_type** | [**WebhookEventType**](.md)| Tipo de evento do webhook. | [optional] 
 
 ### Return type
 
@@ -270,18 +271,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of callback logs with pagination |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**200** | Lista de callbacks |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resend_user_callback_single**
 > ResendUserCallbackSingle200Response resend_user_callback_single(transaction_id)
 
-Re-send callback (single)
+Reenviar callback (individual)
 
-Resend the callback of a single transaction.
+Reenvia o callback de uma única transação.
 
 ### Example
 
@@ -313,10 +315,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.CallbacksApi(api_client)
-    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID.
+    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação.
 
     try:
-        # Re-send callback (single)
+        # Reenviar callback (individual)
         api_response = api_instance.resend_user_callback_single(transaction_id)
         print("The response of CallbacksApi->resend_user_callback_single:\n")
         pprint(api_response)
@@ -331,7 +333,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transaction_id** | **str**| Transaction ID. | 
+ **transaction_id** | **str**| ID da transação. | 
 
 ### Return type
 
@@ -350,20 +352,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Resend dispatched |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Transaction not found or has no callbackUrl configured |  -  |
-**422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+**200** | Reenvio disparado |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Transação sem callbackUrl |  -  |
+**422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resend_user_callbacks**
 > ResendUserCallbacks200Response resend_user_callbacks(resend_user_callbacks_request)
 
-Re-send callbacks (bulk)
+Reenviar callbacks (em lote)
 
-Resend callbacks in bulk for transactions matching the given filters.
+Reenvia callbacks em lote para transações que correspondem aos filtros informados.
 
 ### Example
 
@@ -399,7 +401,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     resend_user_callbacks_request = {"createdAtFrom":"2026-05-05T00:00:00Z","createdAtTo":"2026-05-06T00:00:00Z"} # ResendUserCallbacksRequest | 
 
     try:
-        # Re-send callbacks (bulk)
+        # Reenviar callbacks (em lote)
         api_response = api_instance.resend_user_callbacks(resend_user_callbacks_request)
         print("The response of CallbacksApi->resend_user_callbacks:\n")
         pprint(api_response)
@@ -433,21 +435,21 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Resend dispatched |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | No matching transactions |  -  |
-**422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+**200** | Reenvio disparado |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Nenhuma transação correspondente |  -  |
+**422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resend_user_callbacks_webhook**
 > EnqueuedCallback resend_user_callbacks_webhook(webhook_id)
 
-Resend callbacks by webhook
+Reenviar callbacks por webhook
 
-Queues a bulk resend of the failed callbacks of a given webhook.
+Enfileira o reenvio em lote dos callbacks falhos de um webhook.
 
 ### Example
 
@@ -479,10 +481,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.CallbacksApi(api_client)
-    webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
+    webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Id do webhook.
 
     try:
-        # Resend callbacks by webhook
+        # Reenviar callbacks por webhook
         api_response = api_instance.resend_user_callbacks_webhook(webhook_id)
         print("The response of CallbacksApi->resend_user_callbacks_webhook:\n")
         pprint(api_response)
@@ -497,7 +499,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhook_id** | **str**| Webhook id. | 
+ **webhook_id** | **str**| Id do webhook. | 
 
 ### Return type
 
@@ -516,21 +518,21 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Callbacks accepted for resend. Acceptance is not delivery: the queueing runs after the response. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Webhook not found, inactive or owned by another account (PZW300), or no failed callback matched the filters (PZW310). |  -  |
-**422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+**200** | Callbacks aceitos para reenvio. Aceite não é entrega: o enfileiramento acontece depois da resposta. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Webhook não encontrado, inativo ou de outra conta (PZW300), ou nenhum callback falho para os filtros (PZW310). |  -  |
+**422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resend_user_callbacks_webhooks**
 > EnqueuedCallback resend_user_callbacks_webhooks(resend_webhook_callbacks_request)
 
-Resend webhook callbacks by filters
+Reenviar callbacks de webhook por filtros
 
-Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
 
 ### Example
 
@@ -566,7 +568,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     resend_webhook_callbacks_request = payzu_pix.ResendWebhookCallbacksRequest() # ResendWebhookCallbacksRequest | 
 
     try:
-        # Resend webhook callbacks by filters
+        # Reenviar callbacks de webhook por filtros
         api_response = api_instance.resend_user_callbacks_webhooks(resend_webhook_callbacks_request)
         print("The response of CallbacksApi->resend_user_callbacks_webhooks:\n")
         pprint(api_response)
@@ -600,21 +602,21 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Callbacks accepted for resend. Acceptance is not delivery: the queueing runs after the response. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | No active webhook matched the criteria (PZW301), or no failed callback matched the filters (PZW311). |  -  |
-**422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+**200** | Callbacks aceitos para reenvio. Aceite não é entrega: o enfileiramento acontece depois da resposta. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Nenhum webhook ativo para os critérios (PZW301), ou nenhum callback falho para os filtros (PZW311). |  -  |
+**422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rotate_user_callback_secret**
 > RotateCallbackSecretResponse rotate_user_callback_secret()
 
-Rotate callback secret
+Rotacionar segredo de callback
 
-Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
 
 ### Example
 
@@ -648,7 +650,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     api_instance = payzu_pix.CallbacksApi(api_client)
 
     try:
-        # Rotate callback secret
+        # Rotacionar segredo de callback
         api_response = api_instance.rotate_user_callback_secret()
         print("The response of CallbacksApi->rotate_user_callback_secret:\n")
         pprint(api_response)
@@ -679,10 +681,10 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Rotate callback secret |  -  |
+**200** | Rotacionar segredo de callback |  -  |
 **401** | Unauthorized |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Account has no callback secret to rotate. |  -  |
+**403** | Operação não permitida |  -  |
+**404** | A conta não possui segredo de callback para rotacionar. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

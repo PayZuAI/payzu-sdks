@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,23 +20,23 @@ var _ MappedNullable = &CallbackDetail{}
 
 // CallbackDetail struct for CallbackDetail
 type CallbackDetail struct {
-	// Unique callback ID
+	// ID único do callback
 	Id *string `json:"id,omitempty"`
-	// Webhook URL that received the callback
+	// URL do webhook que recebeu o callback
 	Url *string `json:"url,omitempty"`
-	// HTTP response status code
+	// Código de status HTTP da resposta
 	Status *float32 `json:"status,omitempty"`
-	// Related transaction ID
+	// ID da transação relacionada
 	TransactionId *string `json:"transactionId,omitempty"`
-	// Date and time when the callback log was created
+	// Data e hora em que o log do callback foi criado
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Request body sent (parsed JSON). When the content is not valid JSON, it comes as `{ \"raw\": \"<text>\" }`.
+	// Corpo enviado (JSON interpretado). Quando o conteúdo não é JSON válido, vem como `{ \"raw\": \"<texto>\" }`.
 	Body map[string]interface{} `json:"body,omitempty"`
-	// Response body received (string)
+	// Corpo da resposta recebido (string)
 	ResponseBody *string `json:"responseBody,omitempty"`
-	// Response headers (parsed JSON). When the content is not valid JSON, it comes as `{ \"raw\": \"<text>\" }`.
+	// Cabeçalhos da resposta (JSON interpretado). Quando o conteúdo não é JSON válido, vem como `{ \"raw\": \"<texto>\" }`.
 	ResponseHeaders map[string]interface{} `json:"responseHeaders,omitempty"`
-	// Webhook round-trip time in milliseconds
+	// Tempo de ida e volta do webhook em milissegundos
 	ResponseTime *float32 `json:"responseTime,omitempty"`
 }
 

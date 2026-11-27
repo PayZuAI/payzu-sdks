@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **cash_in_minimum** | **Float** | Floor of the cash-in fee, in reais. | [optional] |
-| **cash_in_fixed** | **Float** | Fixed part of the cash-in fee, in reais. | [optional] |
-| **cash_in_percent** | **Float** | Percentage of the cash-in fee. | [optional] |
-| **cash_out_minimum** | **Float** | Floor of the withdrawal fee, in reais. | [optional] |
-| **cash_out_fixed** | **Float** | Fixed part of the withdrawal fee, in reais. | [optional] |
-| **cash_out_percent** | **Float** | Percentage of the withdrawal fee. | [optional] |
+| **cash_in_minimum** | **Float** | Piso da tarifa de entrada, em reais. | [optional] |
+| **cash_in_fixed** | **Float** | Parcela fixa da tarifa de entrada, em reais. | [optional] |
+| **cash_in_percent** | **Float** | Percentual da tarifa de entrada. | [optional] |
+| **cash_out_minimum** | **Float** | Piso da tarifa de saque, em reais. | [optional] |
+| **cash_out_fixed** | **Float** | Parcela fixa da tarifa de saque, em reais. | [optional] |
+| **cash_out_percent** | **Float** | Percentual da tarifa de saque. | [optional] |
 
 ## Example
 

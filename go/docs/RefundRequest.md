@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float32** | Amount in BRL to refund. Omit to refund the full transaction amount. Partial refunds are allowed up to the original amount. | [optional] 
-**Description** | Pointer to **string** | Free-text description for the refund. | [optional] 
-**ClientReference** | Pointer to **string** | Idempotency key. Reusing it with the same amount replays the existing refund; reusing it with a different amount is rejected. | [optional] 
+**Amount** | Pointer to **float32** | Valor a devolver. | [optional] 
+**Description** | Pointer to **string** | Descrição livre da devolução. | [optional] 
+**ClientReference** | Pointer to **string** | Chave de idempotência. | [optional] 
 
 ## Methods
 

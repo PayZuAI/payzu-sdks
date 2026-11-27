@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -68,22 +68,22 @@ export interface PostWithdrawQrcodeOperationRequest {
 export interface WithdrawalsApiInterface {
     /**
      * Creates request options for getWithdraw without sending the request
-     * @param {string} [id] Transaction ID.
-     * @param {string} [clientReference] External reference provided when creating the withdrawal.
-     * @param {string} [endToEndId] Pix end-to-end ID.
-     * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+     * @param {string} [id] ID da transação.
+     * @param {string} [clientReference] Referência externa informada na criação do saque.
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {string} [virtualAccount] Subconta usada na criação.
      * @throws {RequiredError}
      * @memberof WithdrawalsApiInterface
      */
     getWithdrawRequestOpts(requestParameters: GetWithdrawRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
-     * @summary Retrieve Withdrawal
-     * @param {string} [id] Transaction ID.
-     * @param {string} [clientReference] External reference provided when creating the withdrawal.
-     * @param {string} [endToEndId] Pix end-to-end ID.
-     * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+     * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+     * @summary Consultar Saque
+     * @param {string} [id] ID da transação.
+     * @param {string} [clientReference] Referência externa informada na criação do saque.
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {string} [virtualAccount] Subconta usada na criação.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WithdrawalsApiInterface
@@ -91,25 +91,25 @@ export interface WithdrawalsApiInterface {
     getWithdrawRaw(requestParameters: GetWithdrawRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
-     * Retrieve Withdrawal
+     * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+     * Consultar Saque
      */
     getWithdraw(requestParameters: GetWithdrawRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
 
     /**
      * Creates request options for getWithdrawProof without sending the request
-     * @param {string} id Transaction ID.
-     * @param {'pdf' | 'base64'} [type] Return format.
+     * @param {string} id ID da transação.
+     * @param {'pdf' | 'base64'} [type] Formato de retorno.
      * @throws {RequiredError}
      * @memberof WithdrawalsApiInterface
      */
     getWithdrawProofRequestOpts(requestParameters: GetWithdrawProofRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
-     * @summary Get Withdrawal Receipt
-     * @param {string} id Transaction ID.
-     * @param {'pdf' | 'base64'} [type] Return format.
+     * Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
+     * @summary Obter comprovante de saque
+     * @param {string} id ID da transação.
+     * @param {'pdf' | 'base64'} [type] Formato de retorno.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WithdrawalsApiInterface
@@ -117,8 +117,8 @@ export interface WithdrawalsApiInterface {
     getWithdrawProofRaw(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProofResponse>>;
 
     /**
-     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
-     * Get Withdrawal Receipt
+     * Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
+     * Obter comprovante de saque
      */
     getWithdrawProof(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProofResponse>;
 
@@ -131,8 +131,8 @@ export interface WithdrawalsApiInterface {
     postWithdrawRequestOpts(requestParameters: PostWithdrawOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
-     * @summary Create Withdrawal (Pix key)
+     * Envie um **cash out** Pix para a chave Pix especificada.
+     * @summary Criar saque (chave Pix)
      * @param {PostWithdrawRequest} postWithdrawRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -141,8 +141,8 @@ export interface WithdrawalsApiInterface {
     postWithdrawRaw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
-     * Create Withdrawal (Pix key)
+     * Envie um **cash out** Pix para a chave Pix especificada.
+     * Criar saque (chave Pix)
      */
     postWithdraw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
 
@@ -155,8 +155,8 @@ export interface WithdrawalsApiInterface {
     postWithdrawQrcodeRequestOpts(requestParameters: PostWithdrawQrcodeOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
-     * @summary Create Withdrawal using QR Code
+     * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
+     * @summary Criar Saque usando QR Code
      * @param {PostWithdrawQrcodeRequest} postWithdrawQrcodeRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -165,8 +165,8 @@ export interface WithdrawalsApiInterface {
     postWithdrawQrcodeRaw(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
-     * Create Withdrawal using QR Code
+     * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
+     * Criar Saque usando QR Code
      */
     postWithdrawQrcode(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
 
@@ -221,8 +221,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
-     * Retrieve Withdrawal
+     * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+     * Consultar Saque
      */
     async getWithdrawRaw(requestParameters: GetWithdrawRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
         const requestOptions = await this.getWithdrawRequestOpts(requestParameters);
@@ -232,8 +232,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
-     * Retrieve Withdrawal
+     * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+     * Consultar Saque
      */
     async getWithdraw(requestParameters: GetWithdrawRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
         const response = await this.getWithdrawRaw(requestParameters, initOverrides);
@@ -280,8 +280,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
-     * Get Withdrawal Receipt
+     * Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
+     * Obter comprovante de saque
      */
     async getWithdrawProofRaw(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProofResponse>> {
         const requestOptions = await this.getWithdrawProofRequestOpts(requestParameters);
@@ -291,8 +291,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
-     * Get Withdrawal Receipt
+     * Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
+     * Obter comprovante de saque
      */
     async getWithdrawProof(requestParameters: GetWithdrawProofRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProofResponse> {
         const response = await this.getWithdrawProofRaw(requestParameters, initOverrides);
@@ -337,8 +337,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
-     * Create Withdrawal (Pix key)
+     * Envie um **cash out** Pix para a chave Pix especificada.
+     * Criar saque (chave Pix)
      */
     async postWithdrawRaw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
         const requestOptions = await this.postWithdrawRequestOpts(requestParameters);
@@ -348,8 +348,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
-     * Create Withdrawal (Pix key)
+     * Envie um **cash out** Pix para a chave Pix especificada.
+     * Criar saque (chave Pix)
      */
     async postWithdraw(requestParameters: PostWithdrawOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
         const response = await this.postWithdrawRaw(requestParameters, initOverrides);
@@ -394,8 +394,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
-     * Create Withdrawal using QR Code
+     * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
+     * Criar Saque usando QR Code
      */
     async postWithdrawQrcodeRaw(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
         const requestOptions = await this.postWithdrawQrcodeRequestOpts(requestParameters);
@@ -405,8 +405,8 @@ export class WithdrawalsApi extends runtime.BaseAPI implements WithdrawalsApiInt
     }
 
     /**
-     * Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code\'s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
-     * Create Withdrawal using QR Code
+     * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
+     * Criar Saque usando QR Code
      */
     async postWithdrawQrcode(requestParameters: PostWithdrawQrcodeOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
         const response = await this.postWithdrawQrcodeRaw(requestParameters, initOverrides);

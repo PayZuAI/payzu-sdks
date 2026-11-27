@@ -4,10 +4,10 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getWithdraw**](WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Retrieve Withdrawal |
-| [**getWithdrawProof**](WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
-| [**postWithdraw**](WithdrawalsApi.md#postwithdrawoperation) | **POST** /withdraw | Create Withdrawal (Pix key) |
-| [**postWithdrawQrcode**](WithdrawalsApi.md#postwithdrawqrcodeoperation) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code |
+| [**getWithdraw**](WithdrawalsApi.md#getwithdraw) | **GET** /withdraw | Consultar Saque |
+| [**getWithdrawProof**](WithdrawalsApi.md#getwithdrawproof) | **GET** /withdraw/proof/{id} | Obter comprovante de saque |
+| [**postWithdraw**](WithdrawalsApi.md#postwithdrawoperation) | **POST** /withdraw | Criar saque (chave Pix) |
+| [**postWithdrawQrcode**](WithdrawalsApi.md#postwithdrawqrcodeoperation) | **POST** /withdraw/qrcode | Criar Saque usando QR Code |
 
 
 
@@ -15,9 +15,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > Transaction getWithdraw(id, clientReference, endToEndId, virtualAccount)
 
-Retrieve Withdrawal
+Consultar Saque
 
-Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
+Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60;. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
 
 ### Example
 
@@ -37,13 +37,13 @@ async function example() {
   const api = new WithdrawalsApi(config);
 
   const body = {
-    // string | Transaction ID. (optional)
+    // string | ID da transação. (optional)
     id: PAYZU20260817B3PL8SG5WQ000000,
-    // string | External reference provided when creating the withdrawal. (optional)
+    // string | Referência externa informada na criação do saque. (optional)
     clientReference: order_12345,
-    // string | Pix end-to-end ID. (optional)
+    // string | ID end-to-end do Pix. (optional)
     endToEndId: E00000000202508172159kZ8dQ2mNb1x,
-    // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+    // string | Subconta usada na criação. (optional)
     virtualAccount: loja-centro-01,
   } satisfies GetWithdrawRequest;
 
@@ -64,10 +64,10 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
-| **clientReference** | `string` | External reference provided when creating the withdrawal. | [Optional] [Defaults to `undefined`] |
-| **endToEndId** | `string` | Pix end-to-end ID. | [Optional] [Defaults to `undefined`] |
-| **virtualAccount** | `string` | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [Optional] [Defaults to `undefined`] |
+| **id** | `string` | ID da transação. | [Optional] [Defaults to `undefined`] |
+| **clientReference** | `string` | Referência externa informada na criação do saque. | [Optional] [Defaults to `undefined`] |
+| **endToEndId** | `string` | ID end-to-end do Pix. | [Optional] [Defaults to `undefined`] |
+| **virtualAccount** | `string` | Subconta usada na criação. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -86,11 +86,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Current withdrawal state |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Estado atual do saque |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -99,9 +99,9 @@ example().catch(console.error);
 
 > ProofResponse getWithdrawProof(id, type)
 
-Get Withdrawal Receipt
+Obter comprovante de saque
 
-Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
 
 ### Example
 
@@ -121,9 +121,9 @@ async function example() {
   const api = new WithdrawalsApi(config);
 
   const body = {
-    // string | Transaction ID.
+    // string | ID da transação.
     id: PAYZU20260817B3PL8SG5WQ000000,
-    // 'pdf' | 'base64' | Return format. (optional)
+    // 'pdf' | 'base64' | Formato de retorno. (optional)
     type: pdf,
   } satisfies GetWithdrawProofRequest;
 
@@ -144,8 +144,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Transaction ID. | [Defaults to `undefined`] |
-| **type** | `pdf`, `base64` | Return format. | [Optional] [Defaults to `&#39;pdf&#39;`] [Enum: pdf, base64] |
+| **id** | `string` | ID da transação. | [Defaults to `undefined`] |
+| **type** | `pdf`, `base64` | Formato de retorno. | [Optional] [Defaults to `&#39;pdf&#39;`] [Enum: pdf, base64] |
 
 ### Return type
 
@@ -164,12 +164,13 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **404** | Resource not found |  -  |
-| **422** | Operation refused |  -  |
-| **500** | Internal error |  -  |
+| **200** | Comprovante em PDF ou base64 |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **422** | Operação recusada |  -  |
+| **500** | Erro interno |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -178,9 +179,9 @@ example().catch(console.error);
 
 > Transaction postWithdraw(postWithdrawRequest)
 
-Create Withdrawal (Pix key)
+Criar saque (chave Pix)
 
-Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
+Envie um **cash out** Pix para a chave Pix especificada.
 
 ### Example
 
@@ -240,12 +241,13 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Withdrawal created |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **422** | Operation refused |  -  |
-| **424** | Failure at the financial institution |  -  |
+| **200** | Saque criado |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
+| **422** | Operação recusada |  -  |
+| **424** | Falha na instituição financeira |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -254,9 +256,9 @@ example().catch(console.error);
 
 > Transaction postWithdrawQrcode(postWithdrawQrcodeRequest)
 
-Create Withdrawal using QR Code
+Criar Saque usando QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code\&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
+Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se &#x60;amount&#x60; não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
 
 ### Example
 
@@ -316,13 +318,15 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Withdrawal created from QR Code |  -  |
-| **400** | Invalid QR Code or missing amount for static QR Code without value |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **422** | Operation refused |  -  |
-| **424** | Failure at the financial institution |  -  |
-| **429** | Rate limit exceeded |  -  |
+| **200** | Saque criado a partir do QR Code |  -  |
+| **400** | QR Code inválido |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
+| **410** | QR Code vencido ou removido |  -  |
+| **422** | Operação recusada |  -  |
+| **424** | Falha na instituição financeira |  -  |
+| **429** | Limite de requisições excedido |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

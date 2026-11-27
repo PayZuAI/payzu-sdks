@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -21,21 +21,21 @@ var _ MappedNullable = &PostPixRequest{}
 
 // PostPixRequest struct for PostPixRequest
 type PostPixRequest struct {
-	// Amount in BRL. Must be >= 1.
+	// Valor da cobrança, em reais, com no máximo 2 casas decimais.
 	Amount float32 `json:"amount"`
-	// URL for transaction notifications (http or https).
+	// URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal.
 	CallbackUrl *string `json:"callbackUrl,omitempty" validate:"regexp=^https?:\\/\\/"`
-	// Payer full name. Letters and spaces only.
+	// Nome usado para montar a cobrança.
 	GeneratedName *string `json:"generatedName,omitempty" validate:"regexp=^[a-zA-Z À-ÿ]+$"`
-	// Payer email (optional).
+	// E-mail usado para montar a cobrança.
 	GeneratedEmail *string `json:"generatedEmail,omitempty"`
-	// Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits.
+	// CPF (11 dígitos) ou CNPJ (14 dígitos) do pagador, sem pontuação e com dígitos verificadores válidos. Obrigatório a partir do valor definido na conta (PZD602).
 	GeneratedDocument *string `json:"generatedDocument,omitempty" validate:"regexp=^(\\\\d{11}|\\\\d{14})$"`
-	// Seconds until the QR Code expires.
-	ExpiresIn *float32 `json:"expiresIn,omitempty"`
-	// External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it.
+	// Segundos até o QR Code expirar, em número inteiro.
+	ExpiresIn *int32 `json:"expiresIn,omitempty"`
+	// Referência externa (pedido, fatura etc.). Um clientReference já usado devolve a transação criada com ele.
 	ClientReference *string `json:"clientReference,omitempty"`
-	// Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
+	// Subconta para separar lojas ou filiais.
 	VirtualAccount *string `json:"virtualAccount,omitempty"`
 }
 
@@ -212,9 +212,9 @@ func (o *PostPixRequest) SetGeneratedDocument(v string) {
 }
 
 // GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise.
-func (o *PostPixRequest) GetExpiresIn() float32 {
+func (o *PostPixRequest) GetExpiresIn() int32 {
 	if o == nil || IsNil(o.ExpiresIn) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ExpiresIn
@@ -222,7 +222,7 @@ func (o *PostPixRequest) GetExpiresIn() float32 {
 
 // GetExpiresInOk returns a tuple with the ExpiresIn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostPixRequest) GetExpiresInOk() (*float32, bool) {
+func (o *PostPixRequest) GetExpiresInOk() (*int32, bool) {
 	if o == nil || IsNil(o.ExpiresIn) {
 		return nil, false
 	}
@@ -238,8 +238,8 @@ func (o *PostPixRequest) HasExpiresIn() bool {
 	return false
 }
 
-// SetExpiresIn gets a reference to the given float32 and assigns it to the ExpiresIn field.
-func (o *PostPixRequest) SetExpiresIn(v float32) {
+// SetExpiresIn gets a reference to the given int32 and assigns it to the ExpiresIn field.
+func (o *PostPixRequest) SetExpiresIn(v int32) {
 	o.ExpiresIn = &v
 }
 

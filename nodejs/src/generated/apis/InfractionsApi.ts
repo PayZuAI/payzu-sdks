@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -23,6 +23,11 @@ import {
     DefenseFromJSON,
     DefenseToJSON,
 } from '../models/Defense.js';
+import {
+    type DefenseListItem,
+    DefenseListItemFromJSON,
+    DefenseListItemToJSON,
+} from '../models/DefenseListItem.js';
 import {
     type InfractionDetail,
     InfractionDetailFromJSON,
@@ -89,62 +94,62 @@ export interface PostInfractionsDefenseRequest {
 export interface InfractionsApiInterface {
     /**
      * Creates request options for getInfractions without sending the request
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
-     * @param {string} [status] Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
-     * @param {string} [type] Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-     * @param {string} [endToEndId] End-to-end ID of the Pix.
-     * @param {string} [transactionId] Transaction ID.
-     * @param {number} [amountMin] Minimum amount.
-     * @param {number} [amountMax] Maximum amount.
-     * @param {string} [analysisResult] Comma-separated AnalysisResult: AGREED, DISAGREED.
-     * @param {string} [reportedBy] Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-     * @param {string} [participantDocument] CPF or CNPJ of the participant.
-     * @param {string} [participantName] Name of the participant.
-     * @param {'createdAt' | 'updatedAt'} [sortBy] Sort field.
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
-     * @param {Date} [reportedAtFrom] Filter: reportedAt from.
-     * @param {Date} [reportedAtTo] Filter: reportedAt up to.
-     * @param {Date} [createdAtFrom] Filter: createdAt from.
-     * @param {Date} [createdAtTo] Filter: createdAt up to.
-     * @param {Date} [expiresAtFrom] Filter: expiresAt from.
-     * @param {Date} [expiresAtTo] Filter: expiresAt up to.
-     * @param {Date} [updatedAtFrom] Filter: updatedAt from.
-     * @param {Date} [updatedAtTo] Filter: updatedAt up to.
-     * @param {string} [id] Filter by infraction ID.
-     * @param {string} [protocol] Filter by protocol.
+     * @param {number} [page] Número da página.
+     * @param {number} [limit] Itens por página.
+     * @param {string} [status] Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60;
+     * @param {string} [type] Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60;
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {string} [transactionId] ID da transação.
+     * @param {number} [amountMin] Valor mínimo.
+     * @param {number} [amountMax] Valor máximo.
+     * @param {string} [analysisResult] AnalysisResult separados por vírgula: AGREED, DISAGREED.
+     * @param {string} [reportedBy] Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60;
+     * @param {string} [participantDocument] CPF ou CNPJ do participante.
+     * @param {string} [participantName] Nome do participante.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Campo de ordenação.
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação.
+     * @param {Date} [reportedAtFrom] Filtro: reportedAt a partir de.
+     * @param {Date} [reportedAtTo] Filtro: reportedAt até.
+     * @param {Date} [createdAtFrom] Filtro: createdAt a partir de.
+     * @param {Date} [createdAtTo] Filtro: createdAt até.
+     * @param {Date} [expiresAtFrom] Filtro: expiresAt a partir de.
+     * @param {Date} [expiresAtTo] Filtro: expiresAt até.
+     * @param {Date} [updatedAtFrom] Filtro: updatedAt a partir de.
+     * @param {Date} [updatedAtTo] Filtro: updatedAt até.
+     * @param {string} [id] Filtro por ID da infração.
+     * @param {string} [protocol] Filtro por protocolo.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
     getInfractionsRequestOpts(requestParameters: GetInfractionsRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * List all infractions for the authenticated user with pagination and filters.
-     * @summary List Infractions
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
-     * @param {string} [status] Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
-     * @param {string} [type] Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-     * @param {string} [endToEndId] End-to-end ID of the Pix.
-     * @param {string} [transactionId] Transaction ID.
-     * @param {number} [amountMin] Minimum amount.
-     * @param {number} [amountMax] Maximum amount.
-     * @param {string} [analysisResult] Comma-separated AnalysisResult: AGREED, DISAGREED.
-     * @param {string} [reportedBy] Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-     * @param {string} [participantDocument] CPF or CNPJ of the participant.
-     * @param {string} [participantName] Name of the participant.
-     * @param {'createdAt' | 'updatedAt'} [sortBy] Sort field.
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
-     * @param {Date} [reportedAtFrom] Filter: reportedAt from.
-     * @param {Date} [reportedAtTo] Filter: reportedAt up to.
-     * @param {Date} [createdAtFrom] Filter: createdAt from.
-     * @param {Date} [createdAtTo] Filter: createdAt up to.
-     * @param {Date} [expiresAtFrom] Filter: expiresAt from.
-     * @param {Date} [expiresAtTo] Filter: expiresAt up to.
-     * @param {Date} [updatedAtFrom] Filter: updatedAt from.
-     * @param {Date} [updatedAtTo] Filter: updatedAt up to.
-     * @param {string} [id] Filter by infraction ID.
-     * @param {string} [protocol] Filter by protocol.
+     * Lista todas as infrações do usuário autenticado com paginação e filtros.
+     * @summary Listar infrações
+     * @param {number} [page] Número da página.
+     * @param {number} [limit] Itens por página.
+     * @param {string} [status] Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60;
+     * @param {string} [type] Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60;
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {string} [transactionId] ID da transação.
+     * @param {number} [amountMin] Valor mínimo.
+     * @param {number} [amountMax] Valor máximo.
+     * @param {string} [analysisResult] AnalysisResult separados por vírgula: AGREED, DISAGREED.
+     * @param {string} [reportedBy] Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60;
+     * @param {string} [participantDocument] CPF ou CNPJ do participante.
+     * @param {string} [participantName] Nome do participante.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Campo de ordenação.
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação.
+     * @param {Date} [reportedAtFrom] Filtro: reportedAt a partir de.
+     * @param {Date} [reportedAtTo] Filtro: reportedAt até.
+     * @param {Date} [createdAtFrom] Filtro: createdAt a partir de.
+     * @param {Date} [createdAtTo] Filtro: createdAt até.
+     * @param {Date} [expiresAtFrom] Filtro: expiresAt a partir de.
+     * @param {Date} [expiresAtTo] Filtro: expiresAt até.
+     * @param {Date} [updatedAtFrom] Filtro: updatedAt a partir de.
+     * @param {Date} [updatedAtTo] Filtro: updatedAt até.
+     * @param {string} [id] Filtro por ID da infração.
+     * @param {string} [protocol] Filtro por protocolo.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
@@ -152,23 +157,23 @@ export interface InfractionsApiInterface {
     getInfractionsRaw(requestParameters: GetInfractionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InfractionListResponse>>;
 
     /**
-     * List all infractions for the authenticated user with pagination and filters.
-     * List Infractions
+     * Lista todas as infrações do usuário autenticado com paginação e filtros.
+     * Listar infrações
      */
     getInfractions(requestParameters: GetInfractionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InfractionListResponse>;
 
     /**
      * Creates request options for getInfractionsById without sending the request
-     * @param {string} id Infraction ID
+     * @param {string} id ID da infração
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
     getInfractionsByIdRequestOpts(requestParameters: GetInfractionsByIdRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Get a specific infraction by ID.
-     * @summary Get Infraction
-     * @param {string} id Infraction ID
+     * Obtém uma infração específica por ID.
+     * @summary Obter Infração
+     * @param {string} id ID da infração
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
@@ -176,25 +181,25 @@ export interface InfractionsApiInterface {
     getInfractionsByIdRaw(requestParameters: GetInfractionsByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InfractionDetail>>;
 
     /**
-     * Get a specific infraction by ID.
-     * Get Infraction
+     * Obtém uma infração específica por ID.
+     * Obter Infração
      */
     getInfractionsById(requestParameters: GetInfractionsByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InfractionDetail>;
 
     /**
      * Creates request options for getInfractionsDefenseById without sending the request
-     * @param {string} infractionId Infraction ID
-     * @param {string} defenseId Defense ID
+     * @param {string} infractionId ID da infração
+     * @param {string} defenseId ID da defesa
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
     getInfractionsDefenseByIdRequestOpts(requestParameters: GetInfractionsDefenseByIdRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Get a specific defense for an infraction.
-     * @summary Get Defense
-     * @param {string} infractionId Infraction ID
-     * @param {string} defenseId Defense ID
+     * Obtém uma defesa específica de uma infração.
+     * @summary Obter Defesa
+     * @param {string} infractionId ID da infração
+     * @param {string} defenseId ID da defesa
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
@@ -202,51 +207,51 @@ export interface InfractionsApiInterface {
     getInfractionsDefenseByIdRaw(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Defense>>;
 
     /**
-     * Get a specific defense for an infraction.
-     * Get Defense
+     * Obtém uma defesa específica de uma infração.
+     * Obter Defesa
      */
     getInfractionsDefenseById(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Defense>;
 
     /**
      * Creates request options for getInfractionsDefenses without sending the request
-     * @param {string} id Infraction ID
+     * @param {string} id ID da infração
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
     getInfractionsDefensesRequestOpts(requestParameters: GetInfractionsDefensesRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * List all defenses for a specific infraction.
-     * @summary List Defenses
-     * @param {string} id Infraction ID
+     * Lista todas as defesas de uma infração específica.
+     * @summary Listar Defesas
+     * @param {string} id ID da infração
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
-    getInfractionsDefensesRaw(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Defense>>>;
+    getInfractionsDefensesRaw(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DefenseListItem>>>;
 
     /**
-     * List all defenses for a specific infraction.
-     * List Defenses
+     * Lista todas as defesas de uma infração específica.
+     * Listar Defesas
      */
-    getInfractionsDefenses(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Defense>>;
+    getInfractionsDefenses(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DefenseListItem>>;
 
     /**
      * Creates request options for postInfractionsDefense without sending the request
-     * @param {string} id Infraction ID
-     * @param {string} defense Defense text (max: 1000 characters)
-     * @param {Array<Blob>} [files] Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
+     * @param {string} id ID da infração
+     * @param {string} defense Texto da defesa (máx: 1000 caracteres)
+     * @param {Array<Blob>} [files] Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
      */
     postInfractionsDefenseRequestOpts(requestParameters: PostInfractionsDefenseRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Create a defense for a specific infraction.
-     * @summary Create Defense
-     * @param {string} id Infraction ID
-     * @param {string} defense Defense text (max: 1000 characters)
-     * @param {Array<Blob>} [files] Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
+     * Cria uma defesa para uma infração específica.
+     * @summary Criar Defesa
+     * @param {string} id ID da infração
+     * @param {string} defense Texto da defesa (máx: 1000 caracteres)
+     * @param {Array<Blob>} [files] Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InfractionsApiInterface
@@ -254,8 +259,8 @@ export interface InfractionsApiInterface {
     postInfractionsDefenseRaw(requestParameters: PostInfractionsDefenseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Defense>>;
 
     /**
-     * Create a defense for a specific infraction.
-     * Create Defense
+     * Cria uma defesa para uma infração específica.
+     * Criar Defesa
      */
     postInfractionsDefense(requestParameters: PostInfractionsDefenseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Defense>;
 
@@ -390,8 +395,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * List all infractions for the authenticated user with pagination and filters.
-     * List Infractions
+     * Lista todas as infrações do usuário autenticado com paginação e filtros.
+     * Listar infrações
      */
     async getInfractionsRaw(requestParameters: GetInfractionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InfractionListResponse>> {
         const requestOptions = await this.getInfractionsRequestOpts(requestParameters);
@@ -401,8 +406,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * List all infractions for the authenticated user with pagination and filters.
-     * List Infractions
+     * Lista todas as infrações do usuário autenticado com paginação e filtros.
+     * Listar infrações
      */
     async getInfractions(requestParameters: GetInfractionsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InfractionListResponse> {
         const response = await this.getInfractionsRaw(requestParameters, initOverrides);
@@ -445,8 +450,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Get a specific infraction by ID.
-     * Get Infraction
+     * Obtém uma infração específica por ID.
+     * Obter Infração
      */
     async getInfractionsByIdRaw(requestParameters: GetInfractionsByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InfractionDetail>> {
         const requestOptions = await this.getInfractionsByIdRequestOpts(requestParameters);
@@ -456,8 +461,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Get a specific infraction by ID.
-     * Get Infraction
+     * Obtém uma infração específica por ID.
+     * Obter Infração
      */
     async getInfractionsById(requestParameters: GetInfractionsByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InfractionDetail> {
         const response = await this.getInfractionsByIdRaw(requestParameters, initOverrides);
@@ -508,8 +513,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Get a specific defense for an infraction.
-     * Get Defense
+     * Obtém uma defesa específica de uma infração.
+     * Obter Defesa
      */
     async getInfractionsDefenseByIdRaw(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Defense>> {
         const requestOptions = await this.getInfractionsDefenseByIdRequestOpts(requestParameters);
@@ -519,8 +524,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Get a specific defense for an infraction.
-     * Get Defense
+     * Obtém uma defesa específica de uma infração.
+     * Obter Defesa
      */
     async getInfractionsDefenseById(requestParameters: GetInfractionsDefenseByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Defense> {
         const response = await this.getInfractionsDefenseByIdRaw(requestParameters, initOverrides);
@@ -563,21 +568,21 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * List all defenses for a specific infraction.
-     * List Defenses
+     * Lista todas as defesas de uma infração específica.
+     * Listar Defesas
      */
-    async getInfractionsDefensesRaw(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Defense>>> {
+    async getInfractionsDefensesRaw(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DefenseListItem>>> {
         const requestOptions = await this.getInfractionsDefensesRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DefenseFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DefenseListItemFromJSON));
     }
 
     /**
-     * List all defenses for a specific infraction.
-     * List Defenses
+     * Lista todas as defesas de uma infração específica.
+     * Listar Defesas
      */
-    async getInfractionsDefenses(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Defense>> {
+    async getInfractionsDefenses(requestParameters: GetInfractionsDefensesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DefenseListItem>> {
         const response = await this.getInfractionsDefensesRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -652,8 +657,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Create a defense for a specific infraction.
-     * Create Defense
+     * Cria uma defesa para uma infração específica.
+     * Criar Defesa
      */
     async postInfractionsDefenseRaw(requestParameters: PostInfractionsDefenseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Defense>> {
         const requestOptions = await this.postInfractionsDefenseRequestOpts(requestParameters);
@@ -663,8 +668,8 @@ export class InfractionsApi extends runtime.BaseAPI implements InfractionsApiInt
     }
 
     /**
-     * Create a defense for a specific infraction.
-     * Create Defense
+     * Cria uma defesa para uma infração específica.
+     * Criar Defesa
      */
     async postInfractionsDefense(requestParameters: PostInfractionsDefenseRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Defense> {
         const response = await this.postInfractionsDefenseRaw(requestParameters, initOverrides);

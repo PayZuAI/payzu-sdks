@@ -18,5 +18,8 @@ additionalProperties:
   gemRequiredRubyVersion: ">= 3.0"
   library: faraday
 globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: ""
   apiTests: false
   modelTests: false

@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,25 +15,25 @@ require 'time'
 
 module PayZuPix
   class PostInternalTransferRequest < ApiModelBase
-    # Payer account number (6 digits). Must match the authenticated user's accountNumber.
+    # Conta do pagador.
     attr_accessor :payer_account_number
 
-    # Destination account number (6 digits).
+    # Conta de destino.
     attr_accessor :receiver_account_number
 
-    # Transfer amount in BRL, with at most 2 decimal places.
+    # Valor da transferência em BRL, com no máximo 2 casas decimais.
     attr_accessor :amount
 
-    # Optional transfer description.
+    # Descrição opcional da transferência.
     attr_accessor :description
 
-    # URL for transaction notifications (http or https).
+    # URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal.
     attr_accessor :callback_url
 
-    # External reference for idempotency / reconciliation.
+    # Referência externa para idempotência / reconciliação.
     attr_accessor :client_reference
 
-    # Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
+    # Subconta para separar lojas ou filiais.
     attr_accessor :virtual_account
 
     # Attribute mapping from ruby-style variable name to JSON key.

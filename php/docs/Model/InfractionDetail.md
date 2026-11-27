@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identifier of the infraction inside PayZu, used in the query routes and when sending the defense. | [optional]
-**protocol** | **string** | Infraction code at Bacen. | [optional]
-**status** | **string** | Current state of the infraction. | [optional]
-**type** | **string** | Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED. | [optional]
-**reported_by** | **string** | Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT. | [optional]
-**report_details** | **string** | Reason given by whoever opened the infraction, in the text sent by the partner bank. | [optional]
-**analysis_result** | **string** | Analysis outcome: AGREED or DISAGREED. | [optional]
-**analysis_details** | **string** | Additional text about the analysis decision, when the partner bank sends that information. | [optional]
-**reported_at** | **\DateTime** | Moment the infraction was opened. | [optional]
-**expires_at** | **\DateTime** | Deadline to send the defense of this infraction. | [optional]
+**id** | **string** | Identificador da contestação dentro da PayZu, usado nas rotas de consulta e no envio da defesa. | [optional]
+**protocol** | **string** | Código da contestação no Bacen. | [optional]
+**status** | **string** | Situação atual da contestação. | [optional]
+**type** | **string** | Tipo da contestação: REFUND_REQUEST, FRAUD ou REFUND_CANCELLED. | [optional]
+**reported_by** | **string** | Lado que abriu a contestação: DEBITED_PARTICIPANT ou CREDITED_PARTICIPANT. | [optional]
+**report_details** | **string** | Motivo informado por quem abriu a contestação, no texto enviado pelo banco parceiro. | [optional]
+**analysis_result** | **string** | Desfecho da análise: AGREED ou DISAGREED. | [optional]
+**analysis_details** | **string** | Texto complementar sobre a decisão da análise, quando o banco parceiro envia essa informação. | [optional]
+**reported_at** | **\DateTime** | Momento em que a contestação foi aberta. | [optional]
+**expires_at** | **\DateTime** | Prazo final para enviar a defesa desta contestação. | [optional]
 **transaction** | [**\PayZu\Pix\Model\InfractionDetailTransaction**](InfractionDetailTransaction.md) |  | [optional]
-**defense_history** | [**\PayZu\Pix\Model\DefenseHistoryEntry[]**](DefenseHistoryEntry.md) | Defenses already sent for this infraction, each with text, status and files. | [optional]
+**defense_history** | [**\PayZu\Pix\Model\DefenseHistoryEntry[]**](DefenseHistoryEntry.md) | Defesas já enviadas para esta contestação, com texto, status e anexos de cada uma. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

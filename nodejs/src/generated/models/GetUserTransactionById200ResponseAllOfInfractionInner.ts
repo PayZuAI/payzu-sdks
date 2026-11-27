@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,25 +20,25 @@ import { mapValues } from '../runtime.js';
  */
 export interface GetUserTransactionById200ResponseAllOfInfractionInner {
     /**
-     * Identifier of the infraction linked to this transaction.
+     * Identificador da infração ligada a esta transação.
      * @type {string}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
     id?: string;
     /**
-     * Current state of the infraction.
+     * Situação atual da infração.
      * @type {GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
     status?: GetUserTransactionById200ResponseAllOfInfractionInnerStatusEnum;
     /**
-     * Date and time the infraction was recorded at PayZu.
+     * Data e hora em que a infração foi registrada na PayZu.
      * @type {Date}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */
     createdAt?: Date;
     /**
-     * Date and time of the last change to the infraction record.
+     * Data e hora da última alteração no registro da infração.
      * @type {Date}
      * @memberof GetUserTransactionById200ResponseAllOfInfractionInner
      */

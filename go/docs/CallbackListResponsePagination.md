@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to **int32** | Current page | [optional] 
-**Limit** | Pointer to **int32** | Items per page | [optional] 
-**HasNextPage** | Pointer to **bool** | Indicates if there is a next page | [optional] 
+**Page** | Pointer to **int32** | Página atual | [optional] 
+**Limit** | Pointer to **int32** | Itens por página | [optional] 
+**HasNextPage** | Pointer to **bool** | Indica se há uma próxima página | [optional] 
 
 ## Methods
 

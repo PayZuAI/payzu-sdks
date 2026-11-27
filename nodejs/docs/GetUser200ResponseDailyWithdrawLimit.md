@@ -1,7 +1,7 @@
 
 # GetUser200ResponseDailyWithdrawLimit
 
-Control of the daily outbound cap.
+Controle do teto diário de saída.
 
 ## Properties
 

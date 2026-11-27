@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** | Confirmation of the created secret. | [optional] 
-**secret** | **str** | Callback secret, 43 base64url characters. Store it: there is no route to read it again. | [optional] 
+**message** | **str** | Confirmação do segredo criado. | [optional] 
+**secret** | **str** | Segredo de callback, 43 caracteres base64url. Guarde: não há rota para lê-lo de novo. | [optional] 
 
 ## Example
 

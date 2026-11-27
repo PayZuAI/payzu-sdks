@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,25 +14,25 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * 
+ * Só aceita amount, description e clientReference; outro campo é recusado com 400.
  * @export
  * @interface RefundRequest
  */
 export interface RefundRequest {
     /**
-     * Amount in BRL to refund. Omit to refund the full transaction amount. Partial refunds are allowed up to the original amount.
+     * Valor a devolver.
      * @type {number}
      * @memberof RefundRequest
      */
     amount?: number;
     /**
-     * Free-text description for the refund.
+     * Descrição livre da devolução.
      * @type {string}
      * @memberof RefundRequest
      */
     description?: string;
     /**
-     * Idempotency key. Reusing it with the same amount replays the existing refund; reusing it with a different amount is rejected.
+     * Chave de idempotência.
      * @type {string}
      * @memberof RefundRequest
      */

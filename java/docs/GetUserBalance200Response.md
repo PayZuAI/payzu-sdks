@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**balanceAvailable** | **BigDecimal** | Balance free for withdrawals and transfers, in reais, of the account that owns the token. |  [optional] |
-|**balanceBlocked** | **BigDecimal** | Balance held and unavailable, in reais. |  [optional] |
+|**balanceAvailable** | **BigDecimal** | Saldo livre para saques e transferências, em reais, da conta dona do token. |  [optional] |
+|**balanceBlocked** | **BigDecimal** | Saldo retido e indisponível, em reais. |  [optional] |
 
 
 

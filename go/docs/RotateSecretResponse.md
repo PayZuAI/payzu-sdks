@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Secret** | Pointer to **string** | HMAC signing secret. Shown only on creation and on rotate-secret. Store it now. | [optional] 
+**Secret** | Pointer to **string** | Segredo de assinatura HMAC. | [optional] 
 
 ## Methods
 

@@ -1,6 +1,6 @@
 # WebhookEventType
 
-Event that triggers the webhook.
+Evento que dispara o webhook. O cadastro aceita `TRANSACTION_SUSPECTED_FRAUD` e `TRANSACTION_SUSPECTED_FRAUD_REVERSAL`, que hoje não são enviados.
 
 ## Enum
 

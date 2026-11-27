@@ -1,7 +1,7 @@
 
 # SummaryBlockStatuses
 
-Totals by status in the period.
+Totais por status no período.
 
 ## Properties
 

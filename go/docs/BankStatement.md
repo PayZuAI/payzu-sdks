@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Identifier of the balance entry. | [optional] 
-**Amount** | Pointer to **float32** | Amount of the entry. | [optional] 
-**Operation** | Pointer to **string** | INCREMENT credits the balance, DECREMENT debits it. | [optional] 
-**Reason** | Pointer to **string** | Reason for the ledger entry. | [optional] 
-**BalanceType** | Pointer to **string** | Balance moved: AVAILABLE or BLOCKED. | [optional] 
-**PreviousBalanceAvailable** | Pointer to **float32** | Balance free for use that the account had, in reais, immediately before this entry. | [optional] 
-**PreviousBalanceBlocked** | Pointer to **float32** | Blocked balance before the entry, in reais. | [optional] 
-**NewBalanceAvailable** | Pointer to **float32** | Available balance after the entry, in reais. | [optional] 
-**NewBalanceBlocked** | Pointer to **float32** | Blocked balance after the entry, in reais. | [optional] 
-**TransactionId** | Pointer to **NullableString** | Transaction that originated the entry. | [optional] 
-**InfractionId** | Pointer to **NullableString** | Infraction related to the entry. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time the balance movement was recorded. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the record. | [optional] 
+**Id** | Pointer to **string** | Identificador do lançamento de saldo. | [optional] 
+**Amount** | Pointer to **float32** | Valor do lançamento. | [optional] 
+**Operation** | Pointer to **string** | INCREMENT credita o saldo, DECREMENT debita. | [optional] 
+**Reason** | Pointer to **string** | Motivo do lançamento no extrato. | [optional] 
+**BalanceType** | Pointer to **string** | Saldo movimentado: AVAILABLE ou BLOCKED. | [optional] 
+**PreviousBalanceAvailable** | Pointer to **float32** | Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento. | [optional] 
+**PreviousBalanceBlocked** | Pointer to **float32** | Saldo bloqueado antes do lançamento, em reais. | [optional] 
+**NewBalanceAvailable** | Pointer to **float32** | Saldo disponível depois do lançamento, em reais. | [optional] 
+**NewBalanceBlocked** | Pointer to **float32** | Saldo bloqueado depois do lançamento, em reais. | [optional] 
+**TransactionId** | Pointer to **NullableString** | Transação que originou o lançamento. | [optional] 
+**InfractionId** | Pointer to **NullableString** | Infração relacionada ao lançamento. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Data e hora em que a movimentação de saldo foi registrada. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Data e hora da última alteração do registro. | [optional] 
 
 ## Methods
 

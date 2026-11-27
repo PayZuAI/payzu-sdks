@@ -4,20 +4,18 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_withdraw**](WithdrawalsApi.md#get_withdraw) | **GET** /withdraw | Retrieve Withdrawal
-[**get_withdraw_proof**](WithdrawalsApi.md#get_withdraw_proof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt
-[**post_withdraw**](WithdrawalsApi.md#post_withdraw) | **POST** /withdraw | Create Withdrawal (Pix key)
-[**post_withdraw_qrcode**](WithdrawalsApi.md#post_withdraw_qrcode) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code
+[**get_withdraw**](WithdrawalsApi.md#get_withdraw) | **GET** /withdraw | Consultar Saque
+[**get_withdraw_proof**](WithdrawalsApi.md#get_withdraw_proof) | **GET** /withdraw/proof/{id} | Obter comprovante de saque
+[**post_withdraw**](WithdrawalsApi.md#post_withdraw) | **POST** /withdraw | Criar saque (chave Pix)
+[**post_withdraw_qrcode**](WithdrawalsApi.md#post_withdraw_qrcode) | **POST** /withdraw/qrcode | Criar Saque usando QR Code
 
 
 # **get_withdraw**
 > Transaction get_withdraw(id=id, client_reference=client_reference, end_to_end_id=end_to_end_id, virtual_account=virtual_account)
 
-Retrieve Withdrawal
+Consultar Saque
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
-
-Token permission: `WITHDRAW`.
+Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
 
 ### Example
 
@@ -49,13 +47,13 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WithdrawalsApi(api_client)
-    id = 'PAYZU20260817B3PL8SG5WQ000000' # str | Transaction ID. (optional)
-    client_reference = 'order_12345' # str | External reference provided when creating the withdrawal. (optional)
-    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | Pix end-to-end ID. (optional)
-    virtual_account = 'loja-centro-01' # str | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+    id = 'PAYZU20260817B3PL8SG5WQ000000' # str | ID da transação. (optional)
+    client_reference = 'order_12345' # str | Referência externa informada na criação do saque. (optional)
+    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | ID end-to-end do Pix. (optional)
+    virtual_account = 'loja-centro-01' # str | Subconta usada na criação. (optional)
 
     try:
-        # Retrieve Withdrawal
+        # Consultar Saque
         api_response = api_instance.get_withdraw(id=id, client_reference=client_reference, end_to_end_id=end_to_end_id, virtual_account=virtual_account)
         print("The response of WithdrawalsApi->get_withdraw:\n")
         pprint(api_response)
@@ -70,10 +68,10 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Transaction ID. | [optional] 
- **client_reference** | **str**| External reference provided when creating the withdrawal. | [optional] 
- **end_to_end_id** | **str**| Pix end-to-end ID. | [optional] 
- **virtual_account** | **str**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] 
+ **id** | **str**| ID da transação. | [optional] 
+ **client_reference** | **str**| Referência externa informada na criação do saque. | [optional] 
+ **end_to_end_id** | **str**| ID end-to-end do Pix. | [optional] 
+ **virtual_account** | **str**| Subconta usada na criação. | [optional] 
 
 ### Return type
 
@@ -92,20 +90,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Current withdrawal state |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Missing or invalid Bearer token |  -  |
-**403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-**404** | Resource not found |  -  |
+**200** | Estado atual do saque |  -  |
+**400** | Bad Request |  -  |
+**401** | Token Bearer ausente ou inválido |  -  |
+**403** |  |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_withdraw_proof**
 > ProofResponse get_withdraw_proof(id, type=type)
 
-Get Withdrawal Receipt
+Obter comprovante de saque
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
 ### Example
 
@@ -137,11 +135,11 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WithdrawalsApi(api_client)
-    id = 'PAYZU20260817B3PL8SG5WQ000000' # str | Transaction ID.
-    type = pdf # str | Return format. (optional) (default to pdf)
+    id = 'PAYZU20260817B3PL8SG5WQ000000' # str | ID da transação.
+    type = pdf # str | Formato de retorno. (optional) (default to pdf)
 
     try:
-        # Get Withdrawal Receipt
+        # Obter comprovante de saque
         api_response = api_instance.get_withdraw_proof(id, type=type)
         print("The response of WithdrawalsApi->get_withdraw_proof:\n")
         pprint(api_response)
@@ -156,8 +154,8 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Transaction ID. | 
- **type** | **str**| Return format. | [optional] [default to pdf]
+ **id** | **str**| ID da transação. | 
+ **type** | **str**| Formato de retorno. | [optional] [default to pdf]
 
 ### Return type
 
@@ -176,23 +174,22 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Missing or invalid Bearer token |  -  |
-**404** | Resource not found |  -  |
-**422** | Operation refused |  -  |
-**500** | Internal error |  -  |
+**200** | Comprovante em PDF ou base64 |  -  |
+**400** | Bad Request |  -  |
+**401** | Token Bearer ausente ou inválido |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
+**422** | Operação recusada |  -  |
+**500** | Erro interno |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_withdraw**
 > Transaction post_withdraw(post_withdraw_request)
 
-Create Withdrawal (Pix key)
+Criar saque (chave Pix)
 
-Send a Pix **cash out** to the specified Pix key.
-
-Token permission: `WITHDRAW`.
+Envie um **cash out** Pix para a chave Pix especificada.
 
 ### Example
 
@@ -228,7 +225,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     post_withdraw_request = payzu_pix.PostWithdrawRequest() # PostWithdrawRequest | 
 
     try:
-        # Create Withdrawal (Pix key)
+        # Criar saque (chave Pix)
         api_response = api_instance.post_withdraw(post_withdraw_request)
         print("The response of WithdrawalsApi->post_withdraw:\n")
         pprint(api_response)
@@ -262,23 +259,22 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Withdrawal created |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Missing or invalid Bearer token |  -  |
-**403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-**422** | Operation refused |  -  |
-**424** | Failure at the financial institution |  -  |
+**200** | Saque criado |  -  |
+**400** | Bad Request |  -  |
+**401** | Token Bearer ausente ou inválido |  -  |
+**403** |  |  -  |
+**409** | Conflito com o estado atual do recurso |  -  |
+**422** | Operação recusada |  -  |
+**424** | Falha na instituição financeira |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_withdraw_qrcode**
 > Transaction post_withdraw_qrcode(post_withdraw_qrcode_request)
 
-Create Withdrawal using QR Code
+Criar Saque usando QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.
-
-Token permission: `WITHDRAW`.
+Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
 
 ### Example
 
@@ -314,7 +310,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     post_withdraw_qrcode_request = payzu_pix.PostWithdrawQrcodeRequest() # PostWithdrawQrcodeRequest | 
 
     try:
-        # Create Withdrawal using QR Code
+        # Criar Saque usando QR Code
         api_response = api_instance.post_withdraw_qrcode(post_withdraw_qrcode_request)
         print("The response of WithdrawalsApi->post_withdraw_qrcode:\n")
         pprint(api_response)
@@ -348,13 +344,15 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Withdrawal created from QR Code |  -  |
-**400** | Invalid QR Code or missing amount for static QR Code without value |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**422** | Operation refused |  -  |
-**424** | Failure at the financial institution |  -  |
-**429** | Rate limit exceeded |  -  |
+**200** | Saque criado a partir do QR Code |  -  |
+**400** | QR Code inválido |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**409** | Conflito com o estado atual do recurso |  -  |
+**410** | QR Code vencido ou removido |  -  |
+**422** | Operação recusada |  -  |
+**424** | Falha na instituição financeira |  -  |
+**429** | Limite de requisições excedido |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalTransactions** | Pointer to **int32** | Number of transactions in the period. | [optional] 
-**Deposit** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the account inflows in the period, that is, of the transactions of type DEPOSIT. | [optional] 
-**Withdraw** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the account outflows in the period, that is, of the transactions of type WITHDRAW. | [optional] 
-**Commission** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the commissions credited to the account in the period (transactions of type COMMISSION). | [optional] 
-**Adjustment** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Summary of the adjustments in the period (transactions of type ADJUSTMENT). | [optional] 
+**TotalTransactions** | Pointer to **int32** | Quantidade de transações no período. | [optional] 
+**Deposit** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Resumo das entradas da conta no período, ou seja, das transações do tipo DEPOSIT. | [optional] 
+**Withdraw** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Resumo das saídas da conta no período, ou seja, das transações do tipo WITHDRAW. | [optional] 
+**Commission** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Resumo das comissões creditadas à conta no período (transações do tipo COMMISSION). | [optional] 
+**Adjustment** | Pointer to [**SummaryBlock**](SummaryBlock.md) | Resumo dos ajustes no período (transações do tipo ADJUSTMENT). | [optional] 
 
 ## Methods
 

@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -18,15 +18,15 @@ import (
 // checks if the GetUser200ResponseDailyWithdrawLimit type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetUser200ResponseDailyWithdrawLimit{}
 
-// GetUser200ResponseDailyWithdrawLimit Control of the daily outbound cap.
+// GetUser200ResponseDailyWithdrawLimit Controle do teto diário de saída.
 type GetUser200ResponseDailyWithdrawLimit struct {
-	// Daily outbound cap, in reais, summing withdrawals and internal transfers.
+	// Teto diário de saída, em reais, somando saques e transferências internas.
 	Limit *float32 `json:"limit,omitempty"`
-	// Total of the cap consumed in the day, in reais, by withdrawals and internal transfers.
+	// Total consumido do teto no dia, em reais, por saques e transferências internas.
 	Used *float32 `json:"used,omitempty"`
-	// Date and time of the last change to the daily limit.
+	// Data e hora da última alteração do limite diário.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	// Moment of the last reset of the daily usage.
+	// Momento da última zeragem do consumo diário.
 	LastReset NullableTime `json:"lastReset,omitempty"`
 }
 

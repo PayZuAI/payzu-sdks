@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Identifier of the delivery record; there is one record per callback attempt of the transaction. | [optional] 
-**url** | **str** | Address that received the callback: the callbackUrl of the transaction or the URL of the registered webhook. | [optional] 
-**status** | **int** | HTTP status code returned by the receiver | [optional] 
-**response_time** | **float** | Round-trip time in ms | [optional] 
-**created_at** | **datetime** | Date and time the callback delivery attempt was recorded. | [optional] 
+**id** | **str** | Identificador do registro de envio; há um registro por tentativa de callback da transação. | [optional] 
+**url** | **str** | Endereço que recebeu o callback: a callbackUrl da transação ou a URL do webhook cadastrado. | [optional] 
+**status** | **int** | Código de status HTTP retornado pelo receptor | [optional] 
+**response_time** | **float** | Tempo de ida e volta em ms | [optional] 
+**created_at** | **datetime** | Data e hora em que a tentativa de envio do callback foi registrada. | [optional] 
 
 ## Example
 

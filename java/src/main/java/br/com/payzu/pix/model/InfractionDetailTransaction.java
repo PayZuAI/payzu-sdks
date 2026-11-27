@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Summary of the disputed Pix.
+ * Resumo do Pix contestado.
  */
 @JsonPropertyOrder({
   InfractionDetailTransaction.JSON_PROPERTY_ID,
@@ -104,7 +104,7 @@ public class InfractionDetailTransaction {
   }
 
   /**
-   * Amount of the disputed transaction, in reais with decimal places.
+   * Valor da transação contestada, em reais com casas decimais.
    * @return amount
    */
   @javax.annotation.Nullable
@@ -128,7 +128,7 @@ public class InfractionDetailTransaction {
   }
 
   /**
-   * Name of the Pix payer, as reported by the provider.
+   * Nome do pagador do Pix, conforme informado pelo provedor.
    * @return payerName
    */
   @javax.annotation.Nullable
@@ -160,7 +160,7 @@ public class InfractionDetailTransaction {
   }
 
   /**
-   * CPF or CNPJ of the Pix payer, as reported by the provider.
+   * CPF ou CNPJ do pagador do Pix, conforme informado pelo provedor.
    * @return payerDocument
    */
   @javax.annotation.Nullable
@@ -192,7 +192,7 @@ public class InfractionDetailTransaction {
   }
 
   /**
-   * Name of the Pix receiver, as reported by the provider.
+   * Nome do recebedor do Pix, conforme informado pelo provedor.
    * @return receiverName
    */
   @javax.annotation.Nullable
@@ -224,7 +224,7 @@ public class InfractionDetailTransaction {
   }
 
   /**
-   * CPF or CNPJ of the Pix receiver, as reported by the provider.
+   * CPF ou CNPJ do recebedor do Pix, conforme informado pelo provedor.
    * @return receiverDocument
    */
   @javax.annotation.Nullable
@@ -256,7 +256,7 @@ public class InfractionDetailTransaction {
   }
 
   /**
-   * End-to-end identifier of the Pix, reported by the provider at settlement.
+   * Identificador fim a fim do Pix, informado pelo provedor na liquidação.
    * @return endToEndId
    */
   @javax.annotation.Nullable

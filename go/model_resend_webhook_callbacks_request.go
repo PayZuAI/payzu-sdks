@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -22,19 +22,19 @@ var _ MappedNullable = &ResendWebhookCallbacksRequest{}
 
 // ResendWebhookCallbacksRequest struct for ResendWebhookCallbacksRequest
 type ResendWebhookCallbacksRequest struct {
-	// Start of the delivery period. At most 30 days ago.
+	// Início do período das entregas. No máximo 30 dias atrás.
 	CreatedAtFrom time.Time `json:"createdAtFrom"`
-	// End of the delivery period, on or after createdAtFrom. The window cannot exceed 7 days.
+	// Fim do período das entregas, igual ou posterior a createdAtFrom. A janela não pode passar de 7 dias.
 	CreatedAtTo time.Time `json:"createdAtTo"`
-	// Webhooks to resend. Omitted: all active webhooks of the account.
+	// Webhooks a reenviar. Omitido: todos os webhooks ativos da conta.
 	WebhookIds []string `json:"webhookIds,omitempty"`
-	// Restrict to specific transaction IDs.
+	// Restringe a IDs de transação específicos.
 	TransactionIds []string `json:"transactionIds,omitempty"`
-	// Filter by transaction type.
+	// Filtra pelo tipo da transação.
 	TransactionTypes []string `json:"transactionTypes,omitempty"`
-	// Filter by the current transaction status.
+	// Filtra pelo status atual da transação.
 	TransactionStatus []string `json:"transactionStatus,omitempty"`
-	// Restrict to specific end-to-end IDs.
+	// Restringe a end-to-end IDs específicos.
 	TransactionEndToEndIds []string `json:"transactionEndToEndIds,omitempty"`
 }
 

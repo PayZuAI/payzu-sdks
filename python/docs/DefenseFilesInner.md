@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of the file sent with the defense. | [optional] 
-**mime_type** | **str** | MIME type of the file, provided on upload, for example application/pdf or image/png. | [optional] 
-**size** | **int** | Size of the file in bytes. | [optional] 
-**url** | **str** | Signed download URL, valid for 9 minutes; null when unavailable. Returned when creating the defense and when fetching a single defense. | [optional] 
+**name** | **str** | Nome do arquivo enviado como anexo da defesa. | [optional] 
+**mime_type** | **str** | Tipo MIME do anexo, informado no upload, por exemplo application/pdf ou image/png. | [optional] 
+**size** | **int** | Tamanho do anexo em bytes. | [optional] 
+**url** | **str** | URL assinada de download, válida por 9 minutos; nula quando indisponível. Vem na criação da defesa e na consulta de uma defesa. | [optional] 
 
 ## Example
 

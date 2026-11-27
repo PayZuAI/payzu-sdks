@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -54,145 +54,145 @@ type ApiGetInfractionsRequest struct {
 	protocol *string
 }
 
-// Page number.
+// Número da página.
 func (r ApiGetInfractionsRequest) Page(page int32) ApiGetInfractionsRequest {
 	r.page = &page
 	return r
 }
 
-// Items per page.
+// Itens por página.
 func (r ApiGetInfractionsRequest) Limit(limit int32) ApiGetInfractionsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
+// Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60;
 func (r ApiGetInfractionsRequest) Status(status string) ApiGetInfractionsRequest {
 	r.status = &status
 	return r
 }
 
-// Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
+// Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60;
 func (r ApiGetInfractionsRequest) Type_(type_ string) ApiGetInfractionsRequest {
 	r.type_ = &type_
 	return r
 }
 
-// End-to-end ID of the Pix.
+// ID end-to-end do Pix.
 func (r ApiGetInfractionsRequest) EndToEndId(endToEndId string) ApiGetInfractionsRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
-// Transaction ID.
+// ID da transação.
 func (r ApiGetInfractionsRequest) TransactionId(transactionId string) ApiGetInfractionsRequest {
 	r.transactionId = &transactionId
 	return r
 }
 
-// Minimum amount.
+// Valor mínimo.
 func (r ApiGetInfractionsRequest) AmountMin(amountMin float32) ApiGetInfractionsRequest {
 	r.amountMin = &amountMin
 	return r
 }
 
-// Maximum amount.
+// Valor máximo.
 func (r ApiGetInfractionsRequest) AmountMax(amountMax float32) ApiGetInfractionsRequest {
 	r.amountMax = &amountMax
 	return r
 }
 
-// Comma-separated AnalysisResult: AGREED, DISAGREED.
+// AnalysisResult separados por vírgula: AGREED, DISAGREED.
 func (r ApiGetInfractionsRequest) AnalysisResult(analysisResult string) ApiGetInfractionsRequest {
 	r.analysisResult = &analysisResult
 	return r
 }
 
-// Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
+// Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60;
 func (r ApiGetInfractionsRequest) ReportedBy(reportedBy string) ApiGetInfractionsRequest {
 	r.reportedBy = &reportedBy
 	return r
 }
 
-// CPF or CNPJ of the participant.
+// CPF ou CNPJ do participante.
 func (r ApiGetInfractionsRequest) ParticipantDocument(participantDocument string) ApiGetInfractionsRequest {
 	r.participantDocument = &participantDocument
 	return r
 }
 
-// Name of the participant.
+// Nome do participante.
 func (r ApiGetInfractionsRequest) ParticipantName(participantName string) ApiGetInfractionsRequest {
 	r.participantName = &participantName
 	return r
 }
 
-// Sort field.
+// Campo de ordenação.
 func (r ApiGetInfractionsRequest) SortBy(sortBy string) ApiGetInfractionsRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
-// Sort direction.
+// Direção da ordenação.
 func (r ApiGetInfractionsRequest) SortDirection(sortDirection string) ApiGetInfractionsRequest {
 	r.sortDirection = &sortDirection
 	return r
 }
 
-// Filter: reportedAt from.
+// Filtro: reportedAt a partir de.
 func (r ApiGetInfractionsRequest) ReportedAtFrom(reportedAtFrom time.Time) ApiGetInfractionsRequest {
 	r.reportedAtFrom = &reportedAtFrom
 	return r
 }
 
-// Filter: reportedAt up to.
+// Filtro: reportedAt até.
 func (r ApiGetInfractionsRequest) ReportedAtTo(reportedAtTo time.Time) ApiGetInfractionsRequest {
 	r.reportedAtTo = &reportedAtTo
 	return r
 }
 
-// Filter: createdAt from.
+// Filtro: createdAt a partir de.
 func (r ApiGetInfractionsRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetInfractionsRequest {
 	r.createdAtFrom = &createdAtFrom
 	return r
 }
 
-// Filter: createdAt up to.
+// Filtro: createdAt até.
 func (r ApiGetInfractionsRequest) CreatedAtTo(createdAtTo time.Time) ApiGetInfractionsRequest {
 	r.createdAtTo = &createdAtTo
 	return r
 }
 
-// Filter: expiresAt from.
+// Filtro: expiresAt a partir de.
 func (r ApiGetInfractionsRequest) ExpiresAtFrom(expiresAtFrom time.Time) ApiGetInfractionsRequest {
 	r.expiresAtFrom = &expiresAtFrom
 	return r
 }
 
-// Filter: expiresAt up to.
+// Filtro: expiresAt até.
 func (r ApiGetInfractionsRequest) ExpiresAtTo(expiresAtTo time.Time) ApiGetInfractionsRequest {
 	r.expiresAtTo = &expiresAtTo
 	return r
 }
 
-// Filter: updatedAt from.
+// Filtro: updatedAt a partir de.
 func (r ApiGetInfractionsRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetInfractionsRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
-// Filter: updatedAt up to.
+// Filtro: updatedAt até.
 func (r ApiGetInfractionsRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetInfractionsRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
-// Filter by infraction ID.
+// Filtro por ID da infração.
 func (r ApiGetInfractionsRequest) Id(id string) ApiGetInfractionsRequest {
 	r.id = &id
 	return r
 }
 
-// Filter by protocol.
+// Filtro por protocolo.
 func (r ApiGetInfractionsRequest) Protocol(protocol string) ApiGetInfractionsRequest {
 	r.protocol = &protocol
 	return r
@@ -203,9 +203,9 @@ func (r ApiGetInfractionsRequest) Execute() (*InfractionListResponse, *http.Resp
 }
 
 /*
-GetInfractions List Infractions
+GetInfractions Listar infrações
 
-List all infractions for the authenticated user with pagination and filters.
+Lista todas as infrações do usuário autenticado com paginação e filtros.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetInfractionsRequest
@@ -385,6 +385,17 @@ func (a *InfractionsAPIService) GetInfractionsExecute(r ApiGetInfractionsRequest
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -412,12 +423,12 @@ func (r ApiGetInfractionsByIdRequest) Execute() (*InfractionDetail, *http.Respon
 }
 
 /*
-GetInfractionsById Get Infraction
+GetInfractionsById Obter Infração
 
-Get a specific infraction by ID.
+Obtém uma infração específica por ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Infraction ID
+ @param id ID da infração
  @return ApiGetInfractionsByIdRequest
 */
 func (a *InfractionsAPIService) GetInfractionsById(ctx context.Context, id string) ApiGetInfractionsByIdRequest {
@@ -500,6 +511,17 @@ func (a *InfractionsAPIService) GetInfractionsByIdExecute(r ApiGetInfractionsByI
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -537,13 +559,13 @@ func (r ApiGetInfractionsDefenseByIdRequest) Execute() (*Defense, *http.Response
 }
 
 /*
-GetInfractionsDefenseById Get Defense
+GetInfractionsDefenseById Obter Defesa
 
-Get a specific defense for an infraction.
+Obtém uma defesa específica de uma infração.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param infractionId Infraction ID
- @param defenseId Defense ID
+ @param infractionId ID da infração
+ @param defenseId ID da defesa
  @return ApiGetInfractionsDefenseByIdRequest
 */
 func (a *InfractionsAPIService) GetInfractionsDefenseById(ctx context.Context, infractionId string, defenseId string) ApiGetInfractionsDefenseByIdRequest {
@@ -628,6 +650,17 @@ func (a *InfractionsAPIService) GetInfractionsDefenseByIdExecute(r ApiGetInfract
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -659,17 +692,17 @@ type ApiGetInfractionsDefensesRequest struct {
 	id string
 }
 
-func (r ApiGetInfractionsDefensesRequest) Execute() ([]Defense, *http.Response, error) {
+func (r ApiGetInfractionsDefensesRequest) Execute() ([]DefenseListItem, *http.Response, error) {
 	return r.ApiService.GetInfractionsDefensesExecute(r)
 }
 
 /*
-GetInfractionsDefenses List Defenses
+GetInfractionsDefenses Listar Defesas
 
-List all defenses for a specific infraction.
+Lista todas as defesas de uma infração específica.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Infraction ID
+ @param id ID da infração
  @return ApiGetInfractionsDefensesRequest
 */
 func (a *InfractionsAPIService) GetInfractionsDefenses(ctx context.Context, id string) ApiGetInfractionsDefensesRequest {
@@ -681,13 +714,13 @@ func (a *InfractionsAPIService) GetInfractionsDefenses(ctx context.Context, id s
 }
 
 // Execute executes the request
-//  @return []Defense
-func (a *InfractionsAPIService) GetInfractionsDefensesExecute(r ApiGetInfractionsDefensesRequest) ([]Defense, *http.Response, error) {
+//  @return []DefenseListItem
+func (a *InfractionsAPIService) GetInfractionsDefensesExecute(r ApiGetInfractionsDefensesRequest) ([]DefenseListItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Defense
+		localVarReturnValue  []DefenseListItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InfractionsAPIService.GetInfractionsDefenses")
@@ -750,6 +783,17 @@ func (a *InfractionsAPIService) GetInfractionsDefensesExecute(r ApiGetInfraction
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -774,13 +818,13 @@ type ApiPostInfractionsDefenseRequest struct {
 	files []*os.File
 }
 
-// Defense text (max: 1000 characters)
+// Texto da defesa (máx: 1000 caracteres)
 func (r ApiPostInfractionsDefenseRequest) Defense(defense string) ApiPostInfractionsDefenseRequest {
 	r.defense = &defense
 	return r
 }
 
-// Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
+// Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados.
 func (r ApiPostInfractionsDefenseRequest) Files(files []*os.File) ApiPostInfractionsDefenseRequest {
 	r.files = files
 	return r
@@ -791,12 +835,12 @@ func (r ApiPostInfractionsDefenseRequest) Execute() (*Defense, *http.Response, e
 }
 
 /*
-PostInfractionsDefense Create Defense
+PostInfractionsDefense Criar Defesa
 
-Create a defense for a specific infraction.
+Cria uma defesa para uma infração específica.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Infraction ID
+ @param id ID da infração
  @return ApiPostInfractionsDefenseRequest
 */
 func (a *InfractionsAPIService) PostInfractionsDefense(ctx context.Context, id string) ApiPostInfractionsDefenseRequest {

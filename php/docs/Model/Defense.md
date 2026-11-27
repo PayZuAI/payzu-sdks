@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Defense identifier. | [optional]
-**defense** | **string** | Defense text | [optional]
-**status** | **string** | Defense status | [optional]
-**infraction_id** | **string** | Identifies the infraction the defense belongs to. | [optional]
-**created_at** | **\DateTime** | Moment the defense was recorded at PayZu, saved together with the uploaded files. | [optional]
-**updated_at** | **\DateTime** | Moment of the last change to the defense. | [optional]
-**files** | [**\PayZu\Pix\Model\DefenseFilesInner[]**](DefenseFilesInner.md) | Files sent with the defense, with name, type and size in bytes. | [optional]
+**id** | **string** | Identificador da defesa. | [optional]
+**defense** | **string** | Texto da defesa | [optional]
+**status** | **string** | Status da defesa | [optional]
+**infraction_id** | **string** | Identifica a contestação a que a defesa pertence. | [optional]
+**created_at** | **\DateTime** | Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos. | [optional]
+**updated_at** | **\DateTime** | Momento da última alteração da defesa. | [optional]
+**files** | [**\PayZu\Pix\Model\DefenseFilesInner[]**](DefenseFilesInner.md) | Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

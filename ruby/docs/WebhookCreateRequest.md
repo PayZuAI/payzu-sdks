@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **url** | **String** | URL (http or https) that will receive the notifications. |  |
-| **events** | [**Array&lt;WebhookEventType&gt;**](WebhookEventType.md) | Events to subscribe to. Omit or leave empty to receive all events. | [optional] |
-| **generate_secret** | **Boolean** | Generate an HMAC signing secret for this webhook. | [optional][default to false] |
-| **active** | **Boolean** | Whether the webhook starts active. | [optional][default to true] |
+| **url** | **String** | URL que vai receber as notificações: http ou https, pública, sem usuário e senha e sem IPv6 literal. |  |
+| **events** | [**Array&lt;WebhookEventType&gt;**](WebhookEventType.md) | Eventos a assinar. | [optional] |
+| **generate_secret** | **Boolean** | Gera um segredo de assinatura HMAC para este webhook. | [optional][default to false] |
+| **active** | **Boolean** | Se o webhook começa ativo. | [optional][default to true] |
 
 ## Example
 

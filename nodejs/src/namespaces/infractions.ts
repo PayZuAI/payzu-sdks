@@ -1,4 +1,4 @@
-import type { Defense, InfractionDetail, InfractionsApi } from '../generated/index.js';
+import type { Defense, DefenseListItem, InfractionDetail, InfractionsApi } from '../generated/index.js';
 import { invoke, withJsonMediaType } from '../http.js';
 import type { InfractionList, ListInfractionsParams } from '../types.js';
 
@@ -13,7 +13,7 @@ export class InfractionsNamespace {
     return invoke(() => this.api.getInfractionsById(withJsonMediaType({ id })));
   }
 
-  defenses(infractionId: string): Promise<Defense[]> {
+  defenses(infractionId: string): Promise<DefenseListItem[]> {
     return invoke(() => this.api.getInfractionsDefenses(withJsonMediaType({ id: infractionId })));
   }
 

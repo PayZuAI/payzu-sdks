@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,24 +15,24 @@ require 'time'
 
 module PayZuPix
   class DictConsultResponse < ApiModelBase
-    # Normalized Pix key.
+    # Chave Pix normalizada.
     attr_accessor :pix_key
 
-    # Name of the key holder as returned by the institution queried.
+    # Nome do titular da chave conforme devolvido pela instituição consultada.
     attr_accessor :name
 
-    # Masked CPF/CNPJ of the key holder.
+    # CPF/CNPJ mascarado do titular da chave.
     attr_accessor :document
 
-    # Type of person: PF, PJ, or empty when not informed.
+    # Tipo de pessoa: PF, PJ ou vazio quando não informado.
     attr_accessor :person_type
 
     attr_accessor :account_type
 
-    # ISPB code of the account institution.
+    # Código ISPB da instituição da conta.
     attr_accessor :institution_ispb
 
-    # Name of the institution where the holder account is registered, as the lookup returns it.
+    # Nome da instituição onde a conta do titular está registrada, do jeito que a consulta devolve.
     attr_accessor :institution_name
 
     class EnumAttributeValidator

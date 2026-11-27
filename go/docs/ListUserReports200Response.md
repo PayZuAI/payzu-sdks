@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Total** | Pointer to **int32** | Number of report requests of the user that match the filters. | [optional] 
-**Pages** | Pointer to **int32** | Number of pages for the limit provided, computed from total rounded up. | [optional] 
-**Reports** | Pointer to [**[]ReportJob**](ReportJob.md) | Report requests of the requested page, with id, status and dates. | [optional] 
+**Total** | Pointer to **int32** | Quantidade de solicitações de relatório do usuário que atendem aos filtros. | [optional] 
+**Pages** | Pointer to **int32** | Número de páginas para o limit informado, calculado a partir de total arredondado para cima. | [optional] 
+**Reports** | Pointer to [**[]ReportJob**](ReportJob.md) | Solicitações de relatório da página pedida, com id, status e datas. | [optional] 
 
 ## Methods
 

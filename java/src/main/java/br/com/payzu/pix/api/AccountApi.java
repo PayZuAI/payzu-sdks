@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -21,6 +21,7 @@ import br.com.payzu.pix.Pair;
 import br.com.payzu.pix.model.ApiError;
 import br.com.payzu.pix.model.GetUser200Response;
 import br.com.payzu.pix.model.GetUserBalance200Response;
+import br.com.payzu.pix.model.GetUserPixKeys200Response;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -165,8 +166,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Info
-   * Account profile, limits and fee rules.
+   * Informações da conta
+   * Perfil da conta, limites e regras de tarifas.
    * @return GetUser200Response
    * @throws ApiException if fails to make API call
    */
@@ -175,8 +176,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Info
-   * Account profile, limits and fee rules.
+   * Informações da conta
+   * Perfil da conta, limites e regras de tarifas.
    * @param headers Optional headers to include in the request
    * @return GetUser200Response
    * @throws ApiException if fails to make API call
@@ -187,8 +188,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Info
-   * Account profile, limits and fee rules.
+   * Informações da conta
+   * Perfil da conta, limites e regras de tarifas.
    * @return ApiResponse&lt;GetUser200Response&gt;
    * @throws ApiException if fails to make API call
    */
@@ -197,8 +198,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Info
-   * Account profile, limits and fee rules.
+   * Informações da conta
+   * Perfil da conta, limites e regras de tarifas.
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;GetUser200Response&gt;
    * @throws ApiException if fails to make API call
@@ -274,8 +275,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Balance
-   * Available and blocked balances.
+   * Saldo da conta
+   * Saldos disponíveis e bloqueados.
    * @return GetUserBalance200Response
    * @throws ApiException if fails to make API call
    */
@@ -284,8 +285,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Balance
-   * Available and blocked balances.
+   * Saldo da conta
+   * Saldos disponíveis e bloqueados.
    * @param headers Optional headers to include in the request
    * @return GetUserBalance200Response
    * @throws ApiException if fails to make API call
@@ -296,8 +297,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Balance
-   * Available and blocked balances.
+   * Saldo da conta
+   * Saldos disponíveis e bloqueados.
    * @return ApiResponse&lt;GetUserBalance200Response&gt;
    * @throws ApiException if fails to make API call
    */
@@ -306,8 +307,8 @@ public class AccountApi {
   }
 
   /**
-   * Account Balance
-   * Available and blocked balances.
+   * Saldo da conta
+   * Saldos disponíveis e bloqueados.
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;GetUserBalance200Response&gt;
    * @throws ApiException if fails to make API call
@@ -365,6 +366,115 @@ public class AccountApi {
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
     String localVarPath = "/user/balance";
+
+    localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
+
+    localVarRequestBuilder.header("Accept", "application/json");
+
+    localVarRequestBuilder.method("GET", HttpRequest.BodyPublishers.noBody());
+    if (memberVarReadTimeout != null) {
+      localVarRequestBuilder.timeout(memberVarReadTimeout);
+    }
+    // Add custom headers if provided
+    localVarRequestBuilder = HttpRequestBuilderExtensions.withAdditionalHeaders(localVarRequestBuilder, headers);
+    if (memberVarInterceptor != null) {
+      memberVarInterceptor.accept(localVarRequestBuilder);
+    }
+    return localVarRequestBuilder;
+  }
+
+  /**
+   * Chave Pix de recebimento da conta
+   * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+   * @return GetUserPixKeys200Response
+   * @throws ApiException if fails to make API call
+   */
+  public GetUserPixKeys200Response getUserPixKeys() throws ApiException {
+    return getUserPixKeys(null);
+  }
+
+  /**
+   * Chave Pix de recebimento da conta
+   * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+   * @param headers Optional headers to include in the request
+   * @return GetUserPixKeys200Response
+   * @throws ApiException if fails to make API call
+   */
+  public GetUserPixKeys200Response getUserPixKeys(Map<String, String> headers) throws ApiException {
+    ApiResponse<GetUserPixKeys200Response> localVarResponse = getUserPixKeysWithHttpInfo(headers);
+    return localVarResponse.getData();
+  }
+
+  /**
+   * Chave Pix de recebimento da conta
+   * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+   * @return ApiResponse&lt;GetUserPixKeys200Response&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<GetUserPixKeys200Response> getUserPixKeysWithHttpInfo() throws ApiException {
+    return getUserPixKeysWithHttpInfo(null);
+  }
+
+  /**
+   * Chave Pix de recebimento da conta
+   * Devolve a chave Pix de recebimento da conta, com o titular e a instituição da conta dessa chave.
+   * @param headers Optional headers to include in the request
+   * @return ApiResponse&lt;GetUserPixKeys200Response&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<GetUserPixKeys200Response> getUserPixKeysWithHttpInfo(Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getUserPixKeysRequestBuilder(headers);
+    try {
+      HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
+          localVarRequestBuilder.build(),
+          HttpResponse.BodyHandlers.ofInputStream());
+      if (memberVarResponseInterceptor != null) {
+        memberVarResponseInterceptor.accept(localVarResponse);
+      }
+      InputStream localVarResponseBody = null;
+      try {
+        if (localVarResponse.statusCode()/ 100 != 2) {
+          throw getApiException("getUserPixKeys", localVarResponse);
+        }
+        localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
+        if (localVarResponseBody == null) {
+          return new ApiResponse<GetUserPixKeys200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        
+        
+        String responseBody = new String(localVarResponseBody.readAllBytes());
+        GetUserPixKeys200Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetUserPixKeys200Response>() {});
+        
+
+        return new ApiResponse<GetUserPixKeys200Response>(
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseValue
+        );
+      } finally {
+        if (localVarResponseBody != null) {
+          localVarResponseBody.close();
+        }
+      }
+    } catch (IOException e) {
+      throw new ApiException(e);
+    }
+    catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new ApiException(e);
+    }
+  }
+
+  private HttpRequest.Builder getUserPixKeysRequestBuilder(Map<String, String> headers) throws ApiException {
+
+    HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
+
+    String localVarPath = "/user/pix-keys";
 
     localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
 

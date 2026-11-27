@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -19,7 +19,6 @@ import br.com.payzu.pix.Configuration;
 import br.com.payzu.pix.Pair;
 
 import br.com.payzu.pix.model.ApiError;
-import br.com.payzu.pix.model.DictConsultResponse;
 import br.com.payzu.pix.model.PixKeyInfo;
 import br.com.payzu.pix.model.PostPixQrcodeReadRequest;
 import br.com.payzu.pix.model.QRCodeReadResponse;
@@ -173,27 +172,23 @@ public class KeysAndDictApi {
   }
 
   /**
-   * Pix key lookup (DICT)
-   * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner&#39;s details and associated financial institution.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
-   * @param pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP). (required)
+   * Consulta de chave Pix no DICT
+   * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+   * @param pixKey A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP). (required)
    * @return PixKeyInfo
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Pix key lookup (DICT) Documentation</a>
    */
   public PixKeyInfo getPixKey(@javax.annotation.Nonnull String pixKey) throws ApiException {
     return getPixKey(pixKey, null);
   }
 
   /**
-   * Pix key lookup (DICT)
-   * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner&#39;s details and associated financial institution.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
-   * @param pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP). (required)
+   * Consulta de chave Pix no DICT
+   * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+   * @param pixKey A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP). (required)
    * @param headers Optional headers to include in the request
    * @return PixKeyInfo
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Pix key lookup (DICT) Documentation</a>
    */
   public PixKeyInfo getPixKey(@javax.annotation.Nonnull String pixKey, Map<String, String> headers) throws ApiException {
     ApiResponse<PixKeyInfo> localVarResponse = getPixKeyWithHttpInfo(pixKey, headers);
@@ -201,27 +196,23 @@ public class KeysAndDictApi {
   }
 
   /**
-   * Pix key lookup (DICT)
-   * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner&#39;s details and associated financial institution.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
-   * @param pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP). (required)
+   * Consulta de chave Pix no DICT
+   * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+   * @param pixKey A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP). (required)
    * @return ApiResponse&lt;PixKeyInfo&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Pix key lookup (DICT) Documentation</a>
    */
   public ApiResponse<PixKeyInfo> getPixKeyWithHttpInfo(@javax.annotation.Nonnull String pixKey) throws ApiException {
     return getPixKeyWithHttpInfo(pixKey, null);
   }
 
   /**
-   * Pix key lookup (DICT)
-   * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner&#39;s details and associated financial institution.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
-   * @param pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP). (required)
+   * Consulta de chave Pix no DICT
+   * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+   * @param pixKey A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP). (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;PixKeyInfo&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Pix key lookup (DICT) Documentation</a>
    */
   public ApiResponse<PixKeyInfo> getPixKeyWithHttpInfo(@javax.annotation.Nonnull String pixKey, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getPixKeyRequestBuilder(pixKey, headers);
@@ -313,167 +304,23 @@ public class KeysAndDictApi {
   }
 
   /**
-   * Resolve DICT key
-   * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-   * @param key Pix key to look up (CPF, CNPJ, email, phone or EVP). (required)
-   * @return DictConsultResponse
-   * @throws ApiException if fails to make API call
-   * DICT lookup
-   * @see <a href="/docs/pix-processamento/best-practices/dict">Resolve DICT key Documentation</a>
-   */
-  public DictConsultResponse getUserDict(@javax.annotation.Nonnull String key) throws ApiException {
-    return getUserDict(key, null);
-  }
-
-  /**
-   * Resolve DICT key
-   * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-   * @param key Pix key to look up (CPF, CNPJ, email, phone or EVP). (required)
-   * @param headers Optional headers to include in the request
-   * @return DictConsultResponse
-   * @throws ApiException if fails to make API call
-   * DICT lookup
-   * @see <a href="/docs/pix-processamento/best-practices/dict">Resolve DICT key Documentation</a>
-   */
-  public DictConsultResponse getUserDict(@javax.annotation.Nonnull String key, Map<String, String> headers) throws ApiException {
-    ApiResponse<DictConsultResponse> localVarResponse = getUserDictWithHttpInfo(key, headers);
-    return localVarResponse.getData();
-  }
-
-  /**
-   * Resolve DICT key
-   * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-   * @param key Pix key to look up (CPF, CNPJ, email, phone or EVP). (required)
-   * @return ApiResponse&lt;DictConsultResponse&gt;
-   * @throws ApiException if fails to make API call
-   * DICT lookup
-   * @see <a href="/docs/pix-processamento/best-practices/dict">Resolve DICT key Documentation</a>
-   */
-  public ApiResponse<DictConsultResponse> getUserDictWithHttpInfo(@javax.annotation.Nonnull String key) throws ApiException {
-    return getUserDictWithHttpInfo(key, null);
-  }
-
-  /**
-   * Resolve DICT key
-   * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-   * @param key Pix key to look up (CPF, CNPJ, email, phone or EVP). (required)
-   * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;DictConsultResponse&gt;
-   * @throws ApiException if fails to make API call
-   * DICT lookup
-   * @see <a href="/docs/pix-processamento/best-practices/dict">Resolve DICT key Documentation</a>
-   */
-  public ApiResponse<DictConsultResponse> getUserDictWithHttpInfo(@javax.annotation.Nonnull String key, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getUserDictRequestBuilder(key, headers);
-    try {
-      HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
-          localVarRequestBuilder.build(),
-          HttpResponse.BodyHandlers.ofInputStream());
-      if (memberVarResponseInterceptor != null) {
-        memberVarResponseInterceptor.accept(localVarResponse);
-      }
-      InputStream localVarResponseBody = null;
-      try {
-        if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("getUserDict", localVarResponse);
-        }
-        localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
-        if (localVarResponseBody == null) {
-          return new ApiResponse<DictConsultResponse>(
-              localVarResponse.statusCode(),
-              localVarResponse.headers().map(),
-              null
-          );
-        }
-
-        
-        
-        String responseBody = new String(localVarResponseBody.readAllBytes());
-        DictConsultResponse responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<DictConsultResponse>() {});
-        
-
-        return new ApiResponse<DictConsultResponse>(
-            localVarResponse.statusCode(),
-            localVarResponse.headers().map(),
-            responseValue
-        );
-      } finally {
-        if (localVarResponseBody != null) {
-          localVarResponseBody.close();
-        }
-      }
-    } catch (IOException e) {
-      throw new ApiException(e);
-    }
-    catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-      throw new ApiException(e);
-    }
-  }
-
-  private HttpRequest.Builder getUserDictRequestBuilder(@javax.annotation.Nonnull String key, Map<String, String> headers) throws ApiException {
-    // verify the required parameter 'key' is set
-    if (key == null) {
-      throw new ApiException(400, "Missing the required parameter 'key' when calling getUserDict");
-    }
-
-    HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
-
-    String localVarPath = "/user/dict";
-
-    List<Pair> localVarQueryParams = new ArrayList<>();
-    StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
-    String localVarQueryParameterBaseName;
-    localVarQueryParameterBaseName = "key";
-    localVarQueryParams.addAll(ApiClient.parameterToPairs("key", key));
-
-    if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
-      StringJoiner queryJoiner = new StringJoiner("&");
-      localVarQueryParams.forEach(p -> queryJoiner.add(p.getName() + '=' + p.getValue()));
-      if (localVarQueryStringJoiner.length() != 0) {
-        queryJoiner.add(localVarQueryStringJoiner.toString());
-      }
-      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath + '?' + queryJoiner.toString()));
-    } else {
-      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
-    }
-
-    localVarRequestBuilder.header("Accept", "application/json");
-
-    localVarRequestBuilder.method("GET", HttpRequest.BodyPublishers.noBody());
-    if (memberVarReadTimeout != null) {
-      localVarRequestBuilder.timeout(memberVarReadTimeout);
-    }
-    // Add custom headers if provided
-    localVarRequestBuilder = HttpRequestBuilderExtensions.withAdditionalHeaders(localVarRequestBuilder, headers);
-    if (memberVarInterceptor != null) {
-      memberVarInterceptor.accept(localVarRequestBuilder);
-    }
-    return localVarRequestBuilder;
-  }
-
-  /**
-   * Read QR Code
-   * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
+   * Ler QR Code
+   * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
    * @param postPixQrcodeReadRequest  (required)
    * @return QRCodeReadResponse
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Read QR Code Documentation</a>
    */
   public QRCodeReadResponse postPixQrcodeRead(@javax.annotation.Nonnull PostPixQrcodeReadRequest postPixQrcodeReadRequest) throws ApiException {
     return postPixQrcodeRead(postPixQrcodeReadRequest, null);
   }
 
   /**
-   * Read QR Code
-   * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
+   * Ler QR Code
+   * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
    * @param postPixQrcodeReadRequest  (required)
    * @param headers Optional headers to include in the request
    * @return QRCodeReadResponse
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Read QR Code Documentation</a>
    */
   public QRCodeReadResponse postPixQrcodeRead(@javax.annotation.Nonnull PostPixQrcodeReadRequest postPixQrcodeReadRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<QRCodeReadResponse> localVarResponse = postPixQrcodeReadWithHttpInfo(postPixQrcodeReadRequest, headers);
@@ -481,27 +328,23 @@ public class KeysAndDictApi {
   }
 
   /**
-   * Read QR Code
-   * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
+   * Ler QR Code
+   * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
    * @param postPixQrcodeReadRequest  (required)
    * @return ApiResponse&lt;QRCodeReadResponse&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Read QR Code Documentation</a>
    */
   public ApiResponse<QRCodeReadResponse> postPixQrcodeReadWithHttpInfo(@javax.annotation.Nonnull PostPixQrcodeReadRequest postPixQrcodeReadRequest) throws ApiException {
     return postPixQrcodeReadWithHttpInfo(postPixQrcodeReadRequest, null);
   }
 
   /**
-   * Read QR Code
-   * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
+   * Ler QR Code
+   * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
    * @param postPixQrcodeReadRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;QRCodeReadResponse&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Read QR Code Documentation</a>
    */
   public ApiResponse<QRCodeReadResponse> postPixQrcodeReadWithHttpInfo(@javax.annotation.Nonnull PostPixQrcodeReadRequest postPixQrcodeReadRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postPixQrcodeReadRequestBuilder(postPixQrcodeReadRequest, headers);

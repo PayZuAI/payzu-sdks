@@ -4,45 +4,45 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Identifier of the transaction at PayZu. | [optional] |
-| **status** | **String** | PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR | [optional] |
-| **amount** | **Float** | Amount of the transaction, before the fee. | [optional] |
-| **type** | **String** | Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT. | [optional] |
-| **qr_code_text** | **String** | Copy-and-paste Pix code. | [optional] |
-| **qr_code_base64** | **String** | PNG image of the QR Code in base64, without the data: prefix. | [optional] |
-| **qr_code_url** | **String** | Authenticated route that returns the PNG of the QR Code. | [optional] |
-| **generated_name** | **String** | Name used to build the charge. | [optional] |
-| **generated_document** | **String** | CPF or CNPJ used as the debtor of the charge. | [optional] |
-| **generated_email** | **String** | Email used to build the charge. | [optional] |
-| **payer_name** | **String** | Name of the holder of the account that sent the Pix, as reported by the originating institution. | [optional] |
-| **payer_document** | **String** | CPF or CNPJ of the payer of the Pix, reported by the originating institution. | [optional] |
-| **payer_institution_ispb** | **String** | ISPB code of the institution the Pix was sent from. | [optional] |
-| **payer_institution_name** | **String** | Name of the institution the Pix was sent from. | [optional] |
-| **payer_account_number** | **String** | Payer&#39;s PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions. | [optional] |
-| **service_fee_charged** | **Float** | PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling. | [optional] |
-| **withdraw_pix_key** | **String** | Destination Pix key of the withdrawal, already normalized. | [optional] |
-| **withdraw_pix_type** | **String** | Type of the destination key of the withdrawal, with evp being the random key. | [optional] |
-| **receiver_name** | **String** | Name of the holder of the receiving account. | [optional] |
-| **receiver_document** | **String** | CPF or CNPJ of the receiver. | [optional] |
-| **receiver_institution_ispb** | **String** | ISPB code of the institution that receives the Pix. | [optional] |
-| **receiver_institution_name** | **String** | Name of the institution that receives the Pix. | [optional] |
-| **receiver_account_number** | **String** | Receiver&#39;s PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions. | [optional] |
-| **end_to_end_id** | **String** | Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return. | [optional] |
-| **created_at** | **String** | Date and time the transaction was recorded. | [optional] |
-| **updated_at** | **String** | Date and time of the last change. | [optional] |
-| **paid_at** | **String** | Date and time the Pix was settled, reported by the institution. | [optional] |
-| **client_reference** | **String** | Your identifier of the transaction, returned in queries and callbacks. | [optional] |
-| **refund_end_to_end_id** | **String** | End-to-end ID of the refund transaction | [optional] |
-| **refund_amount** | **Float** | Amount refunded | [optional] |
-| **refund_status** | **String** | Refund status: PENDING, COMPLETED or CANCELED. | [optional] |
-| **refund_reason** | **String** | Reason for the refund | [optional] |
-| **refund_description** | **String** | Description of the refund | [optional] |
-| **refunded_at** | **String** | Date and time when the refund was processed | [optional] |
-| **cancellation_reason** | **String** | Reason for cancellation (if cancelled) | [optional] |
-| **virtual_account** | **String** | Virtual sub-account provided at creation. | [optional] |
-| **method** | **String** | Transaction method/rail. | [optional] |
-| **infraction** | [**Array&lt;GetUserTransactionById200ResponseAllOfInfractionInner&gt;**](GetUserTransactionById200ResponseAllOfInfractionInner.md) | Complete infraction history for this transaction. | [optional] |
-| **callback_log** | [**Array&lt;GetUserTransactionById200ResponseAllOfCallbackLogInner&gt;**](GetUserTransactionById200ResponseAllOfCallbackLogInner.md) | Webhook delivery attempts for this transaction (most recent first) | [optional] |
+| **id** | **String** | Identificador da transação na PayZu. | [optional] |
+| **status** | **String** | Status atual da transação. | [optional] |
+| **amount** | **Float** | Valor da transação, antes da taxa. | [optional] |
+| **type** | **String** | Tipo da transação: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION ou ADJUSTMENT. | [optional] |
+| **qr_code_text** | **String** | Código copia e cola do Pix. | [optional] |
+| **qr_code_base64** | **String** | Imagem PNG do QR Code em base64, sem o prefixo data:. | [optional] |
+| **qr_code_url** | **String** | Rota autenticada que devolve o PNG do QR Code. | [optional] |
+| **generated_name** | **String** | Nome usado para montar a cobrança. | [optional] |
+| **generated_document** | **String** | CPF ou CNPJ usado como devedor na cobrança. | [optional] |
+| **generated_email** | **String** | E-mail usado para montar a cobrança. | [optional] |
+| **payer_name** | **String** | Nome do titular da conta que enviou o Pix, como informado pela instituição de origem. | [optional] |
+| **payer_document** | **String** | CPF ou CNPJ de quem enviou o Pix, informado pela instituição de origem. | [optional] |
+| **payer_institution_ispb** | **String** | Código ISPB da instituição de onde saiu o Pix. | [optional] |
+| **payer_institution_name** | **String** | Nome da instituição de onde saiu o Pix. | [optional] |
+| **payer_account_number** | **String** | Conta PayZu do pagador. | [optional] |
+| **service_fee_charged** | **Float** | Tarifa PayZu cobrada na operação, em reais. Pode ter mais de duas casas decimais: não arredonde ao conciliar. | [optional] |
+| **withdraw_pix_key** | **String** | Chave Pix de destino do saque, já normalizada. | [optional] |
+| **withdraw_pix_type** | **String** | Tipo da chave de destino do saque, sendo evp a chave aleatória. | [optional] |
+| **receiver_name** | **String** | Nome do titular da conta que recebe. | [optional] |
+| **receiver_document** | **String** | CPF ou CNPJ de quem recebe. | [optional] |
+| **receiver_institution_ispb** | **String** | Código ISPB da instituição que recebe o Pix. | [optional] |
+| **receiver_institution_name** | **String** | Nome da instituição que recebe o Pix. | [optional] |
+| **receiver_account_number** | **String** | Conta PayZu do recebedor. | [optional] |
+| **end_to_end_id** | **String** | Identificador do Pix no arranjo do Bacen, usado para rastrear a liquidação e pedir devolução. | [optional] |
+| **created_at** | **String** | Data e hora do registro da transação. | [optional] |
+| **updated_at** | **String** | Data e hora da última alteração. | [optional] |
+| **paid_at** | **String** | Data e hora da liquidação do Pix, informada pela instituição. | [optional] |
+| **client_reference** | **String** | Seu identificador da transação, devolvido em consultas e callbacks. | [optional] |
+| **refund_end_to_end_id** | **String** | ID end-to-end do Pix de devolução. | [optional] |
+| **refund_amount** | **Float** | Valor devolvido. | [optional] |
+| **refund_status** | **String** | Status da devolução. | [optional] |
+| **refund_reason** | **String** | Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu). | [optional] |
+| **refund_description** | **String** | Descrição da devolução. | [optional] |
+| **refunded_at** | **String** | Data e hora em que a devolução foi processada. | [optional] |
+| **cancellation_reason** | **String** | Motivo do cancelamento (se cancelada) | [optional] |
+| **virtual_account** | **String** | Subconta virtual informada na criação. | [optional] |
+| **method** | **String** | &#x60;PIX&#x60;, &#x60;INTERNAL_TRANSFER&#x60; (transferência entre contas PayZu), &#x60;BANK_SLIP&#x60; (boleto) ou &#x60;TED&#x60;. | [optional] |
+| **infraction** | [**Array&lt;GetUserTransactionById200ResponseAllOfInfractionInner&gt;**](GetUserTransactionById200ResponseAllOfInfractionInner.md) | Histórico completo de infrações desta transação. | [optional] |
+| **callback_log** | [**Array&lt;GetUserTransactionById200ResponseAllOfCallbackLogInner&gt;**](GetUserTransactionById200ResponseAllOfCallbackLogInner.md) | Tentativas de entrega do webhook desta transação (mais recentes primeiro) | [optional] |
 
 ## Example
 

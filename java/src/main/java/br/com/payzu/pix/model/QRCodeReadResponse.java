@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -36,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Decoded information from a Pix QR Code.
+ * Informações decodificadas de um QR Code Pix.
  */
 @JsonPropertyOrder({
   QRCodeReadResponse.JSON_PROPERTY_QR_CODE_TYPE,
@@ -54,7 +53,7 @@ import br.com.payzu.pix.ApiClient;
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.22.0")
 public class QRCodeReadResponse {
   /**
-   * Type of QR Code.
+   * Tipo de QR Code.
    */
   public enum QrCodeTypeEnum {
     STATIC(String.valueOf("STATIC")),
@@ -116,7 +115,7 @@ public class QRCodeReadResponse {
   private JsonNullable<BigDecimal> expiresIn = JsonNullable.<BigDecimal>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "createdAt";
-  private JsonNullable<OffsetDateTime> createdAt = JsonNullable.<OffsetDateTime>undefined();
+  private JsonNullable<String> createdAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_AMOUNT_EDITABLE = "amountEditable";
   private JsonNullable<Boolean> amountEditable = JsonNullable.<Boolean>undefined();
@@ -133,7 +132,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Type of QR Code.
+   * Tipo de QR Code.
    * @return qrCodeType
    */
   @javax.annotation.Nullable
@@ -157,7 +156,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Name of the payment receiver.
+   * Nome do recebedor do pagamento.
    * @return name
    */
   @javax.annotation.Nullable
@@ -189,7 +188,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * CPF or CNPJ of the receiver.
+   * CPF ou CNPJ do recebedor.
    * @return document
    */
   @javax.annotation.Nullable
@@ -221,7 +220,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Amount to be paid (may differ from originalAmount for dynamic QR Codes).
+   * Valor a ser pago.
    * @return amount
    */
   @javax.annotation.Nullable
@@ -253,7 +252,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Original amount embedded in the QR Code.
+   * Valor embutido no QR Code.
    * @return originalAmount
    */
   @javax.annotation.Nullable
@@ -285,7 +284,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Transaction identifier.
+   * Identificador da transação.
    * @return txid
    */
   @javax.annotation.Nullable
@@ -317,7 +316,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Additional information or description.
+   * Informações adicionais ou descrição.
    * @return additionalInfo
    */
   @javax.annotation.Nullable
@@ -349,7 +348,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Seconds until QR Code expires (0 for static QR Codes).
+   * Segundos até o QR Code expirar (0 para QR Codes estáticos).
    * @return expiresIn
    */
   @javax.annotation.Nullable
@@ -375,35 +374,35 @@ public class QRCodeReadResponse {
   }
 
 
-  public QRCodeReadResponse createdAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
-    this.createdAt = JsonNullable.<OffsetDateTime>of(createdAt);
+  public QRCodeReadResponse createdAt(@javax.annotation.Nullable String createdAt) {
+    this.createdAt = JsonNullable.<String>of(createdAt);
     return this;
   }
 
   /**
-   * Creation date of the QR Code (for dynamic QR Codes).
+   * Data de criação do QR Code dinâmico, como veio no QR Code: o horário pode vir sem fuso.
    * @return createdAt
    */
   @javax.annotation.Nullable
   @JsonIgnore
-  public OffsetDateTime getCreatedAt() {
+  public String getCreatedAt() {
         return createdAt.orElse(null);
   }
 
   @JsonProperty(value = JSON_PROPERTY_CREATED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getCreatedAt_JsonNullable() {
+  public JsonNullable<String> getCreatedAt_JsonNullable() {
     return createdAt;
   }
   
   @JsonProperty(JSON_PROPERTY_CREATED_AT)
-  public void setCreatedAt_JsonNullable(JsonNullable<OffsetDateTime> createdAt) {
+  public void setCreatedAt_JsonNullable(JsonNullable<String> createdAt) {
     this.createdAt = createdAt;
   }
 
-  public void setCreatedAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
-    this.createdAt = JsonNullable.<OffsetDateTime>of(createdAt);
+  public void setCreatedAt(@javax.annotation.Nullable String createdAt) {
+    this.createdAt = JsonNullable.<String>of(createdAt);
   }
 
 
@@ -413,7 +412,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Whether the payer can change the amount.
+   * Indica se o pagador pode alterar o valor.
    * @return amountEditable
    */
   @javax.annotation.Nullable
@@ -445,7 +444,7 @@ public class QRCodeReadResponse {
   }
 
   /**
-   * Due date of the charge, when the QR Code has one.
+   * Data de vencimento da cobrança, quando o QR Code tiver.
    * @return dueDate
    */
   @javax.annotation.Nullable

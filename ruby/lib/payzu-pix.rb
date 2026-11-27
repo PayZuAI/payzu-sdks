@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -30,6 +30,7 @@ require 'payzu-pix/models/defense'
 require 'payzu-pix/models/defense_files_inner'
 require 'payzu-pix/models/defense_history_entry'
 require 'payzu-pix/models/defense_history_entry_files_inner'
+require 'payzu-pix/models/defense_list_item'
 require 'payzu-pix/models/deposit_pending'
 require 'payzu-pix/models/deposit_pending_list_response'
 require 'payzu-pix/models/dict_consult_response'
@@ -42,10 +43,19 @@ require 'payzu-pix/models/get_user200_response'
 require 'payzu-pix/models/get_user200_response_daily_withdraw_limit'
 require 'payzu-pix/models/get_user200_response_service_fee'
 require 'payzu-pix/models/get_user_balance200_response'
+require 'payzu-pix/models/get_user_pix_keys200_response'
 require 'payzu-pix/models/get_user_transaction_by_id200_response'
 require 'payzu-pix/models/get_user_transaction_by_id200_response_all_of_callback_log_inner'
 require 'payzu-pix/models/get_user_transaction_by_id200_response_all_of_infraction_inner'
 require 'payzu-pix/models/get_user_transactions200_response'
+require 'payzu-pix/models/get_user_whitelist_cnpj200_response'
+require 'payzu-pix/models/get_user_whitelist_cnpj200_response_data_inner'
+require 'payzu-pix/models/get_user_whitelist_cnpj200_response_page_info'
+require 'payzu-pix/models/get_user_whitelist_pix_key200_response'
+require 'payzu-pix/models/get_user_whitelist_pix_key200_response_data_inner'
+require 'payzu-pix/models/get_user_whitelist_pix_key200_response_page_info'
+require 'payzu-pix/models/infraction_changed_data'
+require 'payzu-pix/models/infraction_changed_event'
 require 'payzu-pix/models/infraction_detail'
 require 'payzu-pix/models/infraction_detail_transaction'
 require 'payzu-pix/models/infraction_list_response'
@@ -80,6 +90,13 @@ require 'payzu-pix/models/summary_block_grouped_inner'
 require 'payzu-pix/models/summary_block_statuses'
 require 'payzu-pix/models/summary_status'
 require 'payzu-pix/models/transaction'
+require 'payzu-pix/models/transaction_canceled_event'
+require 'payzu-pix/models/transaction_completed_event'
+require 'payzu-pix/models/transaction_error_event'
+require 'payzu-pix/models/transaction_expired_event'
+require 'payzu-pix/models/transaction_pending_event'
+require 'payzu-pix/models/transaction_refunded_event'
+require 'payzu-pix/models/transaction_waiting_for_refund_event'
 require 'payzu-pix/models/transaction_with_refunds'
 require 'payzu-pix/models/webhook'
 require 'payzu-pix/models/webhook_create_request'
@@ -90,6 +107,7 @@ require 'payzu-pix/models/webhook_with_secret'
 
 # APIs
 require 'payzu-pix/api/account_api'
+require 'payzu-pix/api/allowlist_api'
 require 'payzu-pix/api/callbacks_api'
 require 'payzu-pix/api/infractions_api'
 require 'payzu-pix/api/internal_transfer_api'

@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Defense identifier. | [optional] 
-**Defense** | Pointer to **string** | Defense text | [optional] 
-**Status** | Pointer to **string** | Defense status | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Moment the defense was recorded at PayZu, saved together with the uploaded files. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Moment of the last change to the defense. | [optional] 
-**Files** | Pointer to [**[]DefenseHistoryEntryFilesInner**](DefenseHistoryEntryFilesInner.md) | Files sent with the defense, with name, type and size in bytes. | [optional] 
+**Id** | Pointer to **string** | Identificador da defesa. | [optional] 
+**Defense** | Pointer to **string** | Texto da defesa | [optional] 
+**Status** | Pointer to **string** | Status da defesa | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Momento da última alteração da defesa. | [optional] 
+**Files** | Pointer to [**[]DefenseHistoryEntryFilesInner**](DefenseHistoryEntryFilesInner.md) | Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes. | [optional] 
 
 ## Methods
 

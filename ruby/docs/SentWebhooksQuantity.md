@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **quantity** | **Integer** | Total of deliveries recorded. | [optional] |
+| **quantity** | **Integer** | Total de entregas registradas. | [optional] |
 
 ## Example
 

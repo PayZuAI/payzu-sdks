@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,16 +15,16 @@ require 'time'
 
 module PayZuPix
   class WebhookCreateRequest < ApiModelBase
-    # URL (http or https) that will receive the notifications.
+    # URL que vai receber as notificações: http ou https, pública, sem usuário e senha e sem IPv6 literal.
     attr_accessor :url
 
-    # Events to subscribe to. Omit or leave empty to receive all events.
+    # Eventos a assinar.
     attr_accessor :events
 
-    # Generate an HMAC signing secret for this webhook.
+    # Gera um segredo de assinatura HMAC para este webhook.
     attr_accessor :generate_secret
 
-    # Whether the webhook starts active.
+    # Se o webhook começa ativo.
     attr_accessor :active
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -113,6 +113,11 @@ module PayZuPix
         invalid_properties.push('invalid value for "url", url cannot be nil.')
       end
 
+      pattern = Regexp.new(/^https?:\/\//)
+      if @url !~ pattern
+        invalid_properties.push("invalid value for \"url\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -121,6 +126,7 @@ module PayZuPix
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @url.nil?
+      return false if @url !~ Regexp.new(/^https?:\/\//)
       true
     end
 
@@ -129,6 +135,11 @@ module PayZuPix
     def url=(url)
       if url.nil?
         fail ArgumentError, 'url cannot be nil'
+      end
+
+      pattern = Regexp.new(/^https?:\/\//)
+      if url !~ pattern
+        fail ArgumentError, "invalid value for \"url\", must conform to the pattern #{pattern}."
       end
 
       @url = url

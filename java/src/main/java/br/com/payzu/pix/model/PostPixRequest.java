@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -68,7 +68,7 @@ public class PostPixRequest {
 
   public static final String JSON_PROPERTY_EXPIRES_IN = "expiresIn";
   @javax.annotation.Nullable
-  private BigDecimal expiresIn;
+  private Integer expiresIn;
 
   public static final String JSON_PROPERTY_CLIENT_REFERENCE = "clientReference";
   @javax.annotation.Nullable
@@ -87,7 +87,7 @@ public class PostPixRequest {
   }
 
   /**
-   * Amount in BRL. Must be &gt;&#x3D; 1.
+   * Valor da cobrança, em reais, com no máximo 2 casas decimais.
    * minimum: 1
    * @return amount
    */
@@ -112,7 +112,7 @@ public class PostPixRequest {
   }
 
   /**
-   * URL for transaction notifications (http or https).
+   * URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal.
    * @return callbackUrl
    */
   @javax.annotation.Nullable
@@ -136,7 +136,7 @@ public class PostPixRequest {
   }
 
   /**
-   * Payer full name. Letters and spaces only.
+   * Nome usado para montar a cobrança.
    * @return generatedName
    */
   @javax.annotation.Nullable
@@ -160,7 +160,7 @@ public class PostPixRequest {
   }
 
   /**
-   * Payer email (optional).
+   * E-mail usado para montar a cobrança.
    * @return generatedEmail
    */
   @javax.annotation.Nullable
@@ -184,7 +184,7 @@ public class PostPixRequest {
   }
 
   /**
-   * Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits.
+   * CPF (11 dígitos) ou CNPJ (14 dígitos) do pagador, sem pontuação e com dígitos verificadores válidos. Obrigatório a partir do valor definido na conta (PZD602).
    * @return generatedDocument
    */
   @javax.annotation.Nullable
@@ -202,27 +202,28 @@ public class PostPixRequest {
   }
 
 
-  public PostPixRequest expiresIn(@javax.annotation.Nullable BigDecimal expiresIn) {
+  public PostPixRequest expiresIn(@javax.annotation.Nullable Integer expiresIn) {
     this.expiresIn = expiresIn;
     return this;
   }
 
   /**
-   * Seconds until the QR Code expires.
+   * Segundos até o QR Code expirar, em número inteiro.
+   * minimum: 60
    * maximum: 172000
    * @return expiresIn
    */
   @javax.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_EXPIRES_IN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public BigDecimal getExpiresIn() {
+  public Integer getExpiresIn() {
     return expiresIn;
   }
 
 
   @JsonProperty(value = JSON_PROPERTY_EXPIRES_IN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExpiresIn(@javax.annotation.Nullable BigDecimal expiresIn) {
+  public void setExpiresIn(@javax.annotation.Nullable Integer expiresIn) {
     this.expiresIn = expiresIn;
   }
 
@@ -233,7 +234,7 @@ public class PostPixRequest {
   }
 
   /**
-   * External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it.
+   * Referência externa (pedido, fatura etc.). Um clientReference já usado devolve a transação criada com ele.
    * @return clientReference
    */
   @javax.annotation.Nullable
@@ -257,7 +258,7 @@ public class PostPixRequest {
   }
 
   /**
-   * Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
+   * Subconta para separar lojas ou filiais.
    * @return virtualAccount
    */
   @javax.annotation.Nullable

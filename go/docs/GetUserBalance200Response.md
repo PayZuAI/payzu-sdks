@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BalanceAvailable** | Pointer to **float32** | Balance free for withdrawals and transfers, in reais, of the account that owns the token. | [optional] 
-**BalanceBlocked** | Pointer to **float32** | Balance held and unavailable, in reais. | [optional] 
+**BalanceAvailable** | Pointer to **float32** | Saldo livre para saques e transferências, em reais, da conta dona do token. | [optional] 
+**BalanceBlocked** | Pointer to **float32** | Saldo retido e indisponível, em reais. | [optional] 
 
 ## Methods
 

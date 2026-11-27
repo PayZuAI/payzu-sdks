@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**infractions** | [**List&lt;InfractionDetail&gt;**](InfractionDetail.md) | Infractions of the requested page, each in the same format as the detail. |  [optional] |
+|**infractions** | [**List&lt;InfractionDetail&gt;**](InfractionDetail.md) | Contestações da página solicitada, cada uma no mesmo formato do detalhe. |  [optional] |
 |**pagination** | [**InfractionListResponsePagination**](InfractionListResponsePagination.md) |  |  [optional] |
 
 

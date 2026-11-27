@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -22,37 +22,37 @@ import {
 } from './SummaryStatus.js';
 
 /**
- * Totals by status in the period.
+ * Totais por status no período.
  * @export
  * @interface SummaryBlockStatuses
  */
 export interface SummaryBlockStatuses {
     /**
-     * Count and sum of the amounts, in reais, of the transactions with status PENDING in the queried period.
+     * Contagem e soma dos valores, em reais, das transações com status PENDING no período consultado.
      * @type {SummaryStatus}
      * @memberof SummaryBlockStatuses
      */
     pending?: SummaryStatus;
     /**
-     * Count and sum of the completed transactions, in reais.
+     * Contagem e soma das transações concluídas, em reais.
      * @type {SummaryStatus}
      * @memberof SummaryBlockStatuses
      */
     completed?: SummaryStatus;
     /**
-     * Count and sum of the canceled transactions, in reais.
+     * Contagem e soma das transações canceladas, em reais.
      * @type {SummaryStatus}
      * @memberof SummaryBlockStatuses
      */
     canceled?: SummaryStatus;
     /**
-     * Count and sum of the expired transactions, in reais.
+     * Contagem e soma das transações expiradas, em reais.
      * @type {SummaryStatus}
      * @memberof SummaryBlockStatuses
      */
     expired?: SummaryStatus;
     /**
-     * Count and refunded amount in the period, in reais.
+     * Contagem e valor devolvido no período, em reais.
      * @type {SummaryStatus}
      * @memberof SummaryBlockStatuses
      */

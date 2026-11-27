@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Refund identifier. | [optional] 
-**Amount** | Pointer to **float32** | Refunded amount in BRL. | [optional] 
-**Reason** | Pointer to **string** | Refund reason. | [optional] 
-**Description** | Pointer to **NullableString** | Refund description. | [optional] 
-**Status** | Pointer to **string** | Refund status. | [optional] 
-**EndToEndId** | Pointer to **NullableString** | End-to-end ID of the refund Pix. | [optional] 
-**RefundedAt** | Pointer to **NullableTime** | When the refund was completed. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | When the refund was requested. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Last change to the refund. | [optional] 
+**Id** | Pointer to **string** | Identificador da devolução. | [optional] 
+**Amount** | Pointer to **float32** | Valor devolvido em BRL. | [optional] 
+**Reason** | Pointer to **string** | Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu). | [optional] 
+**Description** | Pointer to **NullableString** | Descrição da devolução. | [optional] 
+**Status** | Pointer to **string** | Status da devolução. | [optional] 
+**EndToEndId** | Pointer to **NullableString** | End-to-end ID do Pix de devolução. | [optional] 
+**RefundedAt** | Pointer to **NullableTime** | Quando a devolução foi concluída. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Quando a devolução foi pedida. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Última alteração da devolução. | [optional] 
 
 ## Methods
 

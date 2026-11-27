@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -30,19 +30,19 @@ type ApiGetInternalTransferRequest struct {
 	virtualAccount *string
 }
 
-// Transaction ID
+// ID da transação
 func (r ApiGetInternalTransferRequest) Id(id string) ApiGetInternalTransferRequest {
 	r.id = &id
 	return r
 }
 
-// External reference
+// Referência externa
 func (r ApiGetInternalTransferRequest) ClientReference(clientReference string) ApiGetInternalTransferRequest {
 	r.clientReference = &clientReference
 	return r
 }
 
-// Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+// Subconta usada na criação.
 func (r ApiGetInternalTransferRequest) VirtualAccount(virtualAccount string) ApiGetInternalTransferRequest {
 	r.virtualAccount = &virtualAccount
 	return r
@@ -53,11 +53,9 @@ func (r ApiGetInternalTransferRequest) Execute() (*Transaction, *http.Response, 
 }
 
 /*
-GetInternalTransfer Get internal transfer
+GetInternalTransfer Obter transferência interna
 
-Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).
-
-Token permission: `WITHDRAW`.
+Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetInternalTransferRequest
@@ -212,11 +210,9 @@ func (r ApiPostInternalTransferRequest) Execute() (*Transaction, *http.Response,
 }
 
 /*
-PostInternalTransfer Create internal transfer
+PostInternalTransfer Criar transferência interna
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.
-
-Token permission: `WITHDRAW`.
+Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostInternalTransferRequest
@@ -316,17 +312,6 @@ func (a *InternalTransferAPIService) PostInternalTransferExecute(r ApiPostIntern
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

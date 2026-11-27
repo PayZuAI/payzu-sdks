@@ -1,15 +1,15 @@
 # PayZu\Pix\WithdrawalsApi
 
-Send money via Pix (cash out) by Pix key or QR Code
+Envie dinheiro via Pix (cash out) por chave Pix ou QR Code
 
 All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getWithdraw()**](WithdrawalsApi.md#getWithdraw) | **GET** /withdraw | Retrieve Withdrawal |
-| [**getWithdrawProof()**](WithdrawalsApi.md#getWithdrawProof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
-| [**postWithdraw()**](WithdrawalsApi.md#postWithdraw) | **POST** /withdraw | Create Withdrawal (Pix key) |
-| [**postWithdrawQrcode()**](WithdrawalsApi.md#postWithdrawQrcode) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code |
+| [**getWithdraw()**](WithdrawalsApi.md#getWithdraw) | **GET** /withdraw | Consultar Saque |
+| [**getWithdrawProof()**](WithdrawalsApi.md#getWithdrawProof) | **GET** /withdraw/proof/{id} | Obter comprovante de saque |
+| [**postWithdraw()**](WithdrawalsApi.md#postWithdraw) | **POST** /withdraw | Criar saque (chave Pix) |
+| [**postWithdrawQrcode()**](WithdrawalsApi.md#postWithdrawQrcode) | **POST** /withdraw/qrcode | Criar Saque usando QR Code |
 
 
 ## `getWithdraw()`
@@ -18,9 +18,9 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 getWithdraw($id, $client_reference, $end_to_end_id, $virtual_account): \PayZu\Pix\Model\Transaction
 ```
 
-Retrieve Withdrawal
+Consultar Saque
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
+Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
 
 ### Example
 
@@ -39,10 +39,10 @@ $apiInstance = new PayZu\Pix\Api\WithdrawalsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20260817B3PL8SG5WQ000000; // string | Transaction ID.
-$client_reference = order_12345; // string | External reference provided when creating the withdrawal.
-$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | Pix end-to-end ID.
-$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$id = PAYZU20260817B3PL8SG5WQ000000; // string | ID da transação.
+$client_reference = order_12345; // string | Referência externa informada na criação do saque.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | ID end-to-end do Pix.
+$virtual_account = loja-centro-01; // string | Subconta usada na criação.
 
 try {
     $result = $apiInstance->getWithdraw($id, $client_reference, $end_to_end_id, $virtual_account);
@@ -56,10 +56,10 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Transaction ID. | [optional] |
-| **client_reference** | **string**| External reference provided when creating the withdrawal. | [optional] |
-| **end_to_end_id** | **string**| Pix end-to-end ID. | [optional] |
-| **virtual_account** | **string**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **string**| ID da transação. | [optional] |
+| **client_reference** | **string**| Referência externa informada na criação do saque. | [optional] |
+| **end_to_end_id** | **string**| ID end-to-end do Pix. | [optional] |
+| **virtual_account** | **string**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -84,9 +84,9 @@ try {
 getWithdrawProof($id, $type): \PayZu\Pix\Model\ProofResponse
 ```
 
-Get Withdrawal Receipt
+Obter comprovante de saque
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
 ### Example
 
@@ -105,8 +105,8 @@ $apiInstance = new PayZu\Pix\Api\WithdrawalsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20260817B3PL8SG5WQ000000; // string | Transaction ID.
-$type = pdf; // string | Return format.
+$id = PAYZU20260817B3PL8SG5WQ000000; // string | ID da transação.
+$type = pdf; // string | Formato de retorno.
 
 try {
     $result = $apiInstance->getWithdrawProof($id, $type);
@@ -120,8 +120,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Transaction ID. | |
-| **type** | **string**| Return format. | [optional] [default to &#39;pdf&#39;] |
+| **id** | **string**| ID da transação. | |
+| **type** | **string**| Formato de retorno. | [optional] [default to &#39;pdf&#39;] |
 
 ### Return type
 
@@ -146,9 +146,9 @@ try {
 postWithdraw($post_withdraw_request): \PayZu\Pix\Model\Transaction
 ```
 
-Create Withdrawal (Pix key)
+Criar saque (chave Pix)
 
-Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
+Envie um **cash out** Pix para a chave Pix especificada.
 
 ### Example
 
@@ -206,9 +206,9 @@ try {
 postWithdrawQrcode($post_withdraw_qrcode_request): \PayZu\Pix\Model\Transaction
 ```
 
-Create Withdrawal using QR Code
+Criar Saque usando QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
+Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
 
 ### Example
 

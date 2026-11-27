@@ -8,3 +8,7 @@ additionalProperties:
   withInterfaces: true
   typescriptThreePlus: true
   importFileExtension: .js
+globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: ""

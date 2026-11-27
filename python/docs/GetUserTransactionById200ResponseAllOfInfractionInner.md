@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Identifier of the infraction linked to this transaction. | [optional] 
-**status** | **str** | Current state of the infraction. | [optional] 
-**created_at** | **datetime** | Date and time the infraction was recorded at PayZu. | [optional] 
-**updated_at** | **datetime** | Date and time of the last change to the infraction record. | [optional] 
+**id** | **str** | Identificador da infração ligada a esta transação. | [optional] 
+**status** | **str** | Situação atual da infração. | [optional] 
+**created_at** | **datetime** | Data e hora em que a infração foi registrada na PayZu. | [optional] 
+**updated_at** | **datetime** | Data e hora da última alteração no registro da infração. | [optional] 
 
 ## Example
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayerAccountNumber** | **string** | Payer account number (6 digits). Must match the authenticated user&#39;s accountNumber. | 
-**ReceiverAccountNumber** | **string** | Destination account number (6 digits). | 
-**Amount** | **float32** | Transfer amount in BRL, with at most 2 decimal places. | 
-**Description** | Pointer to **string** | Optional transfer description. | [optional] 
-**CallbackUrl** | Pointer to **string** | URL for transaction notifications (http or https). | [optional] 
-**ClientReference** | Pointer to **string** | External reference for idempotency / reconciliation. | [optional] 
-**VirtualAccount** | Pointer to **string** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
+**PayerAccountNumber** | **string** | Conta do pagador. | 
+**ReceiverAccountNumber** | **string** | Conta de destino. | 
+**Amount** | **float32** | Valor da transferência em BRL, com no máximo 2 casas decimais. | 
+**Description** | Pointer to **string** | Descrição opcional da transferência. | [optional] 
+**CallbackUrl** | Pointer to **string** | URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal. | [optional] 
+**ClientReference** | Pointer to **string** | Referência externa para idempotência / reconciliação. | [optional] 
+**VirtualAccount** | Pointer to **string** | Subconta para separar lojas ou filiais. | [optional] 
 
 ## Methods
 

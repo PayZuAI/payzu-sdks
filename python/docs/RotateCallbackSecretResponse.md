@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**secret** | **str** | Callback secret, 43 base64url characters. Store it: there is no route to read it again. | [optional] 
+**secret** | **str** | Segredo de callback, 43 caracteres base64url. Guarde: não há rota para lê-lo de novo. | [optional] 
 
 ## Example
 

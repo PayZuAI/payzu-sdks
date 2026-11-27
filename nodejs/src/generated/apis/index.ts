@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AccountApi.js';
+export * from './AllowlistApi.js';
 export * from './CallbacksApi.js';
 export * from './InfractionsApi.js';
 export * from './InternalTransferApi.js';

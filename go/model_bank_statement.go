@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,31 +20,31 @@ var _ MappedNullable = &BankStatement{}
 
 // BankStatement struct for BankStatement
 type BankStatement struct {
-	// Identifier of the balance entry.
+	// Identificador do lançamento de saldo.
 	Id *string `json:"id,omitempty"`
-	// Amount of the entry.
+	// Valor do lançamento.
 	Amount *float32 `json:"amount,omitempty"`
-	// INCREMENT credits the balance, DECREMENT debits it.
+	// INCREMENT credita o saldo, DECREMENT debita.
 	Operation *string `json:"operation,omitempty"`
-	// Reason for the ledger entry.
+	// Motivo do lançamento no extrato.
 	Reason *string `json:"reason,omitempty"`
-	// Balance moved: AVAILABLE or BLOCKED.
+	// Saldo movimentado: AVAILABLE ou BLOCKED.
 	BalanceType *string `json:"balanceType,omitempty"`
-	// Balance free for use that the account had, in reais, immediately before this entry.
+	// Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento.
 	PreviousBalanceAvailable *float32 `json:"previousBalanceAvailable,omitempty"`
-	// Blocked balance before the entry, in reais.
+	// Saldo bloqueado antes do lançamento, em reais.
 	PreviousBalanceBlocked *float32 `json:"previousBalanceBlocked,omitempty"`
-	// Available balance after the entry, in reais.
+	// Saldo disponível depois do lançamento, em reais.
 	NewBalanceAvailable *float32 `json:"newBalanceAvailable,omitempty"`
-	// Blocked balance after the entry, in reais.
+	// Saldo bloqueado depois do lançamento, em reais.
 	NewBalanceBlocked *float32 `json:"newBalanceBlocked,omitempty"`
-	// Transaction that originated the entry.
+	// Transação que originou o lançamento.
 	TransactionId NullableString `json:"transactionId,omitempty"`
-	// Infraction related to the entry.
+	// Infração relacionada ao lançamento.
 	InfractionId NullableString `json:"infractionId,omitempty"`
-	// Date and time the balance movement was recorded.
+	// Data e hora em que a movimentação de saldo foi registrada.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Date and time of the last change to the record.
+	// Data e hora da última alteração do registro.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 

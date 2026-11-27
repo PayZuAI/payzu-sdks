@@ -4,20 +4,20 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_infractions**](InfractionsApi.md#get_infractions) | **GET** /user/infractions | List Infractions |
-| [**get_infractions_by_id**](InfractionsApi.md#get_infractions_by_id) | **GET** /user/infractions/{id} | Get Infraction |
-| [**get_infractions_defense_by_id**](InfractionsApi.md#get_infractions_defense_by_id) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Get Defense |
-| [**get_infractions_defenses**](InfractionsApi.md#get_infractions_defenses) | **GET** /user/infractions/{id}/defenses | List Defenses |
-| [**post_infractions_defense**](InfractionsApi.md#post_infractions_defense) | **POST** /user/infractions/{id}/defenses | Create Defense |
+| [**get_infractions**](InfractionsApi.md#get_infractions) | **GET** /user/infractions | Listar infrações |
+| [**get_infractions_by_id**](InfractionsApi.md#get_infractions_by_id) | **GET** /user/infractions/{id} | Obter Infração |
+| [**get_infractions_defense_by_id**](InfractionsApi.md#get_infractions_defense_by_id) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Obter Defesa |
+| [**get_infractions_defenses**](InfractionsApi.md#get_infractions_defenses) | **GET** /user/infractions/{id}/defenses | Listar Defesas |
+| [**post_infractions_defense**](InfractionsApi.md#post_infractions_defense) | **POST** /user/infractions/{id}/defenses | Criar Defesa |
 
 
 ## get_infractions
 
 > <InfractionListResponse> get_infractions(opts)
 
-List Infractions
+Listar infrações
 
-List all infractions for the authenticated user with pagination and filters.
+Lista todas as infrações do usuário autenticado com paginação e filtros.
 
 ### Examples
 
@@ -32,34 +32,34 @@ end
 
 api_instance = PayZuPix::InfractionsApi.new
 opts = {
-  page: 56, # Integer | Page number.
-  limit: 56, # Integer | Items per page.
-  status: 'OPEN', # String | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
-  type: 'REFUND_REQUEST', # String | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | End-to-end ID of the Pix.
-  transaction_id: 'PAYZU20260814T6NX1CV9MK000000', # String | Transaction ID.
-  amount_min: 10.9, # Float | Minimum amount.
-  amount_max: 500, # Float | Maximum amount.
-  analysis_result: 'AGREED', # String | Comma-separated AnalysisResult: AGREED, DISAGREED.
-  reported_by: 'DEBITED_PARTICIPANT', # String | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-  participant_document: '12345678901', # String | CPF or CNPJ of the participant.
-  participant_name: 'John Doe', # String | Name of the participant.
-  sort_by: 'createdAt', # String | Sort field.
-  sort_direction: 'asc', # String | Sort direction.
-  reported_at_from: Time.parse('2026-08-01'), # Time | Filter: reportedAt from.
-  reported_at_to: Time.parse('2026-08-31'), # Time | Filter: reportedAt up to.
-  created_at_from: Time.parse('2026-08-01'), # Time | Filter: createdAt from.
-  created_at_to: Time.parse('2026-08-31'), # Time | Filter: createdAt up to.
-  expires_at_from: Time.parse('2026-08-01'), # Time | Filter: expiresAt from.
-  expires_at_to: Time.parse('2026-08-31'), # Time | Filter: expiresAt up to.
-  updated_at_from: Time.parse('2026-08-01'), # Time | Filter: updatedAt from.
-  updated_at_to: Time.parse('2026-08-31'), # Time | Filter: updatedAt up to.
-  id: 'cm3w7n2p60002q8f2h7d3z5cf', # String | Filter by infraction ID.
-  protocol: '2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210' # String | Filter by protocol.
+  page: 56, # Integer | Número da página.
+  limit: 56, # Integer | Itens por página.
+  status: 'OPEN', # String | Status da infração, vários separados por vírgula.  `OPEN` `ACKNOWLEDGED` `DEFENDED` `ANSWERED` `WAITING_PSP` `WAITING_ADJUSTMENTS` `CLOSED` `CANCELLED`
+  type: 'REFUND_REQUEST', # String | Tipo da infração, vários separados por vírgula.  `REFUND_REQUEST` `FRAUD` `REFUND_CANCELLED`
+  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | ID end-to-end do Pix.
+  transaction_id: 'PAYZU20260814T6NX1CV9MK000000', # String | ID da transação.
+  amount_min: 10.9, # Float | Valor mínimo.
+  amount_max: 500, # Float | Valor máximo.
+  analysis_result: 'AGREED', # String | AnalysisResult separados por vírgula: AGREED, DISAGREED.
+  reported_by: 'DEBITED_PARTICIPANT', # String | Quem abriu a infração, vários separados por vírgula.  `DEBITED_PARTICIPANT` `CREDITED_PARTICIPANT`
+  participant_document: '12345678901', # String | CPF ou CNPJ do participante.
+  participant_name: 'John Doe', # String | Nome do participante.
+  sort_by: 'createdAt', # String | Campo de ordenação.
+  sort_direction: 'asc', # String | Direção da ordenação.
+  reported_at_from: Time.parse('2026-08-01'), # Time | Filtro: reportedAt a partir de.
+  reported_at_to: Time.parse('2026-08-31'), # Time | Filtro: reportedAt até.
+  created_at_from: Time.parse('2026-08-01'), # Time | Filtro: createdAt a partir de.
+  created_at_to: Time.parse('2026-08-31'), # Time | Filtro: createdAt até.
+  expires_at_from: Time.parse('2026-08-01'), # Time | Filtro: expiresAt a partir de.
+  expires_at_to: Time.parse('2026-08-31'), # Time | Filtro: expiresAt até.
+  updated_at_from: Time.parse('2026-08-01'), # Time | Filtro: updatedAt a partir de.
+  updated_at_to: Time.parse('2026-08-31'), # Time | Filtro: updatedAt até.
+  id: 'cm3w7n2p60002q8f2h7d3z5cf', # String | Filtro por ID da infração.
+  protocol: '2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210' # String | Filtro por protocolo.
 }
 
 begin
-  # List Infractions
+  # Listar infrações
   result = api_instance.get_infractions(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -75,7 +75,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List Infractions
+  # Listar infrações
   data, status_code, headers = api_instance.get_infractions_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -89,30 +89,30 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **page** | **Integer** | Page number. | [optional][default to 1] |
-| **limit** | **Integer** | Items per page. | [optional][default to 10] |
-| **status** | **String** | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) | [optional] |
-| **type** | **String** | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) | [optional] |
-| **end_to_end_id** | **String** | End-to-end ID of the Pix. | [optional] |
-| **transaction_id** | **String** | Transaction ID. | [optional] |
-| **amount_min** | **Float** | Minimum amount. | [optional] |
-| **amount_max** | **Float** | Maximum amount. | [optional] |
-| **analysis_result** | **String** | Comma-separated AnalysisResult: AGREED, DISAGREED. | [optional] |
-| **reported_by** | **String** | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) | [optional] |
-| **participant_document** | **String** | CPF or CNPJ of the participant. | [optional] |
-| **participant_name** | **String** | Name of the participant. | [optional] |
-| **sort_by** | **String** | Sort field. | [optional][default to &#39;createdAt&#39;] |
-| **sort_direction** | **String** | Sort direction. | [optional][default to &#39;desc&#39;] |
-| **reported_at_from** | **Time** | Filter: reportedAt from. | [optional] |
-| **reported_at_to** | **Time** | Filter: reportedAt up to. | [optional] |
-| **created_at_from** | **Time** | Filter: createdAt from. | [optional] |
-| **created_at_to** | **Time** | Filter: createdAt up to. | [optional] |
-| **expires_at_from** | **Time** | Filter: expiresAt from. | [optional] |
-| **expires_at_to** | **Time** | Filter: expiresAt up to. | [optional] |
-| **updated_at_from** | **Time** | Filter: updatedAt from. | [optional] |
-| **updated_at_to** | **Time** | Filter: updatedAt up to. | [optional] |
-| **id** | **String** | Filter by infraction ID. | [optional] |
-| **protocol** | **String** | Filter by protocol. | [optional] |
+| **page** | **Integer** | Número da página. | [optional][default to 1] |
+| **limit** | **Integer** | Itens por página. | [optional][default to 10] |
+| **status** | **String** | Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; | [optional] |
+| **type** | **String** | Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; | [optional] |
+| **end_to_end_id** | **String** | ID end-to-end do Pix. | [optional] |
+| **transaction_id** | **String** | ID da transação. | [optional] |
+| **amount_min** | **Float** | Valor mínimo. | [optional] |
+| **amount_max** | **Float** | Valor máximo. | [optional] |
+| **analysis_result** | **String** | AnalysisResult separados por vírgula: AGREED, DISAGREED. | [optional] |
+| **reported_by** | **String** | Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; | [optional] |
+| **participant_document** | **String** | CPF ou CNPJ do participante. | [optional] |
+| **participant_name** | **String** | Nome do participante. | [optional] |
+| **sort_by** | **String** | Campo de ordenação. | [optional][default to &#39;createdAt&#39;] |
+| **sort_direction** | **String** | Direção da ordenação. | [optional][default to &#39;desc&#39;] |
+| **reported_at_from** | **Time** | Filtro: reportedAt a partir de. | [optional] |
+| **reported_at_to** | **Time** | Filtro: reportedAt até. | [optional] |
+| **created_at_from** | **Time** | Filtro: createdAt a partir de. | [optional] |
+| **created_at_to** | **Time** | Filtro: createdAt até. | [optional] |
+| **expires_at_from** | **Time** | Filtro: expiresAt a partir de. | [optional] |
+| **expires_at_to** | **Time** | Filtro: expiresAt até. | [optional] |
+| **updated_at_from** | **Time** | Filtro: updatedAt a partir de. | [optional] |
+| **updated_at_to** | **Time** | Filtro: updatedAt até. | [optional] |
+| **id** | **String** | Filtro por ID da infração. | [optional] |
+| **protocol** | **String** | Filtro por protocolo. | [optional] |
 
 ### Return type
 
@@ -132,9 +132,9 @@ end
 
 > <InfractionDetail> get_infractions_by_id(id)
 
-Get Infraction
+Obter Infração
 
-Get a specific infraction by ID.
+Obtém uma infração específica por ID.
 
 ### Examples
 
@@ -148,10 +148,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::InfractionsApi.new
-id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | Infraction ID
+id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | ID da infração
 
 begin
-  # Get Infraction
+  # Obter Infração
   result = api_instance.get_infractions_by_id(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -167,7 +167,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Infraction
+  # Obter Infração
   data, status_code, headers = api_instance.get_infractions_by_id_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -181,7 +181,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Infraction ID |  |
+| **id** | **String** | ID da infração |  |
 
 ### Return type
 
@@ -201,9 +201,9 @@ end
 
 > <Defense> get_infractions_defense_by_id(infraction_id, defense_id)
 
-Get Defense
+Obter Defesa
 
-Get a specific defense for an infraction.
+Obtém uma defesa específica de uma infração.
 
 ### Examples
 
@@ -217,11 +217,11 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::InfractionsApi.new
-infraction_id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | Infraction ID
-defense_id = 'cm3w7p5r90003q8f2j8e4a6dg' # String | Defense ID
+infraction_id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | ID da infração
+defense_id = 'cm3w7p5r90003q8f2j8e4a6dg' # String | ID da defesa
 
 begin
-  # Get Defense
+  # Obter Defesa
   result = api_instance.get_infractions_defense_by_id(infraction_id, defense_id)
   p result
 rescue PayZuPix::ApiError => e
@@ -237,7 +237,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Defense
+  # Obter Defesa
   data, status_code, headers = api_instance.get_infractions_defense_by_id_with_http_info(infraction_id, defense_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -251,8 +251,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **infraction_id** | **String** | Infraction ID |  |
-| **defense_id** | **String** | Defense ID |  |
+| **infraction_id** | **String** | ID da infração |  |
+| **defense_id** | **String** | ID da defesa |  |
 
 ### Return type
 
@@ -270,11 +270,11 @@ end
 
 ## get_infractions_defenses
 
-> <Array<Defense>> get_infractions_defenses(id)
+> <Array<DefenseListItem>> get_infractions_defenses(id)
 
-List Defenses
+Listar Defesas
 
-List all defenses for a specific infraction.
+Lista todas as defesas de uma infração específica.
 
 ### Examples
 
@@ -288,10 +288,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::InfractionsApi.new
-id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | Infraction ID
+id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | ID da infração
 
 begin
-  # List Defenses
+  # Listar Defesas
   result = api_instance.get_infractions_defenses(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -303,15 +303,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Defense>>, Integer, Hash)> get_infractions_defenses_with_http_info(id)
+> <Array(<Array<DefenseListItem>>, Integer, Hash)> get_infractions_defenses_with_http_info(id)
 
 ```ruby
 begin
-  # List Defenses
+  # Listar Defesas
   data, status_code, headers = api_instance.get_infractions_defenses_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Defense>>
+  p data # => <Array<DefenseListItem>>
 rescue PayZuPix::ApiError => e
   puts "Error when calling InfractionsApi->get_infractions_defenses_with_http_info: #{e}"
 end
@@ -321,11 +321,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Infraction ID |  |
+| **id** | **String** | ID da infração |  |
 
 ### Return type
 
-[**Array&lt;Defense&gt;**](Defense.md)
+[**Array&lt;DefenseListItem&gt;**](DefenseListItem.md)
 
 ### Authorization
 
@@ -341,9 +341,9 @@ end
 
 > <Defense> post_infractions_defense(id, defense, opts)
 
-Create Defense
+Criar Defesa
 
-Create a defense for a specific infraction.
+Cria uma defesa para uma infração específica.
 
 ### Examples
 
@@ -357,14 +357,14 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::InfractionsApi.new
-id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | Infraction ID
-defense = 'defense_example' # String | Defense text (max: 1000 characters)
+id = 'cm3w7n2p60002q8f2h7d3z5cf' # String | ID da infração
+defense = 'defense_example' # String | Texto da defesa (máx: 1000 caracteres)
 opts = {
-  files: [File.new('/path/to/some/file')] # Array<File> | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
+  files: [File.new('/path/to/some/file')] # Array<File> | Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados.
 }
 
 begin
-  # Create Defense
+  # Criar Defesa
   result = api_instance.post_infractions_defense(id, defense, opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -380,7 +380,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create Defense
+  # Criar Defesa
   data, status_code, headers = api_instance.post_infractions_defense_with_http_info(id, defense, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -394,9 +394,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Infraction ID |  |
-| **defense** | **String** | Defense text (max: 1000 characters) |  |
-| **files** | **Array&lt;File&gt;** | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. | [optional] |
+| **id** | **String** | ID da infração |  |
+| **defense** | **String** | Texto da defesa (máx: 1000 caracteres) |  |
+| **files** | **Array&lt;File&gt;** | Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. | [optional] |
 
 ### Return type
 

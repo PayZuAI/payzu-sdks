@@ -25,7 +25,7 @@ const example = {
   "status": ERROR,
   "error": Bad Request,
   "errorCode": PZV001,
-  "message": Invalid data. Check the fields provided.,
+  "message": Dados inválidos. Verifique os campos informados.,
   "statusCode": 400,
   "requestId": cmbz0f8qk0001js04hp3e2n0f,
   "details": null,

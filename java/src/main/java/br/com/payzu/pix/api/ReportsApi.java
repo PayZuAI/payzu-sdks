@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -184,27 +184,23 @@ public class ReportsApi {
   }
 
   /**
-   * Download report
-   * Returns a short-lived signed URL to download the CSV file.
-   * @param id Report ID. (required)
+   * Baixar relatório
+   * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+   * @param id ID do relatório. (required)
    * @return DownloadUserReport200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Download report Documentation</a>
    */
   public DownloadUserReport200Response downloadUserReport(@javax.annotation.Nonnull UUID id) throws ApiException {
     return downloadUserReport(id, null);
   }
 
   /**
-   * Download report
-   * Returns a short-lived signed URL to download the CSV file.
-   * @param id Report ID. (required)
+   * Baixar relatório
+   * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+   * @param id ID do relatório. (required)
    * @param headers Optional headers to include in the request
    * @return DownloadUserReport200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Download report Documentation</a>
    */
   public DownloadUserReport200Response downloadUserReport(@javax.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
     ApiResponse<DownloadUserReport200Response> localVarResponse = downloadUserReportWithHttpInfo(id, headers);
@@ -212,27 +208,23 @@ public class ReportsApi {
   }
 
   /**
-   * Download report
-   * Returns a short-lived signed URL to download the CSV file.
-   * @param id Report ID. (required)
+   * Baixar relatório
+   * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+   * @param id ID do relatório. (required)
    * @return ApiResponse&lt;DownloadUserReport200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Download report Documentation</a>
    */
   public ApiResponse<DownloadUserReport200Response> downloadUserReportWithHttpInfo(@javax.annotation.Nonnull UUID id) throws ApiException {
     return downloadUserReportWithHttpInfo(id, null);
   }
 
   /**
-   * Download report
-   * Returns a short-lived signed URL to download the CSV file.
-   * @param id Report ID. (required)
+   * Baixar relatório
+   * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+   * @param id ID do relatório. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;DownloadUserReport200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Download report Documentation</a>
    */
   public ApiResponse<DownloadUserReport200Response> downloadUserReportWithHttpInfo(@javax.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = downloadUserReportRequestBuilder(id, headers);
@@ -310,27 +302,23 @@ public class ReportsApi {
   }
 
   /**
-   * Get bank statement
-   * Returns a single statement entry.
-   * @param id Statement entry id. (required)
+   * Consultar lançamento
+   * Retorna um lançamento do extrato.
+   * @param id Id do lançamento do extrato. (required)
    * @return BankStatement
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get bank statement Documentation</a>
    */
   public BankStatement getUserBankStatement(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserBankStatement(id, null);
   }
 
   /**
-   * Get bank statement
-   * Returns a single statement entry.
-   * @param id Statement entry id. (required)
+   * Consultar lançamento
+   * Retorna um lançamento do extrato.
+   * @param id Id do lançamento do extrato. (required)
    * @param headers Optional headers to include in the request
    * @return BankStatement
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get bank statement Documentation</a>
    */
   public BankStatement getUserBankStatement(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<BankStatement> localVarResponse = getUserBankStatementWithHttpInfo(id, headers);
@@ -338,27 +326,23 @@ public class ReportsApi {
   }
 
   /**
-   * Get bank statement
-   * Returns a single statement entry.
-   * @param id Statement entry id. (required)
+   * Consultar lançamento
+   * Retorna um lançamento do extrato.
+   * @param id Id do lançamento do extrato. (required)
    * @return ApiResponse&lt;BankStatement&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get bank statement Documentation</a>
    */
   public ApiResponse<BankStatement> getUserBankStatementWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserBankStatementWithHttpInfo(id, null);
   }
 
   /**
-   * Get bank statement
-   * Returns a single statement entry.
-   * @param id Statement entry id. (required)
+   * Consultar lançamento
+   * Retorna um lançamento do extrato.
+   * @param id Id do lançamento do extrato. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;BankStatement&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get bank statement Documentation</a>
    */
   public ApiResponse<BankStatement> getUserBankStatementWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserBankStatementRequestBuilder(id, headers);
@@ -436,49 +420,45 @@ public class ReportsApi {
   }
 
   /**
-   * List bank statements
-   * Lists the account statement entries. &#x60;createdAtFrom&#x60; and &#x60;createdAtTo&#x60; are required.
-   * @param createdAtFrom Start date (required). (required)
-   * @param createdAtTo End date (required). (required)
-   * @param id Entry ID. (optional)
-   * @param operation Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
-   * @param reason Reason for the entry. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountFrom Minimum amount. (optional)
-   * @param amountTo Maximum amount. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar extrato
+   * Lista os lançamentos do extrato da conta. &#x60;createdAtFrom&#x60; e &#x60;createdAtTo&#x60; são obrigatórios.
+   * @param createdAtFrom Data inicial (obrigatória). (required)
+   * @param createdAtTo Data final (obrigatória). (required)
+   * @param id ID do lançamento. (optional)
+   * @param operation Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
+   * @param reason Razão do lançamento. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountFrom Valor mínimo. (optional)
+   * @param amountTo Valor máximo. (optional)
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @return BankStatementListResponse
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List bank statements Documentation</a>
    */
   public BankStatementListResponse getUserBankStatements(@javax.annotation.Nonnull OffsetDateTime createdAtFrom, @javax.annotation.Nonnull OffsetDateTime createdAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String operation, @javax.annotation.Nullable String reason, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountFrom, @javax.annotation.Nullable BigDecimal amountTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection) throws ApiException {
     return getUserBankStatements(createdAtFrom, createdAtTo, id, operation, reason, transactionId, amountFrom, amountTo, page, limit, sortBy, sortDirection, null);
   }
 
   /**
-   * List bank statements
-   * Lists the account statement entries. &#x60;createdAtFrom&#x60; and &#x60;createdAtTo&#x60; are required.
-   * @param createdAtFrom Start date (required). (required)
-   * @param createdAtTo End date (required). (required)
-   * @param id Entry ID. (optional)
-   * @param operation Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
-   * @param reason Reason for the entry. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountFrom Minimum amount. (optional)
-   * @param amountTo Maximum amount. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar extrato
+   * Lista os lançamentos do extrato da conta. &#x60;createdAtFrom&#x60; e &#x60;createdAtTo&#x60; são obrigatórios.
+   * @param createdAtFrom Data inicial (obrigatória). (required)
+   * @param createdAtTo Data final (obrigatória). (required)
+   * @param id ID do lançamento. (optional)
+   * @param operation Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
+   * @param reason Razão do lançamento. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountFrom Valor mínimo. (optional)
+   * @param amountTo Valor máximo. (optional)
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @param headers Optional headers to include in the request
    * @return BankStatementListResponse
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List bank statements Documentation</a>
    */
   public BankStatementListResponse getUserBankStatements(@javax.annotation.Nonnull OffsetDateTime createdAtFrom, @javax.annotation.Nonnull OffsetDateTime createdAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String operation, @javax.annotation.Nullable String reason, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountFrom, @javax.annotation.Nullable BigDecimal amountTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, Map<String, String> headers) throws ApiException {
     ApiResponse<BankStatementListResponse> localVarResponse = getUserBankStatementsWithHttpInfo(createdAtFrom, createdAtTo, id, operation, reason, transactionId, amountFrom, amountTo, page, limit, sortBy, sortDirection, headers);
@@ -486,49 +466,45 @@ public class ReportsApi {
   }
 
   /**
-   * List bank statements
-   * Lists the account statement entries. &#x60;createdAtFrom&#x60; and &#x60;createdAtTo&#x60; are required.
-   * @param createdAtFrom Start date (required). (required)
-   * @param createdAtTo End date (required). (required)
-   * @param id Entry ID. (optional)
-   * @param operation Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
-   * @param reason Reason for the entry. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountFrom Minimum amount. (optional)
-   * @param amountTo Maximum amount. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar extrato
+   * Lista os lançamentos do extrato da conta. &#x60;createdAtFrom&#x60; e &#x60;createdAtTo&#x60; são obrigatórios.
+   * @param createdAtFrom Data inicial (obrigatória). (required)
+   * @param createdAtTo Data final (obrigatória). (required)
+   * @param id ID do lançamento. (optional)
+   * @param operation Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
+   * @param reason Razão do lançamento. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountFrom Valor mínimo. (optional)
+   * @param amountTo Valor máximo. (optional)
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @return ApiResponse&lt;BankStatementListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List bank statements Documentation</a>
    */
   public ApiResponse<BankStatementListResponse> getUserBankStatementsWithHttpInfo(@javax.annotation.Nonnull OffsetDateTime createdAtFrom, @javax.annotation.Nonnull OffsetDateTime createdAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String operation, @javax.annotation.Nullable String reason, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountFrom, @javax.annotation.Nullable BigDecimal amountTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection) throws ApiException {
     return getUserBankStatementsWithHttpInfo(createdAtFrom, createdAtTo, id, operation, reason, transactionId, amountFrom, amountTo, page, limit, sortBy, sortDirection, null);
   }
 
   /**
-   * List bank statements
-   * Lists the account statement entries. &#x60;createdAtFrom&#x60; and &#x60;createdAtTo&#x60; are required.
-   * @param createdAtFrom Start date (required). (required)
-   * @param createdAtTo End date (required). (required)
-   * @param id Entry ID. (optional)
-   * @param operation Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
-   * @param reason Reason for the entry. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountFrom Minimum amount. (optional)
-   * @param amountTo Maximum amount. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar extrato
+   * Lista os lançamentos do extrato da conta. &#x60;createdAtFrom&#x60; e &#x60;createdAtTo&#x60; são obrigatórios.
+   * @param createdAtFrom Data inicial (obrigatória). (required)
+   * @param createdAtTo Data final (obrigatória). (required)
+   * @param id ID do lançamento. (optional)
+   * @param operation Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; (optional)
+   * @param reason Razão do lançamento. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountFrom Valor mínimo. (optional)
+   * @param amountTo Valor máximo. (optional)
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;BankStatementListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List bank statements Documentation</a>
    */
   public ApiResponse<BankStatementListResponse> getUserBankStatementsWithHttpInfo(@javax.annotation.Nonnull OffsetDateTime createdAtFrom, @javax.annotation.Nonnull OffsetDateTime createdAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String operation, @javax.annotation.Nullable String reason, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountFrom, @javax.annotation.Nullable BigDecimal amountTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserBankStatementsRequestBuilder(createdAtFrom, createdAtTo, id, operation, reason, transactionId, amountFrom, amountTo, page, limit, sortBy, sortDirection, headers);
@@ -646,45 +622,41 @@ public class ReportsApi {
   }
 
   /**
-   * List pending deposits
-   * Lists deposits that are pending / not yet reconciled.
-   * @param status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-   * @param document CPF or CNPJ, digits only. (optional)
-   * @param name Name of the payer or receiver. (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 20)
+   * Listar depósitos via chave Pix
+   * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por &#x60;POST /pix&#x60;.
+   * @param status Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; (optional)
+   * @param document CPF ou CNPJ, apenas dígitos. (optional)
+   * @param name Nome do pagador ou recebedor. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param page Número da página. Valor inválido vira 1. (optional, default to 1)
+   * @param limit Itens por página. Valor inválido vira 20. (optional, default to 20)
    * @return DepositPendingListResponse
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List pending deposits Documentation</a>
    */
   public DepositPendingListResponse getUserDepositPending(@javax.annotation.Nullable String status, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
     return getUserDepositPending(status, document, name, endToEndId, amountMin, amountMax, createdAtFrom, createdAtTo, page, limit, null);
   }
 
   /**
-   * List pending deposits
-   * Lists deposits that are pending / not yet reconciled.
-   * @param status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-   * @param document CPF or CNPJ, digits only. (optional)
-   * @param name Name of the payer or receiver. (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 20)
+   * Listar depósitos via chave Pix
+   * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por &#x60;POST /pix&#x60;.
+   * @param status Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; (optional)
+   * @param document CPF ou CNPJ, apenas dígitos. (optional)
+   * @param name Nome do pagador ou recebedor. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param page Número da página. Valor inválido vira 1. (optional, default to 1)
+   * @param limit Itens por página. Valor inválido vira 20. (optional, default to 20)
    * @param headers Optional headers to include in the request
    * @return DepositPendingListResponse
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List pending deposits Documentation</a>
    */
   public DepositPendingListResponse getUserDepositPending(@javax.annotation.Nullable String status, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, Map<String, String> headers) throws ApiException {
     ApiResponse<DepositPendingListResponse> localVarResponse = getUserDepositPendingWithHttpInfo(status, document, name, endToEndId, amountMin, amountMax, createdAtFrom, createdAtTo, page, limit, headers);
@@ -692,45 +664,41 @@ public class ReportsApi {
   }
 
   /**
-   * List pending deposits
-   * Lists deposits that are pending / not yet reconciled.
-   * @param status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-   * @param document CPF or CNPJ, digits only. (optional)
-   * @param name Name of the payer or receiver. (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 20)
+   * Listar depósitos via chave Pix
+   * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por &#x60;POST /pix&#x60;.
+   * @param status Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; (optional)
+   * @param document CPF ou CNPJ, apenas dígitos. (optional)
+   * @param name Nome do pagador ou recebedor. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param page Número da página. Valor inválido vira 1. (optional, default to 1)
+   * @param limit Itens por página. Valor inválido vira 20. (optional, default to 20)
    * @return ApiResponse&lt;DepositPendingListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List pending deposits Documentation</a>
    */
   public ApiResponse<DepositPendingListResponse> getUserDepositPendingWithHttpInfo(@javax.annotation.Nullable String status, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit) throws ApiException {
     return getUserDepositPendingWithHttpInfo(status, document, name, endToEndId, amountMin, amountMax, createdAtFrom, createdAtTo, page, limit, null);
   }
 
   /**
-   * List pending deposits
-   * Lists deposits that are pending / not yet reconciled.
-   * @param status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-   * @param document CPF or CNPJ, digits only. (optional)
-   * @param name Name of the payer or receiver. (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 20)
+   * Listar depósitos via chave Pix
+   * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por &#x60;POST /pix&#x60;.
+   * @param status Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; (optional)
+   * @param document CPF ou CNPJ, apenas dígitos. (optional)
+   * @param name Nome do pagador ou recebedor. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param page Número da página. Valor inválido vira 1. (optional, default to 1)
+   * @param limit Itens por página. Valor inválido vira 20. (optional, default to 20)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;DepositPendingListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List pending deposits Documentation</a>
    */
   public ApiResponse<DepositPendingListResponse> getUserDepositPendingWithHttpInfo(@javax.annotation.Nullable String status, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserDepositPendingRequestBuilder(status, document, name, endToEndId, amountMin, amountMax, createdAtFrom, createdAtTo, page, limit, headers);
@@ -836,27 +804,23 @@ public class ReportsApi {
   }
 
   /**
-   * Get pending deposit
-   * Returns a single pending deposit.
-   * @param id Pending deposit id. (required)
+   * Consultar depósito via chave Pix
+   * Retorna um depósito via chave Pix.
+   * @param id Id do depósito pendente. (required)
    * @return DepositPending
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get pending deposit Documentation</a>
    */
   public DepositPending getUserDepositPendingById(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserDepositPendingById(id, null);
   }
 
   /**
-   * Get pending deposit
-   * Returns a single pending deposit.
-   * @param id Pending deposit id. (required)
+   * Consultar depósito via chave Pix
+   * Retorna um depósito via chave Pix.
+   * @param id Id do depósito pendente. (required)
    * @param headers Optional headers to include in the request
    * @return DepositPending
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get pending deposit Documentation</a>
    */
   public DepositPending getUserDepositPendingById(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<DepositPending> localVarResponse = getUserDepositPendingByIdWithHttpInfo(id, headers);
@@ -864,27 +828,23 @@ public class ReportsApi {
   }
 
   /**
-   * Get pending deposit
-   * Returns a single pending deposit.
-   * @param id Pending deposit id. (required)
+   * Consultar depósito via chave Pix
+   * Retorna um depósito via chave Pix.
+   * @param id Id do depósito pendente. (required)
    * @return ApiResponse&lt;DepositPending&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get pending deposit Documentation</a>
    */
   public ApiResponse<DepositPending> getUserDepositPendingByIdWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserDepositPendingByIdWithHttpInfo(id, null);
   }
 
   /**
-   * Get pending deposit
-   * Returns a single pending deposit.
-   * @param id Pending deposit id. (required)
+   * Consultar depósito via chave Pix
+   * Retorna um depósito via chave Pix.
+   * @param id Id do depósito pendente. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;DepositPending&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get pending deposit Documentation</a>
    */
   public ApiResponse<DepositPending> getUserDepositPendingByIdWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserDepositPendingByIdRequestBuilder(id, headers);
@@ -962,27 +922,23 @@ public class ReportsApi {
   }
 
   /**
-   * Get report job status
-   * Returns the status and metadata of a specific report job by &#x60;id&#x60;.
-   * @param id Report ID. (required)
+   * Consultar status do relatório
+   * Retorna o status e os metadados de um job de relatório específico pelo &#x60;id&#x60;.
+   * @param id ID do relatório. (required)
    * @return ReportJobDetail
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get report job status Documentation</a>
    */
   public ReportJobDetail getUserReport(@javax.annotation.Nonnull UUID id) throws ApiException {
     return getUserReport(id, null);
   }
 
   /**
-   * Get report job status
-   * Returns the status and metadata of a specific report job by &#x60;id&#x60;.
-   * @param id Report ID. (required)
+   * Consultar status do relatório
+   * Retorna o status e os metadados de um job de relatório específico pelo &#x60;id&#x60;.
+   * @param id ID do relatório. (required)
    * @param headers Optional headers to include in the request
    * @return ReportJobDetail
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get report job status Documentation</a>
    */
   public ReportJobDetail getUserReport(@javax.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
     ApiResponse<ReportJobDetail> localVarResponse = getUserReportWithHttpInfo(id, headers);
@@ -990,27 +946,23 @@ public class ReportsApi {
   }
 
   /**
-   * Get report job status
-   * Returns the status and metadata of a specific report job by &#x60;id&#x60;.
-   * @param id Report ID. (required)
+   * Consultar status do relatório
+   * Retorna o status e os metadados de um job de relatório específico pelo &#x60;id&#x60;.
+   * @param id ID do relatório. (required)
    * @return ApiResponse&lt;ReportJobDetail&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get report job status Documentation</a>
    */
   public ApiResponse<ReportJobDetail> getUserReportWithHttpInfo(@javax.annotation.Nonnull UUID id) throws ApiException {
     return getUserReportWithHttpInfo(id, null);
   }
 
   /**
-   * Get report job status
-   * Returns the status and metadata of a specific report job by &#x60;id&#x60;.
-   * @param id Report ID. (required)
+   * Consultar status do relatório
+   * Retorna o status e os metadados de um job de relatório específico pelo &#x60;id&#x60;.
+   * @param id ID do relatório. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ReportJobDetail&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Get report job status Documentation</a>
    */
   public ApiResponse<ReportJobDetail> getUserReportWithHttpInfo(@javax.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserReportRequestBuilder(id, headers);
@@ -1088,33 +1040,29 @@ public class ReportsApi {
   }
 
   /**
-   * Transaction summary
-   * Aggregated totals for deposits, withdrawals and commission over a period.
-   * @param dateFrom Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-   * @param dateTo End date. Default: now. (optional)
-   * @param groupBy Grouping applied to the transactions. (optional, default to day)
-   * @param grouped When true, returns a series grouped by date. (optional)
+   * Resumo de transações
+   * Totais agregados de depósitos, saques e comissão num período.
+   * @param dateFrom Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). (optional)
+   * @param dateTo Data final. Padrão: agora. (optional)
+   * @param groupBy Agrupamento das transações. (optional, default to day)
+   * @param grouped Quando true, retorna uma série agrupada por data. (optional)
    * @return Summary
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Transaction summary Documentation</a>
    */
   public Summary getUserSummary(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable String groupBy, @javax.annotation.Nullable Boolean grouped) throws ApiException {
     return getUserSummary(dateFrom, dateTo, groupBy, grouped, null);
   }
 
   /**
-   * Transaction summary
-   * Aggregated totals for deposits, withdrawals and commission over a period.
-   * @param dateFrom Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-   * @param dateTo End date. Default: now. (optional)
-   * @param groupBy Grouping applied to the transactions. (optional, default to day)
-   * @param grouped When true, returns a series grouped by date. (optional)
+   * Resumo de transações
+   * Totais agregados de depósitos, saques e comissão num período.
+   * @param dateFrom Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). (optional)
+   * @param dateTo Data final. Padrão: agora. (optional)
+   * @param groupBy Agrupamento das transações. (optional, default to day)
+   * @param grouped Quando true, retorna uma série agrupada por data. (optional)
    * @param headers Optional headers to include in the request
    * @return Summary
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Transaction summary Documentation</a>
    */
   public Summary getUserSummary(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable String groupBy, @javax.annotation.Nullable Boolean grouped, Map<String, String> headers) throws ApiException {
     ApiResponse<Summary> localVarResponse = getUserSummaryWithHttpInfo(dateFrom, dateTo, groupBy, grouped, headers);
@@ -1122,33 +1070,29 @@ public class ReportsApi {
   }
 
   /**
-   * Transaction summary
-   * Aggregated totals for deposits, withdrawals and commission over a period.
-   * @param dateFrom Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-   * @param dateTo End date. Default: now. (optional)
-   * @param groupBy Grouping applied to the transactions. (optional, default to day)
-   * @param grouped When true, returns a series grouped by date. (optional)
+   * Resumo de transações
+   * Totais agregados de depósitos, saques e comissão num período.
+   * @param dateFrom Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). (optional)
+   * @param dateTo Data final. Padrão: agora. (optional)
+   * @param groupBy Agrupamento das transações. (optional, default to day)
+   * @param grouped Quando true, retorna uma série agrupada por data. (optional)
    * @return ApiResponse&lt;Summary&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Transaction summary Documentation</a>
    */
   public ApiResponse<Summary> getUserSummaryWithHttpInfo(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable String groupBy, @javax.annotation.Nullable Boolean grouped) throws ApiException {
     return getUserSummaryWithHttpInfo(dateFrom, dateTo, groupBy, grouped, null);
   }
 
   /**
-   * Transaction summary
-   * Aggregated totals for deposits, withdrawals and commission over a period.
-   * @param dateFrom Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-   * @param dateTo End date. Default: now. (optional)
-   * @param groupBy Grouping applied to the transactions. (optional, default to day)
-   * @param grouped When true, returns a series grouped by date. (optional)
+   * Resumo de transações
+   * Totais agregados de depósitos, saques e comissão num período.
+   * @param dateFrom Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). (optional)
+   * @param dateTo Data final. Padrão: agora. (optional)
+   * @param groupBy Agrupamento das transações. (optional, default to day)
+   * @param grouped Quando true, retorna uma série agrupada por data. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Summary&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Transaction summary Documentation</a>
    */
   public ApiResponse<Summary> getUserSummaryWithHttpInfo(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable String groupBy, @javax.annotation.Nullable Boolean grouped, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserSummaryRequestBuilder(dateFrom, dateTo, groupBy, grouped, headers);
@@ -1242,27 +1186,23 @@ public class ReportsApi {
   }
 
   /**
-   * List transaction details
-   * Retrieve a single transaction with its callback log and linked infractions.
-   * @param id Transaction ID. (required)
+   * Listar detalhes da transação
+   * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+   * @param id ID da transação. (required)
    * @return GetUserTransactionById200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List transaction details Documentation</a>
    */
   public GetUserTransactionById200Response getUserTransactionById(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserTransactionById(id, null);
   }
 
   /**
-   * List transaction details
-   * Retrieve a single transaction with its callback log and linked infractions.
-   * @param id Transaction ID. (required)
+   * Listar detalhes da transação
+   * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+   * @param id ID da transação. (required)
    * @param headers Optional headers to include in the request
    * @return GetUserTransactionById200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List transaction details Documentation</a>
    */
   public GetUserTransactionById200Response getUserTransactionById(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<GetUserTransactionById200Response> localVarResponse = getUserTransactionByIdWithHttpInfo(id, headers);
@@ -1270,27 +1210,23 @@ public class ReportsApi {
   }
 
   /**
-   * List transaction details
-   * Retrieve a single transaction with its callback log and linked infractions.
-   * @param id Transaction ID. (required)
+   * Listar detalhes da transação
+   * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+   * @param id ID da transação. (required)
    * @return ApiResponse&lt;GetUserTransactionById200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List transaction details Documentation</a>
    */
   public ApiResponse<GetUserTransactionById200Response> getUserTransactionByIdWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserTransactionByIdWithHttpInfo(id, null);
   }
 
   /**
-   * List transaction details
-   * Retrieve a single transaction with its callback log and linked infractions.
-   * @param id Transaction ID. (required)
+   * Listar detalhes da transação
+   * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+   * @param id ID da transação. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;GetUserTransactionById200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List transaction details Documentation</a>
    */
   public ApiResponse<GetUserTransactionById200Response> getUserTransactionByIdWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserTransactionByIdRequestBuilder(id, headers);
@@ -1368,59 +1304,55 @@ public class ReportsApi {
   }
 
   /**
-   * List Transactions
-   * Paginated list of account transactions with filters.
-   * @param dateFrom Start date-time (ISO 8601). (optional)
-   * @param dateTo End date-time (ISO 8601). (optional)
-   * @param limit Items per page (max 1000). (optional, default to 10)
-   * @param page Page number (default 1). (optional, default to 1)
-   * @param id Transaction ID. (optional)
-   * @param status Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-   * @param type Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
-   * @param method Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
-   * @param amount Amount filter. Minimum 0.01. (optional)
-   * @param document CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
-   * @param name Name filter. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param sortBy Field to sort by (optional, default to createdAt)
-   * @param sortDirection Sort direction (optional, default to desc)
-   * @param clientReference Filter by external reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-   * @param hasQrCode Only transactions with (true) or without (false) QR Code. (optional)
+   * Listar transações
+   * Lista paginada das transações da conta com filtros.
+   * @param dateFrom Data-hora inicial (ISO 8601). (optional)
+   * @param dateTo Data-hora final (ISO 8601). (optional)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param page Número da página. (optional, default to 1)
+   * @param id ID da transação. (optional)
+   * @param status Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; (optional)
+   * @param type Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+   * @param method Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; (optional)
+   * @param amount Filtro por valor. Mínimo 0.01. (optional)
+   * @param document CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. (optional)
+   * @param name Filtro por nome. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param sortBy Campo pelo qual ordenar (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação (optional, default to desc)
+   * @param clientReference Filtra por referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
+   * @param hasQrCode Só transações com (true) ou sem (false) QR Code. (optional)
    * @return GetUserTransactions200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List Transactions Documentation</a>
    */
   public GetUserTransactions200Response getUserTransactions(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable String id, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String method, @javax.annotation.Nullable BigDecimal amount, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount, @javax.annotation.Nullable Boolean hasQrCode) throws ApiException {
     return getUserTransactions(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount, hasQrCode, null);
   }
 
   /**
-   * List Transactions
-   * Paginated list of account transactions with filters.
-   * @param dateFrom Start date-time (ISO 8601). (optional)
-   * @param dateTo End date-time (ISO 8601). (optional)
-   * @param limit Items per page (max 1000). (optional, default to 10)
-   * @param page Page number (default 1). (optional, default to 1)
-   * @param id Transaction ID. (optional)
-   * @param status Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-   * @param type Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
-   * @param method Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
-   * @param amount Amount filter. Minimum 0.01. (optional)
-   * @param document CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
-   * @param name Name filter. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param sortBy Field to sort by (optional, default to createdAt)
-   * @param sortDirection Sort direction (optional, default to desc)
-   * @param clientReference Filter by external reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-   * @param hasQrCode Only transactions with (true) or without (false) QR Code. (optional)
+   * Listar transações
+   * Lista paginada das transações da conta com filtros.
+   * @param dateFrom Data-hora inicial (ISO 8601). (optional)
+   * @param dateTo Data-hora final (ISO 8601). (optional)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param page Número da página. (optional, default to 1)
+   * @param id ID da transação. (optional)
+   * @param status Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; (optional)
+   * @param type Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+   * @param method Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; (optional)
+   * @param amount Filtro por valor. Mínimo 0.01. (optional)
+   * @param document CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. (optional)
+   * @param name Filtro por nome. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param sortBy Campo pelo qual ordenar (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação (optional, default to desc)
+   * @param clientReference Filtra por referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
+   * @param hasQrCode Só transações com (true) ou sem (false) QR Code. (optional)
    * @param headers Optional headers to include in the request
    * @return GetUserTransactions200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List Transactions Documentation</a>
    */
   public GetUserTransactions200Response getUserTransactions(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable String id, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String method, @javax.annotation.Nullable BigDecimal amount, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount, @javax.annotation.Nullable Boolean hasQrCode, Map<String, String> headers) throws ApiException {
     ApiResponse<GetUserTransactions200Response> localVarResponse = getUserTransactionsWithHttpInfo(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount, hasQrCode, headers);
@@ -1428,59 +1360,55 @@ public class ReportsApi {
   }
 
   /**
-   * List Transactions
-   * Paginated list of account transactions with filters.
-   * @param dateFrom Start date-time (ISO 8601). (optional)
-   * @param dateTo End date-time (ISO 8601). (optional)
-   * @param limit Items per page (max 1000). (optional, default to 10)
-   * @param page Page number (default 1). (optional, default to 1)
-   * @param id Transaction ID. (optional)
-   * @param status Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-   * @param type Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
-   * @param method Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
-   * @param amount Amount filter. Minimum 0.01. (optional)
-   * @param document CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
-   * @param name Name filter. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param sortBy Field to sort by (optional, default to createdAt)
-   * @param sortDirection Sort direction (optional, default to desc)
-   * @param clientReference Filter by external reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-   * @param hasQrCode Only transactions with (true) or without (false) QR Code. (optional)
+   * Listar transações
+   * Lista paginada das transações da conta com filtros.
+   * @param dateFrom Data-hora inicial (ISO 8601). (optional)
+   * @param dateTo Data-hora final (ISO 8601). (optional)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param page Número da página. (optional, default to 1)
+   * @param id ID da transação. (optional)
+   * @param status Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; (optional)
+   * @param type Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+   * @param method Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; (optional)
+   * @param amount Filtro por valor. Mínimo 0.01. (optional)
+   * @param document CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. (optional)
+   * @param name Filtro por nome. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param sortBy Campo pelo qual ordenar (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação (optional, default to desc)
+   * @param clientReference Filtra por referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
+   * @param hasQrCode Só transações com (true) ou sem (false) QR Code. (optional)
    * @return ApiResponse&lt;GetUserTransactions200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List Transactions Documentation</a>
    */
   public ApiResponse<GetUserTransactions200Response> getUserTransactionsWithHttpInfo(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable String id, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String method, @javax.annotation.Nullable BigDecimal amount, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount, @javax.annotation.Nullable Boolean hasQrCode) throws ApiException {
     return getUserTransactionsWithHttpInfo(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount, hasQrCode, null);
   }
 
   /**
-   * List Transactions
-   * Paginated list of account transactions with filters.
-   * @param dateFrom Start date-time (ISO 8601). (optional)
-   * @param dateTo End date-time (ISO 8601). (optional)
-   * @param limit Items per page (max 1000). (optional, default to 10)
-   * @param page Page number (default 1). (optional, default to 1)
-   * @param id Transaction ID. (optional)
-   * @param status Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-   * @param type Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
-   * @param method Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
-   * @param amount Amount filter. Minimum 0.01. (optional)
-   * @param document CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
-   * @param name Name filter. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param sortBy Field to sort by (optional, default to createdAt)
-   * @param sortDirection Sort direction (optional, default to desc)
-   * @param clientReference Filter by external reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-   * @param hasQrCode Only transactions with (true) or without (false) QR Code. (optional)
+   * Listar transações
+   * Lista paginada das transações da conta com filtros.
+   * @param dateFrom Data-hora inicial (ISO 8601). (optional)
+   * @param dateTo Data-hora final (ISO 8601). (optional)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param page Número da página. (optional, default to 1)
+   * @param id ID da transação. (optional)
+   * @param status Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; (optional)
+   * @param type Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+   * @param method Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; (optional)
+   * @param amount Filtro por valor. Mínimo 0.01. (optional)
+   * @param document CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. (optional)
+   * @param name Filtro por nome. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param sortBy Campo pelo qual ordenar (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação (optional, default to desc)
+   * @param clientReference Filtra por referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
+   * @param hasQrCode Só transações com (true) ou sem (false) QR Code. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;GetUserTransactions200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List Transactions Documentation</a>
    */
   public ApiResponse<GetUserTransactions200Response> getUserTransactionsWithHttpInfo(@javax.annotation.Nullable OffsetDateTime dateFrom, @javax.annotation.Nullable OffsetDateTime dateTo, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable Integer page, @javax.annotation.Nullable String id, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String method, @javax.annotation.Nullable BigDecimal amount, @javax.annotation.Nullable String document, @javax.annotation.Nullable String name, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount, @javax.annotation.Nullable Boolean hasQrCode, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserTransactionsRequestBuilder(dateFrom, dateTo, limit, page, id, status, type, method, amount, document, name, endToEndId, sortBy, sortDirection, clientReference, virtualAccount, hasQrCode, headers);
@@ -1600,43 +1528,39 @@ public class ReportsApi {
   }
 
   /**
-   * List report jobs
-   * List report jobs created by the authenticated user.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
-   * @param createdAtFrom Filter: created from. (optional)
-   * @param createdAtTo Filter: created up to. (optional)
-   * @param updatedAtFrom Filter: updated from. (optional)
-   * @param updatedAtTo Filter: updated up to. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar jobs de relatório
+   * Lista os jobs de relatório criados pelo usuário autenticado.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+   * @param createdAtFrom Filtro: criado a partir de. (optional)
+   * @param createdAtTo Filtro: criado até. (optional)
+   * @param updatedAtFrom Filtro: atualizado a partir de. (optional)
+   * @param updatedAtTo Filtro: atualizado até. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @return ListUserReports200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List report jobs Documentation</a>
    */
   public ListUserReports200Response listUserReports(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection) throws ApiException {
     return listUserReports(page, limit, status, createdAtFrom, createdAtTo, updatedAtFrom, updatedAtTo, sortBy, sortDirection, null);
   }
 
   /**
-   * List report jobs
-   * List report jobs created by the authenticated user.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
-   * @param createdAtFrom Filter: created from. (optional)
-   * @param createdAtTo Filter: created up to. (optional)
-   * @param updatedAtFrom Filter: updated from. (optional)
-   * @param updatedAtTo Filter: updated up to. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar jobs de relatório
+   * Lista os jobs de relatório criados pelo usuário autenticado.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+   * @param createdAtFrom Filtro: criado a partir de. (optional)
+   * @param createdAtTo Filtro: criado até. (optional)
+   * @param updatedAtFrom Filtro: atualizado a partir de. (optional)
+   * @param updatedAtTo Filtro: atualizado até. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @param headers Optional headers to include in the request
    * @return ListUserReports200Response
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List report jobs Documentation</a>
    */
   public ListUserReports200Response listUserReports(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, Map<String, String> headers) throws ApiException {
     ApiResponse<ListUserReports200Response> localVarResponse = listUserReportsWithHttpInfo(page, limit, status, createdAtFrom, createdAtTo, updatedAtFrom, updatedAtTo, sortBy, sortDirection, headers);
@@ -1644,43 +1568,39 @@ public class ReportsApi {
   }
 
   /**
-   * List report jobs
-   * List report jobs created by the authenticated user.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
-   * @param createdAtFrom Filter: created from. (optional)
-   * @param createdAtTo Filter: created up to. (optional)
-   * @param updatedAtFrom Filter: updated from. (optional)
-   * @param updatedAtTo Filter: updated up to. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar jobs de relatório
+   * Lista os jobs de relatório criados pelo usuário autenticado.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+   * @param createdAtFrom Filtro: criado a partir de. (optional)
+   * @param createdAtTo Filtro: criado até. (optional)
+   * @param updatedAtFrom Filtro: atualizado a partir de. (optional)
+   * @param updatedAtTo Filtro: atualizado até. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @return ApiResponse&lt;ListUserReports200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List report jobs Documentation</a>
    */
   public ApiResponse<ListUserReports200Response> listUserReportsWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection) throws ApiException {
     return listUserReportsWithHttpInfo(page, limit, status, createdAtFrom, createdAtTo, updatedAtFrom, updatedAtTo, sortBy, sortDirection, null);
   }
 
   /**
-   * List report jobs
-   * List report jobs created by the authenticated user.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
-   * @param createdAtFrom Filter: created from. (optional)
-   * @param createdAtTo Filter: created up to. (optional)
-   * @param updatedAtFrom Filter: updated from. (optional)
-   * @param updatedAtTo Filter: updated up to. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
+   * Listar jobs de relatório
+   * Lista os jobs de relatório criados pelo usuário autenticado.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+   * @param createdAtFrom Filtro: criado a partir de. (optional)
+   * @param createdAtTo Filtro: criado até. (optional)
+   * @param updatedAtFrom Filtro: atualizado a partir de. (optional)
+   * @param updatedAtTo Filtro: atualizado até. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ListUserReports200Response&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">List report jobs Documentation</a>
    */
   public ApiResponse<ListUserReports200Response> listUserReportsWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = listUserReportsRequestBuilder(page, limit, status, createdAtFrom, createdAtTo, updatedAtFrom, updatedAtTo, sortBy, sortDirection, headers);
@@ -1784,27 +1704,23 @@ public class ReportsApi {
   }
 
   /**
-   * Generate transactions report
-   * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+   * Gerar relatório de transações
+   * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
    * @param postUserReportRequest  (required)
    * @return ReportJobAccepted
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Generate transactions report Documentation</a>
    */
   public ReportJobAccepted postUserReport(@javax.annotation.Nonnull PostUserReportRequest postUserReportRequest) throws ApiException {
     return postUserReport(postUserReportRequest, null);
   }
 
   /**
-   * Generate transactions report
-   * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+   * Gerar relatório de transações
+   * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
    * @param postUserReportRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ReportJobAccepted
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Generate transactions report Documentation</a>
    */
   public ReportJobAccepted postUserReport(@javax.annotation.Nonnull PostUserReportRequest postUserReportRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<ReportJobAccepted> localVarResponse = postUserReportWithHttpInfo(postUserReportRequest, headers);
@@ -1812,27 +1728,23 @@ public class ReportsApi {
   }
 
   /**
-   * Generate transactions report
-   * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+   * Gerar relatório de transações
+   * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
    * @param postUserReportRequest  (required)
    * @return ApiResponse&lt;ReportJobAccepted&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Generate transactions report Documentation</a>
    */
   public ApiResponse<ReportJobAccepted> postUserReportWithHttpInfo(@javax.annotation.Nonnull PostUserReportRequest postUserReportRequest) throws ApiException {
     return postUserReportWithHttpInfo(postUserReportRequest, null);
   }
 
   /**
-   * Generate transactions report
-   * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+   * Gerar relatório de transações
+   * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
    * @param postUserReportRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ReportJobAccepted&gt;
    * @throws ApiException if fails to make API call
-   * Reconciliation
-   * @see <a href="/docs/pix-processamento/tutoriais/reconciliation">Generate transactions report Documentation</a>
    */
   public ApiResponse<ReportJobAccepted> postUserReportWithHttpInfo(@javax.annotation.Nonnull PostUserReportRequest postUserReportRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postUserReportRequestBuilder(postUserReportRequest, headers);

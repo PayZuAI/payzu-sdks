@@ -7,9 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**total** | **Integer** | Number of transactions that match the query filters. |  [optional] |
-|**pages** | **Integer** | Number of pages for the limit provided, computed from total rounded up. |  [optional] |
-|**transactions** | [**List&lt;Transaction&gt;**](Transaction.md) | Items of the requested page, ordered by sortBy and sortDirection. |  [optional] |
+|**total** | **Integer** | Quantidade de transações que atendem aos filtros da consulta. |  [optional] |
+|**pages** | **Integer** | Número de páginas para o limit informado, calculado a partir de total arredondado para cima. |  [optional] |
+|**transactions** | [**List&lt;Transaction&gt;**](Transaction.md) | Itens da página pedida, ordenados por sortBy e sortDirection. |  [optional] |
 
 
 

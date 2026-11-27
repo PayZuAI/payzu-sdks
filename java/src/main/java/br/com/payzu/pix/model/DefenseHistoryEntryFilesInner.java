@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -60,7 +60,7 @@ public class DefenseHistoryEntryFilesInner {
   }
 
   /**
-   * Name of the file sent with the defense.
+   * Nome do arquivo enviado como anexo da defesa.
    * @return name
    */
   @javax.annotation.Nullable
@@ -84,7 +84,7 @@ public class DefenseHistoryEntryFilesInner {
   }
 
   /**
-   * MIME type of the file, provided on upload, for example application/pdf or image/png.
+   * Tipo MIME do anexo, informado no upload, por exemplo application/pdf ou image/png.
    * @return mimeType
    */
   @javax.annotation.Nullable
@@ -108,7 +108,7 @@ public class DefenseHistoryEntryFilesInner {
   }
 
   /**
-   * Size of the file in bytes.
+   * Tamanho do anexo em bytes.
    * @return size
    */
   @javax.annotation.Nullable

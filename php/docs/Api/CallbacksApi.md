@@ -1,19 +1,19 @@
 # PayZu\Pix\CallbacksApi
 
-Webhook callback inspection and re-trigger
+Inspeção e reenvio de callback de webhook
 
 All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**createUserCallbackSecret()**](CallbacksApi.md#createUserCallbackSecret) | **POST** /user/callbacks/secret | Create callback secret |
-| [**getUserCallbackById()**](CallbacksApi.md#getUserCallbackById) | **GET** /user/callbacks/{id} | Get Callback |
-| [**getUserCallbacks()**](CallbacksApi.md#getUserCallbacks) | **GET** /user/callbacks | List Callbacks |
-| [**resendUserCallbackSingle()**](CallbacksApi.md#resendUserCallbackSingle) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single) |
-| [**resendUserCallbacks()**](CallbacksApi.md#resendUserCallbacks) | **POST** /user/callbacks/resend | Re-send callbacks (bulk) |
-| [**resendUserCallbacksWebhook()**](CallbacksApi.md#resendUserCallbacksWebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook |
-| [**resendUserCallbacksWebhooks()**](CallbacksApi.md#resendUserCallbacksWebhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters |
-| [**rotateUserCallbackSecret()**](CallbacksApi.md#rotateUserCallbackSecret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret |
+| [**createUserCallbackSecret()**](CallbacksApi.md#createUserCallbackSecret) | **POST** /user/callbacks/secret | Criar segredo de callback |
+| [**getUserCallbackById()**](CallbacksApi.md#getUserCallbackById) | **GET** /user/callbacks/{id} | Obter Callback |
+| [**getUserCallbacks()**](CallbacksApi.md#getUserCallbacks) | **GET** /user/callbacks | Listar Callbacks |
+| [**resendUserCallbackSingle()**](CallbacksApi.md#resendUserCallbackSingle) | **POST** /user/callbacks/resend/{transactionId} | Reenviar callback (individual) |
+| [**resendUserCallbacks()**](CallbacksApi.md#resendUserCallbacks) | **POST** /user/callbacks/resend | Reenviar callbacks (em lote) |
+| [**resendUserCallbacksWebhook()**](CallbacksApi.md#resendUserCallbacksWebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Reenviar callbacks por webhook |
+| [**resendUserCallbacksWebhooks()**](CallbacksApi.md#resendUserCallbacksWebhooks) | **POST** /user/callbacks/resend/webhook | Reenviar callbacks de webhook por filtros |
+| [**rotateUserCallbackSecret()**](CallbacksApi.md#rotateUserCallbackSecret) | **PATCH** /user/callbacks/secret/rotate | Rotacionar segredo de callback |
 
 
 ## `createUserCallbackSecret()`
@@ -22,9 +22,9 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 createUserCallbackSecret(): \PayZu\Pix\Model\CallbackSecretResponse
 ```
 
-Create callback secret
+Criar segredo de callback
 
-Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
 
 ### Example
 
@@ -79,9 +79,9 @@ This endpoint does not need any parameter.
 getUserCallbackById($id): \PayZu\Pix\Model\CallbackDetail
 ```
 
-Get Callback
+Obter Callback
 
-Returns the details of a specific callback log.
+Retorna os detalhes de um log de callback específico.
 
 ### Example
 
@@ -100,7 +100,7 @@ $apiInstance = new PayZu\Pix\Api\CallbacksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7l9v20001q8f2u6c1y4be; // string | Unique callback ID
+$id = cm3w7l9v20001q8f2u6c1y4be; // string | ID único do callback
 
 try {
     $result = $apiInstance->getUserCallbackById($id);
@@ -114,7 +114,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Unique callback ID | |
+| **id** | **string**| ID único do callback | |
 
 ### Return type
 
@@ -139,9 +139,9 @@ try {
 getUserCallbacks($page, $limit, $sort_by, $sort_direction, $id, $url, $status, $transaction_id, $has_error, $created_at_from, $created_at_to, $webhook_id, $event_type): \PayZu\Pix\Model\CallbackListResponse
 ```
 
-List Callbacks
+Listar Callbacks
 
-Returns a paginated list of webhook callback logs for the user's transactions.
+Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
 
 ### Example
 
@@ -160,19 +160,19 @@ $apiInstance = new PayZu\Pix\Api\CallbacksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int | Page number.
-$limit = 10; // int | Items per page.
-$sort_by = 'createdAt'; // string | Sort field.
-$sort_direction = 'desc'; // string | Sort direction.
-$id = cm3w7l9v20001q8f2u6c1y4be; // string | Filter by callback ID
-$url = https://webhook.cool/; // string | Filter by callback URL
-$status = 200; // int | HTTP status code
-$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
-$has_error = true; // bool | Filter callbacks that errored
-$created_at_from = 2026-08-01; // \DateTime | Start of the creation date range.
-$created_at_to = 2026-08-31; // \DateTime | End of the creation date range.
-$webhook_id = 'webhook_id_example'; // string | Webhook id.
-$event_type = new \PayZu\Pix\Model\\PayZu\Pix\Model\WebhookEventType(); // \PayZu\Pix\Model\WebhookEventType | Webhook event type.
+$page = 1; // int | Número da página.
+$limit = 10; // int | Itens por página.
+$sort_by = 'createdAt'; // string | Campo de ordenação.
+$sort_direction = 'desc'; // string | Direção da ordenação.
+$id = cm3w7l9v20001q8f2u6c1y4be; // string | Filtra por ID de callback
+$url = https://webhook.cool/; // string | Filtra por callback URL
+$status = 200; // int | Status HTTP devolvido pelo seu endpoint.
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
+$has_error = true; // bool | Filtra callbacks que apresentaram erro
+$created_at_from = 2026-08-01; // \DateTime | Data de criação inicial.
+$created_at_to = 2026-08-31; // \DateTime | Data de criação final.
+$webhook_id = 'webhook_id_example'; // string | Id do webhook.
+$event_type = new \PayZu\Pix\Model\\PayZu\Pix\Model\WebhookEventType(); // \PayZu\Pix\Model\WebhookEventType | Tipo de evento do webhook.
 
 try {
     $result = $apiInstance->getUserCallbacks($page, $limit, $sort_by, $sort_direction, $id, $url, $status, $transaction_id, $has_error, $created_at_from, $created_at_to, $webhook_id, $event_type);
@@ -186,19 +186,19 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**| Page number. | [optional] [default to 1] |
-| **limit** | **int**| Items per page. | [optional] [default to 10] |
-| **sort_by** | **string**| Sort field. | [optional] [default to &#39;createdAt&#39;] |
-| **sort_direction** | **string**| Sort direction. | [optional] [default to &#39;desc&#39;] |
-| **id** | **string**| Filter by callback ID | [optional] |
-| **url** | **string**| Filter by callback URL | [optional] |
-| **status** | **int**| HTTP status code | [optional] |
-| **transaction_id** | **string**| Transaction ID. | [optional] |
-| **has_error** | **bool**| Filter callbacks that errored | [optional] |
-| **created_at_from** | **\DateTime**| Start of the creation date range. | [optional] |
-| **created_at_to** | **\DateTime**| End of the creation date range. | [optional] |
-| **webhook_id** | **string**| Webhook id. | [optional] |
-| **event_type** | [**\PayZu\Pix\Model\WebhookEventType**](../Model/.md)| Webhook event type. | [optional] |
+| **page** | **int**| Número da página. | [optional] [default to 1] |
+| **limit** | **int**| Itens por página. | [optional] [default to 10] |
+| **sort_by** | **string**| Campo de ordenação. | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**| Direção da ordenação. | [optional] [default to &#39;desc&#39;] |
+| **id** | **string**| Filtra por ID de callback | [optional] |
+| **url** | **string**| Filtra por callback URL | [optional] |
+| **status** | **int**| Status HTTP devolvido pelo seu endpoint. | [optional] |
+| **transaction_id** | **string**| ID da transação. | [optional] |
+| **has_error** | **bool**| Filtra callbacks que apresentaram erro | [optional] |
+| **created_at_from** | **\DateTime**| Data de criação inicial. | [optional] |
+| **created_at_to** | **\DateTime**| Data de criação final. | [optional] |
+| **webhook_id** | **string**| Id do webhook. | [optional] |
+| **event_type** | [**\PayZu\Pix\Model\WebhookEventType**](../Model/.md)| Tipo de evento do webhook. | [optional] |
 
 ### Return type
 
@@ -223,9 +223,9 @@ try {
 resendUserCallbackSingle($transaction_id): \PayZu\Pix\Model\ResendUserCallbackSingle200Response
 ```
 
-Re-send callback (single)
+Reenviar callback (individual)
 
-Resend the callback of a single transaction.
+Reenvia o callback de uma única transação.
 
 ### Example
 
@@ -244,7 +244,7 @@ $apiInstance = new PayZu\Pix\Api\CallbacksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
 
 try {
     $result = $apiInstance->resendUserCallbackSingle($transaction_id);
@@ -258,7 +258,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **transaction_id** | **string**| Transaction ID. | |
+| **transaction_id** | **string**| ID da transação. | |
 
 ### Return type
 
@@ -283,9 +283,9 @@ try {
 resendUserCallbacks($resend_user_callbacks_request): \PayZu\Pix\Model\ResendUserCallbacks200Response
 ```
 
-Re-send callbacks (bulk)
+Reenviar callbacks (em lote)
 
-Resend callbacks in bulk for transactions matching the given filters.
+Reenvia callbacks em lote para transações que correspondem aos filtros informados.
 
 ### Example
 
@@ -343,9 +343,9 @@ try {
 resendUserCallbacksWebhook($webhook_id): \PayZu\Pix\Model\EnqueuedCallback
 ```
 
-Resend callbacks by webhook
+Reenviar callbacks por webhook
 
-Queues a bulk resend of the failed callbacks of a given webhook.
+Enfileira o reenvio em lote dos callbacks falhos de um webhook.
 
 ### Example
 
@@ -364,7 +364,7 @@ $apiInstance = new PayZu\Pix\Api\CallbacksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$webhook_id = cm3w7k1t40000q8f2r5b9x3ad; // string | Id do webhook.
 
 try {
     $result = $apiInstance->resendUserCallbacksWebhook($webhook_id);
@@ -378,7 +378,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **webhook_id** | **string**| Webhook id. | |
+| **webhook_id** | **string**| Id do webhook. | |
 
 ### Return type
 
@@ -403,9 +403,9 @@ try {
 resendUserCallbacksWebhooks($resend_webhook_callbacks_request): \PayZu\Pix\Model\EnqueuedCallback
 ```
 
-Resend webhook callbacks by filters
+Reenviar callbacks de webhook por filtros
 
-Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
 
 ### Example
 
@@ -463,9 +463,9 @@ try {
 rotateUserCallbackSecret(): \PayZu\Pix\Model\RotateCallbackSecretResponse
 ```
 
-Rotate callback secret
+Rotacionar segredo de callback
 
-Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
 
 ### Example
 

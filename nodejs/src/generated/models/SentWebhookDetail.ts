@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,73 +20,73 @@ import { mapValues } from '../runtime.js';
  */
 export interface SentWebhookDetail {
     /**
-     * Identifier of this delivery attempt.
+     * Identificador desta tentativa de entrega.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     id?: string;
     /**
-     * Webhook that originated the delivery.
+     * Webhook que originou a entrega.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     webhookId?: string | null;
     /**
-     * Pix transaction whose event was notified.
+     * Transação Pix cujo evento foi notificado.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     transactionId?: string;
     /**
-     * Address this delivery was sent to, recorded at the time of the dispatch.
+     * Endereço para onde esta entrega foi feita, gravado no momento do disparo.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     url?: string;
     /**
-     * Body sent in the delivery, as serialized JSON.
+     * Corpo enviado no disparo, em JSON serializado.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     body?: string;
     /**
-     * HTTP status returned by your endpoint.
+     * Status HTTP retornado pelo seu endpoint.
      * @type {number}
      * @memberof SentWebhookDetail
      */
     status?: number;
     /**
-     * Response headers, as serialized JSON.
+     * Headers da resposta, em JSON serializado.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     responseHeaders?: string;
     /**
-     * Body of the response received.
+     * Corpo da resposta recebida.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     responseBody?: string;
     /**
-     * Message of the delivery failure.
+     * Mensagem da falha na entrega.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     error?: string | null;
     /**
-     * Response time of your endpoint, in milliseconds.
+     * Tempo de resposta do seu endpoint, em milissegundos.
      * @type {number}
      * @memberof SentWebhookDetail
      */
     responseTime?: number;
     /**
-     * Event that triggered this delivery, the same value sent in the X-Callback-Event header.
+     * Evento que disparou esta entrega, o mesmo valor enviado no cabeçalho X-Callback-Event.
      * @type {string}
      * @memberof SentWebhookDetail
      */
     eventType?: string | null;
     /**
-     * Moment of the delivery attempt.
+     * Momento da tentativa de entrega.
      * @type {Date}
      * @memberof SentWebhookDetail
      */

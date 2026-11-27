@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -17,13 +17,13 @@ import (
 // checks if the RefundRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RefundRequest{}
 
-// RefundRequest struct for RefundRequest
+// RefundRequest Só aceita amount, description e clientReference; outro campo é recusado com 400.
 type RefundRequest struct {
-	// Amount in BRL to refund. Omit to refund the full transaction amount. Partial refunds are allowed up to the original amount.
+	// Valor a devolver.
 	Amount *float32 `json:"amount,omitempty"`
-	// Free-text description for the refund.
+	// Descrição livre da devolução.
 	Description *string `json:"description,omitempty"`
-	// Idempotency key. Reusing it with the same amount replays the existing refund; reusing it with a different amount is rejected.
+	// Chave de idempotência.
 	ClientReference *string `json:"clientReference,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

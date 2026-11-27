@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -63,7 +63,7 @@ public class ListUserReports200Response {
   }
 
   /**
-   * Number of report requests of the user that match the filters.
+   * Quantidade de solicitações de relatório do usuário que atendem aos filtros.
    * @return total
    */
   @javax.annotation.Nullable
@@ -87,7 +87,7 @@ public class ListUserReports200Response {
   }
 
   /**
-   * Number of pages for the limit provided, computed from total rounded up.
+   * Número de páginas para o limit informado, calculado a partir de total arredondado para cima.
    * @return pages
    */
   @javax.annotation.Nullable
@@ -119,7 +119,7 @@ public class ListUserReports200Response {
   }
 
   /**
-   * Report requests of the requested page, with id, status and dates.
+   * Solicitações de relatório da página pedida, com id, status e datas.
    * @return reports
    */
   @javax.annotation.Nullable

@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -34,12 +34,12 @@ func (r ApiDeleteUserWebhookRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteUserWebhook Delete webhook
+DeleteUserWebhook Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Webhook id.
+ @param id Id do webhook.
  @return ApiDeleteUserWebhookRequest
 */
 func (a *WebhooksAPIService) DeleteUserWebhook(ctx context.Context, id string) ApiDeleteUserWebhookRequest {
@@ -169,12 +169,12 @@ func (r ApiGetUserWebhookRequest) Execute() (*Webhook, *http.Response, error) {
 }
 
 /*
-GetUserWebhook Get webhook
+GetUserWebhook Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Webhook id.
+ @param id Id do webhook.
  @return ApiGetUserWebhookRequest
 */
 func (a *WebhooksAPIService) GetUserWebhook(ctx context.Context, id string) ApiGetUserWebhookRequest {
@@ -268,6 +268,17 @@ func (a *WebhooksAPIService) GetUserWebhookExecute(r ApiGetUserWebhookRequest) (
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -305,13 +316,13 @@ func (r ApiGetUserWebhookSentDetailRequest) Execute() (*SentWebhookDetailRespons
 }
 
 /*
-GetUserWebhookSentDetail Get sent callback detail
+GetUserWebhookSentDetail Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Webhook id.
- @param callbackId Callback log id.
+ @param id Id do webhook.
+ @param callbackId Id do log de callback.
  @return ApiGetUserWebhookSentDetailRequest
 */
 func (a *WebhooksAPIService) GetUserWebhookSentDetail(ctx context.Context, id string, callbackId string) ApiGetUserWebhookSentDetailRequest {
@@ -407,6 +418,17 @@ func (a *WebhooksAPIService) GetUserWebhookSentDetailExecute(r ApiGetUserWebhook
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -438,7 +460,7 @@ type ApiGetUserWebhooksRequest struct {
 	active *bool
 }
 
-// Filter by active status.
+// Filtra pelo status ativo.
 func (r ApiGetUserWebhooksRequest) Active(active bool) ApiGetUserWebhooksRequest {
 	r.active = &active
 	return r
@@ -449,9 +471,9 @@ func (r ApiGetUserWebhooksRequest) Execute() (*WebhookListResponse, *http.Respon
 }
 
 /*
-GetUserWebhooks List webhooks
+GetUserWebhooks Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserWebhooksRequest
@@ -546,6 +568,17 @@ func (a *WebhooksAPIService) GetUserWebhooksExecute(r ApiGetUserWebhooksRequest)
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -568,7 +601,7 @@ type ApiGetUserWebhooksSentQuantityRequest struct {
 	webhookId *string
 }
 
-// Filter the count by webhook id.
+// Filtra a contagem por id de webhook.
 func (r ApiGetUserWebhooksSentQuantityRequest) WebhookId(webhookId string) ApiGetUserWebhooksSentQuantityRequest {
 	r.webhookId = &webhookId
 	return r
@@ -579,9 +612,9 @@ func (r ApiGetUserWebhooksSentQuantityRequest) Execute() (*SentWebhooksQuantity,
 }
 
 /*
-GetUserWebhooksSentQuantity Count sent callbacks
+GetUserWebhooksSentQuantity Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserWebhooksSentQuantityRequest
@@ -678,6 +711,17 @@ func (a *WebhooksAPIService) GetUserWebhooksSentQuantityExecute(r ApiGetUserWebh
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -720,12 +764,12 @@ func (r ApiPatchUserWebhookRequest) Execute() (*Webhook, *http.Response, error) 
 }
 
 /*
-PatchUserWebhook Update webhook
+PatchUserWebhook Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Webhook id.
+ @param id Id do webhook.
  @return ApiPatchUserWebhookRequest
 */
 func (a *WebhooksAPIService) PatchUserWebhook(ctx context.Context, id string) ApiPatchUserWebhookRequest {
@@ -887,9 +931,9 @@ func (r ApiPostUserWebhookRequest) Execute() (*WebhookWithSecret, *http.Response
 }
 
 /*
-PostUserWebhook Create webhook
+PostUserWebhook Criar webhook
 
-Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
+Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostUserWebhookRequest
@@ -1035,12 +1079,12 @@ func (r ApiPostUserWebhookRotateSecretRequest) Execute() (*RotateSecretResponse,
 }
 
 /*
-PostUserWebhookRotateSecret Rotate webhook secret
+PostUserWebhookRotateSecret Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Webhook id.
+ @param id Id do webhook.
  @return ApiPostUserWebhookRotateSecretRequest
 */
 func (a *WebhooksAPIService) PostUserWebhookRotateSecret(ctx context.Context, id string) ApiPostUserWebhookRotateSecretRequest {

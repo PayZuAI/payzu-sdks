@@ -6,10 +6,10 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getPix()**](PixOperationsApi.md#getPix) | **GET** /pix | Retrieve Charge |
-| [**getPixQrcode()**](PixOperationsApi.md#getPixQrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG) |
-| [**getProof()**](PixOperationsApi.md#getProof) | **GET** /proof/{id} | Get Transaction Receipt |
-| [**postPix()**](PixOperationsApi.md#postPix) | **POST** /pix | Create Charge (Pix deposit) |
+| [**getPix()**](PixOperationsApi.md#getPix) | **GET** /pix | Recuperar Cobrança |
+| [**getPixQrcode()**](PixOperationsApi.md#getPixQrcode) | **GET** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG) |
+| [**getProof()**](PixOperationsApi.md#getProof) | **GET** /proof/{id} | Obter comprovante da transação |
+| [**postPix()**](PixOperationsApi.md#postPix) | **POST** /pix | Criar Cobrança (depósito Pix) |
 
 
 ## `getPix()`
@@ -18,9 +18,9 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 getPix($id, $client_reference, $end_to_end_id, $virtual_account): \PayZu\Pix\Model\Transaction
 ```
 
-Retrieve Charge
+Recuperar Cobrança
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: `DEPOSIT`.
+Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre `id`, `clientReference` ou `endToEndId` (`virtualAccount` também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
 
 ### Example
 
@@ -39,10 +39,10 @@ $apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20260811R4TZ8WD1NC000000; // string | Transaction ID.
-$client_reference = order_12345; // string | External reference provided when creating the charge.
-$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | Pix end-to-end ID.
-$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+$id = PAYZU20260811R4TZ8WD1NC000000; // string | ID da transação.
+$client_reference = order_12345; // string | Referência externa fornecida na criação da cobrança.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | ID end-to-end do Pix.
+$virtual_account = loja-centro-01; // string | Subconta usada na criação.
 
 try {
     $result = $apiInstance->getPix($id, $client_reference, $end_to_end_id, $virtual_account);
@@ -56,10 +56,10 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Transaction ID. | [optional] |
-| **client_reference** | **string**| External reference provided when creating the charge. | [optional] |
-| **end_to_end_id** | **string**| Pix end-to-end ID. | [optional] |
-| **virtual_account** | **string**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **string**| ID da transação. | [optional] |
+| **client_reference** | **string**| Referência externa fornecida na criação da cobrança. | [optional] |
+| **end_to_end_id** | **string**| ID end-to-end do Pix. | [optional] |
+| **virtual_account** | **string**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -84,9 +84,9 @@ try {
 getPixQrcode($transaction_id): \SplFileObject
 ```
 
-Render Pix QR code (PNG)
+Renderiza o QR Code Pix (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image  Token permission: `DEPOSIT`.
+Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
 
 ### Example
 
@@ -105,7 +105,7 @@ $apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
 
 try {
     $result = $apiInstance->getPixQrcode($transaction_id);
@@ -119,7 +119,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **transaction_id** | **string**| Transaction ID. | |
+| **transaction_id** | **string**| ID da transação. | |
 
 ### Return type
 
@@ -144,9 +144,9 @@ try {
 getProof($id, $type): \PayZu\Pix\Model\ProofResponse
 ```
 
-Get Transaction Receipt
+Obter comprovante da transação
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
 ### Example
 
@@ -165,8 +165,8 @@ $apiInstance = new PayZu\Pix\Api\PixOperationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
-$type = pdf; // string | Return format.
+$id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
+$type = pdf; // string | Formato de retorno.
 
 try {
     $result = $apiInstance->getProof($id, $type);
@@ -180,8 +180,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Transaction ID. | |
-| **type** | **string**| Return format. | [optional] [default to &#39;pdf&#39;] |
+| **id** | **string**| ID da transação. | |
+| **type** | **string**| Formato de retorno. | [optional] [default to &#39;pdf&#39;] |
 
 ### Return type
 
@@ -206,9 +206,9 @@ try {
 postPix($post_pix_request): \PayZu\Pix\Model\Transaction
 ```
 
-Create Charge (Pix deposit)
+Criar Cobrança (depósito Pix)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: `DEPOSIT`.
+Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
 
 ### Example
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **string** | Confirmation that the callbacks were queued. | [optional]
-**total** | **int** | Number of callbacks dispatched | [optional]
+**message** | **string** | Confirmação de que os callbacks foram enfileirados. | [optional]
+**total** | **int** | Número de callbacks disparados | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

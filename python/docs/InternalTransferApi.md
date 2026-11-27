@@ -4,18 +4,16 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_internal_transfer**](InternalTransferApi.md#get_internal_transfer) | **GET** /internal-transfer | Get internal transfer
-[**post_internal_transfer**](InternalTransferApi.md#post_internal_transfer) | **POST** /internal-transfer | Create internal transfer
+[**get_internal_transfer**](InternalTransferApi.md#get_internal_transfer) | **GET** /internal-transfer | Obter transferência interna
+[**post_internal_transfer**](InternalTransferApi.md#post_internal_transfer) | **POST** /internal-transfer | Criar transferência interna
 
 
 # **get_internal_transfer**
 > Transaction get_internal_transfer(id=id, client_reference=client_reference, virtual_account=virtual_account)
 
-Get internal transfer
+Obter transferência interna
 
-Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).
-
-Token permission: `WITHDRAW`.
+Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
 
 ### Example
 
@@ -47,12 +45,12 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.InternalTransferApi(api_client)
-    id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID (optional)
-    client_reference = 'order_12345' # str | External reference (optional)
-    virtual_account = 'loja-centro-01' # str | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+    id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação (optional)
+    client_reference = 'order_12345' # str | Referência externa (optional)
+    virtual_account = 'loja-centro-01' # str | Subconta usada na criação. (optional)
 
     try:
-        # Get internal transfer
+        # Obter transferência interna
         api_response = api_instance.get_internal_transfer(id=id, client_reference=client_reference, virtual_account=virtual_account)
         print("The response of InternalTransferApi->get_internal_transfer:\n")
         pprint(api_response)
@@ -67,9 +65,9 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Transaction ID | [optional] 
- **client_reference** | **str**| External reference | [optional] 
- **virtual_account** | **str**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] 
+ **id** | **str**| ID da transação | [optional] 
+ **client_reference** | **str**| Referência externa | [optional] 
+ **virtual_account** | **str**| Subconta usada na criação. | [optional] 
 
 ### Return type
 
@@ -88,22 +86,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Transfer details |  -  |
-**400** | Provide either &#x60;id&#x60; or &#x60;clientReference&#x60; |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Transfer not found |  -  |
+**200** | Detalhes da transferência |  -  |
+**400** | Informe &#x60;id&#x60; ou &#x60;clientReference&#x60; |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Transferência não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_internal_transfer**
 > Transaction post_internal_transfer(post_internal_transfer_request)
 
-Create internal transfer
+Criar transferência interna
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.
-
-Token permission: `WITHDRAW`.
+Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
 
 ### Example
 
@@ -139,7 +135,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     post_internal_transfer_request = payzu_pix.PostInternalTransferRequest() # PostInternalTransferRequest | 
 
     try:
-        # Create internal transfer
+        # Criar transferência interna
         api_response = api_instance.post_internal_transfer(post_internal_transfer_request)
         print("The response of InternalTransferApi->post_internal_transfer:\n")
         pprint(api_response)
@@ -173,14 +169,13 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Transfer completed |  -  |
-**400** | Invalid payload (e.g. payerAccountNumber does not belong to the requester) |  -  |
-**401** | Authentication failure |  -  |
-**403** | allowInternalTransfer disabled or token missing WITHDRAW permission |  -  |
-**404** | Receiver account not found |  -  |
-**409** | Conflict with the current state of the resource |  -  |
-**422** | Insufficient balance / amount below ticket minimum |  -  |
-**429** | Rate limit exceeded |  -  |
+**200** | Transferência concluída |  -  |
+**400** | Payload inválido |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Sem permissão para transferir |  -  |
+**409** | Conflito com o estado atual do recurso |  -  |
+**422** | Saldo insuficiente |  -  |
+**429** | Limite de requisições excedido |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

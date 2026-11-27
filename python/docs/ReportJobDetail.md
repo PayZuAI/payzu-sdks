@@ -1,18 +1,18 @@
 # ReportJobDetail
 
-Report job with the filters used and the total of rows written.
+Job de relatório com os filtros usados e o total de linhas escritas.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** | Report identifier (UUID), generated when the report is requested. | [optional] 
-**status** | **str** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional] 
-**created_at** | **datetime** | Date and time the report generation was requested. | [optional] 
-**updated_at** | **datetime** | Date and time of the last change to the report record. | [optional] 
-**expires_at** | **datetime** | When the file expires from storage (usually 7 days after creation) | [optional] 
-**params** | **Dict[str, object]** | Filters used when the report was created. | [optional] 
-**written_rows** | **int** | Rows written to the file. Null until the report is COMPLETED. | [optional] 
+**id** | **UUID** | Identificador (UUID) do relatório, gerado no momento da solicitação. | [optional] 
+**status** | **str** | Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED. | [optional] 
+**created_at** | **datetime** | Data e hora em que a geração do relatório foi solicitada. | [optional] 
+**updated_at** | **datetime** | Data e hora da última alteração no registro do relatório. | [optional] 
+**expires_at** | **datetime** | Quando o arquivo expira do armazenamento (normalmente 7 dias após a criação) | [optional] 
+**params** | **Dict[str, object]** | Filtros usados na criação do relatório. | [optional] 
+**written_rows** | **int** | Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED. | [optional] 
 
 ## Example
 

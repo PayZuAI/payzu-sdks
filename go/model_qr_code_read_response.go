@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -12,35 +12,34 @@ package payzupix
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the QRCodeReadResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QRCodeReadResponse{}
 
-// QRCodeReadResponse Decoded information from a Pix QR Code.
+// QRCodeReadResponse Informações decodificadas de um QR Code Pix.
 type QRCodeReadResponse struct {
-	// Type of QR Code.
+	// Tipo de QR Code.
 	QrCodeType *string `json:"qrCodeType,omitempty"`
-	// Name of the payment receiver.
+	// Nome do recebedor do pagamento.
 	Name NullableString `json:"name,omitempty"`
-	// CPF or CNPJ of the receiver.
+	// CPF ou CNPJ do recebedor.
 	Document NullableString `json:"document,omitempty"`
-	// Amount to be paid (may differ from originalAmount for dynamic QR Codes).
+	// Valor a ser pago.
 	Amount NullableFloat32 `json:"amount,omitempty"`
-	// Original amount embedded in the QR Code.
+	// Valor embutido no QR Code.
 	OriginalAmount NullableFloat32 `json:"originalAmount,omitempty"`
-	// Transaction identifier.
+	// Identificador da transação.
 	Txid NullableString `json:"txid,omitempty"`
-	// Additional information or description.
+	// Informações adicionais ou descrição.
 	AdditionalInfo NullableString `json:"additionalInfo,omitempty"`
-	// Seconds until QR Code expires (0 for static QR Codes).
+	// Segundos até o QR Code expirar (0 para QR Codes estáticos).
 	ExpiresIn NullableFloat32 `json:"expiresIn,omitempty"`
-	// Creation date of the QR Code (for dynamic QR Codes).
-	CreatedAt NullableTime `json:"createdAt,omitempty"`
-	// Whether the payer can change the amount.
+	// Data de criação do QR Code dinâmico, como veio no QR Code: o horário pode vir sem fuso.
+	CreatedAt NullableString `json:"createdAt,omitempty"`
+	// Indica se o pagador pode alterar o valor.
 	AmountEditable NullableBool `json:"amountEditable,omitempty"`
-	// Due date of the charge, when the QR Code has one.
+	// Data de vencimento da cobrança, quando o QR Code tiver.
 	DueDate NullableString `json:"dueDate,omitempty"`
 }
 
@@ -388,9 +387,9 @@ func (o *QRCodeReadResponse) UnsetExpiresIn() {
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *QRCodeReadResponse) GetCreatedAt() time.Time {
+func (o *QRCodeReadResponse) GetCreatedAt() string {
 	if o == nil || IsNil(o.CreatedAt.Get()) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.CreatedAt.Get()
@@ -399,7 +398,7 @@ func (o *QRCodeReadResponse) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *QRCodeReadResponse) GetCreatedAtOk() (*time.Time, bool) {
+func (o *QRCodeReadResponse) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -415,8 +414,8 @@ func (o *QRCodeReadResponse) HasCreatedAt() bool {
 	return false
 }
 
-// SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
-func (o *QRCodeReadResponse) SetCreatedAt(v time.Time) {
+// SetCreatedAt gets a reference to the given NullableString and assigns it to the CreatedAt field.
+func (o *QRCodeReadResponse) SetCreatedAt(v string) {
 	o.CreatedAt.Set(&v)
 }
 // SetCreatedAtNil sets the value for CreatedAt to be an explicit nil

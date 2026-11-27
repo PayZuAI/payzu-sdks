@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**webhooks** | [**List[Webhook]**](Webhook.md) | Webhooks registered on the account. | [optional] 
+**webhooks** | [**List[Webhook]**](Webhook.md) | Webhooks cadastrados na conta. | [optional] 
 
 ## Example
 

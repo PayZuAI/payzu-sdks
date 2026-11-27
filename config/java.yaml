@@ -25,5 +25,8 @@ additionalProperties:
   scmUrl: https://github.com/PayZuAI/payzu-sdks
   hideGenerationTimestamp: true
 globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: ""
   apiTests: false
   modelTests: false

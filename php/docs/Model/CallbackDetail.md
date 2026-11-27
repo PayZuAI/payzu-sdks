@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Unique callback ID | [optional]
-**url** | **string** | Webhook URL that received the callback | [optional]
-**status** | **float** | HTTP response status code | [optional]
-**transaction_id** | **string** | Related transaction ID | [optional]
-**created_at** | **\DateTime** | Date and time when the callback log was created | [optional]
-**body** | **object** | Request body sent (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional]
-**response_body** | **string** | Response body received (string) | [optional]
-**response_headers** | **object** | Response headers (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional]
-**response_time** | **float** | Webhook round-trip time in milliseconds | [optional]
+**id** | **string** | ID único do callback | [optional]
+**url** | **string** | URL do webhook que recebeu o callback | [optional]
+**status** | **float** | Código de status HTTP da resposta | [optional]
+**transaction_id** | **string** | ID da transação relacionada | [optional]
+**created_at** | **\DateTime** | Data e hora em que o log do callback foi criado | [optional]
+**body** | **object** | Corpo enviado (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;. | [optional]
+**response_body** | **string** | Corpo da resposta recebido (string) | [optional]
+**response_headers** | **object** | Cabeçalhos da resposta (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;. | [optional]
+**response_time** | **float** | Tempo de ida e volta do webhook em milissegundos | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,9 +19,9 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Delete webhook
-    # Removes a webhook.
-    # @param id [String] Webhook id.
+    # Remover webhook
+    # Remove um webhook.
+    # @param id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def delete_user_webhook(id, opts = {})
@@ -29,9 +29,9 @@ module PayZuPix
       nil
     end
 
-    # Delete webhook
-    # Removes a webhook.
-    # @param id [String] Webhook id.
+    # Remover webhook
+    # Remove um webhook.
+    # @param id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_user_webhook_with_http_info(id, opts = {})
@@ -82,9 +82,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get webhook
-    # Returns a single webhook.
-    # @param id [String] Webhook id.
+    # Consultar webhook
+    # Retorna um webhook.
+    # @param id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [Webhook]
     def get_user_webhook(id, opts = {})
@@ -92,9 +92,9 @@ module PayZuPix
       data
     end
 
-    # Get webhook
-    # Returns a single webhook.
-    # @param id [String] Webhook id.
+    # Consultar webhook
+    # Retorna um webhook.
+    # @param id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Webhook, Integer, Hash)>] Webhook data, response status code and response headers
     def get_user_webhook_with_http_info(id, opts = {})
@@ -145,10 +145,10 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get sent callback detail
-    # Returns the delivery detail of a single sent callback.
-    # @param id [String] Webhook id.
-    # @param callback_id [String] Callback log id.
+    # Detalhe de callback enviado
+    # Retorna o detalhe de entrega de um callback enviado.
+    # @param id [String] Id do webhook.
+    # @param callback_id [String] Id do log de callback.
     # @param [Hash] opts the optional parameters
     # @return [SentWebhookDetailResponse]
     def get_user_webhook_sent_detail(id, callback_id, opts = {})
@@ -156,10 +156,10 @@ module PayZuPix
       data
     end
 
-    # Get sent callback detail
-    # Returns the delivery detail of a single sent callback.
-    # @param id [String] Webhook id.
-    # @param callback_id [String] Callback log id.
+    # Detalhe de callback enviado
+    # Retorna o detalhe de entrega de um callback enviado.
+    # @param id [String] Id do webhook.
+    # @param callback_id [String] Id do log de callback.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SentWebhookDetailResponse, Integer, Hash)>] SentWebhookDetailResponse data, response status code and response headers
     def get_user_webhook_sent_detail_with_http_info(id, callback_id, opts = {})
@@ -214,20 +214,20 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List webhooks
-    # Lists the webhooks registered for the account.
+    # Listar webhooks
+    # Lista os webhooks cadastrados na conta.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :active Filter by active status.
+    # @option opts [Boolean] :active Filtra pelo status ativo.
     # @return [WebhookListResponse]
     def get_user_webhooks(opts = {})
       data, _status_code, _headers = get_user_webhooks_with_http_info(opts)
       data
     end
 
-    # List webhooks
-    # Lists the webhooks registered for the account.
+    # Listar webhooks
+    # Lista os webhooks cadastrados na conta.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :active Filter by active status.
+    # @option opts [Boolean] :active Filtra pelo status ativo.
     # @return [Array<(WebhookListResponse, Integer, Hash)>] WebhookListResponse data, response status code and response headers
     def get_user_webhooks_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -274,20 +274,20 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Count sent callbacks
-    # Returns how many webhook deliveries were made, optionally filtered by webhook.
+    # Contar callbacks enviados
+    # Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :webhook_id Filter the count by webhook id.
+    # @option opts [String] :webhook_id Filtra a contagem por id de webhook.
     # @return [SentWebhooksQuantity]
     def get_user_webhooks_sent_quantity(opts = {})
       data, _status_code, _headers = get_user_webhooks_sent_quantity_with_http_info(opts)
       data
     end
 
-    # Count sent callbacks
-    # Returns how many webhook deliveries were made, optionally filtered by webhook.
+    # Contar callbacks enviados
+    # Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :webhook_id Filter the count by webhook id.
+    # @option opts [String] :webhook_id Filtra a contagem por id de webhook.
     # @return [Array<(SentWebhooksQuantity, Integer, Hash)>] SentWebhooksQuantity data, response status code and response headers
     def get_user_webhooks_sent_quantity_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -334,9 +334,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Update webhook
-    # Updates the url, active flag or events of a webhook. Provide at least one field.
-    # @param id [String] Webhook id.
+    # Atualizar webhook
+    # Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+    # @param id [String] Id do webhook.
     # @param webhook_update_request [WebhookUpdateRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Webhook]
@@ -345,9 +345,9 @@ module PayZuPix
       data
     end
 
-    # Update webhook
-    # Updates the url, active flag or events of a webhook. Provide at least one field.
-    # @param id [String] Webhook id.
+    # Atualizar webhook
+    # Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+    # @param id [String] Id do webhook.
     # @param webhook_update_request [WebhookUpdateRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Webhook, Integer, Hash)>] Webhook data, response status code and response headers
@@ -408,8 +408,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Create webhook
-    # Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
+    # Criar webhook
+    # Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
     # @param webhook_create_request [WebhookCreateRequest] 
     # @param [Hash] opts the optional parameters
     # @return [WebhookWithSecret]
@@ -418,8 +418,8 @@ module PayZuPix
       data
     end
 
-    # Create webhook
-    # Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+    # Criar webhook
+    # Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
     # @param webhook_create_request [WebhookCreateRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(WebhookWithSecret, Integer, Hash)>] WebhookWithSecret data, response status code and response headers
@@ -476,9 +476,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Rotate webhook secret
-    # Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
-    # @param id [String] Webhook id.
+    # Rotacionar segredo do webhook
+    # Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
+    # @param id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [RotateSecretResponse]
     def post_user_webhook_rotate_secret(id, opts = {})
@@ -486,9 +486,9 @@ module PayZuPix
       data
     end
 
-    # Rotate webhook secret
-    # Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
-    # @param id [String] Webhook id.
+    # Rotacionar segredo do webhook
+    # Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
+    # @param id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [Array<(RotateSecretResponse, Integer, Hash)>] RotateSecretResponse data, response status code and response headers
     def post_user_webhook_rotate_secret_with_http_info(id, opts = {})

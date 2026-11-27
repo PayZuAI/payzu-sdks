@@ -4,29 +4,29 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Identifier of the pending deposit. | [optional] |
-| **status** | **String** | Deposit status: PENDING, COMPLETED or REJECTED. | [optional] |
-| **amount** | **Float** | Amount received. | [optional] |
-| **payer_document** | **String** | CNPJ of the payer of the Pix. | [optional] |
-| **payer_name** | **String** | Name of the payer of the Pix. | [optional] |
-| **payer_account_number** | **String** | Account number of the payer inside the platform. | [optional] |
-| **payer_institution_ispb** | **String** | ISPB code of the institution the Pix was sent from. | [optional] |
-| **payer_institution_name** | **String** | Name of the institution the Pix was sent from. | [optional] |
-| **receiver_document** | **String** | CPF or CNPJ of the account that received the Pix. | [optional] |
-| **receiver_name** | **String** | Name of the account that received the Pix. | [optional] |
-| **receiver_account_number** | **String** | Number of your PayZu account that receives the credit if the deposit is approved. | [optional] |
-| **receiver_institution_ispb** | **String** | ISPB code of the institution that received the Pix. | [optional] |
-| **receiver_institution_name** | **String** | Name of the institution where the Pix was settled on the receiving side. | [optional] |
-| **end_to_end_id** | **String** | End-to-end identifier of the Pix. | [optional] |
-| **paid_at** | **Time** | Date and time the Pix was settled. | [optional] |
+| **id** | **String** | Identificador do depósito pendente. | [optional] |
+| **status** | **String** | Situação do depósito: PENDING, COMPLETED ou REJECTED. | [optional] |
+| **amount** | **Float** | Valor recebido. | [optional] |
+| **payer_document** | **String** | CNPJ de quem enviou o Pix. | [optional] |
+| **payer_name** | **String** | Nome de quem enviou o Pix. | [optional] |
+| **payer_account_number** | **String** | Número da conta do pagador dentro da plataforma. | [optional] |
+| **payer_institution_ispb** | **String** | Código ISPB da instituição de onde saiu o Pix. | [optional] |
+| **payer_institution_name** | **String** | Nome da instituição de onde o Pix saiu. | [optional] |
+| **receiver_document** | **String** | CPF ou CNPJ da conta que recebeu o Pix. | [optional] |
+| **receiver_name** | **String** | Nome da conta que recebeu o Pix. | [optional] |
+| **receiver_account_number** | **String** | Número da sua conta na PayZu que receberá o crédito caso o depósito seja aprovado. | [optional] |
+| **receiver_institution_ispb** | **String** | Código ISPB da instituição que recebeu o Pix. | [optional] |
+| **receiver_institution_name** | **String** | Nome da instituição em que o Pix foi liquidado do lado de quem recebeu. | [optional] |
+| **end_to_end_id** | **String** | Identificador ponta a ponta do Pix. | [optional] |
+| **paid_at** | **Time** | Data e hora da liquidação do Pix. | [optional] |
 | **pix_key** | **String** |  | [optional] |
-| **description** | **String** | Free text that would accompany the Pix. | [optional] |
-| **approved_at** | **Time** | Date and time the deposit was approved. | [optional] |
-| **rejected_at** | **Time** | Date and time the deposit was rejected. | [optional] |
-| **rejection_reason** | **String** | Reason the deposit was rejected. | [optional] |
-| **transaction_id** | **String** | Deposit transaction created on approval. | [optional] |
-| **created_at** | **Time** | Moment the received Pix was recorded, before the credit. | [optional] |
-| **updated_at** | **Time** | Moment of the last change to the record, which changes when the deposit is approved or rejected. | [optional] |
+| **description** | **String** | Texto livre que acompanharia o Pix. | [optional] |
+| **approved_at** | **Time** | Data e hora da aprovação do depósito. | [optional] |
+| **rejected_at** | **Time** | Data e hora da recusa do depósito. | [optional] |
+| **rejection_reason** | **String** | Motivo da recusa do depósito. | [optional] |
+| **transaction_id** | **String** | Transação de depósito criada na aprovação. | [optional] |
+| **created_at** | **Time** | Momento em que o Pix recebido foi registrado, antes do crédito. | [optional] |
+| **updated_at** | **Time** | Momento da última alteração do registro, que muda quando o depósito é aprovado ou recusado. | [optional] |
 
 ## Example
 

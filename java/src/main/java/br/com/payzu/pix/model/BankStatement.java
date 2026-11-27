@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -64,7 +64,7 @@ public class BankStatement {
   private BigDecimal amount;
 
   /**
-   * INCREMENT credits the balance, DECREMENT debits it.
+   * INCREMENT credita o saldo, DECREMENT debita.
    */
   public enum OperationEnum {
     INCREMENT(String.valueOf("INCREMENT")),
@@ -109,7 +109,7 @@ public class BankStatement {
   private String reason;
 
   /**
-   * Balance moved: AVAILABLE or BLOCKED.
+   * Saldo movimentado: AVAILABLE ou BLOCKED.
    */
   public enum BalanceTypeEnum {
     AVAILABLE(String.valueOf("AVAILABLE")),
@@ -188,7 +188,7 @@ public class BankStatement {
   }
 
   /**
-   * Identifier of the balance entry.
+   * Identificador do lançamento de saldo.
    * @return id
    */
   @javax.annotation.Nullable
@@ -212,7 +212,7 @@ public class BankStatement {
   }
 
   /**
-   * Amount of the entry.
+   * Valor do lançamento.
    * @return amount
    */
   @javax.annotation.Nullable
@@ -236,7 +236,7 @@ public class BankStatement {
   }
 
   /**
-   * INCREMENT credits the balance, DECREMENT debits it.
+   * INCREMENT credita o saldo, DECREMENT debita.
    * @return operation
    */
   @javax.annotation.Nullable
@@ -260,7 +260,7 @@ public class BankStatement {
   }
 
   /**
-   * Reason for the ledger entry.
+   * Motivo do lançamento no extrato.
    * @return reason
    */
   @javax.annotation.Nullable
@@ -284,7 +284,7 @@ public class BankStatement {
   }
 
   /**
-   * Balance moved: AVAILABLE or BLOCKED.
+   * Saldo movimentado: AVAILABLE ou BLOCKED.
    * @return balanceType
    */
   @javax.annotation.Nullable
@@ -308,7 +308,7 @@ public class BankStatement {
   }
 
   /**
-   * Balance free for use that the account had, in reais, immediately before this entry.
+   * Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento.
    * @return previousBalanceAvailable
    */
   @javax.annotation.Nullable
@@ -332,7 +332,7 @@ public class BankStatement {
   }
 
   /**
-   * Blocked balance before the entry, in reais.
+   * Saldo bloqueado antes do lançamento, em reais.
    * @return previousBalanceBlocked
    */
   @javax.annotation.Nullable
@@ -356,7 +356,7 @@ public class BankStatement {
   }
 
   /**
-   * Available balance after the entry, in reais.
+   * Saldo disponível depois do lançamento, em reais.
    * @return newBalanceAvailable
    */
   @javax.annotation.Nullable
@@ -380,7 +380,7 @@ public class BankStatement {
   }
 
   /**
-   * Blocked balance after the entry, in reais.
+   * Saldo bloqueado depois do lançamento, em reais.
    * @return newBalanceBlocked
    */
   @javax.annotation.Nullable
@@ -404,7 +404,7 @@ public class BankStatement {
   }
 
   /**
-   * Transaction that originated the entry.
+   * Transação que originou o lançamento.
    * @return transactionId
    */
   @javax.annotation.Nullable
@@ -436,7 +436,7 @@ public class BankStatement {
   }
 
   /**
-   * Infraction related to the entry.
+   * Infração relacionada ao lançamento.
    * @return infractionId
    */
   @javax.annotation.Nullable
@@ -468,7 +468,7 @@ public class BankStatement {
   }
 
   /**
-   * Date and time the balance movement was recorded.
+   * Data e hora em que a movimentação de saldo foi registrada.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -492,7 +492,7 @@ public class BankStatement {
   }
 
   /**
-   * Date and time of the last change to the record.
+   * Data e hora da última alteração do registro.
    * @return updatedAt
    */
   @javax.annotation.Nullable

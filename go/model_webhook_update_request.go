@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -17,13 +17,13 @@ import (
 // checks if the WebhookUpdateRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookUpdateRequest{}
 
-// WebhookUpdateRequest Provide at least one field.
+// WebhookUpdateRequest Informe pelo menos um campo.
 type WebhookUpdateRequest struct {
-	// New delivery address, which applies to the following dispatches.
-	Url *string `json:"url,omitempty"`
-	// Turns the webhook deliveries on or pauses them.
+	// Novo endereço de entrega, que passa a valer nos disparos seguintes: http ou https, pública, sem usuário e senha e sem IPv6 literal.
+	Url *string `json:"url,omitempty" validate:"regexp=^https?:\\/\\/"`
+	// Liga ou pausa as entregas do webhook.
 	Active *bool `json:"active,omitempty"`
-	// New list of subscribed events, which replaces the previous one entirely.
+	// Nova lista de eventos assinados, que substitui a anterior por inteiro.
 	Events []WebhookEventType `json:"events,omitempty"`
 }
 

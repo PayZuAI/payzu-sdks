@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,8 +19,8 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Create callback secret
-    # Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+    # Criar segredo de callback
+    # Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
     # @param [Hash] opts the optional parameters
     # @return [CallbackSecretResponse]
     def create_user_callback_secret(opts = {})
@@ -28,8 +28,8 @@ module PayZuPix
       data
     end
 
-    # Create callback secret
-    # Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+    # Criar segredo de callback
+    # Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
     # @param [Hash] opts the optional parameters
     # @return [Array<(CallbackSecretResponse, Integer, Hash)>] CallbackSecretResponse data, response status code and response headers
     def create_user_callback_secret_with_http_info(opts = {})
@@ -76,9 +76,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get Callback
-    # Returns the details of a specific callback log.
-    # @param id [String] Unique callback ID
+    # Obter Callback
+    # Retorna os detalhes de um log de callback específico.
+    # @param id [String] ID único do callback
     # @param [Hash] opts the optional parameters
     # @return [CallbackDetail]
     def get_user_callback_by_id(id, opts = {})
@@ -86,9 +86,9 @@ module PayZuPix
       data
     end
 
-    # Get Callback
-    # Returns the details of a specific callback log.
-    # @param id [String] Unique callback ID
+    # Obter Callback
+    # Retorna os detalhes de um log de callback específico.
+    # @param id [String] ID único do callback
     # @param [Hash] opts the optional parameters
     # @return [Array<(CallbackDetail, Integer, Hash)>] CallbackDetail data, response status code and response headers
     def get_user_callback_by_id_with_http_info(id, opts = {})
@@ -139,44 +139,44 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List Callbacks
-    # Returns a paginated list of webhook callback logs for the user's transactions.
+    # Listar Callbacks
+    # Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
-    # @option opts [String] :id Filter by callback ID
-    # @option opts [String] :url Filter by callback URL
-    # @option opts [Integer] :status HTTP status code
-    # @option opts [String] :transaction_id Transaction ID.
-    # @option opts [Boolean] :has_error Filter callbacks that errored
-    # @option opts [Time] :created_at_from Start of the creation date range.
-    # @option opts [Time] :created_at_to End of the creation date range.
-    # @option opts [String] :webhook_id Webhook id.
-    # @option opts [WebhookEventType] :event_type Webhook event type.
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
+    # @option opts [String] :id Filtra por ID de callback
+    # @option opts [String] :url Filtra por callback URL
+    # @option opts [Integer] :status Status HTTP devolvido pelo seu endpoint.
+    # @option opts [String] :transaction_id ID da transação.
+    # @option opts [Boolean] :has_error Filtra callbacks que apresentaram erro
+    # @option opts [Time] :created_at_from Data de criação inicial.
+    # @option opts [Time] :created_at_to Data de criação final.
+    # @option opts [String] :webhook_id Id do webhook.
+    # @option opts [WebhookEventType] :event_type Tipo de evento do webhook.
     # @return [CallbackListResponse]
     def get_user_callbacks(opts = {})
       data, _status_code, _headers = get_user_callbacks_with_http_info(opts)
       data
     end
 
-    # List Callbacks
-    # Returns a paginated list of webhook callback logs for the user&#39;s transactions.
+    # Listar Callbacks
+    # Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
-    # @option opts [String] :id Filter by callback ID
-    # @option opts [String] :url Filter by callback URL
-    # @option opts [Integer] :status HTTP status code
-    # @option opts [String] :transaction_id Transaction ID.
-    # @option opts [Boolean] :has_error Filter callbacks that errored
-    # @option opts [Time] :created_at_from Start of the creation date range.
-    # @option opts [Time] :created_at_to End of the creation date range.
-    # @option opts [String] :webhook_id Webhook id.
-    # @option opts [WebhookEventType] :event_type Webhook event type.
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
+    # @option opts [String] :id Filtra por ID de callback
+    # @option opts [String] :url Filtra por callback URL
+    # @option opts [Integer] :status Status HTTP devolvido pelo seu endpoint.
+    # @option opts [String] :transaction_id ID da transação.
+    # @option opts [Boolean] :has_error Filtra callbacks que apresentaram erro
+    # @option opts [Time] :created_at_from Data de criação inicial.
+    # @option opts [Time] :created_at_to Data de criação final.
+    # @option opts [String] :webhook_id Id do webhook.
+    # @option opts [WebhookEventType] :event_type Tipo de evento do webhook.
     # @return [Array<(CallbackListResponse, Integer, Hash)>] CallbackListResponse data, response status code and response headers
     def get_user_callbacks_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -255,9 +255,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Re-send callback (single)
-    # Resend the callback of a single transaction.
-    # @param transaction_id [String] Transaction ID.
+    # Reenviar callback (individual)
+    # Reenvia o callback de uma única transação.
+    # @param transaction_id [String] ID da transação.
     # @param [Hash] opts the optional parameters
     # @return [ResendUserCallbackSingle200Response]
     def resend_user_callback_single(transaction_id, opts = {})
@@ -265,9 +265,9 @@ module PayZuPix
       data
     end
 
-    # Re-send callback (single)
-    # Resend the callback of a single transaction.
-    # @param transaction_id [String] Transaction ID.
+    # Reenviar callback (individual)
+    # Reenvia o callback de uma única transação.
+    # @param transaction_id [String] ID da transação.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ResendUserCallbackSingle200Response, Integer, Hash)>] ResendUserCallbackSingle200Response data, response status code and response headers
     def resend_user_callback_single_with_http_info(transaction_id, opts = {})
@@ -318,8 +318,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Re-send callbacks (bulk)
-    # Resend callbacks in bulk for transactions matching the given filters.
+    # Reenviar callbacks (em lote)
+    # Reenvia callbacks em lote para transações que correspondem aos filtros informados.
     # @param resend_user_callbacks_request [ResendUserCallbacksRequest] 
     # @param [Hash] opts the optional parameters
     # @return [ResendUserCallbacks200Response]
@@ -328,8 +328,8 @@ module PayZuPix
       data
     end
 
-    # Re-send callbacks (bulk)
-    # Resend callbacks in bulk for transactions matching the given filters.
+    # Reenviar callbacks (em lote)
+    # Reenvia callbacks em lote para transações que correspondem aos filtros informados.
     # @param resend_user_callbacks_request [ResendUserCallbacksRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ResendUserCallbacks200Response, Integer, Hash)>] ResendUserCallbacks200Response data, response status code and response headers
@@ -386,9 +386,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Resend callbacks by webhook
-    # Queues a bulk resend of the failed callbacks of a given webhook.
-    # @param webhook_id [String] Webhook id.
+    # Reenviar callbacks por webhook
+    # Enfileira o reenvio em lote dos callbacks falhos de um webhook.
+    # @param webhook_id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [EnqueuedCallback]
     def resend_user_callbacks_webhook(webhook_id, opts = {})
@@ -396,9 +396,9 @@ module PayZuPix
       data
     end
 
-    # Resend callbacks by webhook
-    # Queues a bulk resend of the failed callbacks of a given webhook.
-    # @param webhook_id [String] Webhook id.
+    # Reenviar callbacks por webhook
+    # Enfileira o reenvio em lote dos callbacks falhos de um webhook.
+    # @param webhook_id [String] Id do webhook.
     # @param [Hash] opts the optional parameters
     # @return [Array<(EnqueuedCallback, Integer, Hash)>] EnqueuedCallback data, response status code and response headers
     def resend_user_callbacks_webhook_with_http_info(webhook_id, opts = {})
@@ -449,8 +449,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Resend webhook callbacks by filters
-    # Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+    # Reenviar callbacks de webhook por filtros
+    # Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
     # @param resend_webhook_callbacks_request [ResendWebhookCallbacksRequest] 
     # @param [Hash] opts the optional parameters
     # @return [EnqueuedCallback]
@@ -459,8 +459,8 @@ module PayZuPix
       data
     end
 
-    # Resend webhook callbacks by filters
-    # Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+    # Reenviar callbacks de webhook por filtros
+    # Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
     # @param resend_webhook_callbacks_request [ResendWebhookCallbacksRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(EnqueuedCallback, Integer, Hash)>] EnqueuedCallback data, response status code and response headers
@@ -517,8 +517,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Rotate callback secret
-    # Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+    # Rotacionar segredo de callback
+    # Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
     # @param [Hash] opts the optional parameters
     # @return [RotateCallbackSecretResponse]
     def rotate_user_callback_secret(opts = {})
@@ -526,8 +526,8 @@ module PayZuPix
       data
     end
 
-    # Rotate callback secret
-    # Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+    # Rotacionar segredo de callback
+    # Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
     # @param [Hash] opts the optional parameters
     # @return [Array<(RotateCallbackSecretResponse, Integer, Hash)>] RotateCallbackSecretResponse data, response status code and response headers
     def rotate_user_callback_secret_with_http_info(opts = {})

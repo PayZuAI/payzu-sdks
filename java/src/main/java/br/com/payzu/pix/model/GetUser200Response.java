@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -43,7 +43,6 @@ import br.com.payzu.pix.ApiClient;
   GetUser200Response.JSON_PROPERTY_ACCOUNT_NUMBER,
   GetUser200Response.JSON_PROPERTY_BRANCH,
   GetUser200Response.JSON_PROPERTY_NAME,
-  GetUser200Response.JSON_PROPERTY_ROLE,
   GetUser200Response.JSON_PROPERTY_BALANCE_AVAILABLE,
   GetUser200Response.JSON_PROPERTY_BALANCE_BLOCKED,
   GetUser200Response.JSON_PROPERTY_STATUS,
@@ -67,45 +66,6 @@ public class GetUser200Response {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * Account role.
-   */
-  public enum RoleEnum {
-    USER(String.valueOf("USER")),
-    
-    UNKNOWN_DEFAULT_OPEN_API(String.valueOf("unknown_default_open_api"));
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      return UNKNOWN_DEFAULT_OPEN_API;
-    }
-  }
-
-  public static final String JSON_PROPERTY_ROLE = "role";
-  @javax.annotation.Nullable
-  private RoleEnum role;
-
   public static final String JSON_PROPERTY_BALANCE_AVAILABLE = "balanceAvailable";
   @javax.annotation.Nullable
   private BigDecimal balanceAvailable;
@@ -115,7 +75,7 @@ public class GetUser200Response {
   private BigDecimal balanceBlocked;
 
   /**
-   * Account status.
+   * Situação da conta.
    */
   public enum StatusEnum {
     ACTIVE(String.valueOf("ACTIVE")),
@@ -186,7 +146,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Public account identifier (6 digits, unique). Used as destination for internal transfers.
+   * Identificador público da conta.
    * @return accountNumber
    */
   @javax.annotation.Nullable
@@ -218,7 +178,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Branch number (4 digits).
+   * Agência da conta.
    * @return branch
    */
   @javax.annotation.Nullable
@@ -242,7 +202,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Registered name of the account.
+   * Nome cadastrado da conta.
    * @return name
    */
   @javax.annotation.Nullable
@@ -260,37 +220,13 @@ public class GetUser200Response {
   }
 
 
-  public GetUser200Response role(@javax.annotation.Nullable RoleEnum role) {
-    this.role = role;
-    return this;
-  }
-
-  /**
-   * Account role.
-   * @return role
-   */
-  @javax.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ROLE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public RoleEnum getRole() {
-    return role;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_ROLE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
-    this.role = role;
-  }
-
-
   public GetUser200Response balanceAvailable(@javax.annotation.Nullable BigDecimal balanceAvailable) {
     this.balanceAvailable = balanceAvailable;
     return this;
   }
 
   /**
-   * Balance free for withdrawals and transfers, in reais.
+   * Saldo livre para saques e transferências, em reais.
    * @return balanceAvailable
    */
   @javax.annotation.Nullable
@@ -314,7 +250,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Part of the balance held, in reais.
+   * Parte do saldo retida, em reais.
    * @return balanceBlocked
    */
   @javax.annotation.Nullable
@@ -338,7 +274,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Account status.
+   * Situação da conta.
    * @return status
    */
   @javax.annotation.Nullable
@@ -362,7 +298,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
+   * Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada.
    * @return cashInTicketMin
    */
   @javax.annotation.Nullable
@@ -386,7 +322,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
+   * Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada.
    * @return cashInTicketMax
    */
   @javax.annotation.Nullable
@@ -410,7 +346,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused.
+   * Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado.
    * @return cashOutTicketMin
    */
   @javax.annotation.Nullable
@@ -434,7 +370,7 @@ public class GetUser200Response {
   }
 
   /**
-   * Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused.
+   * Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado.
    * @return cashOutTicketMax
    */
   @javax.annotation.Nullable
@@ -515,7 +451,6 @@ public class GetUser200Response {
     return equalsNullable(this.accountNumber, getUser200Response.accountNumber) &&
         Objects.equals(this.branch, getUser200Response.branch) &&
         Objects.equals(this.name, getUser200Response.name) &&
-        Objects.equals(this.role, getUser200Response.role) &&
         Objects.equals(this.balanceAvailable, getUser200Response.balanceAvailable) &&
         Objects.equals(this.balanceBlocked, getUser200Response.balanceBlocked) &&
         Objects.equals(this.status, getUser200Response.status) &&
@@ -533,7 +468,7 @@ public class GetUser200Response {
 
   @Override
   public int hashCode() {
-    return Objects.hash(hashCodeNullable(accountNumber), branch, name, role, balanceAvailable, balanceBlocked, status, cashInTicketMin, cashInTicketMax, cashOutTicketMin, cashOutTicketMax, serviceFee, dailyWithdrawLimit);
+    return Objects.hash(hashCodeNullable(accountNumber), branch, name, balanceAvailable, balanceBlocked, status, cashInTicketMin, cashInTicketMax, cashOutTicketMin, cashOutTicketMax, serviceFee, dailyWithdrawLimit);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -550,7 +485,6 @@ public class GetUser200Response {
     sb.append("    accountNumber: ").append(toIndentedString(accountNumber)).append("\n");
     sb.append("    branch: ").append(toIndentedString(branch)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    balanceAvailable: ").append(toIndentedString(balanceAvailable)).append("\n");
     sb.append("    balanceBlocked: ").append(toIndentedString(balanceBlocked)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
@@ -617,11 +551,6 @@ public class GetUser200Response {
     // add `name` to the URL query string
     if (getName() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
-    }
-
-    // add `role` to the URL query string
-    if (getRole() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%srole%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getRole()))));
     }
 
     // add `balanceAvailable` to the URL query string

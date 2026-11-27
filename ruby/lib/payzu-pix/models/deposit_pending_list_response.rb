@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,16 +15,16 @@ require 'time'
 
 module PayZuPix
   class DepositPendingListResponse < ApiModelBase
-    # Page returned in this response.
+    # Página devolvida nesta resposta.
     attr_accessor :page
 
-    # Maximum number of records per page used in this query.
+    # Quantidade máxima de registros por página usada nesta consulta.
     attr_accessor :limit
 
-    # Comes back true when there is still a record after this page.
+    # Vem true quando ainda existe registro depois desta página.
     attr_accessor :has_next_page
 
-    # Pending deposits of this page, ordered from the most recent creation to the oldest.
+    # Depósitos pendentes desta página, ordenados da criação mais recente para a mais antiga.
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.

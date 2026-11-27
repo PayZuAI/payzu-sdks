@@ -4,10 +4,10 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetPix**](PixOperationsAPI.md#GetPix) | **Get** /pix | Retrieve Charge
-[**GetPixQrcode**](PixOperationsAPI.md#GetPixQrcode) | **Get** /pix/qr-code/{transactionId} | Render Pix QR code (PNG)
-[**GetProof**](PixOperationsAPI.md#GetProof) | **Get** /proof/{id} | Get Transaction Receipt
-[**PostPix**](PixOperationsAPI.md#PostPix) | **Post** /pix | Create Charge (Pix deposit)
+[**GetPix**](PixOperationsAPI.md#GetPix) | **Get** /pix | Recuperar Cobrança
+[**GetPixQrcode**](PixOperationsAPI.md#GetPixQrcode) | **Get** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG)
+[**GetProof**](PixOperationsAPI.md#GetProof) | **Get** /proof/{id} | Obter comprovante da transação
+[**PostPix**](PixOperationsAPI.md#PostPix) | **Post** /pix | Criar Cobrança (depósito Pix)
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > Transaction GetPix(ctx).Id(id).ClientReference(clientReference).EndToEndId(endToEndId).VirtualAccount(virtualAccount).Execute()
 
-Retrieve Charge
+Recuperar Cobrança
 
 
 
@@ -32,10 +32,10 @@ import (
 )
 
 func main() {
-	id := "PAYZU20260811R4TZ8WD1NC000000" // string | Transaction ID. (optional)
-	clientReference := "order_12345" // string | External reference provided when creating the charge. (optional)
-	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | Pix end-to-end ID. (optional)
-	virtualAccount := "loja-centro-01" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+	id := "PAYZU20260811R4TZ8WD1NC000000" // string | ID da transação. (optional)
+	clientReference := "order_12345" // string | Referência externa fornecida na criação da cobrança. (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | ID end-to-end do Pix. (optional)
+	virtualAccount := "loja-centro-01" // string | Subconta usada na criação. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,10 +60,10 @@ Other parameters are passed through a pointer to a apiGetPixRequest struct via t
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string** | Transaction ID. | 
- **clientReference** | **string** | External reference provided when creating the charge. | 
- **endToEndId** | **string** | Pix end-to-end ID. | 
- **virtualAccount** | **string** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | 
+ **id** | **string** | ID da transação. | 
+ **clientReference** | **string** | Referência externa fornecida na criação da cobrança. | 
+ **endToEndId** | **string** | ID end-to-end do Pix. | 
+ **virtualAccount** | **string** | Subconta usada na criação. | 
 
 ### Return type
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > *os.File GetPixQrcode(ctx, transactionId).Execute()
 
-Render Pix QR code (PNG)
+Renderiza o QR Code Pix (PNG)
 
 
 
@@ -104,7 +104,7 @@ import (
 )
 
 func main() {
-	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -124,7 +124,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**transactionId** | **string** | Transaction ID. | 
+**transactionId** | **string** | ID da transação. | 
 
 ### Other Parameters
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 > ProofResponse GetProof(ctx, id).Type_(type_).Execute()
 
-Get Transaction Receipt
+Obter comprovante da transação
 
 
 
@@ -174,8 +174,8 @@ import (
 )
 
 func main() {
-	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
-	type_ := "pdf" // string | Return format. (optional) (default to "pdf")
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação.
+	type_ := "pdf" // string | Formato de retorno. (optional) (default to "pdf")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -195,7 +195,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Transaction ID. | 
+**id** | **string** | ID da transação. | 
 
 ### Other Parameters
 
@@ -205,7 +205,7 @@ Other parameters are passed through a pointer to a apiGetProofRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **type_** | **string** | Return format. | [default to &quot;pdf&quot;]
+ **type_** | **string** | Formato de retorno. | [default to &quot;pdf&quot;]
 
 ### Return type
 
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 > Transaction PostPix(ctx).PostPixRequest(postPixRequest).Execute()
 
-Create Charge (Pix deposit)
+Criar Cobrança (depósito Pix)
 
 
 

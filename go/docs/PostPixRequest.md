@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float32** | Amount in BRL. Must be &gt;&#x3D; 1. | 
-**CallbackUrl** | Pointer to **string** | URL for transaction notifications (http or https). | [optional] 
-**GeneratedName** | Pointer to **string** | Payer full name. Letters and spaces only. | [optional] 
-**GeneratedEmail** | Pointer to **string** | Payer email (optional). | [optional] 
-**GeneratedDocument** | Pointer to **string** | Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits. | [optional] 
-**ExpiresIn** | Pointer to **float32** | Seconds until the QR Code expires. | [optional] 
-**ClientReference** | Pointer to **string** | External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it. | [optional] 
-**VirtualAccount** | Pointer to **string** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
+**Amount** | **float32** | Valor da cobrança, em reais, com no máximo 2 casas decimais. | 
+**CallbackUrl** | Pointer to **string** | URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal. | [optional] 
+**GeneratedName** | Pointer to **string** | Nome usado para montar a cobrança. | [optional] 
+**GeneratedEmail** | Pointer to **string** | E-mail usado para montar a cobrança. | [optional] 
+**GeneratedDocument** | Pointer to **string** | CPF (11 dígitos) ou CNPJ (14 dígitos) do pagador, sem pontuação e com dígitos verificadores válidos. Obrigatório a partir do valor definido na conta (PZD602). | [optional] 
+**ExpiresIn** | Pointer to **int32** | Segundos até o QR Code expirar, em número inteiro. | [optional] 
+**ClientReference** | Pointer to **string** | Referência externa (pedido, fatura etc.). Um clientReference já usado devolve a transação criada com ele. | [optional] 
+**VirtualAccount** | Pointer to **string** | Subconta para separar lojas ou filiais. | [optional] 
 
 ## Methods
 
@@ -154,20 +154,20 @@ HasGeneratedDocument returns a boolean if a field has been set.
 
 ### GetExpiresIn
 
-`func (o *PostPixRequest) GetExpiresIn() float32`
+`func (o *PostPixRequest) GetExpiresIn() int32`
 
 GetExpiresIn returns the ExpiresIn field if non-nil, zero value otherwise.
 
 ### GetExpiresInOk
 
-`func (o *PostPixRequest) GetExpiresInOk() (*float32, bool)`
+`func (o *PostPixRequest) GetExpiresInOk() (*int32, bool)`
 
 GetExpiresInOk returns a tuple with the ExpiresIn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiresIn
 
-`func (o *PostPixRequest) SetExpiresIn(v float32)`
+`func (o *PostPixRequest) SetExpiresIn(v int32)`
 
 SetExpiresIn sets ExpiresIn field to given value.
 

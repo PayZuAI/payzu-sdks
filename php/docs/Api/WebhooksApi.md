@@ -1,19 +1,19 @@
 # PayZu\Pix\WebhooksApi
 
-Register and manage webhook endpoints that receive transaction notifications
+Cadastre e gerencie os endpoints de webhook que recebem as notificações de transação
 
 All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**deleteUserWebhook()**](WebhooksApi.md#deleteUserWebhook) | **DELETE** /user/webhooks/{id} | Delete webhook |
-| [**getUserWebhook()**](WebhooksApi.md#getUserWebhook) | **GET** /user/webhooks/{id} | Get webhook |
-| [**getUserWebhookSentDetail()**](WebhooksApi.md#getUserWebhookSentDetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail |
-| [**getUserWebhooks()**](WebhooksApi.md#getUserWebhooks) | **GET** /user/webhooks | List webhooks |
-| [**getUserWebhooksSentQuantity()**](WebhooksApi.md#getUserWebhooksSentQuantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks |
-| [**patchUserWebhook()**](WebhooksApi.md#patchUserWebhook) | **PATCH** /user/webhooks/{id} | Update webhook |
-| [**postUserWebhook()**](WebhooksApi.md#postUserWebhook) | **POST** /user/webhooks | Create webhook |
-| [**postUserWebhookRotateSecret()**](WebhooksApi.md#postUserWebhookRotateSecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret |
+| [**deleteUserWebhook()**](WebhooksApi.md#deleteUserWebhook) | **DELETE** /user/webhooks/{id} | Remover webhook |
+| [**getUserWebhook()**](WebhooksApi.md#getUserWebhook) | **GET** /user/webhooks/{id} | Consultar webhook |
+| [**getUserWebhookSentDetail()**](WebhooksApi.md#getUserWebhookSentDetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado |
+| [**getUserWebhooks()**](WebhooksApi.md#getUserWebhooks) | **GET** /user/webhooks | Listar webhooks |
+| [**getUserWebhooksSentQuantity()**](WebhooksApi.md#getUserWebhooksSentQuantity) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados |
+| [**patchUserWebhook()**](WebhooksApi.md#patchUserWebhook) | **PATCH** /user/webhooks/{id} | Atualizar webhook |
+| [**postUserWebhook()**](WebhooksApi.md#postUserWebhook) | **POST** /user/webhooks | Criar webhook |
+| [**postUserWebhookRotateSecret()**](WebhooksApi.md#postUserWebhookRotateSecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook |
 
 
 ## `deleteUserWebhook()`
@@ -22,9 +22,9 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 deleteUserWebhook($id)
 ```
 
-Delete webhook
+Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
 ### Example
 
@@ -43,7 +43,7 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Id do webhook.
 
 try {
     $apiInstance->deleteUserWebhook($id);
@@ -56,7 +56,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Webhook id. | |
+| **id** | **string**| Id do webhook. | |
 
 ### Return type
 
@@ -81,9 +81,9 @@ void (empty response body)
 getUserWebhook($id): \PayZu\Pix\Model\Webhook
 ```
 
-Get webhook
+Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
 ### Example
 
@@ -102,7 +102,7 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Id do webhook.
 
 try {
     $result = $apiInstance->getUserWebhook($id);
@@ -116,7 +116,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Webhook id. | |
+| **id** | **string**| Id do webhook. | |
 
 ### Return type
 
@@ -141,9 +141,9 @@ try {
 getUserWebhookSentDetail($id, $callback_id): \PayZu\Pix\Model\SentWebhookDetailResponse
 ```
 
-Get sent callback detail
+Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
 ### Example
 
@@ -162,8 +162,8 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
-$callback_id = cm3w7l9v20001q8f2u6c1y4be; // string | Callback log id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Id do webhook.
+$callback_id = cm3w7l9v20001q8f2u6c1y4be; // string | Id do log de callback.
 
 try {
     $result = $apiInstance->getUserWebhookSentDetail($id, $callback_id);
@@ -177,8 +177,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Webhook id. | |
-| **callback_id** | **string**| Callback log id. | |
+| **id** | **string**| Id do webhook. | |
+| **callback_id** | **string**| Id do log de callback. | |
 
 ### Return type
 
@@ -203,9 +203,9 @@ try {
 getUserWebhooks($active): \PayZu\Pix\Model\WebhookListResponse
 ```
 
-List webhooks
+Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
 ### Example
 
@@ -224,7 +224,7 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$active = true; // bool | Filter by active status.
+$active = true; // bool | Filtra pelo status ativo.
 
 try {
     $result = $apiInstance->getUserWebhooks($active);
@@ -238,7 +238,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **active** | **bool**| Filter by active status. | [optional] |
+| **active** | **bool**| Filtra pelo status ativo. | [optional] |
 
 ### Return type
 
@@ -263,9 +263,9 @@ try {
 getUserWebhooksSentQuantity($webhook_id): \PayZu\Pix\Model\SentWebhooksQuantity
 ```
 
-Count sent callbacks
+Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
 ### Example
 
@@ -284,7 +284,7 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_id = cm3w7k1t40000q8f2r5b9x3ad; // string | Filter the count by webhook id.
+$webhook_id = cm3w7k1t40000q8f2r5b9x3ad; // string | Filtra a contagem por id de webhook.
 
 try {
     $result = $apiInstance->getUserWebhooksSentQuantity($webhook_id);
@@ -298,7 +298,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **webhook_id** | **string**| Filter the count by webhook id. | [optional] |
+| **webhook_id** | **string**| Filtra a contagem por id de webhook. | [optional] |
 
 ### Return type
 
@@ -323,9 +323,9 @@ try {
 patchUserWebhook($id, $webhook_update_request): \PayZu\Pix\Model\Webhook
 ```
 
-Update webhook
+Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
 ### Example
 
@@ -344,7 +344,7 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Id do webhook.
 $webhook_update_request = new \PayZu\Pix\Model\WebhookUpdateRequest(); // \PayZu\Pix\Model\WebhookUpdateRequest
 
 try {
@@ -359,7 +359,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Webhook id. | |
+| **id** | **string**| Id do webhook. | |
 | **webhook_update_request** | [**\PayZu\Pix\Model\WebhookUpdateRequest**](../Model/WebhookUpdateRequest.md)|  | |
 
 ### Return type
@@ -385,9 +385,9 @@ try {
 postUserWebhook($webhook_create_request): \PayZu\Pix\Model\WebhookWithSecret
 ```
 
-Create webhook
+Criar webhook
 
-Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
+Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
 
 ### Example
 
@@ -445,9 +445,9 @@ try {
 postUserWebhookRotateSecret($id): \PayZu\Pix\Model\RotateSecretResponse
 ```
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
 
 ### Example
 
@@ -466,7 +466,7 @@ $apiInstance = new PayZu\Pix\Api\WebhooksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Webhook id.
+$id = cm3w7k1t40000q8f2r5b9x3ad; // string | Id do webhook.
 
 try {
     $result = $apiInstance->postUserWebhookRotateSecret($id);
@@ -480,7 +480,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Webhook id. | |
+| **id** | **string**| Id do webhook. | |
 
 ### Return type
 

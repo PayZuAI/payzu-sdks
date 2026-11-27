@@ -4,25 +4,25 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**download_user_report**](ReportsApi.md#download_user_report) | **POST** /user/report/{id}/download | Download report
-[**get_user_bank_statement**](ReportsApi.md#get_user_bank_statement) | **GET** /user/bank-statements/{id} | Get bank statement
-[**get_user_bank_statements**](ReportsApi.md#get_user_bank_statements) | **GET** /user/bank-statements | List bank statements
-[**get_user_deposit_pending**](ReportsApi.md#get_user_deposit_pending) | **GET** /user/deposit-pending | List pending deposits
-[**get_user_deposit_pending_by_id**](ReportsApi.md#get_user_deposit_pending_by_id) | **GET** /user/deposit-pending/{id} | Get pending deposit
-[**get_user_report**](ReportsApi.md#get_user_report) | **GET** /user/report/{id} | Get report job status
-[**get_user_summary**](ReportsApi.md#get_user_summary) | **GET** /user/summary | Transaction summary
-[**get_user_transaction_by_id**](ReportsApi.md#get_user_transaction_by_id) | **GET** /user/transactions/{id} | List transaction details
-[**get_user_transactions**](ReportsApi.md#get_user_transactions) | **GET** /user/transactions | List Transactions
-[**list_user_reports**](ReportsApi.md#list_user_reports) | **GET** /user/report | List report jobs
-[**post_user_report**](ReportsApi.md#post_user_report) | **POST** /user/report | Generate transactions report
+[**download_user_report**](ReportsApi.md#download_user_report) | **POST** /user/report/{id}/download | Baixar relatório
+[**get_user_bank_statement**](ReportsApi.md#get_user_bank_statement) | **GET** /user/bank-statements/{id} | Consultar lançamento
+[**get_user_bank_statements**](ReportsApi.md#get_user_bank_statements) | **GET** /user/bank-statements | Listar extrato
+[**get_user_deposit_pending**](ReportsApi.md#get_user_deposit_pending) | **GET** /user/deposit-pending | Listar depósitos via chave Pix
+[**get_user_deposit_pending_by_id**](ReportsApi.md#get_user_deposit_pending_by_id) | **GET** /user/deposit-pending/{id} | Consultar depósito via chave Pix
+[**get_user_report**](ReportsApi.md#get_user_report) | **GET** /user/report/{id} | Consultar status do relatório
+[**get_user_summary**](ReportsApi.md#get_user_summary) | **GET** /user/summary | Resumo de transações
+[**get_user_transaction_by_id**](ReportsApi.md#get_user_transaction_by_id) | **GET** /user/transactions/{id} | Listar detalhes da transação
+[**get_user_transactions**](ReportsApi.md#get_user_transactions) | **GET** /user/transactions | Listar transações
+[**list_user_reports**](ReportsApi.md#list_user_reports) | **GET** /user/report | Listar jobs de relatório
+[**post_user_report**](ReportsApi.md#post_user_report) | **POST** /user/report | Gerar relatório de transações
 
 
 # **download_user_report**
 > DownloadUserReport200Response download_user_report(id)
 
-Download report
+Baixar relatório
 
-Returns a short-lived signed URL to download the CSV file.
+Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
 
 ### Example
 
@@ -54,10 +54,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    id = UUID('01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78') # UUID | Report ID.
+    id = UUID('01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78') # UUID | ID do relatório.
 
     try:
-        # Download report
+        # Baixar relatório
         api_response = api_instance.download_user_report(id)
         print("The response of ReportsApi->download_user_report:\n")
         pprint(api_response)
@@ -72,7 +72,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Report ID. | 
+ **id** | **UUID**| ID do relatório. | 
 
 ### Return type
 
@@ -91,22 +91,22 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Signed download URL |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Report not found |  -  |
-**410** | Report file expired |  -  |
-**422** | Report not ready (still processing) |  -  |
+**200** | URL de download assinada |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Relatório não encontrado |  -  |
+**410** | Arquivo do relatório expirado |  -  |
+**422** | Relatório ainda processando |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_bank_statement**
 > BankStatement get_user_bank_statement(id)
 
-Get bank statement
+Consultar lançamento
 
-Returns a single statement entry.
+Retorna um lançamento do extrato.
 
 ### Example
 
@@ -138,10 +138,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    id = 'cm3w7q8s10004q8f2k9f5b7eh' # str | Statement entry id.
+    id = 'cm3w7q8s10004q8f2k9f5b7eh' # str | Id do lançamento do extrato.
 
     try:
-        # Get bank statement
+        # Consultar lançamento
         api_response = api_instance.get_user_bank_statement(id)
         print("The response of ReportsApi->get_user_bank_statement:\n")
         pprint(api_response)
@@ -156,7 +156,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Statement entry id. | 
+ **id** | **str**| Id do lançamento do extrato. | 
 
 ### Return type
 
@@ -175,18 +175,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Statement entry. |  -  |
-**401** | Authentication failure |  -  |
-**404** | Resource not found |  -  |
+**200** | Lançamento. |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_bank_statements**
 > BankStatementListResponse get_user_bank_statements(created_at_from, created_at_to, id=id, operation=operation, reason=reason, transaction_id=transaction_id, amount_from=amount_from, amount_to=amount_to, page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction)
 
-List bank statements
+Listar extrato
 
-Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
 
 ### Example
 
@@ -218,21 +219,21 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    created_at_from = '2026-08-01T00:00:00-03:00' # datetime | Start date (required).
-    created_at_to = '2026-08-31T23:59:59-03:00' # datetime | End date (required).
-    id = 'cm3w7q8s10004q8f2k9f5b7eh' # str | Entry ID. (optional)
-    operation = 'operation_example' # str | Operation type.  `INCREMENT` `DECREMENT` (optional)
-    reason = 'Estorno' # str | Reason for the entry. (optional)
-    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID. (optional)
-    amount_from = 10.9 # float | Minimum amount. (optional)
-    amount_to = 500 # float | Maximum amount. (optional)
-    page = 1 # int | Page number. (optional) (default to 1)
-    limit = 10 # int | Items per page. (optional) (default to 10)
-    sort_by = createdAt # str | Sort field. (optional) (default to createdAt)
-    sort_direction = desc # str | Sort direction. (optional) (default to desc)
+    created_at_from = '2026-08-01T00:00:00-03:00' # datetime | Data inicial (obrigatória).
+    created_at_to = '2026-08-31T23:59:59-03:00' # datetime | Data final (obrigatória).
+    id = 'cm3w7q8s10004q8f2k9f5b7eh' # str | ID do lançamento. (optional)
+    operation = 'operation_example' # str | Tipo de operação.  `INCREMENT` `DECREMENT` (optional)
+    reason = 'PIX_DEPOSIT' # str | Razão do lançamento. (optional)
+    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação. (optional)
+    amount_from = 10.9 # float | Valor mínimo. (optional)
+    amount_to = 500 # float | Valor máximo. (optional)
+    page = 1 # int | Número da página. (optional) (default to 1)
+    limit = 10 # int | Itens por página. (optional) (default to 10)
+    sort_by = createdAt # str | Campo de ordenação. (optional) (default to createdAt)
+    sort_direction = desc # str | Direção da ordenação. (optional) (default to desc)
 
     try:
-        # List bank statements
+        # Listar extrato
         api_response = api_instance.get_user_bank_statements(created_at_from, created_at_to, id=id, operation=operation, reason=reason, transaction_id=transaction_id, amount_from=amount_from, amount_to=amount_to, page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction)
         print("The response of ReportsApi->get_user_bank_statements:\n")
         pprint(api_response)
@@ -247,18 +248,18 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **created_at_from** | **datetime**| Start date (required). | 
- **created_at_to** | **datetime**| End date (required). | 
- **id** | **str**| Entry ID. | [optional] 
- **operation** | **str**| Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] 
- **reason** | **str**| Reason for the entry. | [optional] 
- **transaction_id** | **str**| Transaction ID. | [optional] 
- **amount_from** | **float**| Minimum amount. | [optional] 
- **amount_to** | **float**| Maximum amount. | [optional] 
- **page** | **int**| Page number. | [optional] [default to 1]
- **limit** | **int**| Items per page. | [optional] [default to 10]
- **sort_by** | **str**| Sort field. | [optional] [default to createdAt]
- **sort_direction** | **str**| Sort direction. | [optional] [default to desc]
+ **created_at_from** | **datetime**| Data inicial (obrigatória). | 
+ **created_at_to** | **datetime**| Data final (obrigatória). | 
+ **id** | **str**| ID do lançamento. | [optional] 
+ **operation** | **str**| Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] 
+ **reason** | **str**| Razão do lançamento. | [optional] 
+ **transaction_id** | **str**| ID da transação. | [optional] 
+ **amount_from** | **float**| Valor mínimo. | [optional] 
+ **amount_to** | **float**| Valor máximo. | [optional] 
+ **page** | **int**| Número da página. | [optional] [default to 1]
+ **limit** | **int**| Itens por página. | [optional] [default to 10]
+ **sort_by** | **str**| Campo de ordenação. | [optional] [default to createdAt]
+ **sort_direction** | **str**| Direção da ordenação. | [optional] [default to desc]
 
 ### Return type
 
@@ -277,18 +278,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Statement page. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
+**200** | Página do extrato. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_deposit_pending**
 > DepositPendingListResponse get_user_deposit_pending(status=status, document=document, name=name, end_to_end_id=end_to_end_id, amount_min=amount_min, amount_max=amount_max, created_at_from=created_at_from, created_at_to=created_at_to, page=page, limit=limit)
 
-List pending deposits
+Listar depósitos via chave Pix
 
-Lists deposits that are pending / not yet reconciled.
+Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
 
 ### Example
 
@@ -320,19 +322,19 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    status = 'PENDING' # str | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-    document = '12345678901' # str | CPF or CNPJ, digits only. (optional)
-    name = 'John Doe' # str | Name of the payer or receiver. (optional)
-    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | End-to-end ID of the Pix. (optional)
-    amount_min = 10.9 # float | Minimum amount. (optional)
-    amount_max = 500 # float | Maximum amount. (optional)
-    created_at_from = '2026-08-01' # datetime | Start of the creation date range. (optional)
-    created_at_to = '2026-08-31' # datetime | End of the creation date range. (optional)
-    page = 1 # int | Page number. (optional) (default to 1)
-    limit = 20 # int | Items per page. (optional) (default to 20)
+    status = 'PENDING' # str | Status do depósito, vários separados por vírgula.  `PENDING` `APPROVED` `REJECTED` `EXPIRED` `COMPLETED` (optional)
+    document = '12345678901' # str | CPF ou CNPJ, apenas dígitos. (optional)
+    name = 'John Doe' # str | Nome do pagador ou recebedor. (optional)
+    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | ID end-to-end do Pix. (optional)
+    amount_min = 10.9 # float | Valor mínimo. (optional)
+    amount_max = 500 # float | Valor máximo. (optional)
+    created_at_from = '2026-08-01' # datetime | Data de criação inicial. (optional)
+    created_at_to = '2026-08-31' # datetime | Data de criação final. (optional)
+    page = 1 # int | Número da página. Valor inválido vira 1. (optional) (default to 1)
+    limit = 20 # int | Itens por página. Valor inválido vira 20. (optional) (default to 20)
 
     try:
-        # List pending deposits
+        # Listar depósitos via chave Pix
         api_response = api_instance.get_user_deposit_pending(status=status, document=document, name=name, end_to_end_id=end_to_end_id, amount_min=amount_min, amount_max=amount_max, created_at_from=created_at_from, created_at_to=created_at_to, page=page, limit=limit)
         print("The response of ReportsApi->get_user_deposit_pending:\n")
         pprint(api_response)
@@ -347,16 +349,16 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **status** | **str**| Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [optional] 
- **document** | **str**| CPF or CNPJ, digits only. | [optional] 
- **name** | **str**| Name of the payer or receiver. | [optional] 
- **end_to_end_id** | **str**| End-to-end ID of the Pix. | [optional] 
- **amount_min** | **float**| Minimum amount. | [optional] 
- **amount_max** | **float**| Maximum amount. | [optional] 
- **created_at_from** | **datetime**| Start of the creation date range. | [optional] 
- **created_at_to** | **datetime**| End of the creation date range. | [optional] 
- **page** | **int**| Page number. | [optional] [default to 1]
- **limit** | **int**| Items per page. | [optional] [default to 20]
+ **status** | **str**| Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; | [optional] 
+ **document** | **str**| CPF ou CNPJ, apenas dígitos. | [optional] 
+ **name** | **str**| Nome do pagador ou recebedor. | [optional] 
+ **end_to_end_id** | **str**| ID end-to-end do Pix. | [optional] 
+ **amount_min** | **float**| Valor mínimo. | [optional] 
+ **amount_max** | **float**| Valor máximo. | [optional] 
+ **created_at_from** | **datetime**| Data de criação inicial. | [optional] 
+ **created_at_to** | **datetime**| Data de criação final. | [optional] 
+ **page** | **int**| Número da página. Valor inválido vira 1. | [optional] [default to 1]
+ **limit** | **int**| Itens por página. Valor inválido vira 20. | [optional] [default to 20]
 
 ### Return type
 
@@ -375,18 +377,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Pending deposit page. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
+**200** | Página de pendentes. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_deposit_pending_by_id**
 > DepositPending get_user_deposit_pending_by_id(id)
 
-Get pending deposit
+Consultar depósito via chave Pix
 
-Returns a single pending deposit.
+Retorna um depósito via chave Pix.
 
 ### Example
 
@@ -418,10 +421,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    id = 'cm3w7r1u50005q8f2m1g6c8fj' # str | Pending deposit id.
+    id = 'cm3w7r1u50005q8f2m1g6c8fj' # str | Id do depósito pendente.
 
     try:
-        # Get pending deposit
+        # Consultar depósito via chave Pix
         api_response = api_instance.get_user_deposit_pending_by_id(id)
         print("The response of ReportsApi->get_user_deposit_pending_by_id:\n")
         pprint(api_response)
@@ -436,7 +439,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Pending deposit id. | 
+ **id** | **str**| Id do depósito pendente. | 
 
 ### Return type
 
@@ -455,18 +458,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Pending deposit. |  -  |
-**401** | Authentication failure |  -  |
-**404** | Resource not found |  -  |
+**200** | Depósito pendente. |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_report**
 > ReportJobDetail get_user_report(id)
 
-Get report job status
+Consultar status do relatório
 
-Returns the status and metadata of a specific report job by `id`.
+Retorna o status e os metadados de um job de relatório específico pelo `id`.
 
 ### Example
 
@@ -498,10 +502,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    id = UUID('01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78') # UUID | Report ID.
+    id = UUID('01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78') # UUID | ID do relatório.
 
     try:
-        # Get report job status
+        # Consultar status do relatório
         api_response = api_instance.get_user_report(id)
         print("The response of ReportsApi->get_user_report:\n")
         pprint(api_response)
@@ -516,7 +520,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Report ID. | 
+ **id** | **UUID**| ID do relatório. | 
 
 ### Return type
 
@@ -535,19 +539,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Report job |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**404** | Report not found |  -  |
+**200** | Job de relatório |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Relatório não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_summary**
 > Summary get_user_summary(date_from=date_from, date_to=date_to, group_by=group_by, grouped=grouped)
 
-Transaction summary
+Resumo de transações
 
-Aggregated totals for deposits, withdrawals and commission over a period.
+Totais agregados de depósitos, saques e comissão num período.
 
 ### Example
 
@@ -579,13 +584,13 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    date_from = '2026-08-01T00:00:00-03:00' # datetime | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-    date_to = '2026-08-31T23:59:59-03:00' # datetime | End date. Default: now. (optional)
-    group_by = day # str | Grouping applied to the transactions. (optional) (default to day)
-    grouped = true # bool | When true, returns a series grouped by date. (optional)
+    date_from = '2026-08-01T00:00:00-03:00' # datetime | Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). (optional)
+    date_to = '2026-08-31T23:59:59-03:00' # datetime | Data final. Padrão: agora. (optional)
+    group_by = day # str | Agrupamento das transações. (optional) (default to day)
+    grouped = true # bool | Quando true, retorna uma série agrupada por data. (optional)
 
     try:
-        # Transaction summary
+        # Resumo de transações
         api_response = api_instance.get_user_summary(date_from=date_from, date_to=date_to, group_by=group_by, grouped=grouped)
         print("The response of ReportsApi->get_user_summary:\n")
         pprint(api_response)
@@ -600,10 +605,10 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **date_from** | **datetime**| Start date. Default: start of the previous day (America/Sao_Paulo). | [optional] 
- **date_to** | **datetime**| End date. Default: now. | [optional] 
- **group_by** | **str**| Grouping applied to the transactions. | [optional] [default to day]
- **grouped** | **bool**| When true, returns a series grouped by date. | [optional] 
+ **date_from** | **datetime**| Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). | [optional] 
+ **date_to** | **datetime**| Data final. Padrão: agora. | [optional] 
+ **group_by** | **str**| Agrupamento das transações. | [optional] [default to day]
+ **grouped** | **bool**| Quando true, retorna uma série agrupada por data. | [optional] 
 
 ### Return type
 
@@ -622,18 +627,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Summary. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
+**200** | Resumo. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_transaction_by_id**
 > GetUserTransactionById200Response get_user_transaction_by_id(id)
 
-List transaction details
+Listar detalhes da transação
 
-Retrieve a single transaction with its callback log and linked infractions.
+Recupera uma única transação com seu log de callback e as infrações vinculadas.
 
 ### Example
 
@@ -665,10 +671,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID.
+    id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação.
 
     try:
-        # List transaction details
+        # Listar detalhes da transação
         api_response = api_instance.get_user_transaction_by_id(id)
         print("The response of ReportsApi->get_user_transaction_by_id:\n")
         pprint(api_response)
@@ -683,7 +689,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Transaction ID. | 
+ **id** | **str**| ID da transação. | 
 
 ### Return type
 
@@ -702,18 +708,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Transaction details |  -  |
-**401** | Authentication failure |  -  |
-**404** | Transaction not found |  -  |
+**200** | Detalhes da transação |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Transação não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_transactions**
 > GetUserTransactions200Response get_user_transactions(date_from=date_from, date_to=date_to, limit=limit, page=page, id=id, status=status, type=type, method=method, amount=amount, document=document, name=name, end_to_end_id=end_to_end_id, sort_by=sort_by, sort_direction=sort_direction, client_reference=client_reference, virtual_account=virtual_account, has_qr_code=has_qr_code)
 
-List Transactions
+Listar transações
 
-Paginated list of account transactions with filters.
+Lista paginada das transações da conta com filtros.
 
 ### Example
 
@@ -745,26 +752,26 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    date_from = '2026-08-01T00:00:00-03:00' # datetime | Start date-time (ISO 8601). (optional)
-    date_to = '2026-08-31T23:59:59-03:00' # datetime | End date-time (ISO 8601). (optional)
-    limit = 10 # int | Items per page (max 1000). (optional) (default to 10)
-    page = 1 # int | Page number (default 1). (optional) (default to 1)
-    id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID. (optional)
-    status = 'COMPLETED' # str | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-    type = 'DEPOSIT' # str | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
-    method = 'PIX' # str | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
-    amount = 15000 # float | Amount filter. Minimum 0.01. (optional)
-    document = '12345678901' # str | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
-    name = 'Alice' # str | Name filter. (optional)
-    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | Pix end-to-end ID. (optional)
-    sort_by = createdAt # str | Field to sort by (optional) (default to createdAt)
-    sort_direction = desc # str | Sort direction (optional) (default to desc)
-    client_reference = 'order_12345' # str | Filter by external reference (optional)
-    virtual_account = 'loja-centro-01' # str | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-    has_qr_code = True # bool | Only transactions with (true) or without (false) QR Code. (optional)
+    date_from = '2026-08-01T00:00:00-03:00' # datetime | Data-hora inicial (ISO 8601). (optional)
+    date_to = '2026-08-31T23:59:59-03:00' # datetime | Data-hora final (ISO 8601). (optional)
+    limit = 10 # int | Itens por página. (optional) (default to 10)
+    page = 1 # int | Número da página. (optional) (default to 1)
+    id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação. (optional)
+    status = 'COMPLETED' # str | Status da transação, vários separados por vírgula.  `PENDING` `COMPLETED` `CANCELED` `WAITING_FOR_REFUND` `REFUNDED` `EXPIRED` `ERROR` (optional)
+    type = 'DEPOSIT' # str | Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+    method = 'PIX' # str | Trilho da transação, vários separados por vírgula.  `PIX` `INTERNAL_TRANSFER` `BANK_SLIP` `TED` (optional)
+    amount = 15000 # float | Filtro por valor. Mínimo 0.01. (optional)
+    document = '12345678901' # str | CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. (optional)
+    name = 'Alice' # str | Filtro por nome. (optional)
+    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | ID end-to-end do Pix. (optional)
+    sort_by = createdAt # str | Campo pelo qual ordenar (optional) (default to createdAt)
+    sort_direction = desc # str | Direção da ordenação (optional) (default to desc)
+    client_reference = 'order_12345' # str | Filtra por referência externa (optional)
+    virtual_account = 'loja-centro-01' # str | Subconta usada na criação. (optional)
+    has_qr_code = True # bool | Só transações com (true) ou sem (false) QR Code. (optional)
 
     try:
-        # List Transactions
+        # Listar transações
         api_response = api_instance.get_user_transactions(date_from=date_from, date_to=date_to, limit=limit, page=page, id=id, status=status, type=type, method=method, amount=amount, document=document, name=name, end_to_end_id=end_to_end_id, sort_by=sort_by, sort_direction=sort_direction, client_reference=client_reference, virtual_account=virtual_account, has_qr_code=has_qr_code)
         print("The response of ReportsApi->get_user_transactions:\n")
         pprint(api_response)
@@ -779,23 +786,23 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **date_from** | **datetime**| Start date-time (ISO 8601). | [optional] 
- **date_to** | **datetime**| End date-time (ISO 8601). | [optional] 
- **limit** | **int**| Items per page (max 1000). | [optional] [default to 10]
- **page** | **int**| Page number (default 1). | [optional] [default to 1]
- **id** | **str**| Transaction ID. | [optional] 
- **status** | **str**| Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [optional] 
- **type** | **str**| Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] 
- **method** | **str**| Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | [optional] 
- **amount** | **float**| Amount filter. Minimum 0.01. | [optional] 
- **document** | **str**| CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [optional] 
- **name** | **str**| Name filter. | [optional] 
- **end_to_end_id** | **str**| Pix end-to-end ID. | [optional] 
- **sort_by** | **str**| Field to sort by | [optional] [default to createdAt]
- **sort_direction** | **str**| Sort direction | [optional] [default to desc]
- **client_reference** | **str**| Filter by external reference | [optional] 
- **virtual_account** | **str**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] 
- **has_qr_code** | **bool**| Only transactions with (true) or without (false) QR Code. | [optional] 
+ **date_from** | **datetime**| Data-hora inicial (ISO 8601). | [optional] 
+ **date_to** | **datetime**| Data-hora final (ISO 8601). | [optional] 
+ **limit** | **int**| Itens por página. | [optional] [default to 10]
+ **page** | **int**| Número da página. | [optional] [default to 1]
+ **id** | **str**| ID da transação. | [optional] 
+ **status** | **str**| Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; | [optional] 
+ **type** | **str**| Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] 
+ **method** | **str**| Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; | [optional] 
+ **amount** | **float**| Filtro por valor. Mínimo 0.01. | [optional] 
+ **document** | **str**| CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. | [optional] 
+ **name** | **str**| Filtro por nome. | [optional] 
+ **end_to_end_id** | **str**| ID end-to-end do Pix. | [optional] 
+ **sort_by** | **str**| Campo pelo qual ordenar | [optional] [default to createdAt]
+ **sort_direction** | **str**| Direção da ordenação | [optional] [default to desc]
+ **client_reference** | **str**| Filtra por referência externa | [optional] 
+ **virtual_account** | **str**| Subconta usada na criação. | [optional] 
+ **has_qr_code** | **bool**| Só transações com (true) ou sem (false) QR Code. | [optional] 
 
 ### Return type
 
@@ -814,18 +821,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Transaction page |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**200** | Página de transações |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_user_reports**
 > ListUserReports200Response list_user_reports(page=page, limit=limit, status=status, created_at_from=created_at_from, created_at_to=created_at_to, updated_at_from=updated_at_from, updated_at_to=updated_at_to, sort_by=sort_by, sort_direction=sort_direction)
 
-List report jobs
+Listar jobs de relatório
 
-List report jobs created by the authenticated user.
+Lista os jobs de relatório criados pelo usuário autenticado.
 
 ### Example
 
@@ -857,18 +865,18 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.ReportsApi(api_client)
-    page = 1 # int | Page number. (optional) (default to 1)
-    limit = 10 # int | Items per page. (optional) (default to 10)
-    status = 'COMPLETED,FAILED' # str | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
-    created_at_from = '2026-08-01' # datetime | Filter: created from. (optional)
-    created_at_to = '2026-08-31' # datetime | Filter: created up to. (optional)
-    updated_at_from = '2026-08-01' # datetime | Filter: updated from. (optional)
-    updated_at_to = '2026-08-31' # datetime | Filter: updated up to. (optional)
-    sort_by = createdAt # str | Sort field. (optional) (default to createdAt)
-    sort_direction = desc # str | Sort direction. (optional) (default to desc)
+    page = 1 # int | Número da página. (optional) (default to 1)
+    limit = 10 # int | Itens por página. (optional) (default to 10)
+    status = 'COMPLETED,FAILED' # str | Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+    created_at_from = '2026-08-01' # datetime | Filtro: criado a partir de. (optional)
+    created_at_to = '2026-08-31' # datetime | Filtro: criado até. (optional)
+    updated_at_from = '2026-08-01' # datetime | Filtro: atualizado a partir de. (optional)
+    updated_at_to = '2026-08-31' # datetime | Filtro: atualizado até. (optional)
+    sort_by = createdAt # str | Campo de ordenação. (optional) (default to createdAt)
+    sort_direction = desc # str | Direção da ordenação. (optional) (default to desc)
 
     try:
-        # List report jobs
+        # Listar jobs de relatório
         api_response = api_instance.list_user_reports(page=page, limit=limit, status=status, created_at_from=created_at_from, created_at_to=created_at_to, updated_at_from=updated_at_from, updated_at_to=updated_at_to, sort_by=sort_by, sort_direction=sort_direction)
         print("The response of ReportsApi->list_user_reports:\n")
         pprint(api_response)
@@ -883,15 +891,15 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int**| Page number. | [optional] [default to 1]
- **limit** | **int**| Items per page. | [optional] [default to 10]
- **status** | **str**| Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] 
- **created_at_from** | **datetime**| Filter: created from. | [optional] 
- **created_at_to** | **datetime**| Filter: created up to. | [optional] 
- **updated_at_from** | **datetime**| Filter: updated from. | [optional] 
- **updated_at_to** | **datetime**| Filter: updated up to. | [optional] 
- **sort_by** | **str**| Sort field. | [optional] [default to createdAt]
- **sort_direction** | **str**| Sort direction. | [optional] [default to desc]
+ **page** | **int**| Número da página. | [optional] [default to 1]
+ **limit** | **int**| Itens por página. | [optional] [default to 10]
+ **status** | **str**| Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] 
+ **created_at_from** | **datetime**| Filtro: criado a partir de. | [optional] 
+ **created_at_to** | **datetime**| Filtro: criado até. | [optional] 
+ **updated_at_from** | **datetime**| Filtro: atualizado a partir de. | [optional] 
+ **updated_at_to** | **datetime**| Filtro: atualizado até. | [optional] 
+ **sort_by** | **str**| Campo de ordenação. | [optional] [default to createdAt]
+ **sort_direction** | **str**| Direção da ordenação. | [optional] [default to desc]
 
 ### Return type
 
@@ -910,18 +918,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Page of report jobs |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**200** | Página de jobs de relatório |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_user_report**
 > ReportJobAccepted post_user_report(post_user_report_request)
 
-Generate transactions report
+Gerar relatório de transações
 
-Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
 
 ### Example
 
@@ -957,7 +966,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     post_user_report_request = payzu_pix.PostUserReportRequest() # PostUserReportRequest | 
 
     try:
-        # Generate transactions report
+        # Gerar relatório de transações
         api_response = api_instance.post_user_report(post_user_report_request)
         print("The response of ReportsApi->post_user_report:\n")
         pprint(api_response)
@@ -992,10 +1001,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | Report job aceito (job enfileirado) |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**422** | No transactions match the filter / concurrency limit reached |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**422** | Nenhuma transação no filtro |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

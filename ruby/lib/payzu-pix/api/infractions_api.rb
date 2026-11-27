@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,66 +19,66 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # List Infractions
-    # List all infractions for the authenticated user with pagination and filters.
+    # Listar infrações
+    # Lista todas as infrações do usuário autenticado com paginação e filtros.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :status Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
-    # @option opts [String] :type Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-    # @option opts [String] :end_to_end_id End-to-end ID of the Pix.
-    # @option opts [String] :transaction_id Transaction ID.
-    # @option opts [Float] :amount_min Minimum amount.
-    # @option opts [Float] :amount_max Maximum amount.
-    # @option opts [String] :analysis_result Comma-separated AnalysisResult: AGREED, DISAGREED.
-    # @option opts [String] :reported_by Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-    # @option opts [String] :participant_document CPF or CNPJ of the participant.
-    # @option opts [String] :participant_name Name of the participant.
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
-    # @option opts [Time] :reported_at_from Filter: reportedAt from.
-    # @option opts [Time] :reported_at_to Filter: reportedAt up to.
-    # @option opts [Time] :created_at_from Filter: createdAt from.
-    # @option opts [Time] :created_at_to Filter: createdAt up to.
-    # @option opts [Time] :expires_at_from Filter: expiresAt from.
-    # @option opts [Time] :expires_at_to Filter: expiresAt up to.
-    # @option opts [Time] :updated_at_from Filter: updatedAt from.
-    # @option opts [Time] :updated_at_to Filter: updatedAt up to.
-    # @option opts [String] :id Filter by infraction ID.
-    # @option opts [String] :protocol Filter by protocol.
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :status Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60;
+    # @option opts [String] :type Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60;
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :transaction_id ID da transação.
+    # @option opts [Float] :amount_min Valor mínimo.
+    # @option opts [Float] :amount_max Valor máximo.
+    # @option opts [String] :analysis_result AnalysisResult separados por vírgula: AGREED, DISAGREED.
+    # @option opts [String] :reported_by Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60;
+    # @option opts [String] :participant_document CPF ou CNPJ do participante.
+    # @option opts [String] :participant_name Nome do participante.
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
+    # @option opts [Time] :reported_at_from Filtro: reportedAt a partir de.
+    # @option opts [Time] :reported_at_to Filtro: reportedAt até.
+    # @option opts [Time] :created_at_from Filtro: createdAt a partir de.
+    # @option opts [Time] :created_at_to Filtro: createdAt até.
+    # @option opts [Time] :expires_at_from Filtro: expiresAt a partir de.
+    # @option opts [Time] :expires_at_to Filtro: expiresAt até.
+    # @option opts [Time] :updated_at_from Filtro: updatedAt a partir de.
+    # @option opts [Time] :updated_at_to Filtro: updatedAt até.
+    # @option opts [String] :id Filtro por ID da infração.
+    # @option opts [String] :protocol Filtro por protocolo.
     # @return [InfractionListResponse]
     def get_infractions(opts = {})
       data, _status_code, _headers = get_infractions_with_http_info(opts)
       data
     end
 
-    # List Infractions
-    # List all infractions for the authenticated user with pagination and filters.
+    # Listar infrações
+    # Lista todas as infrações do usuário autenticado com paginação e filtros.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :status Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS)
-    # @option opts [String] :type Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED)
-    # @option opts [String] :end_to_end_id End-to-end ID of the Pix.
-    # @option opts [String] :transaction_id Transaction ID.
-    # @option opts [Float] :amount_min Minimum amount.
-    # @option opts [Float] :amount_max Maximum amount.
-    # @option opts [String] :analysis_result Comma-separated AnalysisResult: AGREED, DISAGREED.
-    # @option opts [String] :reported_by Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT)
-    # @option opts [String] :participant_document CPF or CNPJ of the participant.
-    # @option opts [String] :participant_name Name of the participant.
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
-    # @option opts [Time] :reported_at_from Filter: reportedAt from.
-    # @option opts [Time] :reported_at_to Filter: reportedAt up to.
-    # @option opts [Time] :created_at_from Filter: createdAt from.
-    # @option opts [Time] :created_at_to Filter: createdAt up to.
-    # @option opts [Time] :expires_at_from Filter: expiresAt from.
-    # @option opts [Time] :expires_at_to Filter: expiresAt up to.
-    # @option opts [Time] :updated_at_from Filter: updatedAt from.
-    # @option opts [Time] :updated_at_to Filter: updatedAt up to.
-    # @option opts [String] :id Filter by infraction ID.
-    # @option opts [String] :protocol Filter by protocol.
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :status Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60;
+    # @option opts [String] :type Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60;
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :transaction_id ID da transação.
+    # @option opts [Float] :amount_min Valor mínimo.
+    # @option opts [Float] :amount_max Valor máximo.
+    # @option opts [String] :analysis_result AnalysisResult separados por vírgula: AGREED, DISAGREED.
+    # @option opts [String] :reported_by Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60;
+    # @option opts [String] :participant_document CPF ou CNPJ do participante.
+    # @option opts [String] :participant_name Nome do participante.
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
+    # @option opts [Time] :reported_at_from Filtro: reportedAt a partir de.
+    # @option opts [Time] :reported_at_to Filtro: reportedAt até.
+    # @option opts [Time] :created_at_from Filtro: createdAt a partir de.
+    # @option opts [Time] :created_at_to Filtro: createdAt até.
+    # @option opts [Time] :expires_at_from Filtro: expiresAt a partir de.
+    # @option opts [Time] :expires_at_to Filtro: expiresAt até.
+    # @option opts [Time] :updated_at_from Filtro: updatedAt a partir de.
+    # @option opts [Time] :updated_at_to Filtro: updatedAt até.
+    # @option opts [String] :id Filtro por ID da infração.
+    # @option opts [String] :protocol Filtro por protocolo.
     # @return [Array<(InfractionListResponse, Integer, Hash)>] InfractionListResponse data, response status code and response headers
     def get_infractions_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -94,6 +94,14 @@ module PayZuPix
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling InfractionsApi.get_infractions, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'amount_min'].nil? && opts[:'amount_min'] < 0.01
+        fail ArgumentError, 'invalid value for "opts[:"amount_min"]" when calling InfractionsApi.get_infractions, must be greater than or equal to 0.01.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'amount_max'].nil? && opts[:'amount_max'] < 0.01
+        fail ArgumentError, 'invalid value for "opts[:"amount_max"]" when calling InfractionsApi.get_infractions, must be greater than or equal to 0.01.'
       end
 
       allowable_values = ["createdAt", "updatedAt"]
@@ -168,9 +176,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get Infraction
-    # Get a specific infraction by ID.
-    # @param id [String] Infraction ID
+    # Obter Infração
+    # Obtém uma infração específica por ID.
+    # @param id [String] ID da infração
     # @param [Hash] opts the optional parameters
     # @return [InfractionDetail]
     def get_infractions_by_id(id, opts = {})
@@ -178,9 +186,9 @@ module PayZuPix
       data
     end
 
-    # Get Infraction
-    # Get a specific infraction by ID.
-    # @param id [String] Infraction ID
+    # Obter Infração
+    # Obtém uma infração específica por ID.
+    # @param id [String] ID da infração
     # @param [Hash] opts the optional parameters
     # @return [Array<(InfractionDetail, Integer, Hash)>] InfractionDetail data, response status code and response headers
     def get_infractions_by_id_with_http_info(id, opts = {})
@@ -231,10 +239,10 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get Defense
-    # Get a specific defense for an infraction.
-    # @param infraction_id [String] Infraction ID
-    # @param defense_id [String] Defense ID
+    # Obter Defesa
+    # Obtém uma defesa específica de uma infração.
+    # @param infraction_id [String] ID da infração
+    # @param defense_id [String] ID da defesa
     # @param [Hash] opts the optional parameters
     # @return [Defense]
     def get_infractions_defense_by_id(infraction_id, defense_id, opts = {})
@@ -242,10 +250,10 @@ module PayZuPix
       data
     end
 
-    # Get Defense
-    # Get a specific defense for an infraction.
-    # @param infraction_id [String] Infraction ID
-    # @param defense_id [String] Defense ID
+    # Obter Defesa
+    # Obtém uma defesa específica de uma infração.
+    # @param infraction_id [String] ID da infração
+    # @param defense_id [String] ID da defesa
     # @param [Hash] opts the optional parameters
     # @return [Array<(Defense, Integer, Hash)>] Defense data, response status code and response headers
     def get_infractions_defense_by_id_with_http_info(infraction_id, defense_id, opts = {})
@@ -300,21 +308,21 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List Defenses
-    # List all defenses for a specific infraction.
-    # @param id [String] Infraction ID
+    # Listar Defesas
+    # Lista todas as defesas de uma infração específica.
+    # @param id [String] ID da infração
     # @param [Hash] opts the optional parameters
-    # @return [Array<Defense>]
+    # @return [Array<DefenseListItem>]
     def get_infractions_defenses(id, opts = {})
       data, _status_code, _headers = get_infractions_defenses_with_http_info(id, opts)
       data
     end
 
-    # List Defenses
-    # List all defenses for a specific infraction.
-    # @param id [String] Infraction ID
+    # Listar Defesas
+    # Lista todas as defesas de uma infração específica.
+    # @param id [String] ID da infração
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<Defense>, Integer, Hash)>] Array<Defense> data, response status code and response headers
+    # @return [Array<(Array<DefenseListItem>, Integer, Hash)>] Array<DefenseListItem> data, response status code and response headers
     def get_infractions_defenses_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InfractionsApi.get_infractions_defenses ...'
@@ -341,7 +349,7 @@ module PayZuPix
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<Defense>'
+      return_type = opts[:debug_return_type] || 'Array<DefenseListItem>'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['BearerAuth']
@@ -363,24 +371,24 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Create Defense
-    # Create a defense for a specific infraction.
-    # @param id [String] Infraction ID
-    # @param defense [String] Defense text (max: 1000 characters)
+    # Criar Defesa
+    # Cria uma defesa para uma infração específica.
+    # @param id [String] ID da infração
+    # @param defense [String] Texto da defesa (máx: 1000 caracteres)
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<File>] :files Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
+    # @option opts [Array<File>] :files Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados.
     # @return [Defense]
     def post_infractions_defense(id, defense, opts = {})
       data, _status_code, _headers = post_infractions_defense_with_http_info(id, defense, opts)
       data
     end
 
-    # Create Defense
-    # Create a defense for a specific infraction.
-    # @param id [String] Infraction ID
-    # @param defense [String] Defense text (max: 1000 characters)
+    # Criar Defesa
+    # Cria uma defesa para uma infração específica.
+    # @param id [String] ID da infração
+    # @param defense [String] Texto da defesa (máx: 1000 caracteres)
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<File>] :files Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected.
+    # @option opts [Array<File>] :files Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados.
     # @return [Array<(Defense, Integer, Hash)>] Defense data, response status code and response headers
     def post_infractions_defense_with_http_info(id, defense, opts = {})
       if @api_client.config.debugging

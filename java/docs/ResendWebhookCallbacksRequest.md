@@ -7,13 +7,13 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**createdAtFrom** | **OffsetDateTime** | Start of the delivery period. At most 30 days ago. |  |
-|**createdAtTo** | **OffsetDateTime** | End of the delivery period, on or after createdAtFrom. The window cannot exceed 7 days. |  |
-|**webhookIds** | **List&lt;String&gt;** | Webhooks to resend. Omitted: all active webhooks of the account. |  [optional] |
-|**transactionIds** | **List&lt;String&gt;** | Restrict to specific transaction IDs. |  [optional] |
-|**transactionTypes** | [**List&lt;TransactionTypesEnum&gt;**](#List&lt;TransactionTypesEnum&gt;) | Filter by transaction type. |  [optional] |
-|**transactionStatus** | [**List&lt;TransactionStatusEnum&gt;**](#List&lt;TransactionStatusEnum&gt;) | Filter by the current transaction status. |  [optional] |
-|**transactionEndToEndIds** | **List&lt;String&gt;** | Restrict to specific end-to-end IDs. |  [optional] |
+|**createdAtFrom** | **OffsetDateTime** | Início do período das entregas. No máximo 30 dias atrás. |  |
+|**createdAtTo** | **OffsetDateTime** | Fim do período das entregas, igual ou posterior a createdAtFrom. A janela não pode passar de 7 dias. |  |
+|**webhookIds** | **List&lt;String&gt;** | Webhooks a reenviar. Omitido: todos os webhooks ativos da conta. |  [optional] |
+|**transactionIds** | **List&lt;String&gt;** | Restringe a IDs de transação específicos. |  [optional] |
+|**transactionTypes** | [**List&lt;TransactionTypesEnum&gt;**](#List&lt;TransactionTypesEnum&gt;) | Filtra pelo tipo da transação. |  [optional] |
+|**transactionStatus** | [**List&lt;TransactionStatusEnum&gt;**](#List&lt;TransactionStatusEnum&gt;) | Filtra pelo status atual da transação. |  [optional] |
+|**transactionEndToEndIds** | **List&lt;String&gt;** | Restringe a end-to-end IDs específicos. |  [optional] |
 
 
 

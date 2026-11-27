@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -174,8 +174,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Create callback secret
-   * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+   * Criar segredo de callback
+   * Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
    * @return CallbackSecretResponse
    * @throws ApiException if fails to make API call
    */
@@ -184,8 +184,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Create callback secret
-   * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+   * Criar segredo de callback
+   * Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
    * @param headers Optional headers to include in the request
    * @return CallbackSecretResponse
    * @throws ApiException if fails to make API call
@@ -196,8 +196,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Create callback secret
-   * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+   * Criar segredo de callback
+   * Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
    * @return ApiResponse&lt;CallbackSecretResponse&gt;
    * @throws ApiException if fails to make API call
    */
@@ -206,8 +206,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Create callback secret
-   * Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+   * Criar segredo de callback
+   * Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;CallbackSecretResponse&gt;
    * @throws ApiException if fails to make API call
@@ -283,27 +283,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Get Callback
-   * Returns the details of a specific callback log.
-   * @param id Unique callback ID (required)
+   * Obter Callback
+   * Retorna os detalhes de um log de callback específico.
+   * @param id ID único do callback (required)
    * @return CallbackDetail
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get Callback Documentation</a>
    */
   public CallbackDetail getUserCallbackById(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserCallbackById(id, null);
   }
 
   /**
-   * Get Callback
-   * Returns the details of a specific callback log.
-   * @param id Unique callback ID (required)
+   * Obter Callback
+   * Retorna os detalhes de um log de callback específico.
+   * @param id ID único do callback (required)
    * @param headers Optional headers to include in the request
    * @return CallbackDetail
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get Callback Documentation</a>
    */
   public CallbackDetail getUserCallbackById(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<CallbackDetail> localVarResponse = getUserCallbackByIdWithHttpInfo(id, headers);
@@ -311,27 +307,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Get Callback
-   * Returns the details of a specific callback log.
-   * @param id Unique callback ID (required)
+   * Obter Callback
+   * Retorna os detalhes de um log de callback específico.
+   * @param id ID único do callback (required)
    * @return ApiResponse&lt;CallbackDetail&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get Callback Documentation</a>
    */
   public ApiResponse<CallbackDetail> getUserCallbackByIdWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getUserCallbackByIdWithHttpInfo(id, null);
   }
 
   /**
-   * Get Callback
-   * Returns the details of a specific callback log.
-   * @param id Unique callback ID (required)
+   * Obter Callback
+   * Retorna os detalhes de um log de callback específico.
+   * @param id ID único do callback (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;CallbackDetail&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Get Callback Documentation</a>
    */
   public ApiResponse<CallbackDetail> getUserCallbackByIdWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserCallbackByIdRequestBuilder(id, headers);
@@ -409,51 +401,47 @@ public class CallbacksApi {
   }
 
   /**
-   * List Callbacks
-   * Returns a paginated list of webhook callback logs for the user&#39;s transactions.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param id Filter by callback ID (optional)
-   * @param url Filter by callback URL (optional)
-   * @param status HTTP status code (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param hasError Filter callbacks that errored (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param webhookId Webhook id. (optional)
-   * @param eventType Webhook event type. (optional)
+   * Listar Callbacks
+   * Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param id Filtra por ID de callback (optional)
+   * @param url Filtra por callback URL (optional)
+   * @param status Status HTTP devolvido pelo seu endpoint. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param hasError Filtra callbacks que apresentaram erro (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param webhookId Id do webhook. (optional)
+   * @param eventType Tipo de evento do webhook. (optional)
    * @return CallbackListResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List Callbacks Documentation</a>
    */
   public CallbackListResponse getUserCallbacks(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String id, @javax.annotation.Nullable String url, @javax.annotation.Nullable Integer status, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable Boolean hasError, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable String webhookId, @javax.annotation.Nullable WebhookEventType eventType) throws ApiException {
     return getUserCallbacks(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo, webhookId, eventType, null);
   }
 
   /**
-   * List Callbacks
-   * Returns a paginated list of webhook callback logs for the user&#39;s transactions.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param id Filter by callback ID (optional)
-   * @param url Filter by callback URL (optional)
-   * @param status HTTP status code (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param hasError Filter callbacks that errored (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param webhookId Webhook id. (optional)
-   * @param eventType Webhook event type. (optional)
+   * Listar Callbacks
+   * Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param id Filtra por ID de callback (optional)
+   * @param url Filtra por callback URL (optional)
+   * @param status Status HTTP devolvido pelo seu endpoint. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param hasError Filtra callbacks que apresentaram erro (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param webhookId Id do webhook. (optional)
+   * @param eventType Tipo de evento do webhook. (optional)
    * @param headers Optional headers to include in the request
    * @return CallbackListResponse
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List Callbacks Documentation</a>
    */
   public CallbackListResponse getUserCallbacks(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String id, @javax.annotation.Nullable String url, @javax.annotation.Nullable Integer status, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable Boolean hasError, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable String webhookId, @javax.annotation.Nullable WebhookEventType eventType, Map<String, String> headers) throws ApiException {
     ApiResponse<CallbackListResponse> localVarResponse = getUserCallbacksWithHttpInfo(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo, webhookId, eventType, headers);
@@ -461,51 +449,47 @@ public class CallbacksApi {
   }
 
   /**
-   * List Callbacks
-   * Returns a paginated list of webhook callback logs for the user&#39;s transactions.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param id Filter by callback ID (optional)
-   * @param url Filter by callback URL (optional)
-   * @param status HTTP status code (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param hasError Filter callbacks that errored (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param webhookId Webhook id. (optional)
-   * @param eventType Webhook event type. (optional)
+   * Listar Callbacks
+   * Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param id Filtra por ID de callback (optional)
+   * @param url Filtra por callback URL (optional)
+   * @param status Status HTTP devolvido pelo seu endpoint. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param hasError Filtra callbacks que apresentaram erro (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param webhookId Id do webhook. (optional)
+   * @param eventType Tipo de evento do webhook. (optional)
    * @return ApiResponse&lt;CallbackListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List Callbacks Documentation</a>
    */
   public ApiResponse<CallbackListResponse> getUserCallbacksWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String id, @javax.annotation.Nullable String url, @javax.annotation.Nullable Integer status, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable Boolean hasError, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable String webhookId, @javax.annotation.Nullable WebhookEventType eventType) throws ApiException {
     return getUserCallbacksWithHttpInfo(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo, webhookId, eventType, null);
   }
 
   /**
-   * List Callbacks
-   * Returns a paginated list of webhook callback logs for the user&#39;s transactions.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param id Filter by callback ID (optional)
-   * @param url Filter by callback URL (optional)
-   * @param status HTTP status code (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param hasError Filter callbacks that errored (optional)
-   * @param createdAtFrom Start of the creation date range. (optional)
-   * @param createdAtTo End of the creation date range. (optional)
-   * @param webhookId Webhook id. (optional)
-   * @param eventType Webhook event type. (optional)
+   * Listar Callbacks
+   * Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param id Filtra por ID de callback (optional)
+   * @param url Filtra por callback URL (optional)
+   * @param status Status HTTP devolvido pelo seu endpoint. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param hasError Filtra callbacks que apresentaram erro (optional)
+   * @param createdAtFrom Data de criação inicial. (optional)
+   * @param createdAtTo Data de criação final. (optional)
+   * @param webhookId Id do webhook. (optional)
+   * @param eventType Tipo de evento do webhook. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;CallbackListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">List Callbacks Documentation</a>
    */
   public ApiResponse<CallbackListResponse> getUserCallbacksWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable String id, @javax.annotation.Nullable String url, @javax.annotation.Nullable Integer status, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable Boolean hasError, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable String webhookId, @javax.annotation.Nullable WebhookEventType eventType, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getUserCallbacksRequestBuilder(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo, webhookId, eventType, headers);
@@ -617,27 +601,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Re-send callback (single)
-   * Resend the callback of a single transaction.
-   * @param transactionId Transaction ID. (required)
+   * Reenviar callback (individual)
+   * Reenvia o callback de uma única transação.
+   * @param transactionId ID da transação. (required)
    * @return ResendUserCallbackSingle200Response
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callback (single) Documentation</a>
    */
   public ResendUserCallbackSingle200Response resendUserCallbackSingle(@javax.annotation.Nonnull String transactionId) throws ApiException {
     return resendUserCallbackSingle(transactionId, null);
   }
 
   /**
-   * Re-send callback (single)
-   * Resend the callback of a single transaction.
-   * @param transactionId Transaction ID. (required)
+   * Reenviar callback (individual)
+   * Reenvia o callback de uma única transação.
+   * @param transactionId ID da transação. (required)
    * @param headers Optional headers to include in the request
    * @return ResendUserCallbackSingle200Response
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callback (single) Documentation</a>
    */
   public ResendUserCallbackSingle200Response resendUserCallbackSingle(@javax.annotation.Nonnull String transactionId, Map<String, String> headers) throws ApiException {
     ApiResponse<ResendUserCallbackSingle200Response> localVarResponse = resendUserCallbackSingleWithHttpInfo(transactionId, headers);
@@ -645,27 +625,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Re-send callback (single)
-   * Resend the callback of a single transaction.
-   * @param transactionId Transaction ID. (required)
+   * Reenviar callback (individual)
+   * Reenvia o callback de uma única transação.
+   * @param transactionId ID da transação. (required)
    * @return ApiResponse&lt;ResendUserCallbackSingle200Response&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callback (single) Documentation</a>
    */
   public ApiResponse<ResendUserCallbackSingle200Response> resendUserCallbackSingleWithHttpInfo(@javax.annotation.Nonnull String transactionId) throws ApiException {
     return resendUserCallbackSingleWithHttpInfo(transactionId, null);
   }
 
   /**
-   * Re-send callback (single)
-   * Resend the callback of a single transaction.
-   * @param transactionId Transaction ID. (required)
+   * Reenviar callback (individual)
+   * Reenvia o callback de uma única transação.
+   * @param transactionId ID da transação. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ResendUserCallbackSingle200Response&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callback (single) Documentation</a>
    */
   public ApiResponse<ResendUserCallbackSingle200Response> resendUserCallbackSingleWithHttpInfo(@javax.annotation.Nonnull String transactionId, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = resendUserCallbackSingleRequestBuilder(transactionId, headers);
@@ -743,27 +719,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Re-send callbacks (bulk)
-   * Resend callbacks in bulk for transactions matching the given filters.
+   * Reenviar callbacks (em lote)
+   * Reenvia callbacks em lote para transações que correspondem aos filtros informados.
    * @param resendUserCallbacksRequest  (required)
    * @return ResendUserCallbacks200Response
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callbacks (bulk) Documentation</a>
    */
   public ResendUserCallbacks200Response resendUserCallbacks(@javax.annotation.Nonnull ResendUserCallbacksRequest resendUserCallbacksRequest) throws ApiException {
     return resendUserCallbacks(resendUserCallbacksRequest, null);
   }
 
   /**
-   * Re-send callbacks (bulk)
-   * Resend callbacks in bulk for transactions matching the given filters.
+   * Reenviar callbacks (em lote)
+   * Reenvia callbacks em lote para transações que correspondem aos filtros informados.
    * @param resendUserCallbacksRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ResendUserCallbacks200Response
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callbacks (bulk) Documentation</a>
    */
   public ResendUserCallbacks200Response resendUserCallbacks(@javax.annotation.Nonnull ResendUserCallbacksRequest resendUserCallbacksRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<ResendUserCallbacks200Response> localVarResponse = resendUserCallbacksWithHttpInfo(resendUserCallbacksRequest, headers);
@@ -771,27 +743,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Re-send callbacks (bulk)
-   * Resend callbacks in bulk for transactions matching the given filters.
+   * Reenviar callbacks (em lote)
+   * Reenvia callbacks em lote para transações que correspondem aos filtros informados.
    * @param resendUserCallbacksRequest  (required)
    * @return ApiResponse&lt;ResendUserCallbacks200Response&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callbacks (bulk) Documentation</a>
    */
   public ApiResponse<ResendUserCallbacks200Response> resendUserCallbacksWithHttpInfo(@javax.annotation.Nonnull ResendUserCallbacksRequest resendUserCallbacksRequest) throws ApiException {
     return resendUserCallbacksWithHttpInfo(resendUserCallbacksRequest, null);
   }
 
   /**
-   * Re-send callbacks (bulk)
-   * Resend callbacks in bulk for transactions matching the given filters.
+   * Reenviar callbacks (em lote)
+   * Reenvia callbacks em lote para transações que correspondem aos filtros informados.
    * @param resendUserCallbacksRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ResendUserCallbacks200Response&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Re-send callbacks (bulk) Documentation</a>
    */
   public ApiResponse<ResendUserCallbacks200Response> resendUserCallbacksWithHttpInfo(@javax.annotation.Nonnull ResendUserCallbacksRequest resendUserCallbacksRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = resendUserCallbacksRequestBuilder(resendUserCallbacksRequest, headers);
@@ -874,27 +842,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Resend callbacks by webhook
-   * Queues a bulk resend of the failed callbacks of a given webhook.
-   * @param webhookId Webhook id. (required)
+   * Reenviar callbacks por webhook
+   * Enfileira o reenvio em lote dos callbacks falhos de um webhook.
+   * @param webhookId Id do webhook. (required)
    * @return EnqueuedCallback
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Resend callbacks by webhook Documentation</a>
    */
   public EnqueuedCallback resendUserCallbacksWebhook(@javax.annotation.Nonnull String webhookId) throws ApiException {
     return resendUserCallbacksWebhook(webhookId, null);
   }
 
   /**
-   * Resend callbacks by webhook
-   * Queues a bulk resend of the failed callbacks of a given webhook.
-   * @param webhookId Webhook id. (required)
+   * Reenviar callbacks por webhook
+   * Enfileira o reenvio em lote dos callbacks falhos de um webhook.
+   * @param webhookId Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return EnqueuedCallback
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Resend callbacks by webhook Documentation</a>
    */
   public EnqueuedCallback resendUserCallbacksWebhook(@javax.annotation.Nonnull String webhookId, Map<String, String> headers) throws ApiException {
     ApiResponse<EnqueuedCallback> localVarResponse = resendUserCallbacksWebhookWithHttpInfo(webhookId, headers);
@@ -902,27 +866,23 @@ public class CallbacksApi {
   }
 
   /**
-   * Resend callbacks by webhook
-   * Queues a bulk resend of the failed callbacks of a given webhook.
-   * @param webhookId Webhook id. (required)
+   * Reenviar callbacks por webhook
+   * Enfileira o reenvio em lote dos callbacks falhos de um webhook.
+   * @param webhookId Id do webhook. (required)
    * @return ApiResponse&lt;EnqueuedCallback&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Resend callbacks by webhook Documentation</a>
    */
   public ApiResponse<EnqueuedCallback> resendUserCallbacksWebhookWithHttpInfo(@javax.annotation.Nonnull String webhookId) throws ApiException {
     return resendUserCallbacksWebhookWithHttpInfo(webhookId, null);
   }
 
   /**
-   * Resend callbacks by webhook
-   * Queues a bulk resend of the failed callbacks of a given webhook.
-   * @param webhookId Webhook id. (required)
+   * Reenviar callbacks por webhook
+   * Enfileira o reenvio em lote dos callbacks falhos de um webhook.
+   * @param webhookId Id do webhook. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;EnqueuedCallback&gt;
    * @throws ApiException if fails to make API call
-   * Webhooks
-   * @see <a href="/docs/pix-processamento/webhooks">Resend callbacks by webhook Documentation</a>
    */
   public ApiResponse<EnqueuedCallback> resendUserCallbacksWebhookWithHttpInfo(@javax.annotation.Nonnull String webhookId, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = resendUserCallbacksWebhookRequestBuilder(webhookId, headers);
@@ -1000,8 +960,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Resend webhook callbacks by filters
-   * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+   * Reenviar callbacks de webhook por filtros
+   * Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
    * @param resendWebhookCallbacksRequest  (required)
    * @return EnqueuedCallback
    * @throws ApiException if fails to make API call
@@ -1011,8 +971,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Resend webhook callbacks by filters
-   * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+   * Reenviar callbacks de webhook por filtros
+   * Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
    * @param resendWebhookCallbacksRequest  (required)
    * @param headers Optional headers to include in the request
    * @return EnqueuedCallback
@@ -1024,8 +984,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Resend webhook callbacks by filters
-   * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+   * Reenviar callbacks de webhook por filtros
+   * Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
    * @param resendWebhookCallbacksRequest  (required)
    * @return ApiResponse&lt;EnqueuedCallback&gt;
    * @throws ApiException if fails to make API call
@@ -1035,8 +995,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Resend webhook callbacks by filters
-   * Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+   * Reenviar callbacks de webhook por filtros
+   * Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
    * @param resendWebhookCallbacksRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;EnqueuedCallback&gt;
@@ -1123,8 +1083,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Rotate callback secret
-   * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+   * Rotacionar segredo de callback
+   * Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
    * @return RotateCallbackSecretResponse
    * @throws ApiException if fails to make API call
    */
@@ -1133,8 +1093,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Rotate callback secret
-   * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+   * Rotacionar segredo de callback
+   * Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
    * @param headers Optional headers to include in the request
    * @return RotateCallbackSecretResponse
    * @throws ApiException if fails to make API call
@@ -1145,8 +1105,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Rotate callback secret
-   * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+   * Rotacionar segredo de callback
+   * Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
    * @return ApiResponse&lt;RotateCallbackSecretResponse&gt;
    * @throws ApiException if fails to make API call
    */
@@ -1155,8 +1115,8 @@ public class CallbacksApi {
   }
 
   /**
-   * Rotate callback secret
-   * Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+   * Rotacionar segredo de callback
+   * Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;RotateCallbackSecretResponse&gt;
    * @throws ApiException if fails to make API call

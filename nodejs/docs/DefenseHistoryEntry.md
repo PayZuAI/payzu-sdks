@@ -1,7 +1,7 @@
 
 # DefenseHistoryEntry
 
-Defense recorded in the infraction history, without the infractionId field.
+Defesa registrada no histórico da infração, sem o campo infractionId.
 
 ## Properties
 

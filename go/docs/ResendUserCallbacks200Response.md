@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | Pointer to **string** | Confirmation that the callbacks were queued. | [optional] 
-**Total** | Pointer to **int32** | Number of callbacks dispatched | [optional] 
+**Message** | Pointer to **string** | Confirmação de que os callbacks foram enfileirados. | [optional] 
+**Total** | Pointer to **int32** | Número de callbacks disparados | [optional] 
 
 ## Methods
 

@@ -4,10 +4,10 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getInternalTransfer**](InternalTransferApi.md#getInternalTransfer) | **GET** /internal-transfer | Get internal transfer |
-| [**getInternalTransferWithHttpInfo**](InternalTransferApi.md#getInternalTransferWithHttpInfo) | **GET** /internal-transfer | Get internal transfer |
-| [**postInternalTransfer**](InternalTransferApi.md#postInternalTransfer) | **POST** /internal-transfer | Create internal transfer |
-| [**postInternalTransferWithHttpInfo**](InternalTransferApi.md#postInternalTransferWithHttpInfo) | **POST** /internal-transfer | Create internal transfer |
+| [**getInternalTransfer**](InternalTransferApi.md#getInternalTransfer) | **GET** /internal-transfer | Obter transferência interna |
+| [**getInternalTransferWithHttpInfo**](InternalTransferApi.md#getInternalTransferWithHttpInfo) | **GET** /internal-transfer | Obter transferência interna |
+| [**postInternalTransfer**](InternalTransferApi.md#postInternalTransfer) | **POST** /internal-transfer | Criar transferência interna |
+| [**postInternalTransferWithHttpInfo**](InternalTransferApi.md#postInternalTransferWithHttpInfo) | **POST** /internal-transfer | Criar transferência interna |
 
 
 
@@ -15,9 +15,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > Transaction getInternalTransfer(id, clientReference, virtualAccount)
 
-Get internal transfer
+Obter transferência interna
 
-Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
+Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
 
 ### Example
 
@@ -40,9 +40,9 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         InternalTransferApi apiInstance = new InternalTransferApi(defaultClient);
-        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID
-        String clientReference = "order_12345"; // String | External reference
-        String virtualAccount = "loja-centro-01"; // String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação
+        String clientReference = "order_12345"; // String | Referência externa
+        String virtualAccount = "loja-centro-01"; // String | Subconta usada na criação.
         try {
             Transaction result = apiInstance.getInternalTransfer(id, clientReference, virtualAccount);
             System.out.println(result);
@@ -62,9 +62,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Transaction ID | [optional] |
-| **clientReference** | **String**| External reference | [optional] |
-| **virtualAccount** | **String**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String**| ID da transação | [optional] |
+| **clientReference** | **String**| Referência externa | [optional] |
+| **virtualAccount** | **String**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -83,19 +83,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Transfer details |  -  |
-| **400** | Provide either &#x60;id&#x60; or &#x60;clientReference&#x60; |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Transfer not found |  -  |
+| **200** | Detalhes da transferência |  -  |
+| **400** | Informe &#x60;id&#x60; ou &#x60;clientReference&#x60; |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Transferência não encontrada |  -  |
 
 ## getInternalTransferWithHttpInfo
 
 > ApiResponse<Transaction> getInternalTransferWithHttpInfo(id, clientReference, virtualAccount)
 
-Get internal transfer
+Obter transferência interna
 
-Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
+Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
 
 ### Example
 
@@ -119,9 +119,9 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         InternalTransferApi apiInstance = new InternalTransferApi(defaultClient);
-        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | Transaction ID
-        String clientReference = "order_12345"; // String | External reference
-        String virtualAccount = "loja-centro-01"; // String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+        String id = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação
+        String clientReference = "order_12345"; // String | Referência externa
+        String virtualAccount = "loja-centro-01"; // String | Subconta usada na criação.
         try {
             ApiResponse<Transaction> response = apiInstance.getInternalTransferWithHttpInfo(id, clientReference, virtualAccount);
             System.out.println("Status code: " + response.getStatusCode());
@@ -143,9 +143,9 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Transaction ID | [optional] |
-| **clientReference** | **String**| External reference | [optional] |
-| **virtualAccount** | **String**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String**| ID da transação | [optional] |
+| **clientReference** | **String**| Referência externa | [optional] |
+| **virtualAccount** | **String**| Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -164,20 +164,20 @@ ApiResponse<[**Transaction**](Transaction.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Transfer details |  -  |
-| **400** | Provide either &#x60;id&#x60; or &#x60;clientReference&#x60; |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Transfer not found |  -  |
+| **200** | Detalhes da transferência |  -  |
+| **400** | Informe &#x60;id&#x60; ou &#x60;clientReference&#x60; |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Transferência não encontrada |  -  |
 
 
 ## postInternalTransfer
 
 > Transaction postInternalTransfer(postInternalTransferRequest)
 
-Create internal transfer
+Criar transferência interna
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
 
 ### Example
 
@@ -239,22 +239,21 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Transfer completed |  -  |
-| **400** | Invalid payload (e.g. payerAccountNumber does not belong to the requester) |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | allowInternalTransfer disabled or token missing WITHDRAW permission |  -  |
-| **404** | Receiver account not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
-| **422** | Insufficient balance / amount below ticket minimum |  -  |
-| **429** | Rate limit exceeded |  -  |
+| **200** | Transferência concluída |  -  |
+| **400** | Payload inválido |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Sem permissão para transferir |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
+| **422** | Saldo insuficiente |  -  |
+| **429** | Limite de requisições excedido |  -  |
 
 ## postInternalTransferWithHttpInfo
 
 > ApiResponse<Transaction> postInternalTransferWithHttpInfo(postInternalTransferRequest)
 
-Create internal transfer
+Criar transferência interna
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
 
 ### Example
 
@@ -319,12 +318,11 @@ ApiResponse<[**Transaction**](Transaction.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Transfer completed |  -  |
-| **400** | Invalid payload (e.g. payerAccountNumber does not belong to the requester) |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | allowInternalTransfer disabled or token missing WITHDRAW permission |  -  |
-| **404** | Receiver account not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
-| **422** | Insufficient balance / amount below ticket minimum |  -  |
-| **429** | Rate limit exceeded |  -  |
+| **200** | Transferência concluída |  -  |
+| **400** | Payload inválido |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Sem permissão para transferir |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
+| **422** | Saldo insuficiente |  -  |
+| **429** | Limite de requisições excedido |  -  |
 

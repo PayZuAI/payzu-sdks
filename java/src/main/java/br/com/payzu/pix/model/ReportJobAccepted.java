@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Report job just queued.
+ * Job de relatório recém-enfileirado.
  */
 @JsonPropertyOrder({
   ReportJobAccepted.JSON_PROPERTY_ID,
@@ -47,7 +47,7 @@ import br.com.payzu.pix.ApiClient;
   ReportJobAccepted.JSON_PROPERTY_UPDATED_AT,
   ReportJobAccepted.JSON_PROPERTY_PARAMS,
   ReportJobAccepted.JSON_PROPERTY_WRITTEN_ROWS,
-  ReportJobAccepted.JSON_PROPERTY_STORAGE_EXPIRES_AT
+  ReportJobAccepted.JSON_PROPERTY_EXPIRES_AT
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.22.0")
 public class ReportJobAccepted {
@@ -56,7 +56,7 @@ public class ReportJobAccepted {
   private UUID id;
 
   /**
-   * Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+   * Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
    */
   public enum StatusEnum {
     PENDING(String.valueOf("PENDING")),
@@ -115,8 +115,8 @@ public class ReportJobAccepted {
   public static final String JSON_PROPERTY_WRITTEN_ROWS = "writtenRows";
   private JsonNullable<Integer> writtenRows = JsonNullable.<Integer>undefined();
 
-  public static final String JSON_PROPERTY_STORAGE_EXPIRES_AT = "storageExpiresAt";
-  private JsonNullable<OffsetDateTime> storageExpiresAt = JsonNullable.<OffsetDateTime>undefined();
+  public static final String JSON_PROPERTY_EXPIRES_AT = "expiresAt";
+  private JsonNullable<OffsetDateTime> expiresAt = JsonNullable.<OffsetDateTime>undefined();
 
   public ReportJobAccepted() { 
   }
@@ -127,7 +127,7 @@ public class ReportJobAccepted {
   }
 
   /**
-   * Report identifier (UUID), generated when the report is requested.
+   * Identificador (UUID) do relatório, gerado no momento da solicitação.
    * @return id
    */
   @javax.annotation.Nullable
@@ -151,7 +151,7 @@ public class ReportJobAccepted {
   }
 
   /**
-   * Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+   * Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
    * @return status
    */
   @javax.annotation.Nullable
@@ -175,7 +175,7 @@ public class ReportJobAccepted {
   }
 
   /**
-   * Date and time the report generation was requested.
+   * Data e hora em que a geração do relatório foi solicitada.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -199,7 +199,7 @@ public class ReportJobAccepted {
   }
 
   /**
-   * Date and time of the last change to the report record.
+   * Data e hora da última alteração no registro do relatório.
    * @return updatedAt
    */
   @javax.annotation.Nullable
@@ -231,7 +231,7 @@ public class ReportJobAccepted {
   }
 
   /**
-   * Filters used when the report was created.
+   * Filtros usados na criação do relatório.
    * @return params
    */
   @javax.annotation.Nullable
@@ -255,7 +255,7 @@ public class ReportJobAccepted {
   }
 
   /**
-   * Rows written to the file. Null until the report is COMPLETED.
+   * Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED.
    * @return writtenRows
    */
   @javax.annotation.Nullable
@@ -281,35 +281,35 @@ public class ReportJobAccepted {
   }
 
 
-  public ReportJobAccepted storageExpiresAt(@javax.annotation.Nullable OffsetDateTime storageExpiresAt) {
-    this.storageExpiresAt = JsonNullable.<OffsetDateTime>of(storageExpiresAt);
+  public ReportJobAccepted expiresAt(@javax.annotation.Nullable OffsetDateTime expiresAt) {
+    this.expiresAt = JsonNullable.<OffsetDateTime>of(expiresAt);
     return this;
   }
 
   /**
-   * Date the report file expires.
-   * @return storageExpiresAt
+   * Data em que o arquivo do relatório expira.
+   * @return expiresAt
    */
   @javax.annotation.Nullable
   @JsonIgnore
-  public OffsetDateTime getStorageExpiresAt() {
-        return storageExpiresAt.orElse(null);
+  public OffsetDateTime getExpiresAt() {
+        return expiresAt.orElse(null);
   }
 
-  @JsonProperty(value = JSON_PROPERTY_STORAGE_EXPIRES_AT, required = false)
+  @JsonProperty(value = JSON_PROPERTY_EXPIRES_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getStorageExpiresAt_JsonNullable() {
-    return storageExpiresAt;
+  public JsonNullable<OffsetDateTime> getExpiresAt_JsonNullable() {
+    return expiresAt;
   }
   
-  @JsonProperty(JSON_PROPERTY_STORAGE_EXPIRES_AT)
-  public void setStorageExpiresAt_JsonNullable(JsonNullable<OffsetDateTime> storageExpiresAt) {
-    this.storageExpiresAt = storageExpiresAt;
+  @JsonProperty(JSON_PROPERTY_EXPIRES_AT)
+  public void setExpiresAt_JsonNullable(JsonNullable<OffsetDateTime> expiresAt) {
+    this.expiresAt = expiresAt;
   }
 
-  public void setStorageExpiresAt(@javax.annotation.Nullable OffsetDateTime storageExpiresAt) {
-    this.storageExpiresAt = JsonNullable.<OffsetDateTime>of(storageExpiresAt);
+  public void setExpiresAt(@javax.annotation.Nullable OffsetDateTime expiresAt) {
+    this.expiresAt = JsonNullable.<OffsetDateTime>of(expiresAt);
   }
 
 
@@ -331,7 +331,7 @@ public class ReportJobAccepted {
         Objects.equals(this.updatedAt, reportJobAccepted.updatedAt) &&
         Objects.equals(this.params, reportJobAccepted.params) &&
         equalsNullable(this.writtenRows, reportJobAccepted.writtenRows) &&
-        equalsNullable(this.storageExpiresAt, reportJobAccepted.storageExpiresAt);
+        equalsNullable(this.expiresAt, reportJobAccepted.expiresAt);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -340,7 +340,7 @@ public class ReportJobAccepted {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, status, createdAt, updatedAt, params, hashCodeNullable(writtenRows), hashCodeNullable(storageExpiresAt));
+    return Objects.hash(id, status, createdAt, updatedAt, params, hashCodeNullable(writtenRows), hashCodeNullable(expiresAt));
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -360,7 +360,7 @@ public class ReportJobAccepted {
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    params: ").append(toIndentedString(params)).append("\n");
     sb.append("    writtenRows: ").append(toIndentedString(writtenRows)).append("\n");
-    sb.append("    storageExpiresAt: ").append(toIndentedString(storageExpiresAt)).append("\n");
+    sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -439,9 +439,9 @@ public class ReportJobAccepted {
       joiner.add(String.format(java.util.Locale.ROOT, "%swrittenRows%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getWrittenRows()))));
     }
 
-    // add `storageExpiresAt` to the URL query string
-    if (getStorageExpiresAt() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sstorageExpiresAt%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getStorageExpiresAt()))));
+    // add `expiresAt` to the URL query string
+    if (getExpiresAt() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sexpiresAt%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getExpiresAt()))));
     }
 
     return joiner.toString();

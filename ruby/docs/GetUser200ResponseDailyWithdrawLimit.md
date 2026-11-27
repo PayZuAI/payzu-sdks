@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Float** | Daily outbound cap, in reais, summing withdrawals and internal transfers. | [optional] |
-| **used** | **Float** | Total of the cap consumed in the day, in reais, by withdrawals and internal transfers. | [optional] |
-| **updated_at** | **Time** | Date and time of the last change to the daily limit. | [optional] |
-| **last_reset** | **Time** | Moment of the last reset of the daily usage. | [optional] |
+| **limit** | **Float** | Teto diário de saída, em reais, somando saques e transferências internas. | [optional] |
+| **used** | **Float** | Total consumido do teto no dia, em reais, por saques e transferências internas. | [optional] |
+| **updated_at** | **Time** | Data e hora da última alteração do limite diário. | [optional] |
+| **last_reset** | **Time** | Momento da última zeragem do consumo diário. | [optional] |
 
 ## Example
 

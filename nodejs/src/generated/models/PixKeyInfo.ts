@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,67 +14,67 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * Information about a Pix key from DICT lookup.
+ * Informações sobre uma chave Pix a partir da consulta ao DICT.
  * @export
  * @interface PixKeyInfo
  */
 export interface PixKeyInfo {
     /**
-     * The Pix key that was looked up.
+     * A chave Pix que foi consultada.
      * @type {string}
      * @memberof PixKeyInfo
      */
     pixKey?: string;
     /**
-     * CPF or CNPJ of the owner (partially masked for privacy).
+     * CPF ou CNPJ do titular (parcialmente mascarado por privacidade).
      * @type {string}
      * @memberof PixKeyInfo
      */
     document?: string;
     /**
-     * Name of the Pix key owner.
+     * Nome do titular da chave Pix.
      * @type {string}
      * @memberof PixKeyInfo
      */
     name?: string;
     /**
-     * Bank branch number (masked).
+     * Número da agência bancária (mascarado).
      * @type {string}
      * @memberof PixKeyInfo
      */
     branch?: string;
     /**
-     * Account number (masked).
+     * Número da conta (mascarado).
      * @type {string}
      * @memberof PixKeyInfo
      */
     accountNumber?: string;
     /**
-     * Type of person: PF, PJ, or empty when not informed.
+     * Tipo de pessoa: PF, PJ ou vazio quando não informado.
      * @type {PixKeyInfoPersonTypeEnum}
      * @memberof PixKeyInfo
      */
     personType?: PixKeyInfoPersonTypeEnum;
     /**
-     * Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY.
+     * Tipo de conta devolvido pelo DICT, como CACC, SVGS, TRAN ou SLRY.
      * @type {string}
      * @memberof PixKeyInfo
      */
     accountType?: string;
     /**
-     * ISPB code of the financial institution.
+     * Código ISPB da instituição financeira.
      * @type {string}
      * @memberof PixKeyInfo
      */
     institutionIspb?: string;
     /**
-     * COMPE code of the financial institution.
+     * Código COMPE da instituição financeira.
      * @type {string}
      * @memberof PixKeyInfo
      */
     institutionCode?: string;
     /**
-     * Name of the financial institution.
+     * Nome da instituição financeira.
      * @type {string}
      * @memberof PixKeyInfo
      */

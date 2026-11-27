@@ -4,13 +4,13 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **created_at_from** | **Time** | Start of the delivery period. At most 30 days ago. |  |
-| **created_at_to** | **Time** | End of the delivery period, on or after createdAtFrom. The window cannot exceed 7 days. |  |
-| **webhook_ids** | **Array&lt;String&gt;** | Webhooks to resend. Omitted: all active webhooks of the account. | [optional] |
-| **transaction_ids** | **Array&lt;String&gt;** | Restrict to specific transaction IDs. | [optional] |
-| **transaction_types** | **Array&lt;String&gt;** | Filter by transaction type. | [optional] |
-| **transaction_status** | **Array&lt;String&gt;** | Filter by the current transaction status. | [optional] |
-| **transaction_end_to_end_ids** | **Array&lt;String&gt;** | Restrict to specific end-to-end IDs. | [optional] |
+| **created_at_from** | **Time** | Início do período das entregas. No máximo 30 dias atrás. |  |
+| **created_at_to** | **Time** | Fim do período das entregas, igual ou posterior a createdAtFrom. A janela não pode passar de 7 dias. |  |
+| **webhook_ids** | **Array&lt;String&gt;** | Webhooks a reenviar. Omitido: todos os webhooks ativos da conta. | [optional] |
+| **transaction_ids** | **Array&lt;String&gt;** | Restringe a IDs de transação específicos. | [optional] |
+| **transaction_types** | **Array&lt;String&gt;** | Filtra pelo tipo da transação. | [optional] |
+| **transaction_status** | **Array&lt;String&gt;** | Filtra pelo status atual da transação. | [optional] |
+| **transaction_end_to_end_ids** | **Array&lt;String&gt;** | Restringe a end-to-end IDs específicos. | [optional] |
 
 ## Example
 

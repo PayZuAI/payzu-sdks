@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,29 +20,29 @@ var _ MappedNullable = &SentWebhookDetail{}
 
 // SentWebhookDetail struct for SentWebhookDetail
 type SentWebhookDetail struct {
-	// Identifier of this delivery attempt.
+	// Identificador desta tentativa de entrega.
 	Id *string `json:"id,omitempty"`
-	// Webhook that originated the delivery.
+	// Webhook que originou a entrega.
 	WebhookId NullableString `json:"webhookId,omitempty"`
-	// Pix transaction whose event was notified.
+	// Transação Pix cujo evento foi notificado.
 	TransactionId *string `json:"transactionId,omitempty"`
-	// Address this delivery was sent to, recorded at the time of the dispatch.
+	// Endereço para onde esta entrega foi feita, gravado no momento do disparo.
 	Url *string `json:"url,omitempty"`
-	// Body sent in the delivery, as serialized JSON.
+	// Corpo enviado no disparo, em JSON serializado.
 	Body *string `json:"body,omitempty"`
-	// HTTP status returned by your endpoint.
+	// Status HTTP retornado pelo seu endpoint.
 	Status *int32 `json:"status,omitempty"`
-	// Response headers, as serialized JSON.
+	// Headers da resposta, em JSON serializado.
 	ResponseHeaders *string `json:"responseHeaders,omitempty"`
-	// Body of the response received.
+	// Corpo da resposta recebida.
 	ResponseBody *string `json:"responseBody,omitempty"`
-	// Message of the delivery failure.
+	// Mensagem da falha na entrega.
 	Error NullableString `json:"error,omitempty"`
-	// Response time of your endpoint, in milliseconds.
+	// Tempo de resposta do seu endpoint, em milissegundos.
 	ResponseTime *int32 `json:"responseTime,omitempty"`
-	// Event that triggered this delivery, the same value sent in the X-Callback-Event header.
+	// Evento que disparou esta entrega, o mesmo valor enviado no cabeçalho X-Callback-Event.
 	EventType NullableString `json:"eventType,omitempty"`
-	// Moment of the delivery attempt.
+	// Momento da tentativa de entrega.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 }
 

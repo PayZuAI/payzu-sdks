@@ -1,7 +1,7 @@
 
 # PixKeyInfo
 
-Information about a Pix key from DICT lookup.
+Informações sobre uma chave Pix a partir da consulta ao DICT.
 
 ## Properties
 

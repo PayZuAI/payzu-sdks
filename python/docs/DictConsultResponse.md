@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pix_key** | **str** | Normalized Pix key. | [optional] 
-**name** | **str** | Name of the key holder as returned by the institution queried. | [optional] 
-**document** | **str** | Masked CPF/CNPJ of the key holder. | [optional] 
-**person_type** | **str** | Type of person: PF, PJ, or empty when not informed. | [optional] 
+**pix_key** | **str** | Chave Pix normalizada. | [optional] 
+**name** | **str** | Nome do titular da chave conforme devolvido pela instituição consultada. | [optional] 
+**document** | **str** | CPF/CNPJ mascarado do titular da chave. | [optional] 
+**person_type** | **str** | Tipo de pessoa: PF, PJ ou vazio quando não informado. | [optional] 
 **account_type** | **str** |  | [optional] 
-**institution_ispb** | **str** | ISPB code of the account institution. | [optional] 
-**institution_name** | **str** | Name of the institution where the holder account is registered, as the lookup returns it. | [optional] 
+**institution_ispb** | **str** | Código ISPB da instituição da conta. | [optional] 
+**institution_name** | **str** | Nome da instituição onde a conta do titular está registrada, do jeito que a consulta devolve. | [optional] 
 
 ## Example
 

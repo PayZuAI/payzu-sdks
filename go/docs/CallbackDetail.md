@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Unique callback ID | [optional] 
-**Url** | Pointer to **string** | Webhook URL that received the callback | [optional] 
-**Status** | Pointer to **float32** | HTTP response status code | [optional] 
-**TransactionId** | Pointer to **string** | Related transaction ID | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time when the callback log was created | [optional] 
-**Body** | Pointer to **map[string]interface{}** | Request body sent (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] 
-**ResponseBody** | Pointer to **string** | Response body received (string) | [optional] 
-**ResponseHeaders** | Pointer to **map[string]interface{}** | Response headers (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] 
-**ResponseTime** | Pointer to **float32** | Webhook round-trip time in milliseconds | [optional] 
+**Id** | Pointer to **string** | ID único do callback | [optional] 
+**Url** | Pointer to **string** | URL do webhook que recebeu o callback | [optional] 
+**Status** | Pointer to **float32** | Código de status HTTP da resposta | [optional] 
+**TransactionId** | Pointer to **string** | ID da transação relacionada | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Data e hora em que o log do callback foi criado | [optional] 
+**Body** | Pointer to **map[string]interface{}** | Corpo enviado (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;. | [optional] 
+**ResponseBody** | Pointer to **string** | Corpo da resposta recebido (string) | [optional] 
+**ResponseHeaders** | Pointer to **map[string]interface{}** | Cabeçalhos da resposta (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;. | [optional] 
+**ResponseTime** | Pointer to **float32** | Tempo de ida e volta do webhook em milissegundos | [optional] 
 
 ## Methods
 

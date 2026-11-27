@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quantity** | **int** | Total of deliveries recorded. | [optional] 
+**quantity** | **int** | Total de entregas registradas. | [optional] 
 
 ## Example
 

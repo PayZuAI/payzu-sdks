@@ -35,7 +35,7 @@ Os SDKs aceitam valor de enum que ainda não está no spec sem falhar a leitura 
 
 ## Sincronização
 
-`openapi.json` segue [docs.payzu.com.br/openapi.json](https://docs.payzu.com.br/openapi.json). O workflow `generate.yml` roda `scripts/generate.sh` todo dia e abre PR quando o spec muda.
+`openapi.json` segue [docs.payzu.com.br/openapi/pix.json](https://docs.payzu.com.br/openapi/pix.json). O workflow `generate.yml` roda `scripts/generate.sh` todo dia e abre PR quando o spec muda.
 
 ## Release
 

@@ -157,7 +157,7 @@ module PayZuPix
 
     def initialize
       @scheme = 'https'
-      @host = 'api.payzu.processamento.com'
+      @host = 'api.pix.payzu.com.br'
       @base_path = '/v1'
       @server_index = nil
       @server_operation_index = {}
@@ -262,7 +262,7 @@ module PayZuPix
     def server_settings
       [
         {
-          url: "https://api.payzu.processamento.com/v1",
+          url: "https://api.pix.payzu.com.br/v1",
           description: "Production",
         }
       ]

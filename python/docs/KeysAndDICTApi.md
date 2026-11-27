@@ -1,6 +1,6 @@
 # payzu_pix.KeysAndDICTApi
 
-All URIs are relative to *https://api.payzu.processamento.com/v1*
+All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,10 +28,10 @@ from payzu_pix.models.pix_key_info import PixKeyInfo
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -114,10 +114,10 @@ from payzu_pix.models.dict_consult_response import DictConsultResponse
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -203,10 +203,10 @@ from payzu_pix.models.qr_code_read_response import QRCodeReadResponse
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters

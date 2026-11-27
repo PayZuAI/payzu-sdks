@@ -4,6 +4,7 @@
 
 ### Outras mudanças
 
+- O endereço padrão da API passa a ser `https://api.pix.payzu.com.br/v1` em todas as linguagens (era `https://api.payzu.processamento.com/v1`). É a mesma API, que responde igual nos dois endereços; o antigo fica no ar só durante a migração. Quem já informa o endereço na configuração do cliente não é afetado. Quem libera a saída por nome de host precisa liberar `api.pix.payzu.com.br`.
 - Node.js: `payzu.keys.dict()` fica descontinuado. A API não tem mais `GET /user/dict` e responde 404 a essa rota. Na primeira chamada o método emite um `DeprecationWarning` (código `PAYZU_KEYS_DICT`) e segue devolvendo o erro da API como `PayZuError`. Use `payzu.keys.lookup()`, que consulta `GET /pix/key` e devolve o titular com agência e conta. O método sai na próxima versão major.
 
 ## 3.1.0

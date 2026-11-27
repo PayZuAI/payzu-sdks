@@ -169,7 +169,7 @@ public class ApiClient {
   public ApiClient() {
     this.builder = createDefaultHttpClientBuilder();
     this.mapper = createDefaultObjectMapper();
-    updateBaseUri("https://api.payzu.processamento.com/v1");
+    updateBaseUri("https://api.pix.payzu.com.br/v1");
     interceptor = null;
     readTimeout = null;
     connectTimeout = null;
@@ -187,7 +187,7 @@ public class ApiClient {
   public ApiClient(HttpClient.Builder builder, ObjectMapper mapper, String baseUri) {
     this.builder = builder;
     this.mapper = mapper;
-    updateBaseUri(baseUri != null ? baseUri : "https://api.payzu.processamento.com/v1");
+    updateBaseUri(baseUri != null ? baseUri : "https://api.pix.payzu.com.br/v1");
     interceptor = null;
     readTimeout = null;
     connectTimeout = null;

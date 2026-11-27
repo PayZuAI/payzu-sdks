@@ -43,7 +43,7 @@ const payzuComProvider = new PayZu({
 
 ### Whitelabel / endpoint próprio
 
-Por padrão o SDK chama `https://api.payzu.processamento.com/v1`. Para whitelabels ou ambientes próprios, informe `baseUrl`:
+Por padrão o SDK chama `https://api.pix.payzu.com.br/v1`. Para whitelabels ou ambientes próprios, informe `baseUrl`:
 
 ```ts
 const payzu = new PayZu({

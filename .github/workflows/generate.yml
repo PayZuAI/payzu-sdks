@@ -31,7 +31,7 @@ jobs:
           cache-dependency-path: nodejs/package-lock.json
 
       - name: Sync openapi.json
-        run: curl -sf https://docs.payzu.com.br/openapi.json -o openapi.json
+        run: curl -sf https://docs.payzu.com.br/openapi/pix.json -o openapi.json
 
       - name: Generate
         run: ./scripts/generate.sh
@@ -61,5 +61,5 @@ jobs:
           if [ -z "$(gh pr list --head bot/regenerate-sdks --state open --json number --jq '.[].number')" ]; then
             gh pr create --base main --head bot/regenerate-sdks \
               --title "chore(sdks): regenerar SDKs de openapi.json" \
-              --body "SDKs regenerados a partir de docs.payzu.com.br/openapi.json."
+              --body "SDKs regenerados a partir de docs.payzu.com.br/openapi/pix.json."
           fi

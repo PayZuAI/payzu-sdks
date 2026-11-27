@@ -1,6 +1,6 @@
 # payzu_pix.InternalTransferApi
 
-All URIs are relative to *https://api.payzu.processamento.com/v1*
+All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,10 +27,10 @@ from payzu_pix.models.transaction import Transaction
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -116,10 +116,10 @@ from payzu_pix.models.transaction import Transaction
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.payzu.processamento.com/v1
+# Defining the host is optional and defaults to https://api.pix.payzu.com.br/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = payzu_pix.Configuration(
-    host = "https://api.payzu.processamento.com/v1"
+    host = "https://api.pix.payzu.com.br/v1"
 )
 
 # The client must configure the authentication and authorization parameters

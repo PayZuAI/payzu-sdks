@@ -2,15 +2,15 @@
 
 # CallbackListResponsePagination
 
-Page and limit used, and whether there is a next page.
+Página e limite usados, e se há próxima página.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**page** | **Integer** | Current page |  [optional] |
-|**limit** | **Integer** | Items per page |  [optional] |
-|**hasNextPage** | **Boolean** | Indicates if there is a next page |  [optional] |
+|**page** | **Integer** | Página atual |  [optional] |
+|**limit** | **Integer** | Itens por página |  [optional] |
+|**hasNextPage** | **Boolean** | Indica se há uma próxima página |  [optional] |
 
 
 

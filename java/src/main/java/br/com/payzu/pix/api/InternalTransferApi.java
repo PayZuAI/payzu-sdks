@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -171,31 +171,27 @@ public class InternalTransferApi {
   }
 
   /**
-   * Get internal transfer
-   * Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID (optional)
-   * @param clientReference External reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Obter transferência interna
+   * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
+   * @param id ID da transação (optional)
+   * @param clientReference Referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Get internal transfer Documentation</a>
    */
   public Transaction getInternalTransfer(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount) throws ApiException {
     return getInternalTransfer(id, clientReference, virtualAccount, null);
   }
 
   /**
-   * Get internal transfer
-   * Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID (optional)
-   * @param clientReference External reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Obter transferência interna
+   * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
+   * @param id ID da transação (optional)
+   * @param clientReference Referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Get internal transfer Documentation</a>
    */
   public Transaction getInternalTransfer(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = getInternalTransferWithHttpInfo(id, clientReference, virtualAccount, headers);
@@ -203,31 +199,27 @@ public class InternalTransferApi {
   }
 
   /**
-   * Get internal transfer
-   * Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID (optional)
-   * @param clientReference External reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Obter transferência interna
+   * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
+   * @param id ID da transação (optional)
+   * @param clientReference Referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Get internal transfer Documentation</a>
    */
   public ApiResponse<Transaction> getInternalTransferWithHttpInfo(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount) throws ApiException {
     return getInternalTransferWithHttpInfo(id, clientReference, virtualAccount, null);
   }
 
   /**
-   * Get internal transfer
-   * Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID (optional)
-   * @param clientReference External reference (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Obter transferência interna
+   * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
+   * @param id ID da transação (optional)
+   * @param clientReference Referência externa (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Get internal transfer Documentation</a>
    */
   public ApiResponse<Transaction> getInternalTransferWithHttpInfo(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String virtualAccount, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getInternalTransferRequestBuilder(id, clientReference, virtualAccount, headers);
@@ -319,27 +311,23 @@ public class InternalTransferApi {
   }
 
   /**
-   * Create internal transfer
-   * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar transferência interna
+   * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
    * @param postInternalTransferRequest  (required)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Create internal transfer Documentation</a>
    */
   public Transaction postInternalTransfer(@javax.annotation.Nonnull PostInternalTransferRequest postInternalTransferRequest) throws ApiException {
     return postInternalTransfer(postInternalTransferRequest, null);
   }
 
   /**
-   * Create internal transfer
-   * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar transferência interna
+   * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
    * @param postInternalTransferRequest  (required)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Create internal transfer Documentation</a>
    */
   public Transaction postInternalTransfer(@javax.annotation.Nonnull PostInternalTransferRequest postInternalTransferRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = postInternalTransferWithHttpInfo(postInternalTransferRequest, headers);
@@ -347,27 +335,23 @@ public class InternalTransferApi {
   }
 
   /**
-   * Create internal transfer
-   * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar transferência interna
+   * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
    * @param postInternalTransferRequest  (required)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Create internal transfer Documentation</a>
    */
   public ApiResponse<Transaction> postInternalTransferWithHttpInfo(@javax.annotation.Nonnull PostInternalTransferRequest postInternalTransferRequest) throws ApiException {
     return postInternalTransferWithHttpInfo(postInternalTransferRequest, null);
   }
 
   /**
-   * Create internal transfer
-   * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar transferência interna
+   * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
    * @param postInternalTransferRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Internal transfer
-   * @see <a href="/docs/pix-processamento/tutoriais/internal-transfer">Create internal transfer Documentation</a>
    */
   public ApiResponse<Transaction> postInternalTransferWithHttpInfo(@javax.annotation.Nonnull PostInternalTransferRequest postInternalTransferRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postInternalTransferRequestBuilder(postInternalTransferRequest, headers);

@@ -1,18 +1,18 @@
 # InfractionDetailTransaction
 
-Summary of the disputed Pix.
+Resumo do Pix contestado.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
-**amount** | **float** | Amount of the disputed transaction, in reais with decimal places. | [optional] 
-**payer_name** | **str** | Name of the Pix payer, as reported by the provider. | [optional] 
-**payer_document** | **str** | CPF or CNPJ of the Pix payer, as reported by the provider. | [optional] 
-**receiver_name** | **str** | Name of the Pix receiver, as reported by the provider. | [optional] 
-**receiver_document** | **str** | CPF or CNPJ of the Pix receiver, as reported by the provider. | [optional] 
-**end_to_end_id** | **str** | End-to-end identifier of the Pix, reported by the provider at settlement. | [optional] 
+**amount** | **float** | Valor da transação contestada, em reais com casas decimais. | [optional] 
+**payer_name** | **str** | Nome do pagador do Pix, conforme informado pelo provedor. | [optional] 
+**payer_document** | **str** | CPF ou CNPJ do pagador do Pix, conforme informado pelo provedor. | [optional] 
+**receiver_name** | **str** | Nome do recebedor do Pix, conforme informado pelo provedor. | [optional] 
+**receiver_document** | **str** | CPF ou CNPJ do recebedor do Pix, conforme informado pelo provedor. | [optional] 
+**end_to_end_id** | **str** | Identificador fim a fim do Pix, informado pelo provedor na liquidação. | [optional] 
 
 ## Example
 

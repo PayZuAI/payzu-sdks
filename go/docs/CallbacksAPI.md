@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateUserCallbackSecret**](CallbacksAPI.md#CreateUserCallbackSecret) | **Post** /user/callbacks/secret | Create callback secret
-[**GetUserCallbackById**](CallbacksAPI.md#GetUserCallbackById) | **Get** /user/callbacks/{id} | Get Callback
-[**GetUserCallbacks**](CallbacksAPI.md#GetUserCallbacks) | **Get** /user/callbacks | List Callbacks
-[**ResendUserCallbackSingle**](CallbacksAPI.md#ResendUserCallbackSingle) | **Post** /user/callbacks/resend/{transactionId} | Re-send callback (single)
-[**ResendUserCallbacks**](CallbacksAPI.md#ResendUserCallbacks) | **Post** /user/callbacks/resend | Re-send callbacks (bulk)
-[**ResendUserCallbacksWebhook**](CallbacksAPI.md#ResendUserCallbacksWebhook) | **Post** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook
-[**ResendUserCallbacksWebhooks**](CallbacksAPI.md#ResendUserCallbacksWebhooks) | **Post** /user/callbacks/resend/webhook | Resend webhook callbacks by filters
-[**RotateUserCallbackSecret**](CallbacksAPI.md#RotateUserCallbackSecret) | **Patch** /user/callbacks/secret/rotate | Rotate callback secret
+[**CreateUserCallbackSecret**](CallbacksAPI.md#CreateUserCallbackSecret) | **Post** /user/callbacks/secret | Criar segredo de callback
+[**GetUserCallbackById**](CallbacksAPI.md#GetUserCallbackById) | **Get** /user/callbacks/{id} | Obter Callback
+[**GetUserCallbacks**](CallbacksAPI.md#GetUserCallbacks) | **Get** /user/callbacks | Listar Callbacks
+[**ResendUserCallbackSingle**](CallbacksAPI.md#ResendUserCallbackSingle) | **Post** /user/callbacks/resend/{transactionId} | Reenviar callback (individual)
+[**ResendUserCallbacks**](CallbacksAPI.md#ResendUserCallbacks) | **Post** /user/callbacks/resend | Reenviar callbacks (em lote)
+[**ResendUserCallbacksWebhook**](CallbacksAPI.md#ResendUserCallbacksWebhook) | **Post** /user/callbacks/resend/webhook/{webhookId} | Reenviar callbacks por webhook
+[**ResendUserCallbacksWebhooks**](CallbacksAPI.md#ResendUserCallbacksWebhooks) | **Post** /user/callbacks/resend/webhook | Reenviar callbacks de webhook por filtros
+[**RotateUserCallbackSecret**](CallbacksAPI.md#RotateUserCallbackSecret) | **Patch** /user/callbacks/secret/rotate | Rotacionar segredo de callback
 
 
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > CallbackSecretResponse CreateUserCallbackSecret(ctx).Execute()
 
-Create callback secret
+Criar segredo de callback
 
 
 
@@ -32,7 +32,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
@@ -80,7 +80,7 @@ Other parameters are passed through a pointer to a apiCreateUserCallbackSecretRe
 
 > CallbackDetail GetUserCallbackById(ctx, id).Execute()
 
-Get Callback
+Obter Callback
 
 
 
@@ -93,11 +93,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7l9v20001q8f2u6c1y4be" // string | Unique callback ID
+	id := "cm3w7l9v20001q8f2u6c1y4be" // string | ID único do callback
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -117,7 +117,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Unique callback ID | 
+**id** | **string** | ID único do callback | 
 
 ### Other Parameters
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > CallbackListResponse GetUserCallbacks(ctx).Page(page).Limit(limit).SortBy(sortBy).SortDirection(sortDirection).Id(id).Url(url).Status(status).TransactionId(transactionId).HasError(hasError).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).WebhookId(webhookId).EventType(eventType).Execute()
 
-List Callbacks
+Listar Callbacks
 
 
 
@@ -164,23 +164,23 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	page := int32(56) // int32 | Page number. (optional) (default to 1)
-	limit := int32(56) // int32 | Items per page. (optional) (default to 10)
-	sortBy := "sortBy_example" // string | Sort field. (optional) (default to "createdAt")
-	sortDirection := "sortDirection_example" // string | Sort direction. (optional) (default to "desc")
-	id := "cm3w7l9v20001q8f2u6c1y4be" // string | Filter by callback ID (optional)
-	url := "https://webhook.cool/" // string | Filter by callback URL (optional)
-	status := int32(200) // int32 | HTTP status code (optional)
-	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
-	hasError := true // bool | Filter callbacks that errored (optional)
-	createdAtFrom := time.Now() // time.Time | Start of the creation date range. (optional)
-	createdAtTo := time.Now() // time.Time | End of the creation date range. (optional)
-	webhookId := "webhookId_example" // string | Webhook id. (optional)
-	eventType := openapiclient.WebhookEventType("TRANSACTION_PENDING") // WebhookEventType | Webhook event type. (optional)
+	page := int32(56) // int32 | Número da página. (optional) (default to 1)
+	limit := int32(56) // int32 | Itens por página. (optional) (default to 10)
+	sortBy := "sortBy_example" // string | Campo de ordenação. (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string | Direção da ordenação. (optional) (default to "desc")
+	id := "cm3w7l9v20001q8f2u6c1y4be" // string | Filtra por ID de callback (optional)
+	url := "https://webhook.cool/" // string | Filtra por callback URL (optional)
+	status := int32(200) // int32 | Status HTTP devolvido pelo seu endpoint. (optional)
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação. (optional)
+	hasError := true // bool | Filtra callbacks que apresentaram erro (optional)
+	createdAtFrom := time.Now() // time.Time | Data de criação inicial. (optional)
+	createdAtTo := time.Now() // time.Time | Data de criação final. (optional)
+	webhookId := "webhookId_example" // string | Id do webhook. (optional)
+	eventType := openapiclient.WebhookEventType("TRANSACTION_PENDING") // WebhookEventType | Tipo de evento do webhook. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -205,19 +205,19 @@ Other parameters are passed through a pointer to a apiGetUserCallbacksRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int32** | Page number. | [default to 1]
- **limit** | **int32** | Items per page. | [default to 10]
- **sortBy** | **string** | Sort field. | [default to &quot;createdAt&quot;]
- **sortDirection** | **string** | Sort direction. | [default to &quot;desc&quot;]
- **id** | **string** | Filter by callback ID | 
- **url** | **string** | Filter by callback URL | 
- **status** | **int32** | HTTP status code | 
- **transactionId** | **string** | Transaction ID. | 
- **hasError** | **bool** | Filter callbacks that errored | 
- **createdAtFrom** | **time.Time** | Start of the creation date range. | 
- **createdAtTo** | **time.Time** | End of the creation date range. | 
- **webhookId** | **string** | Webhook id. | 
- **eventType** | [**WebhookEventType**](WebhookEventType.md) | Webhook event type. | 
+ **page** | **int32** | Número da página. | [default to 1]
+ **limit** | **int32** | Itens por página. | [default to 10]
+ **sortBy** | **string** | Campo de ordenação. | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** | Direção da ordenação. | [default to &quot;desc&quot;]
+ **id** | **string** | Filtra por ID de callback | 
+ **url** | **string** | Filtra por callback URL | 
+ **status** | **int32** | Status HTTP devolvido pelo seu endpoint. | 
+ **transactionId** | **string** | ID da transação. | 
+ **hasError** | **bool** | Filtra callbacks que apresentaram erro | 
+ **createdAtFrom** | **time.Time** | Data de criação inicial. | 
+ **createdAtTo** | **time.Time** | Data de criação final. | 
+ **webhookId** | **string** | Id do webhook. | 
+ **eventType** | [**WebhookEventType**](WebhookEventType.md) | Tipo de evento do webhook. | 
 
 ### Return type
 
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 
 > ResendUserCallbackSingle200Response ResendUserCallbackSingle(ctx, transactionId).Execute()
 
-Re-send callback (single)
+Reenviar callback (individual)
 
 
 
@@ -254,11 +254,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -278,7 +278,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**transactionId** | **string** | Transaction ID. | 
+**transactionId** | **string** | ID da transação. | 
 
 ### Other Parameters
 
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 > ResendUserCallbacks200Response ResendUserCallbacks(ctx).ResendUserCallbacksRequest(resendUserCallbacksRequest).Execute()
 
-Re-send callbacks (bulk)
+Reenviar callbacks (em lote)
 
 
 
@@ -325,7 +325,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
@@ -378,7 +378,7 @@ Name | Type | Description  | Notes
 
 > EnqueuedCallback ResendUserCallbacksWebhook(ctx, webhookId).Execute()
 
-Resend callbacks by webhook
+Reenviar callbacks por webhook
 
 
 
@@ -391,11 +391,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	webhookId := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
+	webhookId := "cm3w7k1t40000q8f2r5b9x3ad" // string | Id do webhook.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -415,7 +415,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**webhookId** | **string** | Webhook id. | 
+**webhookId** | **string** | Id do webhook. | 
 
 ### Other Parameters
 
@@ -448,7 +448,7 @@ Name | Type | Description  | Notes
 
 > EnqueuedCallback ResendUserCallbacksWebhooks(ctx).ResendWebhookCallbacksRequest(resendWebhookCallbacksRequest).Execute()
 
-Resend webhook callbacks by filters
+Reenviar callbacks de webhook por filtros
 
 
 
@@ -462,7 +462,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
@@ -515,7 +515,7 @@ Name | Type | Description  | Notes
 
 > RotateCallbackSecretResponse RotateUserCallbackSecret(ctx).Execute()
 
-Rotate callback secret
+Rotacionar segredo de callback
 
 
 
@@ -528,7 +528,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**BankStatementListResponsePagination**](BankStatementListResponsePagination.md) |  | [optional] 
-**bank_statements** | [**List[BankStatement]**](BankStatement.md) | Entries of the queried page. | [optional] 
+**bank_statements** | [**List[BankStatement]**](BankStatement.md) | Lançamentos da página consultada. | [optional] 
 
 ## Example
 

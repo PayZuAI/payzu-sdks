@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** | Confirmation that the callbacks were queued. | [optional] 
-**total** | **int** | Number of callbacks dispatched | [optional] 
+**message** | **str** | Confirmação de que os callbacks foram enfileirados. | [optional] 
+**total** | **int** | Número de callbacks disparados | [optional] 
 
 ## Example
 

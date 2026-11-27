@@ -2,18 +2,18 @@
 
 # GetUser200ResponseServiceFee
 
-Cash-in and cash-out fees of the account, in reais.
+Tarifas de entrada e saída da conta, em reais.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**cashInMinimum** | **BigDecimal** | Floor of the cash-in fee, in reais. |  [optional] |
-|**cashInFixed** | **BigDecimal** | Fixed part of the cash-in fee, in reais. |  [optional] |
-|**cashInPercent** | **BigDecimal** | Percentage of the cash-in fee. |  [optional] |
-|**cashOutMinimum** | **BigDecimal** | Floor of the withdrawal fee, in reais. |  [optional] |
-|**cashOutFixed** | **BigDecimal** | Fixed part of the withdrawal fee, in reais. |  [optional] |
-|**cashOutPercent** | **BigDecimal** | Percentage of the withdrawal fee. |  [optional] |
+|**cashInMinimum** | **BigDecimal** | Piso da tarifa de entrada, em reais. |  [optional] |
+|**cashInFixed** | **BigDecimal** | Parcela fixa da tarifa de entrada, em reais. |  [optional] |
+|**cashInPercent** | **BigDecimal** | Percentual da tarifa de entrada. |  [optional] |
+|**cashOutMinimum** | **BigDecimal** | Piso da tarifa de saque, em reais. |  [optional] |
+|**cashOutFixed** | **BigDecimal** | Parcela fixa da tarifa de saque, em reais. |  [optional] |
+|**cashOutPercent** | **BigDecimal** | Percentual da tarifa de saque. |  [optional] |
 
 
 

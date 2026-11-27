@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,43 +20,43 @@ import { mapValues } from '../runtime.js';
  */
 export interface ResendWebhookCallbacksRequest {
     /**
-     * Start of the delivery period. At most 30 days ago.
+     * Início do período das entregas. No máximo 30 dias atrás.
      * @type {Date}
      * @memberof ResendWebhookCallbacksRequest
      */
     createdAtFrom: Date;
     /**
-     * End of the delivery period, on or after createdAtFrom. The window cannot exceed 7 days.
+     * Fim do período das entregas, igual ou posterior a createdAtFrom. A janela não pode passar de 7 dias.
      * @type {Date}
      * @memberof ResendWebhookCallbacksRequest
      */
     createdAtTo: Date;
     /**
-     * Webhooks to resend. Omitted: all active webhooks of the account.
+     * Webhooks a reenviar. Omitido: todos os webhooks ativos da conta.
      * @type {Array<string>}
      * @memberof ResendWebhookCallbacksRequest
      */
     webhookIds?: Array<string>;
     /**
-     * Restrict to specific transaction IDs.
+     * Restringe a IDs de transação específicos.
      * @type {Array<string>}
      * @memberof ResendWebhookCallbacksRequest
      */
     transactionIds?: Array<string>;
     /**
-     * Filter by transaction type.
+     * Filtra pelo tipo da transação.
      * @type {Array<ResendWebhookCallbacksRequestTransactionTypesEnum>}
      * @memberof ResendWebhookCallbacksRequest
      */
     transactionTypes?: Array<ResendWebhookCallbacksRequestTransactionTypesEnum>;
     /**
-     * Filter by the current transaction status.
+     * Filtra pelo status atual da transação.
      * @type {Array<ResendWebhookCallbacksRequestTransactionStatusEnum>}
      * @memberof ResendWebhookCallbacksRequest
      */
     transactionStatus?: Array<ResendWebhookCallbacksRequestTransactionStatusEnum>;
     /**
-     * Restrict to specific end-to-end IDs.
+     * Restringe a end-to-end IDs específicos.
      * @type {Array<string>}
      * @memberof ResendWebhookCallbacksRequest
      */

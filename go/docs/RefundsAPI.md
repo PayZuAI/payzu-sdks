@@ -4,7 +4,7 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PostRefund**](RefundsAPI.md#PostRefund) | **Post** /refund/{transactionId} | Refund a Pix
+[**PostRefund**](RefundsAPI.md#PostRefund) | **Post** /refund/{transactionId} | Solicitar a devolução de um Pix recebido
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > TransactionWithRefunds PostRefund(ctx, transactionId).RefundRequest(refundRequest).Execute()
 
-Refund a Pix
+Solicitar a devolução de um Pix recebido
 
 
 
@@ -25,11 +25,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID of the transaction to refund.
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação a devolver.
 	refundRequest := *openapiclient.NewRefundRequest() // RefundRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -50,7 +50,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**transactionId** | **string** | ID of the transaction to refund. | 
+**transactionId** | **string** | ID da transação a devolver. | 
 
 ### Other Parameters
 

@@ -4,22 +4,22 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_user_webhook**](WebhooksApi.md#delete_user_webhook) | **DELETE** /user/webhooks/{id} | Delete webhook
-[**get_user_webhook**](WebhooksApi.md#get_user_webhook) | **GET** /user/webhooks/{id} | Get webhook
-[**get_user_webhook_sent_detail**](WebhooksApi.md#get_user_webhook_sent_detail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail
-[**get_user_webhooks**](WebhooksApi.md#get_user_webhooks) | **GET** /user/webhooks | List webhooks
-[**get_user_webhooks_sent_quantity**](WebhooksApi.md#get_user_webhooks_sent_quantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks
-[**patch_user_webhook**](WebhooksApi.md#patch_user_webhook) | **PATCH** /user/webhooks/{id} | Update webhook
-[**post_user_webhook**](WebhooksApi.md#post_user_webhook) | **POST** /user/webhooks | Create webhook
-[**post_user_webhook_rotate_secret**](WebhooksApi.md#post_user_webhook_rotate_secret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret
+[**delete_user_webhook**](WebhooksApi.md#delete_user_webhook) | **DELETE** /user/webhooks/{id} | Remover webhook
+[**get_user_webhook**](WebhooksApi.md#get_user_webhook) | **GET** /user/webhooks/{id} | Consultar webhook
+[**get_user_webhook_sent_detail**](WebhooksApi.md#get_user_webhook_sent_detail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado
+[**get_user_webhooks**](WebhooksApi.md#get_user_webhooks) | **GET** /user/webhooks | Listar webhooks
+[**get_user_webhooks_sent_quantity**](WebhooksApi.md#get_user_webhooks_sent_quantity) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados
+[**patch_user_webhook**](WebhooksApi.md#patch_user_webhook) | **PATCH** /user/webhooks/{id} | Atualizar webhook
+[**post_user_webhook**](WebhooksApi.md#post_user_webhook) | **POST** /user/webhooks | Criar webhook
+[**post_user_webhook_rotate_secret**](WebhooksApi.md#post_user_webhook_rotate_secret) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook
 
 
 # **delete_user_webhook**
 > delete_user_webhook(id)
 
-Delete webhook
+Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
 ### Example
 
@@ -50,10 +50,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Id do webhook.
 
     try:
-        # Delete webhook
+        # Remover webhook
         api_instance.delete_user_webhook(id)
     except Exception as e:
         print("Exception when calling WebhooksApi->delete_user_webhook: %s\n" % e)
@@ -66,7 +66,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Webhook id. | 
+ **id** | **str**| Id do webhook. | 
 
 ### Return type
 
@@ -85,20 +85,20 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Webhook deleted. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Resource not found |  -  |
+**204** | Webhook removido. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_webhook**
 > Webhook get_user_webhook(id)
 
-Get webhook
+Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
 ### Example
 
@@ -130,10 +130,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Id do webhook.
 
     try:
-        # Get webhook
+        # Consultar webhook
         api_response = api_instance.get_user_webhook(id)
         print("The response of WebhooksApi->get_user_webhook:\n")
         pprint(api_response)
@@ -148,7 +148,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Webhook id. | 
+ **id** | **str**| Id do webhook. | 
 
 ### Return type
 
@@ -168,18 +168,19 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Webhook. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**404** | Resource not found |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_webhook_sent_detail**
 > SentWebhookDetailResponse get_user_webhook_sent_detail(id, callback_id)
 
-Get sent callback detail
+Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
 ### Example
 
@@ -211,11 +212,11 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
-    callback_id = 'cm3w7l9v20001q8f2u6c1y4be' # str | Callback log id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Id do webhook.
+    callback_id = 'cm3w7l9v20001q8f2u6c1y4be' # str | Id do log de callback.
 
     try:
-        # Get sent callback detail
+        # Detalhe de callback enviado
         api_response = api_instance.get_user_webhook_sent_detail(id, callback_id)
         print("The response of WebhooksApi->get_user_webhook_sent_detail:\n")
         pprint(api_response)
@@ -230,8 +231,8 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Webhook id. | 
- **callback_id** | **str**| Callback log id. | 
+ **id** | **str**| Id do webhook. | 
+ **callback_id** | **str**| Id do log de callback. | 
 
 ### Return type
 
@@ -250,19 +251,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Callback delivery detail. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**404** | Resource not found |  -  |
+**200** | Detalhe de entrega do callback. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_webhooks**
 > WebhookListResponse get_user_webhooks(active=active)
 
-List webhooks
+Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
 ### Example
 
@@ -294,10 +296,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    active = true # bool | Filter by active status. (optional)
+    active = true # bool | Filtra pelo status ativo. (optional)
 
     try:
-        # List webhooks
+        # Listar webhooks
         api_response = api_instance.get_user_webhooks(active=active)
         print("The response of WebhooksApi->get_user_webhooks:\n")
         pprint(api_response)
@@ -312,7 +314,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **active** | **bool**| Filter by active status. | [optional] 
+ **active** | **bool**| Filtra pelo status ativo. | [optional] 
 
 ### Return type
 
@@ -331,18 +333,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Webhook list. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
+**200** | Lista de webhooks. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_webhooks_sent_quantity**
 > SentWebhooksQuantity get_user_webhooks_sent_quantity(webhook_id=webhook_id)
 
-Count sent callbacks
+Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
 ### Example
 
@@ -374,10 +377,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Filter the count by webhook id. (optional)
+    webhook_id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Filtra a contagem por id de webhook. (optional)
 
     try:
-        # Count sent callbacks
+        # Contar callbacks enviados
         api_response = api_instance.get_user_webhooks_sent_quantity(webhook_id=webhook_id)
         print("The response of WebhooksApi->get_user_webhooks_sent_quantity:\n")
         pprint(api_response)
@@ -392,7 +395,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhook_id** | **str**| Filter the count by webhook id. | [optional] 
+ **webhook_id** | **str**| Filtra a contagem por id de webhook. | [optional] 
 
 ### Return type
 
@@ -411,19 +414,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Quantity. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**404** | Resource not found |  -  |
+**200** | Quantidade. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_user_webhook**
 > Webhook patch_user_webhook(id, webhook_update_request)
 
-Update webhook
+Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
 ### Example
 
@@ -456,11 +460,11 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Id do webhook.
     webhook_update_request = payzu_pix.WebhookUpdateRequest() # WebhookUpdateRequest | 
 
     try:
-        # Update webhook
+        # Atualizar webhook
         api_response = api_instance.patch_user_webhook(id, webhook_update_request)
         print("The response of WebhooksApi->patch_user_webhook:\n")
         pprint(api_response)
@@ -475,7 +479,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Webhook id. | 
+ **id** | **str**| Id do webhook. | 
  **webhook_update_request** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md)|  | 
 
 ### Return type
@@ -495,21 +499,21 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Webhook updated. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Resource not found |  -  |
-**409** | Conflict with the current state of the resource |  -  |
+**200** | Webhook atualizado. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
+**409** | Conflito com o estado atual do recurso |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_user_webhook**
 > WebhookWithSecret post_user_webhook(webhook_create_request)
 
-Create webhook
+Criar webhook
 
-Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
+Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
 
 ### Example
 
@@ -545,7 +549,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
     webhook_create_request = payzu_pix.WebhookCreateRequest() # WebhookCreateRequest | 
 
     try:
-        # Create webhook
+        # Criar webhook
         api_response = api_instance.post_user_webhook(webhook_create_request)
         print("The response of WebhooksApi->post_user_webhook:\n")
         pprint(api_response)
@@ -579,20 +583,20 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Webhook created. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**409** | Conflict with the current state of the resource |  -  |
+**201** | Webhook criado. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**409** | Conflito com o estado atual do recurso |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_user_webhook_rotate_secret**
 > RotateSecretResponse post_user_webhook_rotate_secret(id)
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
 
 ### Example
 
@@ -624,10 +628,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.WebhooksApi(api_client)
-    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Webhook id.
+    id = 'cm3w7k1t40000q8f2r5b9x3ad' # str | Id do webhook.
 
     try:
-        # Rotate webhook secret
+        # Rotacionar segredo do webhook
         api_response = api_instance.post_user_webhook_rotate_secret(id)
         print("The response of WebhooksApi->post_user_webhook_rotate_secret:\n")
         pprint(api_response)
@@ -642,7 +646,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Webhook id. | 
+ **id** | **str**| Id do webhook. | 
 
 ### Return type
 
@@ -661,11 +665,11 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | New secret. |  -  |
-**400** | Invalid request |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Resource not found |  -  |
+**200** | Novo segredo. |  -  |
+**400** | Requisição inválida |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

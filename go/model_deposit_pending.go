@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,50 +20,50 @@ var _ MappedNullable = &DepositPending{}
 
 // DepositPending struct for DepositPending
 type DepositPending struct {
-	// Identifier of the pending deposit.
+	// Identificador do depósito pendente.
 	Id *string `json:"id,omitempty"`
-	// Deposit status: PENDING, COMPLETED or REJECTED.
+	// Situação do depósito: PENDING, COMPLETED ou REJECTED.
 	Status *string `json:"status,omitempty"`
-	// Amount received.
+	// Valor recebido.
 	Amount *float32 `json:"amount,omitempty"`
-	// CNPJ of the payer of the Pix.
+	// CNPJ de quem enviou o Pix.
 	PayerDocument *string `json:"payerDocument,omitempty"`
-	// Name of the payer of the Pix.
+	// Nome de quem enviou o Pix.
 	PayerName NullableString `json:"payerName,omitempty"`
-	// Account number of the payer inside the platform.
+	// Número da conta do pagador dentro da plataforma.
 	PayerAccountNumber NullableString `json:"payerAccountNumber,omitempty"`
-	// ISPB code of the institution the Pix was sent from.
+	// Código ISPB da instituição de onde saiu o Pix.
 	PayerInstitutionIspb NullableString `json:"payerInstitutionIspb,omitempty"`
-	// Name of the institution the Pix was sent from.
+	// Nome da instituição de onde o Pix saiu.
 	PayerInstitutionName NullableString `json:"payerInstitutionName,omitempty"`
-	// CPF or CNPJ of the account that received the Pix.
+	// CPF ou CNPJ da conta que recebeu o Pix.
 	ReceiverDocument NullableString `json:"receiverDocument,omitempty"`
-	// Name of the account that received the Pix.
+	// Nome da conta que recebeu o Pix.
 	ReceiverName NullableString `json:"receiverName,omitempty"`
-	// Number of your PayZu account that receives the credit if the deposit is approved.
+	// Número da sua conta na PayZu que receberá o crédito caso o depósito seja aprovado.
 	ReceiverAccountNumber NullableString `json:"receiverAccountNumber,omitempty"`
-	// ISPB code of the institution that received the Pix.
+	// Código ISPB da instituição que recebeu o Pix.
 	ReceiverInstitutionIspb NullableString `json:"receiverInstitutionIspb,omitempty"`
-	// Name of the institution where the Pix was settled on the receiving side.
+	// Nome da instituição em que o Pix foi liquidado do lado de quem recebeu.
 	ReceiverInstitutionName NullableString `json:"receiverInstitutionName,omitempty"`
-	// End-to-end identifier of the Pix.
+	// Identificador ponta a ponta do Pix.
 	EndToEndId *string `json:"endToEndId,omitempty"`
-	// Date and time the Pix was settled.
+	// Data e hora da liquidação do Pix.
 	PaidAt NullableTime `json:"paidAt,omitempty"`
 	PixKey NullableString `json:"pixKey,omitempty"`
-	// Free text that would accompany the Pix.
+	// Texto livre que acompanharia o Pix.
 	Description NullableString `json:"description,omitempty"`
-	// Date and time the deposit was approved.
+	// Data e hora da aprovação do depósito.
 	ApprovedAt NullableTime `json:"approvedAt,omitempty"`
-	// Date and time the deposit was rejected.
+	// Data e hora da recusa do depósito.
 	RejectedAt NullableTime `json:"rejectedAt,omitempty"`
-	// Reason the deposit was rejected.
+	// Motivo da recusa do depósito.
 	RejectionReason NullableString `json:"rejectionReason,omitempty"`
-	// Deposit transaction created on approval.
+	// Transação de depósito criada na aprovação.
 	TransactionId NullableString `json:"transactionId,omitempty"`
-	// Moment the received Pix was recorded, before the credit.
+	// Momento em que o Pix recebido foi registrado, antes do crédito.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Moment of the last change to the record, which changes when the deposit is approved or rejected.
+	// Momento da última alteração do registro, que muda quando o depósito é aprovado ou recusado.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 

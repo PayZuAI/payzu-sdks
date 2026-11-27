@@ -4,17 +4,17 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownloadUserReport**](ReportsAPI.md#DownloadUserReport) | **Post** /user/report/{id}/download | Download report
-[**GetUserBankStatement**](ReportsAPI.md#GetUserBankStatement) | **Get** /user/bank-statements/{id} | Get bank statement
-[**GetUserBankStatements**](ReportsAPI.md#GetUserBankStatements) | **Get** /user/bank-statements | List bank statements
-[**GetUserDepositPending**](ReportsAPI.md#GetUserDepositPending) | **Get** /user/deposit-pending | List pending deposits
-[**GetUserDepositPendingById**](ReportsAPI.md#GetUserDepositPendingById) | **Get** /user/deposit-pending/{id} | Get pending deposit
-[**GetUserReport**](ReportsAPI.md#GetUserReport) | **Get** /user/report/{id} | Get report job status
-[**GetUserSummary**](ReportsAPI.md#GetUserSummary) | **Get** /user/summary | Transaction summary
-[**GetUserTransactionById**](ReportsAPI.md#GetUserTransactionById) | **Get** /user/transactions/{id} | List transaction details
-[**GetUserTransactions**](ReportsAPI.md#GetUserTransactions) | **Get** /user/transactions | List Transactions
-[**ListUserReports**](ReportsAPI.md#ListUserReports) | **Get** /user/report | List report jobs
-[**PostUserReport**](ReportsAPI.md#PostUserReport) | **Post** /user/report | Generate transactions report
+[**DownloadUserReport**](ReportsAPI.md#DownloadUserReport) | **Post** /user/report/{id}/download | Baixar relatório
+[**GetUserBankStatement**](ReportsAPI.md#GetUserBankStatement) | **Get** /user/bank-statements/{id} | Consultar lançamento
+[**GetUserBankStatements**](ReportsAPI.md#GetUserBankStatements) | **Get** /user/bank-statements | Listar extrato
+[**GetUserDepositPending**](ReportsAPI.md#GetUserDepositPending) | **Get** /user/deposit-pending | Listar depósitos via chave Pix
+[**GetUserDepositPendingById**](ReportsAPI.md#GetUserDepositPendingById) | **Get** /user/deposit-pending/{id} | Consultar depósito via chave Pix
+[**GetUserReport**](ReportsAPI.md#GetUserReport) | **Get** /user/report/{id} | Consultar status do relatório
+[**GetUserSummary**](ReportsAPI.md#GetUserSummary) | **Get** /user/summary | Resumo de transações
+[**GetUserTransactionById**](ReportsAPI.md#GetUserTransactionById) | **Get** /user/transactions/{id} | Listar detalhes da transação
+[**GetUserTransactions**](ReportsAPI.md#GetUserTransactions) | **Get** /user/transactions | Listar transações
+[**ListUserReports**](ReportsAPI.md#ListUserReports) | **Get** /user/report | Listar jobs de relatório
+[**PostUserReport**](ReportsAPI.md#PostUserReport) | **Post** /user/report | Gerar relatório de transações
 
 
 
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 > DownloadUserReport200Response DownloadUserReport(ctx, id).Execute()
 
-Download report
+Baixar relatório
 
 
 
@@ -35,11 +35,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78" // string | Report ID.
+	id := "01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78" // string | ID do relatório.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -59,7 +59,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Report ID. | 
+**id** | **string** | ID do relatório. | 
 
 ### Other Parameters
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 > BankStatement GetUserBankStatement(ctx, id).Execute()
 
-Get bank statement
+Consultar lançamento
 
 
 
@@ -105,11 +105,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7q8s10004q8f2k9f5b7eh" // string | Statement entry id.
+	id := "cm3w7q8s10004q8f2k9f5b7eh" // string | Id do lançamento do extrato.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -129,7 +129,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Statement entry id. | 
+**id** | **string** | Id do lançamento do extrato. | 
 
 ### Other Parameters
 
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 > BankStatementListResponse GetUserBankStatements(ctx).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).Id(id).Operation(operation).Reason(reason).TransactionId(transactionId).AmountFrom(amountFrom).AmountTo(amountTo).Page(page).Limit(limit).SortBy(sortBy).SortDirection(sortDirection).Execute()
 
-List bank statements
+Listar extrato
 
 
 
@@ -176,22 +176,22 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	createdAtFrom := time.Now() // time.Time | Start date (required).
-	createdAtTo := time.Now() // time.Time | End date (required).
-	id := "cm3w7q8s10004q8f2k9f5b7eh" // string | Entry ID. (optional)
-	operation := "operation_example" // string | Operation type.  `INCREMENT` `DECREMENT` (optional)
-	reason := "Estorno" // string | Reason for the entry. (optional)
-	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
-	amountFrom := float32(10.9) // float32 | Minimum amount. (optional)
-	amountTo := float32(500) // float32 | Maximum amount. (optional)
-	page := int32(56) // int32 | Page number. (optional) (default to 1)
-	limit := int32(56) // int32 | Items per page. (optional) (default to 10)
-	sortBy := "sortBy_example" // string | Sort field. (optional) (default to "createdAt")
-	sortDirection := "sortDirection_example" // string | Sort direction. (optional) (default to "desc")
+	createdAtFrom := time.Now() // time.Time | Data inicial (obrigatória).
+	createdAtTo := time.Now() // time.Time | Data final (obrigatória).
+	id := "cm3w7q8s10004q8f2k9f5b7eh" // string | ID do lançamento. (optional)
+	operation := "operation_example" // string | Tipo de operação.  `INCREMENT` `DECREMENT` (optional)
+	reason := "PIX_DEPOSIT" // string | Razão do lançamento. (optional)
+	transactionId := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação. (optional)
+	amountFrom := float32(10.9) // float32 | Valor mínimo. (optional)
+	amountTo := float32(500) // float32 | Valor máximo. (optional)
+	page := int32(56) // int32 | Número da página. (optional) (default to 1)
+	limit := int32(56) // int32 | Itens por página. (optional) (default to 10)
+	sortBy := "sortBy_example" // string | Campo de ordenação. (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string | Direção da ordenação. (optional) (default to "desc")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -216,18 +216,18 @@ Other parameters are passed through a pointer to a apiGetUserBankStatementsReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createdAtFrom** | **time.Time** | Start date (required). | 
- **createdAtTo** | **time.Time** | End date (required). | 
- **id** | **string** | Entry ID. | 
- **operation** | **string** | Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | 
- **reason** | **string** | Reason for the entry. | 
- **transactionId** | **string** | Transaction ID. | 
- **amountFrom** | **float32** | Minimum amount. | 
- **amountTo** | **float32** | Maximum amount. | 
- **page** | **int32** | Page number. | [default to 1]
- **limit** | **int32** | Items per page. | [default to 10]
- **sortBy** | **string** | Sort field. | [default to &quot;createdAt&quot;]
- **sortDirection** | **string** | Sort direction. | [default to &quot;desc&quot;]
+ **createdAtFrom** | **time.Time** | Data inicial (obrigatória). | 
+ **createdAtTo** | **time.Time** | Data final (obrigatória). | 
+ **id** | **string** | ID do lançamento. | 
+ **operation** | **string** | Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | 
+ **reason** | **string** | Razão do lançamento. | 
+ **transactionId** | **string** | ID da transação. | 
+ **amountFrom** | **float32** | Valor mínimo. | 
+ **amountTo** | **float32** | Valor máximo. | 
+ **page** | **int32** | Número da página. | [default to 1]
+ **limit** | **int32** | Itens por página. | [default to 10]
+ **sortBy** | **string** | Campo de ordenação. | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** | Direção da ordenação. | [default to &quot;desc&quot;]
 
 ### Return type
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 
 > DepositPendingListResponse GetUserDepositPending(ctx).Status(status).Document(document).Name(name).EndToEndId(endToEndId).AmountMin(amountMin).AmountMax(amountMax).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).Page(page).Limit(limit).Execute()
 
-List pending deposits
+Listar depósitos via chave Pix
 
 
 
@@ -265,20 +265,20 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	status := "PENDING" // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. (optional)
-	document := "12345678901" // string | CPF or CNPJ, digits only. (optional)
-	name := "John Doe" // string | Name of the payer or receiver. (optional)
-	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | End-to-end ID of the Pix. (optional)
-	amountMin := float32(10.9) // float32 | Minimum amount. (optional)
-	amountMax := float32(500) // float32 | Maximum amount. (optional)
-	createdAtFrom := time.Now() // time.Time | Start of the creation date range. (optional)
-	createdAtTo := time.Now() // time.Time | End of the creation date range. (optional)
-	page := int32(56) // int32 | Page number. (optional) (default to 1)
-	limit := int32(56) // int32 | Items per page. (optional) (default to 20)
+	status := "PENDING" // string | Status do depósito, vários separados por vírgula.  `PENDING` `APPROVED` `REJECTED` `EXPIRED` `COMPLETED` (optional)
+	document := "12345678901" // string | CPF ou CNPJ, apenas dígitos. (optional)
+	name := "John Doe" // string | Nome do pagador ou recebedor. (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | ID end-to-end do Pix. (optional)
+	amountMin := float32(10.9) // float32 | Valor mínimo. (optional)
+	amountMax := float32(500) // float32 | Valor máximo. (optional)
+	createdAtFrom := time.Now() // time.Time | Data de criação inicial. (optional)
+	createdAtTo := time.Now() // time.Time | Data de criação final. (optional)
+	page := int32(56) // int32 | Número da página. Valor inválido vira 1. (optional) (default to 1)
+	limit := int32(56) // int32 | Itens por página. Valor inválido vira 20. (optional) (default to 20)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -303,16 +303,16 @@ Other parameters are passed through a pointer to a apiGetUserDepositPendingReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **status** | **string** | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | 
- **document** | **string** | CPF or CNPJ, digits only. | 
- **name** | **string** | Name of the payer or receiver. | 
- **endToEndId** | **string** | End-to-end ID of the Pix. | 
- **amountMin** | **float32** | Minimum amount. | 
- **amountMax** | **float32** | Maximum amount. | 
- **createdAtFrom** | **time.Time** | Start of the creation date range. | 
- **createdAtTo** | **time.Time** | End of the creation date range. | 
- **page** | **int32** | Page number. | [default to 1]
- **limit** | **int32** | Items per page. | [default to 20]
+ **status** | **string** | Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; | 
+ **document** | **string** | CPF ou CNPJ, apenas dígitos. | 
+ **name** | **string** | Nome do pagador ou recebedor. | 
+ **endToEndId** | **string** | ID end-to-end do Pix. | 
+ **amountMin** | **float32** | Valor mínimo. | 
+ **amountMax** | **float32** | Valor máximo. | 
+ **createdAtFrom** | **time.Time** | Data de criação inicial. | 
+ **createdAtTo** | **time.Time** | Data de criação final. | 
+ **page** | **int32** | Número da página. Valor inválido vira 1. | [default to 1]
+ **limit** | **int32** | Itens por página. Valor inválido vira 20. | [default to 20]
 
 ### Return type
 
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 > DepositPending GetUserDepositPendingById(ctx, id).Execute()
 
-Get pending deposit
+Consultar depósito via chave Pix
 
 
 
@@ -349,11 +349,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7r1u50005q8f2m1g6c8fj" // string | Pending deposit id.
+	id := "cm3w7r1u50005q8f2m1g6c8fj" // string | Id do depósito pendente.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -373,7 +373,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Pending deposit id. | 
+**id** | **string** | Id do depósito pendente. | 
 
 ### Other Parameters
 
@@ -406,7 +406,7 @@ Name | Type | Description  | Notes
 
 > ReportJobDetail GetUserReport(ctx, id).Execute()
 
-Get report job status
+Consultar status do relatório
 
 
 
@@ -419,11 +419,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78" // string | Report ID.
+	id := "01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78" // string | ID do relatório.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -443,7 +443,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Report ID. | 
+**id** | **string** | ID do relatório. | 
 
 ### Other Parameters
 
@@ -476,7 +476,7 @@ Name | Type | Description  | Notes
 
 > Summary GetUserSummary(ctx).DateFrom(dateFrom).DateTo(dateTo).GroupBy(groupBy).Grouped(grouped).Execute()
 
-Transaction summary
+Resumo de transações
 
 
 
@@ -490,14 +490,14 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	dateFrom := time.Now() // time.Time | Start date. Default: start of the previous day (America/Sao_Paulo). (optional)
-	dateTo := time.Now() // time.Time | End date. Default: now. (optional)
-	groupBy := "groupBy_example" // string | Grouping applied to the transactions. (optional) (default to "day")
-	grouped := true // bool | When true, returns a series grouped by date. (optional)
+	dateFrom := time.Now() // time.Time | Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). (optional)
+	dateTo := time.Now() // time.Time | Data final. Padrão: agora. (optional)
+	groupBy := "groupBy_example" // string | Agrupamento das transações. (optional) (default to "day")
+	grouped := true // bool | Quando true, retorna uma série agrupada por data. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -522,10 +522,10 @@ Other parameters are passed through a pointer to a apiGetUserSummaryRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dateFrom** | **time.Time** | Start date. Default: start of the previous day (America/Sao_Paulo). | 
- **dateTo** | **time.Time** | End date. Default: now. | 
- **groupBy** | **string** | Grouping applied to the transactions. | [default to &quot;day&quot;]
- **grouped** | **bool** | When true, returns a series grouped by date. | 
+ **dateFrom** | **time.Time** | Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). | 
+ **dateTo** | **time.Time** | Data final. Padrão: agora. | 
+ **groupBy** | **string** | Agrupamento das transações. | [default to &quot;day&quot;]
+ **grouped** | **bool** | Quando true, retorna uma série agrupada por data. | 
 
 ### Return type
 
@@ -549,7 +549,7 @@ Name | Type | Description  | Notes
 
 > GetUserTransactionById200Response GetUserTransactionById(ctx, id).Execute()
 
-List transaction details
+Listar detalhes da transação
 
 
 
@@ -562,11 +562,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID.
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -586,7 +586,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Transaction ID. | 
+**id** | **string** | ID da transação. | 
 
 ### Other Parameters
 
@@ -619,7 +619,7 @@ Name | Type | Description  | Notes
 
 > GetUserTransactions200Response GetUserTransactions(ctx).DateFrom(dateFrom).DateTo(dateTo).Limit(limit).Page(page).Id(id).Status(status).Type_(type_).Method(method).Amount(amount).Document(document).Name(name).EndToEndId(endToEndId).SortBy(sortBy).SortDirection(sortDirection).ClientReference(clientReference).VirtualAccount(virtualAccount).HasQrCode(hasQrCode).Execute()
 
-List Transactions
+Listar transações
 
 
 
@@ -633,27 +633,27 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	dateFrom := time.Now() // time.Time | Start date-time (ISO 8601). (optional)
-	dateTo := time.Now() // time.Time | End date-time (ISO 8601). (optional)
-	limit := int32(10) // int32 | Items per page (max 1000). (optional) (default to 10)
-	page := int32(1) // int32 | Page number (default 1). (optional) (default to 1)
-	id := "PAYZU20260814T6NX1CV9MK000000" // string | Transaction ID. (optional)
-	status := "COMPLETED" // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. (optional)
-	type_ := "DEPOSIT" // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
-	method := "PIX" // string | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. (optional)
-	amount := float32(15000) // float32 | Amount filter. Minimum 0.01. (optional)
-	document := "12345678901" // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. (optional)
-	name := "Alice" // string | Name filter. (optional)
-	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | Pix end-to-end ID. (optional)
-	sortBy := "sortBy_example" // string | Field to sort by (optional) (default to "createdAt")
-	sortDirection := "sortDirection_example" // string | Sort direction (optional) (default to "desc")
-	clientReference := "order_12345" // string | Filter by external reference (optional)
-	virtualAccount := "loja-centro-01" // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
-	hasQrCode := true // bool | Only transactions with (true) or without (false) QR Code. (optional)
+	dateFrom := time.Now() // time.Time | Data-hora inicial (ISO 8601). (optional)
+	dateTo := time.Now() // time.Time | Data-hora final (ISO 8601). (optional)
+	limit := int32(10) // int32 | Itens por página. (optional) (default to 10)
+	page := int32(1) // int32 | Número da página. (optional) (default to 1)
+	id := "PAYZU20260814T6NX1CV9MK000000" // string | ID da transação. (optional)
+	status := "COMPLETED" // string | Status da transação, vários separados por vírgula.  `PENDING` `COMPLETED` `CANCELED` `WAITING_FOR_REFUND` `REFUNDED` `EXPIRED` `ERROR` (optional)
+	type_ := "DEPOSIT" // string | Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. (optional)
+	method := "PIX" // string | Trilho da transação, vários separados por vírgula.  `PIX` `INTERNAL_TRANSFER` `BANK_SLIP` `TED` (optional)
+	amount := float32(15000) // float32 | Filtro por valor. Mínimo 0.01. (optional)
+	document := "12345678901" // string | CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. (optional)
+	name := "Alice" // string | Filtro por nome. (optional)
+	endToEndId := "E00000000202508172159kZ8dQ2mNb1x" // string | ID end-to-end do Pix. (optional)
+	sortBy := "sortBy_example" // string | Campo pelo qual ordenar (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string | Direção da ordenação (optional) (default to "desc")
+	clientReference := "order_12345" // string | Filtra por referência externa (optional)
+	virtualAccount := "loja-centro-01" // string | Subconta usada na criação. (optional)
+	hasQrCode := true // bool | Só transações com (true) ou sem (false) QR Code. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -678,23 +678,23 @@ Other parameters are passed through a pointer to a apiGetUserTransactionsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dateFrom** | **time.Time** | Start date-time (ISO 8601). | 
- **dateTo** | **time.Time** | End date-time (ISO 8601). | 
- **limit** | **int32** | Items per page (max 1000). | [default to 10]
- **page** | **int32** | Page number (default 1). | [default to 1]
- **id** | **string** | Transaction ID. | 
- **status** | **string** | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | 
- **type_** | **string** | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | 
- **method** | **string** | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | 
- **amount** | **float32** | Amount filter. Minimum 0.01. | 
- **document** | **string** | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | 
- **name** | **string** | Name filter. | 
- **endToEndId** | **string** | Pix end-to-end ID. | 
- **sortBy** | **string** | Field to sort by | [default to &quot;createdAt&quot;]
- **sortDirection** | **string** | Sort direction | [default to &quot;desc&quot;]
- **clientReference** | **string** | Filter by external reference | 
- **virtualAccount** | **string** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | 
- **hasQrCode** | **bool** | Only transactions with (true) or without (false) QR Code. | 
+ **dateFrom** | **time.Time** | Data-hora inicial (ISO 8601). | 
+ **dateTo** | **time.Time** | Data-hora final (ISO 8601). | 
+ **limit** | **int32** | Itens por página. | [default to 10]
+ **page** | **int32** | Número da página. | [default to 1]
+ **id** | **string** | ID da transação. | 
+ **status** | **string** | Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; | 
+ **type_** | **string** | Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | 
+ **method** | **string** | Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; | 
+ **amount** | **float32** | Filtro por valor. Mínimo 0.01. | 
+ **document** | **string** | CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. | 
+ **name** | **string** | Filtro por nome. | 
+ **endToEndId** | **string** | ID end-to-end do Pix. | 
+ **sortBy** | **string** | Campo pelo qual ordenar | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** | Direção da ordenação | [default to &quot;desc&quot;]
+ **clientReference** | **string** | Filtra por referência externa | 
+ **virtualAccount** | **string** | Subconta usada na criação. | 
+ **hasQrCode** | **bool** | Só transações com (true) ou sem (false) QR Code. | 
 
 ### Return type
 
@@ -718,7 +718,7 @@ Name | Type | Description  | Notes
 
 > ListUserReports200Response ListUserReports(ctx).Page(page).Limit(limit).Status(status).CreatedAtFrom(createdAtFrom).CreatedAtTo(createdAtTo).UpdatedAtFrom(updatedAtFrom).UpdatedAtTo(updatedAtTo).SortBy(sortBy).SortDirection(sortDirection).Execute()
 
-List report jobs
+Listar jobs de relatório
 
 
 
@@ -732,19 +732,19 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	page := int32(56) // int32 | Page number. (optional) (default to 1)
-	limit := int32(56) // int32 | Items per page. (optional) (default to 10)
-	status := "COMPLETED,FAILED" // string | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
-	createdAtFrom := time.Now() // time.Time | Filter: created from. (optional)
-	createdAtTo := time.Now() // time.Time | Filter: created up to. (optional)
-	updatedAtFrom := time.Now() // time.Time | Filter: updated from. (optional)
-	updatedAtTo := time.Now() // time.Time | Filter: updated up to. (optional)
-	sortBy := "sortBy_example" // string | Sort field. (optional) (default to "createdAt")
-	sortDirection := "sortDirection_example" // string | Sort direction. (optional) (default to "desc")
+	page := int32(56) // int32 | Número da página. (optional) (default to 1)
+	limit := int32(56) // int32 | Itens por página. (optional) (default to 10)
+	status := "COMPLETED,FAILED" // string | Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. (optional)
+	createdAtFrom := time.Now() // time.Time | Filtro: criado a partir de. (optional)
+	createdAtTo := time.Now() // time.Time | Filtro: criado até. (optional)
+	updatedAtFrom := time.Now() // time.Time | Filtro: atualizado a partir de. (optional)
+	updatedAtTo := time.Now() // time.Time | Filtro: atualizado até. (optional)
+	sortBy := "sortBy_example" // string | Campo de ordenação. (optional) (default to "createdAt")
+	sortDirection := "sortDirection_example" // string | Direção da ordenação. (optional) (default to "desc")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -769,15 +769,15 @@ Other parameters are passed through a pointer to a apiListUserReportsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int32** | Page number. | [default to 1]
- **limit** | **int32** | Items per page. | [default to 10]
- **status** | **string** | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | 
- **createdAtFrom** | **time.Time** | Filter: created from. | 
- **createdAtTo** | **time.Time** | Filter: created up to. | 
- **updatedAtFrom** | **time.Time** | Filter: updated from. | 
- **updatedAtTo** | **time.Time** | Filter: updated up to. | 
- **sortBy** | **string** | Sort field. | [default to &quot;createdAt&quot;]
- **sortDirection** | **string** | Sort direction. | [default to &quot;desc&quot;]
+ **page** | **int32** | Número da página. | [default to 1]
+ **limit** | **int32** | Itens por página. | [default to 10]
+ **status** | **string** | Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. | 
+ **createdAtFrom** | **time.Time** | Filtro: criado a partir de. | 
+ **createdAtTo** | **time.Time** | Filtro: criado até. | 
+ **updatedAtFrom** | **time.Time** | Filtro: atualizado a partir de. | 
+ **updatedAtTo** | **time.Time** | Filtro: atualizado até. | 
+ **sortBy** | **string** | Campo de ordenação. | [default to &quot;createdAt&quot;]
+ **sortDirection** | **string** | Direção da ordenação. | [default to &quot;desc&quot;]
 
 ### Return type
 
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 
 > ReportJobAccepted PostUserReport(ctx).PostUserReportRequest(postUserReportRequest).Execute()
 
-Generate transactions report
+Gerar relatório de transações
 
 
 
@@ -815,7 +815,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {

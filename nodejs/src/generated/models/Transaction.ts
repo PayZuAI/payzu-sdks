@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,229 +14,229 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * Unified transaction representation used by all endpoints.
+ * Representação unificada de transação usada por todos os endpoints.
  * @export
  * @interface Transaction
  */
 export interface Transaction {
     /**
-     * Identifier of the transaction at PayZu.
+     * Identificador da transação na PayZu.
      * @type {string}
      * @memberof Transaction
      */
     id?: string;
     /**
-     * PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
+     * Status atual da transação.
      * @type {TransactionStatusEnum}
      * @memberof Transaction
      */
     status?: TransactionStatusEnum;
     /**
-     * Amount of the transaction, before the fee.
+     * Valor da transação, antes da taxa.
      * @type {number}
      * @memberof Transaction
      */
     amount?: number;
     /**
-     * Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
+     * Tipo da transação: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION ou ADJUSTMENT.
      * @type {TransactionTypeEnum}
      * @memberof Transaction
      */
     type?: TransactionTypeEnum;
     /**
-     * Copy-and-paste Pix code.
+     * Código copia e cola do Pix.
      * @type {string}
      * @memberof Transaction
      */
     qrCodeText?: string | null;
     /**
-     * PNG image of the QR Code in base64, without the data: prefix.
+     * Imagem PNG do QR Code em base64, sem o prefixo data:.
      * @type {string}
      * @memberof Transaction
      */
     qrCodeBase64?: string | null;
     /**
-     * Authenticated route that returns the PNG of the QR Code.
+     * Rota autenticada que devolve o PNG do QR Code.
      * @type {string}
      * @memberof Transaction
      */
     qrCodeUrl?: string | null;
     /**
-     * Name used to build the charge.
+     * Nome usado para montar a cobrança.
      * @type {string}
      * @memberof Transaction
      */
     generatedName?: string | null;
     /**
-     * CPF or CNPJ used as the debtor of the charge.
+     * CPF ou CNPJ usado como devedor na cobrança.
      * @type {string}
      * @memberof Transaction
      */
     generatedDocument?: string | null;
     /**
-     * Email used to build the charge.
+     * E-mail usado para montar a cobrança.
      * @type {string}
      * @memberof Transaction
      */
     generatedEmail?: string | null;
     /**
-     * Name of the holder of the account that sent the Pix, as reported by the originating institution.
+     * Nome do titular da conta que enviou o Pix, como informado pela instituição de origem.
      * @type {string}
      * @memberof Transaction
      */
     payerName?: string | null;
     /**
-     * CPF or CNPJ of the payer of the Pix, reported by the originating institution.
+     * CPF ou CNPJ de quem enviou o Pix, informado pela instituição de origem.
      * @type {string}
      * @memberof Transaction
      */
     payerDocument?: string | null;
     /**
-     * ISPB code of the institution the Pix was sent from.
+     * Código ISPB da instituição de onde saiu o Pix.
      * @type {string}
      * @memberof Transaction
      */
     payerInstitutionIspb?: string | null;
     /**
-     * Name of the institution the Pix was sent from.
+     * Nome da instituição de onde saiu o Pix.
      * @type {string}
      * @memberof Transaction
      */
     payerInstitutionName?: string | null;
     /**
-     * Payer's PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions.
+     * Conta PayZu do pagador.
      * @type {string}
      * @memberof Transaction
      */
     payerAccountNumber?: string | null;
     /**
-     * PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
+     * Tarifa PayZu cobrada na operação, em reais. Pode ter mais de duas casas decimais: não arredonde ao conciliar.
      * @type {number}
      * @memberof Transaction
      */
     serviceFeeCharged?: number | null;
     /**
-     * Destination Pix key of the withdrawal, already normalized.
+     * Chave Pix de destino do saque, já normalizada.
      * @type {string}
      * @memberof Transaction
      */
     withdrawPixKey?: string | null;
     /**
-     * Type of the destination key of the withdrawal, with evp being the random key.
+     * Tipo da chave de destino do saque, sendo evp a chave aleatória.
      * @type {TransactionWithdrawPixTypeEnum}
      * @memberof Transaction
      */
     withdrawPixType?: TransactionWithdrawPixTypeEnum | null;
     /**
-     * Name of the holder of the receiving account.
+     * Nome do titular da conta que recebe.
      * @type {string}
      * @memberof Transaction
      */
     receiverName?: string | null;
     /**
-     * CPF or CNPJ of the receiver.
+     * CPF ou CNPJ de quem recebe.
      * @type {string}
      * @memberof Transaction
      */
     receiverDocument?: string | null;
     /**
-     * ISPB code of the institution that receives the Pix.
+     * Código ISPB da instituição que recebe o Pix.
      * @type {string}
      * @memberof Transaction
      */
     receiverInstitutionIspb?: string | null;
     /**
-     * Name of the institution that receives the Pix.
+     * Nome da instituição que recebe o Pix.
      * @type {string}
      * @memberof Transaction
      */
     receiverInstitutionName?: string | null;
     /**
-     * Receiver's PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions.
+     * Conta PayZu do recebedor.
      * @type {string}
      * @memberof Transaction
      */
     receiverAccountNumber?: string | null;
     /**
-     * Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
+     * Identificador do Pix no arranjo do Bacen, usado para rastrear a liquidação e pedir devolução.
      * @type {string}
      * @memberof Transaction
      */
     endToEndId?: string | null;
     /**
-     * Date and time the transaction was recorded.
+     * Data e hora do registro da transação.
      * @type {string}
      * @memberof Transaction
      */
     createdAt?: string;
     /**
-     * Date and time of the last change.
+     * Data e hora da última alteração.
      * @type {string}
      * @memberof Transaction
      */
     updatedAt?: string;
     /**
-     * Date and time the Pix was settled, reported by the institution.
+     * Data e hora da liquidação do Pix, informada pela instituição.
      * @type {string}
      * @memberof Transaction
      */
     paidAt?: string | null;
     /**
-     * Your identifier of the transaction, returned in queries and callbacks.
+     * Seu identificador da transação, devolvido em consultas e callbacks.
      * @type {string}
      * @memberof Transaction
      */
     clientReference?: string | null;
     /**
-     * End-to-end ID of the refund transaction
+     * ID end-to-end do Pix de devolução.
      * @type {string}
      * @memberof Transaction
      */
     refundEndToEndId?: string | null;
     /**
-     * Amount refunded
+     * Valor devolvido.
      * @type {number}
      * @memberof Transaction
      */
     refundAmount?: number | null;
     /**
-     * Refund status: PENDING, COMPLETED or CANCELED.
+     * Status da devolução.
      * @type {TransactionRefundStatusEnum}
      * @memberof Transaction
      */
     refundStatus?: TransactionRefundStatusEnum | null;
     /**
-     * Reason for the refund
+     * Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
      * @type {TransactionRefundReasonEnum}
      * @memberof Transaction
      */
     refundReason?: TransactionRefundReasonEnum | null;
     /**
-     * Description of the refund
+     * Descrição da devolução.
      * @type {string}
      * @memberof Transaction
      */
     refundDescription?: string | null;
     /**
-     * Date and time when the refund was processed
+     * Data e hora em que a devolução foi processada.
      * @type {string}
      * @memberof Transaction
      */
     refundedAt?: string | null;
     /**
-     * Reason for cancellation (if cancelled)
+     * Motivo do cancelamento (se cancelada)
      * @type {string}
      * @memberof Transaction
      */
     cancellationReason?: string | null;
     /**
-     * Virtual sub-account provided at creation.
+     * Subconta virtual informada na criação.
      * @type {string}
      * @memberof Transaction
      */
     virtualAccount?: string | null;
     /**
-     * Transaction method/rail.
+     * `PIX`, `INTERNAL_TRANSFER` (transferência entre contas PayZu), `BANK_SLIP` (boleto) ou `TED`.
      * @type {TransactionMethodEnum}
      * @memberof Transaction
      */
@@ -297,7 +297,9 @@ export type TransactionRefundStatusEnum = typeof TransactionRefundStatusEnum[key
  */
 export const TransactionRefundReasonEnum = {
     CustomerRequest: 'CUSTOMER_REQUEST',
-    Infraction: 'INFRACTION'
+    Infraction: 'INFRACTION',
+    DenyCompanyDeposit: 'DENY_COMPANY_DEPOSIT',
+    AdminRequest: 'ADMIN_REQUEST'
 } as const;
 export type TransactionRefundReasonEnum = typeof TransactionRefundReasonEnum[keyof typeof TransactionRefundReasonEnum];
 
@@ -306,7 +308,9 @@ export type TransactionRefundReasonEnum = typeof TransactionRefundReasonEnum[key
  */
 export const TransactionMethodEnum = {
     Pix: 'PIX',
-    InternalTransfer: 'INTERNAL_TRANSFER'
+    InternalTransfer: 'INTERNAL_TRANSFER',
+    BankSlip: 'BANK_SLIP',
+    Ted: 'TED'
 } as const;
 export type TransactionMethodEnum = typeof TransactionMethodEnum[keyof typeof TransactionMethodEnum];
 

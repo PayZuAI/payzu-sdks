@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | Pointer to **string** | New delivery address, which applies to the following dispatches. | [optional] 
-**Active** | Pointer to **bool** | Turns the webhook deliveries on or pauses them. | [optional] 
-**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | New list of subscribed events, which replaces the previous one entirely. | [optional] 
+**Url** | Pointer to **string** | Novo endereço de entrega, que passa a valer nos disparos seguintes: http ou https, pública, sem usuário e senha e sem IPv6 literal. | [optional] 
+**Active** | Pointer to **bool** | Liga ou pausa as entregas do webhook. | [optional] 
+**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | Nova lista de eventos assinados, que substitui a anterior por inteiro. | [optional] 
 
 ## Methods
 

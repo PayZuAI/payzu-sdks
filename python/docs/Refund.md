@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Refund identifier. | [optional] 
-**amount** | **float** | Refunded amount in BRL. | [optional] 
-**reason** | **str** | Refund reason. | [optional] 
-**description** | **str** | Refund description. | [optional] 
-**status** | **str** | Refund status. | [optional] 
-**end_to_end_id** | **str** | End-to-end ID of the refund Pix. | [optional] 
-**refunded_at** | **datetime** | When the refund was completed. | [optional] 
-**created_at** | **datetime** | When the refund was requested. | [optional] 
-**updated_at** | **datetime** | Last change to the refund. | [optional] 
+**id** | **str** | Identificador da devolução. | [optional] 
+**amount** | **float** | Valor devolvido em BRL. | [optional] 
+**reason** | **str** | Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu). | [optional] 
+**description** | **str** | Descrição da devolução. | [optional] 
+**status** | **str** | Status da devolução. | [optional] 
+**end_to_end_id** | **str** | End-to-end ID do Pix de devolução. | [optional] 
+**refunded_at** | **datetime** | Quando a devolução foi concluída. | [optional] 
+**created_at** | **datetime** | Quando a devolução foi pedida. | [optional] 
+**updated_at** | **datetime** | Última alteração da devolução. | [optional] 
 
 ## Example
 

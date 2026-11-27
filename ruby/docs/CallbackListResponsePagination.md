@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **page** | **Integer** | Current page | [optional] |
-| **limit** | **Integer** | Items per page | [optional] |
-| **has_next_page** | **Boolean** | Indicates if there is a next page | [optional] |
+| **page** | **Integer** | Página atual | [optional] |
+| **limit** | **Integer** | Itens por página | [optional] |
+| **has_next_page** | **Boolean** | Indica se há uma próxima página | [optional] |
 
 ## Example
 

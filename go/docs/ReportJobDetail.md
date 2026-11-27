@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Report identifier (UUID), generated when the report is requested. | [optional] 
-**Status** | Pointer to **string** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time the report generation was requested. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the report record. | [optional] 
-**ExpiresAt** | Pointer to **NullableTime** | When the file expires from storage (usually 7 days after creation) | [optional] 
-**Params** | Pointer to **map[string]interface{}** | Filters used when the report was created. | [optional] 
-**WrittenRows** | Pointer to **NullableInt32** | Rows written to the file. Null until the report is COMPLETED. | [optional] 
+**Id** | Pointer to **string** | Identificador (UUID) do relatório, gerado no momento da solicitação. | [optional] 
+**Status** | Pointer to **string** | Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Data e hora em que a geração do relatório foi solicitada. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Data e hora da última alteração no registro do relatório. | [optional] 
+**ExpiresAt** | Pointer to **NullableTime** | Quando o arquivo expira do armazenamento (normalmente 7 dias após a criação) | [optional] 
+**Params** | Pointer to **map[string]interface{}** | Filtros usados na criação do relatório. | [optional] 
+**WrittenRows** | Pointer to **NullableInt32** | Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED. | [optional] 
 
 ## Methods
 

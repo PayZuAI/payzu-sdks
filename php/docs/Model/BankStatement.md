@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identifier of the balance entry. | [optional]
-**amount** | **float** | Amount of the entry. | [optional]
-**operation** | **string** | INCREMENT credits the balance, DECREMENT debits it. | [optional]
-**reason** | **string** | Reason for the ledger entry. | [optional]
-**balance_type** | **string** | Balance moved: AVAILABLE or BLOCKED. | [optional]
-**previous_balance_available** | **float** | Balance free for use that the account had, in reais, immediately before this entry. | [optional]
-**previous_balance_blocked** | **float** | Blocked balance before the entry, in reais. | [optional]
-**new_balance_available** | **float** | Available balance after the entry, in reais. | [optional]
-**new_balance_blocked** | **float** | Blocked balance after the entry, in reais. | [optional]
-**transaction_id** | **string** | Transaction that originated the entry. | [optional]
-**infraction_id** | **string** | Infraction related to the entry. | [optional]
-**created_at** | **\DateTime** | Date and time the balance movement was recorded. | [optional]
-**updated_at** | **\DateTime** | Date and time of the last change to the record. | [optional]
+**id** | **string** | Identificador do lançamento de saldo. | [optional]
+**amount** | **float** | Valor do lançamento. | [optional]
+**operation** | **string** | INCREMENT credita o saldo, DECREMENT debita. | [optional]
+**reason** | **string** | Motivo do lançamento no extrato. | [optional]
+**balance_type** | **string** | Saldo movimentado: AVAILABLE ou BLOCKED. | [optional]
+**previous_balance_available** | **float** | Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento. | [optional]
+**previous_balance_blocked** | **float** | Saldo bloqueado antes do lançamento, em reais. | [optional]
+**new_balance_available** | **float** | Saldo disponível depois do lançamento, em reais. | [optional]
+**new_balance_blocked** | **float** | Saldo bloqueado depois do lançamento, em reais. | [optional]
+**transaction_id** | **string** | Transação que originou o lançamento. | [optional]
+**infraction_id** | **string** | Infração relacionada ao lançamento. | [optional]
+**created_at** | **\DateTime** | Data e hora em que a movimentação de saldo foi registrada. | [optional]
+**updated_at** | **\DateTime** | Data e hora da última alteração do registro. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

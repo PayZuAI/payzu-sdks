@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Pagination** | Pointer to [**CallbackListResponsePagination**](CallbackListResponsePagination.md) |  | [optional] 
-**Callbacks** | Pointer to [**[]CallbackDetail**](CallbackDetail.md) | Array of callback logs | [optional] 
+**Callbacks** | Pointer to [**[]CallbackDetail**](CallbackDetail.md) | Array de logs de callback | [optional] 
 
 ## Methods
 

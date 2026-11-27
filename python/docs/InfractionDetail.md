@@ -5,18 +5,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Identifier of the infraction inside PayZu, used in the query routes and when sending the defense. | [optional] 
-**protocol** | **str** | Infraction code at Bacen. | [optional] 
-**status** | **str** | Current state of the infraction. | [optional] 
-**type** | **str** | Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED. | [optional] 
-**reported_by** | **str** | Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT. | [optional] 
-**report_details** | **str** | Reason given by whoever opened the infraction, in the text sent by the partner bank. | [optional] 
-**analysis_result** | **str** | Analysis outcome: AGREED or DISAGREED. | [optional] 
-**analysis_details** | **str** | Additional text about the analysis decision, when the partner bank sends that information. | [optional] 
-**reported_at** | **datetime** | Moment the infraction was opened. | [optional] 
-**expires_at** | **datetime** | Deadline to send the defense of this infraction. | [optional] 
+**id** | **str** | Identificador da contestação dentro da PayZu, usado nas rotas de consulta e no envio da defesa. | [optional] 
+**protocol** | **str** | Código da contestação no Bacen. | [optional] 
+**status** | **str** | Situação atual da contestação. | [optional] 
+**type** | **str** | Tipo da contestação: REFUND_REQUEST, FRAUD ou REFUND_CANCELLED. | [optional] 
+**reported_by** | **str** | Lado que abriu a contestação: DEBITED_PARTICIPANT ou CREDITED_PARTICIPANT. | [optional] 
+**report_details** | **str** | Motivo informado por quem abriu a contestação, no texto enviado pelo banco parceiro. | [optional] 
+**analysis_result** | **str** | Desfecho da análise: AGREED ou DISAGREED. | [optional] 
+**analysis_details** | **str** | Texto complementar sobre a decisão da análise, quando o banco parceiro envia essa informação. | [optional] 
+**reported_at** | **datetime** | Momento em que a contestação foi aberta. | [optional] 
+**expires_at** | **datetime** | Prazo final para enviar a defesa desta contestação. | [optional] 
 **transaction** | [**InfractionDetailTransaction**](InfractionDetailTransaction.md) |  | [optional] 
-**defense_history** | [**List[DefenseHistoryEntry]**](DefenseHistoryEntry.md) | Defenses already sent for this infraction, each with text, status and files. | [optional] 
+**defense_history** | [**List[DefenseHistoryEntry]**](DefenseHistoryEntry.md) | Defesas já enviadas para esta contestação, com texto, status e anexos de cada uma. | [optional] 
 
 ## Example
 

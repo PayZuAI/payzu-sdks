@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Report identifier (UUID), generated when the report is requested. | [optional]
-**status** | **string** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional]
-**created_at** | **\DateTime** | Date and time the report generation was requested. | [optional]
-**updated_at** | **\DateTime** | Date and time of the last change to the report record. | [optional]
-**expires_at** | **\DateTime** | When the file expires from storage (usually 7 days after creation) | [optional]
-**params** | **array<string,mixed>** | Filters used when the report was created. | [optional]
-**written_rows** | **int** | Rows written to the file. Null until the report is COMPLETED. | [optional]
+**id** | **string** | Identificador (UUID) do relatório, gerado no momento da solicitação. | [optional]
+**status** | **string** | Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED. | [optional]
+**created_at** | **\DateTime** | Data e hora em que a geração do relatório foi solicitada. | [optional]
+**updated_at** | **\DateTime** | Data e hora da última alteração no registro do relatório. | [optional]
+**expires_at** | **\DateTime** | Quando o arquivo expira do armazenamento (normalmente 7 dias após a criação) | [optional]
+**params** | **array<string,mixed>** | Filtros usados na criação do relatório. | [optional]
+**written_rows** | **int** | Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

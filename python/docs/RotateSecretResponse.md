@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**secret** | **str** | HMAC signing secret. Shown only on creation and on rotate-secret. Store it now. | [optional] 
+**secret** | **str** | Segredo de assinatura HMAC. | [optional] 
 
 ## Example
 

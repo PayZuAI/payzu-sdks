@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -18,11 +18,6 @@ import {
     ApiErrorFromJSON,
     ApiErrorToJSON,
 } from '../models/ApiError.js';
-import {
-    type DictConsultResponse,
-    DictConsultResponseFromJSON,
-    DictConsultResponseToJSON,
-} from '../models/DictConsultResponse.js';
 import {
     type PixKeyInfo,
     PixKeyInfoFromJSON,
@@ -43,10 +38,6 @@ export interface GetPixKeyRequest {
     pixKey: string;
 }
 
-export interface GetUserDictRequest {
-    key: string;
-}
-
 export interface PostPixQrcodeReadOperationRequest {
     postPixQrcodeReadRequest: PostPixQrcodeReadRequest;
 }
@@ -60,16 +51,16 @@ export interface PostPixQrcodeReadOperationRequest {
 export interface KeysAndDICTApiInterface {
     /**
      * Creates request options for getPixKey without sending the request
-     * @param {string} pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
+     * @param {string} pixKey A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP).
      * @throws {RequiredError}
      * @memberof KeysAndDICTApiInterface
      */
     getPixKeyRequestOpts(requestParameters: GetPixKeyRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * @summary Pix key lookup (DICT)
-     * @param {string} pixKey The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
+     * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+     * @summary Consulta de chave Pix no DICT
+     * @param {string} pixKey A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP).
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof KeysAndDICTApiInterface
@@ -77,34 +68,10 @@ export interface KeysAndDICTApiInterface {
     getPixKeyRaw(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PixKeyInfo>>;
 
     /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * Pix key lookup (DICT)
+     * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+     * Consulta de chave Pix no DICT
      */
     getPixKey(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PixKeyInfo>;
-
-    /**
-     * Creates request options for getUserDict without sending the request
-     * @param {string} key Pix key to look up (CPF, CNPJ, email, phone or EVP).
-     * @throws {RequiredError}
-     * @memberof KeysAndDICTApiInterface
-     */
-    getUserDictRequestOpts(requestParameters: GetUserDictRequest): Promise<runtime.RequestOpts>;
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * @summary Resolve DICT key
-     * @param {string} key Pix key to look up (CPF, CNPJ, email, phone or EVP).
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof KeysAndDICTApiInterface
-     */
-    getUserDictRaw(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DictConsultResponse>>;
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * Resolve DICT key
-     */
-    getUserDict(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DictConsultResponse>;
 
     /**
      * Creates request options for postPixQrcodeRead without sending the request
@@ -115,8 +82,8 @@ export interface KeysAndDICTApiInterface {
     postPixQrcodeReadRequestOpts(requestParameters: PostPixQrcodeReadOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * @summary Read QR Code
+     * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
+     * @summary Ler QR Code
      * @param {PostPixQrcodeReadRequest} postPixQrcodeReadRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -125,8 +92,8 @@ export interface KeysAndDICTApiInterface {
     postPixQrcodeReadRaw(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<QRCodeReadResponse>>;
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * Read QR Code
+     * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
+     * Ler QR Code
      */
     postPixQrcodeRead(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<QRCodeReadResponse>;
 
@@ -176,8 +143,8 @@ export class KeysAndDICTApi extends runtime.BaseAPI implements KeysAndDICTApiInt
     }
 
     /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * Pix key lookup (DICT)
+     * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+     * Consulta de chave Pix no DICT
      */
     async getPixKeyRaw(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PixKeyInfo>> {
         const requestOptions = await this.getPixKeyRequestOpts(requestParameters);
@@ -187,69 +154,11 @@ export class KeysAndDICTApi extends runtime.BaseAPI implements KeysAndDICTApiInt
     }
 
     /**
-     * Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner\'s details and associated financial institution.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * Pix key lookup (DICT)
+     * Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+     * Consulta de chave Pix no DICT
      */
     async getPixKey(requestParameters: GetPixKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PixKeyInfo> {
         const response = await this.getPixKeyRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for getUserDict without sending the request
-     */
-    async getUserDictRequestOpts(requestParameters: GetUserDictRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['key'] == null) {
-            throw new runtime.RequiredError(
-                'key',
-                'Required parameter "key" was null or undefined when calling getUserDict().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['key'] != null) {
-            queryParameters['key'] = requestParameters['key'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("BearerAuth", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-
-        let urlPath = `/user/dict`;
-
-        return {
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * Resolve DICT key
-     */
-    async getUserDictRaw(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DictConsultResponse>> {
-        const requestOptions = await this.getUserDictRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => DictConsultResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-     * Resolve DICT key
-     */
-    async getUserDict(requestParameters: GetUserDictRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DictConsultResponse> {
-        const response = await this.getUserDictRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -291,8 +200,8 @@ export class KeysAndDICTApi extends runtime.BaseAPI implements KeysAndDICTApiInt
     }
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * Read QR Code
+     * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
+     * Ler QR Code
      */
     async postPixQrcodeReadRaw(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<QRCodeReadResponse>> {
         const requestOptions = await this.postPixQrcodeReadRequestOpts(requestParameters);
@@ -302,8 +211,8 @@ export class KeysAndDICTApi extends runtime.BaseAPI implements KeysAndDICTApiInt
     }
 
     /**
-     * Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: `DEPOSIT` or `WITHDRAW`.
-     * Read QR Code
+     * Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
+     * Ler QR Code
      */
     async postPixQrcodeRead(requestParameters: PostPixQrcodeReadOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<QRCodeReadResponse> {
         const response = await this.postPixQrcodeReadRaw(requestParameters, initOverrides);

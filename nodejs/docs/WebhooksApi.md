@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**deleteUserWebhook**](WebhooksApi.md#deleteuserwebhook) | **DELETE** /user/webhooks/{id} | Delete webhook |
-| [**getUserWebhook**](WebhooksApi.md#getuserwebhook) | **GET** /user/webhooks/{id} | Get webhook |
-| [**getUserWebhookSentDetail**](WebhooksApi.md#getuserwebhooksentdetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail |
-| [**getUserWebhooks**](WebhooksApi.md#getuserwebhooks) | **GET** /user/webhooks | List webhooks |
-| [**getUserWebhooksSentQuantity**](WebhooksApi.md#getuserwebhookssentquantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks |
-| [**patchUserWebhook**](WebhooksApi.md#patchuserwebhook) | **PATCH** /user/webhooks/{id} | Update webhook |
-| [**postUserWebhook**](WebhooksApi.md#postuserwebhook) | **POST** /user/webhooks | Create webhook |
-| [**postUserWebhookRotateSecret**](WebhooksApi.md#postuserwebhookrotatesecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret |
+| [**deleteUserWebhook**](WebhooksApi.md#deleteuserwebhook) | **DELETE** /user/webhooks/{id} | Remover webhook |
+| [**getUserWebhook**](WebhooksApi.md#getuserwebhook) | **GET** /user/webhooks/{id} | Consultar webhook |
+| [**getUserWebhookSentDetail**](WebhooksApi.md#getuserwebhooksentdetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado |
+| [**getUserWebhooks**](WebhooksApi.md#getuserwebhooks) | **GET** /user/webhooks | Listar webhooks |
+| [**getUserWebhooksSentQuantity**](WebhooksApi.md#getuserwebhookssentquantity) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados |
+| [**patchUserWebhook**](WebhooksApi.md#patchuserwebhook) | **PATCH** /user/webhooks/{id} | Atualizar webhook |
+| [**postUserWebhook**](WebhooksApi.md#postuserwebhook) | **POST** /user/webhooks | Criar webhook |
+| [**postUserWebhookRotateSecret**](WebhooksApi.md#postuserwebhookrotatesecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook |
 
 
 
@@ -19,9 +19,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > deleteUserWebhook(id)
 
-Delete webhook
+Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
 ### Example
 
@@ -41,7 +41,7 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // string | Webhook id.
+    // string | Id do webhook.
     id: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies DeleteUserWebhookRequest;
 
@@ -62,7 +62,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Webhook id. | [Defaults to `undefined`] |
+| **id** | `string` | Id do webhook. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -81,11 +81,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Webhook deleted. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
+| **204** | Webhook removido. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -94,9 +94,9 @@ example().catch(console.error);
 
 > Webhook getUserWebhook(id)
 
-Get webhook
+Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
 ### Example
 
@@ -116,7 +116,7 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // string | Webhook id.
+    // string | Id do webhook.
     id: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies GetUserWebhookRequest;
 
@@ -137,7 +137,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Webhook id. | [Defaults to `undefined`] |
+| **id** | `string` | Id do webhook. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -157,9 +157,10 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -168,9 +169,9 @@ example().catch(console.error);
 
 > SentWebhookDetailResponse getUserWebhookSentDetail(id, callbackId)
 
-Get sent callback detail
+Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
 ### Example
 
@@ -190,9 +191,9 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // string | Webhook id.
+    // string | Id do webhook.
     id: cm3w7k1t40000q8f2r5b9x3ad,
-    // string | Callback log id.
+    // string | Id do log de callback.
     callbackId: cm3w7l9v20001q8f2u6c1y4be,
   } satisfies GetUserWebhookSentDetailRequest;
 
@@ -213,8 +214,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Webhook id. | [Defaults to `undefined`] |
-| **callbackId** | `string` | Callback log id. | [Defaults to `undefined`] |
+| **id** | `string` | Id do webhook. | [Defaults to `undefined`] |
+| **callbackId** | `string` | Id do log de callback. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -233,10 +234,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Callback delivery detail. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Detalhe de entrega do callback. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -245,9 +247,9 @@ example().catch(console.error);
 
 > WebhookListResponse getUserWebhooks(active)
 
-List webhooks
+Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
 ### Example
 
@@ -267,7 +269,7 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // boolean | Filter by active status. (optional)
+    // boolean | Filtra pelo status ativo. (optional)
     active: true,
   } satisfies GetUserWebhooksRequest;
 
@@ -288,7 +290,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **active** | `boolean` | Filter by active status. | [Optional] [Defaults to `undefined`] |
+| **active** | `boolean` | Filtra pelo status ativo. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -307,9 +309,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Webhook list. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
+| **200** | Lista de webhooks. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -318,9 +321,9 @@ example().catch(console.error);
 
 > SentWebhooksQuantity getUserWebhooksSentQuantity(webhookId)
 
-Count sent callbacks
+Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
 ### Example
 
@@ -340,7 +343,7 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // string | Filter the count by webhook id. (optional)
+    // string | Filtra a contagem por id de webhook. (optional)
     webhookId: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies GetUserWebhooksSentQuantityRequest;
 
@@ -361,7 +364,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **webhookId** | `string` | Filter the count by webhook id. | [Optional] [Defaults to `undefined`] |
+| **webhookId** | `string` | Filtra a contagem por id de webhook. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -380,10 +383,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Quantity. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Quantidade. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -392,9 +396,9 @@ example().catch(console.error);
 
 > Webhook patchUserWebhook(id, webhookUpdateRequest)
 
-Update webhook
+Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
 ### Example
 
@@ -414,7 +418,7 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // string | Webhook id.
+    // string | Id do webhook.
     id: cm3w7k1t40000q8f2r5b9x3ad,
     // WebhookUpdateRequest
     webhookUpdateRequest: ...,
@@ -437,7 +441,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Webhook id. | [Defaults to `undefined`] |
+| **id** | `string` | Id do webhook. | [Defaults to `undefined`] |
 | **webhookUpdateRequest** | [WebhookUpdateRequest](WebhookUpdateRequest.md) |  | |
 
 ### Return type
@@ -457,12 +461,12 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Webhook updated. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
+| **200** | Webhook atualizado. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -471,9 +475,9 @@ example().catch(console.error);
 
 > WebhookWithSecret postUserWebhook(webhookCreateRequest)
 
-Create webhook
+Criar webhook
 
-Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
 
 ### Example
 
@@ -533,11 +537,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Webhook created. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
+| **201** | Webhook criado. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -546,9 +550,9 @@ example().catch(console.error);
 
 > RotateSecretResponse postUserWebhookRotateSecret(id)
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
 
 ### Example
 
@@ -568,7 +572,7 @@ async function example() {
   const api = new WebhooksApi(config);
 
   const body = {
-    // string | Webhook id.
+    // string | Id do webhook.
     id: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies PostUserWebhookRotateSecretRequest;
 
@@ -589,7 +593,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Webhook id. | [Defaults to `undefined`] |
+| **id** | `string` | Id do webhook. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -608,11 +612,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | New secret. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Novo segredo. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

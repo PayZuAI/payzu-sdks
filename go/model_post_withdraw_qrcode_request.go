@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -21,17 +21,17 @@ var _ MappedNullable = &PostWithdrawQrcodeRequest{}
 
 // PostWithdrawQrcodeRequest struct for PostWithdrawQrcodeRequest
 type PostWithdrawQrcodeRequest struct {
-	// Pix QR Code payload (EMV format).
+	// Payload do Pix QR Code (formato EMV).
 	QrCode string `json:"qrCode"`
-	// Amount in BRL, with at most 2 decimal places. Optional: if not provided, uses the QR Code's embedded value.
+	// Valor em BRL, com no máximo 2 casas decimais. Opcional: sem ele, vale o valor do QR Code.
 	Amount *float32 `json:"amount,omitempty"`
-	// URL for transaction notifications (http or https).
+	// URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal.
 	CallbackUrl *string `json:"callbackUrl,omitempty" validate:"regexp=^https?:\\/\\/"`
-	// Optional description for the payment.
+	// Descrição opcional para o pagamento.
 	Description *string `json:"description,omitempty"`
-	// External reference for this withdrawal. Repeating it with the same amount and QR Code returns the existing withdrawal; with different data, the request is rejected with PZC210.
+	// Referência externa deste saque. Repetida com o mesmo valor e o mesmo QR Code, devolve o saque já criado; com dados diferentes, a requisição é recusada com PZC210.
 	ClientReference *string `json:"clientReference,omitempty"`
-	// Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
+	// Subconta para separar lojas ou filiais.
 	VirtualAccount *string `json:"virtualAccount,omitempty"`
 }
 

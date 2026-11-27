@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Identifier of this delivery attempt. | [optional] 
-**WebhookId** | Pointer to **NullableString** | Webhook that originated the delivery. | [optional] 
-**TransactionId** | Pointer to **string** | Pix transaction whose event was notified. | [optional] 
-**Url** | Pointer to **string** | Address this delivery was sent to, recorded at the time of the dispatch. | [optional] 
-**Body** | Pointer to **string** | Body sent in the delivery, as serialized JSON. | [optional] 
-**Status** | Pointer to **int32** | HTTP status returned by your endpoint. | [optional] 
-**ResponseHeaders** | Pointer to **string** | Response headers, as serialized JSON. | [optional] 
-**ResponseBody** | Pointer to **string** | Body of the response received. | [optional] 
-**Error** | Pointer to **NullableString** | Message of the delivery failure. | [optional] 
-**ResponseTime** | Pointer to **int32** | Response time of your endpoint, in milliseconds. | [optional] 
-**EventType** | Pointer to **NullableString** | Event that triggered this delivery, the same value sent in the X-Callback-Event header. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Moment of the delivery attempt. | [optional] 
+**Id** | Pointer to **string** | Identificador desta tentativa de entrega. | [optional] 
+**WebhookId** | Pointer to **NullableString** | Webhook que originou a entrega. | [optional] 
+**TransactionId** | Pointer to **string** | Transação Pix cujo evento foi notificado. | [optional] 
+**Url** | Pointer to **string** | Endereço para onde esta entrega foi feita, gravado no momento do disparo. | [optional] 
+**Body** | Pointer to **string** | Corpo enviado no disparo, em JSON serializado. | [optional] 
+**Status** | Pointer to **int32** | Status HTTP retornado pelo seu endpoint. | [optional] 
+**ResponseHeaders** | Pointer to **string** | Headers da resposta, em JSON serializado. | [optional] 
+**ResponseBody** | Pointer to **string** | Corpo da resposta recebida. | [optional] 
+**Error** | Pointer to **NullableString** | Mensagem da falha na entrega. | [optional] 
+**ResponseTime** | Pointer to **int32** | Tempo de resposta do seu endpoint, em milissegundos. | [optional] 
+**EventType** | Pointer to **NullableString** | Evento que disparou esta entrega, o mesmo valor enviado no cabeçalho X-Callback-Event. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Momento da tentativa de entrega. | [optional] 
 
 ## Methods
 

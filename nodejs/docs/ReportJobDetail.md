@@ -1,7 +1,7 @@
 
 # ReportJobDetail
 
-Report job with the filters used and the total of rows written.
+Job de relatório com os filtros usados e o total de linhas escritas.
 
 ## Properties
 

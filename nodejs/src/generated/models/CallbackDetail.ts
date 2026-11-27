@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,55 +20,55 @@ import { mapValues } from '../runtime.js';
  */
 export interface CallbackDetail {
     /**
-     * Unique callback ID
+     * ID único do callback
      * @type {string}
      * @memberof CallbackDetail
      */
     id?: string;
     /**
-     * Webhook URL that received the callback
+     * URL do webhook que recebeu o callback
      * @type {string}
      * @memberof CallbackDetail
      */
     url?: string;
     /**
-     * HTTP response status code
+     * Código de status HTTP da resposta
      * @type {number}
      * @memberof CallbackDetail
      */
     status?: number;
     /**
-     * Related transaction ID
+     * ID da transação relacionada
      * @type {string}
      * @memberof CallbackDetail
      */
     transactionId?: string;
     /**
-     * Date and time when the callback log was created
+     * Data e hora em que o log do callback foi criado
      * @type {Date}
      * @memberof CallbackDetail
      */
     createdAt?: Date;
     /**
-     * Request body sent (parsed JSON). When the content is not valid JSON, it comes as `{ "raw": "<text>" }`.
+     * Corpo enviado (JSON interpretado). Quando o conteúdo não é JSON válido, vem como `{ "raw": "<texto>" }`.
      * @type {object}
      * @memberof CallbackDetail
      */
     body?: object;
     /**
-     * Response body received (string)
+     * Corpo da resposta recebido (string)
      * @type {string}
      * @memberof CallbackDetail
      */
     responseBody?: string;
     /**
-     * Response headers (parsed JSON). When the content is not valid JSON, it comes as `{ "raw": "<text>" }`.
+     * Cabeçalhos da resposta (JSON interpretado). Quando o conteúdo não é JSON válido, vem como `{ "raw": "<texto>" }`.
      * @type {object}
      * @memberof CallbackDetail
      */
     responseHeaders?: object;
     /**
-     * Webhook round-trip time in milliseconds
+     * Tempo de ida e volta do webhook em milissegundos
      * @type {number}
      * @memberof CallbackDetail
      */

@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -171,29 +171,25 @@ public class RefundsApi {
   }
 
   /**
-   * Refund a Pix
-   * Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param transactionId ID of the transaction to refund. (required)
+   * Solicitar a devolução de um Pix recebido
+   * Devolve um Pix recebido. Informe &#x60;amount&#x60; para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com &#x60;refundStatus: PENDING&#x60;; a conclusão é confirmada depois pelo callback.  Envie &#x60;{}&#x60; para devolver o valor total. O corpo só aceita &#x60;amount&#x60;, &#x60;description&#x60; e &#x60;clientReference&#x60;; outro campo é recusado com 400.
+   * @param transactionId ID da transação a devolver. (required)
    * @param refundRequest  (required)
    * @return TransactionWithRefunds
    * @throws ApiException if fails to make API call
-   * MED
-   * @see <a href="/docs/pix-processamento/med">Refund a Pix Documentation</a>
    */
   public TransactionWithRefunds postRefund(@javax.annotation.Nonnull String transactionId, @javax.annotation.Nonnull RefundRequest refundRequest) throws ApiException {
     return postRefund(transactionId, refundRequest, null);
   }
 
   /**
-   * Refund a Pix
-   * Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param transactionId ID of the transaction to refund. (required)
+   * Solicitar a devolução de um Pix recebido
+   * Devolve um Pix recebido. Informe &#x60;amount&#x60; para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com &#x60;refundStatus: PENDING&#x60;; a conclusão é confirmada depois pelo callback.  Envie &#x60;{}&#x60; para devolver o valor total. O corpo só aceita &#x60;amount&#x60;, &#x60;description&#x60; e &#x60;clientReference&#x60;; outro campo é recusado com 400.
+   * @param transactionId ID da transação a devolver. (required)
    * @param refundRequest  (required)
    * @param headers Optional headers to include in the request
    * @return TransactionWithRefunds
    * @throws ApiException if fails to make API call
-   * MED
-   * @see <a href="/docs/pix-processamento/med">Refund a Pix Documentation</a>
    */
   public TransactionWithRefunds postRefund(@javax.annotation.Nonnull String transactionId, @javax.annotation.Nonnull RefundRequest refundRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<TransactionWithRefunds> localVarResponse = postRefundWithHttpInfo(transactionId, refundRequest, headers);
@@ -201,29 +197,25 @@ public class RefundsApi {
   }
 
   /**
-   * Refund a Pix
-   * Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param transactionId ID of the transaction to refund. (required)
+   * Solicitar a devolução de um Pix recebido
+   * Devolve um Pix recebido. Informe &#x60;amount&#x60; para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com &#x60;refundStatus: PENDING&#x60;; a conclusão é confirmada depois pelo callback.  Envie &#x60;{}&#x60; para devolver o valor total. O corpo só aceita &#x60;amount&#x60;, &#x60;description&#x60; e &#x60;clientReference&#x60;; outro campo é recusado com 400.
+   * @param transactionId ID da transação a devolver. (required)
    * @param refundRequest  (required)
    * @return ApiResponse&lt;TransactionWithRefunds&gt;
    * @throws ApiException if fails to make API call
-   * MED
-   * @see <a href="/docs/pix-processamento/med">Refund a Pix Documentation</a>
    */
   public ApiResponse<TransactionWithRefunds> postRefundWithHttpInfo(@javax.annotation.Nonnull String transactionId, @javax.annotation.Nonnull RefundRequest refundRequest) throws ApiException {
     return postRefundWithHttpInfo(transactionId, refundRequest, null);
   }
 
   /**
-   * Refund a Pix
-   * Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param transactionId ID of the transaction to refund. (required)
+   * Solicitar a devolução de um Pix recebido
+   * Devolve um Pix recebido. Informe &#x60;amount&#x60; para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com &#x60;refundStatus: PENDING&#x60;; a conclusão é confirmada depois pelo callback.  Envie &#x60;{}&#x60; para devolver o valor total. O corpo só aceita &#x60;amount&#x60;, &#x60;description&#x60; e &#x60;clientReference&#x60;; outro campo é recusado com 400.
+   * @param transactionId ID da transação a devolver. (required)
    * @param refundRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;TransactionWithRefunds&gt;
    * @throws ApiException if fails to make API call
-   * MED
-   * @see <a href="/docs/pix-processamento/med">Refund a Pix Documentation</a>
    */
   public ApiResponse<TransactionWithRefunds> postRefundWithHttpInfo(@javax.annotation.Nonnull String transactionId, @javax.annotation.Nonnull RefundRequest refundRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postRefundRequestBuilder(transactionId, refundRequest, headers);

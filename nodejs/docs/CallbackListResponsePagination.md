@@ -1,7 +1,7 @@
 
 # CallbackListResponsePagination
 
-Page and limit used, and whether there is a next page.
+Página e limite usados, e se há próxima página.
 
 ## Properties
 

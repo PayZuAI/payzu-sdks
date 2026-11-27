@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to **int32** | Page returned in this response. | [optional] 
-**Limit** | Pointer to **int32** | Maximum number of records per page used in this query. | [optional] 
-**HasNextPage** | Pointer to **bool** | Comes back true when there is still a record after this page. | [optional] 
-**Data** | Pointer to [**[]DepositPending**](DepositPending.md) | Pending deposits of this page, ordered from the most recent creation to the oldest. | [optional] 
+**Page** | Pointer to **int32** | Página devolvida nesta resposta. | [optional] 
+**Limit** | Pointer to **int32** | Quantidade máxima de registros por página usada nesta consulta. | [optional] 
+**HasNextPage** | Pointer to **bool** | Vem true quando ainda existe registro depois desta página. | [optional] 
+**Data** | Pointer to [**[]DepositPending**](DepositPending.md) | Depósitos pendentes desta página, ordenados da criação mais recente para a mais antiga. | [optional] 
 
 ## Methods
 

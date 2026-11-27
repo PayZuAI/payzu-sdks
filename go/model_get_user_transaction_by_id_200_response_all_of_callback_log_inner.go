@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,15 +20,15 @@ var _ MappedNullable = &GetUserTransactionById200ResponseAllOfCallbackLogInner{}
 
 // GetUserTransactionById200ResponseAllOfCallbackLogInner struct for GetUserTransactionById200ResponseAllOfCallbackLogInner
 type GetUserTransactionById200ResponseAllOfCallbackLogInner struct {
-	// Identifier of the delivery record; there is one record per callback attempt of the transaction.
+	// Identificador do registro de envio; há um registro por tentativa de callback da transação.
 	Id *string `json:"id,omitempty"`
-	// Address that received the callback: the callbackUrl of the transaction or the URL of the registered webhook.
+	// Endereço que recebeu o callback: a callbackUrl da transação ou a URL do webhook cadastrado.
 	Url *string `json:"url,omitempty"`
-	// HTTP status code returned by the receiver
+	// Código de status HTTP retornado pelo receptor
 	Status *int32 `json:"status,omitempty"`
-	// Round-trip time in ms
+	// Tempo de ida e volta em ms
 	ResponseTime *float32 `json:"responseTime,omitempty"`
-	// Date and time the callback delivery attempt was recorded.
+	// Data e hora em que a tentativa de envio do callback foi registrada.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 }
 

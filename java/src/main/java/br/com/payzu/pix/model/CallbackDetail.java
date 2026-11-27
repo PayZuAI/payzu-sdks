@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -92,7 +92,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Unique callback ID
+   * ID único do callback
    * @return id
    */
   @javax.annotation.Nullable
@@ -116,7 +116,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Webhook URL that received the callback
+   * URL do webhook que recebeu o callback
    * @return url
    */
   @javax.annotation.Nullable
@@ -140,7 +140,7 @@ public class CallbackDetail {
   }
 
   /**
-   * HTTP response status code
+   * Código de status HTTP da resposta
    * @return status
    */
   @javax.annotation.Nullable
@@ -164,7 +164,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Related transaction ID
+   * ID da transação relacionada
    * @return transactionId
    */
   @javax.annotation.Nullable
@@ -188,7 +188,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Date and time when the callback log was created
+   * Data e hora em que o log do callback foi criado
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -212,7 +212,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Request body sent (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;.
+   * Corpo enviado (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;.
    * @return body
    */
   @javax.annotation.Nullable
@@ -236,7 +236,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Response body received (string)
+   * Corpo da resposta recebido (string)
    * @return responseBody
    */
   @javax.annotation.Nullable
@@ -260,7 +260,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Response headers (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;.
+   * Cabeçalhos da resposta (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;.
    * @return responseHeaders
    */
   @javax.annotation.Nullable
@@ -284,7 +284,7 @@ public class CallbackDetail {
   }
 
   /**
-   * Webhook round-trip time in milliseconds
+   * Tempo de ida e volta do webhook em milissegundos
    * @return responseTime
    */
   @javax.annotation.Nullable

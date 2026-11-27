@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | Short-lived signed URL to download the CSV (5 min validity) | [optional] 
-**expires_at** | **datetime** | When the signed URL expires | [optional] 
+**url** | **str** | URL assinada de curta duração para baixar o CSV (validade de 5 min) | [optional] 
+**expires_at** | **datetime** | Quando a URL assinada expira | [optional] 
 
 ## Example
 

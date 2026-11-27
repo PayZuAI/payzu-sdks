@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Identifier of the delivery record; there is one record per callback attempt of the transaction. | [optional] 
-**Url** | Pointer to **string** | Address that received the callback: the callbackUrl of the transaction or the URL of the registered webhook. | [optional] 
-**Status** | Pointer to **int32** | HTTP status code returned by the receiver | [optional] 
-**ResponseTime** | Pointer to **float32** | Round-trip time in ms | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time the callback delivery attempt was recorded. | [optional] 
+**Id** | Pointer to **string** | Identificador do registro de envio; há um registro por tentativa de callback da transação. | [optional] 
+**Url** | Pointer to **string** | Endereço que recebeu o callback: a callbackUrl da transação ou a URL do webhook cadastrado. | [optional] 
+**Status** | Pointer to **int32** | Código de status HTTP retornado pelo receptor | [optional] 
+**ResponseTime** | Pointer to **float32** | Tempo de ida e volta em ms | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Data e hora em que a tentativa de envio do callback foi registrada. | [optional] 
 
 ## Methods
 

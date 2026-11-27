@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,28 +15,28 @@ require 'time'
 
 module PayZuPix
   class PostPixRequest < ApiModelBase
-    # Amount in BRL. Must be >= 1.
+    # Valor da cobrança, em reais, com no máximo 2 casas decimais.
     attr_accessor :amount
 
-    # URL for transaction notifications (http or https).
+    # URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal.
     attr_accessor :callback_url
 
-    # Payer full name. Letters and spaces only.
+    # Nome usado para montar a cobrança.
     attr_accessor :generated_name
 
-    # Payer email (optional).
+    # E-mail usado para montar a cobrança.
     attr_accessor :generated_email
 
-    # Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits.
+    # CPF (11 dígitos) ou CNPJ (14 dígitos) do pagador, sem pontuação e com dígitos verificadores válidos. Obrigatório a partir do valor definido na conta (PZD602).
     attr_accessor :generated_document
 
-    # Seconds until the QR Code expires.
+    # Segundos até o QR Code expirar, em número inteiro.
     attr_accessor :expires_in
 
-    # External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it.
+    # Referência externa (pedido, fatura etc.). Um clientReference já usado devolve a transação criada com ele.
     attr_accessor :client_reference
 
-    # Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
+    # Subconta para separar lojas ou filiais.
     attr_accessor :virtual_account
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -71,7 +71,7 @@ module PayZuPix
         :'generated_name' => :'String',
         :'generated_email' => :'String',
         :'generated_document' => :'String',
-        :'expires_in' => :'Float',
+        :'expires_in' => :'Integer',
         :'client_reference' => :'String',
         :'virtual_account' => :'String'
       }
@@ -170,6 +170,10 @@ module PayZuPix
         invalid_properties.push('invalid value for "expires_in", must be smaller than or equal to 172000.')
       end
 
+      if !@expires_in.nil? && @expires_in < 60
+        invalid_properties.push('invalid value for "expires_in", must be greater than or equal to 60.')
+      end
+
       if !@client_reference.nil? && @client_reference.to_s.length > 64
         invalid_properties.push('invalid value for "client_reference", the character length must be smaller than or equal to 64.')
       end
@@ -196,6 +200,7 @@ module PayZuPix
       return false if !@generated_name.nil? && @generated_name !~ Regexp.new(/^[a-zA-Z À-ÿ]+$/)
       return false if !@generated_document.nil? && @generated_document !~ Regexp.new(/^(\d{11}|\d{14})$/)
       return false if !@expires_in.nil? && @expires_in > 172000
+      return false if !@expires_in.nil? && @expires_in < 60
       return false if !@client_reference.nil? && @client_reference.to_s.length > 64
       return false if !@virtual_account.nil? && @virtual_account.to_s.length > 50
       return false if !@virtual_account.nil? && @virtual_account.to_s.length < 1
@@ -274,6 +279,10 @@ module PayZuPix
 
       if expires_in > 172000
         fail ArgumentError, 'invalid value for "expires_in", must be smaller than or equal to 172000.'
+      end
+
+      if expires_in < 60
+        fail ArgumentError, 'invalid value for "expires_in", must be greater than or equal to 60.'
       end
 
       @expires_in = expires_in

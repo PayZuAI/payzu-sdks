@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**field** | **String** | Path of the field rejected in validation, without the leading slash. |  |
-|**message** | **String** | Reason that field was rejected, in Portuguese. |  |
+|**field** | **String** | Caminho do campo rejeitado na validação, sem a barra inicial. |  |
+|**message** | **String** | Motivo da rejeição daquele campo, em português. |  |
 
 
 

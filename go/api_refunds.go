@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -40,16 +40,14 @@ func (r ApiPostRefundRequest) Execute() (*TransactionWithRefunds, *http.Response
 }
 
 /*
-PostRefund Refund a Pix
+PostRefund Solicitar a devolução de um Pix recebido
 
-Refund a received Pix charge. Provide `amount` for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with `refundStatus: PENDING`; completion is confirmed later by webhook.
+Devolve um Pix recebido. Informe `amount` para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com `refundStatus: PENDING`; a conclusão é confirmada depois pelo callback.
 
-Send `{}` to refund the full amount.
-
-Token permission: `WITHDRAW`.
+Envie `{}` para devolver o valor total. O corpo só aceita `amount`, `description` e `clientReference`; outro campo é recusado com 400.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionId ID of the transaction to refund.
+ @param transactionId ID da transação a devolver.
  @return ApiPostRefundRequest
 */
 func (a *RefundsAPIService) PostRefund(ctx context.Context, transactionId string) ApiPostRefundRequest {
@@ -182,6 +180,17 @@ func (a *RefundsAPIService) PostRefundExecute(r ApiPostRefundRequest) (*Transact
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 424 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

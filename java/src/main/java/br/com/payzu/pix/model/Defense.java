@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -56,7 +56,7 @@ public class Defense {
   private String defense;
 
   /**
-   * Defense status
+   * Status da defesa
    */
   public enum StatusEnum {
     PENDING(String.valueOf("PENDING")),
@@ -121,7 +121,7 @@ public class Defense {
   }
 
   /**
-   * Defense identifier.
+   * Identificador da defesa.
    * @return id
    */
   @javax.annotation.Nullable
@@ -145,7 +145,7 @@ public class Defense {
   }
 
   /**
-   * Defense text
+   * Texto da defesa
    * @return defense
    */
   @javax.annotation.Nullable
@@ -169,7 +169,7 @@ public class Defense {
   }
 
   /**
-   * Defense status
+   * Status da defesa
    * @return status
    */
   @javax.annotation.Nullable
@@ -193,7 +193,7 @@ public class Defense {
   }
 
   /**
-   * Identifies the infraction the defense belongs to.
+   * Identifica a contestação a que a defesa pertence.
    * @return infractionId
    */
   @javax.annotation.Nullable
@@ -217,7 +217,7 @@ public class Defense {
   }
 
   /**
-   * Moment the defense was recorded at PayZu, saved together with the uploaded files.
+   * Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -241,7 +241,7 @@ public class Defense {
   }
 
   /**
-   * Moment of the last change to the defense.
+   * Momento da última alteração da defesa.
    * @return updatedAt
    */
   @javax.annotation.Nullable
@@ -273,7 +273,7 @@ public class Defense {
   }
 
   /**
-   * Files sent with the defense, with name, type and size in bytes.
+   * Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes.
    * @return files
    */
   @javax.annotation.Nullable

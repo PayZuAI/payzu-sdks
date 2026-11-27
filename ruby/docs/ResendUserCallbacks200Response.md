@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **message** | **String** | Confirmation that the callbacks were queued. | [optional] |
-| **total** | **Integer** | Number of callbacks dispatched | [optional] |
+| **message** | **String** | Confirmação de que os callbacks foram enfileirados. | [optional] |
+| **total** | **Integer** | Número de callbacks disparados | [optional] |
 
 ## Example
 

@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -14,36 +14,36 @@ require 'date'
 require 'time'
 
 module PayZuPix
-  # Information about a Pix key from DICT lookup.
+  # Informações sobre uma chave Pix a partir da consulta ao DICT.
   class PixKeyInfo < ApiModelBase
-    # The Pix key that was looked up.
+    # A chave Pix que foi consultada.
     attr_accessor :pix_key
 
-    # CPF or CNPJ of the owner (partially masked for privacy).
+    # CPF ou CNPJ do titular (parcialmente mascarado por privacidade).
     attr_accessor :document
 
-    # Name of the Pix key owner.
+    # Nome do titular da chave Pix.
     attr_accessor :name
 
-    # Bank branch number (masked).
+    # Número da agência bancária (mascarado).
     attr_accessor :branch
 
-    # Account number (masked).
+    # Número da conta (mascarado).
     attr_accessor :account_number
 
-    # Type of person: PF, PJ, or empty when not informed.
+    # Tipo de pessoa: PF, PJ ou vazio quando não informado.
     attr_accessor :person_type
 
-    # Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY.
+    # Tipo de conta devolvido pelo DICT, como CACC, SVGS, TRAN ou SLRY.
     attr_accessor :account_type
 
-    # ISPB code of the financial institution.
+    # Código ISPB da instituição financeira.
     attr_accessor :institution_ispb
 
-    # COMPE code of the financial institution.
+    # Código COMPE da instituição financeira.
     attr_accessor :institution_code
 
-    # Name of the financial institution.
+    # Nome da instituição financeira.
     attr_accessor :institution_name
 
     class EnumAttributeValidator

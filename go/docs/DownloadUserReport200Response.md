@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | Pointer to **string** | Short-lived signed URL to download the CSV (5 min validity) | [optional] 
-**ExpiresAt** | Pointer to **time.Time** | When the signed URL expires | [optional] 
+**Url** | Pointer to **string** | URL assinada de curta duração para baixar o CSV (validade de 5 min) | [optional] 
+**ExpiresAt** | Pointer to **time.Time** | Quando a URL assinada expira | [optional] 
 
 ## Methods
 

@@ -7,12 +7,12 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**createdAtFrom** | **OffsetDateTime** | Start of the period. At most 30 days ago. |  |
-|**createdAtTo** | **OffsetDateTime** | End of the period, on or after createdAtFrom. The window between start and end cannot exceed 7 days. |  |
-|**transactionIds** | **List&lt;String&gt;** | Restrict to specific transaction IDs |  [optional] |
-|**transactionTypes** | [**List&lt;TransactionTypesEnum&gt;**](#List&lt;TransactionTypesEnum&gt;) | Filter by transaction type |  [optional] |
-|**transactionStatus** | [**List&lt;TransactionStatusEnum&gt;**](#List&lt;TransactionStatusEnum&gt;) | Filter by transaction status |  [optional] |
-|**transactionEndToEndIds** | **List&lt;String&gt;** | Restrict to specific Pix end-to-end IDs |  [optional] |
+|**createdAtFrom** | **OffsetDateTime** | Início do período. No máximo 30 dias atrás. |  |
+|**createdAtTo** | **OffsetDateTime** | Fim do período, igual ou posterior a createdAtFrom. A janela entre início e fim não pode passar de 7 dias. |  |
+|**transactionIds** | **List&lt;String&gt;** | Restringe a IDs de transação específicos |  [optional] |
+|**transactionTypes** | [**List&lt;TransactionTypesEnum&gt;**](#List&lt;TransactionTypesEnum&gt;) | Filtra por tipo de transação |  [optional] |
+|**transactionStatus** | [**List&lt;TransactionStatusEnum&gt;**](#List&lt;TransactionStatusEnum&gt;) | Filtra por status da transação |  [optional] |
+|**transactionEndToEndIds** | **List&lt;String&gt;** | Restringe a IDs end-to-end Pix específicos |  [optional] |
 
 
 

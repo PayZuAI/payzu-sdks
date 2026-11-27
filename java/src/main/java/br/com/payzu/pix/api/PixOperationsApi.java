@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -173,33 +173,29 @@ public class PixOperationsApi {
   }
 
   /**
-   * Retrieve Charge
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the charge. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Recuperar Cobrança
+   * Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa fornecida na criação da cobrança. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Retrieve Charge Documentation</a>
    */
   public Transaction getPix(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount) throws ApiException {
     return getPix(id, clientReference, endToEndId, virtualAccount, null);
   }
 
   /**
-   * Retrieve Charge
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the charge. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Recuperar Cobrança
+   * Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa fornecida na criação da cobrança. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Retrieve Charge Documentation</a>
    */
   public Transaction getPix(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = getPixWithHttpInfo(id, clientReference, endToEndId, virtualAccount, headers);
@@ -207,33 +203,29 @@ public class PixOperationsApi {
   }
 
   /**
-   * Retrieve Charge
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the charge. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Recuperar Cobrança
+   * Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa fornecida na criação da cobrança. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Retrieve Charge Documentation</a>
    */
   public ApiResponse<Transaction> getPixWithHttpInfo(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount) throws ApiException {
     return getPixWithHttpInfo(id, clientReference, endToEndId, virtualAccount, null);
   }
 
   /**
-   * Retrieve Charge
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the charge. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Recuperar Cobrança
+   * Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa fornecida na criação da cobrança. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Retrieve Charge Documentation</a>
    */
   public ApiResponse<Transaction> getPixWithHttpInfo(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getPixRequestBuilder(id, clientReference, endToEndId, virtualAccount, headers);
@@ -327,27 +319,23 @@ public class PixOperationsApi {
   }
 
   /**
-   * Render Pix QR code (PNG)
-   * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param transactionId Transaction ID. (required)
+   * Renderiza o QR Code Pix (PNG)
+   * Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
+   * @param transactionId ID da transação. (required)
    * @return File
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Render Pix QR code (PNG) Documentation</a>
    */
   public File getPixQrcode(@javax.annotation.Nonnull String transactionId) throws ApiException {
     return getPixQrcode(transactionId, null);
   }
 
   /**
-   * Render Pix QR code (PNG)
-   * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param transactionId Transaction ID. (required)
+   * Renderiza o QR Code Pix (PNG)
+   * Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
+   * @param transactionId ID da transação. (required)
    * @param headers Optional headers to include in the request
    * @return File
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Render Pix QR code (PNG) Documentation</a>
    */
   public File getPixQrcode(@javax.annotation.Nonnull String transactionId, Map<String, String> headers) throws ApiException {
     ApiResponse<File> localVarResponse = getPixQrcodeWithHttpInfo(transactionId, headers);
@@ -355,27 +343,23 @@ public class PixOperationsApi {
   }
 
   /**
-   * Render Pix QR code (PNG)
-   * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param transactionId Transaction ID. (required)
+   * Renderiza o QR Code Pix (PNG)
+   * Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
+   * @param transactionId ID da transação. (required)
    * @return ApiResponse&lt;File&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Render Pix QR code (PNG) Documentation</a>
    */
   public ApiResponse<File> getPixQrcodeWithHttpInfo(@javax.annotation.Nonnull String transactionId) throws ApiException {
     return getPixQrcodeWithHttpInfo(transactionId, null);
   }
 
   /**
-   * Render Pix QR code (PNG)
-   * Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
-   * @param transactionId Transaction ID. (required)
+   * Renderiza o QR Code Pix (PNG)
+   * Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
+   * @param transactionId ID da transação. (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;File&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Render Pix QR code (PNG) Documentation</a>
    */
   public ApiResponse<File> getPixQrcodeWithHttpInfo(@javax.annotation.Nonnull String transactionId, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getPixQrcodeRequestBuilder(transactionId, headers);
@@ -452,29 +436,25 @@ public class PixOperationsApi {
   }
 
   /**
-   * Get Transaction Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante da transação
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @return ProofResponse
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Get Transaction Receipt Documentation</a>
    */
   public ProofResponse getProof(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type) throws ApiException {
     return getProof(id, type, null);
   }
 
   /**
-   * Get Transaction Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante da transação
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @param headers Optional headers to include in the request
    * @return ProofResponse
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Get Transaction Receipt Documentation</a>
    */
   public ProofResponse getProof(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type, Map<String, String> headers) throws ApiException {
     ApiResponse<ProofResponse> localVarResponse = getProofWithHttpInfo(id, type, headers);
@@ -482,29 +462,25 @@ public class PixOperationsApi {
   }
 
   /**
-   * Get Transaction Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante da transação
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @return ApiResponse&lt;ProofResponse&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Get Transaction Receipt Documentation</a>
    */
   public ApiResponse<ProofResponse> getProofWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type) throws ApiException {
     return getProofWithHttpInfo(id, type, null);
   }
 
   /**
-   * Get Transaction Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante da transação
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ProofResponse&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Get Transaction Receipt Documentation</a>
    */
   public ApiResponse<ProofResponse> getProofWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getProofRequestBuilder(id, type, headers);
@@ -597,27 +573,23 @@ public class PixOperationsApi {
   }
 
   /**
-   * Create Charge (Pix deposit)
-   * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+   * Criar Cobrança (depósito Pix)
+   * Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
    * @param postPixRequest  (required)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Create Charge (Pix deposit) Documentation</a>
    */
   public Transaction postPix(@javax.annotation.Nonnull PostPixRequest postPixRequest) throws ApiException {
     return postPix(postPixRequest, null);
   }
 
   /**
-   * Create Charge (Pix deposit)
-   * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+   * Criar Cobrança (depósito Pix)
+   * Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
    * @param postPixRequest  (required)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Create Charge (Pix deposit) Documentation</a>
    */
   public Transaction postPix(@javax.annotation.Nonnull PostPixRequest postPixRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = postPixWithHttpInfo(postPixRequest, headers);
@@ -625,27 +597,23 @@ public class PixOperationsApi {
   }
 
   /**
-   * Create Charge (Pix deposit)
-   * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+   * Criar Cobrança (depósito Pix)
+   * Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
    * @param postPixRequest  (required)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Create Charge (Pix deposit) Documentation</a>
    */
   public ApiResponse<Transaction> postPixWithHttpInfo(@javax.annotation.Nonnull PostPixRequest postPixRequest) throws ApiException {
     return postPixWithHttpInfo(postPixRequest, null);
   }
 
   /**
-   * Create Charge (Pix deposit)
-   * Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+   * Criar Cobrança (depósito Pix)
+   * Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
    * @param postPixRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Receber pagamento Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/receive-pix">Create Charge (Pix deposit) Documentation</a>
    */
   public ApiResponse<Transaction> postPixWithHttpInfo(@javax.annotation.Nonnull PostPixRequest postPixRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postPixRequestBuilder(postPixRequest, headers);

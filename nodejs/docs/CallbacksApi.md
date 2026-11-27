@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createUserCallbackSecret**](CallbacksApi.md#createusercallbacksecret) | **POST** /user/callbacks/secret | Create callback secret |
-| [**getUserCallbackById**](CallbacksApi.md#getusercallbackbyid) | **GET** /user/callbacks/{id} | Get Callback |
-| [**getUserCallbacks**](CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | List Callbacks |
-| [**resendUserCallbackSingle**](CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Re-send callback (single) |
-| [**resendUserCallbacks**](CallbacksApi.md#resendusercallbacksoperation) | **POST** /user/callbacks/resend | Re-send callbacks (bulk) |
-| [**resendUserCallbacksWebhook**](CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Resend callbacks by webhook |
-| [**resendUserCallbacksWebhooks**](CallbacksApi.md#resendusercallbackswebhooks) | **POST** /user/callbacks/resend/webhook | Resend webhook callbacks by filters |
-| [**rotateUserCallbackSecret**](CallbacksApi.md#rotateusercallbacksecret) | **PATCH** /user/callbacks/secret/rotate | Rotate callback secret |
+| [**createUserCallbackSecret**](CallbacksApi.md#createusercallbacksecret) | **POST** /user/callbacks/secret | Criar segredo de callback |
+| [**getUserCallbackById**](CallbacksApi.md#getusercallbackbyid) | **GET** /user/callbacks/{id} | Obter Callback |
+| [**getUserCallbacks**](CallbacksApi.md#getusercallbacks) | **GET** /user/callbacks | Listar Callbacks |
+| [**resendUserCallbackSingle**](CallbacksApi.md#resendusercallbacksingle) | **POST** /user/callbacks/resend/{transactionId} | Reenviar callback (individual) |
+| [**resendUserCallbacks**](CallbacksApi.md#resendusercallbacksoperation) | **POST** /user/callbacks/resend | Reenviar callbacks (em lote) |
+| [**resendUserCallbacksWebhook**](CallbacksApi.md#resendusercallbackswebhook) | **POST** /user/callbacks/resend/webhook/{webhookId} | Reenviar callbacks por webhook |
+| [**resendUserCallbacksWebhooks**](CallbacksApi.md#resendusercallbackswebhooks) | **POST** /user/callbacks/resend/webhook | Reenviar callbacks de webhook por filtros |
+| [**rotateUserCallbackSecret**](CallbacksApi.md#rotateusercallbacksecret) | **PATCH** /user/callbacks/secret/rotate | Rotacionar segredo de callback |
 
 
 
@@ -19,9 +19,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > CallbackSecretResponse createUserCallbackSecret()
 
-Create callback secret
+Criar segredo de callback
 
-Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
 
 ### Example
 
@@ -73,10 +73,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Create callback secret |  -  |
+| **201** | Criar segredo de callback |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Operation not allowed |  -  |
-| **409** | Account already has a callback secret. Use the rotate route. |  -  |
+| **403** | Operação não permitida |  -  |
+| **409** | A conta já possui segredo de callback. Use a rota de rotação. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -85,9 +85,9 @@ This endpoint does not need any parameter.
 
 > CallbackDetail getUserCallbackById(id)
 
-Get Callback
+Obter Callback
 
-Returns the details of a specific callback log.
+Retorna os detalhes de um log de callback específico.
 
 ### Example
 
@@ -107,7 +107,7 @@ async function example() {
   const api = new CallbacksApi(config);
 
   const body = {
-    // string | Unique callback ID
+    // string | ID único do callback
     id: cm3w7l9v20001q8f2u6c1y4be,
   } satisfies GetUserCallbackByIdRequest;
 
@@ -128,7 +128,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Unique callback ID | [Defaults to `undefined`] |
+| **id** | `string` | ID único do callback | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -147,9 +147,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Callback details |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Callback not found or does not belong to the user |  -  |
+| **200** | Detalhes do callback |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Callback não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -158,9 +159,9 @@ example().catch(console.error);
 
 > CallbackListResponse getUserCallbacks(page, limit, sortBy, sortDirection, id, url, status, transactionId, hasError, createdAtFrom, createdAtTo, webhookId, eventType)
 
-List Callbacks
+Listar Callbacks
 
-Returns a paginated list of webhook callback logs for the user\&#39;s transactions.
+Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
 
 ### Example
 
@@ -180,31 +181,31 @@ async function example() {
   const api = new CallbacksApi(config);
 
   const body = {
-    // number | Page number. (optional)
+    // number | Número da página. (optional)
     page: 56,
-    // number | Items per page. (optional)
+    // number | Itens por página. (optional)
     limit: 56,
-    // 'createdAt' | 'status' | Sort field. (optional)
+    // 'createdAt' | 'status' | Campo de ordenação. (optional)
     sortBy: sortBy_example,
-    // 'asc' | 'desc' | Sort direction. (optional)
+    // 'asc' | 'desc' | Direção da ordenação. (optional)
     sortDirection: sortDirection_example,
-    // string | Filter by callback ID (optional)
+    // string | Filtra por ID de callback (optional)
     id: cm3w7l9v20001q8f2u6c1y4be,
-    // string | Filter by callback URL (optional)
+    // string | Filtra por callback URL (optional)
     url: https://webhook.cool/,
-    // number | HTTP status code (optional)
+    // number | Status HTTP devolvido pelo seu endpoint. (optional)
     status: 200,
-    // string | Transaction ID. (optional)
+    // string | ID da transação. (optional)
     transactionId: PAYZU20260814T6NX1CV9MK000000,
-    // boolean | Filter callbacks that errored (optional)
+    // boolean | Filtra callbacks que apresentaram erro (optional)
     hasError: true,
-    // Date | Start of the creation date range. (optional)
+    // Date | Data de criação inicial. (optional)
     createdAtFrom: 2026-08-01,
-    // Date | End of the creation date range. (optional)
+    // Date | Data de criação final. (optional)
     createdAtTo: 2026-08-31,
-    // string | Webhook id. (optional)
+    // string | Id do webhook. (optional)
     webhookId: webhookId_example,
-    // WebhookEventType | Webhook event type. (optional)
+    // WebhookEventType | Tipo de evento do webhook. (optional)
     eventType: ...,
   } satisfies GetUserCallbacksRequest;
 
@@ -225,19 +226,19 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | `number` | Page number. | [Optional] [Defaults to `1`] |
-| **limit** | `number` | Items per page. | [Optional] [Defaults to `10`] |
-| **sortBy** | `createdAt`, `status` | Sort field. | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, status] |
-| **sortDirection** | `asc`, `desc` | Sort direction. | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
-| **id** | `string` | Filter by callback ID | [Optional] [Defaults to `undefined`] |
-| **url** | `string` | Filter by callback URL | [Optional] [Defaults to `undefined`] |
-| **status** | `number` | HTTP status code | [Optional] [Defaults to `undefined`] |
-| **transactionId** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
-| **hasError** | `boolean` | Filter callbacks that errored | [Optional] [Defaults to `undefined`] |
-| **createdAtFrom** | `Date` | Start of the creation date range. | [Optional] [Defaults to `undefined`] |
-| **createdAtTo** | `Date` | End of the creation date range. | [Optional] [Defaults to `undefined`] |
-| **webhookId** | `string` | Webhook id. | [Optional] [Defaults to `undefined`] |
-| **eventType** | `WebhookEventType` | Webhook event type. | [Optional] [Defaults to `undefined`] [Enum: TRANSACTION_PENDING, TRANSACTION_COMPLETED, TRANSACTION_CANCELED, TRANSACTION_WAITING_FOR_REFUND, TRANSACTION_REFUNDED, TRANSACTION_EXPIRED, TRANSACTION_ERROR, TRANSACTION_SUSPECTED_FRAUD, TRANSACTION_SUSPECTED_FRAUD_REVERSAL, INFRACTION_CHANGED] |
+| **page** | `number` | Número da página. | [Optional] [Defaults to `1`] |
+| **limit** | `number` | Itens por página. | [Optional] [Defaults to `10`] |
+| **sortBy** | `createdAt`, `status` | Campo de ordenação. | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, status] |
+| **sortDirection** | `asc`, `desc` | Direção da ordenação. | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
+| **id** | `string` | Filtra por ID de callback | [Optional] [Defaults to `undefined`] |
+| **url** | `string` | Filtra por callback URL | [Optional] [Defaults to `undefined`] |
+| **status** | `number` | Status HTTP devolvido pelo seu endpoint. | [Optional] [Defaults to `undefined`] |
+| **transactionId** | `string` | ID da transação. | [Optional] [Defaults to `undefined`] |
+| **hasError** | `boolean` | Filtra callbacks que apresentaram erro | [Optional] [Defaults to `undefined`] |
+| **createdAtFrom** | `Date` | Data de criação inicial. | [Optional] [Defaults to `undefined`] |
+| **createdAtTo** | `Date` | Data de criação final. | [Optional] [Defaults to `undefined`] |
+| **webhookId** | `string` | Id do webhook. | [Optional] [Defaults to `undefined`] |
+| **eventType** | `WebhookEventType` | Tipo de evento do webhook. | [Optional] [Defaults to `undefined`] [Enum: TRANSACTION_PENDING, TRANSACTION_COMPLETED, TRANSACTION_CANCELED, TRANSACTION_WAITING_FOR_REFUND, TRANSACTION_REFUNDED, TRANSACTION_EXPIRED, TRANSACTION_ERROR, TRANSACTION_SUSPECTED_FRAUD, TRANSACTION_SUSPECTED_FRAUD_REVERSAL, INFRACTION_CHANGED] |
 
 ### Return type
 
@@ -256,9 +257,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of callback logs with pagination |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+| **200** | Lista de callbacks |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -267,9 +269,9 @@ example().catch(console.error);
 
 > ResendUserCallbackSingle200Response resendUserCallbackSingle(transactionId)
 
-Re-send callback (single)
+Reenviar callback (individual)
 
-Resend the callback of a single transaction.
+Reenvia o callback de uma única transação.
 
 ### Example
 
@@ -289,7 +291,7 @@ async function example() {
   const api = new CallbacksApi(config);
 
   const body = {
-    // string | Transaction ID.
+    // string | ID da transação.
     transactionId: PAYZU20260814T6NX1CV9MK000000,
   } satisfies ResendUserCallbackSingleRequest;
 
@@ -310,7 +312,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | `string` | Transaction ID. | [Defaults to `undefined`] |
+| **transactionId** | `string` | ID da transação. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -329,11 +331,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Resend dispatched |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Transaction not found or has no callbackUrl configured |  -  |
-| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+| **200** | Reenvio disparado |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Transação sem callbackUrl |  -  |
+| **422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -342,9 +344,9 @@ example().catch(console.error);
 
 > ResendUserCallbacks200Response resendUserCallbacks(resendUserCallbacksRequest)
 
-Re-send callbacks (bulk)
+Reenviar callbacks (em lote)
 
-Resend callbacks in bulk for transactions matching the given filters.
+Reenvia callbacks em lote para transações que correspondem aos filtros informados.
 
 ### Example
 
@@ -404,12 +406,12 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Resend dispatched |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | No matching transactions |  -  |
-| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+| **200** | Reenvio disparado |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Nenhuma transação correspondente |  -  |
+| **422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -418,9 +420,9 @@ example().catch(console.error);
 
 > EnqueuedCallback resendUserCallbacksWebhook(webhookId)
 
-Resend callbacks by webhook
+Reenviar callbacks por webhook
 
-Queues a bulk resend of the failed callbacks of a given webhook.
+Enfileira o reenvio em lote dos callbacks falhos de um webhook.
 
 ### Example
 
@@ -440,7 +442,7 @@ async function example() {
   const api = new CallbacksApi(config);
 
   const body = {
-    // string | Webhook id.
+    // string | Id do webhook.
     webhookId: cm3w7k1t40000q8f2r5b9x3ad,
   } satisfies ResendUserCallbacksWebhookRequest;
 
@@ -461,7 +463,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **webhookId** | `string` | Webhook id. | [Defaults to `undefined`] |
+| **webhookId** | `string` | Id do webhook. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -480,12 +482,12 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Callbacks accepted for resend. Acceptance is not delivery: the queueing runs after the response. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Webhook not found, inactive or owned by another account (PZW300), or no failed callback matched the filters (PZW310). |  -  |
-| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+| **200** | Callbacks aceitos para reenvio. Aceite não é entrega: o enfileiramento acontece depois da resposta. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Webhook não encontrado, inativo ou de outra conta (PZW300), ou nenhum callback falho para os filtros (PZW310). |  -  |
+| **422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -494,9 +496,9 @@ example().catch(console.error);
 
 > EnqueuedCallback resendUserCallbacksWebhooks(resendWebhookCallbacksRequest)
 
-Resend webhook callbacks by filters
+Reenviar callbacks de webhook por filtros
 
-Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
 
 ### Example
 
@@ -556,12 +558,12 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Callbacks accepted for resend. Acceptance is not delivery: the queueing runs after the response. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | No active webhook matched the criteria (PZW301), or no failed callback matched the filters (PZW311). |  -  |
-| **422** | Resend limit reached: 5 requests per minute per account, shared by all /user/callbacks/resend routes |  -  |
+| **200** | Callbacks aceitos para reenvio. Aceite não é entrega: o enfileiramento acontece depois da resposta. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Nenhum webhook ativo para os critérios (PZW301), ou nenhum callback falho para os filtros (PZW311). |  -  |
+| **422** | Limite de reenvios atingido: 5 requisições por minuto por conta, somadas entre todas as rotas /user/callbacks/resend |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -570,9 +572,9 @@ example().catch(console.error);
 
 > RotateCallbackSecretResponse rotateUserCallbackSecret()
 
-Rotate callback secret
+Rotacionar segredo de callback
 
-Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
 
 ### Example
 
@@ -624,10 +626,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Rotate callback secret |  -  |
+| **200** | Rotacionar segredo de callback |  -  |
 | **401** | Unauthorized |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Account has no callback secret to rotate. |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | A conta não possui segredo de callback para rotacionar. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

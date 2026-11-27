@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,79 +20,79 @@ import { mapValues } from '../runtime.js';
  */
 export interface BankStatement {
     /**
-     * Identifier of the balance entry.
+     * Identificador do lançamento de saldo.
      * @type {string}
      * @memberof BankStatement
      */
     id?: string;
     /**
-     * Amount of the entry.
+     * Valor do lançamento.
      * @type {number}
      * @memberof BankStatement
      */
     amount?: number;
     /**
-     * INCREMENT credits the balance, DECREMENT debits it.
+     * INCREMENT credita o saldo, DECREMENT debita.
      * @type {BankStatementOperationEnum}
      * @memberof BankStatement
      */
     operation?: BankStatementOperationEnum;
     /**
-     * Reason for the ledger entry.
+     * Motivo do lançamento no extrato.
      * @type {string}
      * @memberof BankStatement
      */
     reason?: string;
     /**
-     * Balance moved: AVAILABLE or BLOCKED.
+     * Saldo movimentado: AVAILABLE ou BLOCKED.
      * @type {BankStatementBalanceTypeEnum}
      * @memberof BankStatement
      */
     balanceType?: BankStatementBalanceTypeEnum;
     /**
-     * Balance free for use that the account had, in reais, immediately before this entry.
+     * Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento.
      * @type {number}
      * @memberof BankStatement
      */
     previousBalanceAvailable?: number;
     /**
-     * Blocked balance before the entry, in reais.
+     * Saldo bloqueado antes do lançamento, em reais.
      * @type {number}
      * @memberof BankStatement
      */
     previousBalanceBlocked?: number;
     /**
-     * Available balance after the entry, in reais.
+     * Saldo disponível depois do lançamento, em reais.
      * @type {number}
      * @memberof BankStatement
      */
     newBalanceAvailable?: number;
     /**
-     * Blocked balance after the entry, in reais.
+     * Saldo bloqueado depois do lançamento, em reais.
      * @type {number}
      * @memberof BankStatement
      */
     newBalanceBlocked?: number;
     /**
-     * Transaction that originated the entry.
+     * Transação que originou o lançamento.
      * @type {string}
      * @memberof BankStatement
      */
     transactionId?: string | null;
     /**
-     * Infraction related to the entry.
+     * Infração relacionada ao lançamento.
      * @type {string}
      * @memberof BankStatement
      */
     infractionId?: string | null;
     /**
-     * Date and time the balance movement was recorded.
+     * Data e hora em que a movimentação de saldo foi registrada.
      * @type {Date}
      * @memberof BankStatement
      */
     createdAt?: Date;
     /**
-     * Date and time of the last change to the record.
+     * Data e hora da última alteração do registro.
      * @type {Date}
      * @memberof BankStatement
      */

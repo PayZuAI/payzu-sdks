@@ -7,9 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | **String** | Name of the file sent with the defense. |  [optional] |
-|**mimeType** | **String** | MIME type of the file, provided on upload, for example application/pdf or image/png. |  [optional] |
-|**size** | **Integer** | Size of the file in bytes. |  [optional] |
+|**name** | **String** | Nome do arquivo enviado como anexo da defesa. |  [optional] |
+|**mimeType** | **String** | Tipo MIME do anexo, informado no upload, por exemplo application/pdf ou image/png. |  [optional] |
+|**size** | **Integer** | Tamanho do anexo em bytes. |  [optional] |
 
 
 

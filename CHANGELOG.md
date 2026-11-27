@@ -1,5 +1,35 @@
 # Changelog
 
+## 4.0.0
+
+### Mudanças incompatíveis
+
+- Go: o módulo passa a ser `github.com/PayZuAI/payzu-sdks/go/v4`. Troque o caminho no `go get` e nos imports.
+- `getUserDict` (`GET /user/dict`) sai de `KeysAndDICTApi` em todas as linguagens, porque a API não tem mais essa rota e responde 404. Use `getPixKey` (`GET /pix/key`), que devolve o titular com agência e conta.
+- Node.js: `payzu.keys.dict()`, descontinuado na 3.2.0, sai. Use `payzu.keys.lookup(pixKey)`.
+- `GetUser200Response` não traz mais `role`, nem o enum e os acessores dele. Quem lia o campo precisa tirar a leitura.
+- `ReportJobAccepted`, a resposta de `POST /user/report`, troca `storageExpiresAt` por `expiresAt`, o mesmo nome da consulta do relatório. Leia `expiresAt`.
+- `GET /user/infractions/{id}/defenses` devolve `DefenseListItem[]` no lugar de `Defense[]`. Os campos são os mesmos, mas os anexos da listagem não trazem `url`; para baixar um anexo, consulte a defesa por `GET /user/infractions/{infractionId}/defenses/{defenseId}`. No Node.js, `payzu.infractions.defenses()` passa a declarar `DefenseListItem[]`.
+- `PostPixRequest.expiresIn` passa a ser inteiro, com mínimo de 60 segundos (Go `int32`, Java `Integer`, PHP `int`, Ruby `Integer`, Python `int`). Envie segundos inteiros; Python, PHP e Ruby recusam valor abaixo de 60 antes de chamar a API.
+- `QRCodeReadResponse.createdAt` passa a ser texto em todas as linguagens (era data: Go `time.Time`, Java `OffsetDateTime`, PHP `\DateTime`, Ruby `Time`, Python `datetime`, Node.js `Date`), porque o horário pode vir sem fuso no QR Code. Quem usava o valor como data precisa convertê-lo.
+
+### Novo
+
+- `GET /user/pix-keys` (`AccountApi.getUserPixKeys`): chave Pix de recebimento da conta, com o titular e a instituição.
+- `AllowlistApi`, com os CNPJs (`GET /user/whitelist/cnpj`) e as chaves Pix (`GET /user/whitelist/pix-key`) autorizados na conta, com filtros por período e situação e paginação por cursor.
+- Node.js: as duas rotas acima ficam no core gerado, sem método na fachada `PayZu`. Use `new AccountApi(createConfiguration({ token }))` e `new AllowlistApi(createConfiguration({ token }))`.
+- Modelos dos eventos de webhook, para tipar o corpo que a PayZu envia ao seu endpoint: `TransactionPendingEvent`, `TransactionCompletedEvent`, `TransactionCanceledEvent`, `TransactionExpiredEvent`, `TransactionWaitingForRefundEvent`, `TransactionRefundedEvent`, `TransactionErrorEvent` e `InfractionChangedEvent` (com `InfractionChangedData`). São só modelos: o SDK não chama essas rotas.
+- Valores novos de enum: `Transaction.method` aceita `BANK_SLIP` e `TED`; `Refund.reason` e `Transaction.refundReason` aceitam `DENY_COMPANY_DEPOSIT` e `ADMIN_REQUEST`.
+
+### Outras mudanças
+
+- Respostas de erro documentadas com `ApiError`: 403 nas consultas, 409 nos saques, 410 na leitura de QR Code e no saque por QR Code e 424 no estorno. O `POST /internal-transfer` deixa de documentar o 404.
+- O sandbox `https://pix.sandbox.payzu.dev/v1` entra como segundo servidor da configuração em Go, PHP, Python e Ruby. Em Java e Node.js, o endereço do sandbox se informa na configuração do cliente. O padrão continua `https://api.pix.payzu.com.br/v1`.
+- Os filtros `amountMin` e `amountMax` de infrações passam a ter mínimo de 0,01, conferido antes da chamada em Python, PHP e Ruby.
+- `url` de `WebhookCreateRequest` e `WebhookUpdateRequest` passa a exigir `http://` ou `https://`, conferido antes da chamada em Python, PHP e Ruby.
+- As descrições do código gerado e da documentação de cada linguagem passam a ser em português.
+- Java: Jackson 2.21.7.
+
 ## 3.2.0
 
 ### Outras mudanças

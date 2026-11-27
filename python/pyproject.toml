@@ -1,6 +1,6 @@
 [project]
 name = "payzu_pix"
-version = "3.2.0"
+version = "4.0.0"
 description = "PayZu Pix API"
 authors = [
   {name = "Suporte PayZu",email = "team@openapitools.org"},

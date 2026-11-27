@@ -1,15 +1,15 @@
 # GetUser200ResponseDailyWithdrawLimit
 
-Control of the daily outbound cap.
+Controle do teto diário de saída.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**limit** | **float** | Daily outbound cap, in reais, summing withdrawals and internal transfers. | [optional] 
-**used** | **float** | Total of the cap consumed in the day, in reais, by withdrawals and internal transfers. | [optional] 
-**updated_at** | **datetime** | Date and time of the last change to the daily limit. | [optional] 
-**last_reset** | **datetime** | Moment of the last reset of the daily usage. | [optional] 
+**limit** | **float** | Teto diário de saída, em reais, somando saques e transferências internas. | [optional] 
+**used** | **float** | Total consumido do teto no dia, em reais, por saques e transferências internas. | [optional] 
+**updated_at** | **datetime** | Data e hora da última alteração do limite diário. | [optional] 
+**last_reset** | **datetime** | Momento da última zeragem do consumo diário. | [optional] 
 
 ## Example
 

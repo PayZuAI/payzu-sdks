@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -56,7 +56,7 @@ public class DictConsultResponse {
   private String document;
 
   /**
-   * Type of person: PF, PJ, or empty when not informed.
+   * Tipo de pessoa: PF, PJ ou vazio quando não informado.
    */
   public enum PersonTypeEnum {
     PF(String.valueOf("PF")),
@@ -119,7 +119,7 @@ public class DictConsultResponse {
   }
 
   /**
-   * Normalized Pix key.
+   * Chave Pix normalizada.
    * @return pixKey
    */
   @javax.annotation.Nullable
@@ -143,7 +143,7 @@ public class DictConsultResponse {
   }
 
   /**
-   * Name of the key holder as returned by the institution queried.
+   * Nome do titular da chave conforme devolvido pela instituição consultada.
    * @return name
    */
   @javax.annotation.Nullable
@@ -167,7 +167,7 @@ public class DictConsultResponse {
   }
 
   /**
-   * Masked CPF/CNPJ of the key holder.
+   * CPF/CNPJ mascarado do titular da chave.
    * @return document
    */
   @javax.annotation.Nullable
@@ -191,7 +191,7 @@ public class DictConsultResponse {
   }
 
   /**
-   * Type of person: PF, PJ, or empty when not informed.
+   * Tipo de pessoa: PF, PJ ou vazio quando não informado.
    * @return personType
    */
   @javax.annotation.Nullable
@@ -239,7 +239,7 @@ public class DictConsultResponse {
   }
 
   /**
-   * ISPB code of the account institution.
+   * Código ISPB da instituição da conta.
    * @return institutionIspb
    */
   @javax.annotation.Nullable
@@ -263,7 +263,7 @@ public class DictConsultResponse {
   }
 
   /**
-   * Name of the institution where the holder account is registered, as the lookup returns it.
+   * Nome da instituição onde a conta do titular está registrada, do jeito que a consulta devolve.
    * @return institutionName
    */
   @javax.annotation.Nullable

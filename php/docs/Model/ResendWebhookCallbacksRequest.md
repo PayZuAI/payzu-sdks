@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at_from** | **\DateTime** | Start of the delivery period. At most 30 days ago. |
-**created_at_to** | **\DateTime** | End of the delivery period, on or after createdAtFrom. The window cannot exceed 7 days. |
-**webhook_ids** | **string[]** | Webhooks to resend. Omitted: all active webhooks of the account. | [optional]
-**transaction_ids** | **string[]** | Restrict to specific transaction IDs. | [optional]
-**transaction_types** | **string[]** | Filter by transaction type. | [optional]
-**transaction_status** | **string[]** | Filter by the current transaction status. | [optional]
-**transaction_end_to_end_ids** | **string[]** | Restrict to specific end-to-end IDs. | [optional]
+**created_at_from** | **\DateTime** | Início do período das entregas. No máximo 30 dias atrás. |
+**created_at_to** | **\DateTime** | Fim do período das entregas, igual ou posterior a createdAtFrom. A janela não pode passar de 7 dias. |
+**webhook_ids** | **string[]** | Webhooks a reenviar. Omitido: todos os webhooks ativos da conta. | [optional]
+**transaction_ids** | **string[]** | Restringe a IDs de transação específicos. | [optional]
+**transaction_types** | **string[]** | Filtra pelo tipo da transação. | [optional]
+**transaction_status** | **string[]** | Filtra pelo status atual da transação. | [optional]
+**transaction_end_to_end_ids** | **string[]** | Restringe a end-to-end IDs específicos. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

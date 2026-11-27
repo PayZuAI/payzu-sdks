@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,43 +15,43 @@ require 'time'
 
 module PayZuPix
   class BankStatement < ApiModelBase
-    # Identifier of the balance entry.
+    # Identificador do lançamento de saldo.
     attr_accessor :id
 
-    # Amount of the entry.
+    # Valor do lançamento.
     attr_accessor :amount
 
-    # INCREMENT credits the balance, DECREMENT debits it.
+    # INCREMENT credita o saldo, DECREMENT debita.
     attr_accessor :operation
 
-    # Reason for the ledger entry.
+    # Motivo do lançamento no extrato.
     attr_accessor :reason
 
-    # Balance moved: AVAILABLE or BLOCKED.
+    # Saldo movimentado: AVAILABLE ou BLOCKED.
     attr_accessor :balance_type
 
-    # Balance free for use that the account had, in reais, immediately before this entry.
+    # Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento.
     attr_accessor :previous_balance_available
 
-    # Blocked balance before the entry, in reais.
+    # Saldo bloqueado antes do lançamento, em reais.
     attr_accessor :previous_balance_blocked
 
-    # Available balance after the entry, in reais.
+    # Saldo disponível depois do lançamento, em reais.
     attr_accessor :new_balance_available
 
-    # Blocked balance after the entry, in reais.
+    # Saldo bloqueado depois do lançamento, em reais.
     attr_accessor :new_balance_blocked
 
-    # Transaction that originated the entry.
+    # Transação que originou o lançamento.
     attr_accessor :transaction_id
 
-    # Infraction related to the entry.
+    # Infração relacionada ao lançamento.
     attr_accessor :infraction_id
 
-    # Date and time the balance movement was recorded.
+    # Data e hora em que a movimentação de saldo foi registrada.
     attr_accessor :created_at
 
-    # Date and time of the last change to the record.
+    # Data e hora da última alteração do registro.
     attr_accessor :updated_at
 
     class EnumAttributeValidator

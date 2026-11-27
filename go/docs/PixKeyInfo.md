@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PixKey** | Pointer to **string** | The Pix key that was looked up. | [optional] 
-**Document** | Pointer to **string** | CPF or CNPJ of the owner (partially masked for privacy). | [optional] 
-**Name** | Pointer to **string** | Name of the Pix key owner. | [optional] 
-**Branch** | Pointer to **string** | Bank branch number (masked). | [optional] 
-**AccountNumber** | Pointer to **string** | Account number (masked). | [optional] 
-**PersonType** | Pointer to **string** | Type of person: PF, PJ, or empty when not informed. | [optional] 
-**AccountType** | Pointer to **string** | Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY. | [optional] 
-**InstitutionIspb** | Pointer to **string** | ISPB code of the financial institution. | [optional] 
-**InstitutionCode** | Pointer to **string** | COMPE code of the financial institution. | [optional] 
-**InstitutionName** | Pointer to **string** | Name of the financial institution. | [optional] 
+**PixKey** | Pointer to **string** | A chave Pix que foi consultada. | [optional] 
+**Document** | Pointer to **string** | CPF ou CNPJ do titular (parcialmente mascarado por privacidade). | [optional] 
+**Name** | Pointer to **string** | Nome do titular da chave Pix. | [optional] 
+**Branch** | Pointer to **string** | Número da agência bancária (mascarado). | [optional] 
+**AccountNumber** | Pointer to **string** | Número da conta (mascarado). | [optional] 
+**PersonType** | Pointer to **string** | Tipo de pessoa: PF, PJ ou vazio quando não informado. | [optional] 
+**AccountType** | Pointer to **string** | Tipo de conta devolvido pelo DICT, como CACC, SVGS, TRAN ou SLRY. | [optional] 
+**InstitutionIspb** | Pointer to **string** | Código ISPB da instituição financeira. | [optional] 
+**InstitutionCode** | Pointer to **string** | Código COMPE da instituição financeira. | [optional] 
+**InstitutionName** | Pointer to **string** | Nome da instituição financeira. | [optional] 
 
 ## Methods
 

@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -18,21 +18,21 @@ import (
 // checks if the ReportJobDetail type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReportJobDetail{}
 
-// ReportJobDetail Report job with the filters used and the total of rows written.
+// ReportJobDetail Job de relatório com os filtros usados e o total de linhas escritas.
 type ReportJobDetail struct {
-	// Report identifier (UUID), generated when the report is requested.
+	// Identificador (UUID) do relatório, gerado no momento da solicitação.
 	Id *string `json:"id,omitempty"`
-	// Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+	// Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
 	Status *string `json:"status,omitempty"`
-	// Date and time the report generation was requested.
+	// Data e hora em que a geração do relatório foi solicitada.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Date and time of the last change to the report record.
+	// Data e hora da última alteração no registro do relatório.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	// When the file expires from storage (usually 7 days after creation)
+	// Quando o arquivo expira do armazenamento (normalmente 7 dias após a criação)
 	ExpiresAt NullableTime `json:"expiresAt,omitempty"`
-	// Filters used when the report was created.
+	// Filtros usados na criação do relatório.
 	Params map[string]interface{} `json:"params,omitempty"`
-	// Rows written to the file. Null until the report is COMPLETED.
+	// Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED.
 	WrittenRows NullableInt32 `json:"writtenRows,omitempty"`
 }
 

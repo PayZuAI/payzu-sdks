@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -19,13 +19,13 @@ var _ MappedNullable = &DepositPendingListResponse{}
 
 // DepositPendingListResponse struct for DepositPendingListResponse
 type DepositPendingListResponse struct {
-	// Page returned in this response.
+	// Página devolvida nesta resposta.
 	Page *int32 `json:"page,omitempty"`
-	// Maximum number of records per page used in this query.
+	// Quantidade máxima de registros por página usada nesta consulta.
 	Limit *int32 `json:"limit,omitempty"`
-	// Comes back true when there is still a record after this page.
+	// Vem true quando ainda existe registro depois desta página.
 	HasNextPage *bool `json:"hasNextPage,omitempty"`
-	// Pending deposits of this page, ordered from the most recent creation to the oldest.
+	// Depósitos pendentes desta página, ordenados da criação mais recente para a mais antiga.
 	Data []DepositPending `json:"data,omitempty"`
 }
 

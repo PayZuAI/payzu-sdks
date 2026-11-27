@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -19,11 +19,11 @@ var _ MappedNullable = &EnqueuedCallbackEnqueued{}
 
 // EnqueuedCallbackEnqueued struct for EnqueuedCallbackEnqueued
 type EnqueuedCallbackEnqueued struct {
-	// Total number of callbacks sent for queueing. Not limited by the size of items.
+	// Total de callbacks enviados para enfileiramento. Não é limitado pelo tamanho de items.
 	Count *int32 `json:"count,omitempty"`
-	// True when items lists only part of the callbacks. The resend still covers all of them.
+	// true quando items lista apenas parte dos callbacks. O reenvio cobre todos mesmo assim.
 	Truncated *bool `json:"truncated,omitempty"`
-	// Queued callbacks, capped at 500 entries.
+	// Callbacks enfileirados, no máximo 500 entradas.
 	Items []EnqueuedCallbackItem `json:"items,omitempty"`
 }
 

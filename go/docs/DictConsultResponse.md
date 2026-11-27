@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PixKey** | Pointer to **string** | Normalized Pix key. | [optional] 
-**Name** | Pointer to **string** | Name of the key holder as returned by the institution queried. | [optional] 
-**Document** | Pointer to **string** | Masked CPF/CNPJ of the key holder. | [optional] 
-**PersonType** | Pointer to **string** | Type of person: PF, PJ, or empty when not informed. | [optional] 
+**PixKey** | Pointer to **string** | Chave Pix normalizada. | [optional] 
+**Name** | Pointer to **string** | Nome do titular da chave conforme devolvido pela instituição consultada. | [optional] 
+**Document** | Pointer to **string** | CPF/CNPJ mascarado do titular da chave. | [optional] 
+**PersonType** | Pointer to **string** | Tipo de pessoa: PF, PJ ou vazio quando não informado. | [optional] 
 **AccountType** | Pointer to **string** |  | [optional] 
-**InstitutionIspb** | Pointer to **string** | ISPB code of the account institution. | [optional] 
-**InstitutionName** | Pointer to **string** | Name of the institution where the holder account is registered, as the lookup returns it. | [optional] 
+**InstitutionIspb** | Pointer to **string** | Código ISPB da instituição da conta. | [optional] 
+**InstitutionName** | Pointer to **string** | Nome da instituição onde a conta do titular está registrada, do jeito que a consulta devolve. | [optional] 
 
 ## Methods
 

@@ -5,17 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_number** | **str** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] 
-**branch** | **str** | Branch number (4 digits). | [optional] 
-**name** | **str** | Registered name of the account. | [optional] 
-**role** | **str** | Account role. | [optional] 
-**balance_available** | **float** | Balance free for withdrawals and transfers, in reais. | [optional] 
-**balance_blocked** | **float** | Part of the balance held, in reais. | [optional] 
-**status** | **str** | Account status. | [optional] 
-**cash_in_ticket_min** | **float** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] 
-**cash_in_ticket_max** | **float** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] 
-**cash_out_ticket_min** | **float** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] 
-**cash_out_ticket_max** | **float** | Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused. | [optional] 
+**account_number** | **str** | Identificador público da conta. | [optional] 
+**branch** | **str** | Agência da conta. | [optional] 
+**name** | **str** | Nome cadastrado da conta. | [optional] 
+**balance_available** | **float** | Saldo livre para saques e transferências, em reais. | [optional] 
+**balance_blocked** | **float** | Parte do saldo retida, em reais. | [optional] 
+**status** | **str** | Situação da conta. | [optional] 
+**cash_in_ticket_min** | **float** | Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada. | [optional] 
+**cash_in_ticket_max** | **float** | Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada. | [optional] 
+**cash_out_ticket_min** | **float** | Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado. | [optional] 
+**cash_out_ticket_max** | **float** | Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado. | [optional] 
 **service_fee** | [**GetUser200ResponseServiceFee**](GetUser200ResponseServiceFee.md) |  | [optional] 
 **daily_withdraw_limit** | [**GetUser200ResponseDailyWithdrawLimit**](GetUser200ResponseDailyWithdrawLimit.md) |  | [optional] 
 

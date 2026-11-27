@@ -7,19 +7,19 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **String** | Identifier of the balance entry. |  [optional] |
-|**amount** | **BigDecimal** | Amount of the entry. |  [optional] |
-|**operation** | [**OperationEnum**](#OperationEnum) | INCREMENT credits the balance, DECREMENT debits it. |  [optional] |
-|**reason** | **String** | Reason for the ledger entry. |  [optional] |
-|**balanceType** | [**BalanceTypeEnum**](#BalanceTypeEnum) | Balance moved: AVAILABLE or BLOCKED. |  [optional] |
-|**previousBalanceAvailable** | **BigDecimal** | Balance free for use that the account had, in reais, immediately before this entry. |  [optional] |
-|**previousBalanceBlocked** | **BigDecimal** | Blocked balance before the entry, in reais. |  [optional] |
-|**newBalanceAvailable** | **BigDecimal** | Available balance after the entry, in reais. |  [optional] |
-|**newBalanceBlocked** | **BigDecimal** | Blocked balance after the entry, in reais. |  [optional] |
-|**transactionId** | **String** | Transaction that originated the entry. |  [optional] |
-|**infractionId** | **String** | Infraction related to the entry. |  [optional] |
-|**createdAt** | **OffsetDateTime** | Date and time the balance movement was recorded. |  [optional] |
-|**updatedAt** | **OffsetDateTime** | Date and time of the last change to the record. |  [optional] |
+|**id** | **String** | Identificador do lançamento de saldo. |  [optional] |
+|**amount** | **BigDecimal** | Valor do lançamento. |  [optional] |
+|**operation** | [**OperationEnum**](#OperationEnum) | INCREMENT credita o saldo, DECREMENT debita. |  [optional] |
+|**reason** | **String** | Motivo do lançamento no extrato. |  [optional] |
+|**balanceType** | [**BalanceTypeEnum**](#BalanceTypeEnum) | Saldo movimentado: AVAILABLE ou BLOCKED. |  [optional] |
+|**previousBalanceAvailable** | **BigDecimal** | Saldo livre para uso que a conta tinha, em reais, imediatamente antes deste lançamento. |  [optional] |
+|**previousBalanceBlocked** | **BigDecimal** | Saldo bloqueado antes do lançamento, em reais. |  [optional] |
+|**newBalanceAvailable** | **BigDecimal** | Saldo disponível depois do lançamento, em reais. |  [optional] |
+|**newBalanceBlocked** | **BigDecimal** | Saldo bloqueado depois do lançamento, em reais. |  [optional] |
+|**transactionId** | **String** | Transação que originou o lançamento. |  [optional] |
+|**infractionId** | **String** | Infração relacionada ao lançamento. |  [optional] |
+|**createdAt** | **OffsetDateTime** | Data e hora em que a movimentação de saldo foi registrada. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | Data e hora da última alteração do registro. |  [optional] |
 
 
 

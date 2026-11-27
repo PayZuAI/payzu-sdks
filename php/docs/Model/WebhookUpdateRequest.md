@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **string** | New delivery address, which applies to the following dispatches. | [optional]
-**active** | **bool** | Turns the webhook deliveries on or pauses them. | [optional]
-**events** | [**\PayZu\Pix\Model\WebhookEventType[]**](WebhookEventType.md) | New list of subscribed events, which replaces the previous one entirely. | [optional]
+**url** | **string** | Novo endereço de entrega, que passa a valer nos disparos seguintes: http ou https, pública, sem usuário e senha e sem IPv6 literal. | [optional]
+**active** | **bool** | Liga ou pausa as entregas do webhook. | [optional]
+**events** | [**\PayZu\Pix\Model\WebhookEventType[]**](WebhookEventType.md) | Nova lista de eventos assinados, que substitui a anterior por inteiro. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

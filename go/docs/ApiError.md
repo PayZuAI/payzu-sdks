@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | **string** | Fixed marker of an error response. | 
-**Error** | **string** | Name of the corresponding HTTP status. | 
-**ErrorCode** | **string** | Stable machine-readable error code, when available. | 
-**Message** | **string** | Human-readable error message. | 
-**StatusCode** | **int32** | HTTP status code. | 
-**RequestId** | **string** | Unique request correlation ID (cuid). Include it when contacting support. | 
-**Details** | Pointer to [**[]ApiErrorDetailsInner**](ApiErrorDetailsInner.md) | Field-level validation errors, when applicable. | [optional] 
-**RetryAfterSeconds** | Pointer to **int32** | Seconds to wait before retrying. Present only on 429 responses. | [optional] 
+**Status** | **string** | Marcador fixo de resposta de erro. | 
+**Error** | **string** | Nome do status HTTP correspondente. | 
+**ErrorCode** | **string** | Código de erro estável e legível por máquina, quando disponível. | 
+**Message** | **string** | Mensagem de erro legível. | 
+**StatusCode** | **int32** | Código de status HTTP. | 
+**RequestId** | **string** | ID único de correlação da requisição (cuid). | 
+**Details** | Pointer to [**[]ApiErrorDetailsInner**](ApiErrorDetailsInner.md) | Erros de validação por campo, quando aplicável. | [optional] 
+**RetryAfterSeconds** | Pointer to **int32** | Segundos a aguardar antes de tentar novamente. | [optional] 
 
 ## Methods
 

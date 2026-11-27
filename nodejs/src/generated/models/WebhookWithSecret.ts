@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -28,31 +28,31 @@ import {
  */
 export interface WebhookWithSecret {
     /**
-     * Webhook identifier.
+     * Identificador do webhook.
      * @type {string}
      * @memberof WebhookWithSecret
      */
     id?: string;
     /**
-     * Address that receives the notifications.
+     * Endereço que recebe as notificações.
      * @type {string}
      * @memberof WebhookWithSecret
      */
     url?: string;
     /**
-     * Indicates whether the webhook starts out receiving events.
+     * Indica se o webhook já começa recebendo eventos.
      * @type {boolean}
      * @memberof WebhookWithSecret
      */
     active?: boolean;
     /**
-     * Events subscribed by this webhook.
+     * Eventos assinados por este webhook.
      * @type {Array<WebhookEventType>}
      * @memberof WebhookWithSecret
      */
     events?: Array<WebhookEventType>;
     /**
-     * Indicates whether the webhook has a signing secret.
+     * Indica se o webhook tem segredo de assinatura.
      * @type {boolean}
      * @memberof WebhookWithSecret
      */
@@ -64,13 +64,13 @@ export interface WebhookWithSecret {
      */
     createdAt?: Date;
     /**
-     * Date and time of the last change to the webhook.
+     * Data e hora da última alteração do webhook.
      * @type {Date}
      * @memberof WebhookWithSecret
      */
     updatedAt?: Date;
     /**
-     * HMAC signing secret. Shown only on creation and on rotate-secret. Store it now.
+     * Segredo de assinatura HMAC.
      * @type {string}
      * @memberof WebhookWithSecret
      */

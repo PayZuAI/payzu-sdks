@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Quantity** | Pointer to **int32** | Total of deliveries recorded. | [optional] 
+**Quantity** | Pointer to **int32** | Total de entregas registradas. | [optional] 
 
 ## Methods
 

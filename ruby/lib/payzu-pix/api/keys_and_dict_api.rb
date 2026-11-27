@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,9 +19,9 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Pix key lookup (DICT)
-    # Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner's details and associated financial institution.  Token permission: `DEPOSIT` or `WITHDRAW`.
-    # @param pix_key [String] The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
+    # Consulta de chave Pix no DICT
+    # Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+    # @param pix_key [String] A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP).
     # @param [Hash] opts the optional parameters
     # @return [PixKeyInfo]
     def get_pix_key(pix_key, opts = {})
@@ -29,9 +29,9 @@ module PayZuPix
       data
     end
 
-    # Pix key lookup (DICT)
-    # Query the DICT (Diretório de Identificadores de Contas Transacionais) to retrieve information about a Pix key before sending a payment. Returns the key owner&#39;s details and associated financial institution.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
-    # @param pix_key [String] The Pix key to lookup (CPF, CNPJ, email, phone, or EVP).
+    # Consulta de chave Pix no DICT
+    # Consulta o DICT (Diretório de Identificadores de Contas Transacionais) para obter informações sobre uma chave Pix antes de enviar um pagamento. Retorna os dados do titular da chave e a instituição financeira associada.
+    # @param pix_key [String] A chave Pix a consultar (CPF, CNPJ, email, telefone ou EVP).
     # @param [Hash] opts the optional parameters
     # @return [Array<(PixKeyInfo, Integer, Hash)>] PixKeyInfo data, response status code and response headers
     def get_pix_key_with_http_info(pix_key, opts = {})
@@ -91,80 +91,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Resolve DICT key
-    # Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-    # @param key [String] Pix key to look up (CPF, CNPJ, email, phone or EVP).
-    # @param [Hash] opts the optional parameters
-    # @return [DictConsultResponse]
-    def get_user_dict(key, opts = {})
-      data, _status_code, _headers = get_user_dict_with_http_info(key, opts)
-      data
-    end
-
-    # Resolve DICT key
-    # Resolves a Pix key (DICT) to the holder details before paying. Requires WITHDRAW scope.
-    # @param key [String] Pix key to look up (CPF, CNPJ, email, phone or EVP).
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(DictConsultResponse, Integer, Hash)>] DictConsultResponse data, response status code and response headers
-    def get_user_dict_with_http_info(key, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: KeysAndDICTApi.get_user_dict ...'
-      end
-      # verify the required parameter 'key' is set
-      if @api_client.config.client_side_validation && key.nil?
-        fail ArgumentError, "Missing the required parameter 'key' when calling KeysAndDICTApi.get_user_dict"
-      end
-      if @api_client.config.client_side_validation && key.to_s.length > 77
-        fail ArgumentError, 'invalid value for "key" when calling KeysAndDICTApi.get_user_dict, the character length must be smaller than or equal to 77.'
-      end
-
-      if @api_client.config.client_side_validation && key.to_s.length < 1
-        fail ArgumentError, 'invalid value for "key" when calling KeysAndDICTApi.get_user_dict, the character length must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/user/dict'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'key'] = key
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'DictConsultResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['BearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"KeysAndDICTApi.get_user_dict",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: KeysAndDICTApi#get_user_dict\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Read QR Code
-    # Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: `DEPOSIT` or `WITHDRAW`.
+    # Ler QR Code
+    # Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
     # @param post_pix_qrcode_read_request [PostPixQrcodeReadRequest] 
     # @param [Hash] opts the optional parameters
     # @return [QRCodeReadResponse]
@@ -173,8 +101,8 @@ module PayZuPix
       data
     end
 
-    # Read QR Code
-    # Decode and extract information from a Pix QR Code (EMV format) before making a payment. Returns the parsed data including receiver details, amount (if present), and other QR Code metadata. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;DEPOSIT&#x60; or &#x60;WITHDRAW&#x60;.
+    # Ler QR Code
+    # Decodifica e extrai informações de um QR Code Pix (formato EMV) antes de efetuar um pagamento. Retorna os dados interpretados, incluindo detalhes do recebedor, valor (se presente) e outros metadados do QR Code. PayZu processa QR Code dinâmico e estático.
     # @param post_pix_qrcode_read_request [PostPixQrcodeReadRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(QRCodeReadResponse, Integer, Hash)>] QRCodeReadResponse data, response status code and response headers

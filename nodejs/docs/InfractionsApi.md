@@ -4,11 +4,11 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getInfractions**](InfractionsApi.md#getinfractions) | **GET** /user/infractions | List Infractions |
-| [**getInfractionsById**](InfractionsApi.md#getinfractionsbyid) | **GET** /user/infractions/{id} | Get Infraction |
-| [**getInfractionsDefenseById**](InfractionsApi.md#getinfractionsdefensebyid) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Get Defense |
-| [**getInfractionsDefenses**](InfractionsApi.md#getinfractionsdefenses) | **GET** /user/infractions/{id}/defenses | List Defenses |
-| [**postInfractionsDefense**](InfractionsApi.md#postinfractionsdefense) | **POST** /user/infractions/{id}/defenses | Create Defense |
+| [**getInfractions**](InfractionsApi.md#getinfractions) | **GET** /user/infractions | Listar infrações |
+| [**getInfractionsById**](InfractionsApi.md#getinfractionsbyid) | **GET** /user/infractions/{id} | Obter Infração |
+| [**getInfractionsDefenseById**](InfractionsApi.md#getinfractionsdefensebyid) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Obter Defesa |
+| [**getInfractionsDefenses**](InfractionsApi.md#getinfractionsdefenses) | **GET** /user/infractions/{id}/defenses | Listar Defesas |
+| [**postInfractionsDefense**](InfractionsApi.md#postinfractionsdefense) | **POST** /user/infractions/{id}/defenses | Criar Defesa |
 
 
 
@@ -16,9 +16,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > InfractionListResponse getInfractions(page, limit, status, type, endToEndId, transactionId, amountMin, amountMax, analysisResult, reportedBy, participantDocument, participantName, sortBy, sortDirection, reportedAtFrom, reportedAtTo, createdAtFrom, createdAtTo, expiresAtFrom, expiresAtTo, updatedAtFrom, updatedAtTo, id, protocol)
 
-List Infractions
+Listar infrações
 
-List all infractions for the authenticated user with pagination and filters.
+Lista todas as infrações do usuário autenticado com paginação e filtros.
 
 ### Example
 
@@ -38,53 +38,53 @@ async function example() {
   const api = new InfractionsApi(config);
 
   const body = {
-    // number | Page number. (optional)
+    // number | Número da página. (optional)
     page: 56,
-    // number | Items per page. (optional)
+    // number | Itens por página. (optional)
     limit: 56,
-    // string | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
+    // string | Status da infração, vários separados por vírgula.  `OPEN` `ACKNOWLEDGED` `DEFENDED` `ANSWERED` `WAITING_PSP` `WAITING_ADJUSTMENTS` `CLOSED` `CANCELLED` (optional)
     status: OPEN,
-    // string | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
+    // string | Tipo da infração, vários separados por vírgula.  `REFUND_REQUEST` `FRAUD` `REFUND_CANCELLED` (optional)
     type: REFUND_REQUEST,
-    // string | End-to-end ID of the Pix. (optional)
+    // string | ID end-to-end do Pix. (optional)
     endToEndId: E00000000202508172159kZ8dQ2mNb1x,
-    // string | Transaction ID. (optional)
+    // string | ID da transação. (optional)
     transactionId: PAYZU20260814T6NX1CV9MK000000,
-    // number | Minimum amount. (optional)
+    // number | Valor mínimo. (optional)
     amountMin: 10.9,
-    // number | Maximum amount. (optional)
+    // number | Valor máximo. (optional)
     amountMax: 500,
-    // string | Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
+    // string | AnalysisResult separados por vírgula: AGREED, DISAGREED. (optional)
     analysisResult: AGREED,
-    // string | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
+    // string | Quem abriu a infração, vários separados por vírgula.  `DEBITED_PARTICIPANT` `CREDITED_PARTICIPANT` (optional)
     reportedBy: DEBITED_PARTICIPANT,
-    // string | CPF or CNPJ of the participant. (optional)
+    // string | CPF ou CNPJ do participante. (optional)
     participantDocument: 12345678901,
-    // string | Name of the participant. (optional)
+    // string | Nome do participante. (optional)
     participantName: John Doe,
-    // 'createdAt' | 'updatedAt' | Sort field. (optional)
+    // 'createdAt' | 'updatedAt' | Campo de ordenação. (optional)
     sortBy: sortBy_example,
-    // 'asc' | 'desc' | Sort direction. (optional)
+    // 'asc' | 'desc' | Direção da ordenação. (optional)
     sortDirection: sortDirection_example,
-    // Date | Filter: reportedAt from. (optional)
+    // Date | Filtro: reportedAt a partir de. (optional)
     reportedAtFrom: 2026-08-01,
-    // Date | Filter: reportedAt up to. (optional)
+    // Date | Filtro: reportedAt até. (optional)
     reportedAtTo: 2026-08-31,
-    // Date | Filter: createdAt from. (optional)
+    // Date | Filtro: createdAt a partir de. (optional)
     createdAtFrom: 2026-08-01,
-    // Date | Filter: createdAt up to. (optional)
+    // Date | Filtro: createdAt até. (optional)
     createdAtTo: 2026-08-31,
-    // Date | Filter: expiresAt from. (optional)
+    // Date | Filtro: expiresAt a partir de. (optional)
     expiresAtFrom: 2026-08-01,
-    // Date | Filter: expiresAt up to. (optional)
+    // Date | Filtro: expiresAt até. (optional)
     expiresAtTo: 2026-08-31,
-    // Date | Filter: updatedAt from. (optional)
+    // Date | Filtro: updatedAt a partir de. (optional)
     updatedAtFrom: 2026-08-01,
-    // Date | Filter: updatedAt up to. (optional)
+    // Date | Filtro: updatedAt até. (optional)
     updatedAtTo: 2026-08-31,
-    // string | Filter by infraction ID. (optional)
+    // string | Filtro por ID da infração. (optional)
     id: cm3w7n2p60002q8f2h7d3z5cf,
-    // string | Filter by protocol. (optional)
+    // string | Filtro por protocolo. (optional)
     protocol: 2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210,
   } satisfies GetInfractionsRequest;
 
@@ -105,30 +105,30 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **page** | `number` | Page number. | [Optional] [Defaults to `1`] |
-| **limit** | `number` | Items per page. | [Optional] [Defaults to `10`] |
-| **status** | `string` | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) | [Optional] [Defaults to `undefined`] |
-| **type** | `string` | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) | [Optional] [Defaults to `undefined`] |
-| **endToEndId** | `string` | End-to-end ID of the Pix. | [Optional] [Defaults to `undefined`] |
-| **transactionId** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
-| **amountMin** | `number` | Minimum amount. | [Optional] [Defaults to `undefined`] |
-| **amountMax** | `number` | Maximum amount. | [Optional] [Defaults to `undefined`] |
-| **analysisResult** | `string` | Comma-separated AnalysisResult: AGREED, DISAGREED. | [Optional] [Defaults to `undefined`] |
-| **reportedBy** | `string` | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) | [Optional] [Defaults to `undefined`] |
-| **participantDocument** | `string` | CPF or CNPJ of the participant. | [Optional] [Defaults to `undefined`] |
-| **participantName** | `string` | Name of the participant. | [Optional] [Defaults to `undefined`] |
-| **sortBy** | `createdAt`, `updatedAt` | Sort field. | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, updatedAt] |
-| **sortDirection** | `asc`, `desc` | Sort direction. | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
-| **reportedAtFrom** | `Date` | Filter: reportedAt from. | [Optional] [Defaults to `undefined`] |
-| **reportedAtTo** | `Date` | Filter: reportedAt up to. | [Optional] [Defaults to `undefined`] |
-| **createdAtFrom** | `Date` | Filter: createdAt from. | [Optional] [Defaults to `undefined`] |
-| **createdAtTo** | `Date` | Filter: createdAt up to. | [Optional] [Defaults to `undefined`] |
-| **expiresAtFrom** | `Date` | Filter: expiresAt from. | [Optional] [Defaults to `undefined`] |
-| **expiresAtTo** | `Date` | Filter: expiresAt up to. | [Optional] [Defaults to `undefined`] |
-| **updatedAtFrom** | `Date` | Filter: updatedAt from. | [Optional] [Defaults to `undefined`] |
-| **updatedAtTo** | `Date` | Filter: updatedAt up to. | [Optional] [Defaults to `undefined`] |
-| **id** | `string` | Filter by infraction ID. | [Optional] [Defaults to `undefined`] |
-| **protocol** | `string` | Filter by protocol. | [Optional] [Defaults to `undefined`] |
+| **page** | `number` | Número da página. | [Optional] [Defaults to `1`] |
+| **limit** | `number` | Itens por página. | [Optional] [Defaults to `10`] |
+| **status** | `string` | Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; | [Optional] [Defaults to `undefined`] |
+| **type** | `string` | Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; | [Optional] [Defaults to `undefined`] |
+| **endToEndId** | `string` | ID end-to-end do Pix. | [Optional] [Defaults to `undefined`] |
+| **transactionId** | `string` | ID da transação. | [Optional] [Defaults to `undefined`] |
+| **amountMin** | `number` | Valor mínimo. | [Optional] [Defaults to `undefined`] |
+| **amountMax** | `number` | Valor máximo. | [Optional] [Defaults to `undefined`] |
+| **analysisResult** | `string` | AnalysisResult separados por vírgula: AGREED, DISAGREED. | [Optional] [Defaults to `undefined`] |
+| **reportedBy** | `string` | Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; | [Optional] [Defaults to `undefined`] |
+| **participantDocument** | `string` | CPF ou CNPJ do participante. | [Optional] [Defaults to `undefined`] |
+| **participantName** | `string` | Nome do participante. | [Optional] [Defaults to `undefined`] |
+| **sortBy** | `createdAt`, `updatedAt` | Campo de ordenação. | [Optional] [Defaults to `&#39;createdAt&#39;`] [Enum: createdAt, updatedAt] |
+| **sortDirection** | `asc`, `desc` | Direção da ordenação. | [Optional] [Defaults to `&#39;desc&#39;`] [Enum: asc, desc] |
+| **reportedAtFrom** | `Date` | Filtro: reportedAt a partir de. | [Optional] [Defaults to `undefined`] |
+| **reportedAtTo** | `Date` | Filtro: reportedAt até. | [Optional] [Defaults to `undefined`] |
+| **createdAtFrom** | `Date` | Filtro: createdAt a partir de. | [Optional] [Defaults to `undefined`] |
+| **createdAtTo** | `Date` | Filtro: createdAt até. | [Optional] [Defaults to `undefined`] |
+| **expiresAtFrom** | `Date` | Filtro: expiresAt a partir de. | [Optional] [Defaults to `undefined`] |
+| **expiresAtTo** | `Date` | Filtro: expiresAt até. | [Optional] [Defaults to `undefined`] |
+| **updatedAtFrom** | `Date` | Filtro: updatedAt a partir de. | [Optional] [Defaults to `undefined`] |
+| **updatedAtTo** | `Date` | Filtro: updatedAt até. | [Optional] [Defaults to `undefined`] |
+| **id** | `string` | Filtro por ID da infração. | [Optional] [Defaults to `undefined`] |
+| **protocol** | `string` | Filtro por protocolo. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -147,9 +147,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of infractions with pagination |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+| **200** | Lista de infrações com paginação |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -158,9 +159,9 @@ example().catch(console.error);
 
 > InfractionDetail getInfractionsById(id)
 
-Get Infraction
+Obter Infração
 
-Get a specific infraction by ID.
+Obtém uma infração específica por ID.
 
 ### Example
 
@@ -180,7 +181,7 @@ async function example() {
   const api = new InfractionsApi(config);
 
   const body = {
-    // string | Infraction ID
+    // string | ID da infração
     id: cm3w7n2p60002q8f2h7d3z5cf,
   } satisfies GetInfractionsByIdRequest;
 
@@ -201,7 +202,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Infraction ID | [Defaults to `undefined`] |
+| **id** | `string` | ID da infração | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -220,9 +221,10 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Infraction details |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Infraction not found |  -  |
+| **200** | Detalhes da infração |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Infração não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -231,9 +233,9 @@ example().catch(console.error);
 
 > Defense getInfractionsDefenseById(infractionId, defenseId)
 
-Get Defense
+Obter Defesa
 
-Get a specific defense for an infraction.
+Obtém uma defesa específica de uma infração.
 
 ### Example
 
@@ -253,9 +255,9 @@ async function example() {
   const api = new InfractionsApi(config);
 
   const body = {
-    // string | Infraction ID
+    // string | ID da infração
     infractionId: cm3w7n2p60002q8f2h7d3z5cf,
-    // string | Defense ID
+    // string | ID da defesa
     defenseId: cm3w7p5r90003q8f2j8e4a6dg,
   } satisfies GetInfractionsDefenseByIdRequest;
 
@@ -276,8 +278,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **infractionId** | `string` | Infraction ID | [Defaults to `undefined`] |
-| **defenseId** | `string` | Defense ID | [Defaults to `undefined`] |
+| **infractionId** | `string` | ID da infração | [Defaults to `undefined`] |
+| **defenseId** | `string` | ID da defesa | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -296,20 +298,21 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Defense details |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Defense not found |  -  |
+| **200** | Detalhes da defesa |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Defesa não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getInfractionsDefenses
 
-> Array&lt;Defense&gt; getInfractionsDefenses(id)
+> Array&lt;DefenseListItem&gt; getInfractionsDefenses(id)
 
-List Defenses
+Listar Defesas
 
-List all defenses for a specific infraction.
+Lista todas as defesas de uma infração específica.
 
 ### Example
 
@@ -329,7 +332,7 @@ async function example() {
   const api = new InfractionsApi(config);
 
   const body = {
-    // string | Infraction ID
+    // string | ID da infração
     id: cm3w7n2p60002q8f2h7d3z5cf,
   } satisfies GetInfractionsDefensesRequest;
 
@@ -350,11 +353,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Infraction ID | [Defaults to `undefined`] |
+| **id** | `string` | ID da infração | [Defaults to `undefined`] |
 
 ### Return type
 
-[**Array&lt;Defense&gt;**](Defense.md)
+[**Array&lt;DefenseListItem&gt;**](DefenseListItem.md)
 
 ### Authorization
 
@@ -369,8 +372,9 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of defenses |  -  |
-| **401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+| **200** | Lista de defesas |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -379,9 +383,9 @@ example().catch(console.error);
 
 > Defense postInfractionsDefense(id, defense, files)
 
-Create Defense
+Criar Defesa
 
-Create a defense for a specific infraction.
+Cria uma defesa para uma infração específica.
 
 ### Example
 
@@ -401,11 +405,11 @@ async function example() {
   const api = new InfractionsApi(config);
 
   const body = {
-    // string | Infraction ID
+    // string | ID da infração
     id: cm3w7n2p60002q8f2h7d3z5cf,
-    // string | Defense text (max: 1000 characters)
+    // string | Texto da defesa (máx: 1000 caracteres)
     defense: defense_example,
-    // Array<Blob> | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
+    // Array<Blob> | Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. (optional)
     files: /path/to/file.txt,
   } satisfies PostInfractionsDefenseRequest;
 
@@ -426,9 +430,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Infraction ID | [Defaults to `undefined`] |
-| **defense** | `string` | Defense text (max: 1000 characters) | [Defaults to `undefined`] |
-| **files** | `Array<Blob>` | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. | [Optional] |
+| **id** | `string` | ID da infração | [Defaults to `undefined`] |
+| **defense** | `string` | Texto da defesa (máx: 1000 caracteres) | [Defaults to `undefined`] |
+| **files** | `Array<Blob>` | Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. | [Optional] |
 
 ### Return type
 
@@ -447,13 +451,13 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Defense created |  -  |
-| **400** | Invalid request or file: files above 10 MB in total or with a blocked extension |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Infraction not found |  -  |
-| **413** | More than 5 files or a single file larger than 10 MB |  -  |
-| **422** | Infraction not open for defense |  -  |
+| **201** | Defesa criada |  -  |
+| **400** | Requisição ou arquivo inválido: arquivos acima de 10 MB no total ou com extensão bloqueada |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Infração não encontrada |  -  |
+| **413** | Mais de 5 arquivos ou um arquivo maior que 10 MB |  -  |
+| **422** | Infração não aberta para defesa |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

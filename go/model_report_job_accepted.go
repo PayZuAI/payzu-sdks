@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -18,22 +18,22 @@ import (
 // checks if the ReportJobAccepted type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReportJobAccepted{}
 
-// ReportJobAccepted Report job just queued.
+// ReportJobAccepted Job de relatório recém-enfileirado.
 type ReportJobAccepted struct {
-	// Report identifier (UUID), generated when the report is requested.
+	// Identificador (UUID) do relatório, gerado no momento da solicitação.
 	Id *string `json:"id,omitempty"`
-	// Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+	// Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
 	Status *string `json:"status,omitempty"`
-	// Date and time the report generation was requested.
+	// Data e hora em que a geração do relatório foi solicitada.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Date and time of the last change to the report record.
+	// Data e hora da última alteração no registro do relatório.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	// Filters used when the report was created.
+	// Filtros usados na criação do relatório.
 	Params map[string]interface{} `json:"params,omitempty"`
-	// Rows written to the file. Null until the report is COMPLETED.
+	// Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED.
 	WrittenRows NullableInt32 `json:"writtenRows,omitempty"`
-	// Date the report file expires.
-	StorageExpiresAt NullableTime `json:"storageExpiresAt,omitempty"`
+	// Data em que o arquivo do relatório expira.
+	ExpiresAt NullableTime `json:"expiresAt,omitempty"`
 }
 
 // NewReportJobAccepted instantiates a new ReportJobAccepted object
@@ -255,46 +255,46 @@ func (o *ReportJobAccepted) UnsetWrittenRows() {
 	o.WrittenRows.Unset()
 }
 
-// GetStorageExpiresAt returns the StorageExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ReportJobAccepted) GetStorageExpiresAt() time.Time {
-	if o == nil || IsNil(o.StorageExpiresAt.Get()) {
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReportJobAccepted) GetExpiresAt() time.Time {
+	if o == nil || IsNil(o.ExpiresAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.StorageExpiresAt.Get()
+	return *o.ExpiresAt.Get()
 }
 
-// GetStorageExpiresAtOk returns a tuple with the StorageExpiresAt field value if set, nil otherwise
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReportJobAccepted) GetStorageExpiresAtOk() (*time.Time, bool) {
+func (o *ReportJobAccepted) GetExpiresAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.StorageExpiresAt.Get(), o.StorageExpiresAt.IsSet()
+	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
 }
 
-// HasStorageExpiresAt returns a boolean if a field has been set.
-func (o *ReportJobAccepted) HasStorageExpiresAt() bool {
-	if o != nil && o.StorageExpiresAt.IsSet() {
+// HasExpiresAt returns a boolean if a field has been set.
+func (o *ReportJobAccepted) HasExpiresAt() bool {
+	if o != nil && o.ExpiresAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageExpiresAt gets a reference to the given NullableTime and assigns it to the StorageExpiresAt field.
-func (o *ReportJobAccepted) SetStorageExpiresAt(v time.Time) {
-	o.StorageExpiresAt.Set(&v)
+// SetExpiresAt gets a reference to the given NullableTime and assigns it to the ExpiresAt field.
+func (o *ReportJobAccepted) SetExpiresAt(v time.Time) {
+	o.ExpiresAt.Set(&v)
 }
-// SetStorageExpiresAtNil sets the value for StorageExpiresAt to be an explicit nil
-func (o *ReportJobAccepted) SetStorageExpiresAtNil() {
-	o.StorageExpiresAt.Set(nil)
+// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+func (o *ReportJobAccepted) SetExpiresAtNil() {
+	o.ExpiresAt.Set(nil)
 }
 
-// UnsetStorageExpiresAt ensures that no value is present for StorageExpiresAt, not even an explicit nil
-func (o *ReportJobAccepted) UnsetStorageExpiresAt() {
-	o.StorageExpiresAt.Unset()
+// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+func (o *ReportJobAccepted) UnsetExpiresAt() {
+	o.ExpiresAt.Unset()
 }
 
 func (o ReportJobAccepted) MarshalJSON() ([]byte, error) {
@@ -325,8 +325,8 @@ func (o ReportJobAccepted) ToMap() (map[string]interface{}, error) {
 	if o.WrittenRows.IsSet() {
 		toSerialize["writtenRows"] = o.WrittenRows.Get()
 	}
-	if o.StorageExpiresAt.IsSet() {
-		toSerialize["storageExpiresAt"] = o.StorageExpiresAt.Get()
+	if o.ExpiresAt.IsSet() {
+		toSerialize["expiresAt"] = o.ExpiresAt.Get()
 	}
 	return toSerialize, nil
 }

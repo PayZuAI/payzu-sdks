@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **string** | URL (http or https) that will receive the notifications. |
-**events** | [**\PayZu\Pix\Model\WebhookEventType[]**](WebhookEventType.md) | Events to subscribe to. Omit or leave empty to receive all events. | [optional]
-**generate_secret** | **bool** | Generate an HMAC signing secret for this webhook. | [optional] [default to false]
-**active** | **bool** | Whether the webhook starts active. | [optional] [default to true]
+**url** | **string** | URL que vai receber as notificações: http ou https, pública, sem usuário e senha e sem IPv6 literal. |
+**events** | [**\PayZu\Pix\Model\WebhookEventType[]**](WebhookEventType.md) | Eventos a assinar. | [optional]
+**generate_secret** | **bool** | Gera um segredo de assinatura HMAC para este webhook. | [optional] [default to false]
+**active** | **bool** | Se o webhook começa ativo. | [optional] [default to true]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

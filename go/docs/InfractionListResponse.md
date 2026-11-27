@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Infractions** | Pointer to [**[]InfractionDetail**](InfractionDetail.md) | Infractions of the requested page, each in the same format as the detail. | [optional] 
+**Infractions** | Pointer to [**[]InfractionDetail**](InfractionDetail.md) | Contestações da página solicitada, cada uma no mesmo formato do detalhe. | [optional] 
 **Pagination** | Pointer to [**InfractionListResponsePagination**](InfractionListResponsePagination.md) |  | [optional] 
 
 ## Methods

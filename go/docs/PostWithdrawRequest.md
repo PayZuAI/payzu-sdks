@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float32** | Amount in BRL, with at most 2 decimal places. Must be &gt;&#x3D; 0.01. | 
-**PixKey** | **string** | Destination Pix key in the format of pixType: CPF or CNPJ with valid check digits and no punctuation, phone as +55 followed by area code and number, email, or random key (EVP). | 
-**PixType** | **string** | Pix key type. | 
-**CallbackUrl** | Pointer to **string** | URL for transaction notifications (http or https). | [optional] 
-**ClientReference** | Pointer to **string** | External reference for this withdrawal. Repeating it with the same amount and key returns the existing withdrawal; with different data, the request is rejected with PZC210. | [optional] 
-**Description** | Pointer to **string** | Optional description. | [optional] 
-**VirtualAccount** | Pointer to **string** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
+**Amount** | **float32** | Valor em BRL, com no máximo 2 casas decimais. Mínimo de 0,01. | 
+**PixKey** | **string** | Chave Pix de destino no formato do pixType: CPF ou CNPJ com dígitos verificadores válidos e sem pontuação, celular como +55 seguido de DDD e número, e-mail ou chave aleatória (EVP). | 
+**PixType** | **string** | Tipo da chave Pix. | 
+**CallbackUrl** | Pointer to **string** | URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal. | [optional] 
+**ClientReference** | Pointer to **string** | Referência externa deste saque. Repetida com o mesmo valor e a mesma chave, devolve o saque já criado; com dados diferentes, a requisição é recusada com PZC210. | [optional] 
+**Description** | Pointer to **string** | Descrição opcional. | [optional] 
+**VirtualAccount** | Pointer to **string** | Subconta para separar lojas ou filiais. | [optional] 
 
 ## Methods
 

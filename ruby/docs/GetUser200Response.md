@@ -4,17 +4,16 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_number** | **String** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] |
-| **branch** | **String** | Branch number (4 digits). | [optional] |
-| **name** | **String** | Registered name of the account. | [optional] |
-| **role** | **String** | Account role. | [optional] |
-| **balance_available** | **Float** | Balance free for withdrawals and transfers, in reais. | [optional] |
-| **balance_blocked** | **Float** | Part of the balance held, in reais. | [optional] |
-| **status** | **String** | Account status. | [optional] |
-| **cash_in_ticket_min** | **Float** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] |
-| **cash_in_ticket_max** | **Float** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] |
-| **cash_out_ticket_min** | **Float** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] |
-| **cash_out_ticket_max** | **Float** | Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused. | [optional] |
+| **account_number** | **String** | Identificador público da conta. | [optional] |
+| **branch** | **String** | Agência da conta. | [optional] |
+| **name** | **String** | Nome cadastrado da conta. | [optional] |
+| **balance_available** | **Float** | Saldo livre para saques e transferências, em reais. | [optional] |
+| **balance_blocked** | **Float** | Parte do saldo retida, em reais. | [optional] |
+| **status** | **String** | Situação da conta. | [optional] |
+| **cash_in_ticket_min** | **Float** | Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada. | [optional] |
+| **cash_in_ticket_max** | **Float** | Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada. | [optional] |
+| **cash_out_ticket_min** | **Float** | Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado. | [optional] |
+| **cash_out_ticket_max** | **Float** | Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado. | [optional] |
 | **service_fee** | [**GetUser200ResponseServiceFee**](GetUser200ResponseServiceFee.md) |  | [optional] |
 | **daily_withdraw_limit** | [**GetUser200ResponseDailyWithdrawLimit**](GetUser200ResponseDailyWithdrawLimit.md) |  | [optional] |
 
@@ -27,7 +26,6 @@ instance = PayZuPix::GetUser200Response.new(
   account_number: null,
   branch: 0001,
   name: null,
-  role: null,
   balance_available: null,
   balance_blocked: null,
   status: null,

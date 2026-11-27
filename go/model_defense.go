@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,19 +20,19 @@ var _ MappedNullable = &Defense{}
 
 // Defense struct for Defense
 type Defense struct {
-	// Defense identifier.
+	// Identificador da defesa.
 	Id *string `json:"id,omitempty"`
-	// Defense text
+	// Texto da defesa
 	Defense *string `json:"defense,omitempty"`
-	// Defense status
+	// Status da defesa
 	Status *string `json:"status,omitempty"`
-	// Identifies the infraction the defense belongs to.
+	// Identifica a contestação a que a defesa pertence.
 	InfractionId *string `json:"infractionId,omitempty"`
-	// Moment the defense was recorded at PayZu, saved together with the uploaded files.
+	// Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Moment of the last change to the defense.
+	// Momento da última alteração da defesa.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	// Files sent with the defense, with name, type and size in bytes.
+	// Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes.
 	Files []DefenseFilesInner `json:"files,omitempty"`
 }
 

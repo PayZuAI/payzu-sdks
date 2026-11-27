@@ -1,7 +1,7 @@
 
 # QRCodeReadResponse
 
-Decoded information from a Pix QR Code.
+Informações decodificadas de um QR Code Pix.
 
 ## Properties
 
@@ -15,7 +15,7 @@ Name | Type
 `txid` | string
 `additionalInfo` | string
 `expiresIn` | number
-`createdAt` | Date
+`createdAt` | string
 `amountEditable` | boolean
 `dueDate` | string
 

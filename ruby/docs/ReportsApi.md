@@ -4,26 +4,26 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**download_user_report**](ReportsApi.md#download_user_report) | **POST** /user/report/{id}/download | Download report |
-| [**get_user_bank_statement**](ReportsApi.md#get_user_bank_statement) | **GET** /user/bank-statements/{id} | Get bank statement |
-| [**get_user_bank_statements**](ReportsApi.md#get_user_bank_statements) | **GET** /user/bank-statements | List bank statements |
-| [**get_user_deposit_pending**](ReportsApi.md#get_user_deposit_pending) | **GET** /user/deposit-pending | List pending deposits |
-| [**get_user_deposit_pending_by_id**](ReportsApi.md#get_user_deposit_pending_by_id) | **GET** /user/deposit-pending/{id} | Get pending deposit |
-| [**get_user_report**](ReportsApi.md#get_user_report) | **GET** /user/report/{id} | Get report job status |
-| [**get_user_summary**](ReportsApi.md#get_user_summary) | **GET** /user/summary | Transaction summary |
-| [**get_user_transaction_by_id**](ReportsApi.md#get_user_transaction_by_id) | **GET** /user/transactions/{id} | List transaction details |
-| [**get_user_transactions**](ReportsApi.md#get_user_transactions) | **GET** /user/transactions | List Transactions |
-| [**list_user_reports**](ReportsApi.md#list_user_reports) | **GET** /user/report | List report jobs |
-| [**post_user_report**](ReportsApi.md#post_user_report) | **POST** /user/report | Generate transactions report |
+| [**download_user_report**](ReportsApi.md#download_user_report) | **POST** /user/report/{id}/download | Baixar relatório |
+| [**get_user_bank_statement**](ReportsApi.md#get_user_bank_statement) | **GET** /user/bank-statements/{id} | Consultar lançamento |
+| [**get_user_bank_statements**](ReportsApi.md#get_user_bank_statements) | **GET** /user/bank-statements | Listar extrato |
+| [**get_user_deposit_pending**](ReportsApi.md#get_user_deposit_pending) | **GET** /user/deposit-pending | Listar depósitos via chave Pix |
+| [**get_user_deposit_pending_by_id**](ReportsApi.md#get_user_deposit_pending_by_id) | **GET** /user/deposit-pending/{id} | Consultar depósito via chave Pix |
+| [**get_user_report**](ReportsApi.md#get_user_report) | **GET** /user/report/{id} | Consultar status do relatório |
+| [**get_user_summary**](ReportsApi.md#get_user_summary) | **GET** /user/summary | Resumo de transações |
+| [**get_user_transaction_by_id**](ReportsApi.md#get_user_transaction_by_id) | **GET** /user/transactions/{id} | Listar detalhes da transação |
+| [**get_user_transactions**](ReportsApi.md#get_user_transactions) | **GET** /user/transactions | Listar transações |
+| [**list_user_reports**](ReportsApi.md#list_user_reports) | **GET** /user/report | Listar jobs de relatório |
+| [**post_user_report**](ReportsApi.md#post_user_report) | **POST** /user/report | Gerar relatório de transações |
 
 
 ## download_user_report
 
 > <DownloadUserReport200Response> download_user_report(id)
 
-Download report
+Baixar relatório
 
-Returns a short-lived signed URL to download the CSV file.
+Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
 
 ### Examples
 
@@ -37,10 +37,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-id = '01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' # String | Report ID.
+id = '01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' # String | ID do relatório.
 
 begin
-  # Download report
+  # Baixar relatório
   result = api_instance.download_user_report(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -56,7 +56,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Download report
+  # Baixar relatório
   data, status_code, headers = api_instance.download_user_report_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -70,7 +70,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Report ID. |  |
+| **id** | **String** | ID do relatório. |  |
 
 ### Return type
 
@@ -90,9 +90,9 @@ end
 
 > <BankStatement> get_user_bank_statement(id)
 
-Get bank statement
+Consultar lançamento
 
-Returns a single statement entry.
+Retorna um lançamento do extrato.
 
 ### Examples
 
@@ -106,10 +106,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-id = 'cm3w7q8s10004q8f2k9f5b7eh' # String | Statement entry id.
+id = 'cm3w7q8s10004q8f2k9f5b7eh' # String | Id do lançamento do extrato.
 
 begin
-  # Get bank statement
+  # Consultar lançamento
   result = api_instance.get_user_bank_statement(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -125,7 +125,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get bank statement
+  # Consultar lançamento
   data, status_code, headers = api_instance.get_user_bank_statement_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -139,7 +139,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Statement entry id. |  |
+| **id** | **String** | Id do lançamento do extrato. |  |
 
 ### Return type
 
@@ -159,9 +159,9 @@ end
 
 > <BankStatementListResponse> get_user_bank_statements(created_at_from, created_at_to, opts)
 
-List bank statements
+Listar extrato
 
-Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
 
 ### Examples
 
@@ -175,23 +175,23 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-created_at_from = Time.parse('2026-08-01T00:00:00-03:00') # Time | Start date (required).
-created_at_to = Time.parse('2026-08-31T23:59:59-03:00') # Time | End date (required).
+created_at_from = Time.parse('2026-08-01T00:00:00-03:00') # Time | Data inicial (obrigatória).
+created_at_to = Time.parse('2026-08-31T23:59:59-03:00') # Time | Data final (obrigatória).
 opts = {
-  id: 'cm3w7q8s10004q8f2k9f5b7eh', # String | Entry ID.
-  operation: 'INCREMENT', # String | Operation type.  `INCREMENT` `DECREMENT`
-  reason: 'Estorno', # String | Reason for the entry.
-  transaction_id: 'PAYZU20260814T6NX1CV9MK000000', # String | Transaction ID.
-  amount_from: 10.9, # Float | Minimum amount.
-  amount_to: 500, # Float | Maximum amount.
-  page: 56, # Integer | Page number.
-  limit: 56, # Integer | Items per page.
-  sort_by: 'createdAt', # String | Sort field.
-  sort_direction: 'asc' # String | Sort direction.
+  id: 'cm3w7q8s10004q8f2k9f5b7eh', # String | ID do lançamento.
+  operation: 'INCREMENT', # String | Tipo de operação.  `INCREMENT` `DECREMENT`
+  reason: 'PIX_DEPOSIT', # String | Razão do lançamento.
+  transaction_id: 'PAYZU20260814T6NX1CV9MK000000', # String | ID da transação.
+  amount_from: 10.9, # Float | Valor mínimo.
+  amount_to: 500, # Float | Valor máximo.
+  page: 56, # Integer | Número da página.
+  limit: 56, # Integer | Itens por página.
+  sort_by: 'createdAt', # String | Campo de ordenação.
+  sort_direction: 'asc' # String | Direção da ordenação.
 }
 
 begin
-  # List bank statements
+  # Listar extrato
   result = api_instance.get_user_bank_statements(created_at_from, created_at_to, opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -207,7 +207,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List bank statements
+  # Listar extrato
   data, status_code, headers = api_instance.get_user_bank_statements_with_http_info(created_at_from, created_at_to, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -221,18 +221,18 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **created_at_from** | **Time** | Start date (required). |  |
-| **created_at_to** | **Time** | End date (required). |  |
-| **id** | **String** | Entry ID. | [optional] |
-| **operation** | **String** | Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] |
-| **reason** | **String** | Reason for the entry. | [optional] |
-| **transaction_id** | **String** | Transaction ID. | [optional] |
-| **amount_from** | **Float** | Minimum amount. | [optional] |
-| **amount_to** | **Float** | Maximum amount. | [optional] |
-| **page** | **Integer** | Page number. | [optional][default to 1] |
-| **limit** | **Integer** | Items per page. | [optional][default to 10] |
-| **sort_by** | **String** | Sort field. | [optional][default to &#39;createdAt&#39;] |
-| **sort_direction** | **String** | Sort direction. | [optional][default to &#39;desc&#39;] |
+| **created_at_from** | **Time** | Data inicial (obrigatória). |  |
+| **created_at_to** | **Time** | Data final (obrigatória). |  |
+| **id** | **String** | ID do lançamento. | [optional] |
+| **operation** | **String** | Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] |
+| **reason** | **String** | Razão do lançamento. | [optional] |
+| **transaction_id** | **String** | ID da transação. | [optional] |
+| **amount_from** | **Float** | Valor mínimo. | [optional] |
+| **amount_to** | **Float** | Valor máximo. | [optional] |
+| **page** | **Integer** | Número da página. | [optional][default to 1] |
+| **limit** | **Integer** | Itens por página. | [optional][default to 10] |
+| **sort_by** | **String** | Campo de ordenação. | [optional][default to &#39;createdAt&#39;] |
+| **sort_direction** | **String** | Direção da ordenação. | [optional][default to &#39;desc&#39;] |
 
 ### Return type
 
@@ -252,9 +252,9 @@ end
 
 > <DepositPendingListResponse> get_user_deposit_pending(opts)
 
-List pending deposits
+Listar depósitos via chave Pix
 
-Lists deposits that are pending / not yet reconciled.
+Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
 
 ### Examples
 
@@ -269,20 +269,20 @@ end
 
 api_instance = PayZuPix::ReportsApi.new
 opts = {
-  status: 'PENDING', # String | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-  document: '12345678901', # String | CPF or CNPJ, digits only.
-  name: 'John Doe', # String | Name of the payer or receiver.
-  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | End-to-end ID of the Pix.
-  amount_min: 10.9, # Float | Minimum amount.
-  amount_max: 500, # Float | Maximum amount.
-  created_at_from: Time.parse('2026-08-01'), # Time | Start of the creation date range.
-  created_at_to: Time.parse('2026-08-31'), # Time | End of the creation date range.
-  page: 56, # Integer | Page number.
-  limit: 56 # Integer | Items per page.
+  status: 'PENDING', # String | Status do depósito, vários separados por vírgula.  `PENDING` `APPROVED` `REJECTED` `EXPIRED` `COMPLETED`
+  document: '12345678901', # String | CPF ou CNPJ, apenas dígitos.
+  name: 'John Doe', # String | Nome do pagador ou recebedor.
+  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | ID end-to-end do Pix.
+  amount_min: 10.9, # Float | Valor mínimo.
+  amount_max: 500, # Float | Valor máximo.
+  created_at_from: Time.parse('2026-08-01'), # Time | Data de criação inicial.
+  created_at_to: Time.parse('2026-08-31'), # Time | Data de criação final.
+  page: 56, # Integer | Número da página. Valor inválido vira 1.
+  limit: 56 # Integer | Itens por página. Valor inválido vira 20.
 }
 
 begin
-  # List pending deposits
+  # Listar depósitos via chave Pix
   result = api_instance.get_user_deposit_pending(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -298,7 +298,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List pending deposits
+  # Listar depósitos via chave Pix
   data, status_code, headers = api_instance.get_user_deposit_pending_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -312,16 +312,16 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **status** | **String** | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [optional] |
-| **document** | **String** | CPF or CNPJ, digits only. | [optional] |
-| **name** | **String** | Name of the payer or receiver. | [optional] |
-| **end_to_end_id** | **String** | End-to-end ID of the Pix. | [optional] |
-| **amount_min** | **Float** | Minimum amount. | [optional] |
-| **amount_max** | **Float** | Maximum amount. | [optional] |
-| **created_at_from** | **Time** | Start of the creation date range. | [optional] |
-| **created_at_to** | **Time** | End of the creation date range. | [optional] |
-| **page** | **Integer** | Page number. | [optional][default to 1] |
-| **limit** | **Integer** | Items per page. | [optional][default to 20] |
+| **status** | **String** | Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; | [optional] |
+| **document** | **String** | CPF ou CNPJ, apenas dígitos. | [optional] |
+| **name** | **String** | Nome do pagador ou recebedor. | [optional] |
+| **end_to_end_id** | **String** | ID end-to-end do Pix. | [optional] |
+| **amount_min** | **Float** | Valor mínimo. | [optional] |
+| **amount_max** | **Float** | Valor máximo. | [optional] |
+| **created_at_from** | **Time** | Data de criação inicial. | [optional] |
+| **created_at_to** | **Time** | Data de criação final. | [optional] |
+| **page** | **Integer** | Número da página. Valor inválido vira 1. | [optional][default to 1] |
+| **limit** | **Integer** | Itens por página. Valor inválido vira 20. | [optional][default to 20] |
 
 ### Return type
 
@@ -341,9 +341,9 @@ end
 
 > <DepositPending> get_user_deposit_pending_by_id(id)
 
-Get pending deposit
+Consultar depósito via chave Pix
 
-Returns a single pending deposit.
+Retorna um depósito via chave Pix.
 
 ### Examples
 
@@ -357,10 +357,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-id = 'cm3w7r1u50005q8f2m1g6c8fj' # String | Pending deposit id.
+id = 'cm3w7r1u50005q8f2m1g6c8fj' # String | Id do depósito pendente.
 
 begin
-  # Get pending deposit
+  # Consultar depósito via chave Pix
   result = api_instance.get_user_deposit_pending_by_id(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -376,7 +376,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get pending deposit
+  # Consultar depósito via chave Pix
   data, status_code, headers = api_instance.get_user_deposit_pending_by_id_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -390,7 +390,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Pending deposit id. |  |
+| **id** | **String** | Id do depósito pendente. |  |
 
 ### Return type
 
@@ -410,9 +410,9 @@ end
 
 > <ReportJobDetail> get_user_report(id)
 
-Get report job status
+Consultar status do relatório
 
-Returns the status and metadata of a specific report job by `id`.
+Retorna o status e os metadados de um job de relatório específico pelo `id`.
 
 ### Examples
 
@@ -426,10 +426,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-id = '01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' # String | Report ID.
+id = '01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78' # String | ID do relatório.
 
 begin
-  # Get report job status
+  # Consultar status do relatório
   result = api_instance.get_user_report(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -445,7 +445,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get report job status
+  # Consultar status do relatório
   data, status_code, headers = api_instance.get_user_report_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -459,7 +459,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Report ID. |  |
+| **id** | **String** | ID do relatório. |  |
 
 ### Return type
 
@@ -479,9 +479,9 @@ end
 
 > <Summary> get_user_summary(opts)
 
-Transaction summary
+Resumo de transações
 
-Aggregated totals for deposits, withdrawals and commission over a period.
+Totais agregados de depósitos, saques e comissão num período.
 
 ### Examples
 
@@ -496,14 +496,14 @@ end
 
 api_instance = PayZuPix::ReportsApi.new
 opts = {
-  date_from: Time.parse('2026-08-01T00:00:00-03:00'), # Time | Start date. Default: start of the previous day (America/Sao_Paulo).
-  date_to: Time.parse('2026-08-31T23:59:59-03:00'), # Time | End date. Default: now.
-  group_by: 'day', # String | Grouping applied to the transactions.
-  grouped: true # Boolean | When true, returns a series grouped by date.
+  date_from: Time.parse('2026-08-01T00:00:00-03:00'), # Time | Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
+  date_to: Time.parse('2026-08-31T23:59:59-03:00'), # Time | Data final. Padrão: agora.
+  group_by: 'day', # String | Agrupamento das transações.
+  grouped: true # Boolean | Quando true, retorna uma série agrupada por data.
 }
 
 begin
-  # Transaction summary
+  # Resumo de transações
   result = api_instance.get_user_summary(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -519,7 +519,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Transaction summary
+  # Resumo de transações
   data, status_code, headers = api_instance.get_user_summary_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -533,10 +533,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **date_from** | **Time** | Start date. Default: start of the previous day (America/Sao_Paulo). | [optional] |
-| **date_to** | **Time** | End date. Default: now. | [optional] |
-| **group_by** | **String** | Grouping applied to the transactions. | [optional][default to &#39;day&#39;] |
-| **grouped** | **Boolean** | When true, returns a series grouped by date. | [optional] |
+| **date_from** | **Time** | Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). | [optional] |
+| **date_to** | **Time** | Data final. Padrão: agora. | [optional] |
+| **group_by** | **String** | Agrupamento das transações. | [optional][default to &#39;day&#39;] |
+| **grouped** | **Boolean** | Quando true, retorna uma série agrupada por data. | [optional] |
 
 ### Return type
 
@@ -556,9 +556,9 @@ end
 
 > <GetUserTransactionById200Response> get_user_transaction_by_id(id)
 
-List transaction details
+Listar detalhes da transação
 
-Retrieve a single transaction with its callback log and linked infractions.
+Recupera uma única transação com seu log de callback e as infrações vinculadas.
 
 ### Examples
 
@@ -572,10 +572,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::ReportsApi.new
-id = 'PAYZU20260814T6NX1CV9MK000000' # String | Transaction ID.
+id = 'PAYZU20260814T6NX1CV9MK000000' # String | ID da transação.
 
 begin
-  # List transaction details
+  # Listar detalhes da transação
   result = api_instance.get_user_transaction_by_id(id)
   p result
 rescue PayZuPix::ApiError => e
@@ -591,7 +591,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List transaction details
+  # Listar detalhes da transação
   data, status_code, headers = api_instance.get_user_transaction_by_id_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -605,7 +605,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Transaction ID. |  |
+| **id** | **String** | ID da transação. |  |
 
 ### Return type
 
@@ -625,9 +625,9 @@ end
 
 > <GetUserTransactions200Response> get_user_transactions(opts)
 
-List Transactions
+Listar transações
 
-Paginated list of account transactions with filters.
+Lista paginada das transações da conta com filtros.
 
 ### Examples
 
@@ -642,27 +642,27 @@ end
 
 api_instance = PayZuPix::ReportsApi.new
 opts = {
-  date_from: Time.parse('2026-08-01T00:00:00-03:00'), # Time | Start date-time (ISO 8601).
-  date_to: Time.parse('2026-08-31T23:59:59-03:00'), # Time | End date-time (ISO 8601).
-  limit: 10, # Integer | Items per page (max 1000).
-  page: 1, # Integer | Page number (default 1).
-  id: 'PAYZU20260814T6NX1CV9MK000000', # String | Transaction ID.
-  status: 'COMPLETED', # String | Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-  type: 'DEPOSIT', # String | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
-  method: 'PIX', # String | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
-  amount: 15000, # Float | Amount filter. Minimum 0.01.
-  document: '12345678901', # String | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
-  name: 'Alice', # String | Name filter.
-  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | Pix end-to-end ID.
-  sort_by: 'createdAt', # String | Field to sort by
-  sort_direction: 'asc', # String | Sort direction
-  client_reference: 'order_12345', # String | Filter by external reference
-  virtual_account: 'loja-centro-01', # String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
-  has_qr_code: true # Boolean | Only transactions with (true) or without (false) QR Code.
+  date_from: Time.parse('2026-08-01T00:00:00-03:00'), # Time | Data-hora inicial (ISO 8601).
+  date_to: Time.parse('2026-08-31T23:59:59-03:00'), # Time | Data-hora final (ISO 8601).
+  limit: 10, # Integer | Itens por página.
+  page: 1, # Integer | Número da página.
+  id: 'PAYZU20260814T6NX1CV9MK000000', # String | ID da transação.
+  status: 'COMPLETED', # String | Status da transação, vários separados por vírgula.  `PENDING` `COMPLETED` `CANCELED` `WAITING_FOR_REFUND` `REFUNDED` `EXPIRED` `ERROR`
+  type: 'DEPOSIT', # String | Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+  method: 'PIX', # String | Trilho da transação, vários separados por vírgula.  `PIX` `INTERNAL_TRANSFER` `BANK_SLIP` `TED`
+  amount: 15000, # Float | Filtro por valor. Mínimo 0.01.
+  document: '12345678901', # String | CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
+  name: 'Alice', # String | Filtro por nome.
+  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | ID end-to-end do Pix.
+  sort_by: 'createdAt', # String | Campo pelo qual ordenar
+  sort_direction: 'asc', # String | Direção da ordenação
+  client_reference: 'order_12345', # String | Filtra por referência externa
+  virtual_account: 'loja-centro-01', # String | Subconta usada na criação.
+  has_qr_code: true # Boolean | Só transações com (true) ou sem (false) QR Code.
 }
 
 begin
-  # List Transactions
+  # Listar transações
   result = api_instance.get_user_transactions(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -678,7 +678,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List Transactions
+  # Listar transações
   data, status_code, headers = api_instance.get_user_transactions_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -692,23 +692,23 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **date_from** | **Time** | Start date-time (ISO 8601). | [optional] |
-| **date_to** | **Time** | End date-time (ISO 8601). | [optional] |
-| **limit** | **Integer** | Items per page (max 1000). | [optional][default to 10] |
-| **page** | **Integer** | Page number (default 1). | [optional][default to 1] |
-| **id** | **String** | Transaction ID. | [optional] |
-| **status** | **String** | Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [optional] |
-| **type** | **String** | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] |
-| **method** | **String** | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | [optional] |
-| **amount** | **Float** | Amount filter. Minimum 0.01. | [optional] |
-| **document** | **String** | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [optional] |
-| **name** | **String** | Name filter. | [optional] |
-| **end_to_end_id** | **String** | Pix end-to-end ID. | [optional] |
-| **sort_by** | **String** | Field to sort by | [optional][default to &#39;createdAt&#39;] |
-| **sort_direction** | **String** | Sort direction | [optional][default to &#39;desc&#39;] |
-| **client_reference** | **String** | Filter by external reference | [optional] |
-| **virtual_account** | **String** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
-| **has_qr_code** | **Boolean** | Only transactions with (true) or without (false) QR Code. | [optional] |
+| **date_from** | **Time** | Data-hora inicial (ISO 8601). | [optional] |
+| **date_to** | **Time** | Data-hora final (ISO 8601). | [optional] |
+| **limit** | **Integer** | Itens por página. | [optional][default to 10] |
+| **page** | **Integer** | Número da página. | [optional][default to 1] |
+| **id** | **String** | ID da transação. | [optional] |
+| **status** | **String** | Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; | [optional] |
+| **type** | **String** | Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] |
+| **method** | **String** | Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; | [optional] |
+| **amount** | **Float** | Filtro por valor. Mínimo 0.01. | [optional] |
+| **document** | **String** | CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. | [optional] |
+| **name** | **String** | Filtro por nome. | [optional] |
+| **end_to_end_id** | **String** | ID end-to-end do Pix. | [optional] |
+| **sort_by** | **String** | Campo pelo qual ordenar | [optional][default to &#39;createdAt&#39;] |
+| **sort_direction** | **String** | Direção da ordenação | [optional][default to &#39;desc&#39;] |
+| **client_reference** | **String** | Filtra por referência externa | [optional] |
+| **virtual_account** | **String** | Subconta usada na criação. | [optional] |
+| **has_qr_code** | **Boolean** | Só transações com (true) ou sem (false) QR Code. | [optional] |
 
 ### Return type
 
@@ -728,9 +728,9 @@ end
 
 > <ListUserReports200Response> list_user_reports(opts)
 
-List report jobs
+Listar jobs de relatório
 
-List report jobs created by the authenticated user.
+Lista os jobs de relatório criados pelo usuário autenticado.
 
 ### Examples
 
@@ -745,19 +745,19 @@ end
 
 api_instance = PayZuPix::ReportsApi.new
 opts = {
-  page: 56, # Integer | Page number.
-  limit: 56, # Integer | Items per page.
-  status: 'COMPLETED,FAILED', # String | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
-  created_at_from: Time.parse('2026-08-01'), # Time | Filter: created from.
-  created_at_to: Time.parse('2026-08-31'), # Time | Filter: created up to.
-  updated_at_from: Time.parse('2026-08-01'), # Time | Filter: updated from.
-  updated_at_to: Time.parse('2026-08-31'), # Time | Filter: updated up to.
-  sort_by: 'createdAt', # String | Sort field.
-  sort_direction: 'asc' # String | Sort direction.
+  page: 56, # Integer | Número da página.
+  limit: 56, # Integer | Itens por página.
+  status: 'COMPLETED,FAILED', # String | Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
+  created_at_from: Time.parse('2026-08-01'), # Time | Filtro: criado a partir de.
+  created_at_to: Time.parse('2026-08-31'), # Time | Filtro: criado até.
+  updated_at_from: Time.parse('2026-08-01'), # Time | Filtro: atualizado a partir de.
+  updated_at_to: Time.parse('2026-08-31'), # Time | Filtro: atualizado até.
+  sort_by: 'createdAt', # String | Campo de ordenação.
+  sort_direction: 'asc' # String | Direção da ordenação.
 }
 
 begin
-  # List report jobs
+  # Listar jobs de relatório
   result = api_instance.list_user_reports(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -773,7 +773,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List report jobs
+  # Listar jobs de relatório
   data, status_code, headers = api_instance.list_user_reports_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -787,15 +787,15 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **page** | **Integer** | Page number. | [optional][default to 1] |
-| **limit** | **Integer** | Items per page. | [optional][default to 10] |
-| **status** | **String** | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] |
-| **created_at_from** | **Time** | Filter: created from. | [optional] |
-| **created_at_to** | **Time** | Filter: created up to. | [optional] |
-| **updated_at_from** | **Time** | Filter: updated from. | [optional] |
-| **updated_at_to** | **Time** | Filter: updated up to. | [optional] |
-| **sort_by** | **String** | Sort field. | [optional][default to &#39;createdAt&#39;] |
-| **sort_direction** | **String** | Sort direction. | [optional][default to &#39;desc&#39;] |
+| **page** | **Integer** | Número da página. | [optional][default to 1] |
+| **limit** | **Integer** | Itens por página. | [optional][default to 10] |
+| **status** | **String** | Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] |
+| **created_at_from** | **Time** | Filtro: criado a partir de. | [optional] |
+| **created_at_to** | **Time** | Filtro: criado até. | [optional] |
+| **updated_at_from** | **Time** | Filtro: atualizado a partir de. | [optional] |
+| **updated_at_to** | **Time** | Filtro: atualizado até. | [optional] |
+| **sort_by** | **String** | Campo de ordenação. | [optional][default to &#39;createdAt&#39;] |
+| **sort_direction** | **String** | Direção da ordenação. | [optional][default to &#39;desc&#39;] |
 
 ### Return type
 
@@ -815,9 +815,9 @@ end
 
 > <ReportJobAccepted> post_user_report(post_user_report_request)
 
-Generate transactions report
+Gerar relatório de transações
 
-Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
 
 ### Examples
 
@@ -834,7 +834,7 @@ api_instance = PayZuPix::ReportsApi.new
 post_user_report_request = PayZuPix::PostUserReportRequest.new({date_from: Time.parse('2026-07-01T00:00:00Z'), date_to: Time.parse('2026-07-31T23:59:59Z')}) # PostUserReportRequest | 
 
 begin
-  # Generate transactions report
+  # Gerar relatório de transações
   result = api_instance.post_user_report(post_user_report_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -850,7 +850,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Generate transactions report
+  # Gerar relatório de transações
   data, status_code, headers = api_instance.post_user_report_with_http_info(post_user_report_request)
   p status_code # => 2xx
   p headers # => { ... }

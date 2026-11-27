@@ -4,19 +4,19 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_infractions**](InfractionsApi.md#get_infractions) | **GET** /user/infractions | List Infractions
-[**get_infractions_by_id**](InfractionsApi.md#get_infractions_by_id) | **GET** /user/infractions/{id} | Get Infraction
-[**get_infractions_defense_by_id**](InfractionsApi.md#get_infractions_defense_by_id) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Get Defense
-[**get_infractions_defenses**](InfractionsApi.md#get_infractions_defenses) | **GET** /user/infractions/{id}/defenses | List Defenses
-[**post_infractions_defense**](InfractionsApi.md#post_infractions_defense) | **POST** /user/infractions/{id}/defenses | Create Defense
+[**get_infractions**](InfractionsApi.md#get_infractions) | **GET** /user/infractions | Listar infrações
+[**get_infractions_by_id**](InfractionsApi.md#get_infractions_by_id) | **GET** /user/infractions/{id} | Obter Infração
+[**get_infractions_defense_by_id**](InfractionsApi.md#get_infractions_defense_by_id) | **GET** /user/infractions/{infractionId}/defenses/{defenseId} | Obter Defesa
+[**get_infractions_defenses**](InfractionsApi.md#get_infractions_defenses) | **GET** /user/infractions/{id}/defenses | Listar Defesas
+[**post_infractions_defense**](InfractionsApi.md#post_infractions_defense) | **POST** /user/infractions/{id}/defenses | Criar Defesa
 
 
 # **get_infractions**
 > InfractionListResponse get_infractions(page=page, limit=limit, status=status, type=type, end_to_end_id=end_to_end_id, transaction_id=transaction_id, amount_min=amount_min, amount_max=amount_max, analysis_result=analysis_result, reported_by=reported_by, participant_document=participant_document, participant_name=participant_name, sort_by=sort_by, sort_direction=sort_direction, reported_at_from=reported_at_from, reported_at_to=reported_at_to, created_at_from=created_at_from, created_at_to=created_at_to, expires_at_from=expires_at_from, expires_at_to=expires_at_to, updated_at_from=updated_at_from, updated_at_to=updated_at_to, id=id, protocol=protocol)
 
-List Infractions
+Listar infrações
 
-List all infractions for the authenticated user with pagination and filters.
+Lista todas as infrações do usuário autenticado com paginação e filtros.
 
 ### Example
 
@@ -48,33 +48,33 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.InfractionsApi(api_client)
-    page = 1 # int | Page number. (optional) (default to 1)
-    limit = 10 # int | Items per page. (optional) (default to 10)
-    status = 'OPEN' # str | Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
-    type = 'REFUND_REQUEST' # str | Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
-    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | End-to-end ID of the Pix. (optional)
-    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | Transaction ID. (optional)
-    amount_min = 10.9 # float | Minimum amount. (optional)
-    amount_max = 500 # float | Maximum amount. (optional)
-    analysis_result = 'AGREED' # str | Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
-    reported_by = 'DEBITED_PARTICIPANT' # str | Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
-    participant_document = '12345678901' # str | CPF or CNPJ of the participant. (optional)
-    participant_name = 'John Doe' # str | Name of the participant. (optional)
-    sort_by = createdAt # str | Sort field. (optional) (default to createdAt)
-    sort_direction = desc # str | Sort direction. (optional) (default to desc)
-    reported_at_from = '2026-08-01' # datetime | Filter: reportedAt from. (optional)
-    reported_at_to = '2026-08-31' # datetime | Filter: reportedAt up to. (optional)
-    created_at_from = '2026-08-01' # datetime | Filter: createdAt from. (optional)
-    created_at_to = '2026-08-31' # datetime | Filter: createdAt up to. (optional)
-    expires_at_from = '2026-08-01' # datetime | Filter: expiresAt from. (optional)
-    expires_at_to = '2026-08-31' # datetime | Filter: expiresAt up to. (optional)
-    updated_at_from = '2026-08-01' # datetime | Filter: updatedAt from. (optional)
-    updated_at_to = '2026-08-31' # datetime | Filter: updatedAt up to. (optional)
-    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | Filter by infraction ID. (optional)
-    protocol = '2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210' # str | Filter by protocol. (optional)
+    page = 1 # int | Número da página. (optional) (default to 1)
+    limit = 10 # int | Itens por página. (optional) (default to 10)
+    status = 'OPEN' # str | Status da infração, vários separados por vírgula.  `OPEN` `ACKNOWLEDGED` `DEFENDED` `ANSWERED` `WAITING_PSP` `WAITING_ADJUSTMENTS` `CLOSED` `CANCELLED` (optional)
+    type = 'REFUND_REQUEST' # str | Tipo da infração, vários separados por vírgula.  `REFUND_REQUEST` `FRAUD` `REFUND_CANCELLED` (optional)
+    end_to_end_id = 'E00000000202508172159kZ8dQ2mNb1x' # str | ID end-to-end do Pix. (optional)
+    transaction_id = 'PAYZU20260814T6NX1CV9MK000000' # str | ID da transação. (optional)
+    amount_min = 10.9 # float | Valor mínimo. (optional)
+    amount_max = 500 # float | Valor máximo. (optional)
+    analysis_result = 'AGREED' # str | AnalysisResult separados por vírgula: AGREED, DISAGREED. (optional)
+    reported_by = 'DEBITED_PARTICIPANT' # str | Quem abriu a infração, vários separados por vírgula.  `DEBITED_PARTICIPANT` `CREDITED_PARTICIPANT` (optional)
+    participant_document = '12345678901' # str | CPF ou CNPJ do participante. (optional)
+    participant_name = 'John Doe' # str | Nome do participante. (optional)
+    sort_by = createdAt # str | Campo de ordenação. (optional) (default to createdAt)
+    sort_direction = desc # str | Direção da ordenação. (optional) (default to desc)
+    reported_at_from = '2026-08-01' # datetime | Filtro: reportedAt a partir de. (optional)
+    reported_at_to = '2026-08-31' # datetime | Filtro: reportedAt até. (optional)
+    created_at_from = '2026-08-01' # datetime | Filtro: createdAt a partir de. (optional)
+    created_at_to = '2026-08-31' # datetime | Filtro: createdAt até. (optional)
+    expires_at_from = '2026-08-01' # datetime | Filtro: expiresAt a partir de. (optional)
+    expires_at_to = '2026-08-31' # datetime | Filtro: expiresAt até. (optional)
+    updated_at_from = '2026-08-01' # datetime | Filtro: updatedAt a partir de. (optional)
+    updated_at_to = '2026-08-31' # datetime | Filtro: updatedAt até. (optional)
+    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | Filtro por ID da infração. (optional)
+    protocol = '2f8b1c4a-9d33-4e57-b0aa-7c6d5e4f3210' # str | Filtro por protocolo. (optional)
 
     try:
-        # List Infractions
+        # Listar infrações
         api_response = api_instance.get_infractions(page=page, limit=limit, status=status, type=type, end_to_end_id=end_to_end_id, transaction_id=transaction_id, amount_min=amount_min, amount_max=amount_max, analysis_result=analysis_result, reported_by=reported_by, participant_document=participant_document, participant_name=participant_name, sort_by=sort_by, sort_direction=sort_direction, reported_at_from=reported_at_from, reported_at_to=reported_at_to, created_at_from=created_at_from, created_at_to=created_at_to, expires_at_from=expires_at_from, expires_at_to=expires_at_to, updated_at_from=updated_at_from, updated_at_to=updated_at_to, id=id, protocol=protocol)
         print("The response of InfractionsApi->get_infractions:\n")
         pprint(api_response)
@@ -89,30 +89,30 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int**| Page number. | [optional] [default to 1]
- **limit** | **int**| Items per page. | [optional] [default to 10]
- **status** | **str**| Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) | [optional] 
- **type** | **str**| Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) | [optional] 
- **end_to_end_id** | **str**| End-to-end ID of the Pix. | [optional] 
- **transaction_id** | **str**| Transaction ID. | [optional] 
- **amount_min** | **float**| Minimum amount. | [optional] 
- **amount_max** | **float**| Maximum amount. | [optional] 
- **analysis_result** | **str**| Comma-separated AnalysisResult: AGREED, DISAGREED. | [optional] 
- **reported_by** | **str**| Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) | [optional] 
- **participant_document** | **str**| CPF or CNPJ of the participant. | [optional] 
- **participant_name** | **str**| Name of the participant. | [optional] 
- **sort_by** | **str**| Sort field. | [optional] [default to createdAt]
- **sort_direction** | **str**| Sort direction. | [optional] [default to desc]
- **reported_at_from** | **datetime**| Filter: reportedAt from. | [optional] 
- **reported_at_to** | **datetime**| Filter: reportedAt up to. | [optional] 
- **created_at_from** | **datetime**| Filter: createdAt from. | [optional] 
- **created_at_to** | **datetime**| Filter: createdAt up to. | [optional] 
- **expires_at_from** | **datetime**| Filter: expiresAt from. | [optional] 
- **expires_at_to** | **datetime**| Filter: expiresAt up to. | [optional] 
- **updated_at_from** | **datetime**| Filter: updatedAt from. | [optional] 
- **updated_at_to** | **datetime**| Filter: updatedAt up to. | [optional] 
- **id** | **str**| Filter by infraction ID. | [optional] 
- **protocol** | **str**| Filter by protocol. | [optional] 
+ **page** | **int**| Número da página. | [optional] [default to 1]
+ **limit** | **int**| Itens por página. | [optional] [default to 10]
+ **status** | **str**| Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; | [optional] 
+ **type** | **str**| Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; | [optional] 
+ **end_to_end_id** | **str**| ID end-to-end do Pix. | [optional] 
+ **transaction_id** | **str**| ID da transação. | [optional] 
+ **amount_min** | **float**| Valor mínimo. | [optional] 
+ **amount_max** | **float**| Valor máximo. | [optional] 
+ **analysis_result** | **str**| AnalysisResult separados por vírgula: AGREED, DISAGREED. | [optional] 
+ **reported_by** | **str**| Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; | [optional] 
+ **participant_document** | **str**| CPF ou CNPJ do participante. | [optional] 
+ **participant_name** | **str**| Nome do participante. | [optional] 
+ **sort_by** | **str**| Campo de ordenação. | [optional] [default to createdAt]
+ **sort_direction** | **str**| Direção da ordenação. | [optional] [default to desc]
+ **reported_at_from** | **datetime**| Filtro: reportedAt a partir de. | [optional] 
+ **reported_at_to** | **datetime**| Filtro: reportedAt até. | [optional] 
+ **created_at_from** | **datetime**| Filtro: createdAt a partir de. | [optional] 
+ **created_at_to** | **datetime**| Filtro: createdAt até. | [optional] 
+ **expires_at_from** | **datetime**| Filtro: expiresAt a partir de. | [optional] 
+ **expires_at_to** | **datetime**| Filtro: expiresAt até. | [optional] 
+ **updated_at_from** | **datetime**| Filtro: updatedAt a partir de. | [optional] 
+ **updated_at_to** | **datetime**| Filtro: updatedAt até. | [optional] 
+ **id** | **str**| Filtro por ID da infração. | [optional] 
+ **protocol** | **str**| Filtro por protocolo. | [optional] 
 
 ### Return type
 
@@ -131,18 +131,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of infractions with pagination |  -  |
-**400** | Bad Request, payload or query string failed validation |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**200** | Lista de infrações com paginação |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_infractions_by_id**
 > InfractionDetail get_infractions_by_id(id)
 
-Get Infraction
+Obter Infração
 
-Get a specific infraction by ID.
+Obtém uma infração específica por ID.
 
 ### Example
 
@@ -174,10 +175,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.InfractionsApi(api_client)
-    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | Infraction ID
+    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | ID da infração
 
     try:
-        # Get Infraction
+        # Obter Infração
         api_response = api_instance.get_infractions_by_id(id)
         print("The response of InfractionsApi->get_infractions_by_id:\n")
         pprint(api_response)
@@ -192,7 +193,7 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Infraction ID | 
+ **id** | **str**| ID da infração | 
 
 ### Return type
 
@@ -211,18 +212,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Infraction details |  -  |
-**401** | Authentication failure |  -  |
-**404** | Infraction not found |  -  |
+**200** | Detalhes da infração |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Infração não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_infractions_defense_by_id**
 > Defense get_infractions_defense_by_id(infraction_id, defense_id)
 
-Get Defense
+Obter Defesa
 
-Get a specific defense for an infraction.
+Obtém uma defesa específica de uma infração.
 
 ### Example
 
@@ -254,11 +256,11 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.InfractionsApi(api_client)
-    infraction_id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | Infraction ID
-    defense_id = 'cm3w7p5r90003q8f2j8e4a6dg' # str | Defense ID
+    infraction_id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | ID da infração
+    defense_id = 'cm3w7p5r90003q8f2j8e4a6dg' # str | ID da defesa
 
     try:
-        # Get Defense
+        # Obter Defesa
         api_response = api_instance.get_infractions_defense_by_id(infraction_id, defense_id)
         print("The response of InfractionsApi->get_infractions_defense_by_id:\n")
         pprint(api_response)
@@ -273,8 +275,8 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **infraction_id** | **str**| Infraction ID | 
- **defense_id** | **str**| Defense ID | 
+ **infraction_id** | **str**| ID da infração | 
+ **defense_id** | **str**| ID da defesa | 
 
 ### Return type
 
@@ -293,18 +295,19 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Defense details |  -  |
-**401** | Authentication failure |  -  |
-**404** | Defense not found |  -  |
+**200** | Detalhes da defesa |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Defesa não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_infractions_defenses**
-> List[Defense] get_infractions_defenses(id)
+> List[DefenseListItem] get_infractions_defenses(id)
 
-List Defenses
+Listar Defesas
 
-List all defenses for a specific infraction.
+Lista todas as defesas de uma infração específica.
 
 ### Example
 
@@ -312,7 +315,7 @@ List all defenses for a specific infraction.
 
 ```python
 import payzu_pix
-from payzu_pix.models.defense import Defense
+from payzu_pix.models.defense_list_item import DefenseListItem
 from payzu_pix.rest import ApiException
 from pprint import pprint
 
@@ -336,10 +339,10 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.InfractionsApi(api_client)
-    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | Infraction ID
+    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | ID da infração
 
     try:
-        # List Defenses
+        # Listar Defesas
         api_response = api_instance.get_infractions_defenses(id)
         print("The response of InfractionsApi->get_infractions_defenses:\n")
         pprint(api_response)
@@ -354,11 +357,11 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Infraction ID | 
+ **id** | **str**| ID da infração | 
 
 ### Return type
 
-[**List[Defense]**](Defense.md)
+[**List[DefenseListItem]**](DefenseListItem.md)
 
 ### Authorization
 
@@ -373,17 +376,18 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of defenses |  -  |
-**401** | Unauthorized, missing or invalid Bearer token, or token lacks the required permission for this endpoint |  -  |
+**200** | Lista de defesas |  -  |
+**401** | Unauthorized |  -  |
+**403** | Operação não permitida |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_infractions_defense**
 > Defense post_infractions_defense(id, defense, files=files)
 
-Create Defense
+Criar Defesa
 
-Create a defense for a specific infraction.
+Cria uma defesa para uma infração específica.
 
 ### Example
 
@@ -415,12 +419,12 @@ configuration = payzu_pix.Configuration(
 with payzu_pix.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payzu_pix.InfractionsApi(api_client)
-    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | Infraction ID
-    defense = 'defense_example' # str | Defense text (max: 1000 characters)
-    files = None # List[bytes] | Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
+    id = 'cm3w7n2p60002q8f2h7d3z5cf' # str | ID da infração
+    defense = 'defense_example' # str | Texto da defesa (máx: 1000 caracteres)
+    files = None # List[bytes] | Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. (optional)
 
     try:
-        # Create Defense
+        # Criar Defesa
         api_response = api_instance.post_infractions_defense(id, defense, files=files)
         print("The response of InfractionsApi->post_infractions_defense:\n")
         pprint(api_response)
@@ -435,9 +439,9 @@ with payzu_pix.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| Infraction ID | 
- **defense** | **str**| Defense text (max: 1000 characters) | 
- **files** | **List[bytes]**| Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. | [optional] 
+ **id** | **str**| ID da infração | 
+ **defense** | **str**| Texto da defesa (máx: 1000 caracteres) | 
+ **files** | **List[bytes]**| Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. | [optional] 
 
 ### Return type
 
@@ -456,13 +460,13 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Defense created |  -  |
-**400** | Invalid request or file: files above 10 MB in total or with a blocked extension |  -  |
-**401** | Authentication failure |  -  |
-**403** | Operation not allowed |  -  |
-**404** | Infraction not found |  -  |
-**413** | More than 5 files or a single file larger than 10 MB |  -  |
-**422** | Infraction not open for defense |  -  |
+**201** | Defesa criada |  -  |
+**400** | Requisição ou arquivo inválido: arquivos acima de 10 MB no total ou com extensão bloqueada |  -  |
+**401** | Falha de autenticação |  -  |
+**403** | Operação não permitida |  -  |
+**404** | Infração não encontrada |  -  |
+**413** | Mais de 5 arquivos ou um arquivo maior que 10 MB |  -  |
+**422** | Infração não aberta para defesa |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

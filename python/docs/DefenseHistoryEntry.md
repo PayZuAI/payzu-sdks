@@ -1,17 +1,17 @@
 # DefenseHistoryEntry
 
-Defense recorded in the infraction history, without the infractionId field.
+Defesa registrada no histórico da infração, sem o campo infractionId.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Defense identifier. | [optional] 
-**defense** | **str** | Defense text | [optional] 
-**status** | **str** | Defense status | [optional] 
-**created_at** | **datetime** | Moment the defense was recorded at PayZu, saved together with the uploaded files. | [optional] 
-**updated_at** | **datetime** | Moment of the last change to the defense. | [optional] 
-**files** | [**List[DefenseHistoryEntryFilesInner]**](DefenseHistoryEntryFilesInner.md) | Files sent with the defense, with name, type and size in bytes. | [optional] 
+**id** | **str** | Identificador da defesa. | [optional] 
+**defense** | **str** | Texto da defesa | [optional] 
+**status** | **str** | Status da defesa | [optional] 
+**created_at** | **datetime** | Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos. | [optional] 
+**updated_at** | **datetime** | Momento da última alteração da defesa. | [optional] 
+**files** | [**List[DefenseHistoryEntryFilesInner]**](DefenseHistoryEntryFilesInner.md) | Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes. | [optional] 
 
 ## Example
 

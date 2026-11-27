@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -14,28 +14,28 @@ require 'date'
 require 'time'
 
 module PayZuPix
-  # Report job just queued.
+  # Job de relatório recém-enfileirado.
   class ReportJobAccepted < ApiModelBase
-    # Report identifier (UUID), generated when the report is requested.
+    # Identificador (UUID) do relatório, gerado no momento da solicitação.
     attr_accessor :id
 
-    # Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+    # Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
     attr_accessor :status
 
-    # Date and time the report generation was requested.
+    # Data e hora em que a geração do relatório foi solicitada.
     attr_accessor :created_at
 
-    # Date and time of the last change to the report record.
+    # Data e hora da última alteração no registro do relatório.
     attr_accessor :updated_at
 
-    # Filters used when the report was created.
+    # Filtros usados na criação do relatório.
     attr_accessor :params
 
-    # Rows written to the file. Null until the report is COMPLETED.
+    # Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED.
     attr_accessor :written_rows
 
-    # Date the report file expires.
-    attr_accessor :storage_expires_at
+    # Data em que o arquivo do relatório expira.
+    attr_accessor :expires_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -68,7 +68,7 @@ module PayZuPix
         :'updated_at' => :'updatedAt',
         :'params' => :'params',
         :'written_rows' => :'writtenRows',
-        :'storage_expires_at' => :'storageExpiresAt'
+        :'expires_at' => :'expiresAt'
       }
     end
 
@@ -91,7 +91,7 @@ module PayZuPix
         :'updated_at' => :'Time',
         :'params' => :'Hash<String, Object>',
         :'written_rows' => :'Integer',
-        :'storage_expires_at' => :'Time'
+        :'expires_at' => :'Time'
       }
     end
 
@@ -99,7 +99,7 @@ module PayZuPix
     def self.openapi_nullable
       Set.new([
         :'written_rows',
-        :'storage_expires_at'
+        :'expires_at'
       ])
     end
 
@@ -145,8 +145,8 @@ module PayZuPix
         self.written_rows = attributes[:'written_rows']
       end
 
-      if attributes.key?(:'storage_expires_at')
-        self.storage_expires_at = attributes[:'storage_expires_at']
+      if attributes.key?(:'expires_at')
+        self.expires_at = attributes[:'expires_at']
       end
     end
 
@@ -178,7 +178,7 @@ module PayZuPix
           updated_at == o.updated_at &&
           params == o.params &&
           written_rows == o.written_rows &&
-          storage_expires_at == o.storage_expires_at
+          expires_at == o.expires_at
     end
 
     # @see the `==` method
@@ -190,7 +190,7 @@ module PayZuPix
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, status, created_at, updated_at, params, written_rows, storage_expires_at].hash
+      [id, status, created_at, updated_at, params, written_rows, expires_at].hash
     end
 
     # Builds the object from hash

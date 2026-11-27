@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payer_account_number** | **str** | Payer account number (6 digits). Must match the authenticated user&#39;s accountNumber. | 
-**receiver_account_number** | **str** | Destination account number (6 digits). | 
-**amount** | **float** | Transfer amount in BRL, with at most 2 decimal places. | 
-**description** | **str** | Optional transfer description. | [optional] 
-**callback_url** | **str** | URL for transaction notifications (http or https). | [optional] 
-**client_reference** | **str** | External reference for idempotency / reconciliation. | [optional] 
-**virtual_account** | **str** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. | [optional] 
+**payer_account_number** | **str** | Conta do pagador. | 
+**receiver_account_number** | **str** | Conta de destino. | 
+**amount** | **float** | Valor da transferência em BRL, com no máximo 2 casas decimais. | 
+**description** | **str** | Descrição opcional da transferência. | [optional] 
+**callback_url** | **str** | URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal. | [optional] 
+**client_reference** | **str** | Referência externa para idempotência / reconciliação. | [optional] 
+**virtual_account** | **str** | Subconta para separar lojas ou filiais. | [optional] 
 
 ## Example
 

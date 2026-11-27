@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -48,20 +48,20 @@ export interface PostInternalTransferOperationRequest {
 export interface InternalTransferApiInterface {
     /**
      * Creates request options for getInternalTransfer without sending the request
-     * @param {string} [id] Transaction ID
-     * @param {string} [clientReference] External reference
-     * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+     * @param {string} [id] ID da transação
+     * @param {string} [clientReference] Referência externa
+     * @param {string} [virtualAccount] Subconta usada na criação.
      * @throws {RequiredError}
      * @memberof InternalTransferApiInterface
      */
     getInternalTransferRequestOpts(requestParameters: GetInternalTransferRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
-     * @summary Get internal transfer
-     * @param {string} [id] Transaction ID
-     * @param {string} [clientReference] External reference
-     * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+     * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
+     * @summary Obter transferência interna
+     * @param {string} [id] ID da transação
+     * @param {string} [clientReference] Referência externa
+     * @param {string} [virtualAccount] Subconta usada na criação.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InternalTransferApiInterface
@@ -69,8 +69,8 @@ export interface InternalTransferApiInterface {
     getInternalTransferRaw(requestParameters: GetInternalTransferRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
-     * Get internal transfer
+     * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
+     * Obter transferência interna
      */
     getInternalTransfer(requestParameters: GetInternalTransferRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
 
@@ -83,8 +83,8 @@ export interface InternalTransferApiInterface {
     postInternalTransferRequestOpts(requestParameters: PostInternalTransferOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
-     * @summary Create internal transfer
+     * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
+     * @summary Criar transferência interna
      * @param {PostInternalTransferRequest} postInternalTransferRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -93,8 +93,8 @@ export interface InternalTransferApiInterface {
     postInternalTransferRaw(requestParameters: PostInternalTransferOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>>;
 
     /**
-     * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
-     * Create internal transfer
+     * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
+     * Criar transferência interna
      */
     postInternalTransfer(requestParameters: PostInternalTransferOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction>;
 
@@ -145,8 +145,8 @@ export class InternalTransferApi extends runtime.BaseAPI implements InternalTran
     }
 
     /**
-     * Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
-     * Get internal transfer
+     * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
+     * Obter transferência interna
      */
     async getInternalTransferRaw(requestParameters: GetInternalTransferRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
         const requestOptions = await this.getInternalTransferRequestOpts(requestParameters);
@@ -156,8 +156,8 @@ export class InternalTransferApi extends runtime.BaseAPI implements InternalTran
     }
 
     /**
-     * Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
-     * Get internal transfer
+     * Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
+     * Obter transferência interna
      */
     async getInternalTransfer(requestParameters: GetInternalTransferRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
         const response = await this.getInternalTransferRaw(requestParameters, initOverrides);
@@ -202,8 +202,8 @@ export class InternalTransferApi extends runtime.BaseAPI implements InternalTran
     }
 
     /**
-     * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
-     * Create internal transfer
+     * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
+     * Criar transferência interna
      */
     async postInternalTransferRaw(requestParameters: PostInternalTransferOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Transaction>> {
         const requestOptions = await this.postInternalTransferRequestOpts(requestParameters);
@@ -213,8 +213,8 @@ export class InternalTransferApi extends runtime.BaseAPI implements InternalTran
     }
 
     /**
-     * Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
-     * Create internal transfer
+     * Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
+     * Criar transferência interna
      */
     async postInternalTransfer(requestParameters: PostInternalTransferOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Transaction> {
         const response = await this.postInternalTransferRaw(requestParameters, initOverrides);

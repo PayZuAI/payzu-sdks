@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -35,67 +35,61 @@ import {
  */
 export interface GetUser200Response {
     /**
-     * Public account identifier (6 digits, unique). Used as destination for internal transfers.
+     * Identificador público da conta.
      * @type {string}
      * @memberof GetUser200Response
      */
     accountNumber?: string | null;
     /**
-     * Branch number (4 digits).
+     * Agência da conta.
      * @type {string}
      * @memberof GetUser200Response
      */
     branch?: string;
     /**
-     * Registered name of the account.
+     * Nome cadastrado da conta.
      * @type {string}
      * @memberof GetUser200Response
      */
     name?: string;
     /**
-     * Account role.
-     * @type {GetUser200ResponseRoleEnum}
-     * @memberof GetUser200Response
-     */
-    role?: GetUser200ResponseRoleEnum;
-    /**
-     * Balance free for withdrawals and transfers, in reais.
+     * Saldo livre para saques e transferências, em reais.
      * @type {number}
      * @memberof GetUser200Response
      */
     balanceAvailable?: number;
     /**
-     * Part of the balance held, in reais.
+     * Parte do saldo retida, em reais.
      * @type {number}
      * @memberof GetUser200Response
      */
     balanceBlocked?: number;
     /**
-     * Account status.
+     * Situação da conta.
      * @type {GetUser200ResponseStatusEnum}
      * @memberof GetUser200Response
      */
     status?: GetUser200ResponseStatusEnum;
     /**
-     * Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused.
+     * Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashInTicketMin?: number;
     /**
-     * Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused.
+     * Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashInTicketMax?: number;
     /**
-     * Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused.
+     * Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado.
      * @type {number}
      * @memberof GetUser200Response
      */
     cashOutTicketMin?: number;
     /**
-     * Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused.
+     * Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado.
      * @type {number}
      * @memberof GetUser200Response
      */
@@ -114,14 +108,6 @@ export interface GetUser200Response {
     dailyWithdrawLimit?: GetUser200ResponseDailyWithdrawLimit;
 }
 
-
-/**
- * @export
- */
-export const GetUser200ResponseRoleEnum = {
-    User: 'USER'
-} as const;
-export type GetUser200ResponseRoleEnum = typeof GetUser200ResponseRoleEnum[keyof typeof GetUser200ResponseRoleEnum];
 
 /**
  * @export
@@ -152,7 +138,6 @@ export function GetUser200ResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'accountNumber': json['accountNumber'] == null ? undefined : json['accountNumber'],
         'branch': json['branch'] == null ? undefined : json['branch'],
         'name': json['name'] == null ? undefined : json['name'],
-        'role': json['role'] == null ? undefined : json['role'],
         'balanceAvailable': json['balanceAvailable'] == null ? undefined : json['balanceAvailable'],
         'balanceBlocked': json['balanceBlocked'] == null ? undefined : json['balanceBlocked'],
         'status': json['status'] == null ? undefined : json['status'],
@@ -179,7 +164,6 @@ export function GetUser200ResponseToJSONTyped(value?: GetUser200Response | null,
         'accountNumber': value['accountNumber'],
         'branch': value['branch'],
         'name': value['name'],
-        'role': value['role'],
         'balanceAvailable': value['balanceAvailable'],
         'balanceBlocked': value['balanceBlocked'],
         'status': value['status'],

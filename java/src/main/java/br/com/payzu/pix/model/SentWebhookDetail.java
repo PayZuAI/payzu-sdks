@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -107,7 +107,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Identifier of this delivery attempt.
+   * Identificador desta tentativa de entrega.
    * @return id
    */
   @javax.annotation.Nullable
@@ -131,7 +131,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Webhook that originated the delivery.
+   * Webhook que originou a entrega.
    * @return webhookId
    */
   @javax.annotation.Nullable
@@ -163,7 +163,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Pix transaction whose event was notified.
+   * Transação Pix cujo evento foi notificado.
    * @return transactionId
    */
   @javax.annotation.Nullable
@@ -187,7 +187,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Address this delivery was sent to, recorded at the time of the dispatch.
+   * Endereço para onde esta entrega foi feita, gravado no momento do disparo.
    * @return url
    */
   @javax.annotation.Nullable
@@ -211,7 +211,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Body sent in the delivery, as serialized JSON.
+   * Corpo enviado no disparo, em JSON serializado.
    * @return body
    */
   @javax.annotation.Nullable
@@ -235,7 +235,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * HTTP status returned by your endpoint.
+   * Status HTTP retornado pelo seu endpoint.
    * @return status
    */
   @javax.annotation.Nullable
@@ -259,7 +259,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Response headers, as serialized JSON.
+   * Headers da resposta, em JSON serializado.
    * @return responseHeaders
    */
   @javax.annotation.Nullable
@@ -283,7 +283,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Body of the response received.
+   * Corpo da resposta recebida.
    * @return responseBody
    */
   @javax.annotation.Nullable
@@ -307,7 +307,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Message of the delivery failure.
+   * Mensagem da falha na entrega.
    * @return error
    */
   @javax.annotation.Nullable
@@ -339,7 +339,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Response time of your endpoint, in milliseconds.
+   * Tempo de resposta do seu endpoint, em milissegundos.
    * @return responseTime
    */
   @javax.annotation.Nullable
@@ -363,7 +363,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Event that triggered this delivery, the same value sent in the X-Callback-Event header.
+   * Evento que disparou esta entrega, o mesmo valor enviado no cabeçalho X-Callback-Event.
    * @return eventType
    */
   @javax.annotation.Nullable
@@ -395,7 +395,7 @@ public class SentWebhookDetail {
   }
 
   /**
-   * Moment of the delivery attempt.
+   * Momento da tentativa de entrega.
    * @return createdAt
    */
   @javax.annotation.Nullable

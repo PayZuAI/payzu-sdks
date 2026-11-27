@@ -1,22 +1,22 @@
 # PayZu\Pix\ReportsApi
 
-Transaction history, reports, bank statements, and pending deposits
+Histórico de transações, relatórios, extratos bancários e depósitos pendentes
 
 All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**downloadUserReport()**](ReportsApi.md#downloadUserReport) | **POST** /user/report/{id}/download | Download report |
-| [**getUserBankStatement()**](ReportsApi.md#getUserBankStatement) | **GET** /user/bank-statements/{id} | Get bank statement |
-| [**getUserBankStatements()**](ReportsApi.md#getUserBankStatements) | **GET** /user/bank-statements | List bank statements |
-| [**getUserDepositPending()**](ReportsApi.md#getUserDepositPending) | **GET** /user/deposit-pending | List pending deposits |
-| [**getUserDepositPendingById()**](ReportsApi.md#getUserDepositPendingById) | **GET** /user/deposit-pending/{id} | Get pending deposit |
-| [**getUserReport()**](ReportsApi.md#getUserReport) | **GET** /user/report/{id} | Get report job status |
-| [**getUserSummary()**](ReportsApi.md#getUserSummary) | **GET** /user/summary | Transaction summary |
-| [**getUserTransactionById()**](ReportsApi.md#getUserTransactionById) | **GET** /user/transactions/{id} | List transaction details |
-| [**getUserTransactions()**](ReportsApi.md#getUserTransactions) | **GET** /user/transactions | List Transactions |
-| [**listUserReports()**](ReportsApi.md#listUserReports) | **GET** /user/report | List report jobs |
-| [**postUserReport()**](ReportsApi.md#postUserReport) | **POST** /user/report | Generate transactions report |
+| [**downloadUserReport()**](ReportsApi.md#downloadUserReport) | **POST** /user/report/{id}/download | Baixar relatório |
+| [**getUserBankStatement()**](ReportsApi.md#getUserBankStatement) | **GET** /user/bank-statements/{id} | Consultar lançamento |
+| [**getUserBankStatements()**](ReportsApi.md#getUserBankStatements) | **GET** /user/bank-statements | Listar extrato |
+| [**getUserDepositPending()**](ReportsApi.md#getUserDepositPending) | **GET** /user/deposit-pending | Listar depósitos via chave Pix |
+| [**getUserDepositPendingById()**](ReportsApi.md#getUserDepositPendingById) | **GET** /user/deposit-pending/{id} | Consultar depósito via chave Pix |
+| [**getUserReport()**](ReportsApi.md#getUserReport) | **GET** /user/report/{id} | Consultar status do relatório |
+| [**getUserSummary()**](ReportsApi.md#getUserSummary) | **GET** /user/summary | Resumo de transações |
+| [**getUserTransactionById()**](ReportsApi.md#getUserTransactionById) | **GET** /user/transactions/{id} | Listar detalhes da transação |
+| [**getUserTransactions()**](ReportsApi.md#getUserTransactions) | **GET** /user/transactions | Listar transações |
+| [**listUserReports()**](ReportsApi.md#listUserReports) | **GET** /user/report | Listar jobs de relatório |
+| [**postUserReport()**](ReportsApi.md#postUserReport) | **POST** /user/report | Gerar relatório de transações |
 
 
 ## `downloadUserReport()`
@@ -25,9 +25,9 @@ All URIs are relative to https://api.pix.payzu.com.br/v1, except if the operatio
 downloadUserReport($id): \PayZu\Pix\Model\DownloadUserReport200Response
 ```
 
-Download report
+Baixar relatório
 
-Returns a short-lived signed URL to download the CSV file.
+Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
 
 ### Example
 
@@ -46,7 +46,7 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78; // string | Report ID.
+$id = 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78; // string | ID do relatório.
 
 try {
     $result = $apiInstance->downloadUserReport($id);
@@ -60,7 +60,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Report ID. | |
+| **id** | **string**| ID do relatório. | |
 
 ### Return type
 
@@ -85,9 +85,9 @@ try {
 getUserBankStatement($id): \PayZu\Pix\Model\BankStatement
 ```
 
-Get bank statement
+Consultar lançamento
 
-Returns a single statement entry.
+Retorna um lançamento do extrato.
 
 ### Example
 
@@ -106,7 +106,7 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7q8s10004q8f2k9f5b7eh; // string | Statement entry id.
+$id = cm3w7q8s10004q8f2k9f5b7eh; // string | Id do lançamento do extrato.
 
 try {
     $result = $apiInstance->getUserBankStatement($id);
@@ -120,7 +120,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Statement entry id. | |
+| **id** | **string**| Id do lançamento do extrato. | |
 
 ### Return type
 
@@ -145,9 +145,9 @@ try {
 getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction): \PayZu\Pix\Model\BankStatementListResponse
 ```
 
-List bank statements
+Listar extrato
 
-Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
 
 ### Example
 
@@ -166,18 +166,18 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$created_at_from = 2026-08-01T00:00:00-03:00; // \DateTime | Start date (required).
-$created_at_to = 2026-08-31T23:59:59-03:00; // \DateTime | End date (required).
-$id = cm3w7q8s10004q8f2k9f5b7eh; // string | Entry ID.
-$operation = 'operation_example'; // string | Operation type.  `INCREMENT` `DECREMENT`
-$reason = Estorno; // string | Reason for the entry.
-$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
-$amount_from = 10.9; // float | Minimum amount.
-$amount_to = 500; // float | Maximum amount.
-$page = 1; // int | Page number.
-$limit = 10; // int | Items per page.
-$sort_by = 'createdAt'; // string | Sort field.
-$sort_direction = 'desc'; // string | Sort direction.
+$created_at_from = 2026-08-01T00:00:00-03:00; // \DateTime | Data inicial (obrigatória).
+$created_at_to = 2026-08-31T23:59:59-03:00; // \DateTime | Data final (obrigatória).
+$id = cm3w7q8s10004q8f2k9f5b7eh; // string | ID do lançamento.
+$operation = 'operation_example'; // string | Tipo de operação.  `INCREMENT` `DECREMENT`
+$reason = PIX_DEPOSIT; // string | Razão do lançamento.
+$transaction_id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
+$amount_from = 10.9; // float | Valor mínimo.
+$amount_to = 500; // float | Valor máximo.
+$page = 1; // int | Número da página.
+$limit = 10; // int | Itens por página.
+$sort_by = 'createdAt'; // string | Campo de ordenação.
+$sort_direction = 'desc'; // string | Direção da ordenação.
 
 try {
     $result = $apiInstance->getUserBankStatements($created_at_from, $created_at_to, $id, $operation, $reason, $transaction_id, $amount_from, $amount_to, $page, $limit, $sort_by, $sort_direction);
@@ -191,18 +191,18 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **created_at_from** | **\DateTime**| Start date (required). | |
-| **created_at_to** | **\DateTime**| End date (required). | |
-| **id** | **string**| Entry ID. | [optional] |
-| **operation** | **string**| Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] |
-| **reason** | **string**| Reason for the entry. | [optional] |
-| **transaction_id** | **string**| Transaction ID. | [optional] |
-| **amount_from** | **float**| Minimum amount. | [optional] |
-| **amount_to** | **float**| Maximum amount. | [optional] |
-| **page** | **int**| Page number. | [optional] [default to 1] |
-| **limit** | **int**| Items per page. | [optional] [default to 10] |
-| **sort_by** | **string**| Sort field. | [optional] [default to &#39;createdAt&#39;] |
-| **sort_direction** | **string**| Sort direction. | [optional] [default to &#39;desc&#39;] |
+| **created_at_from** | **\DateTime**| Data inicial (obrigatória). | |
+| **created_at_to** | **\DateTime**| Data final (obrigatória). | |
+| **id** | **string**| ID do lançamento. | [optional] |
+| **operation** | **string**| Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60; | [optional] |
+| **reason** | **string**| Razão do lançamento. | [optional] |
+| **transaction_id** | **string**| ID da transação. | [optional] |
+| **amount_from** | **float**| Valor mínimo. | [optional] |
+| **amount_to** | **float**| Valor máximo. | [optional] |
+| **page** | **int**| Número da página. | [optional] [default to 1] |
+| **limit** | **int**| Itens por página. | [optional] [default to 10] |
+| **sort_by** | **string**| Campo de ordenação. | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**| Direção da ordenação. | [optional] [default to &#39;desc&#39;] |
 
 ### Return type
 
@@ -227,9 +227,9 @@ try {
 getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit): \PayZu\Pix\Model\DepositPendingListResponse
 ```
 
-List pending deposits
+Listar depósitos via chave Pix
 
-Lists deposits that are pending / not yet reconciled.
+Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
 
 ### Example
 
@@ -248,16 +248,16 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$status = PENDING; // string | Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-$document = 12345678901; // string | CPF or CNPJ, digits only.
-$name = John Doe; // string | Name of the payer or receiver.
-$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | End-to-end ID of the Pix.
-$amount_min = 10.9; // float | Minimum amount.
-$amount_max = 500; // float | Maximum amount.
-$created_at_from = 2026-08-01; // \DateTime | Start of the creation date range.
-$created_at_to = 2026-08-31; // \DateTime | End of the creation date range.
-$page = 1; // int | Page number.
-$limit = 20; // int | Items per page.
+$status = PENDING; // string | Status do depósito, vários separados por vírgula.  `PENDING` `APPROVED` `REJECTED` `EXPIRED` `COMPLETED`
+$document = 12345678901; // string | CPF ou CNPJ, apenas dígitos.
+$name = John Doe; // string | Nome do pagador ou recebedor.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | ID end-to-end do Pix.
+$amount_min = 10.9; // float | Valor mínimo.
+$amount_max = 500; // float | Valor máximo.
+$created_at_from = 2026-08-01; // \DateTime | Data de criação inicial.
+$created_at_to = 2026-08-31; // \DateTime | Data de criação final.
+$page = 1; // int | Número da página. Valor inválido vira 1.
+$limit = 20; // int | Itens por página. Valor inválido vira 20.
 
 try {
     $result = $apiInstance->getUserDepositPending($status, $document, $name, $end_to_end_id, $amount_min, $amount_max, $created_at_from, $created_at_to, $page, $limit);
@@ -271,16 +271,16 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **status** | **string**| Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED. | [optional] |
-| **document** | **string**| CPF or CNPJ, digits only. | [optional] |
-| **name** | **string**| Name of the payer or receiver. | [optional] |
-| **end_to_end_id** | **string**| End-to-end ID of the Pix. | [optional] |
-| **amount_min** | **float**| Minimum amount. | [optional] |
-| **amount_max** | **float**| Maximum amount. | [optional] |
-| **created_at_from** | **\DateTime**| Start of the creation date range. | [optional] |
-| **created_at_to** | **\DateTime**| End of the creation date range. | [optional] |
-| **page** | **int**| Page number. | [optional] [default to 1] |
-| **limit** | **int**| Items per page. | [optional] [default to 20] |
+| **status** | **string**| Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60; | [optional] |
+| **document** | **string**| CPF ou CNPJ, apenas dígitos. | [optional] |
+| **name** | **string**| Nome do pagador ou recebedor. | [optional] |
+| **end_to_end_id** | **string**| ID end-to-end do Pix. | [optional] |
+| **amount_min** | **float**| Valor mínimo. | [optional] |
+| **amount_max** | **float**| Valor máximo. | [optional] |
+| **created_at_from** | **\DateTime**| Data de criação inicial. | [optional] |
+| **created_at_to** | **\DateTime**| Data de criação final. | [optional] |
+| **page** | **int**| Número da página. Valor inválido vira 1. | [optional] [default to 1] |
+| **limit** | **int**| Itens por página. Valor inválido vira 20. | [optional] [default to 20] |
 
 ### Return type
 
@@ -305,9 +305,9 @@ try {
 getUserDepositPendingById($id): \PayZu\Pix\Model\DepositPending
 ```
 
-Get pending deposit
+Consultar depósito via chave Pix
 
-Returns a single pending deposit.
+Retorna um depósito via chave Pix.
 
 ### Example
 
@@ -326,7 +326,7 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = cm3w7r1u50005q8f2m1g6c8fj; // string | Pending deposit id.
+$id = cm3w7r1u50005q8f2m1g6c8fj; // string | Id do depósito pendente.
 
 try {
     $result = $apiInstance->getUserDepositPendingById($id);
@@ -340,7 +340,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Pending deposit id. | |
+| **id** | **string**| Id do depósito pendente. | |
 
 ### Return type
 
@@ -365,9 +365,9 @@ try {
 getUserReport($id): \PayZu\Pix\Model\ReportJobDetail
 ```
 
-Get report job status
+Consultar status do relatório
 
-Returns the status and metadata of a specific report job by `id`.
+Retorna o status e os metadados de um job de relatório específico pelo `id`.
 
 ### Example
 
@@ -386,7 +386,7 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78; // string | Report ID.
+$id = 01997c3a-8f21-7c4d-9e05-3b6a1d2f4c78; // string | ID do relatório.
 
 try {
     $result = $apiInstance->getUserReport($id);
@@ -400,7 +400,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Report ID. | |
+| **id** | **string**| ID do relatório. | |
 
 ### Return type
 
@@ -425,9 +425,9 @@ try {
 getUserSummary($date_from, $date_to, $group_by, $grouped): \PayZu\Pix\Model\Summary
 ```
 
-Transaction summary
+Resumo de transações
 
-Aggregated totals for deposits, withdrawals and commission over a period.
+Totais agregados de depósitos, saques e comissão num período.
 
 ### Example
 
@@ -446,10 +446,10 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$date_from = 2026-08-01T00:00:00-03:00; // \DateTime | Start date. Default: start of the previous day (America/Sao_Paulo).
-$date_to = 2026-08-31T23:59:59-03:00; // \DateTime | End date. Default: now.
-$group_by = 'day'; // string | Grouping applied to the transactions.
-$grouped = true; // bool | When true, returns a series grouped by date.
+$date_from = 2026-08-01T00:00:00-03:00; // \DateTime | Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
+$date_to = 2026-08-31T23:59:59-03:00; // \DateTime | Data final. Padrão: agora.
+$group_by = 'day'; // string | Agrupamento das transações.
+$grouped = true; // bool | Quando true, retorna uma série agrupada por data.
 
 try {
     $result = $apiInstance->getUserSummary($date_from, $date_to, $group_by, $grouped);
@@ -463,10 +463,10 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date_from** | **\DateTime**| Start date. Default: start of the previous day (America/Sao_Paulo). | [optional] |
-| **date_to** | **\DateTime**| End date. Default: now. | [optional] |
-| **group_by** | **string**| Grouping applied to the transactions. | [optional] [default to &#39;day&#39;] |
-| **grouped** | **bool**| When true, returns a series grouped by date. | [optional] |
+| **date_from** | **\DateTime**| Data inicial. Padrão: início do dia anterior (America/Sao_Paulo). | [optional] |
+| **date_to** | **\DateTime**| Data final. Padrão: agora. | [optional] |
+| **group_by** | **string**| Agrupamento das transações. | [optional] [default to &#39;day&#39;] |
+| **grouped** | **bool**| Quando true, retorna uma série agrupada por data. | [optional] |
 
 ### Return type
 
@@ -491,9 +491,9 @@ try {
 getUserTransactionById($id): \PayZu\Pix\Model\GetUserTransactionById200Response
 ```
 
-List transaction details
+Listar detalhes da transação
 
-Retrieve a single transaction with its callback log and linked infractions.
+Recupera uma única transação com seu log de callback e as infrações vinculadas.
 
 ### Example
 
@@ -512,7 +512,7 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
+$id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
 
 try {
     $result = $apiInstance->getUserTransactionById($id);
@@ -526,7 +526,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| Transaction ID. | |
+| **id** | **string**| ID da transação. | |
 
 ### Return type
 
@@ -551,9 +551,9 @@ try {
 getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account, $has_qr_code): \PayZu\Pix\Model\GetUserTransactions200Response
 ```
 
-List Transactions
+Listar transações
 
-Paginated list of account transactions with filters.
+Lista paginada das transações da conta com filtros.
 
 ### Example
 
@@ -572,23 +572,23 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$date_from = 2026-08-01T00:00:00-03:00; // \DateTime | Start date-time (ISO 8601).
-$date_to = 2026-08-31T23:59:59-03:00; // \DateTime | End date-time (ISO 8601).
-$limit = 10; // int | Items per page (max 1000).
-$page = 1; // int | Page number (default 1).
-$id = PAYZU20260814T6NX1CV9MK000000; // string | Transaction ID.
-$status = COMPLETED; // string | Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-$type = DEPOSIT; // string | Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
-$method = PIX; // string | Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
-$amount = 15000; // float | Amount filter. Minimum 0.01.
-$document = 12345678901; // string | CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
-$name = Alice; // string | Name filter.
-$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | Pix end-to-end ID.
-$sort_by = 'createdAt'; // string | Field to sort by
-$sort_direction = 'desc'; // string | Sort direction
-$client_reference = order_12345; // string | Filter by external reference
-$virtual_account = loja-centro-01; // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
-$has_qr_code = True; // bool | Only transactions with (true) or without (false) QR Code.
+$date_from = 2026-08-01T00:00:00-03:00; // \DateTime | Data-hora inicial (ISO 8601).
+$date_to = 2026-08-31T23:59:59-03:00; // \DateTime | Data-hora final (ISO 8601).
+$limit = 10; // int | Itens por página.
+$page = 1; // int | Número da página.
+$id = PAYZU20260814T6NX1CV9MK000000; // string | ID da transação.
+$status = COMPLETED; // string | Status da transação, vários separados por vírgula.  `PENDING` `COMPLETED` `CANCELED` `WAITING_FOR_REFUND` `REFUNDED` `EXPIRED` `ERROR`
+$type = DEPOSIT; // string | Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+$method = PIX; // string | Trilho da transação, vários separados por vírgula.  `PIX` `INTERNAL_TRANSFER` `BANK_SLIP` `TED`
+$amount = 15000; // float | Filtro por valor. Mínimo 0.01.
+$document = 12345678901; // string | CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
+$name = Alice; // string | Filtro por nome.
+$end_to_end_id = E00000000202508172159kZ8dQ2mNb1x; // string | ID end-to-end do Pix.
+$sort_by = 'createdAt'; // string | Campo pelo qual ordenar
+$sort_direction = 'desc'; // string | Direção da ordenação
+$client_reference = order_12345; // string | Filtra por referência externa
+$virtual_account = loja-centro-01; // string | Subconta usada na criação.
+$has_qr_code = True; // bool | Só transações com (true) ou sem (false) QR Code.
 
 try {
     $result = $apiInstance->getUserTransactions($date_from, $date_to, $limit, $page, $id, $status, $type, $method, $amount, $document, $name, $end_to_end_id, $sort_by, $sort_direction, $client_reference, $virtual_account, $has_qr_code);
@@ -602,23 +602,23 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date_from** | **\DateTime**| Start date-time (ISO 8601). | [optional] |
-| **date_to** | **\DateTime**| End date-time (ISO 8601). | [optional] |
-| **limit** | **int**| Items per page (max 1000). | [optional] [default to 10] |
-| **page** | **int**| Page number (default 1). | [optional] [default to 1] |
-| **id** | **string**| Transaction ID. | [optional] |
-| **status** | **string**| Transaction status. Accepts CSV: PENDING,COMPLETED,etc. | [optional] |
-| **type** | **string**| Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] |
-| **method** | **string**| Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER. | [optional] |
-| **amount** | **float**| Amount filter. Minimum 0.01. | [optional] |
-| **document** | **string**| CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation. | [optional] |
-| **name** | **string**| Name filter. | [optional] |
-| **end_to_end_id** | **string**| Pix end-to-end ID. | [optional] |
-| **sort_by** | **string**| Field to sort by | [optional] [default to &#39;createdAt&#39;] |
-| **sort_direction** | **string**| Sort direction | [optional] [default to &#39;desc&#39;] |
-| **client_reference** | **string**| Filter by external reference | [optional] |
-| **virtual_account** | **string**| Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
-| **has_qr_code** | **bool**| Only transactions with (true) or without (false) QR Code. | [optional] |
+| **date_from** | **\DateTime**| Data-hora inicial (ISO 8601). | [optional] |
+| **date_to** | **\DateTime**| Data-hora final (ISO 8601). | [optional] |
+| **limit** | **int**| Itens por página. | [optional] [default to 10] |
+| **page** | **int**| Número da página. | [optional] [default to 1] |
+| **id** | **string**| ID da transação. | [optional] |
+| **status** | **string**| Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60; | [optional] |
+| **type** | **string**| Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT. | [optional] |
+| **method** | **string**| Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60; | [optional] |
+| **amount** | **float**| Filtro por valor. Mínimo 0.01. | [optional] |
+| **document** | **string**| CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação. | [optional] |
+| **name** | **string**| Filtro por nome. | [optional] |
+| **end_to_end_id** | **string**| ID end-to-end do Pix. | [optional] |
+| **sort_by** | **string**| Campo pelo qual ordenar | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**| Direção da ordenação | [optional] [default to &#39;desc&#39;] |
+| **client_reference** | **string**| Filtra por referência externa | [optional] |
+| **virtual_account** | **string**| Subconta usada na criação. | [optional] |
+| **has_qr_code** | **bool**| Só transações com (true) ou sem (false) QR Code. | [optional] |
 
 ### Return type
 
@@ -643,9 +643,9 @@ try {
 listUserReports($page, $limit, $status, $created_at_from, $created_at_to, $updated_at_from, $updated_at_to, $sort_by, $sort_direction): \PayZu\Pix\Model\ListUserReports200Response
 ```
 
-List report jobs
+Listar jobs de relatório
 
-List report jobs created by the authenticated user.
+Lista os jobs de relatório criados pelo usuário autenticado.
 
 ### Example
 
@@ -664,15 +664,15 @@ $apiInstance = new PayZu\Pix\Api\ReportsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int | Page number.
-$limit = 10; // int | Items per page.
-$status = COMPLETED,FAILED; // string | Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
-$created_at_from = 2026-08-01; // \DateTime | Filter: created from.
-$created_at_to = 2026-08-31; // \DateTime | Filter: created up to.
-$updated_at_from = 2026-08-01; // \DateTime | Filter: updated from.
-$updated_at_to = 2026-08-31; // \DateTime | Filter: updated up to.
-$sort_by = 'createdAt'; // string | Sort field.
-$sort_direction = 'desc'; // string | Sort direction.
+$page = 1; // int | Número da página.
+$limit = 10; // int | Itens por página.
+$status = COMPLETED,FAILED; // string | Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
+$created_at_from = 2026-08-01; // \DateTime | Filtro: criado a partir de.
+$created_at_to = 2026-08-31; // \DateTime | Filtro: criado até.
+$updated_at_from = 2026-08-01; // \DateTime | Filtro: atualizado a partir de.
+$updated_at_to = 2026-08-31; // \DateTime | Filtro: atualizado até.
+$sort_by = 'createdAt'; // string | Campo de ordenação.
+$sort_direction = 'desc'; // string | Direção da ordenação.
 
 try {
     $result = $apiInstance->listUserReports($page, $limit, $status, $created_at_from, $created_at_to, $updated_at_from, $updated_at_to, $sort_by, $sort_direction);
@@ -686,15 +686,15 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**| Page number. | [optional] [default to 1] |
-| **limit** | **int**| Items per page. | [optional] [default to 10] |
-| **status** | **string**| Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] |
-| **created_at_from** | **\DateTime**| Filter: created from. | [optional] |
-| **created_at_to** | **\DateTime**| Filter: created up to. | [optional] |
-| **updated_at_from** | **\DateTime**| Filter: updated from. | [optional] |
-| **updated_at_to** | **\DateTime**| Filter: updated up to. | [optional] |
-| **sort_by** | **string**| Sort field. | [optional] [default to &#39;createdAt&#39;] |
-| **sort_direction** | **string**| Sort direction. | [optional] [default to &#39;desc&#39;] |
+| **page** | **int**| Número da página. | [optional] [default to 1] |
+| **limit** | **int**| Itens por página. | [optional] [default to 10] |
+| **status** | **string**| Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED. | [optional] |
+| **created_at_from** | **\DateTime**| Filtro: criado a partir de. | [optional] |
+| **created_at_to** | **\DateTime**| Filtro: criado até. | [optional] |
+| **updated_at_from** | **\DateTime**| Filtro: atualizado a partir de. | [optional] |
+| **updated_at_to** | **\DateTime**| Filtro: atualizado até. | [optional] |
+| **sort_by** | **string**| Campo de ordenação. | [optional] [default to &#39;createdAt&#39;] |
+| **sort_direction** | **string**| Direção da ordenação. | [optional] [default to &#39;desc&#39;] |
 
 ### Return type
 
@@ -719,9 +719,9 @@ try {
 postUserReport($post_user_report_request): \PayZu\Pix\Model\ReportJobAccepted
 ```
 
-Generate transactions report
+Gerar relatório de transações
 
-Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
 
 ### Example
 

@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,9 +19,9 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Download report
-    # Returns a short-lived signed URL to download the CSV file.
-    # @param id [String] Report ID.
+    # Baixar relatório
+    # Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+    # @param id [String] ID do relatório.
     # @param [Hash] opts the optional parameters
     # @return [DownloadUserReport200Response]
     def download_user_report(id, opts = {})
@@ -29,9 +29,9 @@ module PayZuPix
       data
     end
 
-    # Download report
-    # Returns a short-lived signed URL to download the CSV file.
-    # @param id [String] Report ID.
+    # Baixar relatório
+    # Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+    # @param id [String] ID do relatório.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DownloadUserReport200Response, Integer, Hash)>] DownloadUserReport200Response data, response status code and response headers
     def download_user_report_with_http_info(id, opts = {})
@@ -82,9 +82,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get bank statement
-    # Returns a single statement entry.
-    # @param id [String] Statement entry id.
+    # Consultar lançamento
+    # Retorna um lançamento do extrato.
+    # @param id [String] Id do lançamento do extrato.
     # @param [Hash] opts the optional parameters
     # @return [BankStatement]
     def get_user_bank_statement(id, opts = {})
@@ -92,9 +92,9 @@ module PayZuPix
       data
     end
 
-    # Get bank statement
-    # Returns a single statement entry.
-    # @param id [String] Statement entry id.
+    # Consultar lançamento
+    # Retorna um lançamento do extrato.
+    # @param id [String] Id do lançamento do extrato.
     # @param [Hash] opts the optional parameters
     # @return [Array<(BankStatement, Integer, Hash)>] BankStatement data, response status code and response headers
     def get_user_bank_statement_with_http_info(id, opts = {})
@@ -145,42 +145,42 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List bank statements
-    # Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
-    # @param created_at_from [Time] Start date (required).
-    # @param created_at_to [Time] End date (required).
+    # Listar extrato
+    # Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
+    # @param created_at_from [Time] Data inicial (obrigatória).
+    # @param created_at_to [Time] Data final (obrigatória).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Entry ID.
-    # @option opts [String] :operation Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
-    # @option opts [String] :reason Reason for the entry.
-    # @option opts [String] :transaction_id Transaction ID.
-    # @option opts [Float] :amount_from Minimum amount.
-    # @option opts [Float] :amount_to Maximum amount.
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
+    # @option opts [String] :id ID do lançamento.
+    # @option opts [String] :operation Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+    # @option opts [String] :reason Razão do lançamento.
+    # @option opts [String] :transaction_id ID da transação.
+    # @option opts [Float] :amount_from Valor mínimo.
+    # @option opts [Float] :amount_to Valor máximo.
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
     # @return [BankStatementListResponse]
     def get_user_bank_statements(created_at_from, created_at_to, opts = {})
       data, _status_code, _headers = get_user_bank_statements_with_http_info(created_at_from, created_at_to, opts)
       data
     end
 
-    # List bank statements
-    # Lists the account statement entries. &#x60;createdAtFrom&#x60; and &#x60;createdAtTo&#x60; are required.
-    # @param created_at_from [Time] Start date (required).
-    # @param created_at_to [Time] End date (required).
+    # Listar extrato
+    # Lista os lançamentos do extrato da conta. &#x60;createdAtFrom&#x60; e &#x60;createdAtTo&#x60; são obrigatórios.
+    # @param created_at_from [Time] Data inicial (obrigatória).
+    # @param created_at_to [Time] Data final (obrigatória).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Entry ID.
-    # @option opts [String] :operation Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
-    # @option opts [String] :reason Reason for the entry.
-    # @option opts [String] :transaction_id Transaction ID.
-    # @option opts [Float] :amount_from Minimum amount.
-    # @option opts [Float] :amount_to Maximum amount.
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
+    # @option opts [String] :id ID do lançamento.
+    # @option opts [String] :operation Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+    # @option opts [String] :reason Razão do lançamento.
+    # @option opts [String] :transaction_id ID da transação.
+    # @option opts [Float] :amount_from Valor mínimo.
+    # @option opts [Float] :amount_to Valor máximo.
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
     # @return [Array<(BankStatementListResponse, Integer, Hash)>] BankStatementListResponse data, response status code and response headers
     def get_user_bank_statements_with_http_info(created_at_from, created_at_to, opts = {})
       if @api_client.config.debugging
@@ -270,38 +270,38 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List pending deposits
-    # Lists deposits that are pending / not yet reconciled.
+    # Listar depósitos via chave Pix
+    # Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-    # @option opts [String] :document CPF or CNPJ, digits only.
-    # @option opts [String] :name Name of the payer or receiver.
-    # @option opts [String] :end_to_end_id End-to-end ID of the Pix.
-    # @option opts [Float] :amount_min Minimum amount.
-    # @option opts [Float] :amount_max Maximum amount.
-    # @option opts [Time] :created_at_from Start of the creation date range.
-    # @option opts [Time] :created_at_to End of the creation date range.
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 20)
+    # @option opts [String] :status Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60;
+    # @option opts [String] :document CPF ou CNPJ, apenas dígitos.
+    # @option opts [String] :name Nome do pagador ou recebedor.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [Float] :amount_min Valor mínimo.
+    # @option opts [Float] :amount_max Valor máximo.
+    # @option opts [Time] :created_at_from Data de criação inicial.
+    # @option opts [Time] :created_at_to Data de criação final.
+    # @option opts [Integer] :page Número da página. Valor inválido vira 1. (default to 1)
+    # @option opts [Integer] :limit Itens por página. Valor inválido vira 20. (default to 20)
     # @return [DepositPendingListResponse]
     def get_user_deposit_pending(opts = {})
       data, _status_code, _headers = get_user_deposit_pending_with_http_info(opts)
       data
     end
 
-    # List pending deposits
-    # Lists deposits that are pending / not yet reconciled.
+    # Listar depósitos via chave Pix
+    # Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por &#x60;POST /pix&#x60;.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :status Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-    # @option opts [String] :document CPF or CNPJ, digits only.
-    # @option opts [String] :name Name of the payer or receiver.
-    # @option opts [String] :end_to_end_id End-to-end ID of the Pix.
-    # @option opts [Float] :amount_min Minimum amount.
-    # @option opts [Float] :amount_max Maximum amount.
-    # @option opts [Time] :created_at_from Start of the creation date range.
-    # @option opts [Time] :created_at_to End of the creation date range.
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 20)
+    # @option opts [String] :status Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60;
+    # @option opts [String] :document CPF ou CNPJ, apenas dígitos.
+    # @option opts [String] :name Nome do pagador ou recebedor.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [Float] :amount_min Valor mínimo.
+    # @option opts [Float] :amount_max Valor máximo.
+    # @option opts [Time] :created_at_from Data de criação inicial.
+    # @option opts [Time] :created_at_to Data de criação final.
+    # @option opts [Integer] :page Número da página. Valor inválido vira 1. (default to 1)
+    # @option opts [Integer] :limit Itens por página. Valor inválido vira 20. (default to 20)
     # @return [Array<(DepositPendingListResponse, Integer, Hash)>] DepositPendingListResponse data, response status code and response headers
     def get_user_deposit_pending_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -382,9 +382,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get pending deposit
-    # Returns a single pending deposit.
-    # @param id [String] Pending deposit id.
+    # Consultar depósito via chave Pix
+    # Retorna um depósito via chave Pix.
+    # @param id [String] Id do depósito pendente.
     # @param [Hash] opts the optional parameters
     # @return [DepositPending]
     def get_user_deposit_pending_by_id(id, opts = {})
@@ -392,9 +392,9 @@ module PayZuPix
       data
     end
 
-    # Get pending deposit
-    # Returns a single pending deposit.
-    # @param id [String] Pending deposit id.
+    # Consultar depósito via chave Pix
+    # Retorna um depósito via chave Pix.
+    # @param id [String] Id do depósito pendente.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DepositPending, Integer, Hash)>] DepositPending data, response status code and response headers
     def get_user_deposit_pending_by_id_with_http_info(id, opts = {})
@@ -445,9 +445,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get report job status
-    # Returns the status and metadata of a specific report job by `id`.
-    # @param id [String] Report ID.
+    # Consultar status do relatório
+    # Retorna o status e os metadados de um job de relatório específico pelo `id`.
+    # @param id [String] ID do relatório.
     # @param [Hash] opts the optional parameters
     # @return [ReportJobDetail]
     def get_user_report(id, opts = {})
@@ -455,9 +455,9 @@ module PayZuPix
       data
     end
 
-    # Get report job status
-    # Returns the status and metadata of a specific report job by &#x60;id&#x60;.
-    # @param id [String] Report ID.
+    # Consultar status do relatório
+    # Retorna o status e os metadados de um job de relatório específico pelo &#x60;id&#x60;.
+    # @param id [String] ID do relatório.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ReportJobDetail, Integer, Hash)>] ReportJobDetail data, response status code and response headers
     def get_user_report_with_http_info(id, opts = {})
@@ -508,26 +508,26 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Transaction summary
-    # Aggregated totals for deposits, withdrawals and commission over a period.
+    # Resumo de transações
+    # Totais agregados de depósitos, saques e comissão num período.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date. Default: start of the previous day (America/Sao_Paulo).
-    # @option opts [Time] :date_to End date. Default: now.
-    # @option opts [String] :group_by Grouping applied to the transactions. (default to 'day')
-    # @option opts [Boolean] :grouped When true, returns a series grouped by date.
+    # @option opts [Time] :date_from Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
+    # @option opts [Time] :date_to Data final. Padrão: agora.
+    # @option opts [String] :group_by Agrupamento das transações. (default to 'day')
+    # @option opts [Boolean] :grouped Quando true, retorna uma série agrupada por data.
     # @return [Summary]
     def get_user_summary(opts = {})
       data, _status_code, _headers = get_user_summary_with_http_info(opts)
       data
     end
 
-    # Transaction summary
-    # Aggregated totals for deposits, withdrawals and commission over a period.
+    # Resumo de transações
+    # Totais agregados de depósitos, saques e comissão num período.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date. Default: start of the previous day (America/Sao_Paulo).
-    # @option opts [Time] :date_to End date. Default: now.
-    # @option opts [String] :group_by Grouping applied to the transactions. (default to 'day')
-    # @option opts [Boolean] :grouped When true, returns a series grouped by date.
+    # @option opts [Time] :date_from Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
+    # @option opts [Time] :date_to Data final. Padrão: agora.
+    # @option opts [String] :group_by Agrupamento das transações. (default to 'day')
+    # @option opts [Boolean] :grouped Quando true, retorna uma série agrupada por data.
     # @return [Array<(Summary, Integer, Hash)>] Summary data, response status code and response headers
     def get_user_summary_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -581,9 +581,9 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List transaction details
-    # Retrieve a single transaction with its callback log and linked infractions.
-    # @param id [String] Transaction ID.
+    # Listar detalhes da transação
+    # Recupera uma única transação com seu log de callback e as infrações vinculadas.
+    # @param id [String] ID da transação.
     # @param [Hash] opts the optional parameters
     # @return [GetUserTransactionById200Response]
     def get_user_transaction_by_id(id, opts = {})
@@ -591,9 +591,9 @@ module PayZuPix
       data
     end
 
-    # List transaction details
-    # Retrieve a single transaction with its callback log and linked infractions.
-    # @param id [String] Transaction ID.
+    # Listar detalhes da transação
+    # Recupera uma única transação com seu log de callback e as infrações vinculadas.
+    # @param id [String] ID da transação.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetUserTransactionById200Response, Integer, Hash)>] GetUserTransactionById200Response data, response status code and response headers
     def get_user_transaction_by_id_with_http_info(id, opts = {})
@@ -644,52 +644,52 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List Transactions
-    # Paginated list of account transactions with filters.
+    # Listar transações
+    # Lista paginada das transações da conta com filtros.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date-time (ISO 8601).
-    # @option opts [Time] :date_to End date-time (ISO 8601).
-    # @option opts [Integer] :limit Items per page (max 1000). (default to 10)
-    # @option opts [Integer] :page Page number (default 1). (default to 1)
-    # @option opts [String] :id Transaction ID.
-    # @option opts [String] :status Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-    # @option opts [String] :type Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
-    # @option opts [String] :method Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
-    # @option opts [Float] :amount Amount filter. Minimum 0.01.
-    # @option opts [String] :document CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
-    # @option opts [String] :name Name filter.
-    # @option opts [String] :end_to_end_id Pix end-to-end ID.
-    # @option opts [String] :sort_by Field to sort by (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction (default to 'desc')
-    # @option opts [String] :client_reference Filter by external reference
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
-    # @option opts [Boolean] :has_qr_code Only transactions with (true) or without (false) QR Code.
+    # @option opts [Time] :date_from Data-hora inicial (ISO 8601).
+    # @option opts [Time] :date_to Data-hora final (ISO 8601).
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [String] :id ID da transação.
+    # @option opts [String] :status Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60;
+    # @option opts [String] :type Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+    # @option opts [String] :method Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60;
+    # @option opts [Float] :amount Filtro por valor. Mínimo 0.01.
+    # @option opts [String] :document CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
+    # @option opts [String] :name Filtro por nome.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :sort_by Campo pelo qual ordenar (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação (default to 'desc')
+    # @option opts [String] :client_reference Filtra por referência externa
+    # @option opts [String] :virtual_account Subconta usada na criação.
+    # @option opts [Boolean] :has_qr_code Só transações com (true) ou sem (false) QR Code.
     # @return [GetUserTransactions200Response]
     def get_user_transactions(opts = {})
       data, _status_code, _headers = get_user_transactions_with_http_info(opts)
       data
     end
 
-    # List Transactions
-    # Paginated list of account transactions with filters.
+    # Listar transações
+    # Lista paginada das transações da conta com filtros.
     # @param [Hash] opts the optional parameters
-    # @option opts [Time] :date_from Start date-time (ISO 8601).
-    # @option opts [Time] :date_to End date-time (ISO 8601).
-    # @option opts [Integer] :limit Items per page (max 1000). (default to 10)
-    # @option opts [Integer] :page Page number (default 1). (default to 1)
-    # @option opts [String] :id Transaction ID.
-    # @option opts [String] :status Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-    # @option opts [String] :type Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
-    # @option opts [String] :method Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
-    # @option opts [Float] :amount Amount filter. Minimum 0.01.
-    # @option opts [String] :document CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
-    # @option opts [String] :name Name filter.
-    # @option opts [String] :end_to_end_id Pix end-to-end ID.
-    # @option opts [String] :sort_by Field to sort by (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction (default to 'desc')
-    # @option opts [String] :client_reference Filter by external reference
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
-    # @option opts [Boolean] :has_qr_code Only transactions with (true) or without (false) QR Code.
+    # @option opts [Time] :date_from Data-hora inicial (ISO 8601).
+    # @option opts [Time] :date_to Data-hora final (ISO 8601).
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [String] :id ID da transação.
+    # @option opts [String] :status Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60;
+    # @option opts [String] :type Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+    # @option opts [String] :method Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60;
+    # @option opts [Float] :amount Filtro por valor. Mínimo 0.01.
+    # @option opts [String] :document CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
+    # @option opts [String] :name Filtro por nome.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :sort_by Campo pelo qual ordenar (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação (default to 'desc')
+    # @option opts [String] :client_reference Filtra por referência externa
+    # @option opts [String] :virtual_account Subconta usada na criação.
+    # @option opts [Boolean] :has_qr_code Só transações com (true) ou sem (false) QR Code.
     # @return [Array<(GetUserTransactions200Response, Integer, Hash)>] GetUserTransactions200Response data, response status code and response headers
     def get_user_transactions_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -793,36 +793,36 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # List report jobs
-    # List report jobs created by the authenticated user.
+    # Listar jobs de relatório
+    # Lista os jobs de relatório criados pelo usuário autenticado.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :status Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
-    # @option opts [Time] :created_at_from Filter: created from.
-    # @option opts [Time] :created_at_to Filter: created up to.
-    # @option opts [Time] :updated_at_from Filter: updated from.
-    # @option opts [Time] :updated_at_to Filter: updated up to.
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :status Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
+    # @option opts [Time] :created_at_from Filtro: criado a partir de.
+    # @option opts [Time] :created_at_to Filtro: criado até.
+    # @option opts [Time] :updated_at_from Filtro: atualizado a partir de.
+    # @option opts [Time] :updated_at_to Filtro: atualizado até.
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
     # @return [ListUserReports200Response]
     def list_user_reports(opts = {})
       data, _status_code, _headers = list_user_reports_with_http_info(opts)
       data
     end
 
-    # List report jobs
-    # List report jobs created by the authenticated user.
+    # Listar jobs de relatório
+    # Lista os jobs de relatório criados pelo usuário autenticado.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :page Page number. (default to 1)
-    # @option opts [Integer] :limit Items per page. (default to 10)
-    # @option opts [String] :status Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
-    # @option opts [Time] :created_at_from Filter: created from.
-    # @option opts [Time] :created_at_to Filter: created up to.
-    # @option opts [Time] :updated_at_from Filter: updated from.
-    # @option opts [Time] :updated_at_to Filter: updated up to.
-    # @option opts [String] :sort_by Sort field. (default to 'createdAt')
-    # @option opts [String] :sort_direction Sort direction. (default to 'desc')
+    # @option opts [Integer] :page Número da página. (default to 1)
+    # @option opts [Integer] :limit Itens por página. (default to 10)
+    # @option opts [String] :status Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
+    # @option opts [Time] :created_at_from Filtro: criado a partir de.
+    # @option opts [Time] :created_at_to Filtro: criado até.
+    # @option opts [Time] :updated_at_from Filtro: atualizado a partir de.
+    # @option opts [Time] :updated_at_to Filtro: atualizado até.
+    # @option opts [String] :sort_by Campo de ordenação. (default to 'createdAt')
+    # @option opts [String] :sort_direction Direção da ordenação. (default to 'desc')
     # @return [Array<(ListUserReports200Response, Integer, Hash)>] ListUserReports200Response data, response status code and response headers
     def list_user_reports_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -897,8 +897,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Generate transactions report
-    # Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+    # Gerar relatório de transações
+    # Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
     # @param post_user_report_request [PostUserReportRequest] 
     # @param [Hash] opts the optional parameters
     # @return [ReportJobAccepted]
@@ -907,8 +907,8 @@ module PayZuPix
       data
     end
 
-    # Generate transactions report
-    # Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+    # Gerar relatório de transações
+    # Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
     # @param post_user_report_request [PostUserReportRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ReportJobAccepted, Integer, Hash)>] ReportJobAccepted data, response status code and response headers

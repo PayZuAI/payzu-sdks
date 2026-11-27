@@ -4,10 +4,10 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPix**](PixOperationsApi.md#getpix) | **GET** /pix | Retrieve Charge |
-| [**getPixQrcode**](PixOperationsApi.md#getpixqrcode) | **GET** /pix/qr-code/{transactionId} | Render Pix QR code (PNG) |
-| [**getProof**](PixOperationsApi.md#getproof) | **GET** /proof/{id} | Get Transaction Receipt |
-| [**postPix**](PixOperationsApi.md#postpixoperation) | **POST** /pix | Create Charge (Pix deposit) |
+| [**getPix**](PixOperationsApi.md#getpix) | **GET** /pix | Recuperar Cobrança |
+| [**getPixQrcode**](PixOperationsApi.md#getpixqrcode) | **GET** /pix/qr-code/{transactionId} | Renderiza o QR Code Pix (PNG) |
+| [**getProof**](PixOperationsApi.md#getproof) | **GET** /proof/{id} | Obter comprovante da transação |
+| [**postPix**](PixOperationsApi.md#postpixoperation) | **POST** /pix | Criar Cobrança (depósito Pix) |
 
 
 
@@ -15,9 +15,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > Transaction getPix(id, clientReference, endToEndId, virtualAccount)
 
-Retrieve Charge
+Recuperar Cobrança
 
-Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; is also accepted). When more than one parameter is provided, they are combined as filters (AND).  Token permission: &#x60;DEPOSIT&#x60;.
+Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60; (&#x60;virtualAccount&#x60; também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
 
 ### Example
 
@@ -37,13 +37,13 @@ async function example() {
   const api = new PixOperationsApi(config);
 
   const body = {
-    // string | Transaction ID. (optional)
+    // string | ID da transação. (optional)
     id: PAYZU20260811R4TZ8WD1NC000000,
-    // string | External reference provided when creating the charge. (optional)
+    // string | Referência externa fornecida na criação da cobrança. (optional)
     clientReference: order_12345,
-    // string | Pix end-to-end ID. (optional)
+    // string | ID end-to-end do Pix. (optional)
     endToEndId: E00000000202508172159kZ8dQ2mNb1x,
-    // string | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+    // string | Subconta usada na criação. (optional)
     virtualAccount: loja-centro-01,
   } satisfies GetPixRequest;
 
@@ -64,10 +64,10 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Transaction ID. | [Optional] [Defaults to `undefined`] |
-| **clientReference** | `string` | External reference provided when creating the charge. | [Optional] [Defaults to `undefined`] |
-| **endToEndId** | `string` | Pix end-to-end ID. | [Optional] [Defaults to `undefined`] |
-| **virtualAccount** | `string` | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [Optional] [Defaults to `undefined`] |
+| **id** | `string` | ID da transação. | [Optional] [Defaults to `undefined`] |
+| **clientReference** | `string` | Referência externa fornecida na criação da cobrança. | [Optional] [Defaults to `undefined`] |
+| **endToEndId** | `string` | ID end-to-end do Pix. | [Optional] [Defaults to `undefined`] |
+| **virtualAccount** | `string` | Subconta usada na criação. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -86,11 +86,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Current transaction state |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Estado atual da transação |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -99,9 +99,9 @@ example().catch(console.error);
 
 > Blob getPixQrcode(transactionId)
 
-Render Pix QR code (PNG)
+Renderiza o QR Code Pix (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image  Token permission: &#x60;DEPOSIT&#x60;.
+Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
 
 ### Example
 
@@ -121,7 +121,7 @@ async function example() {
   const api = new PixOperationsApi(config);
 
   const body = {
-    // string | Transaction ID.
+    // string | ID da transação.
     transactionId: PAYZU20260814T6NX1CV9MK000000,
   } satisfies GetPixQrcodeRequest;
 
@@ -142,7 +142,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | `string` | Transaction ID. | [Defaults to `undefined`] |
+| **transactionId** | `string` | ID da transação. | [Defaults to `undefined`] |
 
 ### Return type
 
@@ -161,11 +161,11 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | QR code image |  -  |
-| **400** | Transaction is not a DEPOSIT or has no QR code |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Transaction not found |  -  |
+| **200** | Imagem do QR Code |  -  |
+| **400** | Transação sem QR Code |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Transação não encontrada |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -174,9 +174,9 @@ example().catch(console.error);
 
 > ProofResponse getProof(id, type)
 
-Get Transaction Receipt
+Obter comprovante da transação
 
-Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
 
 ### Example
 
@@ -196,9 +196,9 @@ async function example() {
   const api = new PixOperationsApi(config);
 
   const body = {
-    // string | Transaction ID.
+    // string | ID da transação.
     id: PAYZU20260814T6NX1CV9MK000000,
-    // 'pdf' | 'base64' | Return format. (optional)
+    // 'pdf' | 'base64' | Formato de retorno. (optional)
     type: pdf,
   } satisfies GetProofRequest;
 
@@ -219,8 +219,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | `string` | Transaction ID. | [Defaults to `undefined`] |
-| **type** | `pdf`, `base64` | Return format. | [Optional] [Defaults to `&#39;pdf&#39;`] [Enum: pdf, base64] |
+| **id** | `string` | ID da transação. | [Defaults to `undefined`] |
+| **type** | `pdf`, `base64` | Formato de retorno. | [Optional] [Defaults to `&#39;pdf&#39;`] [Enum: pdf, base64] |
 
 ### Return type
 
@@ -239,12 +239,13 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Base64 if &#x60;type&#x3D;base64&#x60;, otherwise binary PDF. |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **404** | Resource not found |  -  |
-| **422** | Operation refused |  -  |
-| **500** | Internal error |  -  |
+| **200** | Comprovante em PDF ou base64 |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **422** | Operação recusada |  -  |
+| **500** | Erro interno |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -253,9 +254,9 @@ example().catch(console.error);
 
 > Transaction postPix(postPixRequest)
 
-Create Charge (Pix deposit)
+Criar Cobrança (depósito Pix)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.  Token permission: &#x60;DEPOSIT&#x60;.
+Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
 
 ### Example
 
@@ -315,12 +316,12 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Charge created |  -  |
-| **400** | Bad Request, payload or query string failed validation |  -  |
-| **401** | Missing or invalid Bearer token |  -  |
-| **403** | Operation not allowed, including a token without the required permission (PZA200) |  -  |
-| **422** | Operation refused |  -  |
-| **424** | Failure at the financial institution |  -  |
+| **200** | Cobrança criada |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Token Bearer ausente ou inválido |  -  |
+| **403** |  |  -  |
+| **422** | Operação recusada |  -  |
+| **424** | Falha na instituição financeira |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

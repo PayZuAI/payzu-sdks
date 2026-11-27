@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,91 +20,91 @@ import { mapValues } from '../runtime.js';
  */
 export interface DepositPending {
     /**
-     * Identifier of the pending deposit.
+     * Identificador do depósito pendente.
      * @type {string}
      * @memberof DepositPending
      */
     id?: string;
     /**
-     * Deposit status: PENDING, COMPLETED or REJECTED.
+     * Situação do depósito: PENDING, COMPLETED ou REJECTED.
      * @type {DepositPendingStatusEnum}
      * @memberof DepositPending
      */
     status?: DepositPendingStatusEnum;
     /**
-     * Amount received.
+     * Valor recebido.
      * @type {number}
      * @memberof DepositPending
      */
     amount?: number;
     /**
-     * CNPJ of the payer of the Pix.
+     * CNPJ de quem enviou o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     payerDocument?: string;
     /**
-     * Name of the payer of the Pix.
+     * Nome de quem enviou o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     payerName?: string | null;
     /**
-     * Account number of the payer inside the platform.
+     * Número da conta do pagador dentro da plataforma.
      * @type {string}
      * @memberof DepositPending
      */
     payerAccountNumber?: string | null;
     /**
-     * ISPB code of the institution the Pix was sent from.
+     * Código ISPB da instituição de onde saiu o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     payerInstitutionIspb?: string | null;
     /**
-     * Name of the institution the Pix was sent from.
+     * Nome da instituição de onde o Pix saiu.
      * @type {string}
      * @memberof DepositPending
      */
     payerInstitutionName?: string | null;
     /**
-     * CPF or CNPJ of the account that received the Pix.
+     * CPF ou CNPJ da conta que recebeu o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     receiverDocument?: string | null;
     /**
-     * Name of the account that received the Pix.
+     * Nome da conta que recebeu o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     receiverName?: string | null;
     /**
-     * Number of your PayZu account that receives the credit if the deposit is approved.
+     * Número da sua conta na PayZu que receberá o crédito caso o depósito seja aprovado.
      * @type {string}
      * @memberof DepositPending
      */
     receiverAccountNumber?: string | null;
     /**
-     * ISPB code of the institution that received the Pix.
+     * Código ISPB da instituição que recebeu o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     receiverInstitutionIspb?: string | null;
     /**
-     * Name of the institution where the Pix was settled on the receiving side.
+     * Nome da instituição em que o Pix foi liquidado do lado de quem recebeu.
      * @type {string}
      * @memberof DepositPending
      */
     receiverInstitutionName?: string | null;
     /**
-     * End-to-end identifier of the Pix.
+     * Identificador ponta a ponta do Pix.
      * @type {string}
      * @memberof DepositPending
      */
     endToEndId?: string;
     /**
-     * Date and time the Pix was settled.
+     * Data e hora da liquidação do Pix.
      * @type {Date}
      * @memberof DepositPending
      */
@@ -116,43 +116,43 @@ export interface DepositPending {
      */
     pixKey?: string | null;
     /**
-     * Free text that would accompany the Pix.
+     * Texto livre que acompanharia o Pix.
      * @type {string}
      * @memberof DepositPending
      */
     description?: string | null;
     /**
-     * Date and time the deposit was approved.
+     * Data e hora da aprovação do depósito.
      * @type {Date}
      * @memberof DepositPending
      */
     approvedAt?: Date | null;
     /**
-     * Date and time the deposit was rejected.
+     * Data e hora da recusa do depósito.
      * @type {Date}
      * @memberof DepositPending
      */
     rejectedAt?: Date | null;
     /**
-     * Reason the deposit was rejected.
+     * Motivo da recusa do depósito.
      * @type {string}
      * @memberof DepositPending
      */
     rejectionReason?: string | null;
     /**
-     * Deposit transaction created on approval.
+     * Transação de depósito criada na aprovação.
      * @type {string}
      * @memberof DepositPending
      */
     transactionId?: string | null;
     /**
-     * Moment the received Pix was recorded, before the credit.
+     * Momento em que o Pix recebido foi registrado, antes do crédito.
      * @type {Date}
      * @memberof DepositPending
      */
     createdAt?: Date;
     /**
-     * Moment of the last change to the record, which changes when the deposit is approved or rejected.
+     * Momento da última alteração do registro, que muda quando o depósito é aprovado ou recusado.
      * @type {Date}
      * @memberof DepositPending
      */

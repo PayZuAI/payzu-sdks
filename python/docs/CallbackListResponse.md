@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**CallbackListResponsePagination**](CallbackListResponsePagination.md) |  | [optional] 
-**callbacks** | [**List[CallbackDetail]**](CallbackDetail.md) | Array of callback logs | [optional] 
+**callbacks** | [**List[CallbackDetail]**](CallbackDetail.md) | Array de logs de callback | [optional] 
 
 ## Example
 

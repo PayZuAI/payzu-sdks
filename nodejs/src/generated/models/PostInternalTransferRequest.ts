@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,43 +20,43 @@ import { mapValues } from '../runtime.js';
  */
 export interface PostInternalTransferRequest {
     /**
-     * Payer account number (6 digits). Must match the authenticated user's accountNumber.
+     * Conta do pagador.
      * @type {string}
      * @memberof PostInternalTransferRequest
      */
     payerAccountNumber: string;
     /**
-     * Destination account number (6 digits).
+     * Conta de destino.
      * @type {string}
      * @memberof PostInternalTransferRequest
      */
     receiverAccountNumber: string;
     /**
-     * Transfer amount in BRL, with at most 2 decimal places.
+     * Valor da transferência em BRL, com no máximo 2 casas decimais.
      * @type {number}
      * @memberof PostInternalTransferRequest
      */
     amount: number;
     /**
-     * Optional transfer description.
+     * Descrição opcional da transferência.
      * @type {string}
      * @memberof PostInternalTransferRequest
      */
     description?: string;
     /**
-     * URL for transaction notifications (http or https).
+     * URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal.
      * @type {string}
      * @memberof PostInternalTransferRequest
      */
     callbackUrl?: string;
     /**
-     * External reference for idempotency / reconciliation.
+     * Referência externa para idempotência / reconciliação.
      * @type {string}
      * @memberof PostInternalTransferRequest
      */
     clientReference?: string;
     /**
-     * Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback.
+     * Subconta para separar lojas ou filiais.
      * @type {string}
      * @memberof PostInternalTransferRequest
      */

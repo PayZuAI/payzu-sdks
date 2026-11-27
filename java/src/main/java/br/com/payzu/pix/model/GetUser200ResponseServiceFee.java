@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Cash-in and cash-out fees of the account, in reais.
+ * Tarifas de entrada e saída da conta, em reais.
  */
 @JsonPropertyOrder({
   GetUser200ResponseServiceFee.JSON_PROPERTY_CASH_IN_MINIMUM,
@@ -76,7 +76,7 @@ public class GetUser200ResponseServiceFee {
   }
 
   /**
-   * Floor of the cash-in fee, in reais.
+   * Piso da tarifa de entrada, em reais.
    * @return cashInMinimum
    */
   @javax.annotation.Nullable
@@ -100,7 +100,7 @@ public class GetUser200ResponseServiceFee {
   }
 
   /**
-   * Fixed part of the cash-in fee, in reais.
+   * Parcela fixa da tarifa de entrada, em reais.
    * @return cashInFixed
    */
   @javax.annotation.Nullable
@@ -124,7 +124,7 @@ public class GetUser200ResponseServiceFee {
   }
 
   /**
-   * Percentage of the cash-in fee.
+   * Percentual da tarifa de entrada.
    * @return cashInPercent
    */
   @javax.annotation.Nullable
@@ -148,7 +148,7 @@ public class GetUser200ResponseServiceFee {
   }
 
   /**
-   * Floor of the withdrawal fee, in reais.
+   * Piso da tarifa de saque, em reais.
    * @return cashOutMinimum
    */
   @javax.annotation.Nullable
@@ -172,7 +172,7 @@ public class GetUser200ResponseServiceFee {
   }
 
   /**
-   * Fixed part of the withdrawal fee, in reais.
+   * Parcela fixa da tarifa de saque, em reais.
    * @return cashOutFixed
    */
   @javax.annotation.Nullable
@@ -196,7 +196,7 @@ public class GetUser200ResponseServiceFee {
   }
 
   /**
-   * Percentage of the withdrawal fee.
+   * Percentual da tarifa de saque.
    * @return cashOutPercent
    */
   @javax.annotation.Nullable

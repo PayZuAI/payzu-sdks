@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,23 +20,23 @@ var _ MappedNullable = &Refund{}
 
 // Refund struct for Refund
 type Refund struct {
-	// Refund identifier.
+	// Identificador da devolução.
 	Id *string `json:"id,omitempty"`
-	// Refunded amount in BRL.
+	// Valor devolvido em BRL.
 	Amount *float32 `json:"amount,omitempty"`
-	// Refund reason.
+	// Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
 	Reason *string `json:"reason,omitempty"`
-	// Refund description.
+	// Descrição da devolução.
 	Description NullableString `json:"description,omitempty"`
-	// Refund status.
+	// Status da devolução.
 	Status *string `json:"status,omitempty"`
-	// End-to-end ID of the refund Pix.
+	// End-to-end ID do Pix de devolução.
 	EndToEndId NullableString `json:"endToEndId,omitempty"`
-	// When the refund was completed.
+	// Quando a devolução foi concluída.
 	RefundedAt NullableTime `json:"refundedAt,omitempty"`
-	// When the refund was requested.
+	// Quando a devolução foi pedida.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Last change to the refund.
+	// Última alteração da devolução.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 

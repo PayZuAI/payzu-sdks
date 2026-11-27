@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -33,25 +33,25 @@ type ApiGetPixRequest struct {
 	virtualAccount *string
 }
 
-// Transaction ID.
+// ID da transação.
 func (r ApiGetPixRequest) Id(id string) ApiGetPixRequest {
 	r.id = &id
 	return r
 }
 
-// External reference provided when creating the charge.
+// Referência externa fornecida na criação da cobrança.
 func (r ApiGetPixRequest) ClientReference(clientReference string) ApiGetPixRequest {
 	r.clientReference = &clientReference
 	return r
 }
 
-// Pix end-to-end ID.
+// ID end-to-end do Pix.
 func (r ApiGetPixRequest) EndToEndId(endToEndId string) ApiGetPixRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
-// Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+// Subconta usada na criação.
 func (r ApiGetPixRequest) VirtualAccount(virtualAccount string) ApiGetPixRequest {
 	r.virtualAccount = &virtualAccount
 	return r
@@ -62,11 +62,9 @@ func (r ApiGetPixRequest) Execute() (*Transaction, *http.Response, error) {
 }
 
 /*
-GetPix Retrieve Charge
+GetPix Recuperar Cobrança
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId` (`virtualAccount` is also accepted). When more than one parameter is provided, they are combined as filters (AND).
-
-Token permission: `DEPOSIT`.
+Obtém o status e os detalhes mais recentes de uma transação da conta. Informe pelo menos um dentre `id`, `clientReference` ou `endToEndId` (`virtualAccount` também é aceito). Ao informar mais de um parâmetro, todos são combinados como filtros (AND).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPixRequest
@@ -219,14 +217,12 @@ func (r ApiGetPixQrcodeRequest) Execute() (*os.File, *http.Response, error) {
 }
 
 /*
-GetPixQrcode Render Pix QR code (PNG)
+GetPixQrcode Renderiza o QR Code Pix (PNG)
 
-Render the Pix QR Code of a deposit as a binary PNG image
-
-Token permission: `DEPOSIT`.
+Renderiza o QR Code Pix de um depósito como uma imagem PNG binária
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionId Transaction ID.
+ @param transactionId ID da transação.
  @return ApiGetPixQrcodeRequest
 */
 func (a *PixOperationsAPIService) GetPixQrcode(ctx context.Context, transactionId string) ApiGetPixQrcodeRequest {
@@ -363,7 +359,7 @@ type ApiGetProofRequest struct {
 	type_ *string
 }
 
-// Return format.
+// Formato de retorno.
 func (r ApiGetProofRequest) Type_(type_ string) ApiGetProofRequest {
 	r.type_ = &type_
 	return r
@@ -374,12 +370,12 @@ func (r ApiGetProofRequest) Execute() (*ProofResponse, *http.Response, error) {
 }
 
 /*
-GetProof Get Transaction Receipt
+GetProof Obter comprovante da transação
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Transaction ID.
+ @param id ID da transação.
  @return ApiGetProofRequest
 */
 func (a *PixOperationsAPIService) GetProof(ctx context.Context, id string) ApiGetProofRequest {
@@ -480,6 +476,17 @@ func (a *PixOperationsAPIService) GetProofExecute(r ApiGetProofRequest) (*ProofR
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -543,11 +550,9 @@ func (r ApiPostPixRequest) Execute() (*Transaction, *http.Response, error) {
 }
 
 /*
-PostPix Create Charge (Pix deposit)
+PostPix Criar Cobrança (depósito Pix)
 
-Create a new Pix **deposit** (charge). Returns QR Code and transaction details.
-
-Token permission: `DEPOSIT`.
+Crie um novo **depósito** Pix (cobrança). Retorna o QR Code e os detalhes da transação.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostPixRequest

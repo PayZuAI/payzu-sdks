@@ -1,7 +1,7 @@
 
 # Transaction
 
-Unified transaction representation used by all endpoints.
+Representação unificada de transação usada por todos os endpoints.
 
 ## Properties
 

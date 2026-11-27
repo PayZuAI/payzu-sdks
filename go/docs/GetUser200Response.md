@@ -4,17 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountNumber** | Pointer to **NullableString** | Public account identifier (6 digits, unique). Used as destination for internal transfers. | [optional] 
-**Branch** | Pointer to **string** | Branch number (4 digits). | [optional] 
-**Name** | Pointer to **string** | Registered name of the account. | [optional] 
-**Role** | Pointer to **string** | Account role. | [optional] 
-**BalanceAvailable** | Pointer to **float32** | Balance free for withdrawals and transfers, in reais. | [optional] 
-**BalanceBlocked** | Pointer to **float32** | Part of the balance held, in reais. | [optional] 
-**Status** | Pointer to **string** | Account status. | [optional] 
-**CashInTicketMin** | Pointer to **float32** | Minimum amount accepted in each inbound charge, in reais; below the floor the creation is refused. | [optional] 
-**CashInTicketMax** | Pointer to **float32** | Maximum amount accepted in each inbound charge, in reais; above the cap the creation is refused. | [optional] 
-**CashOutTicketMin** | Pointer to **float32** | Minimum amount per withdrawal or internal transfer, in reais; below the floor the request is refused. | [optional] 
-**CashOutTicketMax** | Pointer to **float32** | Maximum amount per withdrawal or internal transfer, in reais; above the cap the request is refused. | [optional] 
+**AccountNumber** | Pointer to **NullableString** | Identificador público da conta. | [optional] 
+**Branch** | Pointer to **string** | Agência da conta. | [optional] 
+**Name** | Pointer to **string** | Nome cadastrado da conta. | [optional] 
+**BalanceAvailable** | Pointer to **float32** | Saldo livre para saques e transferências, em reais. | [optional] 
+**BalanceBlocked** | Pointer to **float32** | Parte do saldo retida, em reais. | [optional] 
+**Status** | Pointer to **string** | Situação da conta. | [optional] 
+**CashInTicketMin** | Pointer to **float32** | Valor mínimo aceito em cada cobrança de entrada, em reais; abaixo do piso a criação é recusada. | [optional] 
+**CashInTicketMax** | Pointer to **float32** | Valor máximo aceito em cada cobrança de entrada, em reais; acima do teto a criação é recusada. | [optional] 
+**CashOutTicketMin** | Pointer to **float32** | Valor mínimo por saque ou transferência interna, em reais; abaixo do piso o pedido é recusado. | [optional] 
+**CashOutTicketMax** | Pointer to **float32** | Valor máximo por saque ou transferência interna, em reais; acima do teto o pedido é recusado. | [optional] 
 **ServiceFee** | Pointer to [**GetUser200ResponseServiceFee**](GetUser200ResponseServiceFee.md) |  | [optional] 
 **DailyWithdrawLimit** | Pointer to [**GetUser200ResponseDailyWithdrawLimit**](GetUser200ResponseDailyWithdrawLimit.md) |  | [optional] 
 
@@ -121,31 +120,6 @@ SetName sets Name field to given value.
 `func (o *GetUser200Response) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetRole
-
-`func (o *GetUser200Response) GetRole() string`
-
-GetRole returns the Role field if non-nil, zero value otherwise.
-
-### GetRoleOk
-
-`func (o *GetUser200Response) GetRoleOk() (*string, bool)`
-
-GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRole
-
-`func (o *GetUser200Response) SetRole(v string)`
-
-SetRole sets Role field to given value.
-
-### HasRole
-
-`func (o *GetUser200Response) HasRole() bool`
-
-HasRole returns a boolean if a field has been set.
 
 ### GetBalanceAvailable
 

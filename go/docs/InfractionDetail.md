@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Identifier of the infraction inside PayZu, used in the query routes and when sending the defense. | [optional] 
-**Protocol** | Pointer to **string** | Infraction code at Bacen. | [optional] 
-**Status** | Pointer to **string** | Current state of the infraction. | [optional] 
-**Type** | Pointer to **string** | Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED. | [optional] 
-**ReportedBy** | Pointer to **string** | Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT. | [optional] 
-**ReportDetails** | Pointer to **NullableString** | Reason given by whoever opened the infraction, in the text sent by the partner bank. | [optional] 
-**AnalysisResult** | Pointer to **NullableString** | Analysis outcome: AGREED or DISAGREED. | [optional] 
-**AnalysisDetails** | Pointer to **NullableString** | Additional text about the analysis decision, when the partner bank sends that information. | [optional] 
-**ReportedAt** | Pointer to **time.Time** | Moment the infraction was opened. | [optional] 
-**ExpiresAt** | Pointer to **NullableTime** | Deadline to send the defense of this infraction. | [optional] 
+**Id** | Pointer to **string** | Identificador da contestação dentro da PayZu, usado nas rotas de consulta e no envio da defesa. | [optional] 
+**Protocol** | Pointer to **string** | Código da contestação no Bacen. | [optional] 
+**Status** | Pointer to **string** | Situação atual da contestação. | [optional] 
+**Type** | Pointer to **string** | Tipo da contestação: REFUND_REQUEST, FRAUD ou REFUND_CANCELLED. | [optional] 
+**ReportedBy** | Pointer to **string** | Lado que abriu a contestação: DEBITED_PARTICIPANT ou CREDITED_PARTICIPANT. | [optional] 
+**ReportDetails** | Pointer to **NullableString** | Motivo informado por quem abriu a contestação, no texto enviado pelo banco parceiro. | [optional] 
+**AnalysisResult** | Pointer to **NullableString** | Desfecho da análise: AGREED ou DISAGREED. | [optional] 
+**AnalysisDetails** | Pointer to **NullableString** | Texto complementar sobre a decisão da análise, quando o banco parceiro envia essa informação. | [optional] 
+**ReportedAt** | Pointer to **time.Time** | Momento em que a contestação foi aberta. | [optional] 
+**ExpiresAt** | Pointer to **NullableTime** | Prazo final para enviar a defesa desta contestação. | [optional] 
 **Transaction** | Pointer to [**InfractionDetailTransaction**](InfractionDetailTransaction.md) |  | [optional] 
-**DefenseHistory** | Pointer to [**[]DefenseHistoryEntry**](DefenseHistoryEntry.md) | Defenses already sent for this infraction, each with text, status and files. | [optional] 
+**DefenseHistory** | Pointer to [**[]DefenseHistoryEntry**](DefenseHistoryEntry.md) | Defesas já enviadas para esta contestação, com texto, status e anexos de cada uma. | [optional] 
 
 ## Methods
 

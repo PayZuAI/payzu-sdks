@@ -2,19 +2,19 @@
 
 # ReportJobAccepted
 
-Report job just queued.
+Job de relatório recém-enfileirado.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **UUID** | Report identifier (UUID), generated when the report is requested. |  [optional] |
-|**status** | [**StatusEnum**](#StatusEnum) | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. |  [optional] |
-|**createdAt** | **OffsetDateTime** | Date and time the report generation was requested. |  [optional] |
-|**updatedAt** | **OffsetDateTime** | Date and time of the last change to the report record. |  [optional] |
-|**params** | **Map&lt;String, Object&gt;** | Filters used when the report was created. |  [optional] |
-|**writtenRows** | **Integer** | Rows written to the file. Null until the report is COMPLETED. |  [optional] |
-|**storageExpiresAt** | **OffsetDateTime** | Date the report file expires. |  [optional] |
+|**id** | **UUID** | Identificador (UUID) do relatório, gerado no momento da solicitação. |  [optional] |
+|**status** | [**StatusEnum**](#StatusEnum) | Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED. |  [optional] |
+|**createdAt** | **OffsetDateTime** | Data e hora em que a geração do relatório foi solicitada. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | Data e hora da última alteração no registro do relatório. |  [optional] |
+|**params** | **Map&lt;String, Object&gt;** | Filtros usados na criação do relatório. |  [optional] |
+|**writtenRows** | **Integer** | Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED. |  [optional] |
+|**expiresAt** | **OffsetDateTime** | Data em que o arquivo do relatório expira. |  [optional] |
 
 
 

@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at_from** | **datetime** | Start of the period. At most 30 days ago. | 
-**created_at_to** | **datetime** | End of the period, on or after createdAtFrom. The window between start and end cannot exceed 7 days. | 
-**transaction_ids** | **List[str]** | Restrict to specific transaction IDs | [optional] 
-**transaction_types** | **List[str]** | Filter by transaction type | [optional] 
-**transaction_status** | **List[str]** | Filter by transaction status | [optional] 
-**transaction_end_to_end_ids** | **List[str]** | Restrict to specific Pix end-to-end IDs | [optional] 
+**created_at_from** | **datetime** | Início do período. No máximo 30 dias atrás. | 
+**created_at_to** | **datetime** | Fim do período, igual ou posterior a createdAtFrom. A janela entre início e fim não pode passar de 7 dias. | 
+**transaction_ids** | **List[str]** | Restringe a IDs de transação específicos | [optional] 
+**transaction_types** | **List[str]** | Filtra por tipo de transação | [optional] 
+**transaction_status** | **List[str]** | Filtra por status da transação | [optional] 
+**transaction_end_to_end_ids** | **List[str]** | Restringe a IDs end-to-end Pix específicos | [optional] 
 
 ## Example
 

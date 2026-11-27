@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Report identifier (UUID), generated when the report is requested. | [optional] 
-**Status** | Pointer to **string** | Generation progress: PENDING, RUNNING, COMPLETED or FAILED. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time the report generation was requested. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the report record. | [optional] 
-**Params** | Pointer to **map[string]interface{}** | Filters used when the report was created. | [optional] 
-**WrittenRows** | Pointer to **NullableInt32** | Rows written to the file. Null until the report is COMPLETED. | [optional] 
-**StorageExpiresAt** | Pointer to **NullableTime** | Date the report file expires. | [optional] 
+**Id** | Pointer to **string** | Identificador (UUID) do relatório, gerado no momento da solicitação. | [optional] 
+**Status** | Pointer to **string** | Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Data e hora em que a geração do relatório foi solicitada. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Data e hora da última alteração no registro do relatório. | [optional] 
+**Params** | Pointer to **map[string]interface{}** | Filtros usados na criação do relatório. | [optional] 
+**WrittenRows** | Pointer to **NullableInt32** | Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED. | [optional] 
+**ExpiresAt** | Pointer to **NullableTime** | Data em que o arquivo do relatório expira. | [optional] 
 
 ## Methods
 
@@ -191,41 +191,41 @@ HasWrittenRows returns a boolean if a field has been set.
 `func (o *ReportJobAccepted) UnsetWrittenRows()`
 
 UnsetWrittenRows ensures that no value is present for WrittenRows, not even an explicit nil
-### GetStorageExpiresAt
+### GetExpiresAt
 
-`func (o *ReportJobAccepted) GetStorageExpiresAt() time.Time`
+`func (o *ReportJobAccepted) GetExpiresAt() time.Time`
 
-GetStorageExpiresAt returns the StorageExpiresAt field if non-nil, zero value otherwise.
+GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
 
-### GetStorageExpiresAtOk
+### GetExpiresAtOk
 
-`func (o *ReportJobAccepted) GetStorageExpiresAtOk() (*time.Time, bool)`
+`func (o *ReportJobAccepted) GetExpiresAtOk() (*time.Time, bool)`
 
-GetStorageExpiresAtOk returns a tuple with the StorageExpiresAt field if it's non-nil, zero value otherwise
+GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStorageExpiresAt
+### SetExpiresAt
 
-`func (o *ReportJobAccepted) SetStorageExpiresAt(v time.Time)`
+`func (o *ReportJobAccepted) SetExpiresAt(v time.Time)`
 
-SetStorageExpiresAt sets StorageExpiresAt field to given value.
+SetExpiresAt sets ExpiresAt field to given value.
 
-### HasStorageExpiresAt
+### HasExpiresAt
 
-`func (o *ReportJobAccepted) HasStorageExpiresAt() bool`
+`func (o *ReportJobAccepted) HasExpiresAt() bool`
 
-HasStorageExpiresAt returns a boolean if a field has been set.
+HasExpiresAt returns a boolean if a field has been set.
 
-### SetStorageExpiresAtNil
+### SetExpiresAtNil
 
-`func (o *ReportJobAccepted) SetStorageExpiresAtNil(b bool)`
+`func (o *ReportJobAccepted) SetExpiresAtNil(b bool)`
 
- SetStorageExpiresAtNil sets the value for StorageExpiresAt to be an explicit nil
+ SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
 
-### UnsetStorageExpiresAt
-`func (o *ReportJobAccepted) UnsetStorageExpiresAt()`
+### UnsetExpiresAt
+`func (o *ReportJobAccepted) UnsetExpiresAt()`
 
-UnsetStorageExpiresAt ensures that no value is present for StorageExpiresAt, not even an explicit nil
+UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

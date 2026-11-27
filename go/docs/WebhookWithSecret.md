@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Webhook identifier. | [optional] 
-**Url** | Pointer to **string** | Address that receives the notifications. | [optional] 
-**Active** | Pointer to **bool** | Indicates whether the webhook starts out receiving events. | [optional] 
-**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | Events subscribed by this webhook. | [optional] 
-**HasSecretConfigured** | Pointer to **bool** | Indicates whether the webhook has a signing secret. | [optional] 
+**Id** | Pointer to **string** | Identificador do webhook. | [optional] 
+**Url** | Pointer to **string** | Endereço que recebe as notificações. | [optional] 
+**Active** | Pointer to **bool** | Indica se o webhook já começa recebendo eventos. | [optional] 
+**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | Eventos assinados por este webhook. | [optional] 
+**HasSecretConfigured** | Pointer to **bool** | Indica se o webhook tem segredo de assinatura. | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the webhook. | [optional] 
-**Secret** | Pointer to **NullableString** | HMAC signing secret. Shown only on creation and on rotate-secret. Store it now. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Data e hora da última alteração do webhook. | [optional] 
+**Secret** | Pointer to **NullableString** | Segredo de assinatura HMAC. | [optional] 
 
 ## Methods
 

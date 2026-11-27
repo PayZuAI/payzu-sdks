@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,26 +19,26 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Retrieve Withdrawal
-    # Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
+    # Consultar Saque
+    # Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Transaction ID.
-    # @option opts [String] :client_reference External reference provided when creating the withdrawal.
-    # @option opts [String] :end_to_end_id Pix end-to-end ID.
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+    # @option opts [String] :id ID da transação.
+    # @option opts [String] :client_reference Referência externa informada na criação do saque.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :virtual_account Subconta usada na criação.
     # @return [Transaction]
     def get_withdraw(opts = {})
       data, _status_code, _headers = get_withdraw_with_http_info(opts)
       data
     end
 
-    # Retrieve Withdrawal
-    # Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
+    # Consultar Saque
+    # Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60;. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Transaction ID.
-    # @option opts [String] :client_reference External reference provided when creating the withdrawal.
-    # @option opts [String] :end_to_end_id Pix end-to-end ID.
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+    # @option opts [String] :id ID da transação.
+    # @option opts [String] :client_reference Referência externa informada na criação do saque.
+    # @option opts [String] :end_to_end_id ID end-to-end do Pix.
+    # @option opts [String] :virtual_account Subconta usada na criação.
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers
     def get_withdraw_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -96,22 +96,22 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Get Withdrawal Receipt
-    # Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
-    # @param id [String] Transaction ID.
+    # Obter comprovante de saque
+    # Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
+    # @param id [String] ID da transação.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Return format. (default to 'pdf')
+    # @option opts [String] :type Formato de retorno. (default to 'pdf')
     # @return [ProofResponse]
     def get_withdraw_proof(id, opts = {})
       data, _status_code, _headers = get_withdraw_proof_with_http_info(id, opts)
       data
     end
 
-    # Get Withdrawal Receipt
-    # Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-    # @param id [String] Transaction ID.
+    # Obter comprovante de saque
+    # Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+    # @param id [String] ID da transação.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Return format. (default to 'pdf')
+    # @option opts [String] :type Formato de retorno. (default to 'pdf')
     # @return [Array<(ProofResponse, Integer, Hash)>] ProofResponse data, response status code and response headers
     def get_withdraw_proof_with_http_info(id, opts = {})
       if @api_client.config.debugging
@@ -166,8 +166,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Create Withdrawal (Pix key)
-    # Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
+    # Criar saque (chave Pix)
+    # Envie um **cash out** Pix para a chave Pix especificada.
     # @param post_withdraw_request [PostWithdrawRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Transaction]
@@ -176,8 +176,8 @@ module PayZuPix
       data
     end
 
-    # Create Withdrawal (Pix key)
-    # Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
+    # Criar saque (chave Pix)
+    # Envie um **cash out** Pix para a chave Pix especificada.
     # @param post_withdraw_request [PostWithdrawRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers
@@ -234,8 +234,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Create Withdrawal using QR Code
-    # Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
+    # Criar Saque usando QR Code
+    # Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
     # @param post_withdraw_qrcode_request [PostWithdrawQrcodeRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Transaction]
@@ -244,8 +244,8 @@ module PayZuPix
       data
     end
 
-    # Create Withdrawal using QR Code
-    # Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
+    # Criar Saque usando QR Code
+    # Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se &#x60;amount&#x60; não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
     # @param post_withdraw_qrcode_request [PostWithdrawQrcodeRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers

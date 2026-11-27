@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Webhook id. | [optional] 
-**Url** | Pointer to **string** | Address in your system where PayZu sends the event notification. | [optional] 
+**Id** | Pointer to **string** | Id do webhook. | [optional] 
+**Url** | Pointer to **string** | Endereço do seu sistema para onde a PayZu envia a notificação do evento. | [optional] 
 **Active** | Pointer to **bool** | Somente webhooks ativos recebem entregas. | [optional] 
-**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | Subscribed events. Empty means all events. | [optional] 
-**HasSecretConfigured** | Pointer to **bool** | Whether the webhook has an HMAC signing secret. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time the webhook was registered on the account. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the webhook. | [optional] 
+**Events** | Pointer to [**[]WebhookEventType**](WebhookEventType.md) | Eventos assinados. | [optional] 
+**HasSecretConfigured** | Pointer to **bool** | Indica se o webhook tem segredo de assinatura HMAC. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Data e hora em que o webhook foi cadastrado na conta. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Data e hora da última alteração do webhook. | [optional] 
 
 ## Methods
 

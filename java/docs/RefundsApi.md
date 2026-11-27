@@ -4,8 +4,8 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**postRefund**](RefundsApi.md#postRefund) | **POST** /refund/{transactionId} | Refund a Pix |
-| [**postRefundWithHttpInfo**](RefundsApi.md#postRefundWithHttpInfo) | **POST** /refund/{transactionId} | Refund a Pix |
+| [**postRefund**](RefundsApi.md#postRefund) | **POST** /refund/{transactionId} | Solicitar a devolução de um Pix recebido |
+| [**postRefundWithHttpInfo**](RefundsApi.md#postRefundWithHttpInfo) | **POST** /refund/{transactionId} | Solicitar a devolução de um Pix recebido |
 
 
 
@@ -13,9 +13,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > TransactionWithRefunds postRefund(transactionId, refundRequest)
 
-Refund a Pix
+Solicitar a devolução de um Pix recebido
 
-Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
+Devolve um Pix recebido. Informe &#x60;amount&#x60; para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com &#x60;refundStatus: PENDING&#x60;; a conclusão é confirmada depois pelo callback.  Envie &#x60;{}&#x60; para devolver o valor total. O corpo só aceita &#x60;amount&#x60;, &#x60;description&#x60; e &#x60;clientReference&#x60;; outro campo é recusado com 400.
 
 ### Example
 
@@ -38,7 +38,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         RefundsApi apiInstance = new RefundsApi(defaultClient);
-        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | ID of the transaction to refund.
+        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação a devolver.
         RefundRequest refundRequest = new RefundRequest(); // RefundRequest | 
         try {
             TransactionWithRefunds result = apiInstance.postRefund(transactionId, refundRequest);
@@ -59,7 +59,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | **String**| ID of the transaction to refund. | |
+| **transactionId** | **String**| ID da transação a devolver. | |
 | **refundRequest** | [**RefundRequest**](RefundRequest.md)|  | |
 
 ### Return type
@@ -79,23 +79,24 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Refund accepted and enqueued (asynchronous). |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
-| **422** | Refund not allowed for this transaction or amount. |  -  |
-| **429** | Rate limit exceeded |  -  |
-| **500** | Internal error |  -  |
+| **200** | Devolução enfileirada |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
+| **422** | Devolução não permitida |  -  |
+| **424** | Falha na instituição financeira |  -  |
+| **429** | Limite de requisições excedido |  -  |
+| **500** | Erro interno |  -  |
 
 ## postRefundWithHttpInfo
 
 > ApiResponse<TransactionWithRefunds> postRefundWithHttpInfo(transactionId, refundRequest)
 
-Refund a Pix
+Solicitar a devolução de um Pix recebido
 
-Refund a received Pix charge. Provide &#x60;amount&#x60; for a partial refund, or omit it to refund the full amount. Processing is **asynchronous**: the response returns the transaction with &#x60;refundStatus: PENDING&#x60;; completion is confirmed later by webhook.  Send &#x60;{}&#x60; to refund the full amount.  Token permission: &#x60;WITHDRAW&#x60;.
+Devolve um Pix recebido. Informe &#x60;amount&#x60; para uma devolução parcial, ou omita para devolver o valor total. O processamento é **assíncrono**: a resposta volta com &#x60;refundStatus: PENDING&#x60;; a conclusão é confirmada depois pelo callback.  Envie &#x60;{}&#x60; para devolver o valor total. O corpo só aceita &#x60;amount&#x60;, &#x60;description&#x60; e &#x60;clientReference&#x60;; outro campo é recusado com 400.
 
 ### Example
 
@@ -119,7 +120,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         RefundsApi apiInstance = new RefundsApi(defaultClient);
-        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | ID of the transaction to refund.
+        String transactionId = "PAYZU20260814T6NX1CV9MK000000"; // String | ID da transação a devolver.
         RefundRequest refundRequest = new RefundRequest(); // RefundRequest | 
         try {
             ApiResponse<TransactionWithRefunds> response = apiInstance.postRefundWithHttpInfo(transactionId, refundRequest);
@@ -142,7 +143,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **transactionId** | **String**| ID of the transaction to refund. | |
+| **transactionId** | **String**| ID da transação a devolver. | |
 | **refundRequest** | [**RefundRequest**](RefundRequest.md)|  | |
 
 ### Return type
@@ -162,13 +163,14 @@ ApiResponse<[**TransactionWithRefunds**](TransactionWithRefunds.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Refund accepted and enqueued (asynchronous). |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
-| **422** | Refund not allowed for this transaction or amount. |  -  |
-| **429** | Rate limit exceeded |  -  |
-| **500** | Internal error |  -  |
+| **200** | Devolução enfileirada |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
+| **422** | Devolução não permitida |  -  |
+| **424** | Falha na instituição financeira |  -  |
+| **429** | Limite de requisições excedido |  -  |
+| **500** | Erro interno |  -  |
 

@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,13 +15,13 @@ require 'time'
 
 module PayZuPix
   class EnqueuedCallbackEnqueued < ApiModelBase
-    # Total number of callbacks sent for queueing. Not limited by the size of items.
+    # Total de callbacks enviados para enfileiramento. Não é limitado pelo tamanho de items.
     attr_accessor :count
 
-    # True when items lists only part of the callbacks. The resend still covers all of them.
+    # true quando items lista apenas parte dos callbacks. O reenvio cobre todos mesmo assim.
     attr_accessor :truncated
 
-    # Queued callbacks, capped at 500 entries.
+    # Callbacks enfileirados, no máximo 500 entradas.
     attr_accessor :items
 
     # Attribute mapping from ruby-style variable name to JSON key.

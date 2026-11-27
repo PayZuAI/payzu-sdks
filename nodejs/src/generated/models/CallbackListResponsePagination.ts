@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,25 +14,25 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * Page and limit used, and whether there is a next page.
+ * Página e limite usados, e se há próxima página.
  * @export
  * @interface CallbackListResponsePagination
  */
 export interface CallbackListResponsePagination {
     /**
-     * Current page
+     * Página atual
      * @type {number}
      * @memberof CallbackListResponsePagination
      */
     page?: number;
     /**
-     * Items per page
+     * Itens por página
      * @type {number}
      * @memberof CallbackListResponsePagination
      */
     limit?: number;
     /**
-     * Indicates if there is a next page
+     * Indica se há uma próxima página
      * @type {boolean}
      * @memberof CallbackListResponsePagination
      */

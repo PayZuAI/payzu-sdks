@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -174,33 +174,29 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Retrieve Withdrawal
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the withdrawal. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Consultar Saque
+   * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60;. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa informada na criação do saque. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Retrieve Withdrawal Documentation</a>
    */
   public Transaction getWithdraw(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount) throws ApiException {
     return getWithdraw(id, clientReference, endToEndId, virtualAccount, null);
   }
 
   /**
-   * Retrieve Withdrawal
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the withdrawal. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Consultar Saque
+   * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60;. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa informada na criação do saque. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Retrieve Withdrawal Documentation</a>
    */
   public Transaction getWithdraw(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = getWithdrawWithHttpInfo(id, clientReference, endToEndId, virtualAccount, headers);
@@ -208,33 +204,29 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Retrieve Withdrawal
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the withdrawal. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Consultar Saque
+   * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60;. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa informada na criação do saque. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Retrieve Withdrawal Documentation</a>
    */
   public ApiResponse<Transaction> getWithdrawWithHttpInfo(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount) throws ApiException {
     return getWithdrawWithHttpInfo(id, clientReference, endToEndId, virtualAccount, null);
   }
 
   /**
-   * Retrieve Withdrawal
-   * Get the latest status and details of a transaction of the account. Provide at least one of &#x60;id&#x60;, &#x60;clientReference&#x60;, or &#x60;endToEndId&#x60;. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: &#x60;WITHDRAW&#x60;.
-   * @param id Transaction ID. (optional)
-   * @param clientReference External reference provided when creating the withdrawal. (optional)
-   * @param endToEndId Pix end-to-end ID. (optional)
-   * @param virtualAccount Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. (optional)
+   * Consultar Saque
+   * Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: &#x60;id&#x60;, &#x60;clientReference&#x60; ou &#x60;endToEndId&#x60;. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
+   * @param id ID da transação. (optional)
+   * @param clientReference Referência externa informada na criação do saque. (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param virtualAccount Subconta usada na criação. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Retrieve Withdrawal Documentation</a>
    */
   public ApiResponse<Transaction> getWithdrawWithHttpInfo(@javax.annotation.Nullable String id, @javax.annotation.Nullable String clientReference, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String virtualAccount, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getWithdrawRequestBuilder(id, clientReference, endToEndId, virtualAccount, headers);
@@ -328,29 +320,25 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Get Withdrawal Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante de saque
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @return ProofResponse
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Get Withdrawal Receipt Documentation</a>
    */
   public ProofResponse getWithdrawProof(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type) throws ApiException {
     return getWithdrawProof(id, type, null);
   }
 
   /**
-   * Get Withdrawal Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante de saque
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @param headers Optional headers to include in the request
    * @return ProofResponse
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Get Withdrawal Receipt Documentation</a>
    */
   public ProofResponse getWithdrawProof(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type, Map<String, String> headers) throws ApiException {
     ApiResponse<ProofResponse> localVarResponse = getWithdrawProofWithHttpInfo(id, type, headers);
@@ -358,29 +346,25 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Get Withdrawal Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante de saque
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @return ApiResponse&lt;ProofResponse&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Get Withdrawal Receipt Documentation</a>
    */
   public ApiResponse<ProofResponse> getWithdrawProofWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type) throws ApiException {
     return getWithdrawProofWithHttpInfo(id, type, null);
   }
 
   /**
-   * Get Withdrawal Receipt
-   * Returns the transaction receipt. By default (&#x60;type&#x3D;pdf&#x60;) the response is the PDF file; with &#x60;type&#x3D;base64&#x60; it is JSON with the &#x60;base64&#x60; field, the PDF as a data URI.
-   * @param id Transaction ID. (required)
-   * @param type Return format. (optional, default to pdf)
+   * Obter comprovante de saque
+   * Retorna o comprovante da transação. Por padrão (&#x60;type&#x3D;pdf&#x60;) a resposta é o arquivo PDF; com &#x60;type&#x3D;base64&#x60; é um JSON com o campo &#x60;base64&#x60;, o PDF como data URI.
+   * @param id ID da transação. (required)
+   * @param type Formato de retorno. (optional, default to pdf)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;ProofResponse&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Get Withdrawal Receipt Documentation</a>
    */
   public ApiResponse<ProofResponse> getWithdrawProofWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nullable String type, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getWithdrawProofRequestBuilder(id, type, headers);
@@ -473,27 +457,23 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Create Withdrawal (Pix key)
-   * Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar saque (chave Pix)
+   * Envie um **cash out** Pix para a chave Pix especificada.
    * @param postWithdrawRequest  (required)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal (Pix key) Documentation</a>
    */
   public Transaction postWithdraw(@javax.annotation.Nonnull PostWithdrawRequest postWithdrawRequest) throws ApiException {
     return postWithdraw(postWithdrawRequest, null);
   }
 
   /**
-   * Create Withdrawal (Pix key)
-   * Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar saque (chave Pix)
+   * Envie um **cash out** Pix para a chave Pix especificada.
    * @param postWithdrawRequest  (required)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal (Pix key) Documentation</a>
    */
   public Transaction postWithdraw(@javax.annotation.Nonnull PostWithdrawRequest postWithdrawRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = postWithdrawWithHttpInfo(postWithdrawRequest, headers);
@@ -501,27 +481,23 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Create Withdrawal (Pix key)
-   * Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar saque (chave Pix)
+   * Envie um **cash out** Pix para a chave Pix especificada.
    * @param postWithdrawRequest  (required)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal (Pix key) Documentation</a>
    */
   public ApiResponse<Transaction> postWithdrawWithHttpInfo(@javax.annotation.Nonnull PostWithdrawRequest postWithdrawRequest) throws ApiException {
     return postWithdrawWithHttpInfo(postWithdrawRequest, null);
   }
 
   /**
-   * Create Withdrawal (Pix key)
-   * Send a Pix **cash out** to the specified Pix key.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar saque (chave Pix)
+   * Envie um **cash out** Pix para a chave Pix especificada.
    * @param postWithdrawRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal (Pix key) Documentation</a>
    */
   public ApiResponse<Transaction> postWithdrawWithHttpInfo(@javax.annotation.Nonnull PostWithdrawRequest postWithdrawRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postWithdrawRequestBuilder(postWithdrawRequest, headers);
@@ -604,27 +580,23 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Create Withdrawal using QR Code
-   * Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar Saque usando QR Code
+   * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se &#x60;amount&#x60; não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
    * @param postWithdrawQrcodeRequest  (required)
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal using QR Code Documentation</a>
    */
   public Transaction postWithdrawQrcode(@javax.annotation.Nonnull PostWithdrawQrcodeRequest postWithdrawQrcodeRequest) throws ApiException {
     return postWithdrawQrcode(postWithdrawQrcodeRequest, null);
   }
 
   /**
-   * Create Withdrawal using QR Code
-   * Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar Saque usando QR Code
+   * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se &#x60;amount&#x60; não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
    * @param postWithdrawQrcodeRequest  (required)
    * @param headers Optional headers to include in the request
    * @return Transaction
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal using QR Code Documentation</a>
    */
   public Transaction postWithdrawQrcode(@javax.annotation.Nonnull PostWithdrawQrcodeRequest postWithdrawQrcodeRequest, Map<String, String> headers) throws ApiException {
     ApiResponse<Transaction> localVarResponse = postWithdrawQrcodeWithHttpInfo(postWithdrawQrcodeRequest, headers);
@@ -632,27 +604,23 @@ public class WithdrawalsApi {
   }
 
   /**
-   * Create Withdrawal using QR Code
-   * Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar Saque usando QR Code
+   * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se &#x60;amount&#x60; não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
    * @param postWithdrawQrcodeRequest  (required)
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal using QR Code Documentation</a>
    */
   public ApiResponse<Transaction> postWithdrawQrcodeWithHttpInfo(@javax.annotation.Nonnull PostWithdrawQrcodeRequest postWithdrawQrcodeRequest) throws ApiException {
     return postWithdrawQrcodeWithHttpInfo(postWithdrawQrcodeRequest, null);
   }
 
   /**
-   * Create Withdrawal using QR Code
-   * Cash out using a **Pix QR Code** (static/dynamic). If &#x60;amount&#x60; is not provided, the QR Code&#39;s embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: &#x60;WITHDRAW&#x60;.
+   * Criar Saque usando QR Code
+   * Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se &#x60;amount&#x60; não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
    * @param postWithdrawQrcodeRequest  (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Transaction&gt;
    * @throws ApiException if fails to make API call
-   * Enviar Pix
-   * @see <a href="/docs/pix-processamento/tutoriais/send-pix">Create Withdrawal using QR Code Documentation</a>
    */
   public ApiResponse<Transaction> postWithdrawQrcodeWithHttpInfo(@javax.annotation.Nonnull PostWithdrawQrcodeRequest postWithdrawQrcodeRequest, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postWithdrawQrcodeRequestBuilder(postWithdrawQrcodeRequest, headers);

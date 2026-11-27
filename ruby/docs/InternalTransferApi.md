@@ -4,17 +4,17 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_internal_transfer**](InternalTransferApi.md#get_internal_transfer) | **GET** /internal-transfer | Get internal transfer |
-| [**post_internal_transfer**](InternalTransferApi.md#post_internal_transfer) | **POST** /internal-transfer | Create internal transfer |
+| [**get_internal_transfer**](InternalTransferApi.md#get_internal_transfer) | **GET** /internal-transfer | Obter transferência interna |
+| [**post_internal_transfer**](InternalTransferApi.md#post_internal_transfer) | **POST** /internal-transfer | Criar transferência interna |
 
 
 ## get_internal_transfer
 
 > <Transaction> get_internal_transfer(opts)
 
-Get internal transfer
+Obter transferência interna
 
-Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
+Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
 
 ### Examples
 
@@ -29,13 +29,13 @@ end
 
 api_instance = PayZuPix::InternalTransferApi.new
 opts = {
-  id: 'PAYZU20260814T6NX1CV9MK000000', # String | Transaction ID
-  client_reference: 'order_12345', # String | External reference
-  virtual_account: 'loja-centro-01' # String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+  id: 'PAYZU20260814T6NX1CV9MK000000', # String | ID da transação
+  client_reference: 'order_12345', # String | Referência externa
+  virtual_account: 'loja-centro-01' # String | Subconta usada na criação.
 }
 
 begin
-  # Get internal transfer
+  # Obter transferência interna
   result = api_instance.get_internal_transfer(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -51,7 +51,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get internal transfer
+  # Obter transferência interna
   data, status_code, headers = api_instance.get_internal_transfer_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -65,9 +65,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Transaction ID | [optional] |
-| **client_reference** | **String** | External reference | [optional] |
-| **virtual_account** | **String** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String** | ID da transação | [optional] |
+| **client_reference** | **String** | Referência externa | [optional] |
+| **virtual_account** | **String** | Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -87,9 +87,9 @@ end
 
 > <Transaction> post_internal_transfer(post_internal_transfer_request)
 
-Create internal transfer
+Criar transferência interna
 
-Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
+Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
 
 ### Examples
 
@@ -106,7 +106,7 @@ api_instance = PayZuPix::InternalTransferApi.new
 post_internal_transfer_request = PayZuPix::PostInternalTransferRequest.new({payer_account_number: '000000', receiver_account_number: '987654', amount: 100.5}) # PostInternalTransferRequest | 
 
 begin
-  # Create internal transfer
+  # Criar transferência interna
   result = api_instance.post_internal_transfer(post_internal_transfer_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -122,7 +122,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create internal transfer
+  # Criar transferência interna
   data, status_code, headers = api_instance.post_internal_transfer_with_http_info(post_internal_transfer_request)
   p status_code # => 2xx
   p headers # => { ... }

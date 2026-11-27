@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Page, limit, total of items and of pages.
+ * Página, limite, total de itens e de páginas.
  */
 @JsonPropertyOrder({
   InfractionListResponsePagination.JSON_PROPERTY_PAGE,
@@ -65,7 +65,7 @@ public class InfractionListResponsePagination {
   }
 
   /**
-   * Page returned, the same as the page parameter sent in the query; when omitted, it is 1.
+   * Página devolvida, igual ao parâmetro page enviado na consulta; quando omitido, vale 1.
    * @return page
    */
   @javax.annotation.Nullable
@@ -89,7 +89,7 @@ public class InfractionListResponsePagination {
   }
 
   /**
-   * Page size applied in the query; when omitted it is 10 and the maximum accepted is 100.
+   * Tamanho de página aplicado na consulta; quando omitido vale 10 e o máximo aceito é 100.
    * @return limit
    */
   @javax.annotation.Nullable
@@ -113,7 +113,7 @@ public class InfractionListResponsePagination {
   }
 
   /**
-   * Number of infractions that match the filters, counted up to 100,000.
+   * Número de infrações que atendem aos filtros, contado até 100.000.
    * @return totalItems
    */
   @javax.annotation.Nullable
@@ -137,7 +137,7 @@ public class InfractionListResponsePagination {
   }
 
   /**
-   * Number of pages for the limit provided, taken from totalItems rounded up.
+   * Número de páginas para o limit informado, obtido de totalItems arredondado para cima.
    * @return totalPages
    */
   @javax.annotation.Nullable

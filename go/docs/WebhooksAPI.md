@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteUserWebhook**](WebhooksAPI.md#DeleteUserWebhook) | **Delete** /user/webhooks/{id} | Delete webhook
-[**GetUserWebhook**](WebhooksAPI.md#GetUserWebhook) | **Get** /user/webhooks/{id} | Get webhook
-[**GetUserWebhookSentDetail**](WebhooksAPI.md#GetUserWebhookSentDetail) | **Get** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail
-[**GetUserWebhooks**](WebhooksAPI.md#GetUserWebhooks) | **Get** /user/webhooks | List webhooks
-[**GetUserWebhooksSentQuantity**](WebhooksAPI.md#GetUserWebhooksSentQuantity) | **Get** /user/webhooks/sent/quantity | Count sent callbacks
-[**PatchUserWebhook**](WebhooksAPI.md#PatchUserWebhook) | **Patch** /user/webhooks/{id} | Update webhook
-[**PostUserWebhook**](WebhooksAPI.md#PostUserWebhook) | **Post** /user/webhooks | Create webhook
-[**PostUserWebhookRotateSecret**](WebhooksAPI.md#PostUserWebhookRotateSecret) | **Post** /user/webhooks/{id}/rotate-secret | Rotate webhook secret
+[**DeleteUserWebhook**](WebhooksAPI.md#DeleteUserWebhook) | **Delete** /user/webhooks/{id} | Remover webhook
+[**GetUserWebhook**](WebhooksAPI.md#GetUserWebhook) | **Get** /user/webhooks/{id} | Consultar webhook
+[**GetUserWebhookSentDetail**](WebhooksAPI.md#GetUserWebhookSentDetail) | **Get** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado
+[**GetUserWebhooks**](WebhooksAPI.md#GetUserWebhooks) | **Get** /user/webhooks | Listar webhooks
+[**GetUserWebhooksSentQuantity**](WebhooksAPI.md#GetUserWebhooksSentQuantity) | **Get** /user/webhooks/sent/quantity | Contar callbacks enviados
+[**PatchUserWebhook**](WebhooksAPI.md#PatchUserWebhook) | **Patch** /user/webhooks/{id} | Atualizar webhook
+[**PostUserWebhook**](WebhooksAPI.md#PostUserWebhook) | **Post** /user/webhooks | Criar webhook
+[**PostUserWebhookRotateSecret**](WebhooksAPI.md#PostUserWebhookRotateSecret) | **Post** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook
 
 
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > DeleteUserWebhook(ctx, id).Execute()
 
-Delete webhook
+Remover webhook
 
 
 
@@ -32,11 +32,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Id do webhook.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Webhook id. | 
+**id** | **string** | Id do webhook. | 
 
 ### Other Parameters
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > Webhook GetUserWebhook(ctx, id).Execute()
 
-Get webhook
+Consultar webhook
 
 
 
@@ -100,11 +100,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Id do webhook.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -124,7 +124,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Webhook id. | 
+**id** | **string** | Id do webhook. | 
 
 ### Other Parameters
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 > SentWebhookDetailResponse GetUserWebhookSentDetail(ctx, id, callbackId).Execute()
 
-Get sent callback detail
+Detalhe de callback enviado
 
 
 
@@ -170,12 +170,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
-	callbackId := "cm3w7l9v20001q8f2u6c1y4be" // string | Callback log id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Id do webhook.
+	callbackId := "cm3w7l9v20001q8f2u6c1y4be" // string | Id do log de callback.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -195,8 +195,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Webhook id. | 
-**callbackId** | **string** | Callback log id. | 
+**id** | **string** | Id do webhook. | 
+**callbackId** | **string** | Id do log de callback. | 
 
 ### Other Parameters
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 > WebhookListResponse GetUserWebhooks(ctx).Active(active).Execute()
 
-List webhooks
+Listar webhooks
 
 
 
@@ -243,11 +243,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	active := true // bool | Filter by active status. (optional)
+	active := true // bool | Filtra pelo status ativo. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -272,7 +272,7 @@ Other parameters are passed through a pointer to a apiGetUserWebhooksRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **active** | **bool** | Filter by active status. | 
+ **active** | **bool** | Filtra pelo status ativo. | 
 
 ### Return type
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 > SentWebhooksQuantity GetUserWebhooksSentQuantity(ctx).WebhookId(webhookId).Execute()
 
-Count sent callbacks
+Contar callbacks enviados
 
 
 
@@ -309,11 +309,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	webhookId := "cm3w7k1t40000q8f2r5b9x3ad" // string | Filter the count by webhook id. (optional)
+	webhookId := "cm3w7k1t40000q8f2r5b9x3ad" // string | Filtra a contagem por id de webhook. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -338,7 +338,7 @@ Other parameters are passed through a pointer to a apiGetUserWebhooksSentQuantit
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhookId** | **string** | Filter the count by webhook id. | 
+ **webhookId** | **string** | Filtra a contagem por id de webhook. | 
 
 ### Return type
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 > Webhook PatchUserWebhook(ctx, id).WebhookUpdateRequest(webhookUpdateRequest).Execute()
 
-Update webhook
+Atualizar webhook
 
 
 
@@ -375,11 +375,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Id do webhook.
 	webhookUpdateRequest := *openapiclient.NewWebhookUpdateRequest() // WebhookUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -400,7 +400,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Webhook id. | 
+**id** | **string** | Id do webhook. | 
 
 ### Other Parameters
 
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 > WebhookWithSecret PostUserWebhook(ctx).WebhookCreateRequest(webhookCreateRequest).Execute()
 
-Create webhook
+Criar webhook
 
 
 
@@ -447,7 +447,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 
 > RotateSecretResponse PostUserWebhookRotateSecret(ctx, id).Execute()
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
 
 
@@ -513,11 +513,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
-	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Webhook id.
+	id := "cm3w7k1t40000q8f2r5b9x3ad" // string | Id do webhook.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -537,7 +537,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Webhook id. | 
+**id** | **string** | Id do webhook. | 
 
 ### Other Parameters
 

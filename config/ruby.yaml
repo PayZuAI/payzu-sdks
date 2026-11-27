@@ -8,7 +8,7 @@ modelNameMappings:
 additionalProperties:
   gemName: payzu-pix
   moduleName: PayZuPix
-  gemVersion: 3.2.0
+  gemVersion: 4.0.0
   gemLicense: MIT
   gemAuthor: PayZu
   gemAuthorEmail: suporte@payzu.com.br
@@ -18,5 +18,8 @@ additionalProperties:
   gemRequiredRubyVersion: ">= 3.0"
   library: faraday
 globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: ""
   apiTests: false
   modelTests: false

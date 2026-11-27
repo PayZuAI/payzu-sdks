@@ -9,7 +9,6 @@ Name | Type
 `accountNumber` | string
 `branch` | string
 `name` | string
-`role` | string
 `balanceAvailable` | number
 `balanceBlocked` | number
 `status` | string
@@ -30,7 +29,6 @@ const example = {
   "accountNumber": null,
   "branch": 0001,
   "name": null,
-  "role": null,
   "balanceAvailable": null,
   "balanceBlocked": null,
   "status": null,

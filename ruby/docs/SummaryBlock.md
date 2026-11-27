@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **total_amount** | **Float** | Sum of the amounts in the period. | [optional] |
-| **total_transactions** | **Integer** | Number of transactions of that type in the period, also summing all statuses. | [optional] |
+| **total_amount** | **Float** | Soma dos valores no período. | [optional] |
+| **total_transactions** | **Integer** | Quantidade de transações desse tipo no período, também somando todos os status. | [optional] |
 | **statuses** | [**SummaryBlockStatuses**](SummaryBlockStatuses.md) |  | [optional] |
-| **grouped** | [**Array&lt;SummaryBlockGroupedInner&gt;**](SummaryBlockGroupedInner.md) | Present only when grouped&#x3D;true. | [optional] |
+| **grouped** | [**Array&lt;SummaryBlockGroupedInner&gt;**](SummaryBlockGroupedInner.md) | Presente apenas quando grouped&#x3D;true. | [optional] |
 
 ## Example
 

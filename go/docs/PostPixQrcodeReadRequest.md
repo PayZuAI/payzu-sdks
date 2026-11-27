@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Emv** | **string** | The EMV payload string from the Pix QR Code. | 
+**Emv** | **string** | A string do payload EMV do QR Code Pix. | 
 
 ## Methods
 

@@ -1,6 +1,7 @@
 
 # RefundRequest
 
+Só aceita amount, description e clientReference; outro campo é recusado com 400.
 
 ## Properties
 
@@ -18,7 +19,7 @@ import type { RefundRequest } from 'payzu-pix'
 // TODO: Update the object below with actual values
 const example = {
   "amount": 30.5,
-  "description": Estorno solicitado pelo cliente,
+  "description": Devolução pedida pelo cliente,
   "clientReference": refund-2026-0001,
 } satisfies RefundRequest
 

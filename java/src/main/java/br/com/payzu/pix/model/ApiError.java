@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -48,7 +48,7 @@ import br.com.payzu.pix.ApiClient;
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.22.0")
 public class ApiError {
   /**
-   * Fixed marker of an error response.
+   * Marcador fixo de resposta de erro.
    */
   public enum StatusEnum {
     ERROR(String.valueOf("ERROR")),
@@ -123,7 +123,7 @@ public class ApiError {
   }
 
   /**
-   * Fixed marker of an error response.
+   * Marcador fixo de resposta de erro.
    * @return status
    */
   @javax.annotation.Nonnull
@@ -147,7 +147,7 @@ public class ApiError {
   }
 
   /**
-   * Name of the corresponding HTTP status.
+   * Nome do status HTTP correspondente.
    * @return error
    */
   @javax.annotation.Nonnull
@@ -171,7 +171,7 @@ public class ApiError {
   }
 
   /**
-   * Stable machine-readable error code, when available.
+   * Código de erro estável e legível por máquina, quando disponível.
    * @return errorCode
    */
   @javax.annotation.Nonnull
@@ -195,7 +195,7 @@ public class ApiError {
   }
 
   /**
-   * Human-readable error message.
+   * Mensagem de erro legível.
    * @return message
    */
   @javax.annotation.Nonnull
@@ -219,7 +219,7 @@ public class ApiError {
   }
 
   /**
-   * HTTP status code.
+   * Código de status HTTP.
    * @return statusCode
    */
   @javax.annotation.Nonnull
@@ -243,7 +243,7 @@ public class ApiError {
   }
 
   /**
-   * Unique request correlation ID (cuid). Include it when contacting support.
+   * ID único de correlação da requisição (cuid).
    * @return requestId
    */
   @javax.annotation.Nonnull
@@ -275,7 +275,7 @@ public class ApiError {
   }
 
   /**
-   * Field-level validation errors, when applicable.
+   * Erros de validação por campo, quando aplicável.
    * @return details
    */
   @javax.annotation.Nullable
@@ -299,7 +299,7 @@ public class ApiError {
   }
 
   /**
-   * Seconds to wait before retrying. Present only on 429 responses.
+   * Segundos a aguardar antes de tentar novamente.
    * @return retryAfterSeconds
    */
   @javax.annotation.Nullable

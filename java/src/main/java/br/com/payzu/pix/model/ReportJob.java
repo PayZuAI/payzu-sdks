@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -54,7 +54,7 @@ public class ReportJob {
   private UUID id;
 
   /**
-   * Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+   * Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
    */
   public enum StatusEnum {
     PENDING(String.valueOf("PENDING")),
@@ -125,7 +125,7 @@ public class ReportJob {
   }
 
   /**
-   * Report identifier (UUID), generated when the report is requested.
+   * Identificador (UUID) do relatório, gerado no momento da solicitação.
    * @return id
    */
   @javax.annotation.Nullable
@@ -149,7 +149,7 @@ public class ReportJob {
   }
 
   /**
-   * Generation progress: PENDING, RUNNING, COMPLETED or FAILED.
+   * Andamento da geração: PENDING, RUNNING, COMPLETED ou FAILED.
    * @return status
    */
   @javax.annotation.Nullable
@@ -173,7 +173,7 @@ public class ReportJob {
   }
 
   /**
-   * Date and time the report generation was requested.
+   * Data e hora em que a geração do relatório foi solicitada.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -197,7 +197,7 @@ public class ReportJob {
   }
 
   /**
-   * Date and time of the last change to the report record.
+   * Data e hora da última alteração no registro do relatório.
    * @return updatedAt
    */
   @javax.annotation.Nullable
@@ -221,7 +221,7 @@ public class ReportJob {
   }
 
   /**
-   * When the file expires from storage (typically 7 days after creation)
+   * Quando o arquivo expira do armazenamento (normalmente 7 dias após a criação)
    * @return expiresAt
    */
   @javax.annotation.Nullable
@@ -253,7 +253,7 @@ public class ReportJob {
   }
 
   /**
-   * Filters used to generate the report.
+   * Filtros usados para gerar o relatório.
    * @return params
    */
   @javax.annotation.Nullable
@@ -277,7 +277,7 @@ public class ReportJob {
   }
 
   /**
-   * Rows written to the file. Null until the report is COMPLETED.
+   * Linhas escritas no arquivo. Nulo até o relatório ficar COMPLETED.
    * @return writtenRows
    */
   @javax.annotation.Nullable

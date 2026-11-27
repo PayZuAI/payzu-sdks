@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -179,16 +179,16 @@ export interface PostUserReportOperationRequest {
 export interface ReportsApiInterface {
     /**
      * Creates request options for downloadUserReport without sending the request
-     * @param {string} id Report ID.
+     * @param {string} id ID do relatório.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     downloadUserReportRequestOpts(requestParameters: DownloadUserReportRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns a short-lived signed URL to download the CSV file.
-     * @summary Download report
-     * @param {string} id Report ID.
+     * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+     * @summary Baixar relatório
+     * @param {string} id ID do relatório.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -196,23 +196,23 @@ export interface ReportsApiInterface {
     downloadUserReportRaw(requestParameters: DownloadUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DownloadUserReport200Response>>;
 
     /**
-     * Returns a short-lived signed URL to download the CSV file.
-     * Download report
+     * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+     * Baixar relatório
      */
     downloadUserReport(requestParameters: DownloadUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DownloadUserReport200Response>;
 
     /**
      * Creates request options for getUserBankStatement without sending the request
-     * @param {string} id Statement entry id.
+     * @param {string} id Id do lançamento do extrato.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserBankStatementRequestOpts(requestParameters: GetUserBankStatementRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns a single statement entry.
-     * @summary Get bank statement
-     * @param {string} id Statement entry id.
+     * Retorna um lançamento do extrato.
+     * @summary Consultar lançamento
+     * @param {string} id Id do lançamento do extrato.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -220,45 +220,45 @@ export interface ReportsApiInterface {
     getUserBankStatementRaw(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatement>>;
 
     /**
-     * Returns a single statement entry.
-     * Get bank statement
+     * Retorna um lançamento do extrato.
+     * Consultar lançamento
      */
     getUserBankStatement(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatement>;
 
     /**
      * Creates request options for getUserBankStatements without sending the request
-     * @param {Date} createdAtFrom Start date (required).
-     * @param {Date} createdAtTo End date (required).
-     * @param {string} [id] Entry ID.
-     * @param {'INCREMENT' | 'DECREMENT'} [operation] Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
-     * @param {string} [reason] Reason for the entry.
-     * @param {string} [transactionId] Transaction ID.
-     * @param {number} [amountFrom] Minimum amount.
-     * @param {number} [amountTo] Maximum amount.
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
-     * @param {'createdAt' | 'amount'} [sortBy] Sort field.
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
+     * @param {Date} createdAtFrom Data inicial (obrigatória).
+     * @param {Date} createdAtTo Data final (obrigatória).
+     * @param {string} [id] ID do lançamento.
+     * @param {'INCREMENT' | 'DECREMENT'} [operation] Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+     * @param {string} [reason] Razão do lançamento.
+     * @param {string} [transactionId] ID da transação.
+     * @param {number} [amountFrom] Valor mínimo.
+     * @param {number} [amountTo] Valor máximo.
+     * @param {number} [page] Número da página.
+     * @param {number} [limit] Itens por página.
+     * @param {'createdAt' | 'amount'} [sortBy] Campo de ordenação.
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserBankStatementsRequestOpts(requestParameters: GetUserBankStatementsRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
-     * @summary List bank statements
-     * @param {Date} createdAtFrom Start date (required).
-     * @param {Date} createdAtTo End date (required).
-     * @param {string} [id] Entry ID.
-     * @param {'INCREMENT' | 'DECREMENT'} [operation] Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
-     * @param {string} [reason] Reason for the entry.
-     * @param {string} [transactionId] Transaction ID.
-     * @param {number} [amountFrom] Minimum amount.
-     * @param {number} [amountTo] Maximum amount.
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
-     * @param {'createdAt' | 'amount'} [sortBy] Sort field.
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
+     * Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
+     * @summary Listar extrato
+     * @param {Date} createdAtFrom Data inicial (obrigatória).
+     * @param {Date} createdAtTo Data final (obrigatória).
+     * @param {string} [id] ID do lançamento.
+     * @param {'INCREMENT' | 'DECREMENT'} [operation] Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+     * @param {string} [reason] Razão do lançamento.
+     * @param {string} [transactionId] ID da transação.
+     * @param {number} [amountFrom] Valor mínimo.
+     * @param {number} [amountTo] Valor máximo.
+     * @param {number} [page] Número da página.
+     * @param {number} [limit] Itens por página.
+     * @param {'createdAt' | 'amount'} [sortBy] Campo de ordenação.
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -266,41 +266,41 @@ export interface ReportsApiInterface {
     getUserBankStatementsRaw(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatementListResponse>>;
 
     /**
-     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
-     * List bank statements
+     * Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
+     * Listar extrato
      */
     getUserBankStatements(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatementListResponse>;
 
     /**
      * Creates request options for getUserDepositPending without sending the request
-     * @param {string} [status] Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-     * @param {string} [document] CPF or CNPJ, digits only.
-     * @param {string} [name] Name of the payer or receiver.
-     * @param {string} [endToEndId] End-to-end ID of the Pix.
-     * @param {number} [amountMin] Minimum amount.
-     * @param {number} [amountMax] Maximum amount.
-     * @param {Date} [createdAtFrom] Start of the creation date range.
-     * @param {Date} [createdAtTo] End of the creation date range.
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
+     * @param {string} [status] Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60;
+     * @param {string} [document] CPF ou CNPJ, apenas dígitos.
+     * @param {string} [name] Nome do pagador ou recebedor.
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {number} [amountMin] Valor mínimo.
+     * @param {number} [amountMax] Valor máximo.
+     * @param {Date} [createdAtFrom] Data de criação inicial.
+     * @param {Date} [createdAtTo] Data de criação final.
+     * @param {number} [page] Número da página. Valor inválido vira 1.
+     * @param {number} [limit] Itens por página. Valor inválido vira 20.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserDepositPendingRequestOpts(requestParameters: GetUserDepositPendingRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Lists deposits that are pending / not yet reconciled.
-     * @summary List pending deposits
-     * @param {string} [status] Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
-     * @param {string} [document] CPF or CNPJ, digits only.
-     * @param {string} [name] Name of the payer or receiver.
-     * @param {string} [endToEndId] End-to-end ID of the Pix.
-     * @param {number} [amountMin] Minimum amount.
-     * @param {number} [amountMax] Maximum amount.
-     * @param {Date} [createdAtFrom] Start of the creation date range.
-     * @param {Date} [createdAtTo] End of the creation date range.
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
+     * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
+     * @summary Listar depósitos via chave Pix
+     * @param {string} [status] Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60;
+     * @param {string} [document] CPF ou CNPJ, apenas dígitos.
+     * @param {string} [name] Nome do pagador ou recebedor.
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {number} [amountMin] Valor mínimo.
+     * @param {number} [amountMax] Valor máximo.
+     * @param {Date} [createdAtFrom] Data de criação inicial.
+     * @param {Date} [createdAtTo] Data de criação final.
+     * @param {number} [page] Número da página. Valor inválido vira 1.
+     * @param {number} [limit] Itens por página. Valor inválido vira 20.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -308,23 +308,23 @@ export interface ReportsApiInterface {
     getUserDepositPendingRaw(requestParameters: GetUserDepositPendingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPendingListResponse>>;
 
     /**
-     * Lists deposits that are pending / not yet reconciled.
-     * List pending deposits
+     * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
+     * Listar depósitos via chave Pix
      */
     getUserDepositPending(requestParameters: GetUserDepositPendingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPendingListResponse>;
 
     /**
      * Creates request options for getUserDepositPendingById without sending the request
-     * @param {string} id Pending deposit id.
+     * @param {string} id Id do depósito pendente.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserDepositPendingByIdRequestOpts(requestParameters: GetUserDepositPendingByIdRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns a single pending deposit.
-     * @summary Get pending deposit
-     * @param {string} id Pending deposit id.
+     * Retorna um depósito via chave Pix.
+     * @summary Consultar depósito via chave Pix
+     * @param {string} id Id do depósito pendente.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -332,23 +332,23 @@ export interface ReportsApiInterface {
     getUserDepositPendingByIdRaw(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPending>>;
 
     /**
-     * Returns a single pending deposit.
-     * Get pending deposit
+     * Retorna um depósito via chave Pix.
+     * Consultar depósito via chave Pix
      */
     getUserDepositPendingById(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPending>;
 
     /**
      * Creates request options for getUserReport without sending the request
-     * @param {string} id Report ID.
+     * @param {string} id ID do relatório.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserReportRequestOpts(requestParameters: GetUserReportRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns the status and metadata of a specific report job by `id`.
-     * @summary Get report job status
-     * @param {string} id Report ID.
+     * Retorna o status e os metadados de um job de relatório específico pelo `id`.
+     * @summary Consultar status do relatório
+     * @param {string} id ID do relatório.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -356,29 +356,29 @@ export interface ReportsApiInterface {
     getUserReportRaw(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobDetail>>;
 
     /**
-     * Returns the status and metadata of a specific report job by `id`.
-     * Get report job status
+     * Retorna o status e os metadados de um job de relatório específico pelo `id`.
+     * Consultar status do relatório
      */
     getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobDetail>;
 
     /**
      * Creates request options for getUserSummary without sending the request
-     * @param {Date} [dateFrom] Start date. Default: start of the previous day (America/Sao_Paulo).
-     * @param {Date} [dateTo] End date. Default: now.
-     * @param {'day'} [groupBy] Grouping applied to the transactions.
-     * @param {boolean} [grouped] When true, returns a series grouped by date.
+     * @param {Date} [dateFrom] Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
+     * @param {Date} [dateTo] Data final. Padrão: agora.
+     * @param {'day'} [groupBy] Agrupamento das transações.
+     * @param {boolean} [grouped] Quando true, retorna uma série agrupada por data.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserSummaryRequestOpts(requestParameters: GetUserSummaryRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Aggregated totals for deposits, withdrawals and commission over a period.
-     * @summary Transaction summary
-     * @param {Date} [dateFrom] Start date. Default: start of the previous day (America/Sao_Paulo).
-     * @param {Date} [dateTo] End date. Default: now.
-     * @param {'day'} [groupBy] Grouping applied to the transactions.
-     * @param {boolean} [grouped] When true, returns a series grouped by date.
+     * Totais agregados de depósitos, saques e comissão num período.
+     * @summary Resumo de transações
+     * @param {Date} [dateFrom] Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
+     * @param {Date} [dateTo] Data final. Padrão: agora.
+     * @param {'day'} [groupBy] Agrupamento das transações.
+     * @param {boolean} [grouped] Quando true, retorna uma série agrupada por data.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -386,23 +386,23 @@ export interface ReportsApiInterface {
     getUserSummaryRaw(requestParameters: GetUserSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Summary>>;
 
     /**
-     * Aggregated totals for deposits, withdrawals and commission over a period.
-     * Transaction summary
+     * Totais agregados de depósitos, saques e comissão num período.
+     * Resumo de transações
      */
     getUserSummary(requestParameters: GetUserSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Summary>;
 
     /**
      * Creates request options for getUserTransactionById without sending the request
-     * @param {string} id Transaction ID.
+     * @param {string} id ID da transação.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserTransactionByIdRequestOpts(requestParameters: GetUserTransactionByIdRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Retrieve a single transaction with its callback log and linked infractions.
-     * @summary List transaction details
-     * @param {string} id Transaction ID.
+     * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+     * @summary Listar detalhes da transação
+     * @param {string} id ID da transação.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -410,55 +410,55 @@ export interface ReportsApiInterface {
     getUserTransactionByIdRaw(requestParameters: GetUserTransactionByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserTransactionById200Response>>;
 
     /**
-     * Retrieve a single transaction with its callback log and linked infractions.
-     * List transaction details
+     * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+     * Listar detalhes da transação
      */
     getUserTransactionById(requestParameters: GetUserTransactionByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserTransactionById200Response>;
 
     /**
      * Creates request options for getUserTransactions without sending the request
-     * @param {Date} [dateFrom] Start date-time (ISO 8601).
-     * @param {Date} [dateTo] End date-time (ISO 8601).
-     * @param {number} [limit] Items per page (max 1000).
-     * @param {number} [page] Page number (default 1).
-     * @param {string} [id] Transaction ID.
-     * @param {string} [status] Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-     * @param {string} [type] Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
-     * @param {string} [method] Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
-     * @param {number} [amount] Amount filter. Minimum 0.01.
-     * @param {string} [document] CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
-     * @param {string} [name] Name filter.
-     * @param {string} [endToEndId] Pix end-to-end ID.
-     * @param {'createdAt' | 'updatedAt'} [sortBy] Field to sort by
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction
-     * @param {string} [clientReference] Filter by external reference
-     * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
-     * @param {boolean} [hasQrCode] Only transactions with (true) or without (false) QR Code.
+     * @param {Date} [dateFrom] Data-hora inicial (ISO 8601).
+     * @param {Date} [dateTo] Data-hora final (ISO 8601).
+     * @param {number} [limit] Itens por página.
+     * @param {number} [page] Número da página.
+     * @param {string} [id] ID da transação.
+     * @param {string} [status] Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60;
+     * @param {string} [type] Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+     * @param {string} [method] Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60;
+     * @param {number} [amount] Filtro por valor. Mínimo 0.01.
+     * @param {string} [document] CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
+     * @param {string} [name] Filtro por nome.
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Campo pelo qual ordenar
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação
+     * @param {string} [clientReference] Filtra por referência externa
+     * @param {string} [virtualAccount] Subconta usada na criação.
+     * @param {boolean} [hasQrCode] Só transações com (true) ou sem (false) QR Code.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     getUserTransactionsRequestOpts(requestParameters: GetUserTransactionsRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Paginated list of account transactions with filters.
-     * @summary List Transactions
-     * @param {Date} [dateFrom] Start date-time (ISO 8601).
-     * @param {Date} [dateTo] End date-time (ISO 8601).
-     * @param {number} [limit] Items per page (max 1000).
-     * @param {number} [page] Page number (default 1).
-     * @param {string} [id] Transaction ID.
-     * @param {string} [status] Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
-     * @param {string} [type] Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
-     * @param {string} [method] Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
-     * @param {number} [amount] Amount filter. Minimum 0.01.
-     * @param {string} [document] CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
-     * @param {string} [name] Name filter.
-     * @param {string} [endToEndId] Pix end-to-end ID.
-     * @param {'createdAt' | 'updatedAt'} [sortBy] Field to sort by
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction
-     * @param {string} [clientReference] Filter by external reference
-     * @param {string} [virtualAccount] Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
-     * @param {boolean} [hasQrCode] Only transactions with (true) or without (false) QR Code.
+     * Lista paginada das transações da conta com filtros.
+     * @summary Listar transações
+     * @param {Date} [dateFrom] Data-hora inicial (ISO 8601).
+     * @param {Date} [dateTo] Data-hora final (ISO 8601).
+     * @param {number} [limit] Itens por página.
+     * @param {number} [page] Número da página.
+     * @param {string} [id] ID da transação.
+     * @param {string} [status] Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60;
+     * @param {string} [type] Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+     * @param {string} [method] Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60;
+     * @param {number} [amount] Filtro por valor. Mínimo 0.01.
+     * @param {string} [document] CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
+     * @param {string} [name] Filtro por nome.
+     * @param {string} [endToEndId] ID end-to-end do Pix.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Campo pelo qual ordenar
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação
+     * @param {string} [clientReference] Filtra por referência externa
+     * @param {string} [virtualAccount] Subconta usada na criação.
+     * @param {boolean} [hasQrCode] Só transações com (true) ou sem (false) QR Code.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -466,39 +466,39 @@ export interface ReportsApiInterface {
     getUserTransactionsRaw(requestParameters: GetUserTransactionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserTransactions200Response>>;
 
     /**
-     * Paginated list of account transactions with filters.
-     * List Transactions
+     * Lista paginada das transações da conta com filtros.
+     * Listar transações
      */
     getUserTransactions(requestParameters: GetUserTransactionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserTransactions200Response>;
 
     /**
      * Creates request options for listUserReports without sending the request
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
-     * @param {string} [status] Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
-     * @param {Date} [createdAtFrom] Filter: created from.
-     * @param {Date} [createdAtTo] Filter: created up to.
-     * @param {Date} [updatedAtFrom] Filter: updated from.
-     * @param {Date} [updatedAtTo] Filter: updated up to.
-     * @param {'createdAt' | 'updatedAt'} [sortBy] Sort field.
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
+     * @param {number} [page] Número da página.
+     * @param {number} [limit] Itens por página.
+     * @param {string} [status] Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
+     * @param {Date} [createdAtFrom] Filtro: criado a partir de.
+     * @param {Date} [createdAtTo] Filtro: criado até.
+     * @param {Date} [updatedAtFrom] Filtro: atualizado a partir de.
+     * @param {Date} [updatedAtTo] Filtro: atualizado até.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Campo de ordenação.
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
      */
     listUserReportsRequestOpts(requestParameters: ListUserReportsRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * List report jobs created by the authenticated user.
-     * @summary List report jobs
-     * @param {number} [page] Page number.
-     * @param {number} [limit] Items per page.
-     * @param {string} [status] Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
-     * @param {Date} [createdAtFrom] Filter: created from.
-     * @param {Date} [createdAtTo] Filter: created up to.
-     * @param {Date} [updatedAtFrom] Filter: updated from.
-     * @param {Date} [updatedAtTo] Filter: updated up to.
-     * @param {'createdAt' | 'updatedAt'} [sortBy] Sort field.
-     * @param {'asc' | 'desc'} [sortDirection] Sort direction.
+     * Lista os jobs de relatório criados pelo usuário autenticado.
+     * @summary Listar jobs de relatório
+     * @param {number} [page] Número da página.
+     * @param {number} [limit] Itens por página.
+     * @param {string} [status] Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
+     * @param {Date} [createdAtFrom] Filtro: criado a partir de.
+     * @param {Date} [createdAtTo] Filtro: criado até.
+     * @param {Date} [updatedAtFrom] Filtro: atualizado a partir de.
+     * @param {Date} [updatedAtTo] Filtro: atualizado até.
+     * @param {'createdAt' | 'updatedAt'} [sortBy] Campo de ordenação.
+     * @param {'asc' | 'desc'} [sortDirection] Direção da ordenação.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReportsApiInterface
@@ -506,8 +506,8 @@ export interface ReportsApiInterface {
     listUserReportsRaw(requestParameters: ListUserReportsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListUserReports200Response>>;
 
     /**
-     * List report jobs created by the authenticated user.
-     * List report jobs
+     * Lista os jobs de relatório criados pelo usuário autenticado.
+     * Listar jobs de relatório
      */
     listUserReports(requestParameters: ListUserReportsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListUserReports200Response>;
 
@@ -520,8 +520,8 @@ export interface ReportsApiInterface {
     postUserReportRequestOpts(requestParameters: PostUserReportOperationRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
-     * @summary Generate transactions report
+     * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
+     * @summary Gerar relatório de transações
      * @param {PostUserReportRequest} postUserReportRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -530,8 +530,8 @@ export interface ReportsApiInterface {
     postUserReportRaw(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobAccepted>>;
 
     /**
-     * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
-     * Generate transactions report
+     * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
+     * Gerar relatório de transações
      */
     postUserReport(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobAccepted>;
 
@@ -578,8 +578,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns a short-lived signed URL to download the CSV file.
-     * Download report
+     * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+     * Baixar relatório
      */
     async downloadUserReportRaw(requestParameters: DownloadUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DownloadUserReport200Response>> {
         const requestOptions = await this.downloadUserReportRequestOpts(requestParameters);
@@ -589,8 +589,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns a short-lived signed URL to download the CSV file.
-     * Download report
+     * Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
+     * Baixar relatório
      */
     async downloadUserReport(requestParameters: DownloadUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DownloadUserReport200Response> {
         const response = await this.downloadUserReportRaw(requestParameters, initOverrides);
@@ -633,8 +633,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns a single statement entry.
-     * Get bank statement
+     * Retorna um lançamento do extrato.
+     * Consultar lançamento
      */
     async getUserBankStatementRaw(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatement>> {
         const requestOptions = await this.getUserBankStatementRequestOpts(requestParameters);
@@ -644,8 +644,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns a single statement entry.
-     * Get bank statement
+     * Retorna um lançamento do extrato.
+     * Consultar lançamento
      */
     async getUserBankStatement(requestParameters: GetUserBankStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatement> {
         const response = await this.getUserBankStatementRaw(requestParameters, initOverrides);
@@ -742,8 +742,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
-     * List bank statements
+     * Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
+     * Listar extrato
      */
     async getUserBankStatementsRaw(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BankStatementListResponse>> {
         const requestOptions = await this.getUserBankStatementsRequestOpts(requestParameters);
@@ -753,8 +753,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
-     * List bank statements
+     * Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
+     * Listar extrato
      */
     async getUserBankStatements(requestParameters: GetUserBankStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BankStatementListResponse> {
         const response = await this.getUserBankStatementsRaw(requestParameters, initOverrides);
@@ -829,8 +829,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Lists deposits that are pending / not yet reconciled.
-     * List pending deposits
+     * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
+     * Listar depósitos via chave Pix
      */
     async getUserDepositPendingRaw(requestParameters: GetUserDepositPendingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPendingListResponse>> {
         const requestOptions = await this.getUserDepositPendingRequestOpts(requestParameters);
@@ -840,8 +840,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Lists deposits that are pending / not yet reconciled.
-     * List pending deposits
+     * Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
+     * Listar depósitos via chave Pix
      */
     async getUserDepositPending(requestParameters: GetUserDepositPendingRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPendingListResponse> {
         const response = await this.getUserDepositPendingRaw(requestParameters, initOverrides);
@@ -884,8 +884,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns a single pending deposit.
-     * Get pending deposit
+     * Retorna um depósito via chave Pix.
+     * Consultar depósito via chave Pix
      */
     async getUserDepositPendingByIdRaw(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DepositPending>> {
         const requestOptions = await this.getUserDepositPendingByIdRequestOpts(requestParameters);
@@ -895,8 +895,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns a single pending deposit.
-     * Get pending deposit
+     * Retorna um depósito via chave Pix.
+     * Consultar depósito via chave Pix
      */
     async getUserDepositPendingById(requestParameters: GetUserDepositPendingByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DepositPending> {
         const response = await this.getUserDepositPendingByIdRaw(requestParameters, initOverrides);
@@ -939,8 +939,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns the status and metadata of a specific report job by `id`.
-     * Get report job status
+     * Retorna o status e os metadados de um job de relatório específico pelo `id`.
+     * Consultar status do relatório
      */
     async getUserReportRaw(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobDetail>> {
         const requestOptions = await this.getUserReportRequestOpts(requestParameters);
@@ -950,8 +950,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Returns the status and metadata of a specific report job by `id`.
-     * Get report job status
+     * Retorna o status e os metadados de um job de relatório específico pelo `id`.
+     * Consultar status do relatório
      */
     async getUserReport(requestParameters: GetUserReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobDetail> {
         const response = await this.getUserReportRaw(requestParameters, initOverrides);
@@ -1002,8 +1002,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Aggregated totals for deposits, withdrawals and commission over a period.
-     * Transaction summary
+     * Totais agregados de depósitos, saques e comissão num período.
+     * Resumo de transações
      */
     async getUserSummaryRaw(requestParameters: GetUserSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Summary>> {
         const requestOptions = await this.getUserSummaryRequestOpts(requestParameters);
@@ -1013,8 +1013,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Aggregated totals for deposits, withdrawals and commission over a period.
-     * Transaction summary
+     * Totais agregados de depósitos, saques e comissão num período.
+     * Resumo de transações
      */
     async getUserSummary(requestParameters: GetUserSummaryRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Summary> {
         const response = await this.getUserSummaryRaw(requestParameters, initOverrides);
@@ -1057,8 +1057,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Retrieve a single transaction with its callback log and linked infractions.
-     * List transaction details
+     * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+     * Listar detalhes da transação
      */
     async getUserTransactionByIdRaw(requestParameters: GetUserTransactionByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserTransactionById200Response>> {
         const requestOptions = await this.getUserTransactionByIdRequestOpts(requestParameters);
@@ -1068,8 +1068,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Retrieve a single transaction with its callback log and linked infractions.
-     * List transaction details
+     * Recupera uma única transação com seu log de callback e as infrações vinculadas.
+     * Listar detalhes da transação
      */
     async getUserTransactionById(requestParameters: GetUserTransactionByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserTransactionById200Response> {
         const response = await this.getUserTransactionByIdRaw(requestParameters, initOverrides);
@@ -1172,8 +1172,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Paginated list of account transactions with filters.
-     * List Transactions
+     * Lista paginada das transações da conta com filtros.
+     * Listar transações
      */
     async getUserTransactionsRaw(requestParameters: GetUserTransactionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetUserTransactions200Response>> {
         const requestOptions = await this.getUserTransactionsRequestOpts(requestParameters);
@@ -1183,8 +1183,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Paginated list of account transactions with filters.
-     * List Transactions
+     * Lista paginada das transações da conta com filtros.
+     * Listar transações
      */
     async getUserTransactions(requestParameters: GetUserTransactionsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetUserTransactions200Response> {
         const response = await this.getUserTransactionsRaw(requestParameters, initOverrides);
@@ -1255,8 +1255,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * List report jobs created by the authenticated user.
-     * List report jobs
+     * Lista os jobs de relatório criados pelo usuário autenticado.
+     * Listar jobs de relatório
      */
     async listUserReportsRaw(requestParameters: ListUserReportsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListUserReports200Response>> {
         const requestOptions = await this.listUserReportsRequestOpts(requestParameters);
@@ -1266,8 +1266,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * List report jobs created by the authenticated user.
-     * List report jobs
+     * Lista os jobs de relatório criados pelo usuário autenticado.
+     * Listar jobs de relatório
      */
     async listUserReports(requestParameters: ListUserReportsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListUserReports200Response> {
         const response = await this.listUserReportsRaw(requestParameters, initOverrides);
@@ -1312,8 +1312,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
-     * Generate transactions report
+     * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
+     * Gerar relatório de transações
      */
     async postUserReportRaw(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReportJobAccepted>> {
         const requestOptions = await this.postUserReportRequestOpts(requestParameters);
@@ -1323,8 +1323,8 @@ export class ReportsApi extends runtime.BaseAPI implements ReportsApiInterface {
     }
 
     /**
-     * Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
-     * Generate transactions report
+     * Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
+     * Gerar relatório de transações
      */
     async postUserReport(requestParameters: PostUserReportOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReportJobAccepted> {
         const response = await this.postUserReportRaw(requestParameters, initOverrides);

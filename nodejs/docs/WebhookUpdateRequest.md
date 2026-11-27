@@ -1,7 +1,7 @@
 
 # WebhookUpdateRequest
 
-Provide at least one field.
+Informe pelo menos um campo.
 
 ## Properties
 

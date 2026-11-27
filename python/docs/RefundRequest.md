@@ -1,13 +1,14 @@
 # RefundRequest
 
+Só aceita amount, description e clientReference; outro campo é recusado com 400.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** | Amount in BRL to refund. Omit to refund the full transaction amount. Partial refunds are allowed up to the original amount. | [optional] 
-**description** | **str** | Free-text description for the refund. | [optional] 
-**client_reference** | **str** | Idempotency key. Reusing it with the same amount replays the existing refund; reusing it with a different amount is rejected. | [optional] 
+**amount** | **float** | Valor a devolver. | [optional] 
+**description** | **str** | Descrição livre da devolução. | [optional] 
+**client_reference** | **str** | Chave de idempotência. | [optional] 
 
 ## Example
 

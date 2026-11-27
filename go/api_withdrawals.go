@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -32,25 +32,25 @@ type ApiGetWithdrawRequest struct {
 	virtualAccount *string
 }
 
-// Transaction ID.
+// ID da transação.
 func (r ApiGetWithdrawRequest) Id(id string) ApiGetWithdrawRequest {
 	r.id = &id
 	return r
 }
 
-// External reference provided when creating the withdrawal.
+// Referência externa informada na criação do saque.
 func (r ApiGetWithdrawRequest) ClientReference(clientReference string) ApiGetWithdrawRequest {
 	r.clientReference = &clientReference
 	return r
 }
 
-// Pix end-to-end ID.
+// ID end-to-end do Pix.
 func (r ApiGetWithdrawRequest) EndToEndId(endToEndId string) ApiGetWithdrawRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
-// Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+// Subconta usada na criação.
 func (r ApiGetWithdrawRequest) VirtualAccount(virtualAccount string) ApiGetWithdrawRequest {
 	r.virtualAccount = &virtualAccount
 	return r
@@ -61,11 +61,9 @@ func (r ApiGetWithdrawRequest) Execute() (*Transaction, *http.Response, error) {
 }
 
 /*
-GetWithdraw Retrieve Withdrawal
+GetWithdraw Consultar Saque
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.
-
-Token permission: `WITHDRAW`.
+Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetWithdrawRequest
@@ -214,7 +212,7 @@ type ApiGetWithdrawProofRequest struct {
 	type_ *string
 }
 
-// Return format.
+// Formato de retorno.
 func (r ApiGetWithdrawProofRequest) Type_(type_ string) ApiGetWithdrawProofRequest {
 	r.type_ = &type_
 	return r
@@ -225,12 +223,12 @@ func (r ApiGetWithdrawProofRequest) Execute() (*ProofResponse, *http.Response, e
 }
 
 /*
-GetWithdrawProof Get Withdrawal Receipt
+GetWithdrawProof Obter comprovante de saque
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Transaction ID.
+ @param id ID da transação.
  @return ApiGetWithdrawProofRequest
 */
 func (a *WithdrawalsAPIService) GetWithdrawProof(ctx context.Context, id string) ApiGetWithdrawProofRequest {
@@ -331,6 +329,17 @@ func (a *WithdrawalsAPIService) GetWithdrawProofExecute(r ApiGetWithdrawProofReq
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -394,11 +403,9 @@ func (r ApiPostWithdrawRequest) Execute() (*Transaction, *http.Response, error) 
 }
 
 /*
-PostWithdraw Create Withdrawal (Pix key)
+PostWithdraw Criar saque (chave Pix)
 
-Send a Pix **cash out** to the specified Pix key.
-
-Token permission: `WITHDRAW`.
+Envie um **cash out** Pix para a chave Pix especificada.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostWithdrawRequest
@@ -508,6 +515,17 @@ func (a *WithdrawalsAPIService) PostWithdrawExecute(r ApiPostWithdrawRequest) (*
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -560,11 +578,9 @@ func (r ApiPostWithdrawQrcodeRequest) Execute() (*Transaction, *http.Response, e
 }
 
 /*
-PostWithdrawQrcode Create Withdrawal using QR Code
+PostWithdrawQrcode Criar Saque usando QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.
-
-Token permission: `WITHDRAW`.
+Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostWithdrawQrcodeRequest
@@ -664,6 +680,28 @@ func (a *WithdrawalsAPIService) PostWithdrawQrcodeExecute(r ApiPostWithdrawQrcod
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 410 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -21,6 +21,7 @@ import br.com.payzu.pix.Pair;
 import br.com.payzu.pix.model.ApiError;
 import java.math.BigDecimal;
 import br.com.payzu.pix.model.Defense;
+import br.com.payzu.pix.model.DefenseListItem;
 import java.io.File;
 import br.com.payzu.pix.model.InfractionDetail;
 import br.com.payzu.pix.model.InfractionListResponse;
@@ -175,73 +176,69 @@ public class InfractionsApi {
   }
 
   /**
-   * List Infractions
-   * List all infractions for the authenticated user with pagination and filters.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
-   * @param type Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param analysisResult Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
-   * @param reportedBy Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
-   * @param participantDocument CPF or CNPJ of the participant. (optional)
-   * @param participantName Name of the participant. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param reportedAtFrom Filter: reportedAt from. (optional)
-   * @param reportedAtTo Filter: reportedAt up to. (optional)
-   * @param createdAtFrom Filter: createdAt from. (optional)
-   * @param createdAtTo Filter: createdAt up to. (optional)
-   * @param expiresAtFrom Filter: expiresAt from. (optional)
-   * @param expiresAtTo Filter: expiresAt up to. (optional)
-   * @param updatedAtFrom Filter: updatedAt from. (optional)
-   * @param updatedAtTo Filter: updatedAt up to. (optional)
-   * @param id Filter by infraction ID. (optional)
-   * @param protocol Filter by protocol. (optional)
+   * Listar infrações
+   * Lista todas as infrações do usuário autenticado com paginação e filtros.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; (optional)
+   * @param type Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param analysisResult AnalysisResult separados por vírgula: AGREED, DISAGREED. (optional)
+   * @param reportedBy Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; (optional)
+   * @param participantDocument CPF ou CNPJ do participante. (optional)
+   * @param participantName Nome do participante. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param reportedAtFrom Filtro: reportedAt a partir de. (optional)
+   * @param reportedAtTo Filtro: reportedAt até. (optional)
+   * @param createdAtFrom Filtro: createdAt a partir de. (optional)
+   * @param createdAtTo Filtro: createdAt até. (optional)
+   * @param expiresAtFrom Filtro: expiresAt a partir de. (optional)
+   * @param expiresAtTo Filtro: expiresAt até. (optional)
+   * @param updatedAtFrom Filtro: updatedAt a partir de. (optional)
+   * @param updatedAtTo Filtro: updatedAt até. (optional)
+   * @param id Filtro por ID da infração. (optional)
+   * @param protocol Filtro por protocolo. (optional)
    * @return InfractionListResponse
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Infractions Documentation</a>
    */
   public InfractionListResponse getInfractions(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable String analysisResult, @javax.annotation.Nullable String reportedBy, @javax.annotation.Nullable String participantDocument, @javax.annotation.Nullable String participantName, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable OffsetDateTime reportedAtFrom, @javax.annotation.Nullable OffsetDateTime reportedAtTo, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime expiresAtFrom, @javax.annotation.Nullable OffsetDateTime expiresAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String protocol) throws ApiException {
     return getInfractions(page, limit, status, type, endToEndId, transactionId, amountMin, amountMax, analysisResult, reportedBy, participantDocument, participantName, sortBy, sortDirection, reportedAtFrom, reportedAtTo, createdAtFrom, createdAtTo, expiresAtFrom, expiresAtTo, updatedAtFrom, updatedAtTo, id, protocol, null);
   }
 
   /**
-   * List Infractions
-   * List all infractions for the authenticated user with pagination and filters.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
-   * @param type Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param analysisResult Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
-   * @param reportedBy Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
-   * @param participantDocument CPF or CNPJ of the participant. (optional)
-   * @param participantName Name of the participant. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param reportedAtFrom Filter: reportedAt from. (optional)
-   * @param reportedAtTo Filter: reportedAt up to. (optional)
-   * @param createdAtFrom Filter: createdAt from. (optional)
-   * @param createdAtTo Filter: createdAt up to. (optional)
-   * @param expiresAtFrom Filter: expiresAt from. (optional)
-   * @param expiresAtTo Filter: expiresAt up to. (optional)
-   * @param updatedAtFrom Filter: updatedAt from. (optional)
-   * @param updatedAtTo Filter: updatedAt up to. (optional)
-   * @param id Filter by infraction ID. (optional)
-   * @param protocol Filter by protocol. (optional)
+   * Listar infrações
+   * Lista todas as infrações do usuário autenticado com paginação e filtros.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; (optional)
+   * @param type Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param analysisResult AnalysisResult separados por vírgula: AGREED, DISAGREED. (optional)
+   * @param reportedBy Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; (optional)
+   * @param participantDocument CPF ou CNPJ do participante. (optional)
+   * @param participantName Nome do participante. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param reportedAtFrom Filtro: reportedAt a partir de. (optional)
+   * @param reportedAtTo Filtro: reportedAt até. (optional)
+   * @param createdAtFrom Filtro: createdAt a partir de. (optional)
+   * @param createdAtTo Filtro: createdAt até. (optional)
+   * @param expiresAtFrom Filtro: expiresAt a partir de. (optional)
+   * @param expiresAtTo Filtro: expiresAt até. (optional)
+   * @param updatedAtFrom Filtro: updatedAt a partir de. (optional)
+   * @param updatedAtTo Filtro: updatedAt até. (optional)
+   * @param id Filtro por ID da infração. (optional)
+   * @param protocol Filtro por protocolo. (optional)
    * @param headers Optional headers to include in the request
    * @return InfractionListResponse
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Infractions Documentation</a>
    */
   public InfractionListResponse getInfractions(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable String analysisResult, @javax.annotation.Nullable String reportedBy, @javax.annotation.Nullable String participantDocument, @javax.annotation.Nullable String participantName, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable OffsetDateTime reportedAtFrom, @javax.annotation.Nullable OffsetDateTime reportedAtTo, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime expiresAtFrom, @javax.annotation.Nullable OffsetDateTime expiresAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String protocol, Map<String, String> headers) throws ApiException {
     ApiResponse<InfractionListResponse> localVarResponse = getInfractionsWithHttpInfo(page, limit, status, type, endToEndId, transactionId, amountMin, amountMax, analysisResult, reportedBy, participantDocument, participantName, sortBy, sortDirection, reportedAtFrom, reportedAtTo, createdAtFrom, createdAtTo, expiresAtFrom, expiresAtTo, updatedAtFrom, updatedAtTo, id, protocol, headers);
@@ -249,73 +246,69 @@ public class InfractionsApi {
   }
 
   /**
-   * List Infractions
-   * List all infractions for the authenticated user with pagination and filters.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
-   * @param type Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param analysisResult Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
-   * @param reportedBy Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
-   * @param participantDocument CPF or CNPJ of the participant. (optional)
-   * @param participantName Name of the participant. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param reportedAtFrom Filter: reportedAt from. (optional)
-   * @param reportedAtTo Filter: reportedAt up to. (optional)
-   * @param createdAtFrom Filter: createdAt from. (optional)
-   * @param createdAtTo Filter: createdAt up to. (optional)
-   * @param expiresAtFrom Filter: expiresAt from. (optional)
-   * @param expiresAtTo Filter: expiresAt up to. (optional)
-   * @param updatedAtFrom Filter: updatedAt from. (optional)
-   * @param updatedAtTo Filter: updatedAt up to. (optional)
-   * @param id Filter by infraction ID. (optional)
-   * @param protocol Filter by protocol. (optional)
+   * Listar infrações
+   * Lista todas as infrações do usuário autenticado com paginação e filtros.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; (optional)
+   * @param type Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param analysisResult AnalysisResult separados por vírgula: AGREED, DISAGREED. (optional)
+   * @param reportedBy Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; (optional)
+   * @param participantDocument CPF ou CNPJ do participante. (optional)
+   * @param participantName Nome do participante. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param reportedAtFrom Filtro: reportedAt a partir de. (optional)
+   * @param reportedAtTo Filtro: reportedAt até. (optional)
+   * @param createdAtFrom Filtro: createdAt a partir de. (optional)
+   * @param createdAtTo Filtro: createdAt até. (optional)
+   * @param expiresAtFrom Filtro: expiresAt a partir de. (optional)
+   * @param expiresAtTo Filtro: expiresAt até. (optional)
+   * @param updatedAtFrom Filtro: updatedAt a partir de. (optional)
+   * @param updatedAtTo Filtro: updatedAt até. (optional)
+   * @param id Filtro por ID da infração. (optional)
+   * @param protocol Filtro por protocolo. (optional)
    * @return ApiResponse&lt;InfractionListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Infractions Documentation</a>
    */
   public ApiResponse<InfractionListResponse> getInfractionsWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable String analysisResult, @javax.annotation.Nullable String reportedBy, @javax.annotation.Nullable String participantDocument, @javax.annotation.Nullable String participantName, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable OffsetDateTime reportedAtFrom, @javax.annotation.Nullable OffsetDateTime reportedAtTo, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime expiresAtFrom, @javax.annotation.Nullable OffsetDateTime expiresAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String protocol) throws ApiException {
     return getInfractionsWithHttpInfo(page, limit, status, type, endToEndId, transactionId, amountMin, amountMax, analysisResult, reportedBy, participantDocument, participantName, sortBy, sortDirection, reportedAtFrom, reportedAtTo, createdAtFrom, createdAtTo, expiresAtFrom, expiresAtTo, updatedAtFrom, updatedAtTo, id, protocol, null);
   }
 
   /**
-   * List Infractions
-   * List all infractions for the authenticated user with pagination and filters.
-   * @param page Page number. (optional, default to 1)
-   * @param limit Items per page. (optional, default to 10)
-   * @param status Comma-separated InfractionStatus (WAITING_PSP,CLOSED,OPEN,CANCELLED,ACKNOWLEDGED,DEFENDED,ANSWERED,WAITING_ADJUSTMENTS) (optional)
-   * @param type Comma-separated InfractionType (REFUND_REQUEST,FRAUD,REFUND_CANCELLED) (optional)
-   * @param endToEndId End-to-end ID of the Pix. (optional)
-   * @param transactionId Transaction ID. (optional)
-   * @param amountMin Minimum amount. (optional)
-   * @param amountMax Maximum amount. (optional)
-   * @param analysisResult Comma-separated AnalysisResult: AGREED, DISAGREED. (optional)
-   * @param reportedBy Comma-separated ReportedType (DEBITED_PARTICIPANT,CREDITED_PARTICIPANT) (optional)
-   * @param participantDocument CPF or CNPJ of the participant. (optional)
-   * @param participantName Name of the participant. (optional)
-   * @param sortBy Sort field. (optional, default to createdAt)
-   * @param sortDirection Sort direction. (optional, default to desc)
-   * @param reportedAtFrom Filter: reportedAt from. (optional)
-   * @param reportedAtTo Filter: reportedAt up to. (optional)
-   * @param createdAtFrom Filter: createdAt from. (optional)
-   * @param createdAtTo Filter: createdAt up to. (optional)
-   * @param expiresAtFrom Filter: expiresAt from. (optional)
-   * @param expiresAtTo Filter: expiresAt up to. (optional)
-   * @param updatedAtFrom Filter: updatedAt from. (optional)
-   * @param updatedAtTo Filter: updatedAt up to. (optional)
-   * @param id Filter by infraction ID. (optional)
-   * @param protocol Filter by protocol. (optional)
+   * Listar infrações
+   * Lista todas as infrações do usuário autenticado com paginação e filtros.
+   * @param page Número da página. (optional, default to 1)
+   * @param limit Itens por página. (optional, default to 10)
+   * @param status Status da infração, vários separados por vírgula.  &#x60;OPEN&#x60; &#x60;ACKNOWLEDGED&#x60; &#x60;DEFENDED&#x60; &#x60;ANSWERED&#x60; &#x60;WAITING_PSP&#x60; &#x60;WAITING_ADJUSTMENTS&#x60; &#x60;CLOSED&#x60; &#x60;CANCELLED&#x60; (optional)
+   * @param type Tipo da infração, vários separados por vírgula.  &#x60;REFUND_REQUEST&#x60; &#x60;FRAUD&#x60; &#x60;REFUND_CANCELLED&#x60; (optional)
+   * @param endToEndId ID end-to-end do Pix. (optional)
+   * @param transactionId ID da transação. (optional)
+   * @param amountMin Valor mínimo. (optional)
+   * @param amountMax Valor máximo. (optional)
+   * @param analysisResult AnalysisResult separados por vírgula: AGREED, DISAGREED. (optional)
+   * @param reportedBy Quem abriu a infração, vários separados por vírgula.  &#x60;DEBITED_PARTICIPANT&#x60; &#x60;CREDITED_PARTICIPANT&#x60; (optional)
+   * @param participantDocument CPF ou CNPJ do participante. (optional)
+   * @param participantName Nome do participante. (optional)
+   * @param sortBy Campo de ordenação. (optional, default to createdAt)
+   * @param sortDirection Direção da ordenação. (optional, default to desc)
+   * @param reportedAtFrom Filtro: reportedAt a partir de. (optional)
+   * @param reportedAtTo Filtro: reportedAt até. (optional)
+   * @param createdAtFrom Filtro: createdAt a partir de. (optional)
+   * @param createdAtTo Filtro: createdAt até. (optional)
+   * @param expiresAtFrom Filtro: expiresAt a partir de. (optional)
+   * @param expiresAtTo Filtro: expiresAt até. (optional)
+   * @param updatedAtFrom Filtro: updatedAt a partir de. (optional)
+   * @param updatedAtTo Filtro: updatedAt até. (optional)
+   * @param id Filtro por ID da infração. (optional)
+   * @param protocol Filtro por protocolo. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;InfractionListResponse&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Infractions Documentation</a>
    */
   public ApiResponse<InfractionListResponse> getInfractionsWithHttpInfo(@javax.annotation.Nullable Integer page, @javax.annotation.Nullable Integer limit, @javax.annotation.Nullable String status, @javax.annotation.Nullable String type, @javax.annotation.Nullable String endToEndId, @javax.annotation.Nullable String transactionId, @javax.annotation.Nullable BigDecimal amountMin, @javax.annotation.Nullable BigDecimal amountMax, @javax.annotation.Nullable String analysisResult, @javax.annotation.Nullable String reportedBy, @javax.annotation.Nullable String participantDocument, @javax.annotation.Nullable String participantName, @javax.annotation.Nullable String sortBy, @javax.annotation.Nullable String sortDirection, @javax.annotation.Nullable OffsetDateTime reportedAtFrom, @javax.annotation.Nullable OffsetDateTime reportedAtTo, @javax.annotation.Nullable OffsetDateTime createdAtFrom, @javax.annotation.Nullable OffsetDateTime createdAtTo, @javax.annotation.Nullable OffsetDateTime expiresAtFrom, @javax.annotation.Nullable OffsetDateTime expiresAtTo, @javax.annotation.Nullable OffsetDateTime updatedAtFrom, @javax.annotation.Nullable OffsetDateTime updatedAtTo, @javax.annotation.Nullable String id, @javax.annotation.Nullable String protocol, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getInfractionsRequestBuilder(page, limit, status, type, endToEndId, transactionId, amountMin, amountMax, analysisResult, reportedBy, participantDocument, participantName, sortBy, sortDirection, reportedAtFrom, reportedAtTo, createdAtFrom, createdAtTo, expiresAtFrom, expiresAtTo, updatedAtFrom, updatedAtTo, id, protocol, headers);
@@ -449,27 +442,23 @@ public class InfractionsApi {
   }
 
   /**
-   * Get Infraction
-   * Get a specific infraction by ID.
-   * @param id Infraction ID (required)
+   * Obter Infração
+   * Obtém uma infração específica por ID.
+   * @param id ID da infração (required)
    * @return InfractionDetail
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Infraction Documentation</a>
    */
   public InfractionDetail getInfractionsById(@javax.annotation.Nonnull String id) throws ApiException {
     return getInfractionsById(id, null);
   }
 
   /**
-   * Get Infraction
-   * Get a specific infraction by ID.
-   * @param id Infraction ID (required)
+   * Obter Infração
+   * Obtém uma infração específica por ID.
+   * @param id ID da infração (required)
    * @param headers Optional headers to include in the request
    * @return InfractionDetail
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Infraction Documentation</a>
    */
   public InfractionDetail getInfractionsById(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     ApiResponse<InfractionDetail> localVarResponse = getInfractionsByIdWithHttpInfo(id, headers);
@@ -477,27 +466,23 @@ public class InfractionsApi {
   }
 
   /**
-   * Get Infraction
-   * Get a specific infraction by ID.
-   * @param id Infraction ID (required)
+   * Obter Infração
+   * Obtém uma infração específica por ID.
+   * @param id ID da infração (required)
    * @return ApiResponse&lt;InfractionDetail&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Infraction Documentation</a>
    */
   public ApiResponse<InfractionDetail> getInfractionsByIdWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getInfractionsByIdWithHttpInfo(id, null);
   }
 
   /**
-   * Get Infraction
-   * Get a specific infraction by ID.
-   * @param id Infraction ID (required)
+   * Obter Infração
+   * Obtém uma infração específica por ID.
+   * @param id ID da infração (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;InfractionDetail&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Infraction Documentation</a>
    */
   public ApiResponse<InfractionDetail> getInfractionsByIdWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getInfractionsByIdRequestBuilder(id, headers);
@@ -575,29 +560,25 @@ public class InfractionsApi {
   }
 
   /**
-   * Get Defense
-   * Get a specific defense for an infraction.
-   * @param infractionId Infraction ID (required)
-   * @param defenseId Defense ID (required)
+   * Obter Defesa
+   * Obtém uma defesa específica de uma infração.
+   * @param infractionId ID da infração (required)
+   * @param defenseId ID da defesa (required)
    * @return Defense
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Defense Documentation</a>
    */
   public Defense getInfractionsDefenseById(@javax.annotation.Nonnull String infractionId, @javax.annotation.Nonnull String defenseId) throws ApiException {
     return getInfractionsDefenseById(infractionId, defenseId, null);
   }
 
   /**
-   * Get Defense
-   * Get a specific defense for an infraction.
-   * @param infractionId Infraction ID (required)
-   * @param defenseId Defense ID (required)
+   * Obter Defesa
+   * Obtém uma defesa específica de uma infração.
+   * @param infractionId ID da infração (required)
+   * @param defenseId ID da defesa (required)
    * @param headers Optional headers to include in the request
    * @return Defense
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Defense Documentation</a>
    */
   public Defense getInfractionsDefenseById(@javax.annotation.Nonnull String infractionId, @javax.annotation.Nonnull String defenseId, Map<String, String> headers) throws ApiException {
     ApiResponse<Defense> localVarResponse = getInfractionsDefenseByIdWithHttpInfo(infractionId, defenseId, headers);
@@ -605,29 +586,25 @@ public class InfractionsApi {
   }
 
   /**
-   * Get Defense
-   * Get a specific defense for an infraction.
-   * @param infractionId Infraction ID (required)
-   * @param defenseId Defense ID (required)
+   * Obter Defesa
+   * Obtém uma defesa específica de uma infração.
+   * @param infractionId ID da infração (required)
+   * @param defenseId ID da defesa (required)
    * @return ApiResponse&lt;Defense&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Defense Documentation</a>
    */
   public ApiResponse<Defense> getInfractionsDefenseByIdWithHttpInfo(@javax.annotation.Nonnull String infractionId, @javax.annotation.Nonnull String defenseId) throws ApiException {
     return getInfractionsDefenseByIdWithHttpInfo(infractionId, defenseId, null);
   }
 
   /**
-   * Get Defense
-   * Get a specific defense for an infraction.
-   * @param infractionId Infraction ID (required)
-   * @param defenseId Defense ID (required)
+   * Obter Defesa
+   * Obtém uma defesa específica de uma infração.
+   * @param infractionId ID da infração (required)
+   * @param defenseId ID da defesa (required)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Defense&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Get Defense Documentation</a>
    */
   public ApiResponse<Defense> getInfractionsDefenseByIdWithHttpInfo(@javax.annotation.Nonnull String infractionId, @javax.annotation.Nonnull String defenseId, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getInfractionsDefenseByIdRequestBuilder(infractionId, defenseId, headers);
@@ -710,57 +687,49 @@ public class InfractionsApi {
   }
 
   /**
-   * List Defenses
-   * List all defenses for a specific infraction.
-   * @param id Infraction ID (required)
-   * @return List&lt;Defense&gt;
+   * Listar Defesas
+   * Lista todas as defesas de uma infração específica.
+   * @param id ID da infração (required)
+   * @return List&lt;DefenseListItem&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Defenses Documentation</a>
    */
-  public List<Defense> getInfractionsDefenses(@javax.annotation.Nonnull String id) throws ApiException {
+  public List<DefenseListItem> getInfractionsDefenses(@javax.annotation.Nonnull String id) throws ApiException {
     return getInfractionsDefenses(id, null);
   }
 
   /**
-   * List Defenses
-   * List all defenses for a specific infraction.
-   * @param id Infraction ID (required)
+   * Listar Defesas
+   * Lista todas as defesas de uma infração específica.
+   * @param id ID da infração (required)
    * @param headers Optional headers to include in the request
-   * @return List&lt;Defense&gt;
+   * @return List&lt;DefenseListItem&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Defenses Documentation</a>
    */
-  public List<Defense> getInfractionsDefenses(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
-    ApiResponse<List<Defense>> localVarResponse = getInfractionsDefensesWithHttpInfo(id, headers);
+  public List<DefenseListItem> getInfractionsDefenses(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
+    ApiResponse<List<DefenseListItem>> localVarResponse = getInfractionsDefensesWithHttpInfo(id, headers);
     return localVarResponse.getData();
   }
 
   /**
-   * List Defenses
-   * List all defenses for a specific infraction.
-   * @param id Infraction ID (required)
-   * @return ApiResponse&lt;List&lt;Defense&gt;&gt;
+   * Listar Defesas
+   * Lista todas as defesas de uma infração específica.
+   * @param id ID da infração (required)
+   * @return ApiResponse&lt;List&lt;DefenseListItem&gt;&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Defenses Documentation</a>
    */
-  public ApiResponse<List<Defense>> getInfractionsDefensesWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
+  public ApiResponse<List<DefenseListItem>> getInfractionsDefensesWithHttpInfo(@javax.annotation.Nonnull String id) throws ApiException {
     return getInfractionsDefensesWithHttpInfo(id, null);
   }
 
   /**
-   * List Defenses
-   * List all defenses for a specific infraction.
-   * @param id Infraction ID (required)
+   * Listar Defesas
+   * Lista todas as defesas de uma infração específica.
+   * @param id ID da infração (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;List&lt;Defense&gt;&gt;
+   * @return ApiResponse&lt;List&lt;DefenseListItem&gt;&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">List Defenses Documentation</a>
    */
-  public ApiResponse<List<Defense>> getInfractionsDefensesWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
+  public ApiResponse<List<DefenseListItem>> getInfractionsDefensesWithHttpInfo(@javax.annotation.Nonnull String id, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getInfractionsDefensesRequestBuilder(id, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -776,7 +745,7 @@ public class InfractionsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<List<Defense>>(
+          return new ApiResponse<List<DefenseListItem>>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -786,10 +755,10 @@ public class InfractionsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        List<Defense> responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<List<Defense>>() {});
+        List<DefenseListItem> responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<List<DefenseListItem>>() {});
         
 
-        return new ApiResponse<List<Defense>>(
+        return new ApiResponse<List<DefenseListItem>>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -836,31 +805,27 @@ public class InfractionsApi {
   }
 
   /**
-   * Create Defense
-   * Create a defense for a specific infraction.
-   * @param id Infraction ID (required)
-   * @param defense Defense text (max: 1000 characters) (required)
-   * @param files Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
+   * Criar Defesa
+   * Cria uma defesa para uma infração específica.
+   * @param id ID da infração (required)
+   * @param defense Texto da defesa (máx: 1000 caracteres) (required)
+   * @param files Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. (optional)
    * @return Defense
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Create Defense Documentation</a>
    */
   public Defense postInfractionsDefense(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String defense, @javax.annotation.Nullable List<File> files) throws ApiException {
     return postInfractionsDefense(id, defense, files, null);
   }
 
   /**
-   * Create Defense
-   * Create a defense for a specific infraction.
-   * @param id Infraction ID (required)
-   * @param defense Defense text (max: 1000 characters) (required)
-   * @param files Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
+   * Criar Defesa
+   * Cria uma defesa para uma infração específica.
+   * @param id ID da infração (required)
+   * @param defense Texto da defesa (máx: 1000 caracteres) (required)
+   * @param files Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. (optional)
    * @param headers Optional headers to include in the request
    * @return Defense
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Create Defense Documentation</a>
    */
   public Defense postInfractionsDefense(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String defense, @javax.annotation.Nullable List<File> files, Map<String, String> headers) throws ApiException {
     ApiResponse<Defense> localVarResponse = postInfractionsDefenseWithHttpInfo(id, defense, files, headers);
@@ -868,31 +833,27 @@ public class InfractionsApi {
   }
 
   /**
-   * Create Defense
-   * Create a defense for a specific infraction.
-   * @param id Infraction ID (required)
-   * @param defense Defense text (max: 1000 characters) (required)
-   * @param files Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
+   * Criar Defesa
+   * Cria uma defesa para uma infração específica.
+   * @param id ID da infração (required)
+   * @param defense Texto da defesa (máx: 1000 caracteres) (required)
+   * @param files Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. (optional)
    * @return ApiResponse&lt;Defense&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Create Defense Documentation</a>
    */
   public ApiResponse<Defense> postInfractionsDefenseWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String defense, @javax.annotation.Nullable List<File> files) throws ApiException {
     return postInfractionsDefenseWithHttpInfo(id, defense, files, null);
   }
 
   /**
-   * Create Defense
-   * Create a defense for a specific infraction.
-   * @param id Infraction ID (required)
-   * @param defense Defense text (max: 1000 characters) (required)
-   * @param files Evidence files: up to 5 files, 10 MB each and 10 MB in total. Files .exe, .msi, .bat, .sh and .cmd are rejected. (optional)
+   * Criar Defesa
+   * Cria uma defesa para uma infração específica.
+   * @param id ID da infração (required)
+   * @param defense Texto da defesa (máx: 1000 caracteres) (required)
+   * @param files Arquivos de evidência: até 5 arquivos, 10 MB cada e 10 MB no total. Arquivos .exe, .msi, .bat, .sh e .cmd são recusados. (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;Defense&gt;
    * @throws ApiException if fails to make API call
-   * Infractions (MED)
-   * @see <a href="/docs/pix-processamento/tutoriais/infractions">Create Defense Documentation</a>
    */
   public ApiResponse<Defense> postInfractionsDefenseWithHttpInfo(@javax.annotation.Nonnull String id, @javax.annotation.Nonnull String defense, @javax.annotation.Nullable List<File> files, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = postInfractionsDefenseRequestBuilder(id, defense, files, headers);

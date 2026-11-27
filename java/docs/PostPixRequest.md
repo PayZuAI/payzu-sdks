@@ -7,14 +7,14 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**amount** | **BigDecimal** | Amount in BRL. Must be &gt;&#x3D; 1. |  |
-|**callbackUrl** | **URI** | URL for transaction notifications (http or https). |  [optional] |
-|**generatedName** | **String** | Payer full name. Letters and spaces only. |  [optional] |
-|**generatedEmail** | **String** | Payer email (optional). |  [optional] |
-|**generatedDocument** | **String** | Payer CPF (11 digits) or CNPJ (14 digits), no punctuation, with valid check digits. |  [optional] |
-|**expiresIn** | **BigDecimal** | Seconds until the QR Code expires. |  [optional] |
-|**clientReference** | **String** | External reference (order, invoice, etc.). A clientReference already used returns the transaction created with it. |  [optional] |
-|**virtualAccount** | **String** | Virtual sub-account (up to 50 characters) to correlate stores, branches, marketplaces. Returned in the callback. |  [optional] |
+|**amount** | **BigDecimal** | Valor da cobrança, em reais, com no máximo 2 casas decimais. |  |
+|**callbackUrl** | **URI** | URL para notificações da transação: http ou https, pública, sem usuário e senha e sem IPv6 literal. |  [optional] |
+|**generatedName** | **String** | Nome usado para montar a cobrança. |  [optional] |
+|**generatedEmail** | **String** | E-mail usado para montar a cobrança. |  [optional] |
+|**generatedDocument** | **String** | CPF (11 dígitos) ou CNPJ (14 dígitos) do pagador, sem pontuação e com dígitos verificadores válidos. Obrigatório a partir do valor definido na conta (PZD602). |  [optional] |
+|**expiresIn** | **Integer** | Segundos até o QR Code expirar, em número inteiro. |  [optional] |
+|**clientReference** | **String** | Referência externa (pedido, fatura etc.). Um clientReference já usado devolve a transação criada com ele. |  [optional] |
+|**virtualAccount** | **String** | Subconta para separar lojas ou filiais. |  [optional] |
 
 
 

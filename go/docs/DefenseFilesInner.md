@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Name of the file sent with the defense. | [optional] 
-**MimeType** | Pointer to **string** | MIME type of the file, provided on upload, for example application/pdf or image/png. | [optional] 
-**Size** | Pointer to **int32** | Size of the file in bytes. | [optional] 
-**Url** | Pointer to **NullableString** | Signed download URL, valid for 9 minutes; null when unavailable. Returned when creating the defense and when fetching a single defense. | [optional] 
+**Name** | Pointer to **string** | Nome do arquivo enviado como anexo da defesa. | [optional] 
+**MimeType** | Pointer to **string** | Tipo MIME do anexo, informado no upload, por exemplo application/pdf ou image/png. | [optional] 
+**Size** | Pointer to **int32** | Tamanho do anexo em bytes. | [optional] 
+**Url** | Pointer to **NullableString** | URL assinada de download, válida por 9 minutos; nula quando indisponível. Vem na criação da defesa e na consulta de uma defesa. | [optional] 
 
 ## Methods
 

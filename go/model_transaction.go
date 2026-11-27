@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -17,81 +17,81 @@ import (
 // checks if the Transaction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Transaction{}
 
-// Transaction Unified transaction representation used by all endpoints.
+// Transaction Representação unificada de transação usada por todos os endpoints.
 type Transaction struct {
-	// Identifier of the transaction at PayZu.
+	// Identificador da transação na PayZu.
 	Id *string `json:"id,omitempty"`
-	// PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
+	// Status atual da transação.
 	Status *string `json:"status,omitempty"`
-	// Amount of the transaction, before the fee.
+	// Valor da transação, antes da taxa.
 	Amount *float32 `json:"amount,omitempty"`
-	// Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
+	// Tipo da transação: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION ou ADJUSTMENT.
 	Type *string `json:"type,omitempty"`
-	// Copy-and-paste Pix code.
+	// Código copia e cola do Pix.
 	QrCodeText NullableString `json:"qrCodeText,omitempty"`
-	// PNG image of the QR Code in base64, without the data: prefix.
+	// Imagem PNG do QR Code em base64, sem o prefixo data:.
 	QrCodeBase64 NullableString `json:"qrCodeBase64,omitempty"`
-	// Authenticated route that returns the PNG of the QR Code.
+	// Rota autenticada que devolve o PNG do QR Code.
 	QrCodeUrl NullableString `json:"qrCodeUrl,omitempty"`
-	// Name used to build the charge.
+	// Nome usado para montar a cobrança.
 	GeneratedName NullableString `json:"generatedName,omitempty"`
-	// CPF or CNPJ used as the debtor of the charge.
+	// CPF ou CNPJ usado como devedor na cobrança.
 	GeneratedDocument NullableString `json:"generatedDocument,omitempty"`
-	// Email used to build the charge.
+	// E-mail usado para montar a cobrança.
 	GeneratedEmail NullableString `json:"generatedEmail,omitempty"`
-	// Name of the holder of the account that sent the Pix, as reported by the originating institution.
+	// Nome do titular da conta que enviou o Pix, como informado pela instituição de origem.
 	PayerName NullableString `json:"payerName,omitempty"`
-	// CPF or CNPJ of the payer of the Pix, reported by the originating institution.
+	// CPF ou CNPJ de quem enviou o Pix, informado pela instituição de origem.
 	PayerDocument NullableString `json:"payerDocument,omitempty"`
-	// ISPB code of the institution the Pix was sent from.
+	// Código ISPB da instituição de onde saiu o Pix.
 	PayerInstitutionIspb NullableString `json:"payerInstitutionIspb,omitempty"`
-	// Name of the institution the Pix was sent from.
+	// Nome da instituição de onde saiu o Pix.
 	PayerInstitutionName NullableString `json:"payerInstitutionName,omitempty"`
-	// Payer's PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions.
+	// Conta PayZu do pagador.
 	PayerAccountNumber NullableString `json:"payerAccountNumber,omitempty"`
-	// PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
+	// Tarifa PayZu cobrada na operação, em reais. Pode ter mais de duas casas decimais: não arredonde ao conciliar.
 	ServiceFeeCharged NullableFloat32 `json:"serviceFeeCharged,omitempty"`
-	// Destination Pix key of the withdrawal, already normalized.
+	// Chave Pix de destino do saque, já normalizada.
 	WithdrawPixKey NullableString `json:"withdrawPixKey,omitempty"`
-	// Type of the destination key of the withdrawal, with evp being the random key.
+	// Tipo da chave de destino do saque, sendo evp a chave aleatória.
 	WithdrawPixType NullableString `json:"withdrawPixType,omitempty"`
-	// Name of the holder of the receiving account.
+	// Nome do titular da conta que recebe.
 	ReceiverName NullableString `json:"receiverName,omitempty"`
-	// CPF or CNPJ of the receiver.
+	// CPF ou CNPJ de quem recebe.
 	ReceiverDocument NullableString `json:"receiverDocument,omitempty"`
-	// ISPB code of the institution that receives the Pix.
+	// Código ISPB da instituição que recebe o Pix.
 	ReceiverInstitutionIspb NullableString `json:"receiverInstitutionIspb,omitempty"`
-	// Name of the institution that receives the Pix.
+	// Nome da instituição que recebe o Pix.
 	ReceiverInstitutionName NullableString `json:"receiverInstitutionName,omitempty"`
-	// Receiver's PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions.
+	// Conta PayZu do recebedor.
 	ReceiverAccountNumber NullableString `json:"receiverAccountNumber,omitempty"`
-	// Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
+	// Identificador do Pix no arranjo do Bacen, usado para rastrear a liquidação e pedir devolução.
 	EndToEndId NullableString `json:"endToEndId,omitempty"`
-	// Date and time the transaction was recorded.
+	// Data e hora do registro da transação.
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// Date and time of the last change.
+	// Data e hora da última alteração.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
-	// Date and time the Pix was settled, reported by the institution.
+	// Data e hora da liquidação do Pix, informada pela instituição.
 	PaidAt NullableString `json:"paidAt,omitempty"`
-	// Your identifier of the transaction, returned in queries and callbacks.
+	// Seu identificador da transação, devolvido em consultas e callbacks.
 	ClientReference NullableString `json:"clientReference,omitempty"`
-	// End-to-end ID of the refund transaction
+	// ID end-to-end do Pix de devolução.
 	RefundEndToEndId NullableString `json:"refundEndToEndId,omitempty"`
-	// Amount refunded
+	// Valor devolvido.
 	RefundAmount NullableFloat32 `json:"refundAmount,omitempty"`
-	// Refund status: PENDING, COMPLETED or CANCELED.
+	// Status da devolução.
 	RefundStatus NullableString `json:"refundStatus,omitempty"`
-	// Reason for the refund
+	// Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
 	RefundReason NullableString `json:"refundReason,omitempty"`
-	// Description of the refund
+	// Descrição da devolução.
 	RefundDescription NullableString `json:"refundDescription,omitempty"`
-	// Date and time when the refund was processed
+	// Data e hora em que a devolução foi processada.
 	RefundedAt NullableString `json:"refundedAt,omitempty"`
-	// Reason for cancellation (if cancelled)
+	// Motivo do cancelamento (se cancelada)
 	CancellationReason NullableString `json:"cancellationReason,omitempty"`
-	// Virtual sub-account provided at creation.
+	// Subconta virtual informada na criação.
 	VirtualAccount NullableString `json:"virtualAccount,omitempty"`
-	// Transaction method/rail.
+	// `PIX`, `INTERNAL_TRANSFER` (transferência entre contas PayZu), `BANK_SLIP` (boleto) ou `TED`.
 	Method *string `json:"method,omitempty"`
 }
 

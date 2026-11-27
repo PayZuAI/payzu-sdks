@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Name of the file sent with the defense. | [optional] 
-**MimeType** | Pointer to **string** | MIME type of the file, provided on upload, for example application/pdf or image/png. | [optional] 
-**Size** | Pointer to **int32** | Size of the file in bytes. | [optional] 
+**Name** | Pointer to **string** | Nome do arquivo enviado como anexo da defesa. | [optional] 
+**MimeType** | Pointer to **string** | Tipo MIME do anexo, informado no upload, por exemplo application/pdf ou image/png. | [optional] 
+**Size** | Pointer to **int32** | Tamanho do anexo em bytes. | [optional] 
 
 ## Methods
 

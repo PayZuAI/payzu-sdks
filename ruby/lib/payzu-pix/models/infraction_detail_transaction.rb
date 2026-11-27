@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -14,26 +14,26 @@ require 'date'
 require 'time'
 
 module PayZuPix
-  # Summary of the disputed Pix.
+  # Resumo do Pix contestado.
   class InfractionDetailTransaction < ApiModelBase
     attr_accessor :id
 
-    # Amount of the disputed transaction, in reais with decimal places.
+    # Valor da transação contestada, em reais com casas decimais.
     attr_accessor :amount
 
-    # Name of the Pix payer, as reported by the provider.
+    # Nome do pagador do Pix, conforme informado pelo provedor.
     attr_accessor :payer_name
 
-    # CPF or CNPJ of the Pix payer, as reported by the provider.
+    # CPF ou CNPJ do pagador do Pix, conforme informado pelo provedor.
     attr_accessor :payer_document
 
-    # Name of the Pix receiver, as reported by the provider.
+    # Nome do recebedor do Pix, conforme informado pelo provedor.
     attr_accessor :receiver_name
 
-    # CPF or CNPJ of the Pix receiver, as reported by the provider.
+    # CPF ou CNPJ do recebedor do Pix, conforme informado pelo provedor.
     attr_accessor :receiver_document
 
-    # End-to-end identifier of the Pix, reported by the provider at settlement.
+    # Identificador fim a fim do Pix, informado pelo provedor na liquidação.
     attr_accessor :end_to_end_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

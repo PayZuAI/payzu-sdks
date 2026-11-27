@@ -8,7 +8,7 @@ additionalProperties:
   library: native
   groupId: br.com.payzu
   artifactId: payzu-pix
-  artifactVersion: 3.2.0
+  artifactVersion: 4.0.0
   artifactDescription: "SDK oficial Java da API PayZu Pix: depósitos, saques, transferências internas, infrações, relatórios e callbacks."
   artifactUrl: https://docs.payzu.com.br
   invokerPackage: br.com.payzu.pix
@@ -25,5 +25,8 @@ additionalProperties:
   scmUrl: https://github.com/PayZuAI/payzu-sdks
   hideGenerationTimestamp: true
 globalProperties:
+  apis: ""
+  models: ""
+  supportingFiles: ""
   apiTests: false
   modelTests: false

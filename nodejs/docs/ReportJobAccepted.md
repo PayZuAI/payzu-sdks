@@ -1,7 +1,7 @@
 
 # ReportJobAccepted
 
-Report job just queued.
+Job de relatório recém-enfileirado.
 
 ## Properties
 
@@ -13,7 +13,7 @@ Name | Type
 `updatedAt` | Date
 `params` | { [key: string]: any; }
 `writtenRows` | number
-`storageExpiresAt` | Date
+`expiresAt` | Date
 
 ## Example
 
@@ -28,7 +28,7 @@ const example = {
   "updatedAt": null,
   "params": null,
   "writtenRows": null,
-  "storageExpiresAt": null,
+  "expiresAt": null,
 } satisfies ReportJobAccepted
 
 console.log(example)

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Limit** | Pointer to **float32** | Daily outbound cap, in reais, summing withdrawals and internal transfers. | [optional] 
-**Used** | Pointer to **float32** | Total of the cap consumed in the day, in reais, by withdrawals and internal transfers. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time of the last change to the daily limit. | [optional] 
-**LastReset** | Pointer to **NullableTime** | Moment of the last reset of the daily usage. | [optional] 
+**Limit** | Pointer to **float32** | Teto diário de saída, em reais, somando saques e transferências internas. | [optional] 
+**Used** | Pointer to **float32** | Total consumido do teto no dia, em reais, por saques e transferências internas. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Data e hora da última alteração do limite diário. | [optional] 
+**LastReset** | Pointer to **NullableTime** | Momento da última zeragem do consumo diário. | [optional] 
 
 ## Methods
 

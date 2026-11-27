@@ -4,13 +4,13 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Defense identifier. | [optional] |
-| **defense** | **String** | Defense text | [optional] |
-| **status** | **String** | Defense status | [optional] |
-| **infraction_id** | **String** | Identifies the infraction the defense belongs to. | [optional] |
-| **created_at** | **Time** | Moment the defense was recorded at PayZu, saved together with the uploaded files. | [optional] |
-| **updated_at** | **Time** | Moment of the last change to the defense. | [optional] |
-| **files** | [**Array&lt;DefenseFilesInner&gt;**](DefenseFilesInner.md) | Files sent with the defense, with name, type and size in bytes. | [optional] |
+| **id** | **String** | Identificador da defesa. | [optional] |
+| **defense** | **String** | Texto da defesa | [optional] |
+| **status** | **String** | Status da defesa | [optional] |
+| **infraction_id** | **String** | Identifica a contestação a que a defesa pertence. | [optional] |
+| **created_at** | **Time** | Momento em que a defesa foi registrada na PayZu, gravado junto com o envio dos anexos. | [optional] |
+| **updated_at** | **Time** | Momento da última alteração da defesa. | [optional] |
+| **files** | [**Array&lt;DefenseFilesInner&gt;**](DefenseFilesInner.md) | Anexos enviados junto com a defesa, com nome, tipo e tamanho em bytes. | [optional] |
 
 ## Example
 

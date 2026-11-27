@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total** | **int** | Number of report requests of the user that match the filters. | [optional]
-**pages** | **int** | Number of pages for the limit provided, computed from total rounded up. | [optional]
-**reports** | [**\PayZu\Pix\Model\ReportJob[]**](ReportJob.md) | Report requests of the requested page, with id, status and dates. | [optional]
+**total** | **int** | Quantidade de solicitações de relatório do usuário que atendem aos filtros. | [optional]
+**pages** | **int** | Número de páginas para o limit informado, calculado a partir de total arredondado para cima. | [optional]
+**reports** | [**\PayZu\Pix\Model\ReportJob[]**](ReportJob.md) | Solicitações de relatório da página pedida, com id, status e datas. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

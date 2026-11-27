@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -19,24 +19,24 @@ module PayZuPix
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Get internal transfer
-    # Returns the details of an internal transfer. Provide at least one of `id` or `clientReference` (`virtualAccount` is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: `WITHDRAW`.
+    # Obter transferência interna
+    # Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: `id` ou `clientReference` (também aceita `virtualAccount`). Se informar mais de um, todos são aplicados como filtro (AND).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Transaction ID
-    # @option opts [String] :client_reference External reference
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+    # @option opts [String] :id ID da transação
+    # @option opts [String] :client_reference Referência externa
+    # @option opts [String] :virtual_account Subconta usada na criação.
     # @return [Transaction]
     def get_internal_transfer(opts = {})
       data, _status_code, _headers = get_internal_transfer_with_http_info(opts)
       data
     end
 
-    # Get internal transfer
-    # Returns the details of an internal transfer. Provide at least one of &#x60;id&#x60; or &#x60;clientReference&#x60; (&#x60;virtualAccount&#x60; is also accepted). If more than one is provided, all are applied as filters (AND).  Token permission: &#x60;WITHDRAW&#x60;.
+    # Obter transferência interna
+    # Retorna os dados de uma transferência interna. Informe pelo menos um destes parâmetros: &#x60;id&#x60; ou &#x60;clientReference&#x60; (também aceita &#x60;virtualAccount&#x60;). Se informar mais de um, todos são aplicados como filtro (AND).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :id Transaction ID
-    # @option opts [String] :client_reference External reference
-    # @option opts [String] :virtual_account Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+    # @option opts [String] :id ID da transação
+    # @option opts [String] :client_reference Referência externa
+    # @option opts [String] :virtual_account Subconta usada na criação.
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers
     def get_internal_transfer_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -93,8 +93,8 @@ module PayZuPix
       return data, status_code, headers
     end
 
-    # Create internal transfer
-    # Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: `WITHDRAW`.
+    # Criar transferência interna
+    # Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
     # @param post_internal_transfer_request [PostInternalTransferRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Transaction]
@@ -103,8 +103,8 @@ module PayZuPix
       data
     end
 
-    # Create internal transfer
-    # Send funds to another PayZu account using its 6-digit accountNumber. Settles instantly within PayZu.  Token permission: &#x60;WITHDRAW&#x60;.
+    # Criar transferência interna
+    # Envia fundos para outra conta PayZu usando seu accountNumber de 6 dígitos. Liquida instantaneamente dentro da PayZu.
     # @param post_internal_transfer_request [PostInternalTransferRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Transaction, Integer, Hash)>] Transaction data, response status code and response headers

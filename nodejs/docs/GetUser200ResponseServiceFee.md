@@ -1,7 +1,7 @@
 
 # GetUser200ResponseServiceFee
 
-Cash-in and cash-out fees of the account, in reais.
+Tarifas de entrada e saída da conta, em reais.
 
 ## Properties
 

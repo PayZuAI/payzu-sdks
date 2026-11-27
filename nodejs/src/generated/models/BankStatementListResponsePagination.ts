@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -14,25 +14,25 @@
 
 import { mapValues } from '../runtime.js';
 /**
- * Page and limit used, and whether there is a next page.
+ * Página e limite usados, e se há próxima página.
  * @export
  * @interface BankStatementListResponsePagination
  */
 export interface BankStatementListResponsePagination {
     /**
-     * Page returned, the same as the page parameter sent in the query; when omitted, it is 1.
+     * Página devolvida, igual ao parâmetro page enviado na consulta; quando omitido, vale 1.
      * @type {number}
      * @memberof BankStatementListResponsePagination
      */
     page?: number;
     /**
-     * Page size applied in the query; when omitted it is 10 and the maximum accepted is 100.
+     * Tamanho de página aplicado na consulta; quando omitido vale 10 e o máximo aceito é 100.
      * @type {number}
      * @memberof BankStatementListResponsePagination
      */
     limit?: number;
     /**
-     * Indicates whether there is a next page, detected by fetching one item beyond the limit.
+     * Indica se existe página seguinte, detectada buscando um item além do limit.
      * @type {boolean}
      * @memberof BankStatementListResponsePagination
      */

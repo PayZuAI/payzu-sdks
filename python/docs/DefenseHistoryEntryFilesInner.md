@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of the file sent with the defense. | [optional] 
-**mime_type** | **str** | MIME type of the file, provided on upload, for example application/pdf or image/png. | [optional] 
-**size** | **int** | Size of the file in bytes. | [optional] 
+**name** | **str** | Nome do arquivo enviado como anexo da defesa. | [optional] 
+**mime_type** | **str** | Tipo MIME do anexo, informado no upload, por exemplo application/pdf ou image/png. | [optional] 
+**size** | **int** | Tamanho do anexo em bytes. | [optional] 
 
 ## Example
 

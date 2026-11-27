@@ -1,22 +1,22 @@
 # QRCodeReadResponse
 
-Decoded information from a Pix QR Code.
+Informações decodificadas de um QR Code Pix.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**qr_code_type** | **str** | Type of QR Code. | [optional] 
-**name** | **str** | Name of the payment receiver. | [optional] 
-**document** | **str** | CPF or CNPJ of the receiver. | [optional] 
-**amount** | **float** | Amount to be paid (may differ from originalAmount for dynamic QR Codes). | [optional] 
-**original_amount** | **float** | Original amount embedded in the QR Code. | [optional] 
-**txid** | **str** | Transaction identifier. | [optional] 
-**additional_info** | **str** | Additional information or description. | [optional] 
-**expires_in** | **float** | Seconds until QR Code expires (0 for static QR Codes). | [optional] 
-**created_at** | **datetime** | Creation date of the QR Code (for dynamic QR Codes). | [optional] 
-**amount_editable** | **bool** | Whether the payer can change the amount. | [optional] 
-**due_date** | **str** | Due date of the charge, when the QR Code has one. | [optional] 
+**qr_code_type** | **str** | Tipo de QR Code. | [optional] 
+**name** | **str** | Nome do recebedor do pagamento. | [optional] 
+**document** | **str** | CPF ou CNPJ do recebedor. | [optional] 
+**amount** | **float** | Valor a ser pago. | [optional] 
+**original_amount** | **float** | Valor embutido no QR Code. | [optional] 
+**txid** | **str** | Identificador da transação. | [optional] 
+**additional_info** | **str** | Informações adicionais ou descrição. | [optional] 
+**expires_in** | **float** | Segundos até o QR Code expirar (0 para QR Codes estáticos). | [optional] 
+**created_at** | **str** | Data de criação do QR Code dinâmico, como veio no QR Code: o horário pode vir sem fuso. | [optional] 
+**amount_editable** | **bool** | Indica se o pagador pode alterar o valor. | [optional] 
+**due_date** | **str** | Data de vencimento da cobrança, quando o QR Code tiver. | [optional] 
 
 ## Example
 

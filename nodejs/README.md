@@ -67,7 +67,6 @@ const payzu = new PayZu({
 | `payzu.withdraw.readQrCode(emv)` | `POST /pix/qrcode/read` | `QrCodeRead` |
 | `payzu.withdraw.pixKey(pixKey)` | `GET /pix/key` | `PixKeyInfo` |
 | `payzu.keys.lookup(pixKey)` | `GET /pix/key` | `PixKeyInfo` |
-| `payzu.keys.dict(key)` (descontinuado: a API responde 404; use `keys.lookup`) | `GET /user/dict` | `DictConsultResponse` |
 | `payzu.keys.readQrCode(emv)` | `POST /pix/qrcode/read` | `QrCodeRead` |
 | `payzu.account.get()` | `GET /user` | `Account` |
 | `payzu.account.balance()` | `GET /user/balance` | `Balance` |
@@ -100,7 +99,7 @@ const payzu = new PayZu({
 | `payzu.webhooks.sent(id, callbackId)` | `GET /user/webhooks/{id}/sent/{callbackId}` | `SentWebhook` |
 | `payzu.infractions.list(filters?)` | `GET /user/infractions` | `InfractionList` |
 | `payzu.infractions.get(id)` | `GET /user/infractions/{id}` | `InfractionDetail` |
-| `payzu.infractions.defenses(infractionId)` | `GET /user/infractions/{id}/defenses` | `Defense[]` |
+| `payzu.infractions.defenses(infractionId)` | `GET /user/infractions/{id}/defenses` | `DefenseListItem[]` |
 | `payzu.infractions.defense(infractionId, defenseId)` | `GET /user/infractions/{infractionId}/defenses/{defenseId}` | `Defense` |
 | `payzu.infractions.createDefense(infractionId, defense, files?)` | `POST /user/infractions/{id}/defenses` | `Defense` |
 | `payzu.internalTransfer.create(params)` | `POST /internal-transfer` | `Transaction` |

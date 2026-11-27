@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -102,16 +102,16 @@ export interface PostUserWebhookRotateSecretRequest {
 export interface WebhooksApiInterface {
     /**
      * Creates request options for deleteUserWebhook without sending the request
-     * @param {string} id Webhook id.
+     * @param {string} id Id do webhook.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
     deleteUserWebhookRequestOpts(requestParameters: DeleteUserWebhookRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Removes a webhook.
-     * @summary Delete webhook
-     * @param {string} id Webhook id.
+     * Remove um webhook.
+     * @summary Remover webhook
+     * @param {string} id Id do webhook.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -119,23 +119,23 @@ export interface WebhooksApiInterface {
     deleteUserWebhookRaw(requestParameters: DeleteUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * Removes a webhook.
-     * Delete webhook
+     * Remove um webhook.
+     * Remover webhook
      */
     deleteUserWebhook(requestParameters: DeleteUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
      * Creates request options for getUserWebhook without sending the request
-     * @param {string} id Webhook id.
+     * @param {string} id Id do webhook.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
     getUserWebhookRequestOpts(requestParameters: GetUserWebhookRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns a single webhook.
-     * @summary Get webhook
-     * @param {string} id Webhook id.
+     * Retorna um webhook.
+     * @summary Consultar webhook
+     * @param {string} id Id do webhook.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -143,25 +143,25 @@ export interface WebhooksApiInterface {
     getUserWebhookRaw(requestParameters: GetUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Webhook>>;
 
     /**
-     * Returns a single webhook.
-     * Get webhook
+     * Retorna um webhook.
+     * Consultar webhook
      */
     getUserWebhook(requestParameters: GetUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Webhook>;
 
     /**
      * Creates request options for getUserWebhookSentDetail without sending the request
-     * @param {string} id Webhook id.
-     * @param {string} callbackId Callback log id.
+     * @param {string} id Id do webhook.
+     * @param {string} callbackId Id do log de callback.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
     getUserWebhookSentDetailRequestOpts(requestParameters: GetUserWebhookSentDetailRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns the delivery detail of a single sent callback.
-     * @summary Get sent callback detail
-     * @param {string} id Webhook id.
-     * @param {string} callbackId Callback log id.
+     * Retorna o detalhe de entrega de um callback enviado.
+     * @summary Detalhe de callback enviado
+     * @param {string} id Id do webhook.
+     * @param {string} callbackId Id do log de callback.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -169,23 +169,23 @@ export interface WebhooksApiInterface {
     getUserWebhookSentDetailRaw(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhookDetailResponse>>;
 
     /**
-     * Returns the delivery detail of a single sent callback.
-     * Get sent callback detail
+     * Retorna o detalhe de entrega de um callback enviado.
+     * Detalhe de callback enviado
      */
     getUserWebhookSentDetail(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhookDetailResponse>;
 
     /**
      * Creates request options for getUserWebhooks without sending the request
-     * @param {boolean} [active] Filter by active status.
+     * @param {boolean} [active] Filtra pelo status ativo.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
     getUserWebhooksRequestOpts(requestParameters: GetUserWebhooksRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Lists the webhooks registered for the account.
-     * @summary List webhooks
-     * @param {boolean} [active] Filter by active status.
+     * Lista os webhooks cadastrados na conta.
+     * @summary Listar webhooks
+     * @param {boolean} [active] Filtra pelo status ativo.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -193,23 +193,23 @@ export interface WebhooksApiInterface {
     getUserWebhooksRaw(requestParameters: GetUserWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookListResponse>>;
 
     /**
-     * Lists the webhooks registered for the account.
-     * List webhooks
+     * Lista os webhooks cadastrados na conta.
+     * Listar webhooks
      */
     getUserWebhooks(requestParameters: GetUserWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookListResponse>;
 
     /**
      * Creates request options for getUserWebhooksSentQuantity without sending the request
-     * @param {string} [webhookId] Filter the count by webhook id.
+     * @param {string} [webhookId] Filtra a contagem por id de webhook.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
     getUserWebhooksSentQuantityRequestOpts(requestParameters: GetUserWebhooksSentQuantityRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Returns how many webhook deliveries were made, optionally filtered by webhook.
-     * @summary Count sent callbacks
-     * @param {string} [webhookId] Filter the count by webhook id.
+     * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+     * @summary Contar callbacks enviados
+     * @param {string} [webhookId] Filtra a contagem por id de webhook.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -217,14 +217,14 @@ export interface WebhooksApiInterface {
     getUserWebhooksSentQuantityRaw(requestParameters: GetUserWebhooksSentQuantityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhooksQuantity>>;
 
     /**
-     * Returns how many webhook deliveries were made, optionally filtered by webhook.
-     * Count sent callbacks
+     * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+     * Contar callbacks enviados
      */
     getUserWebhooksSentQuantity(requestParameters: GetUserWebhooksSentQuantityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhooksQuantity>;
 
     /**
      * Creates request options for patchUserWebhook without sending the request
-     * @param {string} id Webhook id.
+     * @param {string} id Id do webhook.
      * @param {WebhookUpdateRequest} webhookUpdateRequest 
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -232,9 +232,9 @@ export interface WebhooksApiInterface {
     patchUserWebhookRequestOpts(requestParameters: PatchUserWebhookRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Updates the url, active flag or events of a webhook. Provide at least one field.
-     * @summary Update webhook
-     * @param {string} id Webhook id.
+     * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+     * @summary Atualizar webhook
+     * @param {string} id Id do webhook.
      * @param {WebhookUpdateRequest} webhookUpdateRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -243,8 +243,8 @@ export interface WebhooksApiInterface {
     patchUserWebhookRaw(requestParameters: PatchUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Webhook>>;
 
     /**
-     * Updates the url, active flag or events of a webhook. Provide at least one field.
-     * Update webhook
+     * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+     * Atualizar webhook
      */
     patchUserWebhook(requestParameters: PatchUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Webhook>;
 
@@ -257,8 +257,8 @@ export interface WebhooksApiInterface {
     postUserWebhookRequestOpts(requestParameters: PostUserWebhookRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
-     * @summary Create webhook
+     * Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
+     * @summary Criar webhook
      * @param {WebhookCreateRequest} webhookCreateRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -267,23 +267,23 @@ export interface WebhooksApiInterface {
     postUserWebhookRaw(requestParameters: PostUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookWithSecret>>;
 
     /**
-     * Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
-     * Create webhook
+     * Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
+     * Criar webhook
      */
     postUserWebhook(requestParameters: PostUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookWithSecret>;
 
     /**
      * Creates request options for postUserWebhookRotateSecret without sending the request
-     * @param {string} id Webhook id.
+     * @param {string} id Id do webhook.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
      */
     postUserWebhookRotateSecretRequestOpts(requestParameters: PostUserWebhookRotateSecretRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
-     * @summary Rotate webhook secret
-     * @param {string} id Webhook id.
+     * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
+     * @summary Rotacionar segredo do webhook
+     * @param {string} id Id do webhook.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WebhooksApiInterface
@@ -291,8 +291,8 @@ export interface WebhooksApiInterface {
     postUserWebhookRotateSecretRaw(requestParameters: PostUserWebhookRotateSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RotateSecretResponse>>;
 
     /**
-     * Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
-     * Rotate webhook secret
+     * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
+     * Rotacionar segredo do webhook
      */
     postUserWebhookRotateSecret(requestParameters: PostUserWebhookRotateSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RotateSecretResponse>;
 
@@ -339,8 +339,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Removes a webhook.
-     * Delete webhook
+     * Remove um webhook.
+     * Remover webhook
      */
     async deleteUserWebhookRaw(requestParameters: DeleteUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const requestOptions = await this.deleteUserWebhookRequestOpts(requestParameters);
@@ -350,8 +350,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Removes a webhook.
-     * Delete webhook
+     * Remove um webhook.
+     * Remover webhook
      */
     async deleteUserWebhook(requestParameters: DeleteUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.deleteUserWebhookRaw(requestParameters, initOverrides);
@@ -393,8 +393,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns a single webhook.
-     * Get webhook
+     * Retorna um webhook.
+     * Consultar webhook
      */
     async getUserWebhookRaw(requestParameters: GetUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Webhook>> {
         const requestOptions = await this.getUserWebhookRequestOpts(requestParameters);
@@ -404,8 +404,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns a single webhook.
-     * Get webhook
+     * Retorna um webhook.
+     * Consultar webhook
      */
     async getUserWebhook(requestParameters: GetUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Webhook> {
         const response = await this.getUserWebhookRaw(requestParameters, initOverrides);
@@ -456,8 +456,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns the delivery detail of a single sent callback.
-     * Get sent callback detail
+     * Retorna o detalhe de entrega de um callback enviado.
+     * Detalhe de callback enviado
      */
     async getUserWebhookSentDetailRaw(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhookDetailResponse>> {
         const requestOptions = await this.getUserWebhookSentDetailRequestOpts(requestParameters);
@@ -467,8 +467,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns the delivery detail of a single sent callback.
-     * Get sent callback detail
+     * Retorna o detalhe de entrega de um callback enviado.
+     * Detalhe de callback enviado
      */
     async getUserWebhookSentDetail(requestParameters: GetUserWebhookSentDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhookDetailResponse> {
         const response = await this.getUserWebhookSentDetailRaw(requestParameters, initOverrides);
@@ -507,8 +507,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Lists the webhooks registered for the account.
-     * List webhooks
+     * Lista os webhooks cadastrados na conta.
+     * Listar webhooks
      */
     async getUserWebhooksRaw(requestParameters: GetUserWebhooksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookListResponse>> {
         const requestOptions = await this.getUserWebhooksRequestOpts(requestParameters);
@@ -518,8 +518,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Lists the webhooks registered for the account.
-     * List webhooks
+     * Lista os webhooks cadastrados na conta.
+     * Listar webhooks
      */
     async getUserWebhooks(requestParameters: GetUserWebhooksRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookListResponse> {
         const response = await this.getUserWebhooksRaw(requestParameters, initOverrides);
@@ -558,8 +558,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns how many webhook deliveries were made, optionally filtered by webhook.
-     * Count sent callbacks
+     * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+     * Contar callbacks enviados
      */
     async getUserWebhooksSentQuantityRaw(requestParameters: GetUserWebhooksSentQuantityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SentWebhooksQuantity>> {
         const requestOptions = await this.getUserWebhooksSentQuantityRequestOpts(requestParameters);
@@ -569,8 +569,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Returns how many webhook deliveries were made, optionally filtered by webhook.
-     * Count sent callbacks
+     * Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
+     * Contar callbacks enviados
      */
     async getUserWebhooksSentQuantity(requestParameters: GetUserWebhooksSentQuantityRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SentWebhooksQuantity> {
         const response = await this.getUserWebhooksSentQuantityRaw(requestParameters, initOverrides);
@@ -623,8 +623,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Updates the url, active flag or events of a webhook. Provide at least one field.
-     * Update webhook
+     * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+     * Atualizar webhook
      */
     async patchUserWebhookRaw(requestParameters: PatchUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Webhook>> {
         const requestOptions = await this.patchUserWebhookRequestOpts(requestParameters);
@@ -634,8 +634,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Updates the url, active flag or events of a webhook. Provide at least one field.
-     * Update webhook
+     * Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
+     * Atualizar webhook
      */
     async patchUserWebhook(requestParameters: PatchUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Webhook> {
         const response = await this.patchUserWebhookRaw(requestParameters, initOverrides);
@@ -680,8 +680,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
-     * Create webhook
+     * Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
+     * Criar webhook
      */
     async postUserWebhookRaw(requestParameters: PostUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookWithSecret>> {
         const requestOptions = await this.postUserWebhookRequestOpts(requestParameters);
@@ -691,8 +691,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Registers a webhook endpoint. If `generateSecret` is true, the response includes the HMAC `secret` (shown only here).
-     * Create webhook
+     * Cadastra um endpoint de webhook. Se `generateSecret` for true, a resposta traz o `secret` HMAC (exibido só aqui).
+     * Criar webhook
      */
     async postUserWebhook(requestParameters: PostUserWebhookRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookWithSecret> {
         const response = await this.postUserWebhookRaw(requestParameters, initOverrides);
@@ -735,8 +735,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
-     * Rotate webhook secret
+     * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
+     * Rotacionar segredo do webhook
      */
     async postUserWebhookRotateSecretRaw(requestParameters: PostUserWebhookRotateSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RotateSecretResponse>> {
         const requestOptions = await this.postUserWebhookRotateSecretRequestOpts(requestParameters);
@@ -746,8 +746,8 @@ export class WebhooksApi extends runtime.BaseAPI implements WebhooksApiInterface
     }
 
     /**
-     * Generates a new HMAC signing secret and invalidates the previous one. The new `secret` is shown only in this response.
-     * Rotate webhook secret
+     * Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo `secret` é exibido só nesta resposta.
+     * Rotacionar segredo do webhook
      */
     async postUserWebhookRotateSecret(requestParameters: PostUserWebhookRotateSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RotateSecretResponse> {
         const response = await this.postUserWebhookRotateSecretRaw(requestParameters, initOverrides);

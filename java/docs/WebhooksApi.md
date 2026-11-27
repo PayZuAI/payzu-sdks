@@ -4,22 +4,22 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**deleteUserWebhook**](WebhooksApi.md#deleteUserWebhook) | **DELETE** /user/webhooks/{id} | Delete webhook |
-| [**deleteUserWebhookWithHttpInfo**](WebhooksApi.md#deleteUserWebhookWithHttpInfo) | **DELETE** /user/webhooks/{id} | Delete webhook |
-| [**getUserWebhook**](WebhooksApi.md#getUserWebhook) | **GET** /user/webhooks/{id} | Get webhook |
-| [**getUserWebhookWithHttpInfo**](WebhooksApi.md#getUserWebhookWithHttpInfo) | **GET** /user/webhooks/{id} | Get webhook |
-| [**getUserWebhookSentDetail**](WebhooksApi.md#getUserWebhookSentDetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail |
-| [**getUserWebhookSentDetailWithHttpInfo**](WebhooksApi.md#getUserWebhookSentDetailWithHttpInfo) | **GET** /user/webhooks/{id}/sent/{callbackId} | Get sent callback detail |
-| [**getUserWebhooks**](WebhooksApi.md#getUserWebhooks) | **GET** /user/webhooks | List webhooks |
-| [**getUserWebhooksWithHttpInfo**](WebhooksApi.md#getUserWebhooksWithHttpInfo) | **GET** /user/webhooks | List webhooks |
-| [**getUserWebhooksSentQuantity**](WebhooksApi.md#getUserWebhooksSentQuantity) | **GET** /user/webhooks/sent/quantity | Count sent callbacks |
-| [**getUserWebhooksSentQuantityWithHttpInfo**](WebhooksApi.md#getUserWebhooksSentQuantityWithHttpInfo) | **GET** /user/webhooks/sent/quantity | Count sent callbacks |
-| [**patchUserWebhook**](WebhooksApi.md#patchUserWebhook) | **PATCH** /user/webhooks/{id} | Update webhook |
-| [**patchUserWebhookWithHttpInfo**](WebhooksApi.md#patchUserWebhookWithHttpInfo) | **PATCH** /user/webhooks/{id} | Update webhook |
-| [**postUserWebhook**](WebhooksApi.md#postUserWebhook) | **POST** /user/webhooks | Create webhook |
-| [**postUserWebhookWithHttpInfo**](WebhooksApi.md#postUserWebhookWithHttpInfo) | **POST** /user/webhooks | Create webhook |
-| [**postUserWebhookRotateSecret**](WebhooksApi.md#postUserWebhookRotateSecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret |
-| [**postUserWebhookRotateSecretWithHttpInfo**](WebhooksApi.md#postUserWebhookRotateSecretWithHttpInfo) | **POST** /user/webhooks/{id}/rotate-secret | Rotate webhook secret |
+| [**deleteUserWebhook**](WebhooksApi.md#deleteUserWebhook) | **DELETE** /user/webhooks/{id} | Remover webhook |
+| [**deleteUserWebhookWithHttpInfo**](WebhooksApi.md#deleteUserWebhookWithHttpInfo) | **DELETE** /user/webhooks/{id} | Remover webhook |
+| [**getUserWebhook**](WebhooksApi.md#getUserWebhook) | **GET** /user/webhooks/{id} | Consultar webhook |
+| [**getUserWebhookWithHttpInfo**](WebhooksApi.md#getUserWebhookWithHttpInfo) | **GET** /user/webhooks/{id} | Consultar webhook |
+| [**getUserWebhookSentDetail**](WebhooksApi.md#getUserWebhookSentDetail) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado |
+| [**getUserWebhookSentDetailWithHttpInfo**](WebhooksApi.md#getUserWebhookSentDetailWithHttpInfo) | **GET** /user/webhooks/{id}/sent/{callbackId} | Detalhe de callback enviado |
+| [**getUserWebhooks**](WebhooksApi.md#getUserWebhooks) | **GET** /user/webhooks | Listar webhooks |
+| [**getUserWebhooksWithHttpInfo**](WebhooksApi.md#getUserWebhooksWithHttpInfo) | **GET** /user/webhooks | Listar webhooks |
+| [**getUserWebhooksSentQuantity**](WebhooksApi.md#getUserWebhooksSentQuantity) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados |
+| [**getUserWebhooksSentQuantityWithHttpInfo**](WebhooksApi.md#getUserWebhooksSentQuantityWithHttpInfo) | **GET** /user/webhooks/sent/quantity | Contar callbacks enviados |
+| [**patchUserWebhook**](WebhooksApi.md#patchUserWebhook) | **PATCH** /user/webhooks/{id} | Atualizar webhook |
+| [**patchUserWebhookWithHttpInfo**](WebhooksApi.md#patchUserWebhookWithHttpInfo) | **PATCH** /user/webhooks/{id} | Atualizar webhook |
+| [**postUserWebhook**](WebhooksApi.md#postUserWebhook) | **POST** /user/webhooks | Criar webhook |
+| [**postUserWebhookWithHttpInfo**](WebhooksApi.md#postUserWebhookWithHttpInfo) | **POST** /user/webhooks | Criar webhook |
+| [**postUserWebhookRotateSecret**](WebhooksApi.md#postUserWebhookRotateSecret) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook |
+| [**postUserWebhookRotateSecretWithHttpInfo**](WebhooksApi.md#postUserWebhookRotateSecretWithHttpInfo) | **POST** /user/webhooks/{id}/rotate-secret | Rotacionar segredo do webhook |
 
 
 
@@ -27,9 +27,9 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 > void deleteUserWebhook(id)
 
-Delete webhook
+Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
 ### Example
 
@@ -52,7 +52,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         try {
             apiInstance.deleteUserWebhook(id);
         } catch (ApiException e) {
@@ -71,7 +71,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 
 ### Return type
 
@@ -90,19 +90,19 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Webhook deleted. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
+| **204** | Webhook removido. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 ## deleteUserWebhookWithHttpInfo
 
 > ApiResponse<Void> deleteUserWebhookWithHttpInfo(id)
 
-Delete webhook
+Remover webhook
 
-Removes a webhook.
+Remove um webhook.
 
 ### Example
 
@@ -126,7 +126,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         try {
             ApiResponse<Void> response = apiInstance.deleteUserWebhookWithHttpInfo(id);
             System.out.println("Status code: " + response.getStatusCode());
@@ -147,7 +147,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 
 ### Return type
 
@@ -166,20 +166,20 @@ ApiResponse<Void>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Webhook deleted. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
+| **204** | Webhook removido. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 
 ## getUserWebhook
 
 > Webhook getUserWebhook(id)
 
-Get webhook
+Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
 ### Example
 
@@ -202,7 +202,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         try {
             Webhook result = apiInstance.getUserWebhook(id);
             System.out.println(result);
@@ -222,7 +222,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 
 ### Return type
 
@@ -242,17 +242,18 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 ## getUserWebhookWithHttpInfo
 
 > ApiResponse<Webhook> getUserWebhookWithHttpInfo(id)
 
-Get webhook
+Consultar webhook
 
-Returns a single webhook.
+Retorna um webhook.
 
 ### Example
 
@@ -276,7 +277,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         try {
             ApiResponse<Webhook> response = apiInstance.getUserWebhookWithHttpInfo(id);
             System.out.println("Status code: " + response.getStatusCode());
@@ -298,7 +299,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 
 ### Return type
 
@@ -318,18 +319,19 @@ ApiResponse<[**Webhook**](Webhook.md)>
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 
 ## getUserWebhookSentDetail
 
 > SentWebhookDetailResponse getUserWebhookSentDetail(id, callbackId)
 
-Get sent callback detail
+Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
 ### Example
 
@@ -352,8 +354,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
-        String callbackId = "cm3w7l9v20001q8f2u6c1y4be"; // String | Callback log id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
+        String callbackId = "cm3w7l9v20001q8f2u6c1y4be"; // String | Id do log de callback.
         try {
             SentWebhookDetailResponse result = apiInstance.getUserWebhookSentDetail(id, callbackId);
             System.out.println(result);
@@ -373,8 +375,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
-| **callbackId** | **String**| Callback log id. | |
+| **id** | **String**| Id do webhook. | |
+| **callbackId** | **String**| Id do log de callback. | |
 
 ### Return type
 
@@ -393,18 +395,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Callback delivery detail. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Detalhe de entrega do callback. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 ## getUserWebhookSentDetailWithHttpInfo
 
 > ApiResponse<SentWebhookDetailResponse> getUserWebhookSentDetailWithHttpInfo(id, callbackId)
 
-Get sent callback detail
+Detalhe de callback enviado
 
-Returns the delivery detail of a single sent callback.
+Retorna o detalhe de entrega de um callback enviado.
 
 ### Example
 
@@ -428,8 +431,8 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
-        String callbackId = "cm3w7l9v20001q8f2u6c1y4be"; // String | Callback log id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
+        String callbackId = "cm3w7l9v20001q8f2u6c1y4be"; // String | Id do log de callback.
         try {
             ApiResponse<SentWebhookDetailResponse> response = apiInstance.getUserWebhookSentDetailWithHttpInfo(id, callbackId);
             System.out.println("Status code: " + response.getStatusCode());
@@ -451,8 +454,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
-| **callbackId** | **String**| Callback log id. | |
+| **id** | **String**| Id do webhook. | |
+| **callbackId** | **String**| Id do log de callback. | |
 
 ### Return type
 
@@ -471,19 +474,20 @@ ApiResponse<[**SentWebhookDetailResponse**](SentWebhookDetailResponse.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Callback delivery detail. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Detalhe de entrega do callback. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 
 ## getUserWebhooks
 
 > WebhookListResponse getUserWebhooks(active)
 
-List webhooks
+Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
 ### Example
 
@@ -506,7 +510,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        Boolean active = true; // Boolean | Filter by active status.
+        Boolean active = true; // Boolean | Filtra pelo status ativo.
         try {
             WebhookListResponse result = apiInstance.getUserWebhooks(active);
             System.out.println(result);
@@ -526,7 +530,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **active** | **Boolean**| Filter by active status. | [optional] |
+| **active** | **Boolean**| Filtra pelo status ativo. | [optional] |
 
 ### Return type
 
@@ -545,17 +549,18 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Webhook list. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
+| **200** | Lista de webhooks. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
 
 ## getUserWebhooksWithHttpInfo
 
 > ApiResponse<WebhookListResponse> getUserWebhooksWithHttpInfo(active)
 
-List webhooks
+Listar webhooks
 
-Lists the webhooks registered for the account.
+Lista os webhooks cadastrados na conta.
 
 ### Example
 
@@ -579,7 +584,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        Boolean active = true; // Boolean | Filter by active status.
+        Boolean active = true; // Boolean | Filtra pelo status ativo.
         try {
             ApiResponse<WebhookListResponse> response = apiInstance.getUserWebhooksWithHttpInfo(active);
             System.out.println("Status code: " + response.getStatusCode());
@@ -601,7 +606,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **active** | **Boolean**| Filter by active status. | [optional] |
+| **active** | **Boolean**| Filtra pelo status ativo. | [optional] |
 
 ### Return type
 
@@ -620,18 +625,19 @@ ApiResponse<[**WebhookListResponse**](WebhookListResponse.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Webhook list. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
+| **200** | Lista de webhooks. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
 
 
 ## getUserWebhooksSentQuantity
 
 > SentWebhooksQuantity getUserWebhooksSentQuantity(webhookId)
 
-Count sent callbacks
+Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
 ### Example
 
@@ -654,7 +660,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String webhookId = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Filter the count by webhook id.
+        String webhookId = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Filtra a contagem por id de webhook.
         try {
             SentWebhooksQuantity result = apiInstance.getUserWebhooksSentQuantity(webhookId);
             System.out.println(result);
@@ -674,7 +680,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **webhookId** | **String**| Filter the count by webhook id. | [optional] |
+| **webhookId** | **String**| Filtra a contagem por id de webhook. | [optional] |
 
 ### Return type
 
@@ -693,18 +699,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Quantity. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Quantidade. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 ## getUserWebhooksSentQuantityWithHttpInfo
 
 > ApiResponse<SentWebhooksQuantity> getUserWebhooksSentQuantityWithHttpInfo(webhookId)
 
-Count sent callbacks
+Contar callbacks enviados
 
-Returns how many webhook deliveries were made, optionally filtered by webhook.
+Retorna quantas entregas de webhook foram feitas, opcionalmente filtradas por webhook.
 
 ### Example
 
@@ -728,7 +735,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String webhookId = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Filter the count by webhook id.
+        String webhookId = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Filtra a contagem por id de webhook.
         try {
             ApiResponse<SentWebhooksQuantity> response = apiInstance.getUserWebhooksSentQuantityWithHttpInfo(webhookId);
             System.out.println("Status code: " + response.getStatusCode());
@@ -750,7 +757,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **webhookId** | **String**| Filter the count by webhook id. | [optional] |
+| **webhookId** | **String**| Filtra a contagem por id de webhook. | [optional] |
 
 ### Return type
 
@@ -769,19 +776,20 @@ ApiResponse<[**SentWebhooksQuantity**](SentWebhooksQuantity.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Quantity. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Quantidade. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 
 ## patchUserWebhook
 
 > Webhook patchUserWebhook(id, webhookUpdateRequest)
 
-Update webhook
+Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
 ### Example
 
@@ -804,7 +812,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         WebhookUpdateRequest webhookUpdateRequest = new WebhookUpdateRequest(); // WebhookUpdateRequest | 
         try {
             Webhook result = apiInstance.patchUserWebhook(id, webhookUpdateRequest);
@@ -825,7 +833,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 | **webhookUpdateRequest** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md)|  | |
 
 ### Return type
@@ -845,20 +853,20 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Webhook updated. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
+| **200** | Webhook atualizado. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
 
 ## patchUserWebhookWithHttpInfo
 
 > ApiResponse<Webhook> patchUserWebhookWithHttpInfo(id, webhookUpdateRequest)
 
-Update webhook
+Atualizar webhook
 
-Updates the url, active flag or events of a webhook. Provide at least one field.
+Atualiza a url, o status ativo ou os eventos de um webhook. Informe pelo menos um campo.
 
 ### Example
 
@@ -882,7 +890,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         WebhookUpdateRequest webhookUpdateRequest = new WebhookUpdateRequest(); // WebhookUpdateRequest | 
         try {
             ApiResponse<Webhook> response = apiInstance.patchUserWebhookWithHttpInfo(id, webhookUpdateRequest);
@@ -905,7 +913,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 | **webhookUpdateRequest** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md)|  | |
 
 ### Return type
@@ -925,21 +933,21 @@ ApiResponse<[**Webhook**](Webhook.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Webhook updated. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
+| **200** | Webhook atualizado. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
 
 
 ## postUserWebhook
 
 > WebhookWithSecret postUserWebhook(webhookCreateRequest)
 
-Create webhook
+Criar webhook
 
-Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
 
 ### Example
 
@@ -1001,19 +1009,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Webhook created. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
+| **201** | Webhook criado. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
 
 ## postUserWebhookWithHttpInfo
 
 > ApiResponse<WebhookWithSecret> postUserWebhookWithHttpInfo(webhookCreateRequest)
 
-Create webhook
+Criar webhook
 
-Registers a webhook endpoint. If &#x60;generateSecret&#x60; is true, the response includes the HMAC &#x60;secret&#x60; (shown only here).
+Cadastra um endpoint de webhook. Se &#x60;generateSecret&#x60; for true, a resposta traz o &#x60;secret&#x60; HMAC (exibido só aqui).
 
 ### Example
 
@@ -1078,20 +1086,20 @@ ApiResponse<[**WebhookWithSecret**](WebhookWithSecret.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Webhook created. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **409** | Conflict with the current state of the resource |  -  |
+| **201** | Webhook criado. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **409** | Conflito com o estado atual do recurso |  -  |
 
 
 ## postUserWebhookRotateSecret
 
 > RotateSecretResponse postUserWebhookRotateSecret(id)
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
 
 ### Example
 
@@ -1114,7 +1122,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         try {
             RotateSecretResponse result = apiInstance.postUserWebhookRotateSecret(id);
             System.out.println(result);
@@ -1134,7 +1142,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 
 ### Return type
 
@@ -1153,19 +1161,19 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | New secret. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Novo segredo. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 
 ## postUserWebhookRotateSecretWithHttpInfo
 
 > ApiResponse<RotateSecretResponse> postUserWebhookRotateSecretWithHttpInfo(id)
 
-Rotate webhook secret
+Rotacionar segredo do webhook
 
-Generates a new HMAC signing secret and invalidates the previous one. The new &#x60;secret&#x60; is shown only in this response.
+Gera um novo segredo de assinatura HMAC e invalida o anterior. O novo &#x60;secret&#x60; é exibido só nesta resposta.
 
 ### Example
 
@@ -1189,7 +1197,7 @@ public class Example {
         BearerAuth.setBearerToken("BEARER TOKEN");
 
         WebhooksApi apiInstance = new WebhooksApi(defaultClient);
-        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Webhook id.
+        String id = "cm3w7k1t40000q8f2r5b9x3ad"; // String | Id do webhook.
         try {
             ApiResponse<RotateSecretResponse> response = apiInstance.postUserWebhookRotateSecretWithHttpInfo(id);
             System.out.println("Status code: " + response.getStatusCode());
@@ -1211,7 +1219,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **id** | **String**| Webhook id. | |
+| **id** | **String**| Id do webhook. | |
 
 ### Return type
 
@@ -1230,9 +1238,9 @@ ApiResponse<[**RotateSecretResponse**](RotateSecretResponse.md)>
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | New secret. |  -  |
-| **400** | Invalid request |  -  |
-| **401** | Authentication failure |  -  |
-| **403** | Operation not allowed |  -  |
-| **404** | Resource not found |  -  |
+| **200** | Novo segredo. |  -  |
+| **400** | Requisição inválida |  -  |
+| **401** | Falha de autenticação |  -  |
+| **403** | Operação não permitida |  -  |
+| **404** | Recurso não encontrado |  -  |
 

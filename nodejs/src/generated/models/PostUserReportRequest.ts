@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -20,25 +20,25 @@ import { mapValues } from '../runtime.js';
  */
 export interface PostUserReportRequest {
     /**
-     * Start of the report period.
+     * Início do período do relatório.
      * @type {Date}
      * @memberof PostUserReportRequest
      */
     dateFrom: Date;
     /**
-     * End of the report period.
+     * Fim do período do relatório.
      * @type {Date}
      * @memberof PostUserReportRequest
      */
     dateTo: Date;
     /**
-     * Transaction statuses included in the file. Empty or omitted: all.
+     * Status de transação incluídos no arquivo. Vazio ou omitido: todos.
      * @type {Array<PostUserReportRequestStatusEnum>}
      * @memberof PostUserReportRequest
      */
     status?: Array<PostUserReportRequestStatusEnum>;
     /**
-     * Transaction types included in the file. Empty or omitted: all.
+     * Tipos de transação incluídos no arquivo. Vazio ou omitido: todos.
      * @type {Array<PostUserReportRequestTypeEnum>}
      * @memberof PostUserReportRequest
      */

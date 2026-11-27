@@ -2,17 +2,17 @@
 
 # SummaryBlockStatuses
 
-Totals by status in the period.
+Totais por status no período.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**pending** | [**SummaryStatus**](SummaryStatus.md) | Count and sum of the amounts, in reais, of the transactions with status PENDING in the queried period. |  [optional] |
-|**completed** | [**SummaryStatus**](SummaryStatus.md) | Count and sum of the completed transactions, in reais. |  [optional] |
-|**canceled** | [**SummaryStatus**](SummaryStatus.md) | Count and sum of the canceled transactions, in reais. |  [optional] |
-|**expired** | [**SummaryStatus**](SummaryStatus.md) | Count and sum of the expired transactions, in reais. |  [optional] |
-|**refunded** | [**SummaryStatus**](SummaryStatus.md) | Count and refunded amount in the period, in reais. |  [optional] |
+|**pending** | [**SummaryStatus**](SummaryStatus.md) | Contagem e soma dos valores, em reais, das transações com status PENDING no período consultado. |  [optional] |
+|**completed** | [**SummaryStatus**](SummaryStatus.md) | Contagem e soma das transações concluídas, em reais. |  [optional] |
+|**canceled** | [**SummaryStatus**](SummaryStatus.md) | Contagem e soma das transações canceladas, em reais. |  [optional] |
+|**expired** | [**SummaryStatus**](SummaryStatus.md) | Contagem e soma das transações expiradas, em reais. |  [optional] |
+|**refunded** | [**SummaryStatus**](SummaryStatus.md) | Contagem e valor devolvido no período, em reais. |  [optional] |
 
 
 

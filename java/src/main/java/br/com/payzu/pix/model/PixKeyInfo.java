@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.payzu.pix.ApiClient;
 /**
- * Information about a Pix key from DICT lookup.
+ * Informações sobre uma chave Pix a partir da consulta ao DICT.
  */
 @JsonPropertyOrder({
   PixKeyInfo.JSON_PROPERTY_PIX_KEY,
@@ -67,7 +67,7 @@ public class PixKeyInfo {
   private String accountNumber;
 
   /**
-   * Type of person: PF, PJ, or empty when not informed.
+   * Tipo de pessoa: PF, PJ ou vazio quando não informado.
    */
   public enum PersonTypeEnum {
     PF(String.valueOf("PF")),
@@ -134,7 +134,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * The Pix key that was looked up.
+   * A chave Pix que foi consultada.
    * @return pixKey
    */
   @javax.annotation.Nullable
@@ -158,7 +158,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * CPF or CNPJ of the owner (partially masked for privacy).
+   * CPF ou CNPJ do titular (parcialmente mascarado por privacidade).
    * @return document
    */
   @javax.annotation.Nullable
@@ -182,7 +182,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * Name of the Pix key owner.
+   * Nome do titular da chave Pix.
    * @return name
    */
   @javax.annotation.Nullable
@@ -206,7 +206,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * Bank branch number (masked).
+   * Número da agência bancária (mascarado).
    * @return branch
    */
   @javax.annotation.Nullable
@@ -230,7 +230,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * Account number (masked).
+   * Número da conta (mascarado).
    * @return accountNumber
    */
   @javax.annotation.Nullable
@@ -254,7 +254,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * Type of person: PF, PJ, or empty when not informed.
+   * Tipo de pessoa: PF, PJ ou vazio quando não informado.
    * @return personType
    */
   @javax.annotation.Nullable
@@ -278,7 +278,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY.
+   * Tipo de conta devolvido pelo DICT, como CACC, SVGS, TRAN ou SLRY.
    * @return accountType
    */
   @javax.annotation.Nullable
@@ -302,7 +302,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * ISPB code of the financial institution.
+   * Código ISPB da instituição financeira.
    * @return institutionIspb
    */
   @javax.annotation.Nullable
@@ -326,7 +326,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * COMPE code of the financial institution.
+   * Código COMPE da instituição financeira.
    * @return institutionCode
    */
   @javax.annotation.Nullable
@@ -350,7 +350,7 @@ public class PixKeyInfo {
   }
 
   /**
-   * Name of the financial institution.
+   * Nome da instituição financeira.
    * @return institutionName
    */
   @javax.annotation.Nullable

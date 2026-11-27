@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAtFrom** | **time.Time** | Start of the period. At most 30 days ago. | 
-**CreatedAtTo** | **time.Time** | End of the period, on or after createdAtFrom. The window between start and end cannot exceed 7 days. | 
-**TransactionIds** | Pointer to **[]string** | Restrict to specific transaction IDs | [optional] 
-**TransactionTypes** | Pointer to **[]string** | Filter by transaction type | [optional] 
-**TransactionStatus** | Pointer to **[]string** | Filter by transaction status | [optional] 
-**TransactionEndToEndIds** | Pointer to **[]string** | Restrict to specific Pix end-to-end IDs | [optional] 
+**CreatedAtFrom** | **time.Time** | Início do período. No máximo 30 dias atrás. | 
+**CreatedAtTo** | **time.Time** | Fim do período, igual ou posterior a createdAtFrom. A janela entre início e fim não pode passar de 7 dias. | 
+**TransactionIds** | Pointer to **[]string** | Restringe a IDs de transação específicos | [optional] 
+**TransactionTypes** | Pointer to **[]string** | Filtra por tipo de transação | [optional] 
+**TransactionStatus** | Pointer to **[]string** | Filtra por status da transação | [optional] 
+**TransactionEndToEndIds** | Pointer to **[]string** | Restringe a IDs end-to-end Pix específicos | [optional] 
 
 ## Methods
 

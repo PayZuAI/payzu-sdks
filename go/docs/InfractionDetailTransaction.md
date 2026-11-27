@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float32** | Amount of the disputed transaction, in reais with decimal places. | [optional] 
-**PayerName** | Pointer to **NullableString** | Name of the Pix payer, as reported by the provider. | [optional] 
-**PayerDocument** | Pointer to **NullableString** | CPF or CNPJ of the Pix payer, as reported by the provider. | [optional] 
-**ReceiverName** | Pointer to **NullableString** | Name of the Pix receiver, as reported by the provider. | [optional] 
-**ReceiverDocument** | Pointer to **NullableString** | CPF or CNPJ of the Pix receiver, as reported by the provider. | [optional] 
-**EndToEndId** | Pointer to **NullableString** | End-to-end identifier of the Pix, reported by the provider at settlement. | [optional] 
+**Amount** | Pointer to **float32** | Valor da transação contestada, em reais com casas decimais. | [optional] 
+**PayerName** | Pointer to **NullableString** | Nome do pagador do Pix, conforme informado pelo provedor. | [optional] 
+**PayerDocument** | Pointer to **NullableString** | CPF ou CNPJ do pagador do Pix, conforme informado pelo provedor. | [optional] 
+**ReceiverName** | Pointer to **NullableString** | Nome do recebedor do Pix, conforme informado pelo provedor. | [optional] 
+**ReceiverDocument** | Pointer to **NullableString** | CPF ou CNPJ do recebedor do Pix, conforme informado pelo provedor. | [optional] 
+**EndToEndId** | Pointer to **NullableString** | Identificador fim a fim do Pix, informado pelo provedor na liquidação. | [optional] 
 
 ## Methods
 

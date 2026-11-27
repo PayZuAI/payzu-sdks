@@ -4,19 +4,19 @@ All URIs are relative to *https://api.pix.payzu.com.br/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_withdraw**](WithdrawalsApi.md#get_withdraw) | **GET** /withdraw | Retrieve Withdrawal |
-| [**get_withdraw_proof**](WithdrawalsApi.md#get_withdraw_proof) | **GET** /withdraw/proof/{id} | Get Withdrawal Receipt |
-| [**post_withdraw**](WithdrawalsApi.md#post_withdraw) | **POST** /withdraw | Create Withdrawal (Pix key) |
-| [**post_withdraw_qrcode**](WithdrawalsApi.md#post_withdraw_qrcode) | **POST** /withdraw/qrcode | Create Withdrawal using QR Code |
+| [**get_withdraw**](WithdrawalsApi.md#get_withdraw) | **GET** /withdraw | Consultar Saque |
+| [**get_withdraw_proof**](WithdrawalsApi.md#get_withdraw_proof) | **GET** /withdraw/proof/{id} | Obter comprovante de saque |
+| [**post_withdraw**](WithdrawalsApi.md#post_withdraw) | **POST** /withdraw | Criar saque (chave Pix) |
+| [**post_withdraw_qrcode**](WithdrawalsApi.md#post_withdraw_qrcode) | **POST** /withdraw/qrcode | Criar Saque usando QR Code |
 
 
 ## get_withdraw
 
 > <Transaction> get_withdraw(opts)
 
-Retrieve Withdrawal
+Consultar Saque
 
-Get the latest status and details of a transaction of the account. Provide at least one of `id`, `clientReference`, or `endToEndId`. If more than one is provided, all are applied as filters (AND), which may return no record if they do not point to the same transaction.  Token permission: `WITHDRAW`.
+Retorna o status e os detalhes atuais de uma transação da conta. Informe pelo menos um destes parâmetros: `id`, `clientReference` ou `endToEndId`. Se informar mais de um, todos são aplicados como filtro (AND), o que pode não retornar registro caso não apontem para a mesma transação.
 
 ### Examples
 
@@ -31,14 +31,14 @@ end
 
 api_instance = PayZuPix::WithdrawalsApi.new
 opts = {
-  id: 'PAYZU20260817B3PL8SG5WQ000000', # String | Transaction ID.
-  client_reference: 'order_12345', # String | External reference provided when creating the withdrawal.
-  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | Pix end-to-end ID.
-  virtual_account: 'loja-centro-01' # String | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+  id: 'PAYZU20260817B3PL8SG5WQ000000', # String | ID da transação.
+  client_reference: 'order_12345', # String | Referência externa informada na criação do saque.
+  end_to_end_id: 'E00000000202508172159kZ8dQ2mNb1x', # String | ID end-to-end do Pix.
+  virtual_account: 'loja-centro-01' # String | Subconta usada na criação.
 }
 
 begin
-  # Retrieve Withdrawal
+  # Consultar Saque
   result = api_instance.get_withdraw(opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -54,7 +54,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Retrieve Withdrawal
+  # Consultar Saque
   data, status_code, headers = api_instance.get_withdraw_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -68,10 +68,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Transaction ID. | [optional] |
-| **client_reference** | **String** | External reference provided when creating the withdrawal. | [optional] |
-| **end_to_end_id** | **String** | Pix end-to-end ID. | [optional] |
-| **virtual_account** | **String** | Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key. | [optional] |
+| **id** | **String** | ID da transação. | [optional] |
+| **client_reference** | **String** | Referência externa informada na criação do saque. | [optional] |
+| **end_to_end_id** | **String** | ID end-to-end do Pix. | [optional] |
+| **virtual_account** | **String** | Subconta usada na criação. | [optional] |
 
 ### Return type
 
@@ -91,9 +91,9 @@ end
 
 > <ProofResponse> get_withdraw_proof(id, opts)
 
-Get Withdrawal Receipt
+Obter comprovante de saque
 
-Returns the transaction receipt. By default (`type=pdf`) the response is the PDF file; with `type=base64` it is JSON with the `base64` field, the PDF as a data URI.
+Retorna o comprovante da transação. Por padrão (`type=pdf`) a resposta é o arquivo PDF; com `type=base64` é um JSON com o campo `base64`, o PDF como data URI.
 
 ### Examples
 
@@ -107,13 +107,13 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WithdrawalsApi.new
-id = 'PAYZU20260817B3PL8SG5WQ000000' # String | Transaction ID.
+id = 'PAYZU20260817B3PL8SG5WQ000000' # String | ID da transação.
 opts = {
-  type: 'pdf' # String | Return format.
+  type: 'pdf' # String | Formato de retorno.
 }
 
 begin
-  # Get Withdrawal Receipt
+  # Obter comprovante de saque
   result = api_instance.get_withdraw_proof(id, opts)
   p result
 rescue PayZuPix::ApiError => e
@@ -129,7 +129,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Withdrawal Receipt
+  # Obter comprovante de saque
   data, status_code, headers = api_instance.get_withdraw_proof_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -143,8 +143,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Transaction ID. |  |
-| **type** | **String** | Return format. | [optional][default to &#39;pdf&#39;] |
+| **id** | **String** | ID da transação. |  |
+| **type** | **String** | Formato de retorno. | [optional][default to &#39;pdf&#39;] |
 
 ### Return type
 
@@ -164,9 +164,9 @@ end
 
 > <Transaction> post_withdraw(post_withdraw_request)
 
-Create Withdrawal (Pix key)
+Criar saque (chave Pix)
 
-Send a Pix **cash out** to the specified Pix key.  Token permission: `WITHDRAW`.
+Envie um **cash out** Pix para a chave Pix especificada.
 
 ### Examples
 
@@ -183,7 +183,7 @@ api_instance = PayZuPix::WithdrawalsApi.new
 post_withdraw_request = PayZuPix::PostWithdrawRequest.new({amount: 2, pix_key: 'teste@teste.com', pix_type: 'cpf'}) # PostWithdrawRequest | 
 
 begin
-  # Create Withdrawal (Pix key)
+  # Criar saque (chave Pix)
   result = api_instance.post_withdraw(post_withdraw_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -199,7 +199,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create Withdrawal (Pix key)
+  # Criar saque (chave Pix)
   data, status_code, headers = api_instance.post_withdraw_with_http_info(post_withdraw_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -233,9 +233,9 @@ end
 
 > <Transaction> post_withdraw_qrcode(post_withdraw_qrcode_request)
 
-Create Withdrawal using QR Code
+Criar Saque usando QR Code
 
-Cash out using a **Pix QR Code** (static/dynamic). If `amount` is not provided, the QR Code's embedded value will be used. PayZu processes both dynamic and static QR Codes.  Token permission: `WITHDRAW`.
+Realiza o pagamento (cash out) usando um **QR Code Pix** (estático/dinâmico). Se `amount` não for informado, o valor embutido no QR Code será utilizado. PayZu processa QR Code dinâmico e estático.
 
 ### Examples
 
@@ -249,10 +249,10 @@ PayZuPix.configure do |config|
 end
 
 api_instance = PayZuPix::WithdrawalsApi.new
-post_withdraw_qrcode_request = PayZuPix::PostWithdrawQrcodeRequest.new({qr_code: '00020101021226770014br.gov.bcb.pix2555api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5916PAYZU 6007SAOPAULO6217051320260118278956304EC55'}) # PostWithdrawQrcodeRequest | 
+post_withdraw_qrcode_request = PayZuPix::PostWithdrawQrcodeRequest.new({qr_code: '00020101021226780014br.gov.bcb.pix2556api.payzu/pix/qr/v2/013318d6-2d7d-479e-8bb3-b5c7b9da688c5204000053039865802BR5905PAYZU6008SAOPAULO6217051320260118278956304FEFF'}) # PostWithdrawQrcodeRequest | 
 
 begin
-  # Create Withdrawal using QR Code
+  # Criar Saque usando QR Code
   result = api_instance.post_withdraw_qrcode(post_withdraw_qrcode_request)
   p result
 rescue PayZuPix::ApiError => e
@@ -268,7 +268,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create Withdrawal using QR Code
+  # Criar Saque usando QR Code
   data, status_code, headers = api_instance.post_withdraw_qrcode_with_http_info(post_withdraw_qrcode_request)
   p status_code # => 2xx
   p headers # => { ... }

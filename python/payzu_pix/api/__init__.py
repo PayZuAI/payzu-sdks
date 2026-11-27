@@ -2,6 +2,7 @@
 
 # import apis into api package
 from payzu_pix.api.account_api import AccountApi
+from payzu_pix.api.allowlist_api import AllowlistApi
 from payzu_pix.api.callbacks_api import CallbacksApi
 from payzu_pix.api.infractions_api import InfractionsApi
 from payzu_pix.api.internal_transfer_api import InternalTransferApi

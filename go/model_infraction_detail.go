@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -20,28 +20,28 @@ var _ MappedNullable = &InfractionDetail{}
 
 // InfractionDetail struct for InfractionDetail
 type InfractionDetail struct {
-	// Identifier of the infraction inside PayZu, used in the query routes and when sending the defense.
+	// Identificador da contestação dentro da PayZu, usado nas rotas de consulta e no envio da defesa.
 	Id *string `json:"id,omitempty"`
-	// Infraction code at Bacen.
+	// Código da contestação no Bacen.
 	Protocol *string `json:"protocol,omitempty"`
-	// Current state of the infraction.
+	// Situação atual da contestação.
 	Status *string `json:"status,omitempty"`
-	// Type of the infraction: REFUND_REQUEST, FRAUD or REFUND_CANCELLED.
+	// Tipo da contestação: REFUND_REQUEST, FRAUD ou REFUND_CANCELLED.
 	Type *string `json:"type,omitempty"`
-	// Side that opened the infraction: DEBITED_PARTICIPANT or CREDITED_PARTICIPANT.
+	// Lado que abriu a contestação: DEBITED_PARTICIPANT ou CREDITED_PARTICIPANT.
 	ReportedBy *string `json:"reportedBy,omitempty"`
-	// Reason given by whoever opened the infraction, in the text sent by the partner bank.
+	// Motivo informado por quem abriu a contestação, no texto enviado pelo banco parceiro.
 	ReportDetails NullableString `json:"reportDetails,omitempty"`
-	// Analysis outcome: AGREED or DISAGREED.
+	// Desfecho da análise: AGREED ou DISAGREED.
 	AnalysisResult NullableString `json:"analysisResult,omitempty"`
-	// Additional text about the analysis decision, when the partner bank sends that information.
+	// Texto complementar sobre a decisão da análise, quando o banco parceiro envia essa informação.
 	AnalysisDetails NullableString `json:"analysisDetails,omitempty"`
-	// Moment the infraction was opened.
+	// Momento em que a contestação foi aberta.
 	ReportedAt *time.Time `json:"reportedAt,omitempty"`
-	// Deadline to send the defense of this infraction.
+	// Prazo final para enviar a defesa desta contestação.
 	ExpiresAt NullableTime `json:"expiresAt,omitempty"`
 	Transaction *InfractionDetailTransaction `json:"transaction,omitempty"`
-	// Defenses already sent for this infraction, each with text, status and files.
+	// Defesas já enviadas para esta contestação, com texto, status e anexos de cada uma.
 	DefenseHistory []DefenseHistoryEntry `json:"defenseHistory,omitempty"`
 }
 

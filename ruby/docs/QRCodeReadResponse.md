@@ -4,17 +4,17 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **qr_code_type** | **String** | Type of QR Code. | [optional] |
-| **name** | **String** | Name of the payment receiver. | [optional] |
-| **document** | **String** | CPF or CNPJ of the receiver. | [optional] |
-| **amount** | **Float** | Amount to be paid (may differ from originalAmount for dynamic QR Codes). | [optional] |
-| **original_amount** | **Float** | Original amount embedded in the QR Code. | [optional] |
-| **txid** | **String** | Transaction identifier. | [optional] |
-| **additional_info** | **String** | Additional information or description. | [optional] |
-| **expires_in** | **Float** | Seconds until QR Code expires (0 for static QR Codes). | [optional] |
-| **created_at** | **Time** | Creation date of the QR Code (for dynamic QR Codes). | [optional] |
-| **amount_editable** | **Boolean** | Whether the payer can change the amount. | [optional] |
-| **due_date** | **String** | Due date of the charge, when the QR Code has one. | [optional] |
+| **qr_code_type** | **String** | Tipo de QR Code. | [optional] |
+| **name** | **String** | Nome do recebedor do pagamento. | [optional] |
+| **document** | **String** | CPF ou CNPJ do recebedor. | [optional] |
+| **amount** | **Float** | Valor a ser pago. | [optional] |
+| **original_amount** | **Float** | Valor embutido no QR Code. | [optional] |
+| **txid** | **String** | Identificador da transação. | [optional] |
+| **additional_info** | **String** | Informações adicionais ou descrição. | [optional] |
+| **expires_in** | **Float** | Segundos até o QR Code expirar (0 para QR Codes estáticos). | [optional] |
+| **created_at** | **String** | Data de criação do QR Code dinâmico, como veio no QR Code: o horário pode vir sem fuso. | [optional] |
+| **amount_editable** | **Boolean** | Indica se o pagador pode alterar o valor. | [optional] |
+| **due_date** | **String** | Data de vencimento da cobrança, quando o QR Code tiver. | [optional] |
 
 ## Example
 

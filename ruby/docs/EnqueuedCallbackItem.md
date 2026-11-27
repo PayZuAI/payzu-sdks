@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **transaction_id** | **String** | Transaction whose callback was queued. | [optional] |
-| **webhook_id** | **String** | Webhook that receives the delivery. | [optional] |
-| **event_type** | [**WebhookEventType**](WebhookEventType.md) | Event that triggered the callback, when the log records it. | [optional] |
+| **transaction_id** | **String** | Transação cujo callback foi enfileirado. | [optional] |
+| **webhook_id** | **String** | Webhook que recebe a entrega. | [optional] |
+| **event_type** | [**WebhookEventType**](WebhookEventType.md) | Evento que disparou o callback, quando o log registra. | [optional] |
 
 ## Example
 

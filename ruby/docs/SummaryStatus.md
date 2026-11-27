@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **count** | **Integer** | Number of transactions in that state within the period. | [optional] |
-| **amount** | **Float** | Sum of the amounts of those transactions. | [optional] |
-| **service_fee_charged** | **Float** | Sum of the fees charged on those transactions, in BRL. | [optional] |
+| **count** | **Integer** | Quantidade de transações nessa situação dentro do período. | [optional] |
+| **amount** | **Float** | Soma dos valores dessas transações. | [optional] |
+| **service_fee_charged** | **Float** | Soma das taxas cobradas nessas transações, em reais. | [optional] |
 
 ## Example
 

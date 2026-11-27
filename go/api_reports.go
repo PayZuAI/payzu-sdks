@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -35,12 +35,12 @@ func (r ApiDownloadUserReportRequest) Execute() (*DownloadUserReport200Response,
 }
 
 /*
-DownloadUserReport Download report
+DownloadUserReport Baixar relatório
 
-Returns a short-lived signed URL to download the CSV file.
+Retorna uma URL assinada de curta duração para baixar o arquivo CSV.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Report ID.
+ @param id ID do relatório.
  @return ApiDownloadUserReportRequest
 */
 func (a *ReportsAPIService) DownloadUserReport(ctx context.Context, id string) ApiDownloadUserReportRequest {
@@ -203,12 +203,12 @@ func (r ApiGetUserBankStatementRequest) Execute() (*BankStatement, *http.Respons
 }
 
 /*
-GetUserBankStatement Get bank statement
+GetUserBankStatement Consultar lançamento
 
-Returns a single statement entry.
+Retorna um lançamento do extrato.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Statement entry id.
+ @param id Id do lançamento do extrato.
  @return ApiGetUserBankStatementRequest
 */
 func (a *ReportsAPIService) GetUserBankStatement(ctx context.Context, id string) ApiGetUserBankStatementRequest {
@@ -291,6 +291,17 @@ func (a *ReportsAPIService) GetUserBankStatementExecute(r ApiGetUserBankStatemen
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -333,73 +344,73 @@ type ApiGetUserBankStatementsRequest struct {
 	sortDirection *string
 }
 
-// Start date (required).
+// Data inicial (obrigatória).
 func (r ApiGetUserBankStatementsRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetUserBankStatementsRequest {
 	r.createdAtFrom = &createdAtFrom
 	return r
 }
 
-// End date (required).
+// Data final (obrigatória).
 func (r ApiGetUserBankStatementsRequest) CreatedAtTo(createdAtTo time.Time) ApiGetUserBankStatementsRequest {
 	r.createdAtTo = &createdAtTo
 	return r
 }
 
-// Entry ID.
+// ID do lançamento.
 func (r ApiGetUserBankStatementsRequest) Id(id string) ApiGetUserBankStatementsRequest {
 	r.id = &id
 	return r
 }
 
-// Operation type.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
+// Tipo de operação.  &#x60;INCREMENT&#x60; &#x60;DECREMENT&#x60;
 func (r ApiGetUserBankStatementsRequest) Operation(operation string) ApiGetUserBankStatementsRequest {
 	r.operation = &operation
 	return r
 }
 
-// Reason for the entry.
+// Razão do lançamento.
 func (r ApiGetUserBankStatementsRequest) Reason(reason string) ApiGetUserBankStatementsRequest {
 	r.reason = &reason
 	return r
 }
 
-// Transaction ID.
+// ID da transação.
 func (r ApiGetUserBankStatementsRequest) TransactionId(transactionId string) ApiGetUserBankStatementsRequest {
 	r.transactionId = &transactionId
 	return r
 }
 
-// Minimum amount.
+// Valor mínimo.
 func (r ApiGetUserBankStatementsRequest) AmountFrom(amountFrom float32) ApiGetUserBankStatementsRequest {
 	r.amountFrom = &amountFrom
 	return r
 }
 
-// Maximum amount.
+// Valor máximo.
 func (r ApiGetUserBankStatementsRequest) AmountTo(amountTo float32) ApiGetUserBankStatementsRequest {
 	r.amountTo = &amountTo
 	return r
 }
 
-// Page number.
+// Número da página.
 func (r ApiGetUserBankStatementsRequest) Page(page int32) ApiGetUserBankStatementsRequest {
 	r.page = &page
 	return r
 }
 
-// Items per page.
+// Itens por página.
 func (r ApiGetUserBankStatementsRequest) Limit(limit int32) ApiGetUserBankStatementsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Sort field.
+// Campo de ordenação.
 func (r ApiGetUserBankStatementsRequest) SortBy(sortBy string) ApiGetUserBankStatementsRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
-// Sort direction.
+// Direção da ordenação.
 func (r ApiGetUserBankStatementsRequest) SortDirection(sortDirection string) ApiGetUserBankStatementsRequest {
 	r.sortDirection = &sortDirection
 	return r
@@ -410,9 +421,9 @@ func (r ApiGetUserBankStatementsRequest) Execute() (*BankStatementListResponse, 
 }
 
 /*
-GetUserBankStatements List bank statements
+GetUserBankStatements Listar extrato
 
-Lists the account statement entries. `createdAtFrom` and `createdAtTo` are required.
+Lista os lançamentos do extrato da conta. `createdAtFrom` e `createdAtTo` são obrigatórios.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserBankStatementsRequest
@@ -558,6 +569,17 @@ func (a *ReportsAPIService) GetUserBankStatementsExecute(r ApiGetUserBankStateme
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -589,61 +611,61 @@ type ApiGetUserDepositPendingRequest struct {
 	limit *int32
 }
 
-// Comma-separated statuses: PENDING, APPROVED, REJECTED, EXPIRED, COMPLETED.
+// Status do depósito, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;APPROVED&#x60; &#x60;REJECTED&#x60; &#x60;EXPIRED&#x60; &#x60;COMPLETED&#x60;
 func (r ApiGetUserDepositPendingRequest) Status(status string) ApiGetUserDepositPendingRequest {
 	r.status = &status
 	return r
 }
 
-// CPF or CNPJ, digits only.
+// CPF ou CNPJ, apenas dígitos.
 func (r ApiGetUserDepositPendingRequest) Document(document string) ApiGetUserDepositPendingRequest {
 	r.document = &document
 	return r
 }
 
-// Name of the payer or receiver.
+// Nome do pagador ou recebedor.
 func (r ApiGetUserDepositPendingRequest) Name(name string) ApiGetUserDepositPendingRequest {
 	r.name = &name
 	return r
 }
 
-// End-to-end ID of the Pix.
+// ID end-to-end do Pix.
 func (r ApiGetUserDepositPendingRequest) EndToEndId(endToEndId string) ApiGetUserDepositPendingRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
-// Minimum amount.
+// Valor mínimo.
 func (r ApiGetUserDepositPendingRequest) AmountMin(amountMin float32) ApiGetUserDepositPendingRequest {
 	r.amountMin = &amountMin
 	return r
 }
 
-// Maximum amount.
+// Valor máximo.
 func (r ApiGetUserDepositPendingRequest) AmountMax(amountMax float32) ApiGetUserDepositPendingRequest {
 	r.amountMax = &amountMax
 	return r
 }
 
-// Start of the creation date range.
+// Data de criação inicial.
 func (r ApiGetUserDepositPendingRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetUserDepositPendingRequest {
 	r.createdAtFrom = &createdAtFrom
 	return r
 }
 
-// End of the creation date range.
+// Data de criação final.
 func (r ApiGetUserDepositPendingRequest) CreatedAtTo(createdAtTo time.Time) ApiGetUserDepositPendingRequest {
 	r.createdAtTo = &createdAtTo
 	return r
 }
 
-// Page number.
+// Número da página. Valor inválido vira 1.
 func (r ApiGetUserDepositPendingRequest) Page(page int32) ApiGetUserDepositPendingRequest {
 	r.page = &page
 	return r
 }
 
-// Items per page.
+// Itens por página. Valor inválido vira 20.
 func (r ApiGetUserDepositPendingRequest) Limit(limit int32) ApiGetUserDepositPendingRequest {
 	r.limit = &limit
 	return r
@@ -654,9 +676,9 @@ func (r ApiGetUserDepositPendingRequest) Execute() (*DepositPendingListResponse,
 }
 
 /*
-GetUserDepositPending List pending deposits
+GetUserDepositPending Listar depósitos via chave Pix
 
-Lists deposits that are pending / not yet reconciled.
+Lista os depósitos via chave Pix: Pix que entraram na conta pela chave, sem passar por uma cobrança criada por `POST /pix`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserDepositPendingRequest
@@ -786,6 +808,17 @@ func (a *ReportsAPIService) GetUserDepositPendingExecute(r ApiGetUserDepositPend
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -813,12 +846,12 @@ func (r ApiGetUserDepositPendingByIdRequest) Execute() (*DepositPending, *http.R
 }
 
 /*
-GetUserDepositPendingById Get pending deposit
+GetUserDepositPendingById Consultar depósito via chave Pix
 
-Returns a single pending deposit.
+Retorna um depósito via chave Pix.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Pending deposit id.
+ @param id Id do depósito pendente.
  @return ApiGetUserDepositPendingByIdRequest
 */
 func (a *ReportsAPIService) GetUserDepositPendingById(ctx context.Context, id string) ApiGetUserDepositPendingByIdRequest {
@@ -901,6 +934,17 @@ func (a *ReportsAPIService) GetUserDepositPendingByIdExecute(r ApiGetUserDeposit
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -937,12 +981,12 @@ func (r ApiGetUserReportRequest) Execute() (*ReportJobDetail, *http.Response, er
 }
 
 /*
-GetUserReport Get report job status
+GetUserReport Consultar status do relatório
 
-Returns the status and metadata of a specific report job by `id`.
+Retorna o status e os metadados de um job de relatório específico pelo `id`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Report ID.
+ @param id ID do relatório.
  @return ApiGetUserReportRequest
 */
 func (a *ReportsAPIService) GetUserReport(ctx context.Context, id string) ApiGetUserReportRequest {
@@ -1036,6 +1080,17 @@ func (a *ReportsAPIService) GetUserReportExecute(r ApiGetUserReportRequest) (*Re
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1070,25 +1125,25 @@ type ApiGetUserSummaryRequest struct {
 	grouped *bool
 }
 
-// Start date. Default: start of the previous day (America/Sao_Paulo).
+// Data inicial. Padrão: início do dia anterior (America/Sao_Paulo).
 func (r ApiGetUserSummaryRequest) DateFrom(dateFrom time.Time) ApiGetUserSummaryRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
-// End date. Default: now.
+// Data final. Padrão: agora.
 func (r ApiGetUserSummaryRequest) DateTo(dateTo time.Time) ApiGetUserSummaryRequest {
 	r.dateTo = &dateTo
 	return r
 }
 
-// Grouping applied to the transactions.
+// Agrupamento das transações.
 func (r ApiGetUserSummaryRequest) GroupBy(groupBy string) ApiGetUserSummaryRequest {
 	r.groupBy = &groupBy
 	return r
 }
 
-// When true, returns a series grouped by date.
+// Quando true, retorna uma série agrupada por data.
 func (r ApiGetUserSummaryRequest) Grouped(grouped bool) ApiGetUserSummaryRequest {
 	r.grouped = &grouped
 	return r
@@ -1099,9 +1154,9 @@ func (r ApiGetUserSummaryRequest) Execute() (*Summary, *http.Response, error) {
 }
 
 /*
-GetUserSummary Transaction summary
+GetUserSummary Resumo de transações
 
-Aggregated totals for deposits, withdrawals and commission over a period.
+Totais agregados de depósitos, saques e comissão num período.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserSummaryRequest
@@ -1209,6 +1264,17 @@ func (a *ReportsAPIService) GetUserSummaryExecute(r ApiGetUserSummaryRequest) (*
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1236,12 +1302,12 @@ func (r ApiGetUserTransactionByIdRequest) Execute() (*GetUserTransactionById200R
 }
 
 /*
-GetUserTransactionById List transaction details
+GetUserTransactionById Listar detalhes da transação
 
-Retrieve a single transaction with its callback log and linked infractions.
+Recupera uma única transação com seu log de callback e as infrações vinculadas.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Transaction ID.
+ @param id ID da transação.
  @return ApiGetUserTransactionByIdRequest
 */
 func (a *ReportsAPIService) GetUserTransactionById(ctx context.Context, id string) ApiGetUserTransactionByIdRequest {
@@ -1324,6 +1390,17 @@ func (a *ReportsAPIService) GetUserTransactionByIdExecute(r ApiGetUserTransactio
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1371,103 +1448,103 @@ type ApiGetUserTransactionsRequest struct {
 	hasQrCode *bool
 }
 
-// Start date-time (ISO 8601).
+// Data-hora inicial (ISO 8601).
 func (r ApiGetUserTransactionsRequest) DateFrom(dateFrom time.Time) ApiGetUserTransactionsRequest {
 	r.dateFrom = &dateFrom
 	return r
 }
 
-// End date-time (ISO 8601).
+// Data-hora final (ISO 8601).
 func (r ApiGetUserTransactionsRequest) DateTo(dateTo time.Time) ApiGetUserTransactionsRequest {
 	r.dateTo = &dateTo
 	return r
 }
 
-// Items per page (max 1000).
+// Itens por página.
 func (r ApiGetUserTransactionsRequest) Limit(limit int32) ApiGetUserTransactionsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Page number (default 1).
+// Número da página.
 func (r ApiGetUserTransactionsRequest) Page(page int32) ApiGetUserTransactionsRequest {
 	r.page = &page
 	return r
 }
 
-// Transaction ID.
+// ID da transação.
 func (r ApiGetUserTransactionsRequest) Id(id string) ApiGetUserTransactionsRequest {
 	r.id = &id
 	return r
 }
 
-// Transaction status. Accepts CSV: PENDING,COMPLETED,etc.
+// Status da transação, vários separados por vírgula.  &#x60;PENDING&#x60; &#x60;COMPLETED&#x60; &#x60;CANCELED&#x60; &#x60;WAITING_FOR_REFUND&#x60; &#x60;REFUNDED&#x60; &#x60;EXPIRED&#x60; &#x60;ERROR&#x60;
 func (r ApiGetUserTransactionsRequest) Status(status string) ApiGetUserTransactionsRequest {
 	r.status = &status
 	return r
 }
 
-// Transaction type. Accepts CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
+// Tipo da transação. Aceita CSV: DEPOSIT,WITHDRAW,COMMISSION,LIQUIDATION,ADJUSTMENT.
 func (r ApiGetUserTransactionsRequest) Type_(type_ string) ApiGetUserTransactionsRequest {
 	r.type_ = &type_
 	return r
 }
 
-// Transaction method/rail. Accepts CSV: PIX,INTERNAL_TRANSFER.
+// Trilho da transação, vários separados por vírgula.  &#x60;PIX&#x60; &#x60;INTERNAL_TRANSFER&#x60; &#x60;BANK_SLIP&#x60; &#x60;TED&#x60;
 func (r ApiGetUserTransactionsRequest) Method(method string) ApiGetUserTransactionsRequest {
 	r.method = &method
 	return r
 }
 
-// Amount filter. Minimum 0.01.
+// Filtro por valor. Mínimo 0.01.
 func (r ApiGetUserTransactionsRequest) Amount(amount float32) ApiGetUserTransactionsRequest {
 	r.amount = &amount
 	return r
 }
 
-// CPF (11 digits) or CNPJ (14 digits), digits only, no punctuation.
+// CPF (11 dígitos) ou CNPJ (14 dígitos), apenas números sem formatação.
 func (r ApiGetUserTransactionsRequest) Document(document string) ApiGetUserTransactionsRequest {
 	r.document = &document
 	return r
 }
 
-// Name filter.
+// Filtro por nome.
 func (r ApiGetUserTransactionsRequest) Name(name string) ApiGetUserTransactionsRequest {
 	r.name = &name
 	return r
 }
 
-// Pix end-to-end ID.
+// ID end-to-end do Pix.
 func (r ApiGetUserTransactionsRequest) EndToEndId(endToEndId string) ApiGetUserTransactionsRequest {
 	r.endToEndId = &endToEndId
 	return r
 }
 
-// Field to sort by
+// Campo pelo qual ordenar
 func (r ApiGetUserTransactionsRequest) SortBy(sortBy string) ApiGetUserTransactionsRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
-// Sort direction
+// Direção da ordenação
 func (r ApiGetUserTransactionsRequest) SortDirection(sortDirection string) ApiGetUserTransactionsRequest {
 	r.sortDirection = &sortDirection
 	return r
 }
 
-// Filter by external reference
+// Filtra por referência externa
 func (r ApiGetUserTransactionsRequest) ClientReference(clientReference string) ApiGetUserTransactionsRequest {
 	r.clientReference = &clientReference
 	return r
 }
 
-// Virtual sub-account (up to 50 characters) used at creation. Accepted as an alternative lookup key.
+// Subconta usada na criação.
 func (r ApiGetUserTransactionsRequest) VirtualAccount(virtualAccount string) ApiGetUserTransactionsRequest {
 	r.virtualAccount = &virtualAccount
 	return r
 }
 
-// Only transactions with (true) or without (false) QR Code.
+// Só transações com (true) ou sem (false) QR Code.
 func (r ApiGetUserTransactionsRequest) HasQrCode(hasQrCode bool) ApiGetUserTransactionsRequest {
 	r.hasQrCode = &hasQrCode
 	return r
@@ -1478,9 +1555,9 @@ func (r ApiGetUserTransactionsRequest) Execute() (*GetUserTransactions200Respons
 }
 
 /*
-GetUserTransactions List Transactions
+GetUserTransactions Listar transações
 
-Paginated list of account transactions with filters.
+Lista paginada das transações da conta com filtros.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserTransactionsRequest
@@ -1639,6 +1716,17 @@ func (a *ReportsAPIService) GetUserTransactionsExecute(r ApiGetUserTransactionsR
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1669,55 +1757,55 @@ type ApiListUserReportsRequest struct {
 	sortDirection *string
 }
 
-// Page number.
+// Número da página.
 func (r ApiListUserReportsRequest) Page(page int32) ApiListUserReportsRequest {
 	r.page = &page
 	return r
 }
 
-// Items per page.
+// Itens por página.
 func (r ApiListUserReportsRequest) Limit(limit int32) ApiListUserReportsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Report status. Accepts CSV: PENDING,RUNNING,COMPLETED,FAILED.
+// Status do relatório. Aceita CSV: PENDING,RUNNING,COMPLETED,FAILED.
 func (r ApiListUserReportsRequest) Status(status string) ApiListUserReportsRequest {
 	r.status = &status
 	return r
 }
 
-// Filter: created from.
+// Filtro: criado a partir de.
 func (r ApiListUserReportsRequest) CreatedAtFrom(createdAtFrom time.Time) ApiListUserReportsRequest {
 	r.createdAtFrom = &createdAtFrom
 	return r
 }
 
-// Filter: created up to.
+// Filtro: criado até.
 func (r ApiListUserReportsRequest) CreatedAtTo(createdAtTo time.Time) ApiListUserReportsRequest {
 	r.createdAtTo = &createdAtTo
 	return r
 }
 
-// Filter: updated from.
+// Filtro: atualizado a partir de.
 func (r ApiListUserReportsRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiListUserReportsRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
-// Filter: updated up to.
+// Filtro: atualizado até.
 func (r ApiListUserReportsRequest) UpdatedAtTo(updatedAtTo time.Time) ApiListUserReportsRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
-// Sort field.
+// Campo de ordenação.
 func (r ApiListUserReportsRequest) SortBy(sortBy string) ApiListUserReportsRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
-// Sort direction.
+// Direção da ordenação.
 func (r ApiListUserReportsRequest) SortDirection(sortDirection string) ApiListUserReportsRequest {
 	r.sortDirection = &sortDirection
 	return r
@@ -1728,9 +1816,9 @@ func (r ApiListUserReportsRequest) Execute() (*ListUserReports200Response, *http
 }
 
 /*
-ListUserReports List report jobs
+ListUserReports Listar jobs de relatório
 
-List report jobs created by the authenticated user.
+Lista os jobs de relatório criados pelo usuário autenticado.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListUserReportsRequest
@@ -1865,6 +1953,17 @@ func (a *ReportsAPIService) ListUserReportsExecute(r ApiListUserReportsRequest) 
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1897,9 +1996,9 @@ func (r ApiPostUserReportRequest) Execute() (*ReportJobAccepted, *http.Response,
 }
 
 /*
-PostUserReport Generate transactions report
+PostUserReport Gerar relatório de transações
 
-Queue an asynchronous job that generates a CSV report of transactions for the given period and filters.
+Enfileira um job assíncrono que gera um relatório CSV das transações para o período e filtros informados.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostUserReportRequest

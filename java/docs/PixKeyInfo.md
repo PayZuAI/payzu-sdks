@@ -2,22 +2,22 @@
 
 # PixKeyInfo
 
-Information about a Pix key from DICT lookup.
+Informações sobre uma chave Pix a partir da consulta ao DICT.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**pixKey** | **String** | The Pix key that was looked up. |  [optional] |
-|**document** | **String** | CPF or CNPJ of the owner (partially masked for privacy). |  [optional] |
-|**name** | **String** | Name of the Pix key owner. |  [optional] |
-|**branch** | **String** | Bank branch number (masked). |  [optional] |
-|**accountNumber** | **String** | Account number (masked). |  [optional] |
-|**personType** | [**PersonTypeEnum**](#PersonTypeEnum) | Type of person: PF, PJ, or empty when not informed. |  [optional] |
-|**accountType** | **String** | Account type returned by DICT, such as CACC, SVGS, TRAN or SLRY. |  [optional] |
-|**institutionIspb** | **String** | ISPB code of the financial institution. |  [optional] |
-|**institutionCode** | **String** | COMPE code of the financial institution. |  [optional] |
-|**institutionName** | **String** | Name of the financial institution. |  [optional] |
+|**pixKey** | **String** | A chave Pix que foi consultada. |  [optional] |
+|**document** | **String** | CPF ou CNPJ do titular (parcialmente mascarado por privacidade). |  [optional] |
+|**name** | **String** | Nome do titular da chave Pix. |  [optional] |
+|**branch** | **String** | Número da agência bancária (mascarado). |  [optional] |
+|**accountNumber** | **String** | Número da conta (mascarado). |  [optional] |
+|**personType** | [**PersonTypeEnum**](#PersonTypeEnum) | Tipo de pessoa: PF, PJ ou vazio quando não informado. |  [optional] |
+|**accountType** | **String** | Tipo de conta devolvido pelo DICT, como CACC, SVGS, TRAN ou SLRY. |  [optional] |
+|**institutionIspb** | **String** | Código ISPB da instituição financeira. |  [optional] |
+|**institutionCode** | **String** | Código COMPE da instituição financeira. |  [optional] |
+|**institutionName** | **String** | Nome da instituição financeira. |  [optional] |
 
 
 

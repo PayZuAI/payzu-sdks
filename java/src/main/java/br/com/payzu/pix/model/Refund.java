@@ -1,6 +1,6 @@
 /*
  * PayZu Pix API
- * REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+ * API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
  *
  * The version of the OpenAPI document: 1.8.0
  * 
@@ -60,12 +60,16 @@ public class Refund {
   private BigDecimal amount;
 
   /**
-   * Refund reason.
+   * Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
    */
   public enum ReasonEnum {
     CUSTOMER_REQUEST(String.valueOf("CUSTOMER_REQUEST")),
     
     INFRACTION(String.valueOf("INFRACTION")),
+    
+    DENY_COMPANY_DEPOSIT(String.valueOf("DENY_COMPANY_DEPOSIT")),
+    
+    ADMIN_REQUEST(String.valueOf("ADMIN_REQUEST")),
     
     UNKNOWN_DEFAULT_OPEN_API(String.valueOf("unknown_default_open_api"));
 
@@ -104,7 +108,7 @@ public class Refund {
   private JsonNullable<String> description = JsonNullable.<String>undefined();
 
   /**
-   * Refund status.
+   * Status da devolução.
    */
   public enum StatusEnum {
     PENDING(String.valueOf("PENDING")),
@@ -169,7 +173,7 @@ public class Refund {
   }
 
   /**
-   * Refund identifier.
+   * Identificador da devolução.
    * @return id
    */
   @javax.annotation.Nullable
@@ -193,7 +197,7 @@ public class Refund {
   }
 
   /**
-   * Refunded amount in BRL.
+   * Valor devolvido em BRL.
    * @return amount
    */
   @javax.annotation.Nullable
@@ -217,7 +221,7 @@ public class Refund {
   }
 
   /**
-   * Refund reason.
+   * Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
    * @return reason
    */
   @javax.annotation.Nullable
@@ -241,7 +245,7 @@ public class Refund {
   }
 
   /**
-   * Refund description.
+   * Descrição da devolução.
    * @return description
    */
   @javax.annotation.Nullable
@@ -273,7 +277,7 @@ public class Refund {
   }
 
   /**
-   * Refund status.
+   * Status da devolução.
    * @return status
    */
   @javax.annotation.Nullable
@@ -297,7 +301,7 @@ public class Refund {
   }
 
   /**
-   * End-to-end ID of the refund Pix.
+   * End-to-end ID do Pix de devolução.
    * @return endToEndId
    */
   @javax.annotation.Nullable
@@ -329,7 +333,7 @@ public class Refund {
   }
 
   /**
-   * When the refund was completed.
+   * Quando a devolução foi concluída.
    * @return refundedAt
    */
   @javax.annotation.Nullable
@@ -361,7 +365,7 @@ public class Refund {
   }
 
   /**
-   * When the refund was requested.
+   * Quando a devolução foi pedida.
    * @return createdAt
    */
   @javax.annotation.Nullable
@@ -385,7 +389,7 @@ public class Refund {
   }
 
   /**
-   * Last change to the refund.
+   * Última alteração da devolução.
    * @return updatedAt
    */
   @javax.annotation.Nullable

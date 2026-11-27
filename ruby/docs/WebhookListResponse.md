@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **webhooks** | [**Array&lt;Webhook&gt;**](Webhook.md) | Webhooks registered on the account. | [optional] |
+| **webhooks** | [**Array&lt;Webhook&gt;**](Webhook.md) | Webhooks cadastrados na conta. | [optional] |
 
 ## Example
 

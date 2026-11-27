@@ -1,7 +1,7 @@
 =begin
 #PayZu Pix API
 
-#REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+#API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 The version of the OpenAPI document: 1.8.0
 
@@ -15,121 +15,121 @@ require 'time'
 
 module PayZuPix
   class GetUserTransactionById200Response < ApiModelBase
-    # Identifier of the transaction at PayZu.
+    # Identificador da transação na PayZu.
     attr_accessor :id
 
-    # PENDING, COMPLETED, CANCELED, WAITING_FOR_REFUND, REFUNDED, EXPIRED, ERROR
+    # Status atual da transação.
     attr_accessor :status
 
-    # Amount of the transaction, before the fee.
+    # Valor da transação, antes da taxa.
     attr_accessor :amount
 
-    # Transaction type: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION or ADJUSTMENT.
+    # Tipo da transação: DEPOSIT, WITHDRAW, COMMISSION, LIQUIDATION ou ADJUSTMENT.
     attr_accessor :type
 
-    # Copy-and-paste Pix code.
+    # Código copia e cola do Pix.
     attr_accessor :qr_code_text
 
-    # PNG image of the QR Code in base64, without the data: prefix.
+    # Imagem PNG do QR Code em base64, sem o prefixo data:.
     attr_accessor :qr_code_base64
 
-    # Authenticated route that returns the PNG of the QR Code.
+    # Rota autenticada que devolve o PNG do QR Code.
     attr_accessor :qr_code_url
 
-    # Name used to build the charge.
+    # Nome usado para montar a cobrança.
     attr_accessor :generated_name
 
-    # CPF or CNPJ used as the debtor of the charge.
+    # CPF ou CNPJ usado como devedor na cobrança.
     attr_accessor :generated_document
 
-    # Email used to build the charge.
+    # E-mail usado para montar a cobrança.
     attr_accessor :generated_email
 
-    # Name of the holder of the account that sent the Pix, as reported by the originating institution.
+    # Nome do titular da conta que enviou o Pix, como informado pela instituição de origem.
     attr_accessor :payer_name
 
-    # CPF or CNPJ of the payer of the Pix, reported by the originating institution.
+    # CPF ou CNPJ de quem enviou o Pix, informado pela instituição de origem.
     attr_accessor :payer_document
 
-    # ISPB code of the institution the Pix was sent from.
+    # Código ISPB da instituição de onde saiu o Pix.
     attr_accessor :payer_institution_ispb
 
-    # Name of the institution the Pix was sent from.
+    # Nome da instituição de onde saiu o Pix.
     attr_accessor :payer_institution_name
 
-    # Payer's PayZu account number (6 digits). Present on withdraw, internal-transfer and commission transactions.
+    # Conta PayZu do pagador.
     attr_accessor :payer_account_number
 
-    # PayZu fee charged on the operation, in reais. It may carry more than two decimal places — do not round when reconciling.
+    # Tarifa PayZu cobrada na operação, em reais. Pode ter mais de duas casas decimais: não arredonde ao conciliar.
     attr_accessor :service_fee_charged
 
-    # Destination Pix key of the withdrawal, already normalized.
+    # Chave Pix de destino do saque, já normalizada.
     attr_accessor :withdraw_pix_key
 
-    # Type of the destination key of the withdrawal, with evp being the random key.
+    # Tipo da chave de destino do saque, sendo evp a chave aleatória.
     attr_accessor :withdraw_pix_type
 
-    # Name of the holder of the receiving account.
+    # Nome do titular da conta que recebe.
     attr_accessor :receiver_name
 
-    # CPF or CNPJ of the receiver.
+    # CPF ou CNPJ de quem recebe.
     attr_accessor :receiver_document
 
-    # ISPB code of the institution that receives the Pix.
+    # Código ISPB da instituição que recebe o Pix.
     attr_accessor :receiver_institution_ispb
 
-    # Name of the institution that receives the Pix.
+    # Nome da instituição que recebe o Pix.
     attr_accessor :receiver_institution_name
 
-    # Receiver's PayZu account number (6 digits). Present on deposit, internal-transfer and commission transactions.
+    # Conta PayZu do recebedor.
     attr_accessor :receiver_account_number
 
-    # Identifier of the Pix in the Bacen arrangement, used to track the settlement and request a return.
+    # Identificador do Pix no arranjo do Bacen, usado para rastrear a liquidação e pedir devolução.
     attr_accessor :end_to_end_id
 
-    # Date and time the transaction was recorded.
+    # Data e hora do registro da transação.
     attr_accessor :created_at
 
-    # Date and time of the last change.
+    # Data e hora da última alteração.
     attr_accessor :updated_at
 
-    # Date and time the Pix was settled, reported by the institution.
+    # Data e hora da liquidação do Pix, informada pela instituição.
     attr_accessor :paid_at
 
-    # Your identifier of the transaction, returned in queries and callbacks.
+    # Seu identificador da transação, devolvido em consultas e callbacks.
     attr_accessor :client_reference
 
-    # End-to-end ID of the refund transaction
+    # ID end-to-end do Pix de devolução.
     attr_accessor :refund_end_to_end_id
 
-    # Amount refunded
+    # Valor devolvido.
     attr_accessor :refund_amount
 
-    # Refund status: PENDING, COMPLETED or CANCELED.
+    # Status da devolução.
     attr_accessor :refund_status
 
-    # Reason for the refund
+    # Motivo da devolução: CUSTOMER_REQUEST (pedida pelo cliente, pela API ou pelo painel), INFRACTION (MED), DENY_COMPANY_DEPOSIT (Pix pago por CNPJ numa conta que não aceita depósito de CNPJ, devolvido sem pedido) ou ADMIN_REQUEST (feita pela PayZu).
     attr_accessor :refund_reason
 
-    # Description of the refund
+    # Descrição da devolução.
     attr_accessor :refund_description
 
-    # Date and time when the refund was processed
+    # Data e hora em que a devolução foi processada.
     attr_accessor :refunded_at
 
-    # Reason for cancellation (if cancelled)
+    # Motivo do cancelamento (se cancelada)
     attr_accessor :cancellation_reason
 
-    # Virtual sub-account provided at creation.
+    # Subconta virtual informada na criação.
     attr_accessor :virtual_account
 
-    # Transaction method/rail.
+    # `PIX`, `INTERNAL_TRANSFER` (transferência entre contas PayZu), `BANK_SLIP` (boleto) ou `TED`.
     attr_accessor :method
 
-    # Complete infraction history for this transaction.
+    # Histórico completo de infrações desta transação.
     attr_accessor :infraction
 
-    # Webhook delivery attempts for this transaction (most recent first)
+    # Tentativas de entrega do webhook desta transação (mais recentes primeiro)
     attr_accessor :callback_log
 
     class EnumAttributeValidator
@@ -471,10 +471,10 @@ module PayZuPix
       return false unless withdraw_pix_type_validator.valid?(@withdraw_pix_type)
       refund_status_validator = EnumAttributeValidator.new('String', ["PENDING", "COMPLETED", "CANCELED"])
       return false unless refund_status_validator.valid?(@refund_status)
-      refund_reason_validator = EnumAttributeValidator.new('String', ["CUSTOMER_REQUEST", "INFRACTION"])
+      refund_reason_validator = EnumAttributeValidator.new('String', ["CUSTOMER_REQUEST", "INFRACTION", "DENY_COMPANY_DEPOSIT", "ADMIN_REQUEST"])
       return false unless refund_reason_validator.valid?(@refund_reason)
       return false if !@virtual_account.nil? && @virtual_account.to_s.length > 50
-      method_validator = EnumAttributeValidator.new('String', ["PIX", "INTERNAL_TRANSFER"])
+      method_validator = EnumAttributeValidator.new('String', ["PIX", "INTERNAL_TRANSFER", "BANK_SLIP", "TED"])
       return false unless method_validator.valid?(@method)
       true
     end

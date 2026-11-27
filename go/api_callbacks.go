@@ -1,7 +1,7 @@
 /*
 PayZu Pix API
 
-REST API for Pix operations on the PayZu platform, deposits, withdrawals, internal transfers, infractions, reports, and callback inspection. All amounts are in BRL (reais) unless explicitly noted. Authentication uses a Bearer token issued during onboarding.  ## SDKs oficiais  - Node.js: `npm install payzu-pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks 
+API REST para operações Pix na plataforma PayZu, depósitos, saques, transferências internas, infrações, relatórios e inspeção de callback. Todos os valores estão em BRL (reais), salvo indicação explícita. A autenticação usa um token Bearer emitido durante o onboarding.  ## SDKs oficiais  - Node.js: `npm install @payzu/pix` - Python: `pip install payzu-pix` - PHP: `composer require payzu/pix` - Ruby: `gem install payzu-pix` - Java: `br.com.payzu:payzu-pix` (Maven Central) - Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`  Repo: https://github.com/PayZuAI/payzu-sdks
 
 API version: 1.8.0
 */
@@ -34,9 +34,9 @@ func (r ApiCreateUserCallbackSecretRequest) Execute() (*CallbackSecretResponse, 
 }
 
 /*
-CreateUserCallbackSecret Create callback secret
+CreateUserCallbackSecret Criar segredo de callback
 
-Creates the account callback secret, used to sign deliveries sent to the transaction callbackUrl. The secret is returned once and cannot be read again.
+Cria o segredo de callback da conta, usado para assinar as entregas feitas ao callbackUrl da transação. O segredo é devolvido uma única vez e não pode ser lido depois.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateUserCallbackSecretRequest
@@ -166,12 +166,12 @@ func (r ApiGetUserCallbackByIdRequest) Execute() (*CallbackDetail, *http.Respons
 }
 
 /*
-GetUserCallbackById Get Callback
+GetUserCallbackById Obter Callback
 
-Returns the details of a specific callback log.
+Retorna os detalhes de um log de callback específico.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique callback ID
+ @param id ID único do callback
  @return ApiGetUserCallbackByIdRequest
 */
 func (a *CallbacksAPIService) GetUserCallbackById(ctx context.Context, id string) ApiGetUserCallbackByIdRequest {
@@ -254,6 +254,17 @@ func (a *CallbacksAPIService) GetUserCallbackByIdExecute(r ApiGetUserCallbackByI
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -297,79 +308,79 @@ type ApiGetUserCallbacksRequest struct {
 	eventType *WebhookEventType
 }
 
-// Page number.
+// Número da página.
 func (r ApiGetUserCallbacksRequest) Page(page int32) ApiGetUserCallbacksRequest {
 	r.page = &page
 	return r
 }
 
-// Items per page.
+// Itens por página.
 func (r ApiGetUserCallbacksRequest) Limit(limit int32) ApiGetUserCallbacksRequest {
 	r.limit = &limit
 	return r
 }
 
-// Sort field.
+// Campo de ordenação.
 func (r ApiGetUserCallbacksRequest) SortBy(sortBy string) ApiGetUserCallbacksRequest {
 	r.sortBy = &sortBy
 	return r
 }
 
-// Sort direction.
+// Direção da ordenação.
 func (r ApiGetUserCallbacksRequest) SortDirection(sortDirection string) ApiGetUserCallbacksRequest {
 	r.sortDirection = &sortDirection
 	return r
 }
 
-// Filter by callback ID
+// Filtra por ID de callback
 func (r ApiGetUserCallbacksRequest) Id(id string) ApiGetUserCallbacksRequest {
 	r.id = &id
 	return r
 }
 
-// Filter by callback URL
+// Filtra por callback URL
 func (r ApiGetUserCallbacksRequest) Url(url string) ApiGetUserCallbacksRequest {
 	r.url = &url
 	return r
 }
 
-// HTTP status code
+// Status HTTP devolvido pelo seu endpoint.
 func (r ApiGetUserCallbacksRequest) Status(status int32) ApiGetUserCallbacksRequest {
 	r.status = &status
 	return r
 }
 
-// Transaction ID.
+// ID da transação.
 func (r ApiGetUserCallbacksRequest) TransactionId(transactionId string) ApiGetUserCallbacksRequest {
 	r.transactionId = &transactionId
 	return r
 }
 
-// Filter callbacks that errored
+// Filtra callbacks que apresentaram erro
 func (r ApiGetUserCallbacksRequest) HasError(hasError bool) ApiGetUserCallbacksRequest {
 	r.hasError = &hasError
 	return r
 }
 
-// Start of the creation date range.
+// Data de criação inicial.
 func (r ApiGetUserCallbacksRequest) CreatedAtFrom(createdAtFrom time.Time) ApiGetUserCallbacksRequest {
 	r.createdAtFrom = &createdAtFrom
 	return r
 }
 
-// End of the creation date range.
+// Data de criação final.
 func (r ApiGetUserCallbacksRequest) CreatedAtTo(createdAtTo time.Time) ApiGetUserCallbacksRequest {
 	r.createdAtTo = &createdAtTo
 	return r
 }
 
-// Webhook id.
+// Id do webhook.
 func (r ApiGetUserCallbacksRequest) WebhookId(webhookId string) ApiGetUserCallbacksRequest {
 	r.webhookId = &webhookId
 	return r
 }
 
-// Webhook event type.
+// Tipo de evento do webhook.
 func (r ApiGetUserCallbacksRequest) EventType(eventType WebhookEventType) ApiGetUserCallbacksRequest {
 	r.eventType = &eventType
 	return r
@@ -380,9 +391,9 @@ func (r ApiGetUserCallbacksRequest) Execute() (*CallbackListResponse, *http.Resp
 }
 
 /*
-GetUserCallbacks List Callbacks
+GetUserCallbacks Listar Callbacks
 
-Returns a paginated list of webhook callback logs for the user's transactions.
+Retorna uma lista paginada de logs de callback (webhook) das transações do usuário.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUserCallbacksRequest
@@ -529,6 +540,17 @@ func (a *CallbacksAPIService) GetUserCallbacksExecute(r ApiGetUserCallbacksReque
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -556,12 +578,12 @@ func (r ApiResendUserCallbackSingleRequest) Execute() (*ResendUserCallbackSingle
 }
 
 /*
-ResendUserCallbackSingle Re-send callback (single)
+ResendUserCallbackSingle Reenviar callback (individual)
 
-Resend the callback of a single transaction.
+Reenvia o callback de uma única transação.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transactionId Transaction ID.
+ @param transactionId ID da transação.
  @return ApiResendUserCallbackSingleRequest
 */
 func (a *CallbacksAPIService) ResendUserCallbackSingle(ctx context.Context, transactionId string) ApiResendUserCallbackSingleRequest {
@@ -707,9 +729,9 @@ func (r ApiResendUserCallbacksRequest) Execute() (*ResendUserCallbacks200Respons
 }
 
 /*
-ResendUserCallbacks Re-send callbacks (bulk)
+ResendUserCallbacks Reenviar callbacks (em lote)
 
-Resend callbacks in bulk for transactions matching the given filters.
+Reenvia callbacks em lote para transações que correspondem aos filtros informados.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiResendUserCallbacksRequest
@@ -866,12 +888,12 @@ func (r ApiResendUserCallbacksWebhookRequest) Execute() (*EnqueuedCallback, *htt
 }
 
 /*
-ResendUserCallbacksWebhook Resend callbacks by webhook
+ResendUserCallbacksWebhook Reenviar callbacks por webhook
 
-Queues a bulk resend of the failed callbacks of a given webhook.
+Enfileira o reenvio em lote dos callbacks falhos de um webhook.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param webhookId Webhook id.
+ @param webhookId Id do webhook.
  @return ApiResendUserCallbacksWebhookRequest
 */
 func (a *CallbacksAPIService) ResendUserCallbacksWebhook(ctx context.Context, webhookId string) ApiResendUserCallbacksWebhookRequest {
@@ -1028,9 +1050,9 @@ func (r ApiResendUserCallbacksWebhooksRequest) Execute() (*EnqueuedCallback, *ht
 }
 
 /*
-ResendUserCallbacksWebhooks Resend webhook callbacks by filters
+ResendUserCallbacksWebhooks Reenviar callbacks de webhook por filtros
 
-Queues the resend of failed webhook deliveries in a period. For each webhook, transaction and event, only the last delivery attempt in the period counts, and it is resent only when it failed. The filters apply to the transactions of those deliveries.
+Enfileira o reenvio das entregas de webhook que falharam num período. Para cada webhook, transação e evento, vale só a última tentativa de entrega no período, e ela só é reenviada se falhou. Os filtros se aplicam às transações dessas entregas.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiResendUserCallbacksWebhooksRequest
@@ -1186,9 +1208,9 @@ func (r ApiRotateUserCallbackSecretRequest) Execute() (*RotateCallbackSecretResp
 }
 
 /*
-RotateUserCallbackSecret Rotate callback secret
+RotateUserCallbackSecret Rotacionar segredo de callback
 
-Replaces the account callback secret. Deliveries start being signed with the new secret right away.
+Troca o segredo de callback da conta. As entregas passam a ser assinadas com o novo segredo imediatamente.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRotateUserCallbackSecretRequest

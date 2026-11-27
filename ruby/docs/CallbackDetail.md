@@ -4,15 +4,15 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique callback ID | [optional] |
-| **url** | **String** | Webhook URL that received the callback | [optional] |
-| **status** | **Float** | HTTP response status code | [optional] |
-| **transaction_id** | **String** | Related transaction ID | [optional] |
-| **created_at** | **Time** | Date and time when the callback log was created | [optional] |
-| **body** | **Object** | Request body sent (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] |
-| **response_body** | **String** | Response body received (string) | [optional] |
-| **response_headers** | **Object** | Response headers (parsed JSON). When the content is not valid JSON, it comes as &#x60;{ \&quot;raw\&quot;: \&quot;&lt;text&gt;\&quot; }&#x60;. | [optional] |
-| **response_time** | **Float** | Webhook round-trip time in milliseconds | [optional] |
+| **id** | **String** | ID único do callback | [optional] |
+| **url** | **String** | URL do webhook que recebeu o callback | [optional] |
+| **status** | **Float** | Código de status HTTP da resposta | [optional] |
+| **transaction_id** | **String** | ID da transação relacionada | [optional] |
+| **created_at** | **Time** | Data e hora em que o log do callback foi criado | [optional] |
+| **body** | **Object** | Corpo enviado (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;. | [optional] |
+| **response_body** | **String** | Corpo da resposta recebido (string) | [optional] |
+| **response_headers** | **Object** | Cabeçalhos da resposta (JSON interpretado). Quando o conteúdo não é JSON válido, vem como &#x60;{ \&quot;raw\&quot;: \&quot;&lt;texto&gt;\&quot; }&#x60;. | [optional] |
+| **response_time** | **Float** | Tempo de ida e volta do webhook em milissegundos | [optional] |
 
 ## Example
 

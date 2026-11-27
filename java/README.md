@@ -54,7 +54,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>br.com.payzu</groupId>
   <artifactId>payzu-pix</artifactId>
-  <version>3.2.0</version>
+  <version>4.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -64,7 +64,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "br.com.payzu:payzu-pix:3.2.0"
+compile "br.com.payzu:payzu-pix:4.0.0"
 ```
 
 ### Others
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/payzu-pix-3.2.0.jar`
+- `target/payzu-pix-4.0.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

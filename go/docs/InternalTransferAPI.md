@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {
@@ -96,7 +96,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/PayZuAI/payzu-sdks/go/v3"
+	openapiclient "github.com/PayZuAI/payzu-sdks/go/v4"
 )
 
 func main() {

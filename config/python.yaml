@@ -4,7 +4,7 @@ templateDir: templates/python
 additionalProperties:
   packageName: payzu_pix
   projectName: payzu-pix
-  packageVersion: 3.2.0
+  packageVersion: 4.0.0
 globalProperties:
   apis: ""
   models: ""

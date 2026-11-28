@@ -9,7 +9,7 @@ API REST para operações Pix na plataforma PayZu, depósitos, saques, transfer�
 - PHP: `composer require payzu/pix`
 - Ruby: `gem install payzu-pix`
 - Java: `br.com.payzu:payzu-pix` (Maven Central)
-- Go: `go get github.com/PayZuAI/payzu-sdks/go/v3`
+- Go: `go get github.com/PayZuAI/payzu-sdks/go/v4`
 
 Repo: https://github.com/PayZuAI/payzu-sdks
 
